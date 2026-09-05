@@ -1,0 +1,4 @@
+# Local Kanbus runtime only. Stories and issues are the product.
+project/.overlay/
+project/.cache/
+.vscode/

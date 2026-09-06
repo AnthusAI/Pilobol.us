@@ -52,6 +52,7 @@ PILOBOL_CHROME = SiteChrome(
     # Site chrome only. These are never derived from article Markdown; Markus
     # runs with raw HTML disabled precisely so authors cannot inject scripts.
     scripts=(
+        "assets/theme-toggle.js",
         "assets/background-manager.js",
         "assets/organic-image.js",
         "assets/cinematic-gallery.js",
@@ -63,7 +64,9 @@ def main() -> int:
     result = build_markus_site(
         content_dir=POD_ROOT / "content",
         out_dir=POD_ROOT / "dist-papyrus",
-        theme="catppuccin",
+        # No baked Markus theme: pilobil-theme-v10.css owns the palette
+        # (base tokens + its own light/dark rules), matching the live site.
+        theme=None,
         site_css=POD_ROOT / "css" / "pilobil-theme-v10.css",
         chrome=PILOBOL_CHROME,
         sections=("effects",),

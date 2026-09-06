@@ -64,7 +64,7 @@
 
   /* --- dark (system default): after dark, spores visible --- */
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       --markus-ink: #dfded0;
       --markus-muted: #8b9184;
       --markus-paper: #14170f;
@@ -115,13 +115,13 @@
      Masthead
      --------------------------------------------------------------------- */
 
-  .pilo-masthead {
+  .markus-site-masthead {
     max-width: 46rem;
     margin: 0 auto;
     padding: 2rem 1.25rem 0;
   }
 
-  .pilo-masthead-row {
+  .markus-site-masthead-row {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -129,7 +129,7 @@
     gap: 0.5rem 1rem;
   }
 
-  .pilo-wordmark {
+  .markus-site-wordmark {
     display: inline-flex;
     align-items: baseline;
     gap: 0.55rem;
@@ -141,7 +141,44 @@
     text-decoration: none;
   }
 
-  .pilo-wordmark-mark {
+  /* Papyrus's shell renders the wordmark as
+     <p class="markus-site-wordmark"><a href="index.html">...</a></p>,
+     whereas the old bespoke markup put the class on the anchor itself. Reset
+     the inner link so the wordmark is not styled as body link text. */
+  .pilo-theme-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font: inherit;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid var(--markus-line);
+    background: transparent;
+    color: var(--markus-muted, var(--markus-ink));
+    cursor: pointer;
+  }
+
+  .pilo-theme-toggle:hover {
+    border-color: var(--markus-accent);
+    color: var(--markus-ink);
+  }
+
+  .markus-site-masthead {
+    position: relative;
+  }
+
+  .markus-site-wordmark a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .markus-site-wordmark a:hover {
+    text-decoration: none;
+  }
+
+  .markus-site-wordmark-mark {
     display: inline-block;
     width: 0.62em;
     height: 0.62em;
@@ -152,7 +189,7 @@
     flex-shrink: 0;
   }
 
-  .pilo-wordmark-us {
+  .markus-site-wordmark-us {
     color: var(--markus-accent);
   }
 
@@ -165,14 +202,14 @@
     color: var(--markus-muted);
   }
 
-  .pilo-tagline {
+  .markus-site-tagline {
     margin: 0.35rem 0 1.1rem;
     color: var(--markus-muted);
     font-style: italic;
     font-family: var(--markus-serif);
   }
 
-  .pilo-nav {
+  .markus-site-nav {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem 1.15rem;
@@ -181,18 +218,18 @@
     font-size: 0.92rem;
   }
 
-  .pilo-nav a {
+  .markus-site-nav a {
     color: var(--markus-ink);
     text-decoration: none;
     font-weight: 600;
   }
 
-  .pilo-nav a[aria-current="page"] {
+  .markus-site-nav a[aria-current="page"] {
     color: var(--markus-accent);
     box-shadow: inset 0 -2px 0 var(--markus-accent);
   }
 
-  .pilo-nav a:hover {
+  .markus-site-nav a:hover {
     color: var(--markus-accent);
   }
 
@@ -303,7 +340,7 @@
      Footer
      --------------------------------------------------------------------- */
 
-  .pilo-footer {
+  .markus-site-footer {
     max-width: 46rem;
     margin: 0 auto;
     padding: 2.5rem 1.25rem 3rem;
@@ -312,11 +349,11 @@
     border-top: 1px solid var(--markus-line);
   }
 
-  .pilo-footer a {
+  .markus-site-footer a {
     color: var(--markus-accent);
   }
 
-  .pilo-footer-mycelium {
+  .markus-site-footer-mycelium {
     height: 1px;
     margin: 0 0 2rem;
     background: linear-gradient(
@@ -351,7 +388,7 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    :root .pilo-physarum-canvas {
+    :root:not([data-theme="light"]) .pilo-physarum-canvas {
       opacity: 0.8;
       mix-blend-mode: screen;
     }
@@ -381,18 +418,29 @@
      Page Wrapper (masking the background simulation)
      --------------------------------------------------------------------- */
 
-  .pilo-page-wrapper {
+  /* Papyrus's Markus shell has no wrapper div: the page is
+     <body class="markus-body markus-site"> > header/main/footer. Constrain
+     those directly so the layout matches the old .pilo-page-wrapper. */
+  .markus-site > .markus-site-masthead,
+  .markus-site > main,
+  .markus-site > .markus-site-footer {
     position: relative;
     z-index: 1;
     max-width: 60rem;
     margin: 0 auto;
-    
     padding: 0 4rem;
-    
+  }
+
+  @media (max-width: 640px) {
+    .markus-site > .markus-site-masthead,
+    .markus-site > main,
+    .markus-site > .markus-site-footer {
+      padding: 0 1.25rem;
+    }
   }
 
   /* --- BULLETPROOF TEXT READABILITY --- */
-  main, .markus-document, .pilo-masthead, .pilo-footer {
+  main, .markus-document, .markus-site-masthead, .markus-site-footer {
     
     position: relative !important;
     z-index: 100 !important; transform: translateZ(0) !important; backface-visibility: hidden;
@@ -401,3 +449,39 @@
   body {
     isolation: isolate;
   }
+
+  /* --- dark (explicit choice via the masthead toggle) ---
+     v10 shipped only @media (prefers-color-scheme: dark), so the
+     toggle set data-theme with no CSS listening. These mirror the
+     media-query blocks so an explicit choice works in both
+     directions, matching the deploy-branch theme. --- */
+  :root[data-theme="dark"] {
+      --markus-ink: #dfded0;
+      --markus-muted: #8b9184;
+      --markus-paper: #14170f;
+      --markus-card: #1c2117;
+      --markus-line: #333b2a;
+
+      --markus-accent: #b7d18a;     /* foxfire glow */
+      --markus-accent-2: #d0895a;
+      --markus-quote: #b7a3c4;      /* spore-print violet, lit from behind */
+      --markus-note: #9fd0c9;
+      --markus-warning: #d0a24f;
+      --markus-tip: #9fce7a;
+      --markus-caution: #d17e6e;
+
+      --markus-pre-bg: #0d0f0a;
+      --markus-pre-ink: #dfded0;
+      --markus-code-bg: rgba(223, 222, 208, 0.07);
+      --markus-aside-bg: rgba(183, 163, 196, 0.08);
+      --markus-tab-nav-bg: rgba(13, 15, 10, 0.5);
+      --markus-th-bg: rgba(183, 209, 138, 0.08);
+
+      --pilo-shadow: rgba(0, 0, 0, 0.4);
+      --pilo-hairline: rgba(223, 222, 208, 0.4);
+      color-scheme: dark;
+    }
+:root[data-theme="dark"] .pilo-physarum-canvas {
+      opacity: 0.8;
+      mix-blend-mode: screen;
+    }

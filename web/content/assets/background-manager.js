@@ -17,7 +17,19 @@
     }
   ];
   
-  const chosen = effects[Math.floor(Math.random() * effects.length)];
+  // ?fx=<script-stem> forces a specific effect. Without it the effect is
+  // random, which makes a broken one look intermittent and is miserable to
+  // debug -- two of the three were silently failing and it read as flaky.
+  let chosen = effects[Math.floor(Math.random() * effects.length)];
+  try {
+    const want = new URLSearchParams(window.location.search).get('fx');
+    if (want) {
+      const match = effects.find((e) => e.script.startsWith(want));
+      if (match) chosen = match;
+    }
+  } catch (e) {
+    /* no URLSearchParams: keep the random pick */
+  }
   
   const isArticle = window.location.pathname.includes('/articles/') || window.location.pathname.includes('/effects/');
   const prefix = isArticle ? '../' : '';

@@ -72,6 +72,18 @@ const CellularAutomata = (() => {
       this.canvas = canvas;
       this.gl = canvas.getContext('webgl2', { alpha: true, antialias: false });
       if (!this.gl) return;
+
+      // Required before any RGBA32F texture is attached to a framebuffer.
+      // In WebGL2 float textures are NOT color-renderable without this, and
+      // every draw fails with
+      //   GL_INVALID_FRAMEBUFFER_OPERATION: Framebuffer is incomplete:
+      //   Attachment is not renderable
+      // which silently leaves the canvas blank. physarum-v17.js already did
+      // this; this effect and reaction-diffusion did not.
+      if (!this.gl.getExtension('EXT_color_buffer_float')) {
+        console.warn('cellular-automata: EXT_color_buffer_float unavailable; skipping effect');
+        return;
+      }
       
       this.colorBase = [0, 0, 0];
       this.colorTip = [1, 1, 1];

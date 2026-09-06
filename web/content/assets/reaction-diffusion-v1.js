@@ -74,6 +74,15 @@ const ReactionDiffusion = (() => {
       this.canvas = canvas;
       this.gl = canvas.getContext('webgl2', { alpha: true, antialias: false });
       if (!this.gl) throw new Error("WebGL2 not supported");
+
+      // Required before any RGBA32F texture is attached to a framebuffer.
+      // Without it WebGL2 float textures are not color-renderable and every
+      // draw fails with 'Framebuffer is incomplete: Attachment is not
+      // renderable', leaving the canvas blank with no visible error.
+      if (!this.gl.getExtension('EXT_color_buffer_float')) {
+        console.warn('reaction-diffusion: EXT_color_buffer_float unavailable; skipping effect');
+        return;
+      }
       
       this.presets = {
         'coral': { f: [0.054, 0.056], k: [0.061, 0.063] },

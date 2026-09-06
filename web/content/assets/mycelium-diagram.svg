@@ -1,0 +1,37 @@
+<svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of a mycelium-like network of threads spreading between nine account nodes, with three nodes glowing brighter than the rest.">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#b7d18a" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#b7d18a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="900" height="420" fill="#171b14"/>
+  <g stroke="#5f7a53" stroke-width="1.4" fill="none" opacity="0.85">
+    <path d="M120,80 C220,140 260,120 340,180 C420,240 460,150 560,190 C650,225 700,160 790,120"/>
+    <path d="M120,80 C160,180 130,250 210,300 C280,345 330,300 400,340"/>
+    <path d="M340,180 C360,260 300,290 240,330"/>
+    <path d="M560,190 C520,260 590,300 540,360"/>
+    <path d="M560,190 C610,150 680,210 760,260"/>
+    <path d="M790,120 C820,200 770,240 800,310"/>
+    <path d="M400,340 C460,380 540,370 540,360"/>
+    <path d="M210,300 C160,340 110,330 80,370"/>
+    <path d="M760,260 C700,300 700,350 650,380"/>
+  </g>
+  <g>
+    <circle cx="120" cy="80" r="18" fill="url(#glow)"/>
+    <circle cx="120" cy="80" r="6" fill="#dfded0"/>
+    <circle cx="340" cy="180" r="5" fill="#8b9184"/>
+    <circle cx="560" cy="190" r="20" fill="url(#glow)"/>
+    <circle cx="560" cy="190" r="6.5" fill="#dfded0"/>
+    <circle cx="790" cy="120" r="5" fill="#8b9184"/>
+    <circle cx="400" cy="340" r="5" fill="#8b9184"/>
+    <circle cx="210" cy="300" r="5" fill="#8b9184"/>
+    <circle cx="760" cy="260" r="16" fill="url(#glow)"/>
+    <circle cx="760" cy="260" r="6" fill="#dfded0"/>
+    <circle cx="80" cy="370" r="4" fill="#5f7a53"/>
+    <circle cx="800" cy="310" r="4" fill="#5f7a53"/>
+    <circle cx="540" cy="360" r="4" fill="#5f7a53"/>
+    <circle cx="650" cy="380" r="4" fill="#5f7a53"/>
+    <circle cx="240" cy="330" r="4" fill="#5f7a53"/>
+  </g>
+</svg>

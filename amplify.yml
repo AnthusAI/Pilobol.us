@@ -1,0 +1,15 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - pip install "git+https://github.com/AnthusAI/Markus@v0.5.0"
+    build:
+      commands:
+        - cd web && python3 build.py
+  artifacts:
+    baseDirectory: web/dist
+    files:
+      - '**/*'
+  cache:
+    paths: []

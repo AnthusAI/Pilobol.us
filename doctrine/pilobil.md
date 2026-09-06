@@ -1,11 +1,11 @@
-# Pilobil.us publication doctrine (Slice 1)
+# Pilobol.us publication doctrine (Slice 1)
 
-Pilobil.us is a newsroom about a fungus among us: synthetic interlocutors
+Pilobol.us is a newsroom about a fungus among us: synthetic interlocutors
 infecting the human discussion circle until trust in the conversation itself
 collapses.
 
 This is a **Papyrus local pod**: the newsroom desk and its on-disk knowledge
-base for Pilobil.us. Desk language stays “Papyrus local pod” even though
+base for Pilobol.us. Desk language stays “Papyrus local pod” even though
 **Biblicus** is the underlying knowledge-base system and **Papyrus** is the
 automated newsroom that runs on top of it. When agents say “the KB,” they mean
 this pod’s wiki/corpus path as Papyrus local mode exposes it — not a separate
@@ -68,9 +68,9 @@ least one; many will braid several.
 
 ## Board and naming
 
-- Publication: Pilobil.us (`pilobil.us` when the domain is live).
+- Publication: Pilobol.us (`pilobol.us` when the domain is live).
 - Kanbus publication board key: `PILO`. Console port: `4260`.
-  When Ryan says the Pilobil board, he means this pod (`/workspace/pilobil.us`),
+  When Ryan says the Pilobol board, he means this pod (`/workspace/pilobol.us`),
   not ANTH (Anth.us) or PPY (Papyrus product).
 - This desk’s memory is isolated from Anth.us, P.apyr.us, and Threat
   Intelligence. Shared facts are written here again, or they are not the same

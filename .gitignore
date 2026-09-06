@@ -2,3 +2,4 @@
 project/.overlay/
 project/.cache/
 .vscode/
+web/dist/

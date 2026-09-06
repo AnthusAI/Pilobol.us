@@ -352,17 +352,11 @@
 
   @media (prefers-color-scheme: dark) {
     :root .pilo-physarum-canvas {
-      opacity: 0.8; mix-blend-mode: screen;
+      opacity: 0.8;
+      mix-blend-mode: screen;
+    }
+  }
 
-  .pilo-cinematic-gallery {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/9;
-    margin: 2rem 0;
-    overflow: hidden;
-    background: var(--markus-line);
-    border-radius: 4px;
-    box-shadow: 0 4px 12px var(--pilo-shadow);
   .pilo-organic-image {
     position: relative;
     width: 100%;
@@ -403,7 +397,6 @@
     position: relative !important;
     z-index: 100 !important; transform: translateZ(0) !important; backface-visibility: hidden;
   }
-}
 
   body {
     isolation: isolate;

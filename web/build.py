@@ -19,6 +19,15 @@ ROOT = Path(__file__).resolve().parent
 CONTENT = ROOT / "content"
 DIST = ROOT / "dist"
 
+# Cache-busting token for the CSS links. Derived from the newest mtime under
+# css/ so a stylesheet edit always produces a new URL. Without this, browsers
+# happily serve a stale theme and a CSS fix appears not to have worked.
+def css_version() -> str:
+    files = sorted((ROOT / "css").glob("*.css"))
+    newest = max((f.stat().st_mtime for f in files), default=0)
+    return str(int(newest))
+
+
 NAV_ITEMS = [
     ("Front", "index.html"),
     ("A fungus among us", "articles/fungus-among-us.html"),
@@ -51,14 +60,15 @@ def nav_html(active: str, depth: int) -> str:
 
 def page(title: str, fragment: str, *, active: str, depth: int = 0) -> str:
     prefix = "../" * depth
+    cssver = css_version()
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title} · Pilobil.us</title>
-<link rel="stylesheet" href="{prefix}css/markus-vendor.css">
-<link rel="stylesheet" href="{prefix}css/pilobil-theme-v10.css">
+<link rel="stylesheet" href="{prefix}css/markus-vendor.css?v={cssver}">
+<link rel="stylesheet" href="{prefix}css/pilobil-theme-v10.css?v={cssver}">
 </head>
 <body class="markus-body markus-site">
   

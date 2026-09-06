@@ -118,6 +118,11 @@ const OrganicImage = (() => {
       this.canvas.style.left = '0';
       this.canvas.style.width = '100%';
       this.canvas.style.height = '100%';
+      // Purely decorative: this canvas has no pointer handlers (only window
+      // resize/scroll). Keeping it click-through means that if the container
+      // ever loses `position: relative`, the canvas escapes to the initial
+      // containing block but still cannot swallow clicks on the page.
+      this.canvas.style.pointerEvents = 'none';
       this.container.appendChild(this.canvas);
       
       this.scrollProgress = 0;

@@ -1,16 +1,8 @@
 #!/usr/bin/env python3
-"""Build script for the Pilobol.us Markus site layer.
-
-Runs `markus convert --fragment --no-css` on each Markdown source, then
-wraps the resulting fragment in a page shell (masthead, nav, footer) that
-loads the vendored Markus CSS layer and the Pilobol.us theme layer on top
-of it. No Papyrus code involved — this is CSS + Markdown + Markus only,
-per PPY-5e8072.
-
-Usage: python3 build.py
-"""
+"""Build script for the Pilobol.us Markus site layer."""
 from __future__ import annotations
 
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -21,8 +13,8 @@ DIST = ROOT / "dist"
 
 NAV_ITEMS = [
     ("Front", "index.html"),
+    ("Stories", "articles/index.html"),
     ("A fungus among us", "articles/fungus-among-us.html"),
-    ("The infiltrated circle", "articles/infiltrated-circle.html"),
 ]
 
 THEME_TOGGLE_SCRIPT = """
@@ -71,7 +63,12 @@ def nav_html(active: str, depth: int) -> str:
     prefix = "../" * depth
     links = []
     for label_, href in NAV_ITEMS:
-        full_href = href if depth == 0 else (prefix + href if href != "index.html" else prefix + "index.html")
+        if depth == 0:
+            full_href = href
+        elif href == "index.html":
+            full_href = prefix + "index.html"
+        else:
+            full_href = prefix + href
         current = ' aria-current="page"' if href == active else ""
         links.append(f'<a href="{full_href}"{current}>{label_}</a>')
     return "\n      ".join(links)
@@ -79,12 +76,13 @@ def nav_html(active: str, depth: int) -> str:
 
 def page(title: str, fragment: str, *, active: str, depth: int = 0) -> str:
     prefix = "../" * depth
+    safe_title = title.replace("<", "&lt;").replace(">", "&gt;")
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title} · Pilobol.us</title>
+<title>{safe_title} · Pilobol.us</title>
 <link rel="stylesheet" href="{prefix}css/markus-vendor.css">
 <link rel="stylesheet" href="{prefix}css/pilobil-theme.css">
 </head>
@@ -107,15 +105,21 @@ def page(title: str, fragment: str, *, active: str, depth: int = 0) -> str:
   </main>
   <footer class="pilo-footer">
     <div class="pilo-footer-mycelium" aria-hidden="true"></div>
-    <p>Pilobol.us is a Papyrus local pod. Reader-facing copy publishes through
-    Markus, a Markdown-and-directives renderer — this page is that render,
-    not a Pretext layout. Doctrine and the concept wiki are the source of
-    truth for what this publication is.</p>
+    <p>Pilobol.us — a fungus among us. Weird specimens with receipts.
+    Built with Markus from a Papyrus local pod.</p>
   </footer>
 {THEME_TOGGLE_SCRIPT}
 </body>
 </html>
 """
+
+
+def title_from_md(src: Path) -> str:
+    text = src.read_text(encoding="utf-8")
+    m = re.search(r"^title:\s*[\"']?(.*?)[\"']?\s*$", text, re.M)
+    if m:
+        return m.group(1).strip().strip('"').strip("'")
+    return src.stem.replace("-", " ").title()
 
 
 def main() -> int:
@@ -124,8 +128,11 @@ def main() -> int:
     (DIST / "assets").mkdir(exist_ok=True)
     (DIST / "css").mkdir(exist_ok=True)
 
-    for asset in (CONTENT / "assets").glob("*"):
-        (DIST / "assets" / asset.name).write_bytes(asset.read_bytes())
+    assets_dir = CONTENT / "assets"
+    if assets_dir.exists():
+        for asset in assets_dir.glob("*"):
+            if asset.is_file():
+                (DIST / "assets" / asset.name).write_bytes(asset.read_bytes())
     for css in (ROOT / "css").glob("*.css"):
         (DIST / "css" / css.name).write_bytes(css.read_bytes())
 
@@ -134,14 +141,19 @@ def main() -> int:
         page("Front page", index_fragment, active="index.html", depth=0), encoding="utf-8"
     )
 
-    for slug in ("fungus-among-us", "infiltrated-circle"):
-        src = CONTENT / "articles" / f"{slug}.md"
-        fragment = run_markus(src)
-        title = {"fungus-among-us": "A fungus among us",
-                  "infiltrated-circle": "When the circle stops trusting itself"}[slug]
+    for src in sorted((CONTENT / "articles").glob("*.md")):
+        slug = src.stem
+        try:
+            fragment = run_markus(src)
+        except subprocess.CalledProcessError as e:
+            print("FAIL", src, e.stderr, file=sys.stderr)
+            raise
+        title = title_from_md(src)
+        active = f"articles/{slug}.html" if slug != "index" else "articles/index.html"
         (DIST / "articles" / f"{slug}.html").write_text(
-            page(title, fragment, active=f"articles/{slug}.html", depth=1), encoding="utf-8"
+            page(title, fragment, active=active, depth=1), encoding="utf-8"
         )
+        print(" ", slug)
 
     print("Built:", DIST)
     return 0

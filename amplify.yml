@@ -3,7 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - pip install "git+https://github.com/AnthusAI/Markus@v0.5.0"
+        - pip install "git+https://github.com/AnthusAI/Markus@v0.5.1"
     build:
       commands:
         - cd web && python3 build.py

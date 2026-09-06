@@ -55,10 +55,6 @@ You say the prayers. Three times. In the kitchen, or the car, or wherever the la
 
 
 
-![The app UI: Fr. Justin, Catholic Answers, Assisi](assets/father-justin/father-justin-ui-kym.jpg)
-
-
-
 ## The next day
 
 The collar is gone.

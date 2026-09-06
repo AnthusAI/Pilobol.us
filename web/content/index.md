@@ -1,5 +1,5 @@
 ---
-title: Pilobil.us
+title: Pilobol.us
 description: >-
   A newsroom about a fungus among us — synthetic interlocutors infecting the
   human discussion circle until trust in the conversation itself collapses.

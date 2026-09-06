@@ -1,7 +1,7 @@
 ---
 title: A fungus among us
 authors:
-  - Pilobil.us desk
+  - Pilobol.us desk
 date: 2026-09-06
 description: >-
   Synthetic speakers are colonizing the channels people use to check what is
@@ -55,7 +55,7 @@ Now widen the frame. The replies, the outrage, the consensus forming in a thread
 
 This is the part that keeps the beat from being a mood. Fungus, in the literal sense, leaves evidence: a spore print, a smell, a pattern of decay in the wood. The synthetic kind leaves evidence too, if you know where to look.
 
-:::figure{src="../assets/mycelium-diagram.svg" alt="Diagram of a mycelium-like network connecting nine account nodes, three of them glowing brighter, tracing how a handful of amplifying accounts sit at the hubs of a wider thread network." caption="A thread network drawn as mycelium: quiet distributed nodes, and a few hub accounts doing the amplifying." credit="Pilobil.us desk"}
+:::figure{src="../assets/mycelium-diagram.svg" alt="Diagram of a mycelium-like network connecting nine account nodes, three of them glowing brighter, tracing how a handful of amplifying accounts sit at the hubs of a wider thread network." caption="A thread network drawn as mycelium: quiet distributed nodes, and a few hub accounts doing the amplifying." credit="Pilobol.us desk"}
 :::
 
 :::callout{kind="tip" title="Early clinical signs"}

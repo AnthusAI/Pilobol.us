@@ -1,7 +1,7 @@
 ---
 title: When the circle stops trusting itself
 authors:
-  - Pilobil.us desk
+  - Pilobol.us desk
 date: 2026-08-29
 description: >-
   A working timeline of how a discussion circle usually finds out it has been

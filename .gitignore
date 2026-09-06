@@ -2,3 +2,15 @@
 project/.overlay/
 project/.cache/
 .vscode/
+
+# Node tooling (puppeteer, used for local screenshot checks only)
+node_modules/
+
+# Generated static site. Built by `python3 web/build.py`; Amplify builds it
+# at deploy time. Never commit build output.
+web/dist/
+
+# Python / OS cruft
+__pycache__/
+*.pyc
+.DS_Store

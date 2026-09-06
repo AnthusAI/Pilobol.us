@@ -1,0 +1,410 @@
+/* =========================================================================
+   Pilobil.us site theme — "a fungus among us"
+   =========================================================================
+
+   Loaded AFTER css/markus-vendor.css. Declares its own layer so it always
+   wins over the vendored Markus layer regardless of selector specificity —
+   see the cascade-rule note in markus-vendor.css. This file only redefines
+   --markus-* tokens and adds a thin set of site-specific classes (masthead,
+   nav, footer, story teaser furniture). It does not fight Markus's own
+   component selectors.
+
+   Palette rationale
+   ------------------
+   Two real fungal facts anchor the palette instead of generic "tech" colors:
+
+   - Spore print: the deep violet-brown/near-black cast many mushroom spore
+     prints leave on paper is the identifying feature field guides use when
+     the cap alone won't tell species apart. We use a spore-print violet as
+     the quote/callout-note accent — the color of evidence left behind.
+   - Foxfire: several wood-rotting fungi (Armillaria, Panellus) glow faintly
+     in the dark via bioluminescence. Dark mode's accent is that pale
+     phosphorescent lichen-green glow, not a "hacker green" cliché.
+
+   Light mode reads as a page in daylight, before you've noticed anything is
+   wrong: warm, slightly dulled parchment, ink close to black. Dark mode reads
+   as the same room after dark, once the infection is visible: damp cellar
+   ground, spores glowing faintly at the edges.
+   ========================================================================= */
+
+@layer pilobil-theme {
+
+  :root {
+    /* --- light (default): daylight, before you've noticed --- */
+    --markus-ink: #211d17;
+    --markus-muted: #6b6153;
+    --markus-paper: #f1ead9;
+    --markus-card: #fbf6ea;
+    --markus-line: #d7cbb2;
+
+    --markus-accent: #3f5d43;       /* moss on stone */
+    --markus-accent-2: #a35a2a;     /* dried rust / ochre */
+    --markus-quote: #4a3548;        /* spore-print violet */
+    --markus-note: #3f5d43;
+    --markus-warning: #a35a2a;
+    --markus-tip: #4f6b3a;
+    --markus-caution: #8a3324;
+
+    --markus-pre-bg: #221f19;
+    --markus-pre-ink: #ece4d2;
+    --markus-code-bg: rgba(33, 29, 23, 0.07);
+    --markus-aside-bg: rgba(74, 53, 72, 0.06);
+    --markus-tab-nav-bg: rgba(33, 29, 23, 0.04);
+    --markus-th-bg: rgba(63, 93, 67, 0.09);
+
+    --markus-sans: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+    --markus-serif: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+    --markus-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+
+    /* site-only tokens (not part of Markus's vocabulary) */
+    --pilo-shadow: rgba(33, 29, 23, 0.12);
+    --pilo-hairline: rgba(33, 29, 23, 0.5);
+    color-scheme: light;
+  }
+
+  /* --- dark (system default): after dark, spores visible --- */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --markus-ink: #dfded0;
+      --markus-muted: #8b9184;
+      --markus-paper: #14170f;
+      --markus-card: #1c2117;
+      --markus-line: #333b2a;
+
+      --markus-accent: #b7d18a;     /* foxfire glow */
+      --markus-accent-2: #d0895a;
+      --markus-quote: #b7a3c4;      /* spore-print violet, lit from behind */
+      --markus-note: #9fd0c9;
+      --markus-warning: #d0a24f;
+      --markus-tip: #9fce7a;
+      --markus-caution: #d17e6e;
+
+      --markus-pre-bg: #0d0f0a;
+      --markus-pre-ink: #dfded0;
+      --markus-code-bg: rgba(223, 222, 208, 0.07);
+      --markus-aside-bg: rgba(183, 163, 196, 0.08);
+      --markus-tab-nav-bg: rgba(13, 15, 10, 0.5);
+      --markus-th-bg: rgba(183, 209, 138, 0.08);
+
+      --pilo-shadow: rgba(0, 0, 0, 0.4);
+      --pilo-hairline: rgba(223, 222, 208, 0.4);
+      color-scheme: dark;
+    }
+  }
+
+  }
+
+  /* ---------------------------------------------------------------------
+     Body / document texture
+     --------------------------------------------------------------------- */
+
+  .markus-body {
+    background-image:
+      radial-gradient(circle at 8% 4%, color-mix(in srgb, var(--markus-accent) 7%, transparent), transparent 40%),
+      radial-gradient(circle at 92% 0%, color-mix(in srgb, var(--markus-quote) 6%, transparent), transparent 38%);
+    background-attachment: fixed;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .markus-document a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+  }
+
+  /* ---------------------------------------------------------------------
+     Masthead
+     --------------------------------------------------------------------- */
+
+  .pilo-masthead {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 0;
+  }
+
+  .pilo-masthead-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+
+  .pilo-wordmark {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    font-family: var(--markus-serif);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+    letter-spacing: 0.01em;
+    color: var(--markus-ink);
+    text-decoration: none;
+  }
+
+  .pilo-wordmark-mark {
+    display: inline-block;
+    width: 0.62em;
+    height: 0.62em;
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at 35% 30%, var(--markus-accent), var(--markus-quote) 75%);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--markus-accent) 18%, transparent);
+    flex-shrink: 0;
+  }
+
+  .pilo-wordmark-us {
+    color: var(--markus-accent);
+  }
+
+  .pilo-kicker {
+    font-family: var(--markus-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--markus-muted);
+  }
+
+  .pilo-tagline {
+    margin: 0.35rem 0 1.1rem;
+    color: var(--markus-muted);
+    font-style: italic;
+    font-family: var(--markus-serif);
+  }
+
+  .pilo-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.15rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--markus-line);
+    font-size: 0.92rem;
+  }
+
+  .pilo-nav a {
+    color: var(--markus-ink);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .pilo-nav a[aria-current="page"] {
+    color: var(--markus-accent);
+    box-shadow: inset 0 -2px 0 var(--markus-accent);
+  }
+
+  .pilo-nav a:hover {
+    color: var(--markus-accent);
+  }
+
+
+
+  /* ---------------------------------------------------------------------
+     Article header dressing
+     --------------------------------------------------------------------- */
+
+  .markus-site main .markus-document {
+    padding-top: 2rem;
+    max-width: 46rem;
+  }
+
+  .markus-lede {
+    font-family: var(--markus-serif);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    font-style: italic;
+    border-top: 1px solid var(--markus-line);
+    padding-top: 1rem;
+    margin-top: 1rem !important;
+  }
+
+  .markus-byline {
+    font-family: var(--markus-sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--markus-accent-2);
+  }
+
+  /* ---------------------------------------------------------------------
+     Index / section front: story teasers riding the card-grid vocabulary
+     --------------------------------------------------------------------- */
+
+  .pilo-section-label {
+    font-family: var(--markus-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--markus-accent);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .pilo-section-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--markus-line);
+  }
+
+  .pilo-teaser-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .pilo-teaser-card:hover {
+    border-color: var(--markus-accent);
+    transform: translateY(-2px);
+  }
+
+  .pilo-teaser-kicker {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--markus-accent-2);
+  }
+
+  .pilo-teaser-card h3 {
+    margin: 0.1rem 0 0.2rem !important;
+  }
+
+  .pilo-teaser-card h3 a {
+    color: var(--markus-ink);
+    text-decoration: none;
+  }
+
+  .pilo-teaser-card h3 a:hover {
+    color: var(--markus-accent);
+  }
+
+  .pilo-teaser-dek {
+    color: var(--markus-muted);
+    font-size: 0.94rem;
+  }
+
+  .pilo-lede-card {
+    background:
+      linear-gradient(155deg, color-mix(in srgb, var(--markus-quote) 10%, var(--markus-card)), var(--markus-card));
+  }
+
+  .pilo-lede-card h2 a,
+  .pilo-lede-card h2 {
+    color: var(--markus-ink);
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+
+  /* ---------------------------------------------------------------------
+     Footer
+     --------------------------------------------------------------------- */
+
+  .pilo-footer {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 3rem;
+    color: var(--markus-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--markus-line);
+  }
+
+  .pilo-footer a {
+    color: var(--markus-accent);
+  }
+
+  .pilo-footer-mycelium {
+    height: 1px;
+    margin: 0 0 2rem;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--pilo-hairline) 20%,
+      var(--pilo-hairline) 80%,
+      transparent
+    );
+  }
+
+  @media print {
+}
+
+  /* ---------------------------------------------------------------------
+     Physarum Background Simulation
+     --------------------------------------------------------------------- */
+
+  .pilo-physarum-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.65; mix-blend-mode: multiply;
+    /* Create a permanent transparent tunnel down the middle matching the text column */
+    /* If the screen is narrower than 900px, it will hide the animation completely (which is the only option) */
+    mask-image: linear-gradient(to right, black 0%, black calc(50% - 32rem), transparent calc(50% - 26rem), transparent calc(50% + 26rem), black calc(50% + 32rem), black 100%);
+    -webkit-mask-image: linear-gradient(to right, black 0%, black calc(50% - 32rem), transparent calc(50% - 26rem), transparent calc(50% + 26rem), black calc(50% + 32rem), black 100%);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root .pilo-physarum-canvas {
+      opacity: 0.8; mix-blend-mode: screen;
+
+  .pilo-cinematic-gallery {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    margin: 2rem 0;
+    overflow: hidden;
+    background: var(--markus-line);
+    border-radius: 4px;
+    box-shadow: 0 4px 12px var(--pilo-shadow);
+  .pilo-organic-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    margin: 2rem 0;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .pilo-cinematic-gallery {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    margin: 2rem 0;
+    overflow: hidden;
+    background: var(--markus-pre-bg);
+    border-radius: 4px;
+    box-shadow: 0 4px 12px var(--pilo-shadow);
+  }
+
+  /* ---------------------------------------------------------------------
+     Page Wrapper (masking the background simulation)
+     --------------------------------------------------------------------- */
+
+  .pilo-page-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 60rem;
+    margin: 0 auto;
+    
+    padding: 0 4rem;
+    
+  }
+
+  /* --- BULLETPROOF TEXT READABILITY --- */
+  main, .markus-document, .pilo-masthead, .pilo-footer {
+    
+    position: relative !important;
+    z-index: 100 !important; transform: translateZ(0) !important; backface-visibility: hidden;
+  }
+}
+
+  body {
+    isolation: isolate;
+  }

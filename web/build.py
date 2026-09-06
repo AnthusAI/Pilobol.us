@@ -6,6 +6,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+import shutil
 
 ROOT = Path(__file__).resolve().parent
 CONTENT = ROOT / "content"
@@ -128,11 +129,21 @@ def main() -> int:
     (DIST / "assets").mkdir(exist_ok=True)
     (DIST / "css").mkdir(exist_ok=True)
 
+    # Site-wide assets (mycelium diagram, etc.)
     assets_dir = CONTENT / "assets"
     if assets_dir.exists():
         for asset in assets_dir.glob("*"):
             if asset.is_file():
                 (DIST / "assets" / asset.name).write_bytes(asset.read_bytes())
+
+    # Per-article image trees (e.g. articles/assets/father-justin/*.jpg)
+    # HTML lives at dist/articles/<slug>.html and img src is assets/...
+    article_assets = CONTENT / "articles" / "assets"
+    if article_assets.exists():
+        dest = DIST / "articles" / "assets"
+        if dest.exists():
+            shutil.rmtree(dest)
+        shutil.copytree(article_assets, dest)
     for css in (ROOT / "css").glob("*.css"):
         (DIST / "css" / css.name).write_bytes(css.read_bytes())
 

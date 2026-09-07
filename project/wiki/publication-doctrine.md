@@ -108,7 +108,7 @@ democracy/tech explainers.
 
 **Opinionated (Ryan 2026-09-07):** pieces carry a house take — not “experts say,” not a policy explainer. Opinion rides inside the weird story.
 
-**Storytelling (reader posts):** Weird stories rooted in belief — ordinary start, uncanny tilt. **Not tech journalism** (links are receipts). Rotate **story shapes** from [`content/VOICE.md`](../../content/VOICE.md): inside the user; over one shoulder; witness; conversation-as-story; arrival; morning after. **Historical** is a post *type* (lineage dig), not a seventh camera angle — it can use any shape. First-person inside-user is only one option. Name the thing in plain English early. Street-readable; no “not A, it’s B”; don’t clone the Father Justin spine unless the scene is unmistakably different. Screenshots and concrete beats when available.
+**Storytelling (reader posts):** Weird stories rooted in belief — ordinary start, uncanny tilt. **Not tech journalism** (link sources naturally in the sentences they support; no bibliography). Rotate **story shapes** from [`content/VOICE.md`](../../content/VOICE.md): inside the user; over one shoulder; witness; conversation-as-story; arrival; morning after. **Historical** is a post *type* (lineage dig), not a seventh camera angle — it can use any shape. First-person inside-user is only one option. Name the thing in plain English early. Street-readable; no “not A, it’s B”; don’t clone the Father Justin spine unless the scene is unmistakably different. Screenshots and concrete beats when available.
 
 Strong yes: hologram funerals, griefbots / generative ghosts, dead celebrities
 touroured as product, AI influencers that deny being AI, Meta’s own fake people,

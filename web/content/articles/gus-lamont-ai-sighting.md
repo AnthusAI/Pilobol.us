@@ -31,11 +31,3 @@ South Australia Police told [AFP Fact Check](https://factcheck.afp.com/doc.afp.c
 The search on the ground had scaled back. The search in the feed kept minting breakthroughs.
 
 Nobody had to dig a shaft or fly a drone to make those scenes. They only had to prefer the picture.
-
-## Receipts
-
-- [AFP Fact Check — police refute authenticity of missing-boy image](https://factcheck.afp.com/doc.afp.com.78B22ZR)
-- [AAP FactCheck — false claims about missing Gus Lamont](https://www.aap.com.au/factcheck/false-claims-about-missing-gus-lamont-spread-on-social-media/)
-- [ABC — AI-generated images of missing 4yo Gus raise legal concerns](https://www.abc.net.au/news/2025-10-11/ai-generated-images-of-4yo-gus-prompt-call-for-stronger-laws/105873218)
-- [ABC — AI image of missing Gus “concerning but not surprising”](https://www.abc.net.au/news/2025-10-09/sa-ai-image-of-missing-child-appears-online/105868548)
-- [7NEWS — fake AI images spark false claims in Gus Lamont search](https://7news.com.au/news/fake-ai-images-sparks-wave-of-false-claims-in-search-for-missing-sa-boy-gus-lamont-c-20305471)

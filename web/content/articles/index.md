@@ -3,11 +3,13 @@ title: Spores
 description: Glimpses of our moldy future.
 ---
 
-### [The room with the pond](the-room-with-the-pond.html)
+### [The strangler-fig method](the-strangler-fig-method.html)
 
-[![A strangler fig growing around a palm tree](../assets/the-room-with-the-pond/strangler-fig-palm-cover.jpg)](the-room-with-the-pond.html)
+[![A strangler fig growing around the trunk of a palm tree](../assets/the-strangler-fig-method/strangler-fig-palm-cover.jpg)](the-strangler-fig-method.html)
 
-A TikTok video invited viewers to book a Sedona hotel room overlooking a peaceful pond. The hotel has no such room, no such pond, and perhaps no such creator.
+AI does not need to build a second society beside the first one. It can grow
+through the places where people already meet, then decide what they see, hear,
+and say.
 
 *Monday, September 7, 2026*
 

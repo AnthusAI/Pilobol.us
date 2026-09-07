@@ -70,6 +70,9 @@ a story.
 Internal wiki cards, AGENTS.md, and scout chat digests may use desk shorthand.
 **Reader-facing stories (site drafts and the daily story routine) may not.**
 
+Link a source naturally in the sentence it supports. Reader posts do not end
+with a bibliography or a labeled source list.
+
 ## Storytelling: inside the belief
 
 Pilobolus articles are **weird stories**, not technical explainers. Start
@@ -135,7 +138,8 @@ Two related moves, both looking **backward through history**:
 Rules for Historical posts:
 
 - Still one thread: one *type* or one named day/scene — not a survey essay.
-- Street-readable; no theory lecture; links as receipts.
+- Street-readable; no theory lecture; link sources naturally in the sentences
+  they support.
 - Prefer weird, concrete scenes (named year / person / place / broadcast)
   over vague “humans have always…” throat-clearing.
 - Lineage: use when the belief→consequence bar would otherwise reject the
@@ -147,8 +151,8 @@ Rules for Historical posts:
 Pilobolus is **not** Wired, The Verge, or a product roundup with a lede. We
 include source links. We do not write “Company X launched Y using large language
 models to…” Explainers, funding graphs, feature lists, “experts say,” and
-model-name throat-clearing are out. Tell the weird lived scene. The link is a
-receipt at the end (or in Sources), not permission to sound like a beat reporter.
+model-name throat-clearing are out. Tell the weird lived scene. A link in the
+relevant sentence does not permit beat-reporter prose.
 
 **Opinionated (Ryan 2026-09-07):** “Not tech journalism” includes having a
 **take**. The house has an opinion spine — not a neutral briefing, not both-sides

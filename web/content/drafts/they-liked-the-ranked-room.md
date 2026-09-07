@@ -15,7 +15,7 @@ For a week your phone only shows people you already follow, in the order they po
 
 Most people will switch the ranking back on before the week is over. That isn’t weak willpower. The ranked feed is built to feel better than the plain one — denser, smoother, always finishing a thought before you do — and after years living inside it, a feed that just shows what your friends posted, in order, starts to feel like nothing is happening.
 
-Australia is drafting laws that would force big platforms to offer a way out — pop-ups asking whether you want recommended content or only what you follow. Labor’s shape is mostly **opt-out**: the ranked room stays the default; you have to notice and leave. Consent advocate Chanel Contos told the National Press Club the government should seek **opt-in** instead — make the algorithm ask permission — arguing ranked feeds help fuel sexual violence and push young people toward misogynistic “manosphere” material. The Greens lean that way too. The Coalition calls parts of the fight censorship. The bill also talks about a digital duty of care and fines large enough to make a headline.
+[Australia is drafting laws](https://www.abc.net.au/news/2026-09-06/opt-out-laws-social-media-algorithm-parliament-government/107121192) that would force big platforms to offer a way out — pop-ups asking whether you want recommended content or only what you follow. Labor’s shape is mostly **opt-out**: the ranked room stays the default; you have to notice and leave. Consent advocate Chanel Contos told the National Press Club the government should seek **opt-in** instead — make the algorithm ask permission — arguing ranked feeds help fuel sexual violence and push young people toward misogynistic “manosphere” material. The Greens lean that way too. [The Coalition calls parts of the fight censorship](https://www.theguardian.com/australia-news/2026/sep/06/labor-plans-crackdown-on-social-media-algorithms-as-taylor-says-hes-deeply-sceptical). The bill also talks about a digital duty of care and fines large enough to make a headline.
 
 Contos is right that the pipe delivers harm at industrial scale. An algorithm doesn’t just carry what people already believe — it builds a version of the world around each person, and that version can carry the manosphere content along the same way a flood carries whatever was sitting upstream. Opt-in is more honest than opt-out: it makes the platform ask before it starts building that world, instead of leaving the ranked room switched on until someone notices and climbs out.
 
@@ -26,10 +26,3 @@ What your friends actually post, in the order they posted it, is messy and spars
 So: opt-in over opt-out, if the question is honesty about consent. Do not confuse either with waking up. The darker fact is that after the pop-up, most thumbs will choose the ranked room again — because they like it.
 
 That is the seam. The copy wins when leaving feels like leaving reality.
-
-## Receipts
-
-- BBC — Australians will be able to switch off social media algorithms under planned legislation (Apple News / BBC; Contos Press Club opt-in call)
-- [ABC — Opt-out laws for social media algorithms](https://www.abc.net.au/news/2026-09-06/opt-out-laws-social-media-algorithm-parliament-government/107121192)
-- [The Conversation — proposed laws / opt-out vs opt-in](https://theconversation.com/proposed-laws-would-let-you-opt-out-of-social-media-algorithms-an-expert-explains-291347)
-- [Guardian — Labor crackdown / Taylor sceptical](https://www.theguardian.com/australia-news/2026/sep/06/labor-plans-crackdown-on-social-media-algorithms-as-taylor-says-hes-deeply-sceptical)

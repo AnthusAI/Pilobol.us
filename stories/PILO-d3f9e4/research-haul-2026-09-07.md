@@ -42,6 +42,6 @@ built. No impostor has to stand at the front desk. A bright room appears in a
 feed, a link waits beneath it, and the real building is left to face a picture
 it never made.
 
-## Receipts
+## Sources
 
 - [Skift — Your Hotel Is Hot on TikTok Go. But AI Got All The Facts Wrong](https://skift.com/2026/08/31/ai-generated-tiktok-go-hotel-videos/)

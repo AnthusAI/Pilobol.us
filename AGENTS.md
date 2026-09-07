@@ -174,9 +174,10 @@ that way too, not only the topics. Pilobol.us is AI slop that grows like a
 fungus (bots hunting bot-weirdness). Optional joke: it can look like a bonsai
 to whoever is pruning; underneath it is still fungus.
 
-**Reader posts are weird stories, not tech journalism.** We include source
-links as receipts. We do not write launch explainers, funding graphs, feature
-lists, “experts say,” or model-name throat-clearing.
+**Reader posts are weird stories, not tech journalism.** Link a source in the
+sentence it supports; do not append a bibliography or labeled source list. We
+do not write launch explainers, funding graphs, feature lists, “experts say,”
+or model-name throat-clearing.
 
 **Opinionated (Ryan 2026-09-07):** that ban includes having a house **take** —
 not a neutral briefing. Opinion grows from mission DNA (fungus; people like the

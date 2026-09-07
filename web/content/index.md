@@ -7,11 +7,13 @@ cover: assets/gus-lamont/og-cover.jpg
 
 :::card-grid{columns="6"}
 :::card{span="full"}
-### [The room with the pond](articles/the-room-with-the-pond.html)
+### [The strangler-fig method](articles/the-strangler-fig-method.html)
 
-![A strangler fig growing around a palm tree](assets/the-room-with-the-pond/strangler-fig-palm-cover.jpg)
+![A strangler fig growing around the trunk of a palm tree](assets/the-strangler-fig-method/strangler-fig-palm-cover.jpg)
 
-A TikTok video invited viewers to book a Sedona hotel room overlooking a peaceful pond. The hotel has no such room, no such pond, and perhaps no such creator.
+AI does not need to build a second society beside the first one. It can grow
+through the places where people already meet, then decide what they see, hear,
+and say.
 
 *Monday, September 7, 2026*
 :::

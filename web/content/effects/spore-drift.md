@@ -1,6 +1,6 @@
 ---
 title: "Effect: Spore Drift"
-date: "2026-09-06"
+date: 'Sunday, September 6, 2026'
 ---
 
 # Spore Drift

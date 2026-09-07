@@ -1,10 +1,8 @@
 ---
 title: Father Justin
-date: '2026-09-06'
+date: 'Sunday, September 6, 2026'
 description: A collar, an Assisi balcony, three Our Fathers — then the priest is only
   Justin.
-authors:
-- Pilobolus mycelium
 standfirst: You email for a code. A man with a beard and a collar loads. He says he
   can hear your confession.
 ---

@@ -1,12 +1,10 @@
 ---
 title: A fungus among us
-date: 2026-09-06
+date: 'Sunday, September 6, 2026'
 description: >-
   Weird and surreal outcomes of a society slowly taken over by AI and machine
   learning — the creeping infection, and the moments when the copy feels more
   real than real.
-authors:
-  - Pilobolus mycelium
 ---
 
 Weird and surreal outcomes of a society slowly taken over by AI and machine-learning systems. The creeping infection. Subtle signs when the copy wins — when people live inside the simulation, when the feed or the bot or the hologram feels *more real than real*.

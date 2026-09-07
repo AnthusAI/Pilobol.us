@@ -1,6 +1,6 @@
 ---
 title: "Effect: Diffusion-Limited Aggregation"
-date: "2026-09-06"
+date: 'Sunday, September 6, 2026'
 ---
 
 # Diffusion-Limited Aggregation

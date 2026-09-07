@@ -1,10 +1,8 @@
 ---
 title: Believe the rainbow
-date: '2026-09-06'
+date: 'Sunday, September 6, 2026'
 description: Cryptocurrency works while enough people keep believing. A candy ad already
   showed what happens when someone stops.
-authors:
-- Pilobolus mycelium
 standfirst: A number on a screen is worth something only while enough people agree
   that it is. Stop agreeing, and there is nothing underfoot.
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Effect: Continuous Cellular Automata"
-date: "2026-09-06"
+date: 'Sunday, September 6, 2026'
 ---
 
 # Continuous Cellular Automata

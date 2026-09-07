@@ -11,7 +11,7 @@ description: >-
 
 You email for a code. A man with a beard and a collar loads. He says he can hear your confession.
 
-*2026-09-06*
+*Sunday, September 6, 2026*
 :::
 :::
 

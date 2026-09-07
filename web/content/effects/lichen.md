@@ -1,6 +1,6 @@
 ---
 title: "Effect: Crustose Lichen"
-date: "2026-09-06"
+date: 'Sunday, September 6, 2026'
 ---
 
 # Crustose Lichen

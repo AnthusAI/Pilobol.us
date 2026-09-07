@@ -9,7 +9,7 @@ description: Glimpses of our moldy future.
 
 A number on a screen is worth something only while enough people agree that it is. Stop agreeing, and there is nothing underfoot.
 
-*2026-09-06*
+*Sunday, September 6, 2026*
 
 ### [Father Justin](father-justin.html)
 
@@ -17,4 +17,4 @@ A number on a screen is worth something only while enough people agree that it i
 
 You email for a code. A man with a beard and a collar loads. He says he can hear your confession.
 
-*2026-09-06*
+*Sunday, September 6, 2026*

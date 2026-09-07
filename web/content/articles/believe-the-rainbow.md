@@ -25,46 +25,37 @@ Hey, what if this rainbow doesn’t exist…
 
 Funny. Mean. Exact. [TBWA\Chiat\Day built the spot](https://www.adweek.com/brand-marketing/tbwacd-redefines-skittles-rainbow-theme-73603/) to sell candy, not epistemology, but [the ending still gets](https://tvtropes.org/pmwiki/pmwiki.php/Advertising/Skittles) cited on its own for the exact turn this post is about.
 
-Cryptocurrency is that rainbow without the joke track. A coin is a shared
-story with a ledger attached — it buys a house, a pizza, a ticket out, for as
-long as enough people keep treating the story as money. Underneath the charts
-and the apps and the solemn white papers is agreement. Withdraw the agreement
-and the number on the screen is still a number. It just stops holding weight.
+Cryptocurrency runs on the same rainbow. A coin is a shared story with a
+ledger attached — it buys a house, a pizza, a ticket out, for as long as
+enough people keep treating the story as money. Underneath the charts and the
+white papers is agreement. Withdraw the agreement and the number on the
+screen is still a number. It just stops holding weight.
 
 In May 2022, a coin called TerraUSD was supposed to always be worth exactly a
 dollar — not backed by a vault of cash, but by a second coin, Luna, and an
-algorithm that would mint more Luna on demand to defend the dollar peg
-whenever people started selling. On a Saturday evening, enough people sold at
-once that the peg cracked. The algorithm did exactly what it was built to do:
-it minted more Luna to catch the fall. Which meant more Luna chasing the same
-shrinking pile of belief. Luna’s price didn’t wobble — it went from around
-eighty dollars to a fraction of a cent in four days. Something close to forty
-billion dollars stopped existing overnight — nobody stole it, nobody burned
-it, people just stopped agreeing it was there. In South Korea alone, close to
-280,000 people felt that loss land in a personal account.
-
-The rescue mechanism only worked as long as people trusted the rescue
-mechanism. Once that cracked, printing more of the coin meant to save it just
-made the coin worthless faster — the machine correctly carrying out its own
-death sentence.
+algorithm that would mint more Luna on demand to defend the peg whenever
+people sold. On a Saturday evening, enough people sold at once that the peg
+cracked, and the algorithm did exactly what it was built to do: mint more
+Luna to catch the fall, which only meant more Luna chasing the same shrinking
+pile of belief. Luna went from around eighty dollars to a fraction of a cent
+in four days. Something close to forty billion dollars stopped existing
+overnight — nobody stole it, nobody burned it, people just stopped agreeing
+it was there. In South Korea alone, close to 280,000 people felt that loss
+land in a personal account. The rescue mechanism had only ever worked because
+people trusted it; once that cracked, printing more of the coin just made it
+worthless faster.
 
 :::aside{title="The commercial, in one beat"}
 On the rainbow, doubt doesn’t get a debate. It gets a hole. The spot doesn’t
 argue — it drops the kid who asked.
 :::
 
-That is what counterfeiting really is, even when nobody prints a fake bill in
-a basement. A bad note rarely hurts only the person holding it. It teaches
-everyone nearby that notes might be hollow. Money survives only as long as
-people trust money, and Terra’s fall spooked people holding coins that had
-nothing to do with Terra — the wider crypto market kept sliding for weeks.
-
-People talk about code, scarcity, “trustless” systems. The daily experience
-that week was simpler: someone checked a price, someone else refused to
-accept that price as payment, and by the third day almost nobody would hold
-Luna long enough to find out if the algorithm would catch up. Bank runs are
-the same physics in older clothes. Terra just ran the experiment without a
-teller window to slow anyone down.
+That’s what counterfeiting really does, even without a fake bill in a
+basement: one crack teaches everyone nearby that any note might be hollow.
+Terra’s fall spooked people holding coins that had nothing to do with Terra —
+the wider crypto market kept sliding for weeks. Bank runs are the same
+physics in older clothes. Terra just ran the experiment without a teller
+window to slow anyone down.
 
 :::note{title="A cousin problem"}
 Fake commenters flooding a discussion so it looks like a real crowd agrees
@@ -74,10 +65,9 @@ the appearance of belief instead of the money.
 :::
 
 The Skittles spot ends on a dare: keep believing, or don’t sit there. Crypto
-doesn’t need the dare — the market makes it in public, every few years. The
-rainbow wasn’t doing anything wrong on the way up, and it wasn’t doing
-anything wrong on the way down. It only ever held as many people as agreed to
-sit.
+skips the dare — the market makes it in public, every few years. The rainbow
+wasn’t doing anything wrong on the way up or down. It only ever held as many
+people as agreed to sit.
 
 The candy ad was selling sugar. The ledger was selling forty billion dollars’
 worth of the right to keep sitting — until, one Saturday evening, not enough

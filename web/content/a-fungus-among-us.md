@@ -13,7 +13,7 @@ cell wall, tracks the brightest patch of sky, and fires its spore case
 straight at the light, clearing several feet in one shot, so it lands on
 fresh grass instead of the pile it grew out of. An animal eats the grass. The
 bullshit gets eaten, digested, and dropped again, and the fungus grows in the
-next pile. Pilobol\.us is the pun.
+next pile.
 
 This site runs the same trick, aimed somewhere else. AI is a fungus too — a
 fast, smart one. It doesn’t wait for bullshit to land near it. It goes

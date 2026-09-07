@@ -64,42 +64,42 @@
       script: 'physarum-v17.js',
       configKey: 'physarum',
       variants: ['creeping_veins', 'spore_burst', 'mycelium_threads', 'crystallizing'],
-      creditTitle: 'Effect: Physarum Polycephalum',
+      creditTitle: 'Physarum Polycephalum',
       creditUrl: 'effects/physarum.html'
     },
     {
       script: 'reaction-diffusion-v1.js',
       configKey: 'reaction-diffusion',
       variants: ['coral', 'mitosis', 'maze'],
-      creditTitle: 'Effect: Reaction-Diffusion',
+      creditTitle: 'Reaction-Diffusion',
       creditUrl: 'effects/reaction-diffusion.html'
     },
     {
       script: 'cellular-automata-v1.js',
       configKey: 'cellular-automata',
       variants: ['colonies', 'crystal', 'embers'],
-      creditTitle: 'Effect: Continuous Cellular Automata',
+      creditTitle: 'Continuous Cellular Automata',
       creditUrl: 'effects/cellular-automata.html'
     },
     {
       script: 'dla-v1.js',
       configKey: 'dla',
       variants: ['frost', 'coral', 'rootlets'],
-      creditTitle: 'Effect: Diffusion-Limited Aggregation',
+      creditTitle: 'Diffusion-Limited Aggregation',
       creditUrl: 'effects/dla.html'
     },
     {
       script: 'spore-drift-v1.js',
       configKey: 'spore-drift',
       variants: ['still-air', 'crosswind', 'updraft'],
-      creditTitle: 'Effect: Spore Drift',
+      creditTitle: 'Spore Drift',
       creditUrl: 'effects/spore-drift.html'
     },
     {
       script: 'lichen-v1.js',
       configKey: 'lichen',
       variants: ['dusting', 'islands', 'old-wall'],
-      creditTitle: 'Effect: Crustose Lichen',
+      creditTitle: 'Crustose Lichen',
       creditUrl: 'effects/lichen.html'
     }
   ];
@@ -469,7 +469,7 @@
     const footer = document.querySelector('.markus-site-footer, .pilo-footer');
     if (footer) {
       const creditP = document.createElement('p');
-      creditP.innerHTML = `Living Background: <a href="${prefix}${chosen.creditUrl}">${chosen.creditTitle}</a>`;
+      creditP.innerHTML = `Background: <a href="${prefix}${chosen.creditUrl}">${chosen.creditTitle}</a>`;
       footer.appendChild(creditP);
     }
   };

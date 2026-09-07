@@ -1,5 +1,5 @@
 ---
-title: "Effect: Continuous Cellular Automata"
+title: "Continuous Cellular Automata"
 date: 'Sunday, September 6, 2026'
 ---
 

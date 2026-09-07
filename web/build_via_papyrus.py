@@ -40,15 +40,15 @@ from papyrus_content.markus_renderer import build as markus_build  # noqa: E402
 from papyrus_content.markus_renderer.build import build_markus_site  # noqa: E402
 from papyrus_content.markus_renderer.shell import NavItem, SiteChrome  # noqa: E402
 
-# Papyrus only auto-builds Home + Stories into the header. Effects pages are
-# real URLs under /effects/ but invisible unless we append them here.
+# Papyrus only auto-builds Home + Stories into the header. Background pages
+# live under /effects/ but need an explicit nav entry.
 _orig_nav = markus_build._build_nav_items
 
 
 def _build_nav_items_with_effects(articles):
     items = list(_orig_nav(articles))
     if not any(item.href == "effects/index.html" for item in items):
-        items.append(NavItem("Effects", "effects/index.html"))
+        items.append(NavItem("Backgrounds", "effects/index.html"))
     return items
 
 

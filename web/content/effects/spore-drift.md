@@ -1,5 +1,5 @@
 ---
-title: "Effect: Spore Drift"
+title: "Spore Drift"
 date: 'Sunday, September 6, 2026'
 ---
 

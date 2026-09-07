@@ -1,5 +1,5 @@
 ---
-title: "Effect: Reaction-Diffusion"
+title: "Reaction-Diffusion"
 date: 'Sunday, September 6, 2026'
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Effect: Physarum Polycephalum"
+title: "Physarum Polycephalum"
 date: 'Sunday, September 6, 2026'
 ---
 

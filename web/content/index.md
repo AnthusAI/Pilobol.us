@@ -1,6 +1,8 @@
 ---
-title: "There's a fungus among us, feeding on our excrement and gradually infecting society."
+title: ""
 ---
+
+Feeding on our excrement and gradually infecting society.
 
 :::card-grid{columns="1"}
 :::card{title="Latest" span="full"}

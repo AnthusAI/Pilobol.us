@@ -1,0 +1,33 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # Papyrus's markus_renderer only imports stdlib -- it does not need
+        # Papyrus's own (broken, non-CI-installable) pip package. Cloning
+        # its source at a pinned commit and pointing PAPYRUS_ROOT at it is
+        # all build_via_papyrus.py actually needs.
+        - git clone --depth 1 https://github.com/AnthusAI/Papyrus.git /tmp/papyrus-src
+        - cd /tmp/papyrus-src && git fetch --depth 1 origin f5a5f1fcaedccf31f47380830f41473e7bfb6ec8 && git checkout f5a5f1fcaedccf31f47380830f41473e7bfb6ec8
+        - pip install "git+https://github.com/AnthusAI/Markus@v0.5.1"
+    build:
+      commands:
+        - cd web && PAPYRUS_ROOT=/tmp/papyrus-src python3 build_via_papyrus.py
+  artifacts:
+    baseDirectory: web/dist-papyrus
+    files:
+      - '**/*'
+  cache:
+    paths: []
+# HTML must not sit on CloudFront for a year -- the first deploy shipped
+# s-maxage=31536000 and the homepage stayed on stale content after new
+# stories landed in git.
+customHeaders:
+  - pattern: '**/*.html'
+    headers:
+      - key: Cache-Control
+        value: 'public, max-age=0, s-maxage=60, must-revalidate'
+  - pattern: '/'
+    headers:
+      - key: Cache-Control
+        value: 'public, max-age=0, s-maxage=60, must-revalidate'

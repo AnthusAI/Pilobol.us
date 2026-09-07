@@ -7,6 +7,7 @@ description: A coin was built to always be worth a dollar. The machine meant to
 standfirst: TerraUSD was supposed to always equal a dollar. In May 2022 the
   algorithm built to defend that promise spent four days proving it wasn't true.
   Forty billion dollars stopped existing.
+cover: assets/believe-the-rainbow/og-cover.jpg
 ---
 
 There is an old [Skittles commercial](https://www.youtube.com/watch?v=QUmXhCmVaQg) still sitting on YouTube. Three teenagers

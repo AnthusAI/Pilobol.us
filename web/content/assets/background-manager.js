@@ -352,35 +352,11 @@
       deposit(habitatPoint(rect.left + rect.width / 2, rect.top + rect.height / 2), 0.22, 0.03, 'new-terrain');
     };
 
-    let lastScrollY = window.scrollY;
-    let scrollQueued = false;
-    let scrollSide = false;
-    const onScroll = () => {
-      if (scrollQueued) return;
-      scrollQueued = true;
-      requestAnimationFrame(() => {
-        const delta = window.scrollY - lastScrollY;
-        lastScrollY = window.scrollY;
-        scrollQueued = false;
-        if (Math.abs(delta) < 8) return;
-        scrollSide = !scrollSide;
-        const stress = Math.abs(delta) > window.innerHeight * 0.72;
-        const canvas = document.getElementById('pilo-physarum-bg');
-        const pageHeight = Math.max(1, canvas ? canvas.clientHeight : document.documentElement.scrollHeight);
-        const pageY = clamp((window.scrollY + window.innerHeight * (delta > 0 ? 0.74 : 0.28)) / pageHeight, 0, 1);
-        deposit(
-          { x: scrollSide ? 0.055 : 0.945, y: pageY },
-          stress ? -0.30 : Math.min(0.34, 0.10 + Math.abs(delta) / Math.max(1, window.innerHeight) * 0.38),
-          stress ? 0.035 : 0.028,
-          stress ? 'scroll-stress' : 'moisture'
-        );
-      });
-    };
-
+    // Scroll is never an animation input — reading maps pointer coords into
+    // page space with scrollY, but wheel/scroll itself does not deposit.
     window.addEventListener('pointermove', onPointerMove, { passive: true });
     window.addEventListener('pointerdown', onPointerDown, { passive: true });
     window.addEventListener('pointerover', onPointerOver, { passive: true });
-    window.addEventListener('scroll', onScroll, { passive: true });
     document.addEventListener('selectionchange', onSelection);
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState !== 'visible') window.clearTimeout(dwellTimer);

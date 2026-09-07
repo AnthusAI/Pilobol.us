@@ -3,12 +3,6 @@ title: Spores
 description: Glimpses of our moldy future.
 ---
 
-### [They liked the ranked room](they-liked-the-ranked-room.html)
-
-Australia floated an algorithm opt-out. People argued for the right to stay inside the ranked room.
-
-*Monday, September 7, 2026*
-
 ### [A miracle in the outback](gus-lamont-ai-sighting.html)
 
 An AI picture of a kidnapping landed in the search for a missing boy. Thousands shared it. The ground had nothing.

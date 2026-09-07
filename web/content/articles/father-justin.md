@@ -5,6 +5,7 @@ description: A collar, an Assisi balcony, three Our Fathers — then the priest 
   Justin.
 standfirst: You email for a code. A man with a beard and a collar loads. He says he
   can hear your confession.
+cover: assets/father-justin/og-cover.jpg
 ---
 
 You email for a code.

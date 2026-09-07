@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "4b82d972-ef7a-462c-84a9-788884959b00",
+  "issue_id": "PILO-e9c0a870-b4df-44e6-bfd9-75d09157bcc6",
+  "event_type": "issue_created",
+  "occurred_at": "2026-09-07T08:22:03.394Z",
+  "actor_id": "box",
+  "payload": {
+    "title": "Synthetic sightings of the missing",
+    "description": "Research: AI-fabricated images/sightings that hijack live missing-person searches (belief moves searchers and the feed).",
+    "issue_type": "story",
+    "status": "idea",
+    "priority": 2,
+    "assignee": null,
+    "parent": null,
+    "labels": []
+  }
+}

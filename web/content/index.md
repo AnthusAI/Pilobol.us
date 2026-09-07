@@ -7,11 +7,11 @@ description: >-
 
 :::card-grid{columns="1"}
 :::card{title="Latest" span="full"}
-### [Father Justin](articles/father-justin.html)
+### [They liked the ranked room](articles/they-liked-the-ranked-room.html)
 
-You email for a code. A man with a beard and a collar loads. He says he can hear your confession.
+Australia floated an algorithm opt-out. People argued for the right to stay inside the ranked room.
 
-*Sunday, September 6, 2026*
+*Monday, September 7, 2026*
 :::
 :::
 

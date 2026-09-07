@@ -1,6 +1,6 @@
 # Simulacrum
 
-Last updated: 2026-09-05 17:05 ET
+Last updated: 2026-09-07 04:10 ET
 
 ## What it is
 
@@ -45,3 +45,7 @@ metrics until it behaves like a copy of itself.
 - When is “authenticity” itself a productized sign (a simulacrum of the real)?
 - How do we write about this without the prose becoming pure simulation —
   stylish doom that points at nothing checkable?
+
+## Specimens
+
+- [USA TODAY Cat in the Hat AI scare](../sources/usatoday-cat-in-the-hat-ai-trend.md)

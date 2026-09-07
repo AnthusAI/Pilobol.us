@@ -1,0 +1,23 @@
+{
+  "id": "PILO-1bbd2be7-578c-4a70-9e8f-9e510f8e8df4",
+  "title": "Competing event narratives \u2014 rumor/conspiracy proliferation after focal media events",
+  "description": "Gus Lamont\u2013style AI sightings feel like a sped-up version of competing narratives around big media events (false-flag templates, disaster myths, rumor cascades). Map formal terms and research lanes; file theory keepers.",
+  "type": "story",
+  "status": "research",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [
+    "competing-event-narratives"
+  ],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-09-07T08:41:45.551614Z",
+  "updated_at": "2026-09-07T08:45:33.305852Z",
+  "closed_at": null,
+  "custom": {
+    "source": "shared",
+    "project_label": "PILO"
+  }
+}

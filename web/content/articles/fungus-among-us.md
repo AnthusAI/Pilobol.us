@@ -9,7 +9,7 @@ description: >-
 
 Weird and surreal outcomes of a society slowly taken over by AI and machine-learning systems. The creeping infection. Subtle signs when the copy wins — when people live inside the simulation, when the feed or the bot or the hologram feels *more real than real*.
 
-*Pilobolus* is a psychedelic mushroom that grows on shit.
+*Pilobolus* is a dung-cannon fungus — it grows on herbivore dung and shoots its spores.
 
 A simulation becomes something stranger when it starts to feel more real than real. Social media is the obvious stage, and the fungus is wider than any one platform: care homes and operating rooms, wedding halls and war feeds, newsrooms and confessionals.
 

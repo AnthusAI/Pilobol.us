@@ -1,6 +1,6 @@
 # Fungus among us
 
-Last updated: 2026-09-05 17:05 ET
+Last updated: 2026-09-07 09:20 ET
 
 ## What it is
 
@@ -31,6 +31,11 @@ viral posts, spores as copy-paste personas). Drop it when it becomes costume.
 - Desk braid: fungus (spread) × Harari circle (trust collapse) × Baudrillard
   simulacrum (signs without originals).
 
+### Addendum — fungus scout 2026-09-07
+
+- [Skift — TikTok Go Ambiente](../sources/skift-tiktok-go-ambiente-ai.md)
+- [NY Focus — Salamanca Sally](../sources/nysfocus-salamanca-realbotix-sally.md)
+
 ## Open questions
 
 - Biological metaphor limits: where does “fungus” hide human incentives
@@ -39,3 +44,7 @@ viral posts, spores as copy-paste personas). Drop it when it becomes costume.
   a reporter can actually check?
 - Pilobolus (the fungus genus the domain echoes): how much natural-history
   color do we want in the brand vs. keep as a wink?
+
+## Specimens
+
+- [USA TODAY Cat in the Hat AI scare](../sources/usatoday-cat-in-the-hat-ai-trend.md)

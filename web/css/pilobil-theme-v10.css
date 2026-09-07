@@ -482,6 +482,7 @@
 
   .markus-document > .markus-card-grid > .markus-card {
     /* Partial opacity: panel tint that still lets the FX show through. */
+    position: relative;
     background: color-mix(in srgb, var(--markus-card) 18%, transparent);
     border: none;
     border-radius: 1rem;
@@ -492,6 +493,20 @@
 
   .markus-document > .markus-card-grid > .markus-card:hover {
     transform: translateY(-1px);
+  }
+
+  /* Whole card is the hit target: stretch the title link over image, dek, pad. */
+  .markus-document > .markus-card-grid > .markus-card
+    .markus-card-body > h3:first-child a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card:has(h3 a):hover {
+    cursor: pointer;
   }
 
   .markus-document > .markus-card-grid > .markus-card .markus-card-body > h3:first-child {

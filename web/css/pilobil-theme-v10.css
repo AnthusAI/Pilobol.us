@@ -197,7 +197,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 0.25rem;
-    border-bottom: 1px solid var(--markus-line);
+    border-bottom: none;
   }
 
   .markus-site-masthead-row {

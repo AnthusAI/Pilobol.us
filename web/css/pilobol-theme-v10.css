@@ -1,0 +1,918 @@
+/* =========================================================================
+   Pilobol.us site theme — "a fungus among us"
+   =========================================================================
+
+   Loaded AFTER css/markus-vendor.css. Declares its own layer so it always
+   wins over the vendored Markus layer regardless of selector specificity —
+   see the cascade-rule note in markus-vendor.css. This file only redefines
+   --markus-* tokens and adds a thin set of site-specific classes (masthead,
+   nav, footer, story teaser furniture). It does not fight Markus's own
+   component selectors.
+
+   Palette rationale
+   ------------------
+   Two real fungal facts anchor the palette instead of generic "tech" colors:
+
+   - Spore print: the deep violet-brown/near-black cast many mushroom spore
+     prints leave on paper is the identifying feature field guides use when
+     the cap alone won't tell species apart. We use a spore-print violet as
+     the quote/callout-note accent — the color of evidence left behind.
+   - Foxfire: several wood-rotting fungi (Armillaria, Panellus) glow faintly
+     in the dark via bioluminescence. Dark mode's accent is that pale
+     phosphorescent lichen-green glow, not a "hacker green" cliché.
+
+   Light mode reads as a page in daylight, before you've noticed anything is
+   wrong: warm, slightly dulled parchment, ink close to black. Dark mode reads
+   as the same room after dark, once the infection is visible: damp cellar
+   ground, spores glowing faintly at the edges.
+   ========================================================================= */
+
+@layer pilobol-theme {
+
+  :root {
+    /* --- light (default): daylight, before you've noticed --- */
+    --markus-ink: #211d17;
+    --markus-muted: #6b6153;
+    --markus-paper: #f1ead9;
+    --markus-card: #fbf6ea;
+    --markus-line: #d7cbb2;
+
+    --markus-accent: #3f5d43;       /* moss on stone */
+    --markus-accent-2: #a35a2a;     /* dried rust / ochre */
+    --markus-quote: #4a3548;        /* spore-print violet */
+    --markus-note: #3f5d43;
+    --markus-warning: #a35a2a;
+    --markus-tip: #4f6b3a;
+    --markus-caution: #8a3324;
+
+    --markus-pre-bg: #221f19;
+    --markus-pre-ink: #ece4d2;
+    --markus-code-bg: rgba(33, 29, 23, 0.07);
+    --markus-aside-bg: rgba(74, 53, 72, 0.06);
+    --markus-tab-nav-bg: rgba(33, 29, 23, 0.04);
+    --markus-th-bg: rgba(63, 93, 67, 0.09);
+
+    --markus-sans: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+    --markus-serif: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+    --markus-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+
+    /* site-only tokens (not part of Markus's vocabulary) */
+    --pilo-shadow: rgba(33, 29, 23, 0.12);
+    --pilo-hairline: rgba(33, 29, 23, 0.5);
+    --pilo-page-shade: rgba(53, 43, 28, 0.12);
+    --pilo-page-edge: rgba(53, 43, 28, 0.11);
+    --pilo-page-bottom: rgba(53, 43, 28, 0.17);
+    --pilo-fx-opacity: 0.26;
+    /* Flat surround outside the paper sheet on wide screens (dulled parchment,
+       not the reading surface). */
+    --pilo-stage: #ddd4bf;
+    /* Hard cap on the paper sheet (content column + side margins for FX).
+       Beyond this, the viewport is just --pilo-stage — not liquid margins. */
+    --pilo-page-width: 72rem;
+
+    /* Single source of truth for the content column width. The page-wrapper
+       rule below and the canvas mask both derive from this ONE value instead
+       of each hard-coding their own rem number -- that mismatch (32rem vs a
+       42rem column, then 24rem+3rem vs 21rem) is exactly why the visible gap
+       between text and animation kept drifting back after each "fix". Change
+       this one value to change the column width; the mask follows it
+       automatically. */
+    --pilo-content-width: 56rem;
+    /* Deliberate small gap between the content column's edge and where the
+       animation becomes visible -- zero gap read as the effect touching the
+       text with no breathing room; the original bug's 3+rem buffer read as
+       a dead zone. This is the one number to change either direction. */
+    --pilo-fx-gutter: 1.5rem;
+    color-scheme: light;
+  }
+
+  /* --- dark (system default): after dark, spores visible --- */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --markus-ink: #dfded0;
+      --markus-muted: #8b9184;
+      --markus-paper: #14170f;
+      --markus-card: #1c2117;
+      --markus-line: #333b2a;
+
+      --markus-accent: #b7d18a;     /* foxfire glow */
+      --markus-accent-2: #d0895a;
+      --markus-quote: #b7a3c4;      /* spore-print violet, lit from behind */
+      --markus-note: #9fd0c9;
+      --markus-warning: #d0a24f;
+      --markus-tip: #9fce7a;
+      --markus-caution: #d17e6e;
+
+      --markus-pre-bg: #0d0f0a;
+      --markus-pre-ink: #dfded0;
+      --markus-code-bg: rgba(223, 222, 208, 0.07);
+      --markus-aside-bg: rgba(183, 163, 196, 0.08);
+      --markus-tab-nav-bg: rgba(13, 15, 10, 0.5);
+      --markus-th-bg: rgba(183, 209, 138, 0.08);
+
+      --pilo-shadow: rgba(0, 0, 0, 0.4);
+      --pilo-hairline: rgba(223, 222, 208, 0.4);
+      --pilo-page-shade: rgba(0, 0, 0, 0.42);
+      --pilo-page-edge: rgba(0, 0, 0, 0.32);
+      --pilo-page-bottom: rgba(0, 0, 0, 0.52);
+      --pilo-fx-opacity: 0.32;
+      --pilo-stage: #0d0f0a;
+      color-scheme: dark;
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     Body / document texture
+     --------------------------------------------------------------------- */
+
+  /* Capped paper sheet; outside it on wide screens is flat --pilo-stage. */
+  html {
+    height: 100%;
+    background-color: var(--pilo-stage);
+    /* Kill rubber-band overscroll on Apple (and elsewhere) so the stage
+       color doesn't flash past the paper sheet. */
+    overscroll-behavior: none;
+  }
+
+  .markus-body {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--pilo-page-width);
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: var(--markus-paper);
+    background-image:
+      url("../assets/paper-grain.svg"),
+      linear-gradient(to right, var(--pilo-page-edge) 0%, transparent 8%, transparent 92%, var(--pilo-page-edge) 100%),
+      linear-gradient(to bottom, transparent 66%, var(--pilo-page-bottom) 100%),
+      radial-gradient(ellipse at 50% -10%, transparent 30%, var(--pilo-page-shade) 135%),
+      radial-gradient(circle at 8% 4%, color-mix(in srgb, var(--markus-accent) 7%, transparent), transparent 40%),
+      radial-gradient(circle at 92% 0%, color-mix(in srgb, var(--markus-quote) 6%, transparent), transparent 38%);
+    background-size: 256px 256px, auto, auto, auto, auto, auto;
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    background-blend-mode: multiply, normal, normal, normal, normal, normal;
+    background-attachment: scroll;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .markus-body {
+      /* The same grain gently lifts dark paper instead of muddying it. */
+      background-blend-mode: screen, normal, normal, normal, normal, normal;
+    }
+  }
+
+  .pilo-youtube {
+    position: relative;
+    width: 100%;
+    max-width: 40rem;
+    aspect-ratio: 16 / 9;
+    margin: 1.25rem 0 1.5rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: #111;
+  }
+
+  .pilo-youtube iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .markus-document a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+  }
+
+  /* The vendored CSS only constrains image width inside .markus-figure (the
+     :::figure{} directive) -- a bare Markdown ![](...) image gets no width
+     rule at all and renders at its native pixel size, which for a real photo
+     (e.g. the Father Justin screenshots) is much wider than the content
+     column. Same treatment as .markus-figure img for consistency. */
+
+  /* Mission page: real Pilobolus photo, floated top-right beside the lede. */
+  .markus-document:has(#pilobolus-specimen)::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .markus-document #pilobolus-specimen {
+    float: right;
+    width: min(52%, 20rem);
+    max-width: 20rem;
+    margin: 0.15rem 0 1rem 1.25rem;
+    clear: right;
+  }
+  .markus-document #pilobolus-specimen img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0;
+  }
+  .markus-document #pilobolus-specimen figcaption {
+    font-size: 0.85em;
+    line-height: 1.35;
+    margin-top: 0.45rem;
+  }
+  @media (max-width: 640px) {
+    .markus-document #pilobolus-specimen {
+      float: none;
+      width: 100%;
+      max-width: none;
+      margin: 0 0 1.1rem;
+    }
+  }
+
+  .markus-document img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.8rem;
+    background: var(--markus-card);
+    margin: 1.5rem 0;
+  }
+
+  /* ---------------------------------------------------------------------
+     Masthead
+     --------------------------------------------------------------------- */
+
+  .markus-site-masthead {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    border-bottom: none;
+  }
+
+  .markus-site-masthead-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+
+  /* Left-stack brand poem: wordmark + lines; nav comes under it. */
+  .pilo-masthead-poem {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+    max-width: 28rem;
+  }
+
+  .pilo-poem-line {
+    margin: 0;
+    color: var(--markus-muted);
+    font-style: italic;
+    font-family: var(--markus-serif);
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    line-height: 1.35;
+  }
+
+  .pilo-poem-line a {
+    color: var(--markus-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  .pilo-poem-line a:visited {
+    color: var(--markus-accent);
+  }
+
+  .pilo-poem-line a:hover {
+    color: var(--markus-accent-2);
+  }
+
+  .markus-site-wordmark {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    font-family: var(--markus-serif);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+    letter-spacing: 0.01em;
+    color: var(--markus-ink);
+    text-decoration: none;
+  }
+
+  .markus-site-masthead {
+    position: relative;
+  }
+
+  .markus-site-wordmark a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .markus-site-wordmark a:hover {
+    text-decoration: none;
+  }
+
+  .markus-site-wordmark-mark {
+    display: inline-block;
+    width: 0.62em;
+    height: 0.62em;
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at 35% 30%, var(--markus-accent), var(--markus-quote) 75%);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--markus-accent) 18%, transparent);
+    flex-shrink: 0;
+  }
+
+  .markus-site-wordmark-us {
+    color: var(--markus-accent);
+  }
+
+  .pilo-kicker {
+    font-family: var(--markus-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--markus-muted);
+  }
+
+  .markus-site-tagline {
+    margin: 0.15rem 0 0.6rem;
+    color: var(--markus-muted);
+    font-style: italic;
+    font-family: var(--markus-serif);
+  }
+
+  .markus-site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.9rem;
+    margin: 0;
+    padding: 0 0 0.75rem;
+    border-bottom: 1px solid var(--markus-line);
+    font-size: 0.92rem;
+    width: 100%;
+  }
+
+  .markus-site-wordmark {
+    margin: 0;
+  }
+
+  .markus-site-nav a {
+    color: var(--markus-ink);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .markus-site-nav a[aria-current="page"] {
+    color: var(--markus-accent);
+    box-shadow: inset 0 -2px 0 var(--markus-accent);
+  }
+
+  .markus-site-nav a:hover {
+    color: var(--markus-accent);
+  }
+
+
+
+  /* ---------------------------------------------------------------------
+     Article header dressing
+     --------------------------------------------------------------------- */
+
+  .markus-site main .markus-document {
+    /* The vendored Markus CSS puts its own `padding: 2.5rem 1.25rem 4rem` AND
+       `max-width: 52rem; margin: 0 auto;` on .markus-document. Since the
+       article sits inside <main>, which already has its own
+       `padding: 0 4rem` and its own width (--pilo-content-width, 56rem),
+       those compounded: the horizontal padding stacked (4rem + 1.25rem), and
+       ON TOP of that the vendor's 52rem max-width made the 832px-wide
+       article center itself inside main's already-narrower 896px content
+       box, leaving a ~32px gap on each side versus the masthead/footer
+       (siblings of <main>, not wrapped in .markus-document, so they only
+       ever had main's own width and 4rem padding). Zeroing the padding
+       fixed one half of this; max-width: none fixes the other -- the
+       article now simply fills main's content box, matching everything
+       else in the page wrapper exactly. */
+    max-width: none;
+    padding-top: 2rem;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .markus-lede {
+    font-family: var(--markus-serif);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    font-style: italic;
+    border-top: 1px solid var(--markus-line);
+    padding-top: 1rem;
+    margin-top: 1rem !important;
+  }
+
+  .markus-byline {
+    font-family: var(--markus-sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--markus-accent-2);
+  }
+
+  /* ---------------------------------------------------------------------
+     Index / section front: story teasers riding the card-grid vocabulary
+     --------------------------------------------------------------------- */
+
+  .pilo-section-label {
+    font-family: var(--markus-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--markus-accent);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .pilo-section-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--markus-line);
+  }
+
+  .pilo-teaser-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .pilo-teaser-card:hover {
+    border-color: var(--markus-accent);
+    transform: translateY(-2px);
+  }
+
+  .pilo-teaser-kicker {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--markus-accent-2);
+  }
+
+  .pilo-teaser-card h3 {
+    margin: 0.1rem 0 0.2rem !important;
+  }
+
+  .pilo-teaser-card h3 a {
+    color: var(--markus-ink);
+    text-decoration: none;
+  }
+
+  .pilo-teaser-card h3 a:hover {
+    color: var(--markus-accent);
+  }
+
+  .pilo-teaser-dek {
+    color: var(--markus-muted);
+    font-size: 0.94rem;
+  }
+
+  .pilo-lede-card {
+    background:
+      linear-gradient(155deg, color-mix(in srgb, var(--markus-quote) 10%, var(--markus-card)), var(--markus-card));
+  }
+
+  .pilo-lede-card h2 a,
+  .pilo-lede-card h2 {
+    color: var(--markus-ink);
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+
+  /* ---------------------------------------------------------------------
+     Homepage reverse-chrono feed (Markus card-grid mosaic)
+     --------------------------------------------------------------------- */
+
+  .markus-document > .markus-card-grid {
+    /* Card chrome bleeds into the side margins; text stays on the Pilobolus
+       content edge (padding on cards cancels this negative margin). */
+    --pilo-feed-pad-x: 1.15rem;
+    --pilo-feed-pad-y: 1.1rem;
+    margin-top: 1.75rem;
+    margin-left: calc(-1 * var(--pilo-feed-pad-x));
+    margin-right: calc(-1 * var(--pilo-feed-pad-x));
+    row-gap: 1.1rem;
+    column-gap: 1.1rem;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card {
+    /* Partial opacity: panel tint that still lets the FX show through. */
+    position: relative;
+    background: color-mix(in srgb, var(--markus-card) 18%, transparent);
+    border: none;
+    border-radius: 1rem;
+    box-shadow: none;
+    padding: var(--pilo-feed-pad-y) var(--pilo-feed-pad-x) calc(var(--pilo-feed-pad-y) + 0.1rem);
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card:hover {
+    transform: translateY(-1px);
+  }
+
+  /* Whole card is the hit target: stretch the title link over image, dek, pad. */
+  .markus-document > .markus-card-grid > .markus-card
+    .markus-card-body > h3:first-child a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card:has(h3 a):hover {
+    cursor: pointer;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card .markus-card-body > h3:first-child {
+    margin: 0 0 0.55rem;
+    font-family: var(--markus-serif);
+    font-size: clamp(1.45rem, 3.2vw, 2.05rem);
+    font-weight: 600;
+    line-height: 1.15;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card .markus-card-body > h3:first-child a {
+    color: var(--markus-ink);
+    text-decoration: none;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card .markus-card-body > h3:first-child a:hover {
+    color: var(--markus-accent);
+  }
+
+  .markus-document > .markus-card-grid > .markus-card .markus-card-body > p {
+    margin: 0.35rem 0 0;
+    color: var(--markus-muted);
+    font-size: 0.95rem;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card .markus-card-body > p:has(em:only-child),
+  .markus-document > .markus-card-grid > .markus-card .markus-card-body > p > em:only-child {
+    font-size: 0.78rem;
+    color: var(--markus-muted);
+    font-style: normal;
+    letter-spacing: 0.02em;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card .markus-card-body img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.35rem;
+    margin: 0.55rem 0 0.15rem;
+    object-fit: contain;
+    aspect-ratio: auto;
+  }
+
+
+
+  /* Half-span cards with media: horizontal copy | still (keeps SD thumbs modest). */
+  @media (min-width: 720px) {
+    .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img) {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 36%);
+      column-gap: 0.95rem;
+      row-gap: 0.25rem;
+      align-items: start;
+    }
+
+    .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
+      .markus-card-body {
+      display: contents;
+    }
+
+    .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
+      .markus-card-body > h3:first-child {
+      grid-column: 1;
+      grid-row: 1;
+      margin: 0;
+      min-width: 0;
+    }
+
+    .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
+      .markus-card-body > p:not(:has(img)) {
+      grid-column: 1;
+      margin: 0.25rem 0 0;
+      min-width: 0;
+    }
+
+    /* Image column: width from the grid; height follows the still’s natural aspect. */
+    .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
+      .markus-card-body > p:has(img),
+    .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
+      .markus-card-body > img {
+      grid-column: 2;
+      grid-row: 1 / span 4;
+      box-sizing: border-box;
+      margin: 0;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      height: auto;
+      align-self: start;
+      justify-self: stretch;
+      object-fit: contain;
+      aspect-ratio: auto;
+    }
+
+    .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
+      .markus-card-body > p:has(img) {
+      max-width: 100%;
+    }
+
+    .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
+      .markus-card-body > p:has(img) > img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      margin: 0;
+      object-fit: contain;
+      aspect-ratio: auto;
+    }
+  }
+
+  /* Full-span lead keeps a touch more vertical pad; type matches every card. */
+  .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child {
+    padding: 1.55rem var(--pilo-feed-pad-x) 1.65rem;
+    background: color-mix(in srgb, var(--markus-card) 26%, transparent);
+  }
+
+  /* Wide: full-span cards with media → copy left / image right */
+  @media (min-width: 720px) {
+    .markus-document > .markus-card-grid > .markus-card[data-span="full"]:has(img) {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+      column-gap: 1.35rem;
+      row-gap: 0.35rem;
+      align-items: center;
+      padding: 1.35rem var(--pilo-feed-pad-x) 1.45rem;
+    }
+
+    .markus-document > .markus-card-grid > .markus-card[data-span="full"]:has(img)
+      .markus-card-body {
+      display: contents;
+    }
+
+    .markus-document > .markus-card-grid > .markus-card[data-span="full"]:has(img)
+      .markus-card-body > h3:first-child {
+      grid-column: 1;
+      grid-row: 1;
+      margin: 0;
+      font-size: clamp(1.45rem, 3.2vw, 2.05rem);
+    }
+
+    .markus-document > .markus-card-grid > .markus-card[data-span="full"]:has(img)
+      .markus-card-body > p:not(:has(img)) {
+      grid-column: 1;
+      margin: 0.2rem 0 0;
+    }
+
+    .markus-document > .markus-card-grid > .markus-card[data-span="full"]:has(img)
+      .markus-card-body > p:has(img),
+    .markus-document > .markus-card-grid > .markus-card[data-span="full"]:has(img)
+      .markus-card-body > img {
+      grid-column: 2;
+      grid-row: 1 / span 4;
+      margin: 0;
+      align-self: stretch;
+      height: 100%;
+      min-height: 12rem;
+      object-fit: cover;
+      aspect-ratio: auto;
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     Footer
+     --------------------------------------------------------------------- */
+
+  .markus-site-footer {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 3rem;
+    color: var(--markus-muted);
+    font-size: 0.85rem;
+    border-top: none;
+  }
+
+  .markus-site-footer a {
+    color: var(--markus-accent);
+  }
+
+  .markus-site-footer-mycelium {
+    height: 1px;
+    margin: 0 0 2rem;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--pilo-hairline) 20%,
+      var(--pilo-hairline) 80%,
+      transparent
+    );
+  }
+
+  @media print {
+}
+
+  /* ---------------------------------------------------------------------
+     Physarum Background Simulation
+     --------------------------------------------------------------------- */
+
+  .pilo-physarum-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    /* Above the paper, below every reading surface. The former -1 layer was
+       painted behind the body's opaque paper background, which made the
+       animation vanish most noticeably on narrow screens. */
+    z-index: 0;
+    pointer-events: none;
+    /* In daylight the compositor's multiply operation makes every drawn
+       pixel no lighter than the paper beneath it. At night the equivalent
+       screen operation makes fungal growth lift gently from dark paper.
+       The gradients are in the mask, rather than a hard content cutout: a
+       colony may reach a word only as a very faint edge, never as a sudden
+       high-contrast slab behind type. */
+    opacity: calc(var(--pilo-fx-opacity) * var(--pilo-fx-intensity, 0.68));
+    mix-blend-mode: multiply;
+    animation: pilo-fx-arrive 9s cubic-bezier(.22, .75, .28, 1) both;
+
+    /* Three additive exposure zones share one canvas: a top-right bloom in
+       the header's deliberately empty space, responsive left/right marginal
+       bands, and a broad low-opacity rise from the footer. The marginal band
+       derives from the actual column width but bottoms out at about one
+       mobile side-padding, so it remains perceptible at 320px wide. */
+    mask-image:
+      radial-gradient(ellipse var(--pilo-fx-header-width, 34rem) var(--pilo-fx-header-height, 18rem) at var(--pilo-fx-header-x, 88%) 9rem, black 0%, rgba(0, 0, 0, .80) 30%, rgba(0, 0, 0, .24) 58%, transparent 88%),
+      linear-gradient(to right, black 0, black calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) - var(--pilo-fx-gutter)), rgba(0, 0, 0, .46) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + .8rem), transparent calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + 3rem), transparent calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - 3rem), rgba(0, 0, 0, .46) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - .8rem), black calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) + var(--pilo-fx-gutter)), black 100%),
+      radial-gradient(ellipse var(--pilo-fx-footer-width, 70%) var(--pilo-fx-footer-height, 19rem) at 55% 103%, black 0%, rgba(0, 0, 0, .64) 39%, rgba(0, 0, 0, .18) 70%, transparent 100%);
+    -webkit-mask-image:
+      radial-gradient(ellipse var(--pilo-fx-header-width, 34rem) var(--pilo-fx-header-height, 18rem) at var(--pilo-fx-header-x, 88%) 9rem, black 0%, rgba(0, 0, 0, .80) 30%, rgba(0, 0, 0, .24) 58%, transparent 88%),
+      linear-gradient(to right, black 0, black calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) - var(--pilo-fx-gutter)), rgba(0, 0, 0, .46) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + .8rem), transparent calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + 3rem), transparent calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - 3rem), rgba(0, 0, 0, .46) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - .8rem), black calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) + var(--pilo-fx-gutter)), black 100%),
+      radial-gradient(ellipse var(--pilo-fx-footer-width, 70%) var(--pilo-fx-footer-height, 19rem) at 55% 103%, black 0%, rgba(0, 0, 0, .64) 39%, rgba(0, 0, 0, .18) 70%, transparent 100%);
+    mask-composite: add, add;
+    -webkit-mask-composite: source-over, source-over;
+  }
+
+  /* Reaction-diffusion is made of fine boundaries rather than broad opaque
+     bodies, so it needs a little more compositing headroom than the other
+     renderers to remain legible through the shared low-contrast mask. */
+  .markus-body[data-pilo-fx-effect^="reaction-diffusion"] {
+    --pilo-fx-opacity: 0.36;
+  }
+
+  /* The manager assigns these preset names on <body>; forcing one with
+     ?fxPreset=footer-rise is useful for art direction and gallery pages. */
+  .markus-body[data-pilo-fx-layout="header-bloom"] .pilo-physarum-canvas {
+    --pilo-fx-header-width: 40rem;
+    --pilo-fx-header-height: 21rem;
+    --pilo-fx-header-x: 91%;
+    --pilo-fx-footer-height: 15rem;
+  }
+
+  .markus-body[data-pilo-fx-layout="margin-creep"] .pilo-physarum-canvas {
+    --pilo-fx-header-width: 27rem;
+    --pilo-fx-header-height: 15rem;
+    --pilo-fx-header-x: 87%;
+    --pilo-fx-footer-height: 17rem;
+  }
+
+  .markus-body[data-pilo-fx-layout="footer-rise"] .pilo-physarum-canvas {
+    --pilo-fx-header-width: 26rem;
+    --pilo-fx-header-height: 14rem;
+    --pilo-fx-footer-width: 86%;
+    --pilo-fx-footer-height: 26rem;
+  }
+
+  .markus-body[data-pilo-fx-layout="quiet-spores"] .pilo-physarum-canvas {
+    --pilo-fx-header-width: 24rem;
+    --pilo-fx-header-height: 13rem;
+    --pilo-fx-footer-width: 54%;
+    --pilo-fx-footer-height: 14rem;
+  }
+
+  @keyframes pilo-fx-arrive {
+    from { opacity: 0; filter: saturate(.78) blur(.45px); }
+    58% { opacity: calc(var(--pilo-fx-opacity) * var(--pilo-fx-intensity, 0.68) * .62); }
+    to { opacity: calc(var(--pilo-fx-opacity) * var(--pilo-fx-intensity, 0.68)); filter: saturate(1) blur(0); }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .pilo-physarum-canvas {
+      mix-blend-mode: screen;
+    }
+  }
+
+  /* Static art direction for reduced-motion, data-saver, or failed WebGL.
+     It uses the same placement mask and stain-safe blend mode as the live
+     renderers, so accessibility degradation still looks intentional. */
+  .pilo-physarum-canvas[data-pilo-fx-mode="static"] {
+    animation: none;
+    filter: none;
+    opacity: calc(var(--pilo-fx-opacity) * .42);
+    background-image:
+      radial-gradient(ellipse 18rem 11rem at 91% 14%, color-mix(in srgb, var(--markus-accent) 28%, transparent), transparent 72%),
+      radial-gradient(ellipse 7rem 20rem at 2% 57%, color-mix(in srgb, var(--markus-quote) 22%, transparent), transparent 76%),
+      radial-gradient(ellipse 24rem 9rem at 58% 104%, color-mix(in srgb, var(--markus-accent-2) 20%, transparent), transparent 78%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pilo-physarum-canvas {
+      animation: none;
+      opacity: calc(var(--pilo-fx-opacity) * .42);
+    }
+  }
+
+  .pilo-organic-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    margin: 2rem 0;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .pilo-cinematic-gallery {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    margin: 2rem 0;
+    overflow: hidden;
+    background: var(--markus-pre-bg);
+    border-radius: 4px;
+    box-shadow: 0 4px 12px var(--pilo-shadow);
+  }
+
+  /* ---------------------------------------------------------------------
+     Page Wrapper (masking the background simulation)
+     --------------------------------------------------------------------- */
+
+  /* Papyrus's Markus shell has no wrapper div: the page is
+     <body class="markus-body markus-site"> > header/main/footer. Constrain
+     those directly so the layout matches the old .pilo-page-wrapper. */
+  .markus-site > .markus-site-masthead,
+  .markus-site > main,
+  .markus-site > .markus-site-footer {
+    position: relative;
+    z-index: 1;
+    max-width: var(--pilo-content-width);
+    margin: 0 auto;
+    padding: 0 4rem;
+  }
+
+  @media (max-width: 640px) {
+    .markus-site > .markus-site-masthead,
+    .markus-site > main,
+    .markus-site > .markus-site-footer {
+      padding: 0 1.25rem;
+    }
+  }
+
+  /* The masthead's own vertical padding was fully zeroed out by the rule
+     above (".markus-site > .markus-site-masthead { padding: 0 4rem }" is a
+     shorthand, so it sets top/bottom to 0 too) -- so all the masthead's
+     vertical space came only from its children's margins (including the
+     wordmark <p>'s default ~1em browser margin, which nothing ever reset).
+     Combined with the looser tagline/nav spacing, the header read as far
+     too sparse. This has to come AFTER the rule above (same specificity,
+     source order decides) to actually win. */
+  .markus-site > .markus-site-masthead {
+    padding-top: 2.5rem;
+    padding-bottom: 0.25rem;
+  }
+
+  /* --- BULLETPROOF TEXT READABILITY --- */
+  main, .markus-document, .markus-site-masthead, .markus-site-footer {
+    
+    position: relative !important;
+    z-index: 100 !important; transform: translateZ(0) !important; backface-visibility: hidden;
+  }
+
+  body {
+    isolation: isolate;
+    overscroll-behavior: none;
+  }
+}

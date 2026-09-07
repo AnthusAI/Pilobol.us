@@ -4,11 +4,11 @@ Catalog for the Pilobol.us **Papyrus local pod** knowledge base. Read this first
 
 - [Schema](schema.md)
 - [Log](log.md)
-- [Accepted refs (live)](accepted-refs.md) — JSON on story `WIKI-pilobil-accepted`
+- [Accepted refs (live)](accepted-refs.md) — JSON on story `WIKI-pilobol-accepted`
 - Mission / doctrine: [mission.md](mission.md), [publication-doctrine.md](publication-doctrine.md)
 
 Accepted sources live as pages in `sources/` **and** as pod references on
-`WIKI-pilobil-accepted`. Do not put references on the Kanbus board.
+`WIKI-pilobol-accepted`. Do not put references on the Kanbus board.
 
 ## Concepts
 
@@ -26,7 +26,7 @@ Accepted sources live as pages in `sources/` **and** as pod references on
 
 ## Sources
 
-Accepted keepers live in `sources/` (markdown) with matching JSON on `WIKI-pilobil-accepted`. Latest 4am: [Cat in the Hat AI scare](sources/usatoday-cat-in-the-hat-ai-trend.md). Research hauls: [synthetic sightings](concepts/synthetic-sightings.md) (Gus/Ben); [competing event narratives](concepts/competing-event-narratives.md) (theory lanes).
+Accepted keepers live in `sources/` (markdown) with matching JSON on `WIKI-pilobol-accepted`. Latest 4am: [Cat in the Hat AI scare](sources/usatoday-cat-in-the-hat-ai-trend.md). Research hauls: [synthetic sightings](concepts/synthetic-sightings.md) (Gus/Ben); [competing event narratives](concepts/competing-event-narratives.md) (theory lanes).
 - [More real than real](concepts/more-real-than-real.md) — uncanny hyperreality niche
 - [Hyperreality](concepts/hyperreality.md) — realer than real as current-events lens
 

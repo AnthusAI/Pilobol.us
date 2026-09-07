@@ -340,7 +340,7 @@ def main() -> int:
         content_dir=POD_ROOT / "content",
         out_dir=POD_ROOT / "dist-papyrus",
         theme=None,
-        site_css=POD_ROOT / "css" / "pilobil-theme-v10.css",
+        site_css=POD_ROOT / "css" / "pilobol-theme-v10.css",
         chrome=PILOBOL_CHROME,
         sections=("effects",),
     )

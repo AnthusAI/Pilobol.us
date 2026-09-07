@@ -1,0 +1,21 @@
+{
+  "id": "WIKI-pilobol-accepted",
+  "title": "Accepted sources",
+  "description": "Standing story for accepted wiki references as JSON. Keepers stay in project/wiki/sources/; do not treat this as a publication card.",
+  "type": "story",
+  "status": "open",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-09-07T19:19:04.763539Z",
+  "updated_at": "2026-09-07T19:40:00.000000Z",
+  "closed_at": null,
+  "custom": {
+    "source": "shared",
+    "project_label": "PILO"
+  }
+}

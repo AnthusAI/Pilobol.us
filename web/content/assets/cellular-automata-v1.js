@@ -257,7 +257,7 @@ const CellularAutomata = (() => {
       // or the CSS mask -- a permanent, wide dead band baked into the
       // simulation itself, independent of and much wider than whatever the
       // page's mask was doing. The mask (.pilo-physarum-canvas in
-      // pilobil-theme-v10.css) is solely responsible for hiding the part of
+      // pilobol-theme-v10.css) is solely responsible for hiding the part of
       // the canvas that sits behind the text column; the simulation should
       // have real content everywhere so there's something to reveal right up
       // to the mask's edge.

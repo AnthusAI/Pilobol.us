@@ -5,16 +5,24 @@
  * Papyrus's Markus page shell stays publication-agnostic — same pattern as
  * background-manager.js creating its own canvas.
  *
- * Storage key is "pilobil-theme" (not "pilobol-") to stay compatible with the
- * preference already persisted in readers' browsers by the previous build.
+ * Storage key is "pilobol-theme". A one-time read of the past key
+ * "pilobil-theme" (pre-rename leftover) keeps an existing reader preference.
  */
 (() => {
-  const KEY = 'pilobil-theme';
+  const KEY = 'pilobol-theme';
+  // Past identifier leftover; read only if the current key is empty.
+  const PAST_KEY = 'pilobil-theme';
   const root = document.documentElement;
 
   let stored = null;
   try {
     stored = localStorage.getItem(KEY);
+    if (stored !== 'light' && stored !== 'dark') {
+      stored = localStorage.getItem(PAST_KEY);
+      if (stored === 'light' || stored === 'dark') {
+        localStorage.setItem(KEY, stored);
+      }
+    }
   } catch (e) {
     /* private mode / blocked storage: fall back to system preference */
   }

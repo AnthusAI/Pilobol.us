@@ -1,0 +1,27 @@
+title: An Analysis of Rumor (Allport & Postman)
+media_type: text/markdown
+abstract: 'Basic law of rumor: intensity ≈ importance × ambiguity (R ~ i × a) — multiplicative;
+  if either factor is zero, no rumor. Wartime cases show rumor also thickens when
+  news is *plentiful* and momentous (Pearl Harbor report, V-J Day, FDR death), not
+  only when news is absent. Transmission distorts via leveling, sharpening, assimilation
+  to the teller’s interests and stereotypes. Founding lane for “why big events sprout
+  many unverified versions.”'
+biblicus:
+  id: allport-postman-analysis-of-rumor
+  source: https://www.romolocapuano.com/wp-content/uploads/2018/10/ALLPORT_POSTMAN_AN-ANALYSIS-OF-RUMOR.pdf
+dates:
+  published_at: Winter 1946–47 (book 1947)
+  updated_at: null
+  retrieved_at: '2026-09-07T19:53:21.748259Z'
+tags:
+- competing-event-narratives
+- information-habit
+- historical-lineage
+- classic-social-psychology
+curation:
+  corpus_role: source-material
+ingestion_rationale: '[classic social psychology (rumor transmission)] Claim: Basic
+  law of rumor: intensity ≈ importance × ambiguity (R ~ i × a) — multiplicative; if
+  either factor is zero, no rumor. Wartime cases show rumor also thickens when news
+  is *plentiful* and momentous (Pearl Harbor report, V-J Day, FDR death), not only
+  when news is absent. Transmission distorts via leveling, sh…'

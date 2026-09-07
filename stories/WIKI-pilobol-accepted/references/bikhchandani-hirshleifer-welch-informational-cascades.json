@@ -1,0 +1,10 @@
+{
+  "id": "bikhchandani-hirshleifer-welch-informational-cascades",
+  "title": "A Theory of Fads\u2026 as Informational Cascades (Bikhchandani, Hirshleifer & Welch)",
+  "status": "accepted",
+  "corpus": "pilobol-us",
+  "url": "https://snap.stanford.edu/class/cs224w-readings/bikhchandani92fads.pdf",
+  "source": "pilobol-wiki",
+  "why": "[economics / observational learning] Claim: An **informational cascade** starts when it is optimal for an individual, having seen predecessors\u2019 *actions*, to follow them and ignore private information. Explains localized conformity *and* fragility \u2014 small shocks or a little new public information can reverse long-running mass behavior. When only previo\u2026",
+  "wiki": "project/wiki/sources/bikhchandani-hirshleifer-welch-informational-cascades.md"
+}

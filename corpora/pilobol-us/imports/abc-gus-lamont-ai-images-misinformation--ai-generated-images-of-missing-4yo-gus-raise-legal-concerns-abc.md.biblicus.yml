@@ -1,0 +1,30 @@
+title: AI-generated images of missing 4yo Gus raise legal concerns (ABC)
+media_type: text/markdown
+abstract: 'After four-year-old Gus disappears from a South Australia outback homestead
+  near Yunta, Facebook pages push AI images of him — a blonde child loaded into a
+  four-wheel drive (“Is this a kidnapping case?”), fake “breakthroughs,” even a “miracle
+  in the outback” reunion with US-style police uniforms. Posts rack up hundreds/thousands
+  of reactions; experts flag family trauma, false hope, and trust collapse. Flinders
+  law lecturer Joel Lisk: emotional harm + clickbait; RMIT’s Michael Cowling names
+  the uncanny valley tell (hands, lighting). The copy invents a kidnapping the search
+  never found.'
+biblicus:
+  id: abc-gus-lamont-ai-images-misinformation
+  source: https://www.abc.net.au/news/2025-10-11/ai-generated-images-of-4yo-gus-prompt-call-for-stronger-laws/105873218
+dates:
+  published_at: '2025-10-11'
+  updated_at: null
+  retrieved_at: '2026-09-07T19:53:21.748259Z'
+tags:
+- synthetic-sightings
+- uncanny-hyperreality
+- counterfeit-persons
+- liars-dividend
+- news
+curation:
+  corpus_role: source-material
+ingestion_rationale: '[news (surreal specimen)] Claim: After four-year-old Gus disappears
+  from a South Australia outback homestead near Yunta, Facebook pages push AI images
+  of him — a blonde child loaded into a four-wheel drive (“Is this a kidnapping case?”),
+  fake “breakthroughs,” even a “miracle in the outback” reunion with US-style police
+  uniforms. Posts rack u…'

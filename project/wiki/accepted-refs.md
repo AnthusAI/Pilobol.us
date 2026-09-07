@@ -1,6 +1,6 @@
 # Accepted references
 
-Live list from pod JSON on story `WIKI-pilobil-accepted`, via
+Live list from pod JSON on story `WIKI-pilobol-accepted`, via
 `references(status="accepted")` when the Papyrus wiki renderer is wired.
 Until then, prefer `python3 bin/list-refs.py`.
 

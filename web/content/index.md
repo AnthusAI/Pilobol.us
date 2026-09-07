@@ -13,6 +13,8 @@ Opt-out asks you to leave a room you moved into on purpose. Opt-in is more hones
 :::card{span="3"}
 ### [A miracle in the outback](articles/gus-lamont-ai-sighting.html)
 
+![Celebrity Today AI kidnapping collage, labeled AI-generated](assets/gus-lamont/celebrity-today-kidnap-ai-labeled.jpg)
+
 An AI picture of a kidnapping landed in the search for a missing boy. Thousands shared it. The ground had nothing.
 
 *Monday, September 7, 2026*

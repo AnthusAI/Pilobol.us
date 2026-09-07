@@ -8,7 +8,7 @@ frontend:
         # its source at a pinned commit and pointing PAPYRUS_ROOT at it is
         # all build_via_papyrus.py actually needs.
         - git clone --depth 1 https://github.com/AnthusAI/Papyrus.git /tmp/papyrus-src
-        - cd /tmp/papyrus-src && git fetch --depth 1 origin f5a5f1fcaedccf31f47380830f41473e7bfb6ec8 && git checkout f5a5f1fcaedccf31f47380830f41473e7bfb6ec8
+        - cd /tmp/papyrus-src && git fetch --depth 1 origin d664fc7a397b578155df38068ed1a8967d4dc69f && git checkout d664fc7a397b578155df38068ed1a8967d4dc69f
         - pip install "git+https://github.com/AnthusAI/Markus@v0.5.1"
     build:
       commands:

@@ -49,7 +49,7 @@ const OrganicImage = (() => {
       float n2 = snoise(vUv * 3.0 - uTime * 0.1 + 100.0);
       vec2 shatteredPos = targetPos + vec2(n1, n2) * 1.5;
       
-      // Interpolate based on scroll (1.0 = assembled, 0.0 = completely shattered)
+      // Assembly factor (1.0 = assembled, 0.0 = shattered). Not driven by scroll.
       // We use a smoothstep so it snaps together nicely.
       float assembleProgress = smoothstep(0.0, 1.0, uScroll);
       vec2 currentPos = mix(shatteredPos, targetPos, assembleProgress);
@@ -166,7 +166,6 @@ const OrganicImage = (() => {
       
       this.resize();
       window.addEventListener('resize', () => this.resize());
-      window.addEventListener('scroll', () => this.onScroll(), {passive: true});
       
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -176,7 +175,8 @@ const OrganicImage = (() => {
       }, { threshold: 0.0, rootMargin: '200px' });
       observer.observe(this.container);
       
-      this.onScroll();
+      this.scrollProgress = 1;
+      this.targetScrollProgress = 1;
       this.render();
     }
     
@@ -186,26 +186,12 @@ const OrganicImage = (() => {
       this.canvas.width = rect.width * dpr;
       this.canvas.height = rect.height * dpr;
       this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
-      this.onScroll();
     }
     
     onScroll() {
-      const rect = this.container.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      
-      // We want uScroll to be 1.0 when the element is in the middle of the screen
-      // and 0.0 when it is at the very edges or outside.
-      const center = rect.top + rect.height / 2;
-      const screenCenter = windowHeight / 2;
-      
-      const distFromCenter = Math.abs(center - screenCenter);
-      // Normalized distance (0 = center, 1 = edge)
-      const maxDist = windowHeight / 1.5; 
-      let p = 1.0 - (distFromCenter / maxDist);
-      p = Math.max(0, Math.min(1, p));
-      
-      // Smooth curve
-      this.targetScrollProgress = p * p * (3 - 2 * p);
+      // Scroll is never an animation input; keep the image assembled.
+      this.targetScrollProgress = 1;
+      this.scrollProgress = 1;
     }
     
     render() {

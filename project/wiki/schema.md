@@ -9,8 +9,7 @@ Papyrus is the automated newsroom. Agents do not need a second dialect for
 day-to-day wiki work.
 
 Operator config: `.papyrus/operator-cli.config.yaml` (`podPath` →
-`/workspace/pilobil.us`, corpus `pilobil-us`). Symlink: `/workspace/pilobil.us`
-→ `/workspace/pilobol.us`.
+`/workspace/pilobol.us`, corpus `pilobol-us`).
 
 ## Layers
 
@@ -21,8 +20,8 @@ Operator config: `.papyrus/operator-cli.config.yaml` (`podPath` →
 - [accepted-refs.md](accepted-refs.md) — live accepted list from pod JSON.
 - `sources/` — one markdown keeper page per accepted source (notes, claims,
   concept links).
-- **Pod references** — JSON on standing story `WIKI-pilobil-accepted`
-  (`stories/WIKI-pilobil-accepted/references/*.json`). Not Kanbus board cards.
+- **Pod references** — JSON on standing story `WIKI-pilobol-accepted`
+  (`stories/WIKI-pilobol-accepted/references/*.json`). Not Kanbus board cards.
 
 ## Register / list
 

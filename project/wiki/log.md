@@ -42,3 +42,14 @@ Filed 4 keepers: Skift Ambiente Sedona / TikTok Go AI hotel videos (Schulz); NY 
 - Removed leftover `doctrine/pilobil.md` (canonical DNA is `mission.md` + `publication-doctrine.md`).
 - README rewritten: Kanbus = stories only; knowledge home = Papyrus local-pod wiki + `WIKI-pilobil-accepted` refs.
 - Added thin `style-guide.md` index → `content/VOICE.md`.
+
+## 2026-09-07 — Identifier leftover rename (`pilobil*` → `pilobol*`)
+
+Technical ids now match the Pilobol.us / Pilobolus brand. Historical lines
+above still record the old names as they were at the time.
+
+- Corpus / publication key: `pilobil-us` → `pilobol-us`.
+- Standing story: `WIKI-pilobil-accepted` → `WIKI-pilobol-accepted` (same
+  story, renamed; not a duplicate).
+- Pod path in operator config and live docs: `/workspace/pilobol.us`.
+- Theme file / CSS layer: `pilobol-theme-v10.css`, `@layer pilobol-theme`.

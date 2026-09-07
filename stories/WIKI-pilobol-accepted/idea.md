@@ -1,7 +1,7 @@
 # Accepted sources (standing)
 
 Not a publication story. This workspace holds **accepted reference JSON** for the
-Pilobol.us Papyrus local pod (`stories/WIKI-pilobil-accepted/references/`).
+Pilobol.us Papyrus local pod (`stories/WIKI-pilobol-accepted/references/`).
 
 Human-readable keepers remain in `project/wiki/sources/`. Concepts live in
 `project/wiki/concepts/`. Register new accepts with:

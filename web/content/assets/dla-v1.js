@@ -93,7 +93,7 @@ const DLA = (() => {
       col = mix(col, uColorBase, smoothstep(0.4, 1.0, a));
 
       // A fungal stain reads as darker paper, not lighter -- normal blending
-      // (see pilobil-theme-v10.css; multiply guaranteed darker-or-equal but
+      // (see pilobol-theme-v10.css; multiply guaranteed darker-or-equal but
       // could never go lighter even briefly) means the shader itself must
       // keep results darker than the page almost always. This is the one
       // deliberate exception: a rare, tiny bright fleck at peak density,

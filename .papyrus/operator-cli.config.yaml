@@ -1,5 +1,5 @@
 backend: local
-defaultCorpusKey: pilobil-us
-publicationKey: pilobil-us
+defaultCorpusKey: pilobol-us
+publicationKey: pilobol-us
 local:
-  podPath: /workspace/pilobil.us
+  podPath: /workspace/pilobol.us

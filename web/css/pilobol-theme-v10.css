@@ -1,5 +1,5 @@
 /* =========================================================================
-   Pilobil.us site theme — "a fungus among us"
+   Pilobol.us site theme — "a fungus among us"
    =========================================================================
 
    Loaded AFTER css/markus-vendor.css. Declares its own layer so it always
@@ -27,7 +27,7 @@
    ground, spores glowing faintly at the edges.
    ========================================================================= */
 
-@layer pilobil-theme {
+@layer pilobol-theme {
 
   :root {
     /* --- light (default): daylight, before you've noticed --- */

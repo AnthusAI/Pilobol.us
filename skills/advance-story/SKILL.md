@@ -1,19 +1,20 @@
 ---
-name: advance-pilobil-story
+name: advance-pilobol-story
 description: >-
-  Advance a Pilobil.us newsroom pod story through Kanbus stages. Use when
-  working in /workspace/pilobil.us, moving a story between idea/assignment/
+  Advance a Pilobol.us newsroom pod story through Kanbus stages. Use when
+  working in /workspace/pilobol.us, moving a story between idea/assignment/
   research/report/editor_select/copywriting/published, or when Kanbus refuses
   a transition.
 ---
-# Advance a Pilobil.us newsroom story
+# Advance a Pilobol.us newsroom story
 
-Work from the pod root: `/workspace/pilobil.us`. Prefer Kanbus **0.20.1**
+Work from the pod root: `/workspace/pilobol.us`. Prefer Kanbus **0.20.1**
 (`kanbus-version`). Never edit `project/issues/` or `project/events/` by hand.
 Wiki pages under `project/wiki/` are the exception — agents may edit those.
 
-Read `doctrine/pilobil.md` when context is thin. Desk language: Papyrus local
-pod (Biblicus is the KB engine underneath; Papyrus is the automated newsroom).
+Read `project/wiki/mission.md` and `project/wiki/publication-doctrine.md` when
+context is thin. Desk language: Papyrus local pod (Biblicus is the KB engine
+underneath; Papyrus is the automated newsroom).
 
 ## Inspect before acting
 
@@ -44,14 +45,14 @@ Markus publish path exists, treat `article.md` as the publish artifact.
 ## Advance a story
 
 ```bash
-cd /workspace/pilobil.us
+cd /workspace/pilobol.us
 kbs update <story-id> --status <next-stage>
 ```
 
 ## Create a new story
 
 ```bash
-cd /workspace/pilobil.us
+cd /workspace/pilobol.us
 kbs create "Post title" --type story
 ```
 

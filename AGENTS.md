@@ -66,9 +66,9 @@ Amplify Gen 2 deploys via DevOps.
 
 ### Knowledge base (Papyrus local pod)
 
-- Pod root: `/workspace/pilobil.us` (symlink to this repo).
+- Pod root: `/workspace/pilobol.us`.
 - Wiki: `project/wiki/` (concepts + `sources/` keepers).
-- Accepted references JSON: `stories/WIKI-pilobil-accepted/references/`.
+- Accepted references JSON: `stories/WIKI-pilobol-accepted/references/`.
 - Register: `python3 bin/register-ref.py --title "..." --url "..." --why "..."`.
 - List: `python3 bin/list-refs.py`.
 - Kanbus (`PILO`, console 4260) is **stories only** — never put references on the board.
@@ -147,7 +147,7 @@ influencer economies.
 - Living filter: `inclusion_rubric.md` (Include / Demote / Landed / Rejected /
   Stay-off / seeds). Stay-off is **URL/title**, not theme ban.
 - Daily **4am ET** (all days): one find → inverted-pyramid explain → wiki file.
-  Quiet if nothing. One story per night. (`pilobil-4am-find`)
+  Quiet if nothing. One story per night. (`pilobol-4am-find`)
 - Daily **4am ET** (all days): **research + story** — invent a fresh board
   research assignment, file new keepers, then one street-readable Pilobolus
   story (pick a story shape from `content/VOICE.md`). Never tech journalism.

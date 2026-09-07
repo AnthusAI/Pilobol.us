@@ -144,16 +144,31 @@
   /* Mold-stained paper fills the full viewport; wide-screen gutters inherit
      the same treatment instead of a flat neutral stage. */
   html {
-    height: 100%;
+    position: relative;
+    min-height: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: var(--pilo-stage);
+    /* Kill rubber-band overscroll on Apple (and elsewhere) so the stained
+       stage doesn't flash a bare color past the paper sheet. */
+    overscroll-behavior: none;
+  }
+
+  /* Paint the mold stain on a fixed viewport layer so wide-screen gutters never
+     cut off at content height or mid-scroll. The capped sheet scrolls its own
+     opaque paper on .markus-body; gutters keep this stage behind the FX canvas. */
+  html::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
     background-color: var(--pilo-stage);
     background-image: var(--pilo-paper-texture);
     background-size: var(--pilo-paper-texture-size);
     background-repeat: var(--pilo-paper-texture-repeat);
     background-blend-mode: var(--pilo-paper-texture-blend);
     background-attachment: scroll;
-    /* Kill rubber-band overscroll on Apple (and elsewhere) so the stained
-       stage doesn't flash a bare color past the paper sheet. */
-    overscroll-behavior: none;
   }
 
   .markus-body {
@@ -809,7 +824,11 @@
     width: 100vw;
     max-width: 100vw;
     margin-left: -50vw;
-    height: 100vh;
+    /* Stretch with the sheet; background-manager.js may set an explicit pixel
+       height — do not cap at 100vh in CSS or gutter FX stops mid-scroll. */
+    bottom: 0;
+    height: 100%;
+    aspect-ratio: auto;
     /* Above the paper backdrop, below every reading surface. */
     z-index: 0;
     pointer-events: none;
@@ -975,8 +994,13 @@
   }
 
   body {
-    /* Do not isolate: mix-blend-mode on the FX canvas must composite with
-       html's full-viewport paper in the wide-screen gutters. */
+    /* Stretch the document chain so html's mold-stain stage is at least one
+       viewport tall on short pages and grows with long articles. */
+    min-height: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    /* Do not isolate and do not raise a stacking context — mix-blend-mode on
+       the FX canvas must composite with html's paper stage in the gutters. */
     overscroll-behavior: none;
   }
 }

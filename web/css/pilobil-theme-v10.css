@@ -450,7 +450,13 @@
      --------------------------------------------------------------------- */
 
   .markus-document > .markus-card-grid {
+    /* Card chrome bleeds into the side margins; text stays on the Pilobolus
+       content edge (padding on cards cancels this negative margin). */
+    --pilo-feed-pad-x: 1.15rem;
+    --pilo-feed-pad-y: 1.1rem;
     margin-top: 1.75rem;
+    margin-left: calc(-1 * var(--pilo-feed-pad-x));
+    margin-right: calc(-1 * var(--pilo-feed-pad-x));
     row-gap: 1.1rem;
     column-gap: 1.1rem;
   }
@@ -461,6 +467,7 @@
     border: none;
     border-radius: 1rem;
     box-shadow: none;
+    padding: var(--pilo-feed-pad-y) var(--pilo-feed-pad-x) calc(var(--pilo-feed-pad-y) + 0.1rem);
     transition: transform 0.15s ease, background 0.15s ease;
   }
 
@@ -511,7 +518,8 @@
 
   /* Featured lead: more real estate, bigger type */
   .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child {
-    padding: 1.55rem 1.45rem 1.65rem;
+    /* Same horizontal pad as siblings so text stays on the shared left edge. */
+    padding: 1.55rem var(--pilo-feed-pad-x) 1.65rem;
     background: color-mix(in srgb, var(--markus-card) 26%, transparent);
   }
 
@@ -536,7 +544,7 @@
       column-gap: 1.35rem;
       row-gap: 0.35rem;
       align-items: center;
-      padding: 1.35rem 1.35rem 1.45rem;
+      padding: 1.35rem var(--pilo-feed-pad-x) 1.45rem;
     }
 
     .markus-document > .markus-card-grid > .markus-card[data-span="full"]:has(img)

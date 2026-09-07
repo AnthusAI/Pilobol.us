@@ -77,6 +77,10 @@
     --pilo-paper-texture-size: 256px 256px, auto, auto, auto, auto, auto;
     --pilo-paper-texture-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
     --pilo-paper-texture-blend: multiply, normal, normal, normal, normal, normal;
+    /* Wide-viewport sheet edge: how far the capped paper sheet feathers into
+       the full-viewport mold stain before the gutters. */
+    --pilo-sheet-edge-feather: 5.5rem;
+    --pilo-sheet-edge-shadow: rgba(33, 29, 23, 0.1);
     /* Hard cap on the layout sheet (content column + side margins for FX). */
     --pilo-page-width: 72rem;
 
@@ -128,6 +132,7 @@
       --pilo-fx-opacity: 0.32;
       --pilo-stage: var(--markus-paper);
       --pilo-paper-texture-blend: screen, normal, normal, normal, normal, normal;
+      --pilo-sheet-edge-shadow: rgba(0, 0, 0, 0.38);
       color-scheme: dark;
     }
   }
@@ -165,6 +170,52 @@
        this sheet's capped width on ultra-wide screens. */
     background: transparent;
     transition: color 0.2s ease;
+  }
+
+  /* On ultra-wide viewports, re-layer the paper stain on the capped sheet and
+     feather its left/right edges so the sheet meets the gutters softly. */
+  @media (min-width: 72.0625rem) {
+    .markus-body {
+      box-shadow:
+        min(-2.5rem, -3.5vw) 0 min(4.5rem, 6vw) max(-2.75rem, -3.25vw) var(--pilo-sheet-edge-shadow),
+        min(2.5rem, 3.5vw) 0 min(4.5rem, 6vw) max(-2.75rem, -3.25vw) var(--pilo-sheet-edge-shadow);
+    }
+
+    .markus-body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-color: var(--pilo-stage);
+      background-image: var(--pilo-paper-texture);
+      background-size: var(--pilo-paper-texture-size);
+      background-repeat: var(--pilo-paper-texture-repeat);
+      background-blend-mode: var(--pilo-paper-texture-blend);
+      background-attachment: scroll;
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.22) calc(var(--pilo-sheet-edge-feather) * 0.35),
+        rgba(0, 0, 0, 0.72) calc(var(--pilo-sheet-edge-feather) * 0.72),
+        black var(--pilo-sheet-edge-feather),
+        black calc(100% - var(--pilo-sheet-edge-feather)),
+        rgba(0, 0, 0, 0.72) calc(100% - var(--pilo-sheet-edge-feather) * 0.72),
+        rgba(0, 0, 0, 0.22) calc(100% - var(--pilo-sheet-edge-feather) * 0.35),
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.22) calc(var(--pilo-sheet-edge-feather) * 0.35),
+        rgba(0, 0, 0, 0.72) calc(var(--pilo-sheet-edge-feather) * 0.72),
+        black var(--pilo-sheet-edge-feather),
+        black calc(100% - var(--pilo-sheet-edge-feather)),
+        rgba(0, 0, 0, 0.72) calc(100% - var(--pilo-sheet-edge-feather) * 0.72),
+        rgba(0, 0, 0, 0.22) calc(100% - var(--pilo-sheet-edge-feather) * 0.35),
+        transparent 100%
+      );
+    }
   }
 
   .pilo-youtube {
@@ -743,8 +794,12 @@
   .pilo-physarum-canvas {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    /* Full-viewport width so mold FX can feather at the sheet edge instead of
+       clipping hard at the capped .markus-body box. */
+    left: 50%;
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: -50vw;
     height: 100vh;
     /* Above the paper, below every reading surface. The former -1 layer was
        painted behind the body's opaque paper background, which made the

@@ -1,5 +1,5 @@
 ---
-title: Pilobolus
+title: Specimens
 description: >-
   A fungus among us — weird and surreal outcomes of a society slowly taken over
   by AI and machine learning. Specimens where the copy feels more real than real.

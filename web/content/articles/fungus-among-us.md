@@ -6,8 +6,6 @@ description: >-
   society.
 ---
 
-There's a fungus among us, feeding on our excrement and gradually infecting society.
-
 *Pilobolus* is a dung-cannon fungus — it grows on herbivore dung and shoots its spores.
 
 The copy wraps the host until what is left is an echo of the human shape. Care homes and operating rooms, wedding halls and war feeds, newsrooms and confessionals.

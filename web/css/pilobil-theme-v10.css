@@ -456,8 +456,8 @@
   }
 
   .markus-document > .markus-card-grid > .markus-card {
-    /* Translucent panel — not fully opaque card, not wiped away. */
-    background: color-mix(in srgb, var(--markus-card) 82%, transparent);
+    /* Partial opacity: panel tint that still lets the FX show through. */
+    background: color-mix(in srgb, var(--markus-card) 42%, transparent);
     border: none;
     border-radius: 1rem;
     box-shadow: none;
@@ -512,7 +512,7 @@
   /* Featured lead: more real estate, bigger type */
   .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child {
     padding: 1.55rem 1.45rem 1.65rem;
-    background: color-mix(in srgb, var(--markus-card) 90%, transparent);
+    background: color-mix(in srgb, var(--markus-card) 52%, transparent);
   }
 
   .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child

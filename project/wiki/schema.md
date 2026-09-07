@@ -1,6 +1,6 @@
-# Pilobil.us wiki schema
+# Pilobol.us wiki schema
 
-Papyrus local-pod knowledge base for the Pilobil.us newsroom. Wiki markdown
+Papyrus local-pod knowledge base for the Pilobol.us newsroom. Wiki markdown
 lives at `project/wiki/`. This is the documented exception to “do not edit
 `project/`”; never hand-edit `project/issues` or `project/events`.
 

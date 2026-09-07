@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""List Pilobil pod-references (JSON under stories/*/references/)."""
+"""List Pilobolus pod-references (JSON under stories/*/references/)."""
 import json
 from pathlib import Path
 

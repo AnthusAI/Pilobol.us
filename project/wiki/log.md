@@ -1,4 +1,4 @@
-# Pilobil.us wiki log
+# Pilobol.us wiki log
 
 ## [2026-09-05 17:05 ET] seed | Doctrine + three concepts
 
@@ -38,7 +38,7 @@ Filed 4 keepers: Skift Ambiente Sedona / TikTok Go AI hotel videos (Schulz); NY 
 
 ## 2026-09-07 — Prune stale Kanbus / duplicate DNA paths
 
-- Deleted smoke-test story `PILO-94e22d` (Pilobil board smoke).
+- Deleted smoke-test story `PILO-94e22d` (Pilobolus board smoke).
 - Removed leftover `doctrine/pilobil.md` (canonical DNA is `mission.md` + `publication-doctrine.md`).
 - README rewritten: Kanbus = stories only; knowledge home = Papyrus local-pod wiki + `WIKI-pilobil-accepted` refs.
 - Added thin `style-guide.md` index → `content/VOICE.md`.

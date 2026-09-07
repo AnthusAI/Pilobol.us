@@ -1,6 +1,6 @@
-# Pilobil.us wiki
+# Pilobol.us wiki
 
-Catalog for the Pilobil.us **Papyrus local pod** knowledge base. Read this first.
+Catalog for the Pilobol.us **Papyrus local pod** knowledge base. Read this first.
 
 - [Schema](schema.md)
 - [Log](log.md)

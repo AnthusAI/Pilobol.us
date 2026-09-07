@@ -9,7 +9,7 @@ sphere is like a human discussion circle infiltrated by robots. Once you cannot
 tell who is real, trust in the conversation itself collapses — not merely trust
 in this or that speaker.
 
-Pilobil.us takes that as a standing editorial frame. The robots are not a side
+Pilobol.us takes that as a standing editorial frame. The robots are not a side
 cast; they are the infection inside the circle. See also
 [fungus among us](fungus-among-us.md) and [simulacrum](simulacrum.md).
 

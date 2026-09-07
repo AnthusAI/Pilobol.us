@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Add a pod-reference JSON for the Pilobil.us Papyrus local pod."""
+"""Add a pod-reference JSON for the Pilobol.us Papyrus local pod."""
 import argparse
 import json
 import re
@@ -20,7 +20,7 @@ def slug_from_url(url: str) -> str:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Register a Pilobil local pod reference")
+    parser = argparse.ArgumentParser(description="Register a Pilobolus local pod reference")
     parser.add_argument("--title", required=True)
     parser.add_argument("--url", required=True)
     parser.add_argument("--why", default="")

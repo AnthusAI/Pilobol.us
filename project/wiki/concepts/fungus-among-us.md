@@ -4,7 +4,7 @@ Last updated: 2026-09-07 09:20 ET
 
 ## What it is
 
-The house metaphor for Pilobil.us: synthetic and automated speakers as a
+The house metaphor for Pilobol.us: synthetic and automated speakers as a
 creeping fungus in human society — especially in the digital public sphere.
 Mycelium is distributed, often invisible at the tips, and structural once it
 has colonized the host. So are botnets, engagement farms, persona mills, and
@@ -27,7 +27,7 @@ viral posts, spores as copy-paste personas). Drop it when it becomes costume.
 
 ## Anchors (seed)
 
-- Publication name and mission: Pilobil.us — about a fungus among us.
+- Publication name and mission: Pilobol.us — about a fungus among us.
 - Desk braid: fungus (spread) × Harari circle (trust collapse) × Baudrillard
   simulacrum (signs without originals).
 

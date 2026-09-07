@@ -1,6 +1,6 @@
-# Pilobil.us newsroom pod
+# Pilobol.us newsroom pod
 
-Papyrus local pod + Kanbus publication board for **Pilobil.us** (*a fungus among us*).
+Papyrus local pod + Kanbus publication board for **Pilobol.us** (*a fungus among us*).
 
 - **Papyrus local pod** = desk language for this on-disk KB + newsroom.
 - **Biblicus** = knowledge-base engine underneath.

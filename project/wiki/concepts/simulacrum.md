@@ -11,7 +11,7 @@ basic reality; masking and denaturing that reality; masking the *absence* of
 reality; then pure simulacrum with no relation to any reality at all. The map
 does not follow the territory; it precedes and replaces it.
 
-For Pilobil.us this is not a literature seminar. It is a working lens on feeds,
+For Pilobol.us this is not a literature seminar. It is a working lens on feeds,
 bots, synthetic media, and “engagement” that looks like discourse while
 detaching from speakers who can be held to account.
 

@@ -1,8 +1,5 @@
 ---
-title: Specimens
-description: >-
-  There's a fungus among us, feeding on our excrement and gradually infecting
-  society.
+title: "There's a fungus among us, feeding on our excrement and gradually infecting society."
 ---
 
 :::card-grid{columns="1"}
@@ -29,4 +26,3 @@ A number on a screen is worth something only while enough people agree that it i
 :::aside{title="More stories"}
 Full list: [Stories archive →](articles/index.html). Mission: [A fungus among us →](articles/fungus-among-us.html).
 :::
-

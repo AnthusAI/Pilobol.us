@@ -42,8 +42,8 @@ pocket, no government seal to lean on when belief slips. There is the network
 of belief, or there is the fall.
 
 :::aside{title="The commercial, in one beat"}
-Doubt is not a debate on the rainbow. Doubt is the hole. The spot doesn’t
-argue. It drops the kid who asked.
+On the rainbow, doubt doesn’t get a debate. It gets a hole. The spot doesn’t
+argue — it drops the kid who asked.
 :::
 
 ## What belief is doing
@@ -57,11 +57,11 @@ they were sitting on air.
 Bank runs are the same physics in older clothes. Crypto just refuses the
 polite furniture. It is belief with a stopwatch and a graph.
 
-:::note{title="One example"}
-This piece is about cryptocurrency as a belief-rainbow — counterfeiting of
-trust in money. Fake people in the discussion circle are [the same *shape*
-of problem](https://chattic.us/thoughts/dont-pretend-bots-are-human/). They
-get their own post.
+:::note{title="A cousin problem"}
+Fake commenters flooding a discussion so it looks like a real crowd agrees
+with something — that’s [the same trick with a different
+target](https://chattic.us/thoughts/dont-pretend-bots-are-human/): manufacture
+the appearance of belief instead of the money.
 :::
 
 ## Taste the fall

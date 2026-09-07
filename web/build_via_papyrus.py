@@ -40,25 +40,13 @@ sys.path.insert(0, str(PAPYRUS_ROOT / "src"))
 from papyrus_content.markus_renderer import build as markus_build  # noqa: E402
 from papyrus_content.markus_renderer import shell as markus_shell  # noqa: E402
 from papyrus_content.markus_renderer.build import build_markus_site  # noqa: E402
-from papyrus_content.markus_renderer.shell import NavItem, SiteChrome  # noqa: E402
+from papyrus_content.markus_renderer.shell import SiteChrome  # noqa: E402
 
-# Papyrus only auto-builds Home + Stories into the header. Background pages
-# live under /effects/ but need an explicit nav entry.
-_orig_nav = markus_build._build_nav_items
+# No site nav for now (YAGNI). Archive/drill-down later when there's a pile.
+markus_build._build_nav_items = lambda articles: []
 
-
-def _build_nav_items_with_effects(articles):
-    items = list(_orig_nav(articles))
-    if not any(item.href == "effects/index.html" for item in items):
-        items.append(NavItem("Backgrounds", "effects/index.html"))
-    return items
-
-
-markus_build._build_nav_items = _build_nav_items_with_effects
-
-# Publication identity. Tagline is None: the left-side masthead poem carries
-# wordmark + lines so we don't double "a fungus among us" via Papyrus's
-# single tagline slot. footer_html can't be "" (falsy → Papyrus default).
+# Tagline is None: left-side masthead poem carries wordmark + lines.
+# footer_html can't be "" (falsy → Papyrus default).
 PILOBOL_CHROME = SiteChrome(
     site_name="Pilobolus",
     tagline=None,
@@ -80,7 +68,7 @@ _POEM_LINES = (
 
 
 def render_page_with_poem(**kwargs):
-    """Stack Pilobolus + poem lines on the left; nav sits under the poem."""
+    """Left-stack brand poem only — no nav."""
     html = _orig_render_page(**kwargs)
     depth = kwargs.get("depth", 0) or 0
     prefix = "../" * depth
@@ -94,11 +82,8 @@ def render_page_with_poem(**kwargs):
         "    </div>"
     )
     html2, n = re.subn(
-        r'<header class="markus-site-masthead">\s*'
-        r'<p class="markus-site-wordmark">.*?</p>\s*'
-        r'(?:<p class="markus-site-tagline">.*?</p>\s*)?'
-        r'(<nav class="markus-site-nav")',
-        rf'<header class="markus-site-masthead">\n{poem}\n    \1',
+        r'<header class="markus-site-masthead">.*?</header>',
+        f'<header class="markus-site-masthead">\n{poem}\n  </header>',
         html,
         count=1,
         flags=re.S,
@@ -109,7 +94,6 @@ def render_page_with_poem(**kwargs):
 
 
 markus_shell.render_page = render_page_with_poem
-# build.py binds render_page at import time; patch that name too.
 markus_build.render_page = render_page_with_poem
 
 

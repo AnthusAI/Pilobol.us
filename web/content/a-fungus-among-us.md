@@ -3,8 +3,11 @@ title: A fungus among us
 date: 'Monday, September 7, 2026'
 description: A fungus that grows on bullshit and shoots its spores dead straight
   at the sun gave this site its name — and its whole appetite.
-cover: assets/og-default.jpg
+cover: assets/pilobolus/pilobolus-crystallinus.jpg
 ---
+
+:::figure{id="pilobolus-specimen" src="assets/pilobolus/pilobolus-crystallinus.jpg" alt="Pilobolus crystallinus — a translucent stalk with a clear bulb and a black spore case on top" caption="Pilobolus crystallinus, the dung cannon. A clear vesicle aims the black spore case at the brightest patch of sky." credit="Photo: Jerry Cooper / iNaturalist, CC BY 4.0"}
+:::
 
 There’s a fungus among us. *Pilobolus* grows on bullshit — cow shit, horse
 shit, whatever a grazing animal leaves on the ground — and it does something

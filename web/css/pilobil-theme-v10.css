@@ -428,6 +428,135 @@
   }
 
   /* ---------------------------------------------------------------------
+     Homepage reverse-chrono feed (Markus card-grid mosaic)
+     --------------------------------------------------------------------- */
+
+  .markus-document > .markus-card-grid {
+    margin-top: 1.75rem;
+    row-gap: 1.1rem;
+    column-gap: 1.1rem;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card {
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card:hover {
+    border-color: var(--markus-accent);
+    transform: translateY(-1px);
+  }
+
+  .markus-document > .markus-card-grid > .markus-card .markus-card-body > h3:first-child {
+    margin: 0 0 0.45rem;
+    font-family: var(--markus-serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card .markus-card-body > h3:first-child a {
+    color: var(--markus-ink);
+    text-decoration: none;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card .markus-card-body > h3:first-child a:hover {
+    color: var(--markus-accent);
+  }
+
+  .markus-document > .markus-card-grid > .markus-card .markus-card-body > p {
+    margin: 0.35rem 0 0;
+    color: var(--markus-muted);
+    font-size: 0.95rem;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card .markus-card-body > p:has(em:only-child),
+  .markus-document > .markus-card-grid > .markus-card .markus-card-body > p > em:only-child {
+    font-size: 0.78rem;
+    color: var(--markus-muted);
+    font-style: normal;
+    letter-spacing: 0.02em;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card .markus-card-body img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.35rem;
+    margin: 0.55rem 0 0.15rem;
+    object-fit: cover;
+    aspect-ratio: 16 / 10;
+  }
+
+  /* Featured lead: more real estate, bigger type */
+  .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child {
+    padding: 1.55rem 1.45rem 1.65rem;
+    background:
+      linear-gradient(
+        155deg,
+        color-mix(in srgb, var(--markus-quote) 10%, var(--markus-card)),
+        var(--markus-card)
+      );
+  }
+
+  .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child
+    .markus-card-body > h3:first-child {
+    font-size: clamp(1.45rem, 3.2vw, 2.05rem);
+    line-height: 1.15;
+    margin-bottom: 0.65rem;
+  }
+
+  .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child
+    .markus-card-body > p {
+    font-size: 1.05rem;
+    color: var(--markus-ink);
+  }
+
+  /* Wide: full-span cards with media → copy left / image right */
+  @media (min-width: 720px) {
+    .markus-document > .markus-card-grid > .markus-card[data-span="full"]:has(img) {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+      column-gap: 1.35rem;
+      row-gap: 0.35rem;
+      align-items: center;
+      padding: 1.35rem 1.35rem 1.45rem;
+    }
+
+    .markus-document > .markus-card-grid > .markus-card[data-span="full"]:has(img)
+      .markus-card-body {
+      display: contents;
+    }
+
+    .markus-document > .markus-card-grid > .markus-card[data-span="full"]:has(img)
+      .markus-card-body > h3:first-child {
+      grid-column: 1;
+      grid-row: 1;
+      margin: 0;
+      font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+    }
+
+    .markus-document > .markus-card-grid > .markus-card[data-span="full"]:has(img)
+      .markus-card-body > p:not(:has(img)) {
+      grid-column: 1;
+      margin: 0.2rem 0 0;
+    }
+
+    .markus-document > .markus-card-grid > .markus-card[data-span="full"]:has(img)
+      .markus-card-body > p:has(img),
+    .markus-document > .markus-card-grid > .markus-card[data-span="full"]:has(img)
+      .markus-card-body > img {
+      grid-column: 2;
+      grid-row: 1 / span 4;
+      margin: 0;
+      align-self: stretch;
+      height: 100%;
+      min-height: 12rem;
+      object-fit: cover;
+      aspect-ratio: auto;
+    }
+  }
+
+  /* ---------------------------------------------------------------------
      Footer
      --------------------------------------------------------------------- */
 

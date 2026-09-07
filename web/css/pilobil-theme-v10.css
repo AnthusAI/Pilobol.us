@@ -584,6 +584,18 @@
     aspect-ratio: 16 / 10;
   }
 
+
+  /* Rainbow card: source still is SD; keep it modest in the feed. */
+  .markus-document > .markus-card-grid > .markus-card
+    .markus-card-body img[src*="believe-the-rainbow"] {
+    width: min(100%, 14rem);
+    max-height: 8.5rem;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    margin-left: 0;
+    margin-right: auto;
+  }
+
   /* Full-span lead keeps a touch more vertical pad; type matches every card. */
   .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child {
     padding: 1.55rem var(--pilo-feed-pad-x) 1.65rem;

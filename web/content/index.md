@@ -18,7 +18,7 @@ An AI picture of a kidnapping landed in the search for a missing boy. Thousands 
 :::card{span="3"}
 ### [Believe the rainbow](articles/believe-the-rainbow.html)
 
-![Skittles Believe the Rainbow still](https://img.youtube.com/vi/QUmXhCmVaQg/hqdefault.jpg)
+![Skittles Believe the Rainbow still](assets/believe-the-rainbow/card-still.jpg)
 
 A number on a screen is worth something only while enough people agree that it is. Stop agreeing, and there is nothing underfoot.
 

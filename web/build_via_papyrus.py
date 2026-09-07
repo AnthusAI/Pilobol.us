@@ -23,6 +23,7 @@ from __future__ import annotations
 import os
 import re
 import sys
+from html import escape
 from pathlib import Path
 
 POD_ROOT = Path(__file__).resolve().parent
@@ -59,6 +60,36 @@ PILOBOL_CHROME = SiteChrome(
 )
 
 _orig_render_page = markus_shell.render_page
+
+# Markus :::video becomes <video src="…">; YouTube watch URLs need an iframe.
+_YT_VIDEO_RE = re.compile(
+    r'<video(?P<pre>[^>]*?)\bclass="markus-video"(?P<mid>[^>]*?)\bsrc="'
+    r'(?P<src>https?://(?:www\.)?(?:youtube\.com/watch\?v=|youtu\.be/)(?P<id>[\w-]{6,}))'
+    r'(?:[^"]*)"(?P<post>[^>]*)>\s*</video>',
+    re.I,
+)
+
+
+def _rewrite_youtube_videos(html: str) -> str:
+    def repl(m: re.Match[str]) -> str:
+        vid = m.group("id")
+        blob = f'{m.group("pre")}{m.group("mid")}{m.group("post")}'
+        title_m = re.search(r'\btitle="([^"]*)"', blob)
+        title = escape(title_m.group(1) if title_m else "YouTube video", quote=True)
+        return (
+            f'<div class="pilo-youtube">'
+            f'<iframe src="https://www.youtube-nocookie.com/embed/{vid}" '
+            f'title="{title}" '
+            f'allow="accelerometer; autoplay; clipboard-write; encrypted-media; '
+            f'gyroscope; picture-in-picture; web-share" '
+            f'allowfullscreen loading="lazy" '
+            f'referrerpolicy="strict-origin-when-cross-origin">'
+            f'</iframe></div>'
+        )
+
+    return _YT_VIDEO_RE.sub(repl, html)
+
+
 
 _POEM_LINES = (
     "a fungus among us",
@@ -98,7 +129,7 @@ def render_page_with_poem(**kwargs):
     )
     if n != 1:
         raise RuntimeError(f"masthead poem inject failed (n={n})")
-    return html2
+    return _rewrite_youtube_videos(html2)
 
 
 markus_shell.render_page = render_page_with_poem

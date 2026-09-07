@@ -63,6 +63,12 @@
     --pilo-page-edge: rgba(53, 43, 28, 0.11);
     --pilo-page-bottom: rgba(53, 43, 28, 0.17);
     --pilo-fx-opacity: 0.26;
+    /* Flat surround outside the paper sheet on wide screens (dulled parchment,
+       not the reading surface). */
+    --pilo-stage: #ddd4bf;
+    /* Hard cap on the paper sheet (content column + side margins for FX).
+       Beyond this, the viewport is just --pilo-stage — not liquid margins. */
+    --pilo-page-width: 72rem;
 
     /* Single source of truth for the content column width. The page-wrapper
        rule below and the canvas mask both derive from this ONE value instead
@@ -110,29 +116,32 @@
       --pilo-page-edge: rgba(0, 0, 0, 0.32);
       --pilo-page-bottom: rgba(0, 0, 0, 0.52);
       --pilo-fx-opacity: 0.32;
+      --pilo-stage: #0d0f0a;
       color-scheme: dark;
     }
-  }
-
   }
 
   /* ---------------------------------------------------------------------
      Body / document texture
      --------------------------------------------------------------------- */
 
-  /* Short pages used to leave the body only as tall as the copy, so the
-     page-edge / page-bottom shade stopped mid-viewport and the rest of the
-     screen was unshaded paper. Fill the viewport; html gets the same paper
-     so any overflow is the same color. */
+  /* Capped paper sheet; outside it on wide screens is flat --pilo-stage. */
   html {
     height: 100%;
-    background-color: var(--markus-paper);
+    background-color: var(--pilo-stage);
   }
 
   .markus-body {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--pilo-page-width);
+    margin-left: auto;
+    margin-right: auto;
     min-height: 100%;
     min-height: 100vh;
     min-height: 100dvh;
+    background-color: var(--markus-paper);
     background-image:
       url("../assets/paper-grain.svg"),
       linear-gradient(to right, var(--pilo-page-edge) 0%, transparent 8%, transparent 92%, var(--pilo-page-edge) 100%),
@@ -604,3 +613,4 @@
   body {
     isolation: isolate;
   }
+}

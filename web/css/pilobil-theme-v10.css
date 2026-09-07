@@ -166,10 +166,17 @@
     min-height: 100%;
     min-height: 100vh;
     min-height: 100dvh;
-    /* Transparent so html's full-viewport stain shows through, including past
-       this sheet's capped width on ultra-wide screens. */
-    background: transparent;
-    transition: color 0.2s ease;
+    /* Opaque stained paper inside the capped sheet — the multiply-blended FX
+       canvas needs a real backdrop here (transparent body + isolation: isolate
+       made the animation vanish). Ultra-wide gutters still inherit html's
+       full-viewport stain past this box. */
+    background-color: var(--markus-paper);
+    background-image: var(--pilo-paper-texture);
+    background-size: var(--pilo-paper-texture-size);
+    background-repeat: var(--pilo-paper-texture-repeat);
+    background-blend-mode: var(--pilo-paper-texture-blend);
+    background-attachment: scroll;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   /* On ultra-wide viewports, re-layer the paper stain on the capped sheet and
@@ -185,7 +192,9 @@
       content: "";
       position: absolute;
       inset: 0;
-      z-index: 0;
+      /* Below the FX canvas (z-index 0). At 0 it painted over the animation
+         and wiped the multiply blend. */
+      z-index: -1;
       pointer-events: none;
       background-color: var(--pilo-stage);
       background-image: var(--pilo-paper-texture);
@@ -801,9 +810,7 @@
     max-width: 100vw;
     margin-left: -50vw;
     height: 100vh;
-    /* Above the paper, below every reading surface. The former -1 layer was
-       painted behind the body's opaque paper background, which made the
-       animation vanish most noticeably on narrow screens. */
+    /* Above the paper backdrop, below every reading surface. */
     z-index: 0;
     pointer-events: none;
     /* In daylight the compositor's multiply operation makes every drawn
@@ -968,7 +975,8 @@
   }
 
   body {
-    isolation: isolate;
+    /* Do not isolate: mix-blend-mode on the FX canvas must composite with
+       html's full-viewport paper in the wide-screen gutters. */
     overscroll-behavior: none;
   }
 }

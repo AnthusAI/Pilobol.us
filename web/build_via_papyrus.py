@@ -50,7 +50,7 @@ markus_build._build_nav_items = lambda articles: []
 PILOBOL_CHROME = SiteChrome(
     site_name="Pilobolus",
     tagline=None,
-    footer_html="<p>Pilobolus</p>",
+    footer_html="<!-- background credit host -->",
     scripts=(
         "assets/background-manager.js",
         "assets/organic-image.js",

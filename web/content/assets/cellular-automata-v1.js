@@ -72,6 +72,8 @@ const CellularAutomata = (() => {
     uniform vec3 uColorBase;
     uniform vec3 uColorTip;
     uniform vec3 uColorMid;
+    uniform float uOpacity;
+    uniform float uFade;
 
     void main() {
       // Small box blur purely for the on-screen appearance (does not feed
@@ -106,7 +108,7 @@ const CellularAutomata = (() => {
       float glint = glintGate * smoothstep(0.85, 1.0, a) * 0.12;
       col = mix(col, vec3(1.0), glint);
 
-      float alpha = a * 0.7;
+      float alpha = a * 0.7 * uOpacity * uFade;
       outColor = vec4(col * alpha, alpha);
     }
   `;
@@ -115,6 +117,22 @@ const CellularAutomata = (() => {
     const match = rgbString.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
     if (!match) return [0, 0, 0];
     return [parseInt(match[1])/255, parseInt(match[2])/255, parseInt(match[3])/255];
+  }
+
+  // Optional manager contract. The effect remains safe to run on the
+  // standalone gallery when the manager has not published configuration.
+  function readFxConfig(name) {
+    const root = window.__piloFxConfig || {};
+    const scoped = (root.effects && root.effects[name]) || root[name] || {};
+    const source = typeof scoped === 'object' ? scoped : {};
+    const finite = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
+    return {
+      opacity: Math.max(0, Math.min(1, finite(source.opacity ?? source.intensity ?? root.opacity ?? root.intensity, 0.72))),
+      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 4200)),
+      motionScale: Math.max(0, Math.min(1, finite(source.motionScale ?? root.motionScale, 1))),
+      reducedMotion: Boolean(source.reducedMotion ?? root.reducedMotion ?? (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)),
+      seedRegions: Array.isArray(source.seedRegions ?? root.seedRegions) ? (source.seedRegions ?? root.seedRegions) : []
+    };
   }
 
   class Simulation {
@@ -134,6 +152,8 @@ const CellularAutomata = (() => {
         console.warn('cellular-automata: EXT_color_buffer_float unavailable; skipping effect');
         return;
       }
+
+      this.fx = readFxConfig('cellular-automata');
       
       // See physarum-v17.js constructor for why readColors() is called here
       // immediately rather than left to the periodic call ~60 frames in --
@@ -143,14 +163,27 @@ const CellularAutomata = (() => {
       this.colorTip = [1, 1, 1];
       this.colorMid = [0.6, 0.6, 0.6];
       this.readColors();
+      this.fadeStart = performance.now();
 
       this.initGL();
       this.resize();
+      this.canvas.dataset.piloFxReady = 'true';
+      this.canvas.dataset.piloFxMode = 'live';
       window.addEventListener('resize', () => this.resize());
+      document.addEventListener('pilo:canvasresize', () => this.resize());
       
       this.time = 0;
       this.running = true;
       requestAnimationFrame((t) => this.render(t));
+      document.addEventListener('visibilitychange', () => {
+        const visible = document.visibilityState === 'visible';
+        if (visible === this.running) return;
+        this.running = visible;
+        if (visible) {
+          this.lastTime = 0;
+          requestAnimationFrame((t) => this.render(t));
+        }
+      });
     }
     
     initGL() {
@@ -180,11 +213,14 @@ const CellularAutomata = (() => {
     }
     
     resize() {
-      const dpr = Math.min(window.devicePixelRatio, 2.0);
+      const pageHeight = Math.max(window.innerHeight, this.canvas.clientHeight || 0);
+      const maxCanvas = this.gl.getParameter(this.gl.MAX_RENDERBUFFER_SIZE) || 8192;
+      const dprLimit = pageHeight > window.innerHeight * 2 ? 1.25 : 2.0;
+      const dpr = Math.min(window.devicePixelRatio, dprLimit, maxCanvas / window.innerWidth, maxCanvas / pageHeight);
       this.simWidth = Math.floor(window.innerWidth / 3);
-      this.simHeight = Math.floor(window.innerHeight / 3);
-      this.canvas.width = window.innerWidth * dpr;
-      this.canvas.height = window.innerHeight * dpr;
+      this.simHeight = Math.floor(pageHeight / 3);
+      this.canvas.width = Math.floor(window.innerWidth * dpr);
+      this.canvas.height = Math.floor(pageHeight * dpr);
       this.resetTextures();
     }
     
@@ -207,6 +243,21 @@ const CellularAutomata = (() => {
       for (let i = 0; i < data.length; i += 4) {
         data[i] = Math.random() < 0.35 ? 1.0 : 0.0;
         data[i+3] = 1.0;
+      }
+      // Seed normalized manager regions so the effect remains discoverable
+      // on narrow screens where the content-aware mask reveals only small
+      // header/margin/footer areas.
+      for (const region of this.fx.seedRegions) {
+        const cx = Math.max(0, Math.min(this.simWidth - 1, Number(region.x) * this.simWidth));
+        // Page coordinates put y=0 at the top; WebGL textures put it at the bottom.
+        const cy = Math.max(0, Math.min(this.simHeight - 1, (1 - Number(region.y)) * this.simHeight));
+        const radius = Math.max(1, (Number(region.radius) || 0.08) * Math.min(this.simWidth, this.simHeight));
+        for (let y = Math.max(0, Math.floor(cy - radius)); y < Math.min(this.simHeight, Math.ceil(cy + radius)); y++) {
+          for (let x = Math.max(0, Math.floor(cx - radius)); x < Math.min(this.simWidth, Math.ceil(cx + radius)); x++) {
+            const dx = x - cx, dy = y - cy;
+            if (dx * dx + dy * dy <= radius * radius) data[(y * this.simWidth + x) * 4] = 1.0;
+          }
+        }
       }
 
       const createTex = (d) => {
@@ -255,12 +306,15 @@ const CellularAutomata = (() => {
       if (timestamp - this.lastTime < 150) return; // Super slow
       this.lastTime = timestamp;
       
-      this.time += 0.01;
+      this.time += 0.01 * (this.fx.reducedMotion ? 0.12 : this.fx.motionScale);
       if (Math.floor(this.time * 100) % 60 === 0) {
           this.readColors();
       }
       
       const gl = this.gl;
+      if (window.__piloNutrients) {
+        window.__piloNutrients.paint(gl, this.texA, this.simWidth, this.simHeight, 'density');
+      }
       gl.bindVertexArray(this.vao);
       
       gl.useProgram(this.progProcess);
@@ -286,6 +340,8 @@ const CellularAutomata = (() => {
       gl.uniform3f(gl.getUniformLocation(this.progScreen, "uColorBase"), this.colorBase[0], this.colorBase[1], this.colorBase[2]);
       gl.uniform3f(gl.getUniformLocation(this.progScreen, "uColorTip"), this.colorTip[0], this.colorTip[1], this.colorTip[2]);
       gl.uniform3f(gl.getUniformLocation(this.progScreen, "uColorMid"), this.colorMid[0], this.colorMid[1], this.colorMid[2]);
+      gl.uniform1f(gl.getUniformLocation(this.progScreen, "uOpacity"), this.fx.opacity);
+      gl.uniform1f(gl.getUniformLocation(this.progScreen, "uFade"), Math.min(1, (performance.now() - this.fadeStart) / this.fx.fadeInMs));
 
       gl.bindTexture(gl.TEXTURE_2D, this.texA);
       gl.drawArrays(gl.TRIANGLES, 0, 6);

@@ -147,6 +147,8 @@ const Physarum = (() => {
     uniform vec3 uColorBase;
     uniform vec3 uColorTip;
     uniform vec3 uColorMid;
+    uniform float uOpacity;
+    uniform float uFade;
 
     void main() {
       float val = texture(uTrail, vUv).r;
@@ -169,7 +171,7 @@ const Physarum = (() => {
       float glint = glintGate * smoothstep(0.85, 1.0, val) * 0.12;
       col = mix(col, vec3(1.0), glint);
 
-      float alpha = val * 0.7;
+      float alpha = val * 0.7 * uOpacity * uFade;
       outColor = vec4(col * alpha, alpha);
     }
   `;
@@ -224,6 +226,49 @@ const Physarum = (() => {
     return [0, 0, 0];
   }
 
+  // The page manager publishes this optional contract before loading an
+  // effect. Keep the effect usable in the gallery (and on older pages) when
+  // the contract is absent or partially populated.
+  function readFxConfig(name, presets) {
+    const root = window.__piloFxConfig || {};
+    const scoped = (root.effects && root.effects[name]) || root[name] || {};
+    const source = typeof scoped === 'object' ? scoped : {};
+    // The manager's root preset is a layout preset (header-bloom, etc.), not
+    // a Physarum simulation preset. Only an explicitly effect-scoped preset
+    // may select one of this script's algorithm variants.
+    const presetName = typeof source.preset === 'string' ? source.preset : '';
+    const finite = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
+    return {
+      presetName,
+      preset: presets[presetName] || null,
+      opacity: Math.max(0, Math.min(1, finite(source.opacity ?? source.intensity ?? root.opacity ?? root.intensity, 0.72))),
+      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 4200)),
+      motionScale: Math.max(0, Math.min(1, finite(source.motionScale ?? root.motionScale, 1))),
+      reducedMotion: Boolean(source.reducedMotion ?? root.reducedMotion ?? (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)),
+      seedRegions: Array.isArray(source.seedRegions ?? root.seedRegions) ? (source.seedRegions ?? root.seedRegions) : []
+    };
+  }
+
+  function pickSeed(regions, width, height, fallback) {
+    if (!regions.length) return fallback();
+    const total = regions.reduce((sum, region) => sum + Math.max(0, Number(region.weight) || 0), 0);
+    let roll = Math.random() * (total || regions.length);
+    let selected = regions[0];
+    for (const region of regions) {
+      roll -= total ? Math.max(0, Number(region.weight) || 0) : 1;
+      if (roll <= 0) { selected = region; break; }
+    }
+    const radiusX = Math.max(0, Number(selected.radiusX ?? selected.radius) || 0.08);
+    const radiusY = Math.max(0, Number(selected.radiusY ?? selected.radius) || 0.08);
+    const x = Number.isFinite(Number(selected.x)) ? Number(selected.x) : Math.random();
+    const y = Number.isFinite(Number(selected.y)) ? Number(selected.y) : Math.random();
+    return [
+      Math.max(0, Math.min(width - 1, (x + (Math.random() - 0.5) * radiusX) * width)),
+      // Page coordinates put y=0 at the top; WebGL puts it at the bottom.
+      Math.max(0, Math.min(height - 1, (1 - y + (Math.random() - 0.5) * radiusY) * height))
+    ];
+  }
+
   class Simulation {
     constructor(canvas) {
       this.canvas = canvas;
@@ -269,9 +314,11 @@ const Physarum = (() => {
         }
       };
 
+      this.fx = readFxConfig('physarum', this.presets);
+
       const randomRange = (min, max) => min + Math.random() * (max - min);
       const presetKeys = Object.keys(this.presets);
-      const chosenKey = presetKeys[Math.floor(Math.random() * presetKeys.length)];
+      const chosenKey = this.fx.preset ? this.fx.presetName : presetKeys[Math.floor(Math.random() * presetKeys.length)];
       const rawPreset = this.presets[chosenKey];
       
       this.currentPreset = {
@@ -281,6 +328,18 @@ const Physarum = (() => {
         moveSpeed: randomRange(rawPreset.moveSpeed[0], rawPreset.moveSpeed[1]),
         decay: randomRange(rawPreset.decay[0], rawPreset.decay[1])
       };
+      // A named manager preset wins over the random range, while preserving
+      // the legacy range-based presets used by the standalone gallery.
+      if (this.fx.preset) {
+        const p = this.fx.preset;
+        this.currentPreset = {
+          sensorAngle: randomRange(p.sensorAngle[0], p.sensorAngle[1]),
+          sensorDist: randomRange(p.sensorDist[0], p.sensorDist[1]),
+          turnSpeed: randomRange(p.turnSpeed[0], p.turnSpeed[1]),
+          moveSpeed: randomRange(p.moveSpeed[0], p.moveSpeed[1]),
+          decay: randomRange(p.decay[0], p.decay[1])
+        };
+      }
       this.agentTexSize = Math.ceil(Math.sqrt(50000)); 
       this.numAgents = this.agentTexSize * this.agentTexSize;
       
@@ -299,10 +358,14 @@ const Physarum = (() => {
       // light, and the light is too bright" sequence. Reading real colors
       // immediately removes the placeholder window entirely.
       this.readColors();
+      this.fadeStart = performance.now();
 
       this.init();
       this.resize();
+      this.canvas.dataset.piloFxReady = 'true';
+      this.canvas.dataset.piloFxMode = 'live';
       window.addEventListener('resize', () => this.resize());
+      document.addEventListener('pilo:canvasresize', () => this.resize());
       
       this.time = 0;
       this.running = true;
@@ -350,12 +413,15 @@ const Physarum = (() => {
     }
     
     resize() {
-      const dpr = Math.min(window.devicePixelRatio, 2.0);
+      const pageHeight = Math.max(window.innerHeight, this.canvas.clientHeight || 0);
+      const maxCanvas = this.gl.getParameter(this.gl.MAX_RENDERBUFFER_SIZE) || 8192;
+      const dprLimit = pageHeight > window.innerHeight * 2 ? 1.25 : 2.0;
+      const dpr = Math.min(window.devicePixelRatio, dprLimit, maxCanvas / window.innerWidth, maxCanvas / pageHeight);
       this.simWidth = Math.floor(window.innerWidth / 2);
-      this.simHeight = Math.floor(window.innerHeight / 2);
+      this.simHeight = Math.floor(pageHeight / 2);
       
-      this.canvas.width = window.innerWidth * dpr;
-      this.canvas.height = window.innerHeight * dpr;
+      this.canvas.width = Math.floor(window.innerWidth * dpr);
+      this.canvas.height = Math.floor(pageHeight * dpr);
       
       this.resetTextures();
     }
@@ -368,10 +434,11 @@ const Physarum = (() => {
       for (let s = 0; s < 7; s++) {
          // Bias heavily towards edges (e.g. outer 20% of the screen)
          let isLeft = Math.random() > 0.5;
-         spores.push({
-           x: isLeft ? Math.random() * (this.simWidth * 0.2) : this.simWidth - Math.random() * (this.simWidth * 0.2),
-           y: Math.random() * this.simHeight
-         });
+         const [seedX, seedY] = pickSeed(this.fx.seedRegions, this.simWidth, this.simHeight, () => [
+           isLeft ? Math.random() * (this.simWidth * 0.2) : this.simWidth - Math.random() * (this.simWidth * 0.2),
+           Math.random() * this.simHeight
+         ]);
+         spores.push({ x: seedX, y: seedY });
       }
 
       for (let i = 0; i < this.numAgents; i++) {
@@ -421,14 +488,17 @@ const Physarum = (() => {
       if (timestamp - this.lastTime < 180) return; // ~5.5 FPS throttle (was ~12fps)
       this.lastTime = timestamp;
       
-      this.time += 0.01;
+      this.time += 0.01 * (this.fx.reducedMotion ? 0.12 : this.fx.motionScale);
       // Read colors every 60 frames to save overhead
       if (Math.floor(this.time * 100) % 60 === 0) {
           this.readColors();
       }
       
       const gl = this.gl;
-      
+      if (window.__piloNutrients) {
+        window.__piloNutrients.paint(gl, this.texTrailA, this.simWidth, this.simHeight, 'trail');
+      }
+
       // 1. Update Agents
       gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboAgentsB);
       gl.viewport(0, 0, this.agentTexSize, this.agentTexSize);
@@ -501,6 +571,8 @@ const Physarum = (() => {
       gl.uniform3f(gl.getUniformLocation(this.progScreen, "uColorBase"), this.colorBase[0], this.colorBase[1], this.colorBase[2]);
       gl.uniform3f(gl.getUniformLocation(this.progScreen, "uColorTip"), this.colorTip[0], this.colorTip[1], this.colorTip[2]);
       gl.uniform3f(gl.getUniformLocation(this.progScreen, "uColorMid"), this.colorMid[0], this.colorMid[1], this.colorMid[2]);
+      gl.uniform1f(gl.getUniformLocation(this.progScreen, "uOpacity"), this.fx.opacity);
+      gl.uniform1f(gl.getUniformLocation(this.progScreen, "uFade"), Math.min(1, (performance.now() - this.fadeStart) / this.fx.fadeInMs));
       
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
@@ -521,10 +593,6 @@ const Physarum = (() => {
     const canvas = document.getElementById('pilo-physarum-bg');
     if (canvas) {
       window.piloPhysarum = new Simulation(canvas);
-      const bodyPreset = document.body.getAttribute('data-physarum-preset');
-      if (bodyPreset && window.piloPhysarum.presets[bodyPreset]) {
-        window.piloPhysarum.currentPreset = window.piloPhysarum.presets[bodyPreset];
-      }
     }
   };
   if (document.readyState === 'loading') {

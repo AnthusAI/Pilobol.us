@@ -59,6 +59,10 @@
     /* site-only tokens (not part of Markus's vocabulary) */
     --pilo-shadow: rgba(33, 29, 23, 0.12);
     --pilo-hairline: rgba(33, 29, 23, 0.5);
+    --pilo-page-shade: rgba(53, 43, 28, 0.12);
+    --pilo-page-edge: rgba(53, 43, 28, 0.11);
+    --pilo-page-bottom: rgba(53, 43, 28, 0.17);
+    --pilo-fx-opacity: 0.26;
 
     /* Single source of truth for the content column width. The page-wrapper
        rule below and the canvas mask both derive from this ONE value instead
@@ -78,7 +82,7 @@
 
   /* --- dark (system default): after dark, spores visible --- */
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
+    :root {
       --markus-ink: #dfded0;
       --markus-muted: #8b9184;
       --markus-paper: #14170f;
@@ -102,6 +106,10 @@
 
       --pilo-shadow: rgba(0, 0, 0, 0.4);
       --pilo-hairline: rgba(223, 222, 208, 0.4);
+      --pilo-page-shade: rgba(0, 0, 0, 0.42);
+      --pilo-page-edge: rgba(0, 0, 0, 0.32);
+      --pilo-page-bottom: rgba(0, 0, 0, 0.52);
+      --pilo-fx-opacity: 0.32;
       color-scheme: dark;
     }
   }
@@ -114,10 +122,24 @@
 
   .markus-body {
     background-image:
+      url("../assets/paper-grain.svg"),
+      linear-gradient(to right, var(--pilo-page-edge) 0%, transparent 8%, transparent 92%, var(--pilo-page-edge) 100%),
+      linear-gradient(to bottom, transparent 66%, var(--pilo-page-bottom) 100%),
+      radial-gradient(ellipse at 50% -10%, transparent 30%, var(--pilo-page-shade) 135%),
       radial-gradient(circle at 8% 4%, color-mix(in srgb, var(--markus-accent) 7%, transparent), transparent 40%),
       radial-gradient(circle at 92% 0%, color-mix(in srgb, var(--markus-quote) 6%, transparent), transparent 38%);
-    background-attachment: fixed;
+    background-size: 256px 256px, auto, auto, auto, auto, auto;
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    background-blend-mode: multiply, normal, normal, normal, normal, normal;
+    background-attachment: scroll;
     transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .markus-body {
+      /* The same grain gently lifts dark paper instead of muddying it. */
+      background-blend-mode: screen, normal, normal, normal, normal, normal;
+    }
   }
 
   .markus-document a {
@@ -167,30 +189,6 @@
     letter-spacing: 0.01em;
     color: var(--markus-ink);
     text-decoration: none;
-  }
-
-  /* Papyrus's shell renders the wordmark as
-     <p class="markus-site-wordmark"><a href="index.html">...</a></p>,
-     whereas the old bespoke markup put the class on the anchor itself. Reset
-     the inner link so the wordmark is not styled as body link text. */
-  .pilo-theme-toggle {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font: inherit;
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
-    padding: 0.3rem 0.7rem;
-    border-radius: 999px;
-    border: 1px solid var(--markus-line);
-    background: transparent;
-    color: var(--markus-muted, var(--markus-ink));
-    cursor: pointer;
-  }
-
-  .pilo-theme-toggle:hover {
-    border-color: var(--markus-accent);
-    color: var(--markus-ink);
   }
 
   .markus-site-masthead {
@@ -420,71 +418,109 @@
      --------------------------------------------------------------------- */
 
   .pilo-physarum-canvas {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    z-index: -1;
+    /* Above the paper, below every reading surface. The former -1 layer was
+       painted behind the body's opaque paper background, which made the
+       animation vanish most noticeably on narrow screens. */
+    z-index: 0;
     pointer-events: none;
-    /* Lower ceiling than before (was 0.65/0.8) -- the effect read as too
-       high-contrast against the page.
-       Blend mode is "normal", not "multiply": multiply mathematically
-       guarantees the result is never lighter than the page (result =
-       backdrop * source), which also means it's IMPOSSIBLE for a rare
-       highlight fleck to ever read as lighter than the paper, even a
-       little. Each shader's own color math is now responsible for staying
-       darker than the page almost always (a fungal stain, not a bleach
-       spot) with the one deliberate exception being a rare, tiny bright
-       glint at peak density (see dla-v1.js fsScreen). Dark mode keeps
-       "screen" below -- that's an intentional bioluminescent glow, not
-       something this note applies to. */
-    opacity: 0.3; mix-blend-mode: normal;
-    /* Hidden-middle half-width is derived from --pilo-content-width (defined
-       once, on :root, above) instead of a second hard-coded rem number here.
-       This is the actual fix for the gap that kept coming back: it was never
-       a matter of picking the right number, it was that the column width and
-       the mask width were two independent numbers that had to be manually
-       kept in sync, and every edit to one without the other reopened a gap.
-       Now there is exactly one number. The 45vw term is only a fallback so
-       the hidden band still shrinks gracefully on viewports too narrow to
-       fit the full column.
+    /* In daylight the compositor's multiply operation makes every drawn
+       pixel no lighter than the paper beneath it. At night the equivalent
+       screen operation makes fungal growth lift gently from dark paper.
+       The gradients are in the mask, rather than a hard content cutout: a
+       colony may reach a word only as a very faint edge, never as a sudden
+       high-contrast slab behind type. */
+    opacity: calc(var(--pilo-fx-opacity) * var(--pilo-fx-intensity, 0.68));
+    mix-blend-mode: multiply;
+    animation: pilo-fx-arrive 9s cubic-bezier(.22, .75, .28, 1) both;
 
-       Two mask layers, intersected: the first (unchanged) cuts the middle
-       text column horizontally; the second fades the top 5rem vertically so
-       the effect doesn't start flush against the very top of the viewport
-       with zero gap before the masthead -- previously this mask only cut
-       left/right, so the canvas filled the full page height right up to
-       y=0, touching the header with no breathing room.
+    /* Three additive exposure zones share one canvas: a top-right bloom in
+       the header's deliberately empty space, responsive left/right marginal
+       bands, and a broad low-opacity rise from the footer. The marginal band
+       derives from the actual column width but bottoms out at about one
+       mobile side-padding, so it remains perceptible at 320px wide. */
+    mask-image:
+      radial-gradient(ellipse var(--pilo-fx-header-width, 34rem) var(--pilo-fx-header-height, 18rem) at var(--pilo-fx-header-x, 88%) 9rem, black 0%, rgba(0, 0, 0, .80) 30%, rgba(0, 0, 0, .24) 58%, transparent 88%),
+      linear-gradient(to right, black 0, black calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) - var(--pilo-fx-gutter)), rgba(0, 0, 0, .46) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + .8rem), transparent calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + 3rem), transparent calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - 3rem), rgba(0, 0, 0, .46) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - .8rem), black calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) + var(--pilo-fx-gutter)), black 100%),
+      radial-gradient(ellipse var(--pilo-fx-footer-width, 70%) var(--pilo-fx-footer-height, 19rem) at 55% 103%, black 0%, rgba(0, 0, 0, .64) 39%, rgba(0, 0, 0, .18) 70%, transparent 100%);
+    -webkit-mask-image:
+      radial-gradient(ellipse var(--pilo-fx-header-width, 34rem) var(--pilo-fx-header-height, 18rem) at var(--pilo-fx-header-x, 88%) 9rem, black 0%, rgba(0, 0, 0, .80) 30%, rgba(0, 0, 0, .24) 58%, transparent 88%),
+      linear-gradient(to right, black 0, black calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) - var(--pilo-fx-gutter)), rgba(0, 0, 0, .46) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + .8rem), transparent calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + 3rem), transparent calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - 3rem), rgba(0, 0, 0, .46) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - .8rem), black calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) + var(--pilo-fx-gutter)), black 100%),
+      radial-gradient(ellipse var(--pilo-fx-footer-width, 70%) var(--pilo-fx-footer-height, 19rem) at 55% 103%, black 0%, rgba(0, 0, 0, .64) 39%, rgba(0, 0, 0, .18) 70%, transparent 100%);
+    mask-composite: add, add;
+    -webkit-mask-composite: source-over, source-over;
+  }
 
-       The horizontal cut adds --pilo-fx-gutter beyond the content edge
-       before fading in -- flush-with-zero-gap read as the animation
-       touching the text directly, so there is deliberately a little air
-       between them now, not just the exact content-edge coordinate. */
-    mask-image: linear-gradient(to right,
-      black 0%,
-      black calc(50% - min(calc(var(--pilo-content-width) / 2), 45vw) - var(--pilo-fx-gutter) - 0.25rem),
-      transparent calc(50% - min(calc(var(--pilo-content-width) / 2), 45vw) - var(--pilo-fx-gutter)),
-      transparent calc(50% + min(calc(var(--pilo-content-width) / 2), 45vw) + var(--pilo-fx-gutter)),
-      black calc(50% + min(calc(var(--pilo-content-width) / 2), 45vw) + var(--pilo-fx-gutter) + 0.25rem),
-      black 100%),
-      linear-gradient(to bottom, transparent 0, black 5rem);
-    -webkit-mask-image: linear-gradient(to right,
-      black 0%,
-      black calc(50% - min(calc(var(--pilo-content-width) / 2), 45vw) - var(--pilo-fx-gutter) - 0.25rem),
-      transparent calc(50% - min(calc(var(--pilo-content-width) / 2), 45vw) - var(--pilo-fx-gutter)),
-      transparent calc(50% + min(calc(var(--pilo-content-width) / 2), 45vw) + var(--pilo-fx-gutter)),
-      black calc(50% + min(calc(var(--pilo-content-width) / 2), 45vw) + var(--pilo-fx-gutter) + 0.25rem),
-      black 100%),
-      linear-gradient(to bottom, transparent 0, black 5rem);
-    mask-composite: intersect;
-    -webkit-mask-composite: source-in;
+  /* Reaction-diffusion is made of fine boundaries rather than broad opaque
+     bodies, so it needs a little more compositing headroom than the other
+     renderers to remain legible through the shared low-contrast mask. */
+  .markus-body[data-pilo-fx-effect^="reaction-diffusion"] {
+    --pilo-fx-opacity: 0.36;
+  }
+
+  /* The manager assigns these preset names on <body>; forcing one with
+     ?fxPreset=footer-rise is useful for art direction and gallery pages. */
+  .markus-body[data-pilo-fx-layout="header-bloom"] .pilo-physarum-canvas {
+    --pilo-fx-header-width: 40rem;
+    --pilo-fx-header-height: 21rem;
+    --pilo-fx-header-x: 91%;
+    --pilo-fx-footer-height: 15rem;
+  }
+
+  .markus-body[data-pilo-fx-layout="margin-creep"] .pilo-physarum-canvas {
+    --pilo-fx-header-width: 27rem;
+    --pilo-fx-header-height: 15rem;
+    --pilo-fx-header-x: 87%;
+    --pilo-fx-footer-height: 17rem;
+  }
+
+  .markus-body[data-pilo-fx-layout="footer-rise"] .pilo-physarum-canvas {
+    --pilo-fx-header-width: 26rem;
+    --pilo-fx-header-height: 14rem;
+    --pilo-fx-footer-width: 86%;
+    --pilo-fx-footer-height: 26rem;
+  }
+
+  .markus-body[data-pilo-fx-layout="quiet-spores"] .pilo-physarum-canvas {
+    --pilo-fx-header-width: 24rem;
+    --pilo-fx-header-height: 13rem;
+    --pilo-fx-footer-width: 54%;
+    --pilo-fx-footer-height: 14rem;
+  }
+
+  @keyframes pilo-fx-arrive {
+    from { opacity: 0; filter: saturate(.78) blur(.45px); }
+    58% { opacity: calc(var(--pilo-fx-opacity) * var(--pilo-fx-intensity, 0.68) * .62); }
+    to { opacity: calc(var(--pilo-fx-opacity) * var(--pilo-fx-intensity, 0.68)); filter: saturate(1) blur(0); }
   }
 
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .pilo-physarum-canvas {
-      opacity: 0.4;
+    .pilo-physarum-canvas {
       mix-blend-mode: screen;
+    }
+  }
+
+  /* Static art direction for reduced-motion, data-saver, or failed WebGL.
+     It uses the same placement mask and stain-safe blend mode as the live
+     renderers, so accessibility degradation still looks intentional. */
+  .pilo-physarum-canvas[data-pilo-fx-mode="static"] {
+    animation: none;
+    filter: none;
+    opacity: calc(var(--pilo-fx-opacity) * .42);
+    background-image:
+      radial-gradient(ellipse 18rem 11rem at 91% 14%, color-mix(in srgb, var(--markus-accent) 28%, transparent), transparent 72%),
+      radial-gradient(ellipse 7rem 20rem at 2% 57%, color-mix(in srgb, var(--markus-quote) 22%, transparent), transparent 76%),
+      radial-gradient(ellipse 24rem 9rem at 58% 104%, color-mix(in srgb, var(--markus-accent-2) 20%, transparent), transparent 78%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pilo-physarum-canvas {
+      animation: none;
+      opacity: calc(var(--pilo-fx-opacity) * .42);
     }
   }
 
@@ -556,39 +592,3 @@
   body {
     isolation: isolate;
   }
-
-  /* --- dark (explicit choice via the masthead toggle) ---
-     v10 shipped only @media (prefers-color-scheme: dark), so the
-     toggle set data-theme with no CSS listening. These mirror the
-     media-query blocks so an explicit choice works in both
-     directions, matching the deploy-branch theme. --- */
-  :root[data-theme="dark"] {
-      --markus-ink: #dfded0;
-      --markus-muted: #8b9184;
-      --markus-paper: #14170f;
-      --markus-card: #1c2117;
-      --markus-line: #333b2a;
-
-      --markus-accent: #b7d18a;     /* foxfire glow */
-      --markus-accent-2: #d0895a;
-      --markus-quote: #b7a3c4;      /* spore-print violet, lit from behind */
-      --markus-note: #9fd0c9;
-      --markus-warning: #d0a24f;
-      --markus-tip: #9fce7a;
-      --markus-caution: #d17e6e;
-
-      --markus-pre-bg: #0d0f0a;
-      --markus-pre-ink: #dfded0;
-      --markus-code-bg: rgba(223, 222, 208, 0.07);
-      --markus-aside-bg: rgba(183, 163, 196, 0.08);
-      --markus-tab-nav-bg: rgba(13, 15, 10, 0.5);
-      --markus-th-bg: rgba(183, 209, 138, 0.08);
-
-      --pilo-shadow: rgba(0, 0, 0, 0.4);
-      --pilo-hairline: rgba(223, 222, 208, 0.4);
-      color-scheme: dark;
-    }
-:root[data-theme="dark"] .pilo-physarum-canvas {
-      opacity: 0.4;
-      mix-blend-mode: screen;
-    }

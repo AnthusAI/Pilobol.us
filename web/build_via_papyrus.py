@@ -69,7 +69,6 @@ PILOBOL_CHROME = SiteChrome(
     # Site chrome only. These are never derived from article Markdown; Markus
     # runs with raw HTML disabled precisely so authors cannot inject scripts.
     scripts=(
-        "assets/theme-toggle.js",
         "assets/background-manager.js",
         "assets/organic-image.js",
         "assets/cinematic-gallery.js",

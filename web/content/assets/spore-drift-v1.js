@@ -131,6 +131,8 @@ const SporeDrift = (() => {
     uniform vec3 uColorBase;
     uniform vec3 uColorTip;
     uniform vec3 uColorMid;
+    uniform float uOpacity;
+    uniform float uFade;
 
     void main() {
       float val = texture(uTrail, vUv).r;
@@ -143,7 +145,7 @@ const SporeDrift = (() => {
       float glint = glintGate * smoothstep(0.85, 1.0, val) * 0.12;
       col = mix(col, vec3(1.0), glint);
 
-      float alpha = val * 0.6;
+      float alpha = val * 0.6 * uOpacity * uFade;
       outColor = vec4(col * alpha, alpha);
     }
   `;
@@ -196,6 +198,39 @@ const SporeDrift = (() => {
     return [0, 0, 0];
   }
 
+  function readFxConfig(name) {
+    const root = window.__piloFxConfig || {};
+    const scoped = (root.effects && root.effects[name]) || root[name] || {};
+    const source = typeof scoped === 'object' ? scoped : {};
+    const finite = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
+    return {
+      opacity: Math.max(0, Math.min(1, finite(source.opacity ?? source.intensity ?? root.opacity ?? root.intensity, 0.72))),
+      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 4200)),
+      motionScale: Math.max(0, Math.min(1, finite(source.motionScale ?? root.motionScale, 1))),
+      reducedMotion: Boolean(source.reducedMotion ?? root.reducedMotion ?? (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)),
+      seedRegions: Array.isArray(source.seedRegions ?? root.seedRegions) ? (source.seedRegions ?? root.seedRegions) : []
+    };
+  }
+
+  function pickSeed(regions, width, height, fallback) {
+    if (!regions.length) return fallback();
+    const total = regions.reduce((sum, region) => sum + Math.max(0, Number(region.weight) || 0), 0);
+    let roll = Math.random() * (total || regions.length);
+    let selected = regions[0];
+    for (const region of regions) {
+      roll -= total ? Math.max(0, Number(region.weight) || 0) : 1;
+      if (roll <= 0) { selected = region; break; }
+    }
+    const radiusX = Math.max(0, Number(selected.radiusX ?? selected.radius) || 0.08);
+    const radiusY = Math.max(0, Number(selected.radiusY ?? selected.radius) || 0.08);
+    const x = Number.isFinite(Number(selected.x)) ? Number(selected.x) : Math.random();
+    const y = Number.isFinite(Number(selected.y)) ? Number(selected.y) : Math.random();
+    return [
+      Math.max(0, Math.min(width - 1, (x + (Math.random() - 0.5) * radiusX) * width)),
+      Math.max(0, Math.min(height - 1, (1 - y + (Math.random() - 0.5) * radiusY) * height))
+    ];
+  }
+
   class Simulation {
     constructor(canvas) {
       this.canvas = canvas;
@@ -207,7 +242,9 @@ const SporeDrift = (() => {
         return;
       }
 
-      this.moveSpeed = 0.35;
+      this.fx = readFxConfig('spore-drift');
+
+      this.moveSpeed = 0.35 * (this.fx.motionScale || 1);
       // Far fewer than physarum's 50000: unlike physarum, agents here have
       // no sensor-based steering away from dense trail, so a curl-noise
       // flow field's recirculation zones let deposits pile up at hotspots
@@ -220,10 +257,14 @@ const SporeDrift = (() => {
       this.colorTip = [1, 1, 1];
       this.colorMid = [0.6, 0.6, 0.6];
       this.readColors();
+      this.fadeStart = performance.now();
 
       this.init();
       this.resize();
+      this.canvas.dataset.piloFxReady = 'true';
+      this.canvas.dataset.piloFxMode = 'live';
       window.addEventListener('resize', () => this.resize());
+      document.addEventListener('pilo:canvasresize', () => this.resize());
 
       this.time = 0;
       this.running = true;
@@ -266,11 +307,14 @@ const SporeDrift = (() => {
     }
 
     resize() {
-      const dpr = Math.min(window.devicePixelRatio, 2.0);
+      const pageHeight = Math.max(window.innerHeight, this.canvas.clientHeight || 0);
+      const maxCanvas = this.gl.getParameter(this.gl.MAX_RENDERBUFFER_SIZE) || 8192;
+      const dprLimit = pageHeight > window.innerHeight * 2 ? 1.25 : 2.0;
+      const dpr = Math.min(window.devicePixelRatio, dprLimit, maxCanvas / window.innerWidth, maxCanvas / pageHeight);
       this.simWidth = Math.floor(window.innerWidth / 2);
-      this.simHeight = Math.floor(window.innerHeight / 2);
-      this.canvas.width = window.innerWidth * dpr;
-      this.canvas.height = window.innerHeight * dpr;
+      this.simHeight = Math.floor(pageHeight / 2);
+      this.canvas.width = Math.floor(window.innerWidth * dpr);
+      this.canvas.height = Math.floor(pageHeight * dpr);
       this.resetTextures();
     }
 
@@ -278,8 +322,9 @@ const SporeDrift = (() => {
       const gl = this.gl;
       const agentsData = new Float32Array(this.numAgents * 4);
       for (let i = 0; i < this.numAgents; i++) {
-        agentsData[i * 4 + 0] = Math.random() * this.simWidth;
-        agentsData[i * 4 + 1] = Math.random() * this.simHeight;
+        const [seedX, seedY] = pickSeed(this.fx.seedRegions, this.simWidth, this.simHeight, () => [Math.random() * this.simWidth, Math.random() * this.simHeight]);
+        agentsData[i * 4 + 0] = seedX;
+        agentsData[i * 4 + 1] = seedY;
         agentsData[i * 4 + 2] = 0.0;
         agentsData[i * 4 + 3] = 1.0;
       }
@@ -315,12 +360,15 @@ const SporeDrift = (() => {
       if (timestamp - this.lastTime < 180) return;
       this.lastTime = timestamp;
 
-      this.time += 0.01;
+      this.time += 0.01 * (this.fx.reducedMotion ? 0.12 : this.fx.motionScale);
       if (Math.floor(this.time * 100) % 60 === 0) {
         this.readColors();
       }
 
       const gl = this.gl;
+      if (window.__piloNutrients) {
+        window.__piloNutrients.paint(gl, this.texTrailA, this.simWidth, this.simHeight, 'trail');
+      }
 
       gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboAgentsB);
       gl.viewport(0, 0, this.agentTexSize, this.agentTexSize);
@@ -372,6 +420,8 @@ const SporeDrift = (() => {
       gl.uniform3f(gl.getUniformLocation(this.progScreen, 'uColorBase'), this.colorBase[0], this.colorBase[1], this.colorBase[2]);
       gl.uniform3f(gl.getUniformLocation(this.progScreen, 'uColorTip'), this.colorTip[0], this.colorTip[1], this.colorTip[2]);
       gl.uniform3f(gl.getUniformLocation(this.progScreen, 'uColorMid'), this.colorMid[0], this.colorMid[1], this.colorMid[2]);
+      gl.uniform1f(gl.getUniformLocation(this.progScreen, 'uOpacity'), this.fx.opacity);
+      gl.uniform1f(gl.getUniformLocation(this.progScreen, 'uFade'), Math.min(1, (performance.now() - this.fadeStart) / this.fx.fadeInMs));
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.disable(gl.BLEND);

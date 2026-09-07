@@ -1,9 +1,7 @@
 ---
 title: Stories
-description: Reader pieces from the Pilobolus desk.
+description: Glimpses of our moldy future.
 ---
-
-Weird stories with receipts. Historical digs and live specimens.
 
 ### [Believe the rainbow](believe-the-rainbow.html)
 

@@ -1,8 +1,8 @@
 ---
 title: Specimens
 description: >-
-  A fungus among us — weird and surreal outcomes of a society slowly taken over
-  by AI and machine learning. Specimens where the copy feels more real than real.
+  There's a fungus among us, feeding on our excrement and gradually infecting
+  society.
 ---
 
 :::card-grid{columns="1"}
@@ -15,8 +15,8 @@ You email for a code. A man with a beard and a collar loads. He says he can hear
 :::
 :::
 
-:::pull-quote{tone="quiet" attribution="Standing brief"}
-Weird specimens. Checkable scenes. The copy that wins.
+:::pull-quote{tone="quiet"}
+Glimpses of our moldy future.
 :::
 
 :::card-grid{columns="2"}

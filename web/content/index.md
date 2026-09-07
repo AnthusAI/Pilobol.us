@@ -2,8 +2,6 @@
 title: ""
 ---
 
-Glimpses of our moldy future.
-
 :::card-grid{columns="6"}
 :::card{span="full"}
 ### [They liked the ranked room](articles/they-liked-the-ranked-room.html)

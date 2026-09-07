@@ -31,6 +31,6 @@ A number on a screen is worth something only while enough people agree that it i
 
 You email for a code. A man with a beard and a collar loads. He says he can hear your confession.
 
-*Sunday, September 6, 2026*
+*Saturday, September 5, 2026*
 :::
 :::

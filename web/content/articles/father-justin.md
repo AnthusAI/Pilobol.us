@@ -1,6 +1,6 @@
 ---
 title: Father Justin
-date: 'Sunday, September 6, 2026'
+date: 'Saturday, September 5, 2026'
 description: A collar, an Assisi balcony, three Our Fathers — then the priest is only
   Justin.
 standfirst: You email for a code. A man with a beard and a collar loads. He says he

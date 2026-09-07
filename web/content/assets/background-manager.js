@@ -62,31 +62,43 @@
   const effects = [
     {
       script: 'physarum-v17.js',
+      configKey: 'physarum',
+      variants: ['creeping_veins', 'spore_burst', 'mycelium_threads', 'crystallizing'],
       creditTitle: 'Effect: Physarum Polycephalum',
       creditUrl: 'effects/physarum.html'
     },
     {
       script: 'reaction-diffusion-v1.js',
+      configKey: 'reaction-diffusion',
+      variants: ['coral', 'mitosis', 'maze'],
       creditTitle: 'Effect: Reaction-Diffusion',
       creditUrl: 'effects/reaction-diffusion.html'
     },
     {
       script: 'cellular-automata-v1.js',
+      configKey: 'cellular-automata',
+      variants: ['colonies', 'crystal', 'embers'],
       creditTitle: 'Effect: Continuous Cellular Automata',
       creditUrl: 'effects/cellular-automata.html'
     },
     {
       script: 'dla-v1.js',
+      configKey: 'dla',
+      variants: ['frost', 'coral', 'rootlets'],
       creditTitle: 'Effect: Diffusion-Limited Aggregation',
       creditUrl: 'effects/dla.html'
     },
     {
       script: 'spore-drift-v1.js',
+      configKey: 'spore-drift',
+      variants: ['still-air', 'crosswind', 'updraft'],
       creditTitle: 'Effect: Spore Drift',
       creditUrl: 'effects/spore-drift.html'
     },
     {
       script: 'lichen-v1.js',
+      configKey: 'lichen',
+      variants: ['dusting', 'islands', 'old-wall'],
       creditTitle: 'Effect: Crustose Lichen',
       creditUrl: 'effects/lichen.html'
     }
@@ -97,6 +109,7 @@
   // debug -- two of the three were silently failing and it read as flaky.
   let chosen = effects[Math.floor(Math.random() * effects.length)];
   let chosenLayout = Object.keys(layouts)[Math.floor(Math.random() * Object.keys(layouts).length)];
+  let chosenVariant = '';
   try {
     const params = new URLSearchParams(window.location.search);
     const want = params.get('fx');
@@ -107,6 +120,21 @@
     // Both spellings are supported so a preview URL is easy to type.
     const wantedLayout = params.get('fxPreset') || params.get('fx-preset');
     if (wantedLayout && layouts[wantedLayout]) chosenLayout = wantedLayout;
+    const wantedVariant = params.get('fxVariant');
+    if (wantedVariant) {
+      if (chosen.variants.includes(wantedVariant)) {
+        chosenVariant = wantedVariant;
+      } else if (!want) {
+        // A variant-only URL is still reproducible: infer the effect that
+        // owns that variant. With no variant at all, effect selection remains
+        // fully random as before.
+        const variantOwner = effects.find((effect) => effect.variants.includes(wantedVariant));
+        if (variantOwner) {
+          chosen = variantOwner;
+          chosenVariant = wantedVariant;
+        }
+      }
+    }
   } catch (e) {
     /* no URLSearchParams: keep the random pick */
   }
@@ -370,6 +398,12 @@
       effect: chosen.script.replace(/\.js$/, ''),
       preset: chosenLayout,
       presetLabel: layout.label,
+      // Placement preset remains at the root. Algorithm variants are scoped
+      // by config key so a layout named "coral" can never accidentally select
+      // a Reaction-Diffusion simulation preset.
+      effects: chosenVariant ? { [chosen.configKey]: { preset: chosenVariant } } : {},
+      variant: chosenVariant || null,
+      variants: chosen.variants.slice(),
       intensity: layout.intensity,
       motionScale: layout.motionScale,
       seedRegions: layout.seedRegions.map((region) => ({

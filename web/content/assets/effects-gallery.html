@@ -41,9 +41,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 0.5rem;
     padding: 0.5rem 0.75rem;
   }
   .cell-head span { font-weight: 600; }
+  .cell-controls { display: flex; align-items: center; gap: 0.35rem; }
+  .cell-head select,
   .cell-head button {
     font: inherit;
     background: #1c2117;
@@ -53,6 +56,7 @@
     padding: 0.25rem 0.6rem;
     cursor: pointer;
   }
+  .cell-head select { max-width: 10rem; }
   .cell-head button:hover { background: #333b2a; }
   .frame-wrap {
     aspect-ratio: 4 / 3;
@@ -72,36 +76,51 @@
 <p class="note">Every background animation in rotation on Pilobol.us, shown here unmasked and at full size for a clear look. On an article page, only one effect is chosen at random and composited subtly behind the margins. Reload a panel to see a new random preset/seed.</p>
 <div class="grid">
   <div class="cell" id="physarum">
-    <div class="cell-head"><span>Physarum Polycephalum</span><button data-target="f-physarum">Reload</button></div>
+    <div class="cell-head"><span>Physarum Polycephalum</span><div class="cell-controls"><select data-variants="creeping_veins,spore_burst,mycelium_threads,crystallizing" aria-label="Physarum variant"></select><button data-target="f-physarum">Reload</button></div></div>
     <iframe class="frame-wrap" id="f-physarum" src="gallery-physarum.html"></iframe>
   </div>
   <div class="cell" id="reaction-diffusion">
-    <div class="cell-head"><span>Reaction-Diffusion</span><button data-target="f-rd">Reload</button></div>
+    <div class="cell-head"><span>Reaction-Diffusion</span><div class="cell-controls"><select data-variants="coral,mitosis,maze" aria-label="Reaction-Diffusion variant"></select><button data-target="f-rd">Reload</button></div></div>
     <iframe class="frame-wrap" id="f-rd" src="gallery-reaction-diffusion.html"></iframe>
   </div>
   <div class="cell" id="cellular-automata">
-    <div class="cell-head"><span>Continuous Cellular Automata</span><button data-target="f-ca">Reload</button></div>
+    <div class="cell-head"><span>Continuous Cellular Automata</span><div class="cell-controls"><select data-variants="colonies,crystal,embers" aria-label="Cellular automata variant"></select><button data-target="f-ca">Reload</button></div></div>
     <iframe class="frame-wrap" id="f-ca" src="gallery-cellular-automata.html"></iframe>
   </div>
   <div class="cell" id="dla">
-    <div class="cell-head"><span>Diffusion-Limited Aggregation</span><button data-target="f-dla">Reload</button></div>
+    <div class="cell-head"><span>Diffusion-Limited Aggregation</span><div class="cell-controls"><select data-variants="frost,coral,rootlets" aria-label="DLA variant"></select><button data-target="f-dla">Reload</button></div></div>
     <iframe class="frame-wrap" id="f-dla" src="gallery-dla.html"></iframe>
   </div>
   <div class="cell" id="spore-drift">
-    <div class="cell-head"><span>Spore Drift</span><button data-target="f-spore">Reload</button></div>
+    <div class="cell-head"><span>Spore Drift</span><div class="cell-controls"><select data-variants="still-air,crosswind,updraft" aria-label="Spore drift variant"></select><button data-target="f-spore">Reload</button></div></div>
     <iframe class="frame-wrap" id="f-spore" src="gallery-spore-drift.html"></iframe>
   </div>
   <div class="cell" id="lichen">
-    <div class="cell-head"><span>Crustose Lichen</span><button data-target="f-lichen">Reload</button></div>
+    <div class="cell-head"><span>Crustose Lichen</span><div class="cell-controls"><select data-variants="dusting,islands,old-wall" aria-label="Lichen variant"></select><button data-target="f-lichen">Reload</button></div></div>
     <iframe class="frame-wrap" id="f-lichen" src="gallery-lichen.html"></iframe>
   </div>
 </div>
 <script>
-  document.querySelectorAll('button[data-target]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const frame = document.getElementById(btn.getAttribute('data-target'));
-      frame.src = frame.src;
-    });
+  const titleCase = (value) => value.replace(/[-_]/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
+  const query = new URLSearchParams(window.location.search);
+  const requestedEffect = query.get('fx');
+  const requestedVariant = query.get('fxVariant');
+  document.querySelectorAll('.cell').forEach((cell) => {
+    const select = cell.querySelector('select[data-variants]');
+    const frame = cell.querySelector('iframe');
+    const variants = select.getAttribute('data-variants').split(',').filter(Boolean);
+    select.add(new Option('Random variant', ''));
+    variants.forEach((variant) => select.add(new Option(titleCase(variant), variant)));
+    if (requestedEffect && (cell.id === requestedEffect || requestedEffect.startsWith(cell.id)) && variants.includes(requestedVariant)) select.value = requestedVariant;
+
+    const load = (variant) => {
+      const url = new URL(frame.getAttribute('src'), window.location.href);
+      if (variant && variants.includes(variant)) url.searchParams.set('fxVariant', variant);
+      else url.searchParams.delete('fxVariant');
+      frame.src = url.href;
+    };
+    select.addEventListener('change', () => load(select.value));
+    cell.querySelector('button[data-target]').addEventListener('click', () => load(select.value));
   });
 </script>
 </body>

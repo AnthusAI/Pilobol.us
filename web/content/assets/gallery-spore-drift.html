@@ -12,6 +12,19 @@
 </head>
 <body>
 <canvas id="pilo-physarum-bg"></canvas>
+<script>
+  (() => {
+    const variants = ['still-air', 'crosswind', 'updraft'];
+    const requested = new URLSearchParams(window.location.search).get('fxVariant');
+    const variant = variants.includes(requested) ? requested : null;
+    window.__piloFxConfig = Object.freeze({
+      effect: 'spore-drift-v1', preset: 'gallery', presetLabel: 'Gallery',
+      effects: variant ? { 'spore-drift': { preset: variant } } : {},
+      intensity: 0.68, motionScale: 0.62, seedRegions: [],
+      theme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    });
+  })();
+</script>
 <script src="spore-drift-v1.js"></script>
 </body>
 </html>

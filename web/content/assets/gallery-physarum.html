@@ -12,6 +12,19 @@
 </head>
 <body>
 <canvas id="pilo-physarum-bg"></canvas>
+<script>
+  (() => {
+    const variants = ['creeping_veins', 'spore_burst', 'mycelium_threads', 'crystallizing'];
+    const requested = new URLSearchParams(window.location.search).get('fxVariant');
+    const variant = variants.includes(requested) ? requested : null;
+    window.__piloFxConfig = Object.freeze({
+      effect: 'physarum-v17', preset: 'gallery', presetLabel: 'Gallery',
+      effects: variant ? { physarum: { preset: variant } } : {},
+      intensity: 0.68, motionScale: 0.62, seedRegions: [],
+      theme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    });
+  })();
+</script>
 <script src="physarum-v17.js"></script>
 </body>
 </html>

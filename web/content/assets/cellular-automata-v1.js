@@ -16,6 +16,13 @@ const CellularAutomata = (() => {
     uniform sampler2D uState;
     uniform vec2 uResolution;
     uniform float uTime;
+    uniform float uBirthMin;
+    uniform float uBirthMax;
+    uniform float uDecayLow;
+    uniform float uDecayHigh;
+    uniform float uJitter;
+    uniform float uGrowRate;
+    uniform float uDecayRate;
 
     float hash(vec2 p) { return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x)))); }
 
@@ -41,7 +48,7 @@ const CellularAutomata = (() => {
       // growth and decay windows) -- verified in a numpy model: identical grids
       // frame to frame once settled. The jitter keeps the field slowly wandering
       // instead of freezing solid.
-      sum += (hash(vUv * uResolution + uTime) - 0.5) * 2.4;
+      sum += (hash(vUv * uResolution + uTime) - 0.5) * uJitter;
 
       // SmoothLife-ish rules. The original thresholds (birth 10-14, death <8 or
       // >18 of 24 neighbors) required roughly half the neighborhood alive to grow
@@ -52,10 +59,10 @@ const CellularAutomata = (() => {
       // thresholds were re-tuned numerically so a mid-density random seed
       // settles into a persistent, slowly-drifting pattern instead of dying out.
       float nextVal = val;
-      if (sum >= 6.0 && sum <= 10.0) {
-        nextVal = clamp(val + 0.04, 0.0, 1.0);
-      } else if (sum < 3.0 || sum > 15.0) {
-        nextVal = clamp(val - 0.02, 0.0, 1.0);
+      if (sum >= uBirthMin && sum <= uBirthMax) {
+        nextVal = clamp(val + uGrowRate, 0.0, 1.0);
+      } else if (sum < uDecayLow || sum > uDecayHigh) {
+        nextVal = clamp(val - uDecayRate, 0.0, 1.0);
       }
 
       outColor = vec4(nextVal, 0.0, 0.0, 1.0);
@@ -127,6 +134,7 @@ const CellularAutomata = (() => {
     const source = typeof scoped === 'object' ? scoped : {};
     const finite = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
     return {
+      presetName: typeof source.preset === 'string' ? source.preset : '',
       opacity: Math.max(0, Math.min(1, finite(source.opacity ?? source.intensity ?? root.opacity ?? root.intensity, 0.72))),
       fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 4200)),
       motionScale: Math.max(0, Math.min(1, finite(source.motionScale ?? root.motionScale, 1))),
@@ -154,6 +162,20 @@ const CellularAutomata = (() => {
       }
 
       this.fx = readFxConfig('cellular-automata');
+      // Three deliberately restrained rule families. They change the rule,
+      // not the palette, so all variants inherit the shared stain-safe
+      // light/dark compositor and gradual opacity ramp.
+      this.presets = {
+        colonies: { seedDensity: 0.31, birthMin: 5.6, birthMax: 10.2, decayLow: 2.8, decayHigh: 15.4, jitter: 1.5, growRate: 0.030, decayRate: 0.014 },
+        crystal: { seedDensity: 0.24, birthMin: 7.2, birthMax: 9.4, decayLow: 2.2, decayHigh: 13.4, jitter: 0.65, growRate: 0.025, decayRate: 0.020 },
+        embers: { seedDensity: 0.38, birthMin: 5.1, birthMax: 11.2, decayLow: 3.4, decayHigh: 16.0, jitter: 2.7, growRate: 0.045, decayRate: 0.026 }
+      };
+      const presetNames = Object.keys(this.presets);
+      const chosenName = this.presets[this.fx.presetName]
+        ? this.fx.presetName
+        : presetNames[Math.floor(Math.random() * presetNames.length)];
+      this.currentPreset = this.presets[chosenName];
+      this.canvas.dataset.piloFxVariant = chosenName;
       
       // See physarum-v17.js constructor for why readColors() is called here
       // immediately rather than left to the periodic call ~60 frames in --
@@ -241,7 +263,7 @@ const CellularAutomata = (() => {
       // to the mask's edge.
       const data = new Float32Array(this.simWidth * this.simHeight * 4);
       for (let i = 0; i < data.length; i += 4) {
-        data[i] = Math.random() < 0.35 ? 1.0 : 0.0;
+        data[i] = Math.random() < this.currentPreset.seedDensity ? 1.0 : 0.0;
         data[i+3] = 1.0;
       }
       // Seed normalized manager regions so the effect remains discoverable
@@ -320,6 +342,13 @@ const CellularAutomata = (() => {
       gl.useProgram(this.progProcess);
       gl.uniform2f(gl.getUniformLocation(this.progProcess, "uResolution"), this.simWidth, this.simHeight);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, "uTime"), this.time);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, "uBirthMin"), this.currentPreset.birthMin);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, "uBirthMax"), this.currentPreset.birthMax);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, "uDecayLow"), this.currentPreset.decayLow);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, "uDecayHigh"), this.currentPreset.decayHigh);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, "uJitter"), this.currentPreset.jitter);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, "uGrowRate"), this.currentPreset.growRate);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, "uDecayRate"), this.currentPreset.decayRate);
 
       gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
       gl.viewport(0, 0, this.simWidth, this.simHeight);

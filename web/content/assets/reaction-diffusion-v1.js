@@ -163,26 +163,20 @@ const ReactionDiffusion = (() => {
 
       this.fx = readFxConfig('reaction-diffusion', this.presets);
 
-      const randomRange = (min, max) => min + Math.random() * (max - min);
+      // An explicitly named profile is exact; only the unconfigured gallery
+      // chooses a point inside the deliberately narrow family range.
+      const chooseRange = (min, max) => this.fx.preset ? (min + max) / 2 : min + Math.random() * (max - min);
       const keys = Object.keys(this.presets);
       const chosen = this.fx.preset ? this.fx.presetName : keys[Math.floor(Math.random() * keys.length)];
       const raw = this.presets[chosen];
       
       this.currentPreset = {
-        f: randomRange(raw.f[0], raw.f[1]),
-        k: randomRange(raw.k[0], raw.k[1]),
+        f: chooseRange(raw.f[0], raw.f[1]),
+        k: chooseRange(raw.k[0], raw.k[1]),
         dA: 1.0,
         dB: 0.5
       };
       this.warmupRemaining = 600;
-      if (this.fx.preset) {
-        this.currentPreset = {
-          f: randomRange(raw.f[0], raw.f[1]),
-          k: randomRange(raw.k[0], raw.k[1]),
-          dA: 1.0,
-          dB: 0.5
-        };
-      }
 
       // See physarum-v17.js constructor for why readColors() is called here
       // immediately rather than left to the periodic call ~60 frames in --

@@ -22,6 +22,7 @@ const SporeDrift = (() => {
     uniform vec2 uResolution;
     uniform float uTime;
     uniform float uMoveSpeed;
+    uniform vec2 uDrift;
 
     float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }
 
@@ -55,7 +56,7 @@ const SporeDrift = (() => {
       vec2 pos = agent.xy;
 
       vec2 flow = curl(pos * 0.006 + vec2(uTime * 0.03, -uTime * 0.02));
-      pos += flow * uMoveSpeed;
+      pos += (flow + uDrift) * uMoveSpeed;
 
       // Wrap rather than reflect: a drifting spore field should feel
       // boundless, not bounce off the edges of the viewport.
@@ -93,6 +94,8 @@ const SporeDrift = (() => {
     out vec4 outColor;
     uniform sampler2D uTrail;
     uniform vec2 uResolution;
+    uniform float uDiffusion;
+    uniform float uDecay;
 
     void main() {
       vec2 texel = 1.0 / uResolution;
@@ -113,12 +116,12 @@ const SporeDrift = (() => {
       // the whole canvas saturated to fully opaque within ~16 real seconds.
       // A mostly-rigid mix (95% current, 5% blurred) plus decay keeps
       // deposits as short, localized comet-tails instead.
-      float finalBlur = mix(current, blurred, 0.02);
+      float finalBlur = mix(current, blurred, uDiffusion);
       // Clamped, not just decayed: deposits are unbounded additive (however
       // many agents land on one cell in a frame), so without a hard ceiling
       // a recirculation hotspot in the flow field can accumulate faster
       // than any reasonable decay rate removes it.
-      float decayed = clamp(finalBlur - 0.035, 0.0, 1.0);
+      float decayed = clamp(finalBlur - uDecay, 0.0, 1.0);
       outColor = vec4(decayed, decayed, decayed, 1.0);
     }
   `;
@@ -204,6 +207,7 @@ const SporeDrift = (() => {
     const source = typeof scoped === 'object' ? scoped : {};
     const finite = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
     return {
+      presetName: typeof source.preset === 'string' ? source.preset : '',
       opacity: Math.max(0, Math.min(1, finite(source.opacity ?? source.intensity ?? root.opacity ?? root.intensity, 0.72))),
       fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 4200)),
       motionScale: Math.max(0, Math.min(1, finite(source.motionScale ?? root.motionScale, 1))),
@@ -243,14 +247,28 @@ const SporeDrift = (() => {
       }
 
       this.fx = readFxConfig('spore-drift');
+      // Air profiles keep the same slow, stain-like density ceiling but vary
+      // direction, persistence, and population: suspended dust, a horizontal
+      // draft, or a quiet warm updraft.
+      this.presets = {
+        'still-air': { agentCount: 3200, moveSpeed: 0.16, drift: [0.00, 0.04], diffusion: 0.030, decay: 0.022 },
+        crosswind: { agentCount: 4800, moveSpeed: 0.34, drift: [0.82, 0.03], diffusion: 0.012, decay: 0.037 },
+        updraft: { agentCount: 3900, moveSpeed: 0.27, drift: [0.05, 0.92], diffusion: 0.024, decay: 0.029 }
+      };
+      const presetNames = Object.keys(this.presets);
+      const chosenName = this.presets[this.fx.presetName]
+        ? this.fx.presetName
+        : presetNames[Math.floor(Math.random() * presetNames.length)];
+      this.currentPreset = this.presets[chosenName];
+      this.canvas.dataset.piloFxVariant = chosenName;
 
-      this.moveSpeed = 0.35 * (this.fx.motionScale || 1);
+      this.moveSpeed = this.currentPreset.moveSpeed * this.fx.motionScale;
       // Far fewer than physarum's 50000: unlike physarum, agents here have
       // no sensor-based steering away from dense trail, so a curl-noise
       // flow field's recirculation zones let deposits pile up at hotspots
       // with nothing to spread them back out. Fewer agents plus the tighter
       // decay/clamp below keep that bounded instead of saturating.
-      this.agentTexSize = Math.ceil(Math.sqrt(6000));
+      this.agentTexSize = Math.ceil(Math.sqrt(this.currentPreset.agentCount));
       this.numAgents = this.agentTexSize * this.agentTexSize;
 
       this.colorBase = [0, 0, 0];
@@ -379,6 +397,7 @@ const SporeDrift = (() => {
       gl.uniform2f(gl.getUniformLocation(this.progUpdate, 'uResolution'), this.simWidth, this.simHeight);
       gl.uniform1f(gl.getUniformLocation(this.progUpdate, 'uTime'), this.time);
       gl.uniform1f(gl.getUniformLocation(this.progUpdate, 'uMoveSpeed'), this.moveSpeed);
+      gl.uniform2f(gl.getUniformLocation(this.progUpdate, 'uDrift'), this.currentPreset.drift[0], this.currentPreset.drift[1]);
       gl.bindVertexArray(this.vaoQuad);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
 
@@ -405,6 +424,8 @@ const SporeDrift = (() => {
       gl.bindTexture(gl.TEXTURE_2D, this.texTrailA);
       gl.uniform1i(gl.getUniformLocation(this.progProcess, 'uTrail'), 0);
       gl.uniform2f(gl.getUniformLocation(this.progProcess, 'uResolution'), this.simWidth, this.simHeight);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uDiffusion'), this.currentPreset.diffusion);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uDecay'), this.currentPreset.decay);
       gl.bindVertexArray(this.vaoQuad);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
 

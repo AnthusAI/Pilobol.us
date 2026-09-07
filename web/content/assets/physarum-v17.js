@@ -316,28 +316,31 @@ const Physarum = (() => {
 
       this.fx = readFxConfig('physarum', this.presets);
 
-      const randomRange = (min, max) => min + Math.random() * (max - min);
+      // Gallery visits get a gentle variation inside each family; an explicit
+      // effect-scoped preset is deliberately exact so art-directed pages and
+      // visual regression captures remain reproducible.
+      const chooseRange = (min, max) => this.fx.preset ? (min + max) / 2 : min + Math.random() * (max - min);
       const presetKeys = Object.keys(this.presets);
       const chosenKey = this.fx.preset ? this.fx.presetName : presetKeys[Math.floor(Math.random() * presetKeys.length)];
       const rawPreset = this.presets[chosenKey];
       
       this.currentPreset = {
-        sensorAngle: randomRange(rawPreset.sensorAngle[0], rawPreset.sensorAngle[1]),
-        sensorDist: randomRange(rawPreset.sensorDist[0], rawPreset.sensorDist[1]),
-        turnSpeed: randomRange(rawPreset.turnSpeed[0], rawPreset.turnSpeed[1]),
-        moveSpeed: randomRange(rawPreset.moveSpeed[0], rawPreset.moveSpeed[1]),
-        decay: randomRange(rawPreset.decay[0], rawPreset.decay[1])
+        sensorAngle: chooseRange(rawPreset.sensorAngle[0], rawPreset.sensorAngle[1]),
+        sensorDist: chooseRange(rawPreset.sensorDist[0], rawPreset.sensorDist[1]),
+        turnSpeed: chooseRange(rawPreset.turnSpeed[0], rawPreset.turnSpeed[1]),
+        moveSpeed: chooseRange(rawPreset.moveSpeed[0], rawPreset.moveSpeed[1]),
+        decay: chooseRange(rawPreset.decay[0], rawPreset.decay[1])
       };
       // A named manager preset wins over the random range, while preserving
       // the legacy range-based presets used by the standalone gallery.
       if (this.fx.preset) {
         const p = this.fx.preset;
         this.currentPreset = {
-          sensorAngle: randomRange(p.sensorAngle[0], p.sensorAngle[1]),
-          sensorDist: randomRange(p.sensorDist[0], p.sensorDist[1]),
-          turnSpeed: randomRange(p.turnSpeed[0], p.turnSpeed[1]),
-          moveSpeed: randomRange(p.moveSpeed[0], p.moveSpeed[1]),
-          decay: randomRange(p.decay[0], p.decay[1])
+          sensorAngle: chooseRange(p.sensorAngle[0], p.sensorAngle[1]),
+          sensorDist: chooseRange(p.sensorDist[0], p.sensorDist[1]),
+          turnSpeed: chooseRange(p.turnSpeed[0], p.turnSpeed[1]),
+          moveSpeed: chooseRange(p.moveSpeed[0], p.moveSpeed[1]),
+          decay: chooseRange(p.decay[0], p.decay[1])
         };
       }
       this.agentTexSize = Math.ceil(Math.sqrt(50000)); 

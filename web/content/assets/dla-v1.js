@@ -24,6 +24,9 @@ const DLA = (() => {
     uniform sampler2D uState;
     uniform vec2 uResolution;
     uniform float uTime;
+    uniform float uFrontierThreshold;
+    uniform float uFreezeChance;
+    uniform float uErosion;
 
     float hash(vec2 p) { return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x)))); }
 
@@ -46,14 +49,14 @@ const DLA = (() => {
       // is what makes DLA branch sparsely instead of filling in solid the
       // way a straight neighbor-majority rule (like the cellular-automata
       // effect) does.
-      if (val < 0.5 && neighborSum > 0.4 && roll < 0.05) {
+      if (val < 0.5 && neighborSum > uFrontierThreshold && roll < uFreezeChance) {
         nextVal = 1.0;
       }
       // Frozen structure erodes very slowly instead of being permanent, so
       // the frost pattern keeps slowly turning over -- new branches reach
       // out from the frontier as old growth fades, rather than the whole
       // canvas eventually freezing solid and stopping.
-      nextVal = max(0.0, nextVal - 0.00012);
+      nextVal = max(0.0, nextVal - uErosion);
 
       outColor = vec4(nextVal, 0.0, 0.0, 1.0);
     }
@@ -117,6 +120,7 @@ const DLA = (() => {
     const source = typeof scoped === 'object' ? scoped : {};
     const finite = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
     return {
+      presetName: typeof source.preset === 'string' ? source.preset : '',
       opacity: Math.max(0, Math.min(1, finite(source.opacity ?? source.intensity ?? root.opacity ?? root.intensity, 0.72))),
       fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 4200)),
       motionScale: Math.max(0, Math.min(1, finite(source.motionScale ?? root.motionScale, 1))),
@@ -156,6 +160,20 @@ const DLA = (() => {
       }
 
       this.fx = readFxConfig('dla');
+      // Sparse, low-contrast branch families. Frost is the finest and most
+      // transient; coral is denser and rounded; rootlets hold longer, with
+      // fewer initiation points and outward-reaching forks.
+      this.presets = {
+        frost: { seedCount: 46, seedRadius: [1, 2], frontierThreshold: 0.45, freezeChance: 0.036, erosion: 0.00019 },
+        coral: { seedCount: 34, seedRadius: [2, 3], frontierThreshold: 0.30, freezeChance: 0.064, erosion: 0.00014 },
+        rootlets: { seedCount: 18, seedRadius: [1, 2], frontierThreshold: 0.55, freezeChance: 0.042, erosion: 0.000075 }
+      };
+      const presetNames = Object.keys(this.presets);
+      const chosenName = this.presets[this.fx.presetName]
+        ? this.fx.presetName
+        : presetNames[Math.floor(Math.random() * presetNames.length)];
+      this.currentPreset = this.presets[chosenName];
+      this.canvas.dataset.piloFxVariant = chosenName;
 
       this.colorBase = [0, 0, 0];
       this.colorTip = [1, 1, 1];
@@ -229,10 +247,10 @@ const DLA = (() => {
       // just the outer margins) -- unlike a single-source DLA cluster, this
       // gives several independent frost structures that read well whether
       // only a narrow strip either side of the mask ends up visible.
-      const seedCount = 40;
+      const seedCount = this.currentPreset.seedCount;
       for (let s = 0; s < seedCount; s++) {
         const [cx, cy] = pickSeed(this.fx.seedRegions, this.simWidth, this.simHeight, () => [Math.random() * this.simWidth, Math.random() * this.simHeight]);
-        const r = 1 + Math.floor(Math.random() * 2);
+        const r = this.currentPreset.seedRadius[0] + Math.floor(Math.random() * (this.currentPreset.seedRadius[1] - this.currentPreset.seedRadius[0] + 1));
         for (let y = Math.max(0, Math.floor(cy - r)); y < Math.min(this.simHeight, Math.ceil(cy + r)); y++) {
           for (let x = Math.max(0, Math.floor(cx - r)); x < Math.min(this.simWidth, Math.ceil(cx + r)); x++) {
             const idx = (y * this.simWidth + x) * 4;
@@ -301,6 +319,9 @@ const DLA = (() => {
       gl.useProgram(this.progProcess);
       gl.uniform2f(gl.getUniformLocation(this.progProcess, 'uResolution'), this.simWidth, this.simHeight);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uTime'), this.time);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uFrontierThreshold'), this.currentPreset.frontierThreshold);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uFreezeChance'), this.currentPreset.freezeChance);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uErosion'), this.currentPreset.erosion);
 
       gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
       gl.viewport(0, 0, this.simWidth, this.simHeight);

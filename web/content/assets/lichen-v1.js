@@ -21,6 +21,10 @@ const Lichen = (() => {
 
     uniform sampler2D uState;
     uniform vec2 uResolution;
+    uniform float uResistanceScale;
+    uniform float uResistanceAmplitude;
+    uniform float uRelaxation;
+    uniform float uDecay;
 
     float hash(vec2 p) { return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x)))); }
 
@@ -42,11 +46,11 @@ const Lichen = (() => {
       // takes where the neighborhood average clears the local resistance,
       // so the colony's edge comes out irregular and patchy rather than a
       // smooth expanding circle.
-      float resistance = hash(vUv * uResolution * 0.6) * 0.5;
-      float target = avg > resistance ? 1.0 : val * 0.999;
+      float resistance = hash(vUv * uResolution * uResistanceScale) * uResistanceAmplitude;
+      float target = avg > resistance ? 1.0 : val * (1.0 - uDecay);
       // Slow relaxation toward the target -- this is what makes the spread
       // gradual instead of the whole frontier jumping in one step.
-      float nextVal = mix(val, target, 0.025);
+      float nextVal = mix(val, target, uRelaxation);
 
       outColor = vec4(nextVal, 0.0, 0.0, 1.0);
     }
@@ -111,6 +115,7 @@ const Lichen = (() => {
     const source = typeof scoped === 'object' ? scoped : {};
     const finite = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
     return {
+      presetName: typeof source.preset === 'string' ? source.preset : '',
       opacity: Math.max(0, Math.min(1, finite(source.opacity ?? source.intensity ?? root.opacity ?? root.intensity, 0.72))),
       fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 4200)),
       motionScale: Math.max(0, Math.min(1, finite(source.motionScale ?? root.motionScale, 1))),
@@ -150,6 +155,20 @@ const Lichen = (() => {
       }
 
       this.fx = readFxConfig('lichen');
+      // Surface families vary the substrate rather than the colour: dusting
+      // stays granular, islands joins into rounded colonies, and old-wall
+      // spreads as patient, resistant patches.
+      this.presets = {
+        dusting: { seedCount: 34, seedRadius: [1, 2], resistanceScale: 1.30, resistanceAmplitude: 0.70, relaxation: 0.018, decay: 0.0012 },
+        islands: { seedCount: 9, seedRadius: [4, 7], resistanceScale: 0.42, resistanceAmplitude: 0.34, relaxation: 0.035, decay: 0.0003 },
+        'old-wall': { seedCount: 19, seedRadius: [2, 5], resistanceScale: 0.82, resistanceAmplitude: 0.54, relaxation: 0.022, decay: 0.00065 }
+      };
+      const presetNames = Object.keys(this.presets);
+      const chosenName = this.presets[this.fx.presetName]
+        ? this.fx.presetName
+        : presetNames[Math.floor(Math.random() * presetNames.length)];
+      this.currentPreset = this.presets[chosenName];
+      this.canvas.dataset.piloFxVariant = chosenName;
 
       this.colorBase = [0, 0, 0];
       this.colorTip = [1, 1, 1];
@@ -220,10 +239,10 @@ const Lichen = (() => {
       const gl = this.gl;
       const data = new Float32Array(this.simWidth * this.simHeight * 4);
       // A handful of small colony seeds, scattered across the full canvas.
-      const seedCount = 22;
+      const seedCount = this.currentPreset.seedCount;
       for (let s = 0; s < seedCount; s++) {
         const [cx, cy] = pickSeed(this.fx.seedRegions, this.simWidth, this.simHeight, () => [Math.random() * this.simWidth, Math.random() * this.simHeight]);
-        const r = 2 + Math.floor(Math.random() * 3);
+        const r = this.currentPreset.seedRadius[0] + Math.floor(Math.random() * (this.currentPreset.seedRadius[1] - this.currentPreset.seedRadius[0] + 1));
         for (let y = Math.max(0, Math.floor(cy - r)); y < Math.min(this.simHeight, Math.ceil(cy + r)); y++) {
           for (let x = Math.max(0, Math.floor(cx - r)); x < Math.min(this.simWidth, Math.ceil(cx + r)); x++) {
             const dx = x - cx, dy = y - cy;
@@ -291,6 +310,10 @@ const Lichen = (() => {
 
       gl.useProgram(this.progProcess);
       gl.uniform2f(gl.getUniformLocation(this.progProcess, 'uResolution'), this.simWidth, this.simHeight);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uResistanceScale'), this.currentPreset.resistanceScale);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uResistanceAmplitude'), this.currentPreset.resistanceAmplitude);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uRelaxation'), this.currentPreset.relaxation);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uDecay'), this.currentPreset.decay);
 
       gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
       gl.viewport(0, 0, this.simWidth, this.simHeight);

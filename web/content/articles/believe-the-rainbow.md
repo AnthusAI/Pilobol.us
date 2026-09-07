@@ -5,6 +5,7 @@ description: Cryptocurrency works while enough people keep believing. A candy ad
   showed what happens when someone stops.
 standfirst: A number on a screen is worth something only while enough people agree
   that it is. Stop agreeing, and there is nothing underfoot.
+cover: assets/believe-the-rainbow/og-cover.jpg
 ---
 
 There is an old [Skittles commercial](https://www.youtube.com/watch?v=QUmXhCmVaQg) still sitting on YouTube. Three teenagers

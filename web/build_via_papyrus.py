@@ -23,7 +23,7 @@ from __future__ import annotations
 import os
 import re
 import sys
-from html import escape
+from html import escape, unescape
 from pathlib import Path
 
 POD_ROOT = Path(__file__).resolve().parent
@@ -91,6 +91,175 @@ def _rewrite_youtube_videos(html: str) -> str:
 
 
 
+
+SITE_ORIGIN = "https://pilobol.us"
+_DEFAULT_DESCRIPTION = (
+    "Weird stories from a society slowly taken over by AI — a fungus among us."
+)
+_DEFAULT_COVER = "assets/og-default.jpg"
+
+
+def _parse_front_matter(md_path: Path) -> dict[str, str]:
+    """Tiny YAML-ish front-matter reader (scalars + indented continuations)."""
+    if not md_path.is_file():
+        return {}
+    text = md_path.read_text(encoding="utf-8")
+    if not text.startswith("---"):
+        return {}
+    end = text.find("\n---", 3)
+    if end < 0:
+        return {}
+    block = text[3:end]
+    out: dict[str, str] = {}
+    key: str | None = None
+    buf: list[str] = []
+
+    def flush() -> None:
+        nonlocal key, buf
+        if key is None:
+            return
+        out[key] = " ".join(x for x in buf if x).strip()
+        key = None
+        buf = []
+
+    for line in block.splitlines():
+        if key is not None and (line.startswith("  ") or line.startswith("	")):
+            piece = line.strip()
+            if piece:
+                buf.append(piece)
+            continue
+        flush()
+        if ":" not in line:
+            continue
+        k, _, v = line.partition(":")
+        k = k.strip()
+        v = v.strip()
+        if v in (">-", ">", "|", ""):
+            key = k
+            buf = []
+            continue
+        if len(v) >= 2 and ((v[0] == v[-1] == '"') or (v[0] == v[-1] == "'")):
+            v = v[1:-1]
+        key = k
+        buf = [v]
+    flush()
+    return out
+
+
+def _canonical_url(active_href: str) -> str:
+    href = (active_href or "index.html").lstrip("/")
+    if href in ("", "index.html"):
+        return f"{SITE_ORIGIN}/"
+    return f"{SITE_ORIGIN}/{href}"
+
+
+def _absolute_asset(src: str) -> str:
+    if src.startswith("http://") or src.startswith("https://"):
+        return src
+    return f"{SITE_ORIGIN}/{src.lstrip('./')}"
+
+
+def _source_markdown_for_href(active_href: str) -> Path | None:
+    """Map a built page href back to its Markdown source under content/."""
+    href = (active_href or "index.html").lstrip("/")
+    content = POD_ROOT / "content"
+    if href in ("", "index.html"):
+        return content / "index.md"
+    candidate = content / href.replace(".html", ".md")
+    if candidate.is_file():
+        return candidate
+    # effects/index.html etc.
+    return None
+
+
+def _pick_cover(fm: dict[str, str], html: str) -> str:
+    if fm.get("cover"):
+        return _absolute_asset(fm["cover"])
+    fig = re.search(
+        r'<figure class="markus-figure"><img[^>]+src="([^"]+)"', html
+    )
+    if fig:
+        src = fig.group(1)
+        if src.startswith("../"):
+            src = src[3:]
+        elif src.startswith("./"):
+            src = src[2:]
+        return _absolute_asset(src)
+    img = re.search(r'<img[^>]+src="([^"]+)"', html)
+    if img:
+        src = img.group(1)
+        if src.startswith("../"):
+            src = src[3:]
+        return _absolute_asset(src)
+    return _absolute_asset(_DEFAULT_COVER)
+
+
+def _pick_description(fm: dict[str, str], html: str, title: str) -> str:
+    if fm.get("description"):
+        return fm["description"]
+    if fm.get("standfirst"):
+        return fm["standfirst"]
+    lede = re.search(r'<p class="markus-lede">(.*?)</p>', html, re.S)
+    if lede:
+        return re.sub(r"<[^>]+>", "", unescape(lede.group(1))).strip()
+    if title and title.strip() and title.strip() != "Pilobolus":
+        return title.strip()
+    return _DEFAULT_DESCRIPTION
+
+
+def _inject_social_meta(html: str, **kwargs) -> str:
+    """Open Graph + Twitter large-image cards for crawlers and messengers."""
+    title = (kwargs.get("title") or "").strip() or "Pilobolus"
+    active_href = kwargs.get("active_href") or "index.html"
+    fm_path = _source_markdown_for_href(active_href)
+    fm = _parse_front_matter(fm_path) if fm_path else {}
+    if fm.get("title"):
+        # Prefer front-matter title when the shell got an empty homepage title.
+        if not title or title in ("", "Home", "index.html"):
+            title = fm["title"] or "Pilobolus"
+    description = _pick_description(fm, html, title)
+    image = _pick_cover(fm, html)
+    url = _canonical_url(active_href)
+    page_title = title if title != "Pilobolus" else "Pilobolus"
+    # Homepage with blank title
+    is_home = active_href in ("index.html", "")
+    if is_home or page_title in ("", "Home"):
+        page_title = "Pilobolus"
+    og_type = "website" if is_home else "article"
+
+    def q(value: str) -> str:
+        return escape(value, quote=True)
+
+    meta = (
+        f'<meta name="description" content="{q(description)}">\n'
+        f'<link rel="canonical" href="{q(url)}">\n'
+        f'<meta property="og:site_name" content="Pilobolus">\n'
+        f'<meta property="og:type" content="{og_type}">\n'
+        f'<meta property="og:title" content="{q(page_title)}">\n'
+        f'<meta property="og:description" content="{q(description)}">\n'
+        f'<meta property="og:url" content="{q(url)}">\n'
+        f'<meta property="og:image" content="{q(image)}">\n'
+        f'<meta property="og:image:width" content="1200">\n'
+        f'<meta property="og:image:height" content="630">\n'
+        f'<meta name="twitter:card" content="summary_large_image">\n'
+        f'<meta name="twitter:title" content="{q(page_title)}">\n'
+        f'<meta name="twitter:description" content="{q(description)}">\n'
+        f'<meta name="twitter:image" content="{q(image)}">\n'
+    )
+    if 'property="og:title"' in html:
+        return html
+    html2, n = re.subn(
+        r"(</title>\s*)",
+        r"\1" + meta,
+        html,
+        count=1,
+    )
+    if n != 1:
+        raise RuntimeError("social meta inject failed")
+    return html2
+
+
+
 _POEM_LINES = (
     "a fungus among us",
     "feeding on our excrement",
@@ -129,7 +298,8 @@ def render_page_with_poem(**kwargs):
     )
     if n != 1:
         raise RuntimeError(f"masthead poem inject failed (n={n})")
-    return _rewrite_youtube_videos(html2)
+    html2 = _rewrite_youtube_videos(html2)
+    return _inject_social_meta(html2, **kwargs)
 
 
 markus_shell.render_page = render_page_with_poem
@@ -178,6 +348,27 @@ def main() -> int:
         result,
         POD_ROOT / "content" / "a-fungus-among-us.md",
         "a-fungus-among-us.html",
+    )
+    # Crawlers (Twitterbot, Slack, iMessage, Facebook) need an explicit allow.
+    (result.out_dir / "robots.txt").write_text(
+        "User-agent: *\nAllow: /\n\n"
+        f"Sitemap: {SITE_ORIGIN}/sitemap.xml\n",
+        encoding="utf-8",
+    )
+    # Minimal sitemap so preview crawlers can find story URLs.
+    urls = []
+    for page in result.pages:
+        rel = page.relative_to(result.out_dir).as_posix()
+        urls.append(_canonical_url(rel))
+    body = "\n".join(
+        f"  <url><loc>{escape(u, quote=True)}</loc></url>" for u in sorted(set(urls))
+    )
+    (result.out_dir / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"{body}\n"
+        "</urlset>\n",
+        encoding="utf-8",
     )
     print(f"Built Pilobol.us via Papyrus renderer: {result.out_dir}")
     for page in result.pages:

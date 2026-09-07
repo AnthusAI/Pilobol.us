@@ -1,5 +1,8 @@
 ---
 title: ""
+description: >-
+  Weird stories from a society slowly taken over by AI — a fungus among us.
+cover: assets/gus-lamont/og-cover.jpg
 ---
 
 :::card-grid{columns="6"}

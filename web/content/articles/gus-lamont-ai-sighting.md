@@ -5,6 +5,7 @@ description: Four-year-old Gus went missing from a sheep station. The feed inven
   a kidnapping, a reunion, and a bloody toy the police never found.
 standfirst: An AI picture of a kidnapping landed in the search for a missing boy.
   Thousands shared it. The ground had nothing.
+cover: assets/gus-lamont/og-cover.jpg
 ---
 
 Four-year-old Gus Lamont was last seen on a Saturday in late September 2025, playing on a mound of dirt at his family’s homestead south of Yunta, in South Australia’s outback. When his grandmother came back, he was gone.

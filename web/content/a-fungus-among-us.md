@@ -3,6 +3,7 @@ title: A fungus among us
 date: 'Monday, September 7, 2026'
 description: A fungus that grows in cow dung and shoots its spores dead straight
   at the sun gave this site its name — and its whole beat.
+cover: assets/og-default.jpg
 ---
 
 There’s a fungus among us. *Pilobolus* grows on herbivore dung, and it does something no mold on your bread does: it aims. The fungus grows a small lens out of its own cell wall, tracks the brightest patch of sky, and fires its spore case straight at the light — clearing several feet in a single shot, so it lands on fresh grass instead of the pile it grew from. A cow eats the grass. The cycle starts again. Pilobol\.us is the pun.

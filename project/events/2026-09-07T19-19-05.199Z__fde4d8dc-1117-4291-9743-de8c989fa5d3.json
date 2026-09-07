@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "fde4d8dc-1117-4291-9743-de8c989fa5d3",
+  "issue_id": "WIKI-pilobil-accepted",
+  "event_type": "state_transition",
+  "occurred_at": "2026-09-07T19:19:05.199Z",
+  "actor_id": "box",
+  "payload": {
+    "from_status": "idea",
+    "to_status": "open"
+  }
+}

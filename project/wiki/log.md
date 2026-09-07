@@ -27,3 +27,11 @@ Board `PILO-1bbd2b` (idea→assignment→research). Theme: formal terms for comp
 ## [2026-09-07 09:20 ET] weekday fungus scout | TikTok Go + Sally + Emily Rae
 
 Filed 4 keepers: Skift Ambiente Sedona / TikTok Go AI hotel videos (Schulz); NY Focus Salamanca Realbotix Sally launch + pause (Manno×2); Newsweek Emily Rae / Yan Mun AI influencers (Afshar). Concepts: counterfeit-places, drove-to-the-pin, undisclosed-ai-influencers, kids-school-inbox-authority, more-real-than-real, uncanny-hyperreality, counterfeit-persons, strangler-fig, fungus-among-us, hyperreality. Stay-off appended. KB only — no publish.
+
+## 2026-09-07 — Papyrus local-pod refs wired
+
+- Standing story `WIKI-pilobil-accepted` (status `open`) holds accepted reference JSON.
+- Added `bin/register-ref.py` and `bin/list-refs.py` (corpus `pilobil-us`).
+- Backfilled 22 accepted refs from existing `project/wiki/sources/` keepers.
+- Wiki index + `accepted-refs.md` point at the dual layer (markdown keepers + JSON).
+- Kanbus board remains stories only; references are never board cards.

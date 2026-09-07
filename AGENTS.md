@@ -64,6 +64,15 @@ Stack: **Papyrus local pod** (desk language) with **Biblicus** as the KB engine
 underneath; site builds through Papyrus's Markus renderer (`web/build_via_papyrus.py`);
 Amplify Gen 2 deploys via DevOps.
 
+### Knowledge base (Papyrus local pod)
+
+- Pod root: `/workspace/pilobil.us` (symlink to this repo).
+- Wiki: `project/wiki/` (concepts + `sources/` keepers).
+- Accepted references JSON: `stories/WIKI-pilobil-accepted/references/`.
+- Register: `python3 bin/register-ref.py --title "..." --url "..." --why "..."`.
+- List: `python3 bin/list-refs.py`.
+- Kanbus (`PILO`, console 4260) is **stories only** — never put references on the board.
+
 **Site is live** at pilobol.us. Reader copy still must never name the house or talk
 about “our take.” Desk DNA lives in this file plus `project/wiki/mission.md`,
 `project/wiki/publication-doctrine.md`, `content/VOICE.md`, and `inclusion_rubric.md`.

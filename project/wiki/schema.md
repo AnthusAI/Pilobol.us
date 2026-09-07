@@ -8,23 +8,38 @@ Desk language: **Papyrus local pod**. Biblicus is the KB engine underneath;
 Papyrus is the automated newsroom. Agents do not need a second dialect for
 day-to-day wiki work.
 
+Operator config: `.papyrus/operator-cli.config.yaml` (`podPath` →
+`/workspace/pilobil.us`, corpus `pilobil-us`). Symlink: `/workspace/pilobil.us`
+→ `/workspace/pilobol.us`.
+
 ## Layers
 
 - `concepts/` — standing editorial concepts (simulacrum, infiltrated circle,
-  fungus, and later topics).
+  fungus, institutional lag, …).
 - [index.md](index.md) — catalog; read first.
 - [log.md](log.md) — append-only timeline.
-- `sources/` — one page per accepted source (create when we start filing
-  evidence; empty at seed).
-- Doctrine (outside the wiki): `doctrine/pilobil.md` at the pod root.
+- [accepted-refs.md](accepted-refs.md) — live accepted list from pod JSON.
+- `sources/` — one markdown keeper page per accepted source (notes, claims,
+  concept links).
+- **Pod references** — JSON on standing story `WIKI-pilobil-accepted`
+  (`stories/WIKI-pilobil-accepted/references/*.json`). Not Kanbus board cards.
+
+## Register / list
+
+```
+python3 bin/register-ref.py --title "..." --url "https://..." --why "..."
+python3 bin/list-refs.py
+```
+
+New accepts: write/update the `sources/` keeper **and** register JSON
+(`--status accepted`). Rejected sources: write nothing.
 
 ## Concept page shape
 
 - What it is, current thesis, anchors, open questions, last updated.
 - Relative links to sibling concepts. No fabricated citations.
-- Seed pages may stay thin until primary sources are verified.
 
-## Accept vs reject (when sources arrive)
+## Accept vs reject
 
-- **Accept:** source page, update concepts, index line, log line.
+- **Accept:** source page + JSON ref + update concepts/index/log as needed.
 - **Reject:** no wiki trace.

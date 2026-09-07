@@ -12,10 +12,13 @@ const CellularAutomata = (() => {
     precision highp float;
     in vec2 vUv;
     out vec4 outColor;
-    
+
     uniform sampler2D uState;
     uniform vec2 uResolution;
-    
+    uniform float uTime;
+
+    float hash(vec2 p) { return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x)))); }
+
     float getSum(vec2 uv, vec2 texel) {
       float sum = 0.0;
       for (int y = -2; y <= 2; y++) {
@@ -26,20 +29,35 @@ const CellularAutomata = (() => {
       }
       return sum;
     }
-    
+
     void main() {
       vec2 texel = 1.0 / uResolution;
       float val = texture(uState, vUv).r;
       float sum = getSum(vUv, texel);
-      
-      // SmoothLife-ish rules
+
+      // Persistent jitter on the neighbor sum. Without this, a hard three-zone
+      // threshold rule like this always converges to a static fixed point (every
+      // cell's local neighborhood stops changing once it lands outside both the
+      // growth and decay windows) -- verified in a numpy model: identical grids
+      // frame to frame once settled. The jitter keeps the field slowly wandering
+      // instead of freezing solid.
+      sum += (hash(vUv * uResolution + uTime) - 0.5) * 2.4;
+
+      // SmoothLife-ish rules. The original thresholds (birth 10-14, death <8 or
+      // >18 of 24 neighbors) required roughly half the neighborhood alive to grow
+      // but only ~1/3 alive to decay -- at any low-density random seed the
+      // expected neighbor sum is far below the growth window (verified: at a 5%
+      // seed, P(growth) is ~1e-7 while P(decay) is ~0.9999), so the whole field
+      // provably decayed to zero within a couple of seconds every time. These
+      // thresholds were re-tuned numerically so a mid-density random seed
+      // settles into a persistent, slowly-drifting pattern instead of dying out.
       float nextVal = val;
-      if (sum >= 10.0 && sum <= 14.0) {
-        nextVal = clamp(val + 0.1, 0.0, 1.0);
-      } else if (sum < 8.0 || sum > 18.0) {
-        nextVal = clamp(val - 0.1, 0.0, 1.0);
+      if (sum >= 6.0 && sum <= 10.0) {
+        nextVal = clamp(val + 0.04, 0.0, 1.0);
+      } else if (sum < 3.0 || sum > 15.0) {
+        nextVal = clamp(val - 0.02, 0.0, 1.0);
       }
-      
+
       outColor = vec4(nextVal, 0.0, 0.0, 1.0);
     }
   `;
@@ -48,15 +66,41 @@ const CellularAutomata = (() => {
     precision highp float;
     in vec2 vUv;
     out vec4 outColor;
-    
+
     uniform sampler2D uState;
+    uniform vec2 uResolution;
     uniform vec3 uColorBase;
     uniform vec3 uColorTip;
-    
+    uniform vec3 uColorMid;
+
     void main() {
-      float val = texture(uState, vUv).r;
-      vec3 col = mix(uColorBase, uColorTip, val);
-      float alpha = val * 0.85;
+      // Small box blur purely for the on-screen appearance (does not feed
+      // back into the simulation state). The rule itself drives cells toward
+      // hard 0/1 values, and at this low a simulation resolution that reads
+      // as blocky, hard-edged shapes rather than an organic, feathered
+      // growth. LINEAR texture filtering (see createTex below) already softens
+      // it some; this blur plus the wide smoothstep below finishes the job.
+      vec2 texel = 1.0 / uResolution;
+      float val = 0.0;
+      val += texture(uState, vUv).r * 0.28;
+      val += texture(uState, vUv + vec2(texel.x, 0.0)).r * 0.12;
+      val += texture(uState, vUv - vec2(texel.x, 0.0)).r * 0.12;
+      val += texture(uState, vUv + vec2(0.0, texel.y)).r * 0.12;
+      val += texture(uState, vUv - vec2(0.0, texel.y)).r * 0.12;
+      val += texture(uState, vUv + texel).r * 0.06;
+      val += texture(uState, vUv - texel).r * 0.06;
+      val += texture(uState, vUv + vec2(texel.x, -texel.y)).r * 0.06;
+      val += texture(uState, vUv + vec2(-texel.x, texel.y)).r * 0.06;
+
+      float a = smoothstep(0.08, 0.55, val);
+      // Two-stage mix through a real third hue (uColorMid, --markus-accent-2)
+      // instead of a flat two-color interpolation between background and one
+      // accent -- background -> mid-tone at low/moderate density, mid-tone ->
+      // ink at high density, so the pattern actually passes through a color
+      // gradient rather than reading as nearly monochromatic.
+      vec3 col = mix(uColorTip, uColorMid, smoothstep(0.0, 0.5, a));
+      col = mix(col, uColorBase, smoothstep(0.4, 1.0, a));
+      float alpha = a * 0.7;
       outColor = vec4(col * alpha, alpha);
     }
   `;
@@ -85,9 +129,15 @@ const CellularAutomata = (() => {
         return;
       }
       
+      // See physarum-v17.js constructor for why readColors() is called here
+      // immediately rather than left to the periodic call ~60 frames in --
+      // that's now ~11 real seconds of using these arbitrary placeholder
+      // colors instead of the theme's actual palette.
       this.colorBase = [0, 0, 0];
       this.colorTip = [1, 1, 1];
-      
+      this.colorMid = [0.6, 0.6, 0.6];
+      this.readColors();
+
       this.initGL();
       this.resize();
       window.addEventListener('resize', () => this.resize());
@@ -134,22 +184,25 @@ const CellularAutomata = (() => {
     
     resetTextures() {
       const gl = this.gl;
+      // 35% seed density: matches the re-tuned growth/decay thresholds above.
+      // The old 5% density was numerically guaranteed to hit the decay branch
+      // (P ~ 0.9999) since the expected neighbor sum at that sparsity never
+      // reaches the growth window.
+      // Seed the FULL canvas uniformly. This used to also hard-zero the
+      // middle 60% of the grid ("clear center") regardless of viewport size
+      // or the CSS mask -- a permanent, wide dead band baked into the
+      // simulation itself, independent of and much wider than whatever the
+      // page's mask was doing. The mask (.pilo-physarum-canvas in
+      // pilobil-theme-v10.css) is solely responsible for hiding the part of
+      // the canvas that sits behind the text column; the simulation should
+      // have real content everywhere so there's something to reveal right up
+      // to the mask's edge.
       const data = new Float32Array(this.simWidth * this.simHeight * 4);
       for (let i = 0; i < data.length; i += 4) {
-        data[i] = Math.random() > 0.95 ? 1.0 : 0.0;
+        data[i] = Math.random() < 0.35 ? 1.0 : 0.0;
         data[i+3] = 1.0;
       }
-      
-      // Only seed outer margins
-      for (let y = 0; y < this.simHeight; y++) {
-        for (let x = 0; x < this.simWidth; x++) {
-          if (x > this.simWidth * 0.2 && x < this.simWidth * 0.8) {
-             let idx = (y * this.simWidth + x) * 4;
-             data[idx] = 0.0; // clear center
-          }
-        }
-      }
-      
+
       const createTex = (d) => {
         const tex = gl.createTexture();
         gl.bindTexture(gl.TEXTURE_2D, tex);
@@ -175,10 +228,16 @@ const CellularAutomata = (() => {
       const div = document.createElement('div');
       div.style.color = 'var(--markus-ink)';
       div.style.backgroundColor = 'var(--markus-accent)';
+      div.style.borderColor = 'var(--markus-accent-2)';
       document.body.appendChild(div);
       const computed = getComputedStyle(div);
       this.colorBase = rgbToNormalizedArray(computed.color);
       this.colorTip = rgbToNormalizedArray(computed.backgroundColor);
+      // A third, genuinely different hue (rust/ochre in light mode, warm
+      // orange in dark mode) so growth passes through a real color gradient
+      // instead of a flat two-tone mix between background and one accent --
+      // that's why it read as nearly monochromatic.
+      this.colorMid = rgbToNormalizedArray(computed.borderColor);
       document.body.removeChild(div);
     }
 
@@ -200,7 +259,8 @@ const CellularAutomata = (() => {
       
       gl.useProgram(this.progProcess);
       gl.uniform2f(gl.getUniformLocation(this.progProcess, "uResolution"), this.simWidth, this.simHeight);
-      
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, "uTime"), this.time);
+
       gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
       gl.viewport(0, 0, this.simWidth, this.simHeight);
       gl.bindTexture(gl.TEXTURE_2D, this.texA);
@@ -216,9 +276,11 @@ const CellularAutomata = (() => {
       gl.disable(gl.BLEND);
       
       gl.useProgram(this.progScreen);
+      gl.uniform2f(gl.getUniformLocation(this.progScreen, "uResolution"), this.simWidth, this.simHeight);
       gl.uniform3f(gl.getUniformLocation(this.progScreen, "uColorBase"), this.colorBase[0], this.colorBase[1], this.colorBase[2]);
       gl.uniform3f(gl.getUniformLocation(this.progScreen, "uColorTip"), this.colorTip[0], this.colorTip[1], this.colorTip[2]);
-      
+      gl.uniform3f(gl.getUniformLocation(this.progScreen, "uColorMid"), this.colorMid[0], this.colorMid[1], this.colorMid[2]);
+
       gl.bindTexture(gl.TEXTURE_2D, this.texA);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
     }

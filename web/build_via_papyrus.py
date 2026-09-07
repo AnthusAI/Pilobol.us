@@ -42,13 +42,15 @@ from papyrus_content.markus_renderer.shell import SiteChrome  # noqa: E402
 # Publication identity. This is the ONLY thing Pilobol.us contributes to the
 # render; everything else comes from Papyrus's renderer.
 PILOBOL_CHROME = SiteChrome(
-    site_name="Pilobol.us",
+    site_name="Pilobolus",
     tagline="a fungus among us",
-    footer_html=(
-        "<p>Pilobol.us is a Papyrus publication. Reader-facing copy publishes "
-        "through Markus, a Markdown-and-directives renderer &mdash; this page is "
-        "that render, not a Pretext layout.</p>"
-    ),
+    # The masthead tagline already says "a fungus among us" on every page --
+    # restating it in the footer too just made it repeat, worst on the one
+    # article actually titled that (title, tagline, lede, and footer all
+    # saying the same phrase on one page). footer_html can't be "" (falsy,
+    # falls back to Papyrus's own generic default), so this is deliberately
+    # a distinct, minimal line instead.
+    footer_html="<p>Pilobolus</p>",
     # Site chrome only. These are never derived from article Markdown; Markus
     # runs with raw HTML disabled precisely so authors cannot inject scripts.
     scripts=(

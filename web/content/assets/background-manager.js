@@ -55,7 +55,14 @@
   const start = () => {
     ensureCanvas();
     const scriptTag = document.createElement('script');
-    scriptTag.src = prefix + 'assets/' + chosen.script;
+    // window.__markusAssetVersion is set by the page shell from the same
+    // content hash the CSS links use. Without it, this dynamically-injected
+    // script tag has no cache-busting at all (unlike every other script on
+    // the page, which the shell itself versions) -- a browser can keep
+    // serving a stale cached copy of whichever effect was picked, silently,
+    // indefinitely, surviving ordinary reloads.
+    const version = window.__markusAssetVersion;
+    scriptTag.src = prefix + 'assets/' + chosen.script + (version ? ('?v=' + version) : '');
     document.head.appendChild(scriptTag);
   };
   

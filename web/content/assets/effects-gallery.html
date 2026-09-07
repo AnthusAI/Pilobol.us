@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Effects Gallery — Pilobol.us</title>
+<style>
+  :root { color-scheme: dark; }
+  body {
+    margin: 0;
+    background: #14170f;
+    color: #dfded0;
+    font: 14px/1.4 -apple-system, "Source Sans 3", system-ui, sans-serif;
+  }
+  h1 {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-bottom: 1px solid #333b2a;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1px;
+    background: #333b2a;
+  }
+  .cell {
+    background: #14170f;
+    display: flex;
+    flex-direction: column;
+    outline: 3px solid transparent;
+    outline-offset: -3px;
+    transition: outline-color 0.3s ease;
+    scroll-margin-top: 1rem;
+  }
+  .cell:target {
+    outline-color: #b7d18a;
+  }
+  .cell-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+  }
+  .cell-head span { font-weight: 600; }
+  .cell-head button {
+    font: inherit;
+    background: #1c2117;
+    color: #dfded0;
+    border: 1px solid #333b2a;
+    border-radius: 3px;
+    padding: 0.25rem 0.6rem;
+    cursor: pointer;
+  }
+  .cell-head button:hover { background: #333b2a; }
+  .frame-wrap {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    border: none;
+  }
+  iframe { width: 100%; height: 100%; border: none; display: block; }
+  p.note {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    color: #8b9184;
+  }
+</style>
+</head>
+<body>
+<h1>Effects Gallery</h1>
+<p class="note">Every background animation in rotation on Pilobol.us, shown here unmasked and at full size for a clear look. On an article page, only one effect is chosen at random and composited subtly behind the margins. Reload a panel to see a new random preset/seed.</p>
+<div class="grid">
+  <div class="cell" id="physarum">
+    <div class="cell-head"><span>Physarum Polycephalum</span><button data-target="f-physarum">Reload</button></div>
+    <iframe class="frame-wrap" id="f-physarum" src="gallery-physarum.html"></iframe>
+  </div>
+  <div class="cell" id="reaction-diffusion">
+    <div class="cell-head"><span>Reaction-Diffusion</span><button data-target="f-rd">Reload</button></div>
+    <iframe class="frame-wrap" id="f-rd" src="gallery-reaction-diffusion.html"></iframe>
+  </div>
+  <div class="cell" id="cellular-automata">
+    <div class="cell-head"><span>Continuous Cellular Automata</span><button data-target="f-ca">Reload</button></div>
+    <iframe class="frame-wrap" id="f-ca" src="gallery-cellular-automata.html"></iframe>
+  </div>
+</div>
+<script>
+  document.querySelectorAll('button[data-target]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const frame = document.getElementById(btn.getAttribute('data-target'));
+      frame.src = frame.src;
+    });
+  });
+</script>
+</body>
+</html>

@@ -59,6 +59,20 @@
     /* site-only tokens (not part of Markus's vocabulary) */
     --pilo-shadow: rgba(33, 29, 23, 0.12);
     --pilo-hairline: rgba(33, 29, 23, 0.5);
+
+    /* Single source of truth for the content column width. The page-wrapper
+       rule below and the canvas mask both derive from this ONE value instead
+       of each hard-coding their own rem number -- that mismatch (32rem vs a
+       42rem column, then 24rem+3rem vs 21rem) is exactly why the visible gap
+       between text and animation kept drifting back after each "fix". Change
+       this one value to change the column width; the mask follows it
+       automatically. */
+    --pilo-content-width: 56rem;
+    /* Deliberate small gap between the content column's edge and where the
+       animation becomes visible -- zero gap read as the effect touching the
+       text with no breathing room; the original bug's 3+rem buffer read as
+       a dead zone. This is the one number to change either direction. */
+    --pilo-fx-gutter: 1.5rem;
     color-scheme: light;
   }
 
@@ -109,6 +123,20 @@
   .markus-document a {
     text-decoration-thickness: 1px;
     text-underline-offset: 0.15em;
+  }
+
+  /* The vendored CSS only constrains image width inside .markus-figure (the
+     :::figure{} directive) -- a bare Markdown ![](...) image gets no width
+     rule at all and renders at its native pixel size, which for a real photo
+     (e.g. the Father Justin screenshots) is much wider than the content
+     column. Same treatment as .markus-figure img for consistency. */
+  .markus-document img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.8rem;
+    background: var(--markus-card);
+    margin: 1.5rem 0;
   }
 
   /* ---------------------------------------------------------------------
@@ -203,7 +231,7 @@
   }
 
   .markus-site-tagline {
-    margin: 0.35rem 0 1.1rem;
+    margin: 0.15rem 0 0.6rem;
     color: var(--markus-muted);
     font-style: italic;
     font-family: var(--markus-serif);
@@ -212,10 +240,14 @@
   .markus-site-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem 1.15rem;
-    padding-bottom: 0.9rem;
+    gap: 0.4rem 0.9rem;
+    padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--markus-line);
     font-size: 0.92rem;
+  }
+
+  .markus-site-wordmark {
+    margin: 0;
   }
 
   .markus-site-nav a {
@@ -240,8 +272,23 @@
      --------------------------------------------------------------------- */
 
   .markus-site main .markus-document {
+    /* The vendored Markus CSS puts its own `padding: 2.5rem 1.25rem 4rem` AND
+       `max-width: 52rem; margin: 0 auto;` on .markus-document. Since the
+       article sits inside <main>, which already has its own
+       `padding: 0 4rem` and its own width (--pilo-content-width, 56rem),
+       those compounded: the horizontal padding stacked (4rem + 1.25rem), and
+       ON TOP of that the vendor's 52rem max-width made the 832px-wide
+       article center itself inside main's already-narrower 896px content
+       box, leaving a ~32px gap on each side versus the masthead/footer
+       (siblings of <main>, not wrapped in .markus-document, so they only
+       ever had main's own width and 4rem padding). Zeroing the padding
+       fixed one half of this; max-width: none fixes the other -- the
+       article now simply fills main's content box, matching everything
+       else in the page wrapper exactly. */
+    max-width: none;
     padding-top: 2rem;
-    max-width: 46rem;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .markus-lede {
@@ -380,16 +427,53 @@
     height: 100vh;
     z-index: -1;
     pointer-events: none;
-    opacity: 0.65; mix-blend-mode: multiply;
-    /* Create a permanent transparent tunnel down the middle matching the text column */
-    /* If the screen is narrower than 900px, it will hide the animation completely (which is the only option) */
-    mask-image: linear-gradient(to right, black 0%, black calc(50% - 32rem), transparent calc(50% - 26rem), transparent calc(50% + 26rem), black calc(50% + 32rem), black 100%);
-    -webkit-mask-image: linear-gradient(to right, black 0%, black calc(50% - 32rem), transparent calc(50% - 26rem), transparent calc(50% + 26rem), black calc(50% + 32rem), black 100%);
+    /* Lower ceiling than before (was 0.65/0.8) -- the effect read as too
+       high-contrast against the page. */
+    opacity: 0.3; mix-blend-mode: multiply;
+    /* Hidden-middle half-width is derived from --pilo-content-width (defined
+       once, on :root, above) instead of a second hard-coded rem number here.
+       This is the actual fix for the gap that kept coming back: it was never
+       a matter of picking the right number, it was that the column width and
+       the mask width were two independent numbers that had to be manually
+       kept in sync, and every edit to one without the other reopened a gap.
+       Now there is exactly one number. The 45vw term is only a fallback so
+       the hidden band still shrinks gracefully on viewports too narrow to
+       fit the full column.
+
+       Two mask layers, intersected: the first (unchanged) cuts the middle
+       text column horizontally; the second fades the top 5rem vertically so
+       the effect doesn't start flush against the very top of the viewport
+       with zero gap before the masthead -- previously this mask only cut
+       left/right, so the canvas filled the full page height right up to
+       y=0, touching the header with no breathing room.
+
+       The horizontal cut adds --pilo-fx-gutter beyond the content edge
+       before fading in -- flush-with-zero-gap read as the animation
+       touching the text directly, so there is deliberately a little air
+       between them now, not just the exact content-edge coordinate. */
+    mask-image: linear-gradient(to right,
+      black 0%,
+      black calc(50% - min(calc(var(--pilo-content-width) / 2), 45vw) - var(--pilo-fx-gutter) - 0.25rem),
+      transparent calc(50% - min(calc(var(--pilo-content-width) / 2), 45vw) - var(--pilo-fx-gutter)),
+      transparent calc(50% + min(calc(var(--pilo-content-width) / 2), 45vw) + var(--pilo-fx-gutter)),
+      black calc(50% + min(calc(var(--pilo-content-width) / 2), 45vw) + var(--pilo-fx-gutter) + 0.25rem),
+      black 100%),
+      linear-gradient(to bottom, transparent 0, black 5rem);
+    -webkit-mask-image: linear-gradient(to right,
+      black 0%,
+      black calc(50% - min(calc(var(--pilo-content-width) / 2), 45vw) - var(--pilo-fx-gutter) - 0.25rem),
+      transparent calc(50% - min(calc(var(--pilo-content-width) / 2), 45vw) - var(--pilo-fx-gutter)),
+      transparent calc(50% + min(calc(var(--pilo-content-width) / 2), 45vw) + var(--pilo-fx-gutter)),
+      black calc(50% + min(calc(var(--pilo-content-width) / 2), 45vw) + var(--pilo-fx-gutter) + 0.25rem),
+      black 100%),
+      linear-gradient(to bottom, transparent 0, black 5rem);
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) .pilo-physarum-canvas {
-      opacity: 0.8;
+      opacity: 0.4;
       mix-blend-mode: screen;
     }
   }
@@ -426,7 +510,7 @@
   .markus-site > .markus-site-footer {
     position: relative;
     z-index: 1;
-    max-width: 60rem;
+    max-width: var(--pilo-content-width);
     margin: 0 auto;
     padding: 0 4rem;
   }
@@ -437,6 +521,19 @@
     .markus-site > .markus-site-footer {
       padding: 0 1.25rem;
     }
+  }
+
+  /* The masthead's own vertical padding was fully zeroed out by the rule
+     above (".markus-site > .markus-site-masthead { padding: 0 4rem }" is a
+     shorthand, so it sets top/bottom to 0 too) -- so all the masthead's
+     vertical space came only from its children's margins (including the
+     wordmark <p>'s default ~1em browser margin, which nothing ever reset).
+     Combined with the looser tagline/nav spacing, the header read as far
+     too sparse. This has to come AFTER the rule above (same specificity,
+     source order decides) to actually win. */
+  .markus-site > .markus-site-masthead {
+    padding-top: 2.5rem;
+    padding-bottom: 0.25rem;
   }
 
   /* --- BULLETPROOF TEXT READABILITY --- */
@@ -482,6 +579,6 @@
       color-scheme: dark;
     }
 :root[data-theme="dark"] .pilo-physarum-canvas {
-      opacity: 0.8;
+      opacity: 0.4;
       mix-blend-mode: screen;
     }

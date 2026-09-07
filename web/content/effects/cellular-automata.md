@@ -12,3 +12,5 @@ Unlike traditional grids like Conway's *Game of Life*, this algorithm operates i
 ## Credits
 
 This implementation is inspired by smooth life algorithms such as **SmoothLife** by **Stephan Rafler** and **Lenia** by **Bert Chan**, which generalized discrete cellular automata into continuous domains to simulate lifelike biological structures.
+
+[See this effect running full-size in the effects gallery →](../assets/effects-gallery.html#cellular-automata)

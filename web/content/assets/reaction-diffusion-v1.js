@@ -53,12 +53,20 @@ const ReactionDiffusion = (() => {
     uniform sampler2D uState;
     uniform vec3 uColorBase;
     uniform vec3 uColorTip;
-    
+    uniform vec3 uColorMid;
+
     void main() {
       float B = texture(uState, vUv).g;
       float val = smoothstep(0.1, 0.6, B);
-      vec3 col = mix(uColorBase, uColorTip, val);
-      float alpha = val * 0.85;
+      // See physarum-v17.js fsDrawScreen for why this mixes toward uColorBase
+      // (dark ink in light mode) rather than uColorTip (accent) as density
+      // rises: the densest pattern should read as the strongest stain, not
+      // the lightest pixel on the page. Two-stage mix through uColorMid
+      // (--markus-accent-2) for a real color gradient instead of a flat
+      // two-tone interpolation.
+      vec3 col = mix(uColorTip, uColorMid, smoothstep(0.0, 0.5, val));
+      col = mix(col, uColorBase, smoothstep(0.4, 1.0, val));
+      float alpha = val * 0.7;
       outColor = vec4(col * alpha, alpha);
     }
   `;
@@ -102,9 +110,15 @@ const ReactionDiffusion = (() => {
         dB: 0.5
       };
 
+      // See physarum-v17.js constructor for why readColors() is called here
+      // immediately rather than left to the periodic call ~60 frames in --
+      // that's now ~11 real seconds of using these arbitrary placeholder
+      // colors instead of the theme's actual palette.
       this.colorBase = [0, 0, 0];
       this.colorTip = [1, 1, 1];
-      
+      this.colorMid = [0.6, 0.6, 0.6];
+      this.readColors();
+
       this.initGL();
       this.resize();
       window.addEventListener('resize', () => this.resize());
@@ -206,10 +220,12 @@ const ReactionDiffusion = (() => {
       const div = document.createElement('div');
       div.style.color = 'var(--markus-ink)';
       div.style.backgroundColor = 'var(--markus-accent)';
+      div.style.borderColor = 'var(--markus-accent-2)';
       document.body.appendChild(div);
       const computed = getComputedStyle(div);
       this.colorBase = rgbToNormalizedArray(computed.color);
       this.colorTip = rgbToNormalizedArray(computed.backgroundColor);
+      this.colorMid = rgbToNormalizedArray(computed.borderColor);
       document.body.removeChild(div);
     }
 
@@ -217,9 +233,11 @@ const ReactionDiffusion = (() => {
       if (!this.running) return;
       requestAnimationFrame((t) => this.render(t));
       
-      // Throttle to 15fps for slow growth
+      // Throttle for slow growth. Was 66ms (~15fps) x 4 sub-steps/frame below,
+      // i.e. ~60 simulation steps/sec -- far too fast for a "gradual, creeping"
+      // feel. Slowed ~6x overall between this and the sub-step count below.
       if (!this.lastTime) this.lastTime = timestamp;
-      if (timestamp - this.lastTime < 66) return;
+      if (timestamp - this.lastTime < 150) return;
       this.lastTime = timestamp;
       
       this.time += 0.01;
@@ -230,15 +248,15 @@ const ReactionDiffusion = (() => {
       const gl = this.gl;
       gl.bindVertexArray(this.vao);
       
-      // Process Pass (run a few iterations per frame to speed up RD slowly)
+      // Process Pass
       gl.useProgram(this.progProcess);
       gl.uniform2f(gl.getUniformLocation(this.progProcess, "uResolution"), this.simWidth, this.simHeight);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, "f"), this.currentPreset.f);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, "k"), this.currentPreset.k);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, "dA"), this.currentPreset.dA);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, "dB"), this.currentPreset.dB);
-      
-      for (let i = 0; i < 4; i++) {
+
+      for (let i = 0; i < 1; i++) {
         gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
         gl.viewport(0, 0, this.simWidth, this.simHeight);
         gl.bindTexture(gl.TEXTURE_2D, this.texA);
@@ -258,7 +276,8 @@ const ReactionDiffusion = (() => {
       gl.useProgram(this.progScreen);
       gl.uniform3f(gl.getUniformLocation(this.progScreen, "uColorBase"), this.colorBase[0], this.colorBase[1], this.colorBase[2]);
       gl.uniform3f(gl.getUniformLocation(this.progScreen, "uColorTip"), this.colorTip[0], this.colorTip[1], this.colorTip[2]);
-      
+      gl.uniform3f(gl.getUniformLocation(this.progScreen, "uColorMid"), this.colorMid[0], this.colorMid[1], this.colorMid[2]);
+
       gl.bindTexture(gl.TEXTURE_2D, this.texA);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
     }

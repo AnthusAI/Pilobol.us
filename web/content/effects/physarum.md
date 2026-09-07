@@ -12,3 +12,5 @@ The algorithm simulates thousands of independent agent particles that deposit a 
 ## Credits
 
 This implementation is inspired by the seminal research paper **Characteristics of pattern formation and evolution in approximations of physarum transport networks** by **Jeff Jones** (2010), and the beautiful WebGL adaptations popularized by digital artists like **Sage Jenson**.
+
+[See this effect running full-size in the effects gallery →](../assets/effects-gallery.html#physarum)

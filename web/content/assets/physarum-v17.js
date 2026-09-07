@@ -146,11 +146,24 @@ const Physarum = (() => {
     uniform sampler2D uTrail;
     uniform vec3 uColorBase;
     uniform vec3 uColorTip;
-    
+    uniform vec3 uColorMid;
+
     void main() {
       float val = texture(uTrail, vUv).r;
-      vec3 col = mix(uColorBase, uColorTip, val);
-      float alpha = val * 0.85;
+      // Growth trends toward uColorBase (the theme's ink color: dark in light
+      // mode, pale in dark mode), not uColorTip (accent). With the old
+      // mix(colorBase, colorTip, val) the densest, most-established trails --
+      // the areas that should read as the strongest stain -- ended up
+      // *lighter* under a light-mode multiply blend than sparse trail edges
+      // did, since colorTip is lighter than colorBase there. A fungal stain
+      // should get darker where it's most established, not lighter.
+      //
+      // Two-stage mix through uColorMid (--markus-accent-2, a genuinely
+      // different hue) instead of a flat two-color interpolation -- a single
+      // background->accent mix read as nearly monochromatic.
+      vec3 col = mix(uColorTip, uColorMid, smoothstep(0.0, 0.5, val));
+      col = mix(col, uColorBase, smoothstep(0.4, 1.0, val));
+      float alpha = val * 0.7;
       outColor = vec4(col * alpha, alpha);
     }
   `;
@@ -214,33 +227,38 @@ const Physarum = (() => {
       const ext = this.gl.getExtension("EXT_color_buffer_float");
       if (!ext) console.warn("EXT_color_buffer_float not available, might fail");
 
+      // moveSpeed cut ~4x from the original presets (0.4-2.0 -> 0.1-0.5) and
+      // the frame throttle below slowed from ~12fps to ~5fps -- combined,
+      // roughly a 9x reduction in how fast agents visibly travel. It read as
+      // continuous flowing motion rather than the slow, gradual creep this
+      // effect is supposed to be.
       this.presets = {
-        'creeping_veins': { 
-          sensorAngle: [0.30, 0.45], 
-          sensorDist: [2.5, 4.0], 
-          turnSpeed: [0.02, 0.05], 
-          moveSpeed: [0.5, 1.0], 
-          decay: [0.0001, 0.0002] 
+        'creeping_veins': {
+          sensorAngle: [0.30, 0.45],
+          sensorDist: [2.5, 4.0],
+          turnSpeed: [0.02, 0.05],
+          moveSpeed: [0.12, 0.25],
+          decay: [0.0001, 0.0002]
         },
-        'spore_burst': { 
-          sensorAngle: [0.5, 0.8], 
-          sensorDist: [1.5, 3.0], 
-          turnSpeed: [0.1, 0.2], 
-          moveSpeed: [0.8, 1.5], 
-          decay: [0.0002, 0.0005] 
+        'spore_burst': {
+          sensorAngle: [0.5, 0.8],
+          sensorDist: [1.5, 3.0],
+          turnSpeed: [0.1, 0.2],
+          moveSpeed: [0.2, 0.38],
+          decay: [0.0002, 0.0005]
         },
-        'mycelium_threads': { 
-          sensorAngle: [0.1, 0.2], 
-          sensorDist: [5.0, 8.0], 
-          turnSpeed: [0.01, 0.03], 
-          moveSpeed: [1.0, 2.0], 
-          decay: [0.00005, 0.0001] 
+        'mycelium_threads': {
+          sensorAngle: [0.1, 0.2],
+          sensorDist: [5.0, 8.0],
+          turnSpeed: [0.01, 0.03],
+          moveSpeed: [0.25, 0.5],
+          decay: [0.00005, 0.0001]
         },
         'crystallizing': {
           sensorAngle: [0.7, 0.9],
           sensorDist: [2.0, 4.0],
           turnSpeed: [0.3, 0.5],
-          moveSpeed: [0.4, 0.8], 
+          moveSpeed: [0.1, 0.2],
           decay: [0.0001, 0.0003]
         }
       };
@@ -260,9 +278,22 @@ const Physarum = (() => {
       this.agentTexSize = Math.ceil(Math.sqrt(50000)); 
       this.numAgents = this.agentTexSize * this.agentTexSize;
       
+      // Placeholder fallbacks in case readColors() below can't run yet for
+      // some reason (no document.body). Not meant to ever actually be seen.
       this.colorBase = [0, 0, 0];
       this.colorTip = [0.5, 1, 0.5];
-      
+      this.colorMid = [0.6, 0.6, 0.6];
+      // readColors() was previously only called periodically, ~60 frames in
+      // -- at the current throttle that's ~11 real seconds before the theme's
+      // actual colors ever get used. Agents start tightly clustered at their
+      // spawn points, so peak density there swings from very-high (mapping to
+      // the black fallback above) down to moderate (mapping to the bright
+      // green fallback above) as the cluster disperses, all before the real
+      // colors ever apply -- exactly the "dark spots that suddenly turn
+      // light, and the light is too bright" sequence. Reading real colors
+      // immediately removes the placeholder window entirely.
+      this.readColors();
+
       this.init();
       this.resize();
       window.addEventListener('resize', () => this.resize());
@@ -366,11 +397,13 @@ const Physarum = (() => {
       const div = document.createElement('div');
       div.style.color = 'var(--markus-ink)';
       div.style.backgroundColor = 'var(--markus-accent)';
+      div.style.borderColor = 'var(--markus-accent-2)';
       document.body.appendChild(div);
       const computed = getComputedStyle(div);
-      
+
       this.colorBase = rgbToNormalizedArray(computed.color);
       this.colorTip = rgbToNormalizedArray(computed.backgroundColor);
+      this.colorMid = rgbToNormalizedArray(computed.borderColor);
       document.body.removeChild(div);
     }
 
@@ -379,7 +412,7 @@ const Physarum = (() => {
       requestAnimationFrame((t) => this.render(t));
       
       if (!this.lastTime) this.lastTime = timestamp;
-      if (timestamp - this.lastTime < 83) return; // ~12 FPS throttle
+      if (timestamp - this.lastTime < 180) return; // ~5.5 FPS throttle (was ~12fps)
       this.lastTime = timestamp;
       
       this.time += 0.01;
@@ -461,6 +494,7 @@ const Physarum = (() => {
       gl.uniform1i(gl.getUniformLocation(this.progScreen, "uTrail"), 0);
       gl.uniform3f(gl.getUniformLocation(this.progScreen, "uColorBase"), this.colorBase[0], this.colorBase[1], this.colorBase[2]);
       gl.uniform3f(gl.getUniformLocation(this.progScreen, "uColorTip"), this.colorTip[0], this.colorTip[1], this.colorTip[2]);
+      gl.uniform3f(gl.getUniformLocation(this.progScreen, "uColorMid"), this.colorMid[0], this.colorMid[1], this.colorMid[2]);
       
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
@@ -471,7 +505,13 @@ const Physarum = (() => {
     }
   }
 
-  window.addEventListener('DOMContentLoaded', () => {
+  // This script is injected dynamically (background-manager.js appends it to
+  // <head> well after initial page load), so DOMContentLoaded has already
+  // fired by the time this line runs. Listening for it here means the
+  // listener never fires and Simulation is never constructed -- 100%
+  // reproducible, not a random flake. Match the readyState-check pattern
+  // cellular-automata-v1.js and reaction-diffusion-v1.js already use.
+  const init = () => {
     const canvas = document.getElementById('pilo-physarum-bg');
     if (canvas) {
       window.piloPhysarum = new Simulation(canvas);
@@ -480,6 +520,11 @@ const Physarum = (() => {
         window.piloPhysarum.currentPreset = window.piloPhysarum.presets[bodyPreset];
       }
     }
-  });
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 
 })();

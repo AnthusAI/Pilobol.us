@@ -129,6 +129,9 @@
   html {
     height: 100%;
     background-color: var(--pilo-stage);
+    /* Kill rubber-band overscroll on Apple (and elsewhere) so the stage
+       color doesn't flash past the paper sheet. */
+    overscroll-behavior: none;
   }
 
   .markus-body {
@@ -766,5 +769,6 @@
 
   body {
     isolation: isolate;
+    overscroll-behavior: none;
   }
 }

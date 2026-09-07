@@ -21,6 +21,7 @@ Usage:
 from __future__ import annotations
 
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -37,6 +38,7 @@ if not (PAPYRUS_ROOT / "src" / "papyrus_content").is_dir():
 sys.path.insert(0, str(PAPYRUS_ROOT / "src"))
 
 from papyrus_content.markus_renderer import build as markus_build  # noqa: E402
+from papyrus_content.markus_renderer import shell as markus_shell  # noqa: E402
 from papyrus_content.markus_renderer.build import build_markus_site  # noqa: E402
 from papyrus_content.markus_renderer.shell import NavItem, SiteChrome  # noqa: E402
 
@@ -54,20 +56,13 @@ def _build_nav_items_with_effects(articles):
 
 markus_build._build_nav_items = _build_nav_items_with_effects
 
-# Publication identity. This is the ONLY thing Pilobol.us contributes to the
-# render; everything else comes from Papyrus's renderer.
+# Publication identity. Tagline is None: the left-side masthead poem carries
+# wordmark + lines so we don't double "a fungus among us" via Papyrus's
+# single tagline slot. footer_html can't be "" (falsy → Papyrus default).
 PILOBOL_CHROME = SiteChrome(
     site_name="Pilobolus",
-    tagline="a fungus among us",
-    # The masthead tagline already says "a fungus among us" on every page --
-    # restating it in the footer too just made it repeat, worst on the one
-    # article actually titled that (title, tagline, lede, and footer all
-    # saying the same phrase on one page). footer_html can't be "" (falsy,
-    # falls back to Papyrus's own generic default), so this is deliberately
-    # a distinct, minimal line instead.
+    tagline=None,
     footer_html="<p>Pilobolus</p>",
-    # Site chrome only. These are never derived from article Markdown; Markus
-    # runs with raw HTML disabled precisely so authors cannot inject scripts.
     scripts=(
         "assets/background-manager.js",
         "assets/organic-image.js",
@@ -75,13 +70,53 @@ PILOBOL_CHROME = SiteChrome(
     ),
 )
 
+_orig_render_page = markus_shell.render_page
+
+_POEM_LINES = (
+    "a fungus among us",
+    "feeding on our excrement",
+    "and gradually infecting society.",
+)
+
+
+def render_page_with_poem(**kwargs):
+    """Stack Pilobolus + poem lines on the left; nav sits under the poem."""
+    html = _orig_render_page(**kwargs)
+    depth = kwargs.get("depth", 0) or 0
+    prefix = "../" * depth
+    lines = "\n".join(
+        f'      <p class="pilo-poem-line">{line}</p>' for line in _POEM_LINES
+    )
+    poem = (
+        '    <div class="pilo-masthead-poem">\n'
+        f'      <p class="markus-site-wordmark"><a href="{prefix}index.html">Pilobolus</a></p>\n'
+        f"{lines}\n"
+        "    </div>"
+    )
+    html2, n = re.subn(
+        r'<header class="markus-site-masthead">\s*'
+        r'<p class="markus-site-wordmark">.*?</p>\s*'
+        r'(?:<p class="markus-site-tagline">.*?</p>\s*)?'
+        r'(<nav class="markus-site-nav")',
+        rf'<header class="markus-site-masthead">\n{poem}\n    \1',
+        html,
+        count=1,
+        flags=re.S,
+    )
+    if n != 1:
+        raise RuntimeError(f"masthead poem inject failed (n={n})")
+    return html2
+
+
+markus_shell.render_page = render_page_with_poem
+# build.py binds render_page at import time; patch that name too.
+markus_build.render_page = render_page_with_poem
+
 
 def main() -> int:
     result = build_markus_site(
         content_dir=POD_ROOT / "content",
         out_dir=POD_ROOT / "dist-papyrus",
-        # No baked Markus theme: pilobil-theme-v10.css owns the palette
-        # (base tokens + its own light/dark rules), matching the live site.
         theme=None,
         site_css=POD_ROOT / "css" / "pilobil-theme-v10.css",
         chrome=PILOBOL_CHROME,

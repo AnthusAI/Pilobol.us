@@ -190,6 +190,10 @@
     max-width: 46rem;
     margin: 0 auto;
     padding: 2rem 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 
   .markus-site-masthead-row {
@@ -198,6 +202,24 @@
     align-items: baseline;
     justify-content: space-between;
     gap: 0.5rem 1rem;
+  }
+
+  /* Left-stack brand poem: wordmark + lines; nav comes under it. */
+  .pilo-masthead-poem {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+    max-width: 28rem;
+  }
+
+  .pilo-poem-line {
+    margin: 0;
+    color: var(--markus-muted);
+    font-style: italic;
+    font-family: var(--markus-serif);
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    line-height: 1.35;
   }
 
   .markus-site-wordmark {
@@ -260,9 +282,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem 0.9rem;
-    padding-bottom: 0.5rem;
+    margin: 0;
+    padding: 0 0 0.75rem;
     border-bottom: 1px solid var(--markus-line);
     font-size: 0.92rem;
+    width: 100%;
   }
 
   .markus-site-wordmark {

@@ -1,5 +1,5 @@
 ---
-title: Stories
+title: Spores
 description: Glimpses of our moldy future.
 ---
 

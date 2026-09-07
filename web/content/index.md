@@ -2,8 +2,6 @@
 title: ""
 ---
 
-Feeding on our excrement and gradually infecting society.
-
 :::card-grid{columns="1"}
 :::card{title="Latest" span="full"}
 ### [They liked the ranked room](articles/they-liked-the-ranked-room.html)
@@ -26,5 +24,5 @@ A number on a screen is worth something only while enough people agree that it i
 :::
 
 :::aside{title="More stories"}
-Full list: [Stories archive →](articles/index.html). Mission: [A fungus among us →](articles/fungus-among-us.html).
+Spores: [archive →](articles/index.html). Mission: [A fungus among us →](articles/fungus-among-us.html).
 :::

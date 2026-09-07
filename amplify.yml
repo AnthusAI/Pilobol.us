@@ -8,7 +8,13 @@ frontend:
         # its source at a pinned commit and pointing PAPYRUS_ROOT at it is
         # all build_via_papyrus.py actually needs.
         - git clone --depth 1 https://github.com/AnthusAI/Papyrus.git /tmp/papyrus-src
-        - cd /tmp/papyrus-src && git fetch --depth 1 origin d664fc7a397b578155df38068ed1a8967d4dc69f && git checkout d664fc7a397b578155df38068ed1a8967d4dc69f
+        # `git -C <dir>` instead of `cd <dir> && git ...`: Amplify's build
+        # phases share ONE persistent shell, so a bare `cd` here silently
+        # carried into the build phase below -- its own `cd web` then
+        # resolved relative to /tmp/papyrus-src instead of the repo root,
+        # looking for a web/ directory that only exists in THIS repo.
+        - git -C /tmp/papyrus-src fetch --depth 1 origin d664fc7a397b578155df38068ed1a8967d4dc69f
+        - git -C /tmp/papyrus-src checkout d664fc7a397b578155df38068ed1a8967d4dc69f
         - pip install "git+https://github.com/AnthusAI/Markus@v0.5.1"
     build:
       commands:

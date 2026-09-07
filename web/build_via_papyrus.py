@@ -78,7 +78,7 @@ def render_page_with_poem(**kwargs):
         if line == "a fungus among us":
             rendered_lines.append(
                 f'      <p class="pilo-poem-line">'
-                f'<a href="{mission}">a fungus among us</a></p>'
+                f'a <a href="{mission}">fungus among us</a></p>'
             )
         else:
             rendered_lines.append(f'      <p class="pilo-poem-line">{line}</p>')

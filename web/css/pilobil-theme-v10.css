@@ -227,18 +227,18 @@
   }
 
   .pilo-poem-line a {
-    color: inherit;
-    text-decoration: none;
+    color: var(--markus-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
   }
 
   .pilo-poem-line a:visited {
-    color: inherit;
+    color: var(--markus-accent);
   }
 
   .pilo-poem-line a:hover {
-    color: var(--markus-accent);
-    text-decoration: underline;
-    text-underline-offset: 0.15em;
+    color: var(--markus-accent-2);
   }
 
   .markus-site-wordmark {

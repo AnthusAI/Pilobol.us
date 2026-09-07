@@ -594,7 +594,6 @@
       column-gap: 0.95rem;
       row-gap: 0.25rem;
       align-items: start;
-      overflow: hidden;
     }
 
     .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
@@ -617,6 +616,7 @@
       min-width: 0;
     }
 
+    /* Image column: width from the grid; height follows the still’s natural aspect. */
     .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
       .markus-card-body > p:has(img),
     .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
@@ -627,20 +627,16 @@
       margin: 0;
       width: 100%;
       max-width: 100%;
+      min-width: 0;
       height: auto;
-      max-height: 7.75rem;
       align-self: start;
       justify-self: stretch;
-      object-fit: cover;
-      aspect-ratio: 4 / 3;
-      min-width: 0;
-      min-height: 0;
+      object-fit: contain;
+      aspect-ratio: auto;
     }
 
-    /* img sits inside a <p>; that wrapper must not inflate past the column */
     .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
       .markus-card-body > p:has(img) {
-      overflow: hidden;
       max-width: 100%;
     }
 
@@ -649,11 +645,10 @@
       display: block;
       width: 100%;
       max-width: 100%;
-      height: 100%;
-      max-height: 7.75rem;
+      height: auto;
       margin: 0;
-      object-fit: cover;
-      aspect-ratio: 4 / 3;
+      object-fit: contain;
+      aspect-ratio: auto;
     }
   }
 

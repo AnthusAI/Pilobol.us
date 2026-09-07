@@ -510,11 +510,11 @@
   }
 
   .markus-document > .markus-card-grid > .markus-card .markus-card-body > h3:first-child {
-    margin: 0 0 0.45rem;
+    margin: 0 0 0.55rem;
     font-family: var(--markus-serif);
-    font-size: 1.15rem;
+    font-size: clamp(1.45rem, 3.2vw, 2.05rem);
     font-weight: 600;
-    line-height: 1.25;
+    line-height: 1.15;
   }
 
   .markus-document > .markus-card-grid > .markus-card .markus-card-body > h3:first-child a {
@@ -550,24 +550,10 @@
     aspect-ratio: 16 / 10;
   }
 
-  /* Featured lead: more real estate, bigger type */
+  /* Full-span lead keeps a touch more vertical pad; type matches every card. */
   .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child {
-    /* Same horizontal pad as siblings so text stays on the shared left edge. */
     padding: 1.55rem var(--pilo-feed-pad-x) 1.65rem;
     background: color-mix(in srgb, var(--markus-card) 26%, transparent);
-  }
-
-  .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child
-    .markus-card-body > h3:first-child {
-    font-size: clamp(1.45rem, 3.2vw, 2.05rem);
-    line-height: 1.15;
-    margin-bottom: 0.65rem;
-  }
-
-  .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child
-    .markus-card-body > p {
-    font-size: 1.05rem;
-    color: var(--markus-ink);
   }
 
   /* Wide: full-span cards with media → copy left / image right */
@@ -591,7 +577,7 @@
       grid-column: 1;
       grid-row: 1;
       margin: 0;
-      font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+      font-size: clamp(1.45rem, 3.2vw, 2.05rem);
     }
 
     .markus-document > .markus-card-grid > .markus-card[data-span="full"]:has(img)

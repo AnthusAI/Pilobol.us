@@ -441,11 +441,14 @@
   }
 
   .markus-document > .markus-card-grid > .markus-card {
-    transition: border-color 0.15s ease, transform 0.15s ease;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    transition: transform 0.15s ease;
   }
 
   .markus-document > .markus-card-grid > .markus-card:hover {
-    border-color: var(--markus-accent);
     transform: translateY(-1px);
   }
 
@@ -493,12 +496,7 @@
   /* Featured lead: more real estate, bigger type */
   .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child {
     padding: 1.55rem 1.45rem 1.65rem;
-    background:
-      linear-gradient(
-        155deg,
-        color-mix(in srgb, var(--markus-quote) 10%, var(--markus-card)),
-        var(--markus-card)
-      );
+    background: transparent;
   }
 
   .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child

@@ -428,8 +428,18 @@
     z-index: -1;
     pointer-events: none;
     /* Lower ceiling than before (was 0.65/0.8) -- the effect read as too
-       high-contrast against the page. */
-    opacity: 0.3; mix-blend-mode: multiply;
+       high-contrast against the page.
+       Blend mode is "normal", not "multiply": multiply mathematically
+       guarantees the result is never lighter than the page (result =
+       backdrop * source), which also means it's IMPOSSIBLE for a rare
+       highlight fleck to ever read as lighter than the paper, even a
+       little. Each shader's own color math is now responsible for staying
+       darker than the page almost always (a fungal stain, not a bleach
+       spot) with the one deliberate exception being a rare, tiny bright
+       glint at peak density (see dla-v1.js fsScreen). Dark mode keeps
+       "screen" below -- that's an intentional bioluminescent glow, not
+       something this note applies to. */
+    opacity: 0.3; mix-blend-mode: normal;
     /* Hidden-middle half-width is derived from --pilo-content-width (defined
        once, on :root, above) instead of a second hard-coded rem number here.
        This is the actual fix for the gap that kept coming back: it was never

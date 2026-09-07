@@ -14,6 +14,21 @@
       script: 'cellular-automata-v1.js',
       creditTitle: 'Effect: Continuous Cellular Automata',
       creditUrl: 'effects/cellular-automata.html'
+    },
+    {
+      script: 'dla-v1.js',
+      creditTitle: 'Effect: Diffusion-Limited Aggregation',
+      creditUrl: 'effects/dla.html'
+    },
+    {
+      script: 'spore-drift-v1.js',
+      creditTitle: 'Effect: Spore Drift',
+      creditUrl: 'effects/spore-drift.html'
+    },
+    {
+      script: 'lichen-v1.js',
+      creditTitle: 'Effect: Crustose Lichen',
+      creditUrl: 'effects/lichen.html'
     }
   ];
   

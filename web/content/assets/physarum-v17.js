@@ -163,6 +163,12 @@ const Physarum = (() => {
       // background->accent mix read as nearly monochromatic.
       vec3 col = mix(uColorTip, uColorMid, smoothstep(0.0, 0.5, val));
       col = mix(col, uColorBase, smoothstep(0.4, 1.0, val));
+
+      // See dla-v1.js fsScreen for why this rare tiny highlight exists.
+      float glintGate = step(0.986, fract(sin(dot(vUv, vec2(41.3, 289.1))) * 43758.5453));
+      float glint = glintGate * smoothstep(0.85, 1.0, val) * 0.12;
+      col = mix(col, vec3(1.0), glint);
+
       float alpha = val * 0.7;
       outColor = vec4(col * alpha, alpha);
     }

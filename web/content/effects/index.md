@@ -12,4 +12,7 @@ Here is an index of the current effects in rotation and the brilliant artists an
 - [Physarum Polycephalum](physarum.html): A slime mold network simulation.
 - [Reaction-Diffusion](reaction-diffusion.html): Chemical Turing patterns.
 - [Continuous Cellular Automata](cellular-automata.html): Soft-edged geometric crystalline growths.
+- [Diffusion-Limited Aggregation](dla.html): Sparse, dendritic frost or coral branching.
+- [Spore Drift](spore-drift.html): Loose particles carried on a curl-noise current.
+- [Crustose Lichen](lichen.html): Patchy colonies spreading and merging.
 

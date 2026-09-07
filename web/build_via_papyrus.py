@@ -72,7 +72,7 @@ def render_page_with_poem(**kwargs):
     html = _orig_render_page(**kwargs)
     depth = kwargs.get("depth", 0) or 0
     prefix = "../" * depth
-    mission = f"{prefix}articles/fungus-among-us.html"
+    mission = f"{prefix}a-fungus-among-us.html"
     rendered_lines = []
     for line in _POEM_LINES:
         if line == "a fungus among us":
@@ -105,6 +105,35 @@ markus_shell.render_page = render_page_with_poem
 markus_build.render_page = render_page_with_poem
 
 
+def _build_standalone_page(result, source: Path, href: str) -> None:
+    """Render one root-level page that isn't part of ``articles/`` or a
+    ``sections`` collection — e.g. the mission statement, linked only from
+    the masthead poem. ``_discover_articles``/``_discover_section`` never
+    see it, so it needs its own write here.
+    """
+    if not source.is_file():
+        raise RuntimeError(f"Standalone page source not found: {source}")
+    css_version = markus_build._css_version(
+        result.out_dir / "css", result.out_dir / "assets"
+    )
+    fragment = markus_build.convert_fragment(source, theme=None)
+    title = markus_build._read_title(source, href)
+    page_path = result.out_dir / href
+    page_path.write_text(
+        markus_build.render_page(
+            title=title,
+            fragment=fragment,
+            active_href=href,
+            nav_items=[],
+            depth=0,
+            chrome=PILOBOL_CHROME,
+            css_version=css_version,
+        ),
+        encoding="utf-8",
+    )
+    result.pages.append(page_path)
+
+
 def main() -> int:
     result = build_markus_site(
         content_dir=POD_ROOT / "content",
@@ -113,6 +142,11 @@ def main() -> int:
         site_css=POD_ROOT / "css" / "pilobil-theme-v10.css",
         chrome=PILOBOL_CHROME,
         sections=("effects",),
+    )
+    _build_standalone_page(
+        result,
+        POD_ROOT / "content" / "a-fungus-among-us.md",
+        "a-fungus-among-us.html",
     )
     print(f"Built Pilobol.us via Papyrus renderer: {result.out_dir}")
     for page in result.pages:

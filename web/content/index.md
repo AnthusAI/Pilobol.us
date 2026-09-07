@@ -4,13 +4,6 @@ title: ""
 
 :::card-grid{columns="6"}
 :::card{span="full"}
-### [They liked the ranked room](articles/they-liked-the-ranked-room.html)
-
-Opt-out asks you to leave a room you moved into on purpose. Opt-in is more honest. Neither undoes liking the copy.
-
-*Monday, September 7, 2026*
-:::
-:::card{span="3"}
 ### [A miracle in the outback](articles/gus-lamont-ai-sighting.html)
 
 ![Celebrity Today AI kidnapping collage, labeled AI-generated](assets/gus-lamont/celebrity-today-kidnap-ai-labeled.jpg)
@@ -28,7 +21,7 @@ A number on a screen is worth something only while enough people agree that it i
 
 *Sunday, September 6, 2026*
 :::
-:::card{span="full"}
+:::card{span="3"}
 ### [Father Justin](articles/father-justin.html)
 
 ![Father Justin in collar on the Assisi balcony](assets/father-justin/father-justin-osv-collar.jpg)

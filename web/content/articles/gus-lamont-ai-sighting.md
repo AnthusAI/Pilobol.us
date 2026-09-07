@@ -25,8 +25,16 @@ Other posts were louder. A “miracle in the outback.” A reunion with loved on
 :::figure{src="../assets/gus-lamont/anchor-focus-miracle-return-false.jpg" alt="Screenshot of an Anchor Focus Facebook post claiming Gus Lamont miraculously returned, stamped False by fact-checkers" caption="Anchor Focus posted that Gus was alive and that his parents broke down after a miraculous return, with a collage of the boy, a hole in the ground, and a police officer. None of that return happened. Fact-checkers stamped the post False. Engagement-bait pages, some managed from Vietnam, kept minting breakthroughs the ground search never had." credit="Screenshot via AAP FactCheck"}
 :::
 
-South Australia Police told AFP Fact Check the carrying image was “not factual.” Look close and the man’s fingers warp; a tree floats like a ghost. AAP FactCheck traced engagement-bait pages managed from Vietnam. SA’s Commissioner for Victims’ Rights, Sarah Quick, said the fakes added an “extra layer of trauma” for a family already underwater — “very real consequences” for the people still looking.
+South Australia Police told [AFP Fact Check](https://factcheck.afp.com/doc.afp.com.78B22ZR) the carrying image was “not factual.” Look close and the man’s fingers warp; a tree floats like a ghost. [AAP FactCheck](https://www.aap.com.au/factcheck/false-claims-about-missing-gus-lamont-spread-on-social-media/) traced engagement-bait pages managed from Vietnam. SA’s Commissioner for Victims’ Rights, Sarah Quick, said the fakes added an “extra layer of trauma” for a family already underwater — “very real consequences” for the people still looking.
 
 The search on the ground had scaled back. The search in the feed kept minting breakthroughs.
 
 Nobody had to dig a shaft or fly a drone to make those scenes. They only had to prefer the picture.
+
+## Receipts
+
+- [AFP Fact Check — police refute authenticity of missing-boy image](https://factcheck.afp.com/doc.afp.com.78B22ZR)
+- [AAP FactCheck — false claims about missing Gus Lamont](https://www.aap.com.au/factcheck/false-claims-about-missing-gus-lamont-spread-on-social-media/)
+- [ABC — AI-generated images of missing 4yo Gus raise legal concerns](https://www.abc.net.au/news/2025-10-11/ai-generated-images-of-4yo-gus-prompt-call-for-stronger-laws/105873218)
+- [ABC — AI image of missing Gus “concerning but not surprising”](https://www.abc.net.au/news/2025-10-09/sa-ai-image-of-missing-child-appears-online/105868548)
+- [7NEWS — fake AI images spark false claims in Gus Lamont search](https://7news.com.au/news/fake-ai-images-sparks-wave-of-false-claims-in-search-for-missing-sa-boy-gus-lamont-c-20305471)

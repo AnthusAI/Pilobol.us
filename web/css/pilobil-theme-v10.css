@@ -129,6 +129,9 @@
   html {
     height: 100%;
     background-color: var(--pilo-stage);
+    /* Kill rubber-band overscroll on Apple (and elsewhere) so the stage
+       color doesn't flash past the paper sheet. */
+    overscroll-behavior: none;
   }
 
   .markus-body {
@@ -194,7 +197,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 0.25rem;
-    border-bottom: 1px solid var(--markus-line);
+    border-bottom: none;
   }
 
   .markus-site-masthead-row {
@@ -221,6 +224,21 @@
     font-family: var(--markus-serif);
     font-size: clamp(1rem, 2.2vw, 1.2rem);
     line-height: 1.35;
+  }
+
+  .pilo-poem-line a {
+    color: var(--markus-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  .pilo-poem-line a:visited {
+    color: var(--markus-accent);
+  }
+
+  .pilo-poem-line a:hover {
+    color: var(--markus-accent-2);
   }
 
   .markus-site-wordmark {
@@ -438,11 +456,15 @@
   }
 
   .markus-document > .markus-card-grid > .markus-card {
-    transition: border-color 0.15s ease, transform 0.15s ease;
+    /* Partial opacity: panel tint that still lets the FX show through. */
+    background: color-mix(in srgb, var(--markus-card) 18%, transparent);
+    border: none;
+    border-radius: 1rem;
+    box-shadow: none;
+    transition: transform 0.15s ease, background 0.15s ease;
   }
 
   .markus-document > .markus-card-grid > .markus-card:hover {
-    border-color: var(--markus-accent);
     transform: translateY(-1px);
   }
 
@@ -490,12 +512,7 @@
   /* Featured lead: more real estate, bigger type */
   .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child {
     padding: 1.55rem 1.45rem 1.65rem;
-    background:
-      linear-gradient(
-        155deg,
-        color-mix(in srgb, var(--markus-quote) 10%, var(--markus-card)),
-        var(--markus-card)
-      );
+    background: color-mix(in srgb, var(--markus-card) 26%, transparent);
   }
 
   .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child
@@ -566,7 +583,7 @@
     padding: 2.5rem 1.25rem 3rem;
     color: var(--markus-muted);
     font-size: 0.85rem;
-    border-top: 1px solid var(--markus-line);
+    border-top: none;
   }
 
   .markus-site-footer a {
@@ -766,5 +783,6 @@
 
   body {
     isolation: isolate;
+    overscroll-behavior: none;
   }
 }

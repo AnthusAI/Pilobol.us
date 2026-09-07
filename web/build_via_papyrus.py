@@ -50,7 +50,7 @@ markus_build._build_nav_items = lambda articles: []
 PILOBOL_CHROME = SiteChrome(
     site_name="Pilobolus",
     tagline=None,
-    footer_html="<p>Pilobolus</p>",
+    footer_html="<!-- background credit host -->",
     scripts=(
         "assets/background-manager.js",
         "assets/organic-image.js",
@@ -72,9 +72,17 @@ def render_page_with_poem(**kwargs):
     html = _orig_render_page(**kwargs)
     depth = kwargs.get("depth", 0) or 0
     prefix = "../" * depth
-    lines = "\n".join(
-        f'      <p class="pilo-poem-line">{line}</p>' for line in _POEM_LINES
-    )
+    mission = f"{prefix}articles/fungus-among-us.html"
+    rendered_lines = []
+    for line in _POEM_LINES:
+        if line == "a fungus among us":
+            rendered_lines.append(
+                f'      <p class="pilo-poem-line">'
+                f'a <a href="{mission}">fungus among us</a></p>'
+            )
+        else:
+            rendered_lines.append(f'      <p class="pilo-poem-line">{line}</p>')
+    lines = "\n".join(rendered_lines)
     poem = (
         '    <div class="pilo-masthead-poem">\n'
         f'      <p class="markus-site-wordmark"><a href="{prefix}index.html">Pilobolus</a></p>\n'

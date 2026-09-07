@@ -1,6 +1,6 @@
 ---
 title: A fungus among us
-date: 'Sunday, September 6, 2026'
+date: 'Monday, September 7, 2026'
 description: A fungus that grows in cow dung and shoots its spores dead straight
   at the sun gave this site its name — and its whole beat.
 ---

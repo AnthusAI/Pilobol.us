@@ -7,22 +7,22 @@ Papyrus local pod + Kanbus publication board for **Pilobol.us** (*a fungus among
 - **Markus** = reader-facing Markdown publication (site builds via `web/build_via_papyrus.py`).
 - **Kanbus** project key: `PILO`. Console port: `4260`. Stories only — not the knowledge store.
 
-Pod path: `/workspace/pilobil.us` → `/workspace/pilobol.us`.
+Pod path: `/workspace/pilobol.us`.
 
 ## Layout
 
 ```
 .kanbus.yml                          # story type + stage machine + hooks
-.papyrus/operator-cli.config.yaml    # local backend, corpus pilobil-us
+.papyrus/operator-cli.config.yaml    # local backend, corpus pilobol-us
 bin/register-ref.py                  # accept a reference (JSON)
 bin/list-refs.py                     # list accepted/pending refs
 project/wiki/                        # Papyrus local-pod wiki (concepts, sources, DNA)
-stories/WIKI-pilobil-accepted/references/  # accepted reference JSON
+stories/WIKI-pilobol-accepted/references/  # accepted reference JSON
 stories/<id>/                        # publication story artifacts
 web/                                 # Markus site
 ```
 
-Knowledge home: `project/wiki/` + `stories/WIKI-pilobil-accepted/references/`.
+Knowledge home: `project/wiki/` + `stories/WIKI-pilobol-accepted/references/`.
 Do not put references on the Kanbus board.
 
 ## Stage order (publication stories)
@@ -32,7 +32,7 @@ Do not put references on the Kanbus board.
 ## Quick check
 
 ```bash
-cd /workspace/pilobil.us
+cd /workspace/pilobol.us
 PATH=/workspace/kbs-172/bin:$PATH
 kbs validate
 kbs hooks validate

@@ -7,8 +7,8 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 POD = Path(__file__).resolve().parents[1]
-REFS = POD / "stories" / "WIKI-pilobil-accepted" / "references"
-CORPUS = "pilobil-us"
+REFS = POD / "stories" / "WIKI-pilobol-accepted" / "references"
+CORPUS = "pilobol-us"
 
 
 def slug_from_url(url: str) -> str:
@@ -26,7 +26,7 @@ def main() -> int:
     parser.add_argument("--why", default="")
     parser.add_argument("--id", default="")
     parser.add_argument("--status", default="accepted")
-    parser.add_argument("--source", default="pilobil-wiki")
+    parser.add_argument("--source", default="pilobol-wiki")
     args = parser.parse_args()
     REFS.mkdir(parents=True, exist_ok=True)
     rid = args.id or slug_from_url(args.url)

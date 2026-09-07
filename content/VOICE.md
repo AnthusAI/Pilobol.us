@@ -271,8 +271,8 @@ a scene. They fail when they replace the scene.
 
 - Brand: **Pilobolus**. Domain/agent/repo: **Pilobol.us** /
   `AnthusAI/Pilobol.us`. Never **Pilobil.us**.
-- Local checkout: `/workspace/pilobol.us`. Internal Papyrus corpus key may
-  still be `pilobil-us` — that is wiring, not public copy.
+- Local checkout: `/workspace/pilobol.us`. Internal Papyrus corpus key is
+  `pilobol-us` — that is wiring, not public copy.
 - Product and outlet names need sources. Claims about what happened need
   checkable reporting.
 - Never invent a live public URL or launch voice until Ryan says the brand is
@@ -312,7 +312,7 @@ buoy that AI bots write the hunt. `project/wiki/mission.md`.
 **Scout digests (chat)** — inverted pyramid for Ryan; not reader-facing site
 copy. `skills/daily-find`.
 
-**Internal source keepers** (`project/wiki/sources/`) — thin claim cards, not house prose. Paired with JSON on `WIKI-pilobil-accepted`.
+**Internal source keepers** (`project/wiki/sources/`) — thin claim cards, not house prose. Paired with JSON on `WIKI-pilobol-accepted`.
 
 ## Distinct from Anth.us and Chatticus
 

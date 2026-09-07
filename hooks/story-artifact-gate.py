@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed artifact gates for Pilobil.us newsroom story transitions."""
+"""Fail-closed artifact gates for Pilobol.us newsroom story transitions."""
 
 from __future__ import annotations
 

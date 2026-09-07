@@ -1,5 +1,5 @@
 /* Vendored from Markus (src/markusmd/static/markus.css + site.css).
-   Wrapped in @layer markus so Pilobil.us site CSS can override it
+   Wrapped in @layer markus so Pilobol.us site CSS can override it
    deterministically via a later-declared layer, regardless of
    selector specificity or upstream Markus's own future use of @layer. */
 @layer markus {

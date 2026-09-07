@@ -1,0 +1,529 @@
+{
+  "schema_version": 2,
+  "generated_at": "2026-09-07T19:53:21.748259Z",
+  "corpus_uri": "file:corpora/pilobol-us",
+  "raw_dir": ".",
+  "latest_run_id": null,
+  "latest_snapshot_id": null,
+  "items": {
+    "7news-gus-lamont-fake-ai-images": {
+      "id": "7news-gus-lamont-fake-ai-images",
+      "relpath": "imports/7news-gus-lamont-fake-ai-images--fake-ai-images-spark-false-claims-in-gus-lamont-search-7news.md",
+      "sha256": "062494d29fff8e3230f540b40a6766d5f4e72b616e5fe573987257adde153b25",
+      "bytes": 1888,
+      "media_type": "text/markdown",
+      "title": "Fake AI images spark false claims in Gus Lamont search (7NEWS)",
+      "tags": [
+        "synthetic-sightings",
+        "uncanny-hyperreality",
+        "subtle-steering",
+        "news"
+      ],
+      "source_uri": "https://7news.com.au/news/fake-ai-images-sparks-wave-of-false-claims-in-search-for-missing-sa-boy-gus-lamont-c-20305471",
+      "metadata": {
+        "biblicus": {
+          "id": "7news-gus-lamont-fake-ai-images",
+          "source": "https://7news.com.au/news/fake-ai-images-sparks-wave-of-false-claims-in-search-for-missing-sa-boy-gus-lamont-c-20305471"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "aap-gus-lamont-false-claims-social": {
+      "id": "aap-gus-lamont-false-claims-social",
+      "relpath": "imports/aap-gus-lamont-false-claims-social--false-claims-about-missing-gus-lamont-spread-on-social-media-aap-factcheck.md",
+      "sha256": "5f01146e1cf6c22d6f49ba1b3dec194c4a3e919999d2d8d04c468c36d534c50d",
+      "bytes": 1801,
+      "media_type": "text/markdown",
+      "title": "False claims about missing Gus Lamont spread on social media (AAP FactCheck)",
+      "tags": [
+        "synthetic-sightings",
+        "liars-dividend",
+        "counterfeit-persons",
+        "fact-check"
+      ],
+      "source_uri": "https://www.aap.com.au/factcheck/false-claims-about-missing-gus-lamont-spread-on-social-media/",
+      "metadata": {
+        "biblicus": {
+          "id": "aap-gus-lamont-false-claims-social",
+          "source": "https://www.aap.com.au/factcheck/false-claims-about-missing-gus-lamont-spread-on-social-media/"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "abc-gus-lamont-ai-images-misinformation": {
+      "id": "abc-gus-lamont-ai-images-misinformation",
+      "relpath": "imports/abc-gus-lamont-ai-images-misinformation--ai-generated-images-of-missing-4yo-gus-raise-legal-concerns-abc.md",
+      "sha256": "67552b68fa9982b40a597a4a4c09e84633e68968b1dbb5ae7c4d17990bf0bc26",
+      "bytes": 2217,
+      "media_type": "text/markdown",
+      "title": "AI-generated images of missing 4yo Gus raise legal concerns (ABC)",
+      "tags": [
+        "synthetic-sightings",
+        "uncanny-hyperreality",
+        "counterfeit-persons",
+        "liars-dividend",
+        "news"
+      ],
+      "source_uri": "https://www.abc.net.au/news/2025-10-11/ai-generated-images-of-4yo-gus-prompt-call-for-stronger-laws/105873218",
+      "metadata": {
+        "biblicus": {
+          "id": "abc-gus-lamont-ai-images-misinformation",
+          "source": "https://www.abc.net.au/news/2025-10-11/ai-generated-images-of-4yo-gus-prompt-call-for-stronger-laws/105873218"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "abc-holder-gus-ai-image-not-surprising": {
+      "id": "abc-holder-gus-ai-image-not-surprising",
+      "relpath": "imports/abc-holder-gus-ai-image-not-surprising--expert-ai-image-of-missing-gus-concerning-but-not-surprising-abc.md",
+      "sha256": "f4dc2cbfe57bad15efb6b4ed03ede8710419c641a03c5b5c50e8f09291c1d941",
+      "bytes": 1955,
+      "media_type": "text/markdown",
+      "title": "Expert: AI image of missing Gus \u201cconcerning but not surprising\u201d (ABC)",
+      "tags": [
+        "synthetic-sightings",
+        "uncanny-hyperreality",
+        "liars-dividend",
+        "news"
+      ],
+      "source_uri": "https://www.abc.net.au/news/2025-10-09/sa-ai-image-of-missing-child-appears-online/105868548",
+      "metadata": {
+        "biblicus": {
+          "id": "abc-holder-gus-ai-image-not-surprising",
+          "source": "https://www.abc.net.au/news/2025-10-09/sa-ai-image-of-missing-child-appears-online/105868548"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "afp-gus-lamont-police-refute-image": {
+      "id": "afp-gus-lamont-police-refute-image",
+      "relpath": "imports/afp-gus-lamont-police-refute-image--australia-police-refute-authenticity-of-missing-boy-image-afp-fact-check.md",
+      "sha256": "6b201adbc811ede431ebed2ecc9f45decc8c076d5db7927dc824ff9bac0f6a00",
+      "bytes": 1715,
+      "media_type": "text/markdown",
+      "title": "Australia police refute authenticity of missing-boy image (AFP Fact Check)",
+      "tags": [
+        "synthetic-sightings",
+        "counterfeit-persons",
+        "liars-dividend",
+        "fact-check"
+      ],
+      "source_uri": "https://factcheck.afp.com/doc.afp.com.78B22ZR",
+      "metadata": {
+        "biblicus": {
+          "id": "afp-gus-lamont-police-refute-image",
+          "source": "https://factcheck.afp.com/doc.afp.com.78B22ZR"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "allport-postman-analysis-of-rumor": {
+      "id": "allport-postman-analysis-of-rumor",
+      "relpath": "imports/allport-postman-analysis-of-rumor--an-analysis-of-rumor-allport-postman.md",
+      "sha256": "dde79e7e1e3b77df366fbffe68f632f1d0f01f31ba4930bf1b45718650190048",
+      "bytes": 2020,
+      "media_type": "text/markdown",
+      "title": "An Analysis of Rumor (Allport & Postman)",
+      "tags": [
+        "competing-event-narratives",
+        "information-habit",
+        "historical-lineage",
+        "classic-social-psychology"
+      ],
+      "source_uri": "https://www.romolocapuano.com/wp-content/uploads/2018/10/ALLPORT_POSTMAN_AN-ANALYSIS-OF-RUMOR.pdf",
+      "metadata": {
+        "biblicus": {
+          "id": "allport-postman-analysis-of-rumor",
+          "source": "https://www.romolocapuano.com/wp-content/uploads/2018/10/ALLPORT_POSTMAN_AN-ANALYSIS-OF-RUMOR.pdf"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "bikhchandani-hirshleifer-welch-informational-cascades": {
+      "id": "bikhchandani-hirshleifer-welch-informational-cascades",
+      "relpath": "imports/bikhchandani-hirshleifer-welch-informational-cascades--a-theory-of-fads-as-informational-cascades-bikhchandani-hirshleifer-welch.md",
+      "sha256": "71bc0562d728908077705165a249293e85c720472bc9fff8cec8b923282a5747",
+      "bytes": 1887,
+      "media_type": "text/markdown",
+      "title": "A Theory of Fads\u2026 as Informational Cascades (Bikhchandani, Hirshleifer & Welch)",
+      "tags": [
+        "competing-event-narratives",
+        "information-habit",
+        "economics-observational-learning"
+      ],
+      "source_uri": "https://snap.stanford.edu/class/cs224w-readings/bikhchandani92fads.pdf",
+      "metadata": {
+        "biblicus": {
+          "id": "bikhchandani-hirshleifer-welch-informational-cascades",
+          "source": "https://snap.stanford.edu/class/cs224w-readings/bikhchandani92fads.pdf"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "boin-hart-mcconnell-crisis-exploitation": {
+      "id": "boin-hart-mcconnell-crisis-exploitation",
+      "relpath": "imports/boin-hart-mcconnell-crisis-exploitation--crisis-exploitation-framing-contests-after-emergencies-boin-t-hart-mcconnell.md",
+      "sha256": "383abb05be647941d07c5857f932d6a305bf75a2624ca182e435511351afe85f",
+      "bytes": 1860,
+      "media_type": "text/markdown",
+      "title": "Crisis Exploitation: Framing Contests after Emergencies (Boin, \u2019t Hart & McConnell)",
+      "tags": [
+        "competing-event-narratives",
+        "ai-proxy-politics",
+        "state-made-belief",
+        "crisis-governance-political-communication"
+      ],
+      "source_uri": "https://strathprints.strath.ac.uk/26398/",
+      "metadata": {
+        "biblicus": {
+          "id": "boin-hart-mcconnell-crisis-exploitation",
+          "source": "https://strathprints.strath.ac.uk/26398/"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "hyzen-van-den-bulck-ideological-entrepreneurs": {
+      "id": "hyzen-van-den-bulck-ideological-entrepreneurs",
+      "relpath": "imports/hyzen-van-den-bulck-ideological-entrepreneurs--conspiracies-ideological-entrepreneurs-and-digital-popular-culture-hyzen-van-den.md",
+      "sha256": "b1d728f7304b0887200fc7618c5ce4ea36d871d2c2dad1862d5eb4a910ec0e17",
+      "bytes": 2004,
+      "media_type": "text/markdown",
+      "title": "Conspiracies, Ideological Entrepreneurs, and Digital Popular Culture (Hyzen & Van den Bulck)",
+      "tags": [
+        "competing-event-narratives",
+        "infiltrated-circle",
+        "fungus-among-us",
+        "media-cultural-studies"
+      ],
+      "source_uri": "https://www.cogitatiopress.com/mediaandcommunication/article/viewFile/4092/2268",
+      "metadata": {
+        "biblicus": {
+          "id": "hyzen-van-den-bulck-ideological-entrepreneurs",
+          "source": "https://www.cogitatiopress.com/mediaandcommunication/article/viewFile/4092/2268"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "isd-false-flag-moments-of-crises": {
+      "id": "isd-false-flag-moments-of-crises",
+      "relpath": "imports/isd-false-flag-moments-of-crises--the-rise-of-false-flag-conspiracy-theories-in-moments-of-crises-isd.md",
+      "sha256": "17a95985d325040a0ef991981e245474be1a049d71d56ebbccd8d7339c5f33dd",
+      "bytes": 2053,
+      "media_type": "text/markdown",
+      "title": "The rise of false flag conspiracy theories in moments of crises (ISD)",
+      "tags": [
+        "competing-event-narratives",
+        "synthetic-sightings",
+        "liars-dividend",
+        "monitoring-report"
+      ],
+      "source_uri": "https://www.isdglobal.org/digital-dispatch/the-rise-of-false-flag-conspiracy-theories-in-moments-of-crises/",
+      "metadata": {
+        "biblicus": {
+          "id": "isd-false-flag-moments-of-crises",
+          "source": "https://www.isdglobal.org/digital-dispatch/the-rise-of-false-flag-conspiracy-theories-in-moments-of-crises/"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "kuran-sunstein-availability-cascades": {
+      "id": "kuran-sunstein-availability-cascades",
+      "relpath": "imports/kuran-sunstein-availability-cascades--availability-cascades-and-risk-regulation-kuran-sunstein.md",
+      "sha256": "8f00bafdbfd32d2567cf1eeba8ebb227434612add6554f06543af372f328d63a",
+      "bytes": 2111,
+      "media_type": "text/markdown",
+      "title": "Availability Cascades and Risk Regulation (Kuran & Sunstein)",
+      "tags": [
+        "competing-event-narratives",
+        "information-habit",
+        "state-made-belief",
+        "law-behavioral-social-science"
+      ],
+      "source_uri": "https://sites.duke.edu/timurkuran/files/2016/10/availability-cascades-1.original.pdf",
+      "metadata": {
+        "biblicus": {
+          "id": "kuran-sunstein-availability-cascades",
+          "source": "https://sites.duke.edu/timurkuran/files/2016/10/availability-cascades-1.original.pdf"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "mirror-ben-needham-ai-reunion-post": {
+      "id": "mirror-ben-needham-ai-reunion-post",
+      "relpath": "imports/mirror-ben-needham-ai-reunion-post--ben-needham-s-mum-reports-sick-ai-reunion-post-mirror.md",
+      "sha256": "d86dd058db82997ee52bbdd7df5fb1cb57dac5873f328786295f0b9b219d5a6f",
+      "bytes": 1951,
+      "media_type": "text/markdown",
+      "title": "Ben Needham\u2019s mum reports \u201csick\u201d AI reunion post (Mirror)",
+      "tags": [
+        "synthetic-sightings",
+        "grief-as-product",
+        "counterfeit-persons",
+        "news"
+      ],
+      "source_uri": "https://www.mirror.co.uk/news/uk-news/ben-needhams-mum-distraught-over-36903820",
+      "metadata": {
+        "biblicus": {
+          "id": "mirror-ben-needham-ai-reunion-post",
+          "source": "https://www.mirror.co.uk/news/uk-news/ben-needhams-mum-distraught-over-36903820"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "newsweek-emily-rae-ai-influencer": {
+      "id": "newsweek-emily-rae-ai-influencer",
+      "relpath": "imports/newsweek-emily-rae-ai-influencer--how-to-tell-if-an-influencer-is-ai-and-why-you-should-care.md",
+      "sha256": "c7a114e2e6cd901e2f1c8738393dc04ba704d21f31276f4849496cb1538af435",
+      "bytes": 2010,
+      "media_type": "text/markdown",
+      "title": "How to Tell if an Influencer Is AI\u2014and Why You Should Care",
+      "tags": [
+        "undisclosed-ai-influencers",
+        "more-real-than-real",
+        "uncanny-hyperreality",
+        "counterfeit-persons",
+        "hyperreality",
+        "news"
+      ],
+      "source_uri": "https://www.newsweek.com/how-to-tell-influencer-ai-11541965",
+      "metadata": {
+        "biblicus": {
+          "id": "newsweek-emily-rae-ai-influencer",
+          "source": "https://www.newsweek.com/how-to-tell-influencer-ai-11541965"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "nysfocus-salamanca-realbotix-sally": {
+      "id": "nysfocus-salamanca-realbotix-sally",
+      "relpath": "imports/nysfocus-salamanca-realbotix-sally--western-ny-school-to-launch-humanoid-robot-teacher-sally-realbotix.md",
+      "sha256": "9efee1b6d6e33a4daa95d86dad786569ae1a4c172ba43579c98823d7e9404554",
+      "bytes": 2404,
+      "media_type": "text/markdown",
+      "title": "Western NY School To Launch Humanoid Robot Teacher (Sally / Realbotix)",
+      "tags": [
+        "kids-school-inbox-authority",
+        "counterfeit-persons",
+        "strangler-fig",
+        "fungus-among-us",
+        "more-real-than-real",
+        "uncanny-hyperreality",
+        "news"
+      ],
+      "source_uri": "https://nysfocus.com/2026/07/14/new-york-humanoid-robot-teacher-salamanca-school-district",
+      "metadata": {
+        "biblicus": {
+          "id": "nysfocus-salamanca-realbotix-sally",
+          "source": "https://nysfocus.com/2026/07/14/new-york-humanoid-robot-teacher-salamanca-school-district"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "nysfocus-salamanca-robot-paused": {
+      "id": "nysfocus-salamanca-robot-paused",
+      "relpath": "imports/nysfocus-salamanca-robot-paused--western-new-york-school-district-hits-pause-on-robot-teacher-amid-scrutiny.md",
+      "sha256": "fd60c61b20e7faba0218deeecb083cc738350be8af5dd514aeeac2d6c2c5153f",
+      "bytes": 1826,
+      "media_type": "text/markdown",
+      "title": "Western New York School District Hits Pause on Robot Teacher Amid Scrutiny",
+      "tags": [
+        "kids-school-inbox-authority",
+        "counterfeit-persons",
+        "strangler-fig",
+        "news"
+      ],
+      "source_uri": "https://nysfocus.com/2026/07/24/new-york-robot-teacher-plan-paused",
+      "metadata": {
+        "biblicus": {
+          "id": "nysfocus-salamanca-robot-paused",
+          "source": "https://nysfocus.com/2026/07/24/new-york-robot-teacher-plan-paused"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "politifact-false-flags-social-media": {
+      "id": "politifact-false-flags-social-media",
+      "relpath": "imports/politifact-false-flags-social-media--false-flags-real-ops-vs-social-media-template-politifact.md",
+      "sha256": "159789349164f242fe2c10f1f7ccb4d945948bcf743ff51b5e2f2311c71bad98",
+      "bytes": 2220,
+      "media_type": "text/markdown",
+      "title": "False flags: real ops vs social-media template (PolitiFact)",
+      "tags": [
+        "competing-event-narratives",
+        "historical-lineage",
+        "state-made-belief",
+        "explanatory-journalism"
+      ],
+      "source_uri": "https://www.politifact.com/article/2022/02/08/false-flags-theyre-real-far-less-widespread-social/",
+      "metadata": {
+        "biblicus": {
+          "id": "politifact-false-flags-social-media",
+          "source": "https://www.politifact.com/article/2022/02/08/false-flags-theyre-real-far-less-widespread-social/"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "skift-tiktok-go-ambiente-ai": {
+      "id": "skift-tiktok-go-ambiente-ai",
+      "relpath": "imports/skift-tiktok-go-ambiente-ai--your-hotel-is-hot-on-tiktok-go-but-ai-got-all-the-facts-wrong.md",
+      "sha256": "7225150503f1d91b18194c19b7bb4d45b8080935466df6a76e8a7fe622d593d8",
+      "bytes": 1957,
+      "media_type": "text/markdown",
+      "title": "Your Hotel Is Hot on TikTok Go. But AI Got All The Facts Wrong.",
+      "tags": [
+        "counterfeit-places",
+        "undisclosed-ai-influencers",
+        "drove-to-the-pin",
+        "more-real-than-real",
+        "uncanny-hyperreality",
+        "hyperreality",
+        "news"
+      ],
+      "source_uri": "https://skift.com/2026/08/31/ai-generated-tiktok-go-hotel-videos/",
+      "metadata": {
+        "biblicus": {
+          "id": "skift-tiktok-go-ambiente-ai",
+          "source": "https://skift.com/2026/08/31/ai-generated-tiktok-go-hotel-videos/"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "sunstein-vermeule-conspiracy-theories": {
+      "id": "sunstein-vermeule-conspiracy-theories",
+      "relpath": "imports/sunstein-vermeule-conspiracy-theories--conspiracy-theories-causes-and-cures-sunstein-vermeule.md",
+      "sha256": "01cbc6eacdc9c109847efdb6f4d878b5e4c4f94ca9a160c24774c6221ff3004c",
+      "bytes": 1858,
+      "media_type": "text/markdown",
+      "title": "Conspiracy Theories: Causes and Cures (Sunstein & Vermeule)",
+      "tags": [
+        "competing-event-narratives",
+        "infiltrated-circle",
+        "state-made-belief",
+        "political-philosophy-cascade-mechanisms"
+      ],
+      "source_uri": "https://doi.org/10.1111/j.1467-9760.2008.00325.x",
+      "metadata": {
+        "biblicus": {
+          "id": "sunstein-vermeule-conspiracy-theories",
+          "source": "https://doi.org/10.1111/j.1467-9760.2008.00325.x"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "thestar-ben-needham-ai-found-claims": {
+      "id": "thestar-ben-needham-ai-found-claims",
+      "relpath": "imports/thestar-ben-needham-ai-found-claims--ai-pages-claim-ben-needham-and-other-missing-kids-found-the-star.md",
+      "sha256": "7d3c1132267290dd8376d73ae38dee05044efaedb8b80fa76b0a98c55ac1fd75",
+      "bytes": 1927,
+      "media_type": "text/markdown",
+      "title": "AI pages claim Ben Needham (and other missing kids) \u201cfound\u201d (The Star)",
+      "tags": [
+        "synthetic-sightings",
+        "counterfeit-persons",
+        "liars-dividend",
+        "fungus-among-us",
+        "news"
+      ],
+      "source_uri": "https://www.thestar.co.uk/news/crime/family-of-missing-sheffield-boy-ben-needham-ai-claims-march-23-6166849",
+      "metadata": {
+        "biblicus": {
+          "id": "thestar-ben-needham-ai-found-claims",
+          "source": "https://www.thestar.co.uk/news/crime/family-of-missing-sheffield-boy-ben-needham-ai-claims-march-23-6166849"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "tierney-bevc-kuligowski-disaster-myths-katrina": {
+      "id": "tierney-bevc-kuligowski-disaster-myths-katrina",
+      "relpath": "imports/tierney-bevc-kuligowski-disaster-myths-katrina--metaphors-matter-disaster-myths-media-frames-and-katrina-tierney-bevc-kuligowski.md",
+      "sha256": "795cdc72b9ba3f5f087876ab1924a4a608ce7cd38848f10d629d4d4c6a2f7265",
+      "bytes": 2151,
+      "media_type": "text/markdown",
+      "title": "Metaphors Matter: Disaster Myths, Media Frames, and Katrina (Tierney, Bevc & Kuligowski)",
+      "tags": [
+        "competing-event-narratives",
+        "historical-lineage",
+        "state-made-belief",
+        "disaster-sociology"
+      ],
+      "source_uri": "https://www.rti.org/publication/metaphors-matter-disaster-myths-media-frames-consequences-hurricane-katrina",
+      "metadata": {
+        "biblicus": {
+          "id": "tierney-bevc-kuligowski-disaster-myths-katrina",
+          "source": "https://www.rti.org/publication/metaphors-matter-disaster-myths-media-frames-consequences-hurricane-katrina"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "usatoday-cat-in-the-hat-ai-trend": {
+      "id": "usatoday-cat-in-the-hat-ai-trend",
+      "relpath": "imports/usatoday-cat-in-the-hat-ai-trend--viral-cat-in-the-hat-trend-linked-to-arrests-and-school-lockdowns.md",
+      "sha256": "e03c597817b71e4ff765ea10ad39f09705c79d0a4b8c8976859ce6b6295125b5",
+      "bytes": 1764,
+      "media_type": "text/markdown",
+      "title": "Viral 'Cat in the Hat' trend linked to arrests and school lockdowns",
+      "tags": [
+        "more-real-than-real",
+        "uncanny-hyperreality",
+        "hyperreality",
+        "simulacrum",
+        "fungus-among-us",
+        "news"
+      ],
+      "source_uri": "https://www.usatoday.com/story/tech/news/2026/09/01/cat-in-the-hat-viral-trend-safety-concerns/91562322007/",
+      "metadata": {
+        "biblicus": {
+          "id": "usatoday-cat-in-the-hat-ai-trend",
+          "source": "https://www.usatoday.com/story/tech/news/2026/09/01/cat-in-the-hat-viral-trend-safety-concerns/91562322007/"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    },
+    "wikipedia-ostension-folklore": {
+      "id": "wikipedia-ostension-folklore",
+      "relpath": "imports/wikipedia-ostension-folklore--ostension-folklore-legend-enacted-misread-as-reality.md",
+      "sha256": "44d587242ea8895ce902a6a5b0851583e7c5abf2c5ffc2ff24a4cd165de248b8",
+      "bytes": 2175,
+      "media_type": "text/markdown",
+      "title": "Ostension (folklore) \u2014 legend enacted / misread as reality",
+      "tags": [
+        "competing-event-narratives",
+        "synthetic-sightings",
+        "historical-lineage",
+        "folklore-encyclopedia"
+      ],
+      "source_uri": "https://en.wikipedia.org/wiki/Ostension_(folklore)",
+      "metadata": {
+        "biblicus": {
+          "id": "wikipedia-ostension-folklore",
+          "source": "https://en.wikipedia.org/wiki/Ostension_(folklore)"
+        }
+      },
+      "created_at": "2026-09-07T19:53:21.748259Z"
+    }
+  },
+  "order": [
+    "7news-gus-lamont-fake-ai-images",
+    "aap-gus-lamont-false-claims-social",
+    "abc-gus-lamont-ai-images-misinformation",
+    "abc-holder-gus-ai-image-not-surprising",
+    "afp-gus-lamont-police-refute-image",
+    "allport-postman-analysis-of-rumor",
+    "bikhchandani-hirshleifer-welch-informational-cascades",
+    "boin-hart-mcconnell-crisis-exploitation",
+    "hyzen-van-den-bulck-ideological-entrepreneurs",
+    "isd-false-flag-moments-of-crises",
+    "kuran-sunstein-availability-cascades",
+    "mirror-ben-needham-ai-reunion-post",
+    "newsweek-emily-rae-ai-influencer",
+    "nysfocus-salamanca-realbotix-sally",
+    "nysfocus-salamanca-robot-paused",
+    "politifact-false-flags-social-media",
+    "skift-tiktok-go-ambiente-ai",
+    "sunstein-vermeule-conspiracy-theories",
+    "thestar-ben-needham-ai-found-claims",
+    "tierney-bevc-kuligowski-disaster-myths-katrina",
+    "usatoday-cat-in-the-hat-ai-trend",
+    "wikipedia-ostension-folklore"
+  ]
+}

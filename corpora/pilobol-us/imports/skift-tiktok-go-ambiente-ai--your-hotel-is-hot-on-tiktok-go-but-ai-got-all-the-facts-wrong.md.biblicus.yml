@@ -1,0 +1,30 @@
+title: Your Hotel Is Hot on TikTok Go. But AI Got All The Facts Wrong.
+media_type: text/markdown
+abstract: 'AI-generated TikTok videos (and possibly AI “creators”) push Ambiente Sedona
+  and other hotels through TikTok Go booking commissions (~5%). Owner Jennifer May:
+  atrium suite and “peaceful pond” don’t exist; Resemble.AI flags the presenter as
+  synthetic. Seventeen Sedona clips flagged ≥80% AI; only one labeled. Guests pay
+  $1,300+/night into a feed that out-pictures the property.'
+biblicus:
+  id: skift-tiktok-go-ambiente-ai
+  source: https://skift.com/2026/08/31/ai-generated-tiktok-go-hotel-videos/
+dates:
+  published_at: 2026-08-31 (updated 2026-09-07)
+  updated_at: null
+  retrieved_at: '2026-09-07T19:53:21.748259Z'
+tags:
+- counterfeit-places
+- undisclosed-ai-influencers
+- drove-to-the-pin
+- more-real-than-real
+- uncanny-hyperreality
+- hyperreality
+- news
+curation:
+  corpus_role: source-material
+ingestion_rationale: '[news (counterfeit places / undisclosed AI influencers / TikTok
+  Go commissions)] Claim: AI-generated TikTok videos (and possibly AI “creators”)
+  push Ambiente Sedona and other hotels through TikTok Go booking commissions (~5%).
+  Owner Jennifer May: atrium suite and “peaceful pond” don’t exist; Resemble.AI flags
+  the presenter as synthetic. Seventeen Sedona clips flagged ≥80% AI; only one labeled.
+  G…'

@@ -1,0 +1,28 @@
+title: 'Expert: AI image of missing Gus “concerning but not surprising” (ABC)'
+media_type: text/markdown
+abstract: 'Facebook circulates an AI image of a curly-haired boy being put into a
+  4WD beside Gus’s real released photo. University of Sydney AI ethicist Rebecca Johnson:
+  clickbait farms exploit the stress void. SA Commissioner for Victims’ Rights Sarah
+  Quick: “extra layer of trauma” for the family, “very real consequences” for community
+  and searchers. SA Police: only trust official images. Earlier, Facebook’s own AI
+  search had already spat wrong answers about the case — the platform’s answer-engine
+  joins the rumor.'
+biblicus:
+  id: abc-holder-gus-ai-image-not-surprising
+  source: https://www.abc.net.au/news/2025-10-09/sa-ai-image-of-missing-child-appears-online/105868548
+dates:
+  published_at: '2025-10-09'
+  updated_at: null
+  retrieved_at: '2026-09-07T19:53:21.748259Z'
+tags:
+- synthetic-sightings
+- uncanny-hyperreality
+- liars-dividend
+- news
+curation:
+  corpus_role: source-material
+ingestion_rationale: '[news (surreal specimen)] Claim: Facebook circulates an AI image
+  of a curly-haired boy being put into a 4WD beside Gus’s real released photo. University
+  of Sydney AI ethicist Rebecca Johnson: clickbait farms exploit the stress void.
+  SA Commissioner for Victims’ Rights Sarah Quick: “extra layer of trauma” for the
+  family, “very real consequenc…'

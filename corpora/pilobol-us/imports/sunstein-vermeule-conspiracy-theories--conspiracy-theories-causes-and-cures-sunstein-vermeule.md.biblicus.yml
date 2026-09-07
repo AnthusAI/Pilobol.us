@@ -1,0 +1,26 @@
+title: 'Conspiracy Theories: Causes and Cures (Sunstein & Vermeule)'
+media_type: text/markdown
+abstract: Conspiracy theories often spread via informational, reputational, and availability
+  cascade dynamics; they are **self-sealing** (attempts to rebut become further “proof”).
+  Authors argue holders often have a “crippled epistemology” and controversially propose
+  “cognitive infiltration” of extremist groups. Use for the cascade *mechanism* after
+  focal events — not for endorsing the policy cure.
+biblicus:
+  id: sunstein-vermeule-conspiracy-theories
+  source: https://doi.org/10.1111/j.1467-9760.2008.00325.x
+dates:
+  published_at: 2009 (JPP; SSRN 2008)
+  updated_at: null
+  retrieved_at: '2026-09-07T19:53:21.748259Z'
+tags:
+- competing-event-narratives
+- infiltrated-circle
+- state-made-belief
+- political-philosophy-cascade-mechanisms
+curation:
+  corpus_role: source-material
+ingestion_rationale: '[political philosophy / cascade mechanisms] Claim: Conspiracy
+  theories often spread via informational, reputational, and availability cascade
+  dynamics; they are **self-sealing** (attempts to rebut become further “proof”).
+  Authors argue holders often have a “crippled epistemology” and controversially propose
+  “cognitive infiltration” of extremist groups. Use fo…'

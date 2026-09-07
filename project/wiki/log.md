@@ -35,3 +35,10 @@ Filed 4 keepers: Skift Ambiente Sedona / TikTok Go AI hotel videos (Schulz); NY 
 - Backfilled 22 accepted refs from existing `project/wiki/sources/` keepers.
 - Wiki index + `accepted-refs.md` point at the dual layer (markdown keepers + JSON).
 - Kanbus board remains stories only; references are never board cards.
+
+## 2026-09-07 — Prune stale Kanbus / duplicate DNA paths
+
+- Deleted smoke-test story `PILO-94e22d` (Pilobil board smoke).
+- Removed leftover `doctrine/pilobil.md` (canonical DNA is `mission.md` + `publication-doctrine.md`).
+- README rewritten: Kanbus = stories only; knowledge home = Papyrus local-pod wiki + `WIKI-pilobil-accepted` refs.
+- Added thin `style-guide.md` index → `content/VOICE.md`.

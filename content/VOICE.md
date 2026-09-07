@@ -312,7 +312,7 @@ buoy that AI bots write the hunt. `project/wiki/mission.md`.
 **Scout digests (chat)** — inverted pyramid for Ryan; not reader-facing site
 copy. `skills/daily-find`.
 
-**Internal wiki sources** — thin claim cards, not house prose.
+**Internal source keepers** (`project/wiki/sources/`) — thin claim cards, not house prose. Paired with JSON on `WIKI-pilobil-accepted`.
 
 ## Distinct from Anth.us and Chatticus
 

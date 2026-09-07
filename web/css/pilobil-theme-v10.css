@@ -580,8 +580,8 @@
     height: auto;
     border-radius: 0.35rem;
     margin: 0.55rem 0 0.15rem;
-    object-fit: cover;
-    aspect-ratio: 16 / 10;
+    object-fit: contain;
+    aspect-ratio: auto;
   }
 
 

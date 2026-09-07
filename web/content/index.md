@@ -1,7 +1,7 @@
 ---
 title: ""
 description: >-
-  Weird stories from a society slowly taken over by AI — a fungus among us.
+  Glimpses of our moldy future, as our society is gradually infected by a fungus that grows on our bullshit.
 cover: assets/gus-lamont/og-cover.jpg
 ---
 

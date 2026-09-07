@@ -94,7 +94,7 @@ def _rewrite_youtube_videos(html: str) -> str:
 
 SITE_ORIGIN = "https://pilobol.us"
 _DEFAULT_DESCRIPTION = (
-    "Weird stories from a society slowly taken over by AI — a fungus among us."
+    "Glimpses of our moldy future, as our society is gradually infected by a fungus that grows on our bullshit."
 )
 _DEFAULT_COVER = "assets/og-default.jpg"
 

@@ -231,6 +231,10 @@
     text-decoration: none;
   }
 
+  .pilo-poem-line a:visited {
+    color: inherit;
+  }
+
   .pilo-poem-line a:hover {
     color: var(--markus-accent);
     text-decoration: underline;
@@ -452,11 +456,12 @@
   }
 
   .markus-document > .markus-card-grid > .markus-card {
-    background: transparent;
+    /* Translucent panel — not fully opaque card, not wiped away. */
+    background: color-mix(in srgb, var(--markus-card) 82%, transparent);
     border: none;
-    border-radius: 0;
+    border-radius: 1rem;
     box-shadow: none;
-    transition: transform 0.15s ease;
+    transition: transform 0.15s ease, background 0.15s ease;
   }
 
   .markus-document > .markus-card-grid > .markus-card:hover {
@@ -507,7 +512,7 @@
   /* Featured lead: more real estate, bigger type */
   .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child {
     padding: 1.55rem 1.45rem 1.65rem;
-    background: transparent;
+    background: color-mix(in srgb, var(--markus-card) 90%, transparent);
   }
 
   .markus-document > .markus-card-grid > .markus-card[data-span="full"]:first-child

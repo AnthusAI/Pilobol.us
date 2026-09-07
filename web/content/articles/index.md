@@ -3,6 +3,14 @@ title: Spores
 description: Glimpses of our moldy future.
 ---
 
+### [The room with the pond](the-room-with-the-pond.html)
+
+[![A strangler fig growing around a palm tree](../assets/the-room-with-the-pond/strangler-fig-palm-cover.jpg)](the-room-with-the-pond.html)
+
+A TikTok video invited viewers to book a Sedona hotel room overlooking a peaceful pond. The hotel has no such room, no such pond, and perhaps no such creator.
+
+*Monday, September 7, 2026*
+
 ### [A miracle in the outback](gus-lamont-ai-sighting.html)
 
 An AI picture of a kidnapping landed in the search for a missing boy. Thousands shared it. The ground had nothing.

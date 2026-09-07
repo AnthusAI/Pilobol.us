@@ -63,11 +63,25 @@
     --pilo-page-edge: rgba(53, 43, 28, 0.11);
     --pilo-page-bottom: rgba(53, 43, 28, 0.17);
     --pilo-fx-opacity: 0.26;
-    /* Flat surround outside the paper sheet on wide screens (dulled parchment,
-       not the reading surface). */
-    --pilo-stage: #ddd4bf;
-    /* Hard cap on the paper sheet (content column + side margins for FX).
-       Beyond this, the viewport is just --pilo-stage — not liquid margins. */
+    /* Fallback under the stained paper stack (html + overscroll). */
+    --pilo-stage: var(--markus-paper);
+    /* Shared mold-stained paper surface — html paints it full-viewport; the
+       capped .markus-body sheet stays transparent so gutters match the page. */
+    --pilo-paper-texture:
+      url("../assets/paper-grain.svg"),
+      linear-gradient(to right, var(--pilo-page-edge) 0%, transparent 8%, transparent 92%, var(--pilo-page-edge) 100%),
+      linear-gradient(to bottom, transparent 66%, var(--pilo-page-bottom) 100%),
+      radial-gradient(ellipse at 50% -10%, transparent 30%, var(--pilo-page-shade) 135%),
+      radial-gradient(circle at 8% 4%, color-mix(in srgb, var(--markus-accent) 7%, transparent), transparent 40%),
+      radial-gradient(circle at 92% 0%, color-mix(in srgb, var(--markus-quote) 6%, transparent), transparent 38%);
+    --pilo-paper-texture-size: 256px 256px, auto, auto, auto, auto, auto;
+    --pilo-paper-texture-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    --pilo-paper-texture-blend: multiply, normal, normal, normal, normal, normal;
+    /* Wide-viewport sheet edge: how far the capped paper sheet feathers into
+       the full-viewport mold stain before the gutters. */
+    --pilo-sheet-edge-feather: 5.5rem;
+    --pilo-sheet-edge-shadow: rgba(33, 29, 23, 0.1);
+    /* Hard cap on the layout sheet (content column + side margins for FX). */
     --pilo-page-width: 72rem;
 
     /* Single source of truth for the content column width. The page-wrapper
@@ -116,7 +130,9 @@
       --pilo-page-edge: rgba(0, 0, 0, 0.32);
       --pilo-page-bottom: rgba(0, 0, 0, 0.52);
       --pilo-fx-opacity: 0.32;
-      --pilo-stage: #0d0f0a;
+      --pilo-stage: var(--markus-paper);
+      --pilo-paper-texture-blend: screen, normal, normal, normal, normal, normal;
+      --pilo-sheet-edge-shadow: rgba(0, 0, 0, 0.38);
       color-scheme: dark;
     }
   }
@@ -125,12 +141,18 @@
      Body / document texture
      --------------------------------------------------------------------- */
 
-  /* Capped paper sheet; outside it on wide screens is flat --pilo-stage. */
+  /* Mold-stained paper fills the full viewport; wide-screen gutters inherit
+     the same treatment instead of a flat neutral stage. */
   html {
     height: 100%;
     background-color: var(--pilo-stage);
-    /* Kill rubber-band overscroll on Apple (and elsewhere) so the stage
-       color doesn't flash past the paper sheet. */
+    background-image: var(--pilo-paper-texture);
+    background-size: var(--pilo-paper-texture-size);
+    background-repeat: var(--pilo-paper-texture-repeat);
+    background-blend-mode: var(--pilo-paper-texture-blend);
+    background-attachment: scroll;
+    /* Kill rubber-band overscroll on Apple (and elsewhere) so the stained
+       stage doesn't flash a bare color past the paper sheet. */
     overscroll-behavior: none;
   }
 
@@ -144,25 +166,55 @@
     min-height: 100%;
     min-height: 100vh;
     min-height: 100dvh;
-    background-color: var(--markus-paper);
-    background-image:
-      url("../assets/paper-grain.svg"),
-      linear-gradient(to right, var(--pilo-page-edge) 0%, transparent 8%, transparent 92%, var(--pilo-page-edge) 100%),
-      linear-gradient(to bottom, transparent 66%, var(--pilo-page-bottom) 100%),
-      radial-gradient(ellipse at 50% -10%, transparent 30%, var(--pilo-page-shade) 135%),
-      radial-gradient(circle at 8% 4%, color-mix(in srgb, var(--markus-accent) 7%, transparent), transparent 40%),
-      radial-gradient(circle at 92% 0%, color-mix(in srgb, var(--markus-quote) 6%, transparent), transparent 38%);
-    background-size: 256px 256px, auto, auto, auto, auto, auto;
-    background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
-    background-blend-mode: multiply, normal, normal, normal, normal, normal;
-    background-attachment: scroll;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    /* Transparent so html's full-viewport stain shows through, including past
+       this sheet's capped width on ultra-wide screens. */
+    background: transparent;
+    transition: color 0.2s ease;
   }
 
-  @media (prefers-color-scheme: dark) {
+  /* On ultra-wide viewports, re-layer the paper stain on the capped sheet and
+     feather its left/right edges so the sheet meets the gutters softly. */
+  @media (min-width: 72.0625rem) {
     .markus-body {
-      /* The same grain gently lifts dark paper instead of muddying it. */
-      background-blend-mode: screen, normal, normal, normal, normal, normal;
+      box-shadow:
+        min(-2.5rem, -3.5vw) 0 min(4.5rem, 6vw) max(-2.75rem, -3.25vw) var(--pilo-sheet-edge-shadow),
+        min(2.5rem, 3.5vw) 0 min(4.5rem, 6vw) max(-2.75rem, -3.25vw) var(--pilo-sheet-edge-shadow);
+    }
+
+    .markus-body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-color: var(--pilo-stage);
+      background-image: var(--pilo-paper-texture);
+      background-size: var(--pilo-paper-texture-size);
+      background-repeat: var(--pilo-paper-texture-repeat);
+      background-blend-mode: var(--pilo-paper-texture-blend);
+      background-attachment: scroll;
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.22) calc(var(--pilo-sheet-edge-feather) * 0.35),
+        rgba(0, 0, 0, 0.72) calc(var(--pilo-sheet-edge-feather) * 0.72),
+        black var(--pilo-sheet-edge-feather),
+        black calc(100% - var(--pilo-sheet-edge-feather)),
+        rgba(0, 0, 0, 0.72) calc(100% - var(--pilo-sheet-edge-feather) * 0.72),
+        rgba(0, 0, 0, 0.22) calc(100% - var(--pilo-sheet-edge-feather) * 0.35),
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.22) calc(var(--pilo-sheet-edge-feather) * 0.35),
+        rgba(0, 0, 0, 0.72) calc(var(--pilo-sheet-edge-feather) * 0.72),
+        black var(--pilo-sheet-edge-feather),
+        black calc(100% - var(--pilo-sheet-edge-feather)),
+        rgba(0, 0, 0, 0.72) calc(100% - var(--pilo-sheet-edge-feather) * 0.72),
+        rgba(0, 0, 0, 0.22) calc(100% - var(--pilo-sheet-edge-feather) * 0.35),
+        transparent 100%
+      );
     }
   }
 
@@ -742,8 +794,12 @@
   .pilo-physarum-canvas {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    /* Full-viewport width so mold FX can feather at the sheet edge instead of
+       clipping hard at the capped .markus-body box. */
+    left: 50%;
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: -50vw;
     height: 100vh;
     /* Above the paper, below every reading surface. The former -1 layer was
        painted behind the body's opaque paper background, which made the

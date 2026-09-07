@@ -585,15 +585,49 @@
   }
 
 
-  /* Rainbow card: source still is SD; keep it modest in the feed. */
-  .markus-document > .markus-card-grid > .markus-card
-    .markus-card-body img[src*="believe-the-rainbow"] {
-    width: min(100%, 14rem);
-    max-height: 8.5rem;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    margin-left: 0;
-    margin-right: auto;
+
+  /* Half-span cards with media: horizontal copy | still (keeps SD thumbs modest). */
+  @media (min-width: 720px) {
+    .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img) {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(7rem, 36%);
+      column-gap: 0.95rem;
+      row-gap: 0.25rem;
+      align-items: center;
+    }
+
+    .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
+      .markus-card-body {
+      display: contents;
+    }
+
+    .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
+      .markus-card-body > h3:first-child {
+      grid-column: 1;
+      grid-row: 1;
+      margin: 0;
+    }
+
+    .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
+      .markus-card-body > p:not(:has(img)) {
+      grid-column: 1;
+      margin: 0.25rem 0 0;
+    }
+
+    .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
+      .markus-card-body > p:has(img),
+    .markus-document > .markus-card-grid > .markus-card:not([data-span="full"]):has(img)
+      .markus-card-body > img {
+      grid-column: 2;
+      grid-row: 1 / span 4;
+      margin: 0;
+      width: 100%;
+      max-height: 7.75rem;
+      height: 100%;
+      align-self: center;
+      object-fit: cover;
+      aspect-ratio: 4 / 3;
+    }
   }
 
   /* Full-span lead keeps a touch more vertical pad; type matches every card. */

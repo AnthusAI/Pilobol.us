@@ -30,6 +30,3 @@ A number on a screen is worth something only while enough people agree that it i
 Full list: [Stories archive →](articles/index.html). Mission: [A fungus among us →](articles/fungus-among-us.html).
 :::
 
-:::aside{title="What this is not"}
-Not a generic AI product blog, not a threat-intel feed, not a dump of model release notes. Specimens where belief, routing, or a convincing copy moves bodies and trust.
-:::

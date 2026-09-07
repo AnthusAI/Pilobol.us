@@ -36,8 +36,23 @@ if not (PAPYRUS_ROOT / "src" / "papyrus_content").is_dir():
 
 sys.path.insert(0, str(PAPYRUS_ROOT / "src"))
 
+from papyrus_content.markus_renderer import build as markus_build  # noqa: E402
 from papyrus_content.markus_renderer.build import build_markus_site  # noqa: E402
-from papyrus_content.markus_renderer.shell import SiteChrome  # noqa: E402
+from papyrus_content.markus_renderer.shell import NavItem, SiteChrome  # noqa: E402
+
+# Papyrus only auto-builds Home + Stories into the header. Effects pages are
+# real URLs under /effects/ but invisible unless we append them here.
+_orig_nav = markus_build._build_nav_items
+
+
+def _build_nav_items_with_effects(articles):
+    items = list(_orig_nav(articles))
+    if not any(item.href == "effects/index.html" for item in items):
+        items.append(NavItem("Effects", "effects/index.html"))
+    return items
+
+
+markus_build._build_nav_items = _build_nav_items_with_effects
 
 # Publication identity. This is the ONLY thing Pilobol.us contributes to the
 # render; everything else comes from Papyrus's renderer.

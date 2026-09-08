@@ -9,10 +9,10 @@ cover: assets/gus-lamont/og-cover.jpg
 :::card{span="full"}
 ### [The wrap that learned your shape](articles/the-wrap-that-learned-your-shape.html)
 
-![Looking up through the hollow of a strangler fig after the host tree is gone](assets/the-wrap-that-learned-your-shape/looking-up-hollow-cover.jpg)
+![A strangler fig growing around the trunk of a palm tree](assets/the-wrap-that-learned-your-shape/strangler-fig-palm-cover.jpg)
 
-Monday morning the phone already knew which coffee shop would be open. It did
-not ask.
+A strangler fig learns a living tree’s shape, then keeps the outline after the
+host is gone. Soft systems transform the same way.
 
 *Monday, September 7, 2026*
 :::

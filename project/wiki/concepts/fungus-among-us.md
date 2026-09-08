@@ -1,6 +1,6 @@
 # Fungus among us
 
-Last updated: 2026-09-07 09:20 ET
+Last updated: 2026-09-07 (monitoring-wall watch)
 
 ## What it is
 
@@ -35,6 +35,11 @@ viral posts, spores as copy-paste personas). Drop it when it becomes costume.
 
 - [Skift — TikTok Go Ambiente](../sources/skift-tiktok-go-ambiente-ai.md)
 - [NY Focus — Salamanca Sally](../sources/nysfocus-salamanca-realbotix-sally.md)
+
+
+### Addendum — monitoring wall 2026-09-07
+
+- [Pachocki — An Alien Mind](../sources/openai-an-alien-mind.md) → [monitoring-wall](monitoring-wall.md)
 
 ## Open questions
 

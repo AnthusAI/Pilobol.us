@@ -42,3 +42,10 @@ Filed 4 keepers: Skift Ambiente Sedona / TikTok Go AI hotel videos (Schulz); NY 
 - Removed leftover `doctrine/pilobil.md` (canonical DNA is `mission.md` + `publication-doctrine.md`).
 - README rewritten: Kanbus = stories only; knowledge home = Papyrus local-pod wiki + `WIKI-pilobil-accepted` refs.
 - Added thin `style-guide.md` index → `content/VOICE.md`.
+
+## 2026-09-07 — Monitoring wall / Alien Mind watch
+
+Ryan: *An Alien Mind* cuts core to mission — standing lookout for specimens it
+envisions (not one story). Added concept [monitoring-wall](concepts/monitoring-wall.md),
+source [openai-an-alien-mind](sources/openai-an-alien-mind.md), mission + institutional-lag
+touches; 4am desk briefed to rotate this lane.

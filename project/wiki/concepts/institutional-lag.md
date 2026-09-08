@@ -1,6 +1,6 @@
 # Institutional lag (capability disparity)
 
-Last updated: 2026-09-07 (household democratization watch)
+Last updated: 2026-09-07 (monitoring-wall + household democratization)
 
 House theme (Ryan 2026-09-07): **opportunities for discordians and malefactors
 created by lag or disparity in capability between potential attackers and
@@ -11,7 +11,7 @@ technology improves and spreads.
 Sibling of [prior-failure-amplification](prior-failure-amplification.md) and
 [fungus-among-us](fungus-among-us.md); braids [subtle-steering](subtle-steering.md),
 [competing-event-narratives](competing-event-narratives.md),
-[state-made-belief](state-made-belief.md), [synthetic-evidence](synthetic-evidence.md).
+[state-made-belief](state-made-belief.md), [synthetic-evidence](synthetic-evidence.md), [monitoring-wall](monitoring-wall.md).
 
 Also called: speed asymmetry, defender lag, capability gap.
 
@@ -50,6 +50,11 @@ only shows the fake (hoodwink) misses the shape; coverage that shows the
   exits after the preferred copy already won
 - School responses to AI “Cat in the Hat” driveway posts — institutions move on
   a prompt
+
+- **Monitoring wall** (lab/customer lag): ability to *see* what models are
+  doing loses to capability — CoT opacity, gamed reasoning, defense clocks behind
+  cyber-capable agents. Seed: [An Alien Mind](../sources/openai-an-alien-mind.md);
+  concept: [monitoring-wall](monitoring-wall.md)
 
 
 ## Democratized state-grade attacks on households (watch lane)

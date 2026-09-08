@@ -23,12 +23,17 @@ Accepted sources live as pages in `sources/` **and** as pod references on
 - [Competing event narratives](concepts/competing-event-narratives.md) — rumor/cascade/myth proliferation after focal events
 - [Prior failure amplification](concepts/prior-failure-amplification.md) — AI accelerates old human weaknesses; not a hoodwink series
 - [Institutional lag](concepts/institutional-lag.md) — attacker/defender capability disparity; new lags → new attacker classes
+- [Monitoring wall](concepts/monitoring-wall.md) — frosted window into alien mind; CoT/monitorability lag (Alien Mind watch)
 
 ## Sources
 
 Accepted keepers live in `sources/` (markdown) with matching JSON on `WIKI-pilobil-accepted`. Latest 4am: [Cat in the Hat AI scare](sources/usatoday-cat-in-the-hat-ai-trend.md). Research hauls: [synthetic sightings](concepts/synthetic-sightings.md) (Gus/Ben); [competing event narratives](concepts/competing-event-narratives.md) (theory lanes).
 - [More real than real](concepts/more-real-than-real.md) — uncanny hyperreality niche
 - [Hyperreality](concepts/hyperreality.md) — realer than real as current-events lens
+
+## Latest mission watch (2026-09-07)
+
+- [An Alien Mind](sources/openai-an-alien-mind.md) → [monitoring-wall](concepts/monitoring-wall.md)
 
 ## Latest fungus scout (2026-09-07)
 

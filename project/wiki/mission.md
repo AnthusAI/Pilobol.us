@@ -37,6 +37,8 @@ Weird specimens. Checkable scenes. People (and bots) who believe — and often
 
 **Institutional lag / capability disparity** (Ryan 2026-09-07): Fully valid coverage pattern — opportunities for discordians and malefactors opened by lag between attackers and defenders. Especially when **new lags** create **new classes of attack and attacker** that were rare or impossible before, then become common as technology improves and becomes ubiquitous. The fungus farms the gap (USPTO specimen farms vs paper-era checks is a model case). See [institutional-lag](concepts/institutional-lag.md).
 
+**Monitoring wall / alien mind** (Ryan 2026-09-07): Standing watch for specimens of what Pachocki’s *An Alien Mind* envisions — frosted CoT windows, motivated reasoning under pressure, cyber capability ahead of defense, AI driving its own development, slowdown theater while shipping continues, agency hollow-out. Mission substrate, not one post. See [monitoring-wall](concepts/monitoring-wall.md).
+
 **Opinionated, not tech journalism** (Ryan 2026-09-07): pieces carry a house
 take. Not a neutral briefing, not “experts say,” not a policy explainer with a
 lede. A weird story with a spine.

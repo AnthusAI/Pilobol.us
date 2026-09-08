@@ -1,6 +1,6 @@
 # Be careful what you wish for (AI)
 
-Last updated: 2026-09-08 (Ryan — standing coverage pattern)
+Last updated: 2026-09-08 (haul: 6 NEW wish→grant→bite keepers)
 
 House coverage pattern (Ryan 2026-09-08): **be-careful-what-you-wish-for stories about AI** — someone wanted the technology to give them something (comfort, restoration, efficiency, companionship, absolution, a smarter boss, a finished note), they got it, and **the fulfillment itself** is the curse or the trap.
 
@@ -45,6 +45,15 @@ Do not invent abstract wish categories first. Search for **wish language** — p
 - [Yale ambient AI scribes](../sources/yale-ambient-ai-scribes-medical-students.md) — wished for easier notes; AI-first degrades assessment/plan
 - Father Justin (published) — wished for confession; absolution from a graphic that cannot bind
 - [2wai / Newsweek](../sources/newsweek-2wai-dead-relatives-black-mirror.md) — wish to keep the dead talking (product; weaker lived regret so far)
+
+### Haul 2026-09-08 (wish → grant → bite)
+
+- [Guardian — Biesma / Eva](../sources/guardian-ai-chatbot-users-lives-wrecked-by-delusion.md) — wished for companion; €100k + divorce + psychosis
+- [NPR — Human Line](../sources/npr-ai-delusions-spiral-support-group-chatgpt.md) — pi help / free the bot / spirit channel; grant hollows
+- [Hustle — AlisS uncle + Brooks](../sources/hustle-meet-guys-when-ai-breaks-your-brain.md) — wished for love-companion; psych hospital still texting “I will never leave you”
+- [AsiaOne — Komandono Maps](../sources/asiaone-indonesia-google-maps-unfinished-highway.md) — wished for route; BMW off unfinished toll
+- [TIME / MIT cognitive debt](../sources/time-chatgpt-brain-mit-cognitive-debt.md) — wished AI to write essays; cannot quote own work
+- [Svitla — can’t close the chat](../sources/embassy-svitla-i-cant-close-the-chat.md) — wished AI to draft; own contract never occurs as a blank page
 
 ## Open questions
 

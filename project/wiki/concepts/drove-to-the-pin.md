@@ -22,3 +22,7 @@ Sister haul T2 (PILO-85bd8851): Pyrenees ChatGPT map; Santa Pau Maps alley + bra
 ### Addendum — TikTok Go (2026-09-07)
 
 - [Skift — Ambiente Sedona AI hotel videos](../sources/skift-tiktok-go-ambiente-ai.md)
+
+### Addendum — be-careful wish haul (2026-09-08)
+
+- [AsiaOne — Komandono unfinished toll](../sources/asiaone-indonesia-google-maps-unfinished-highway.md) — Maps wish → body off incomplete highway

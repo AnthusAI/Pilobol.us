@@ -667,6 +667,17 @@ Each run, after named radars:
 - **1–2** from Open questions on `project/wiki/concepts/`
 - Prefer 2025–2026; read the actual page
 
+- Guardian AI chatbot users lives wrecked by delusion / Biesma Eva (Moore 2026-03-26) https://www.theguardian.com/lifeandstyle/2026/mar/26/ai-chatbot-users-lives-wrecked-by-delusion
+- NPR AI delusions spiral support group ChatGPT Human Line Brooks Dex (Bond 2026-01-20) https://www.npr.org/2026/01/20/nx-s1-5591473/ai-delusions-spiral-support-group-chatgpt
+- The Hustle Meet the guys you call when AI breaks your brain AlisS Brooks (Laidlaw 2026-07-24) https://thehustle.co/originals/meet-the-guys-you-call-when-ai-breaks-your-brain
+- AsiaOne Indonesia Google Maps unfinished highway Komandono (2025-04-15) https://www.asiaone.com/asia/pair-narrowly-escape-death-after-driving-incomplete-highway-indonesia-while-following-google
+- TIME ChatGPT Impact On Our Brains MIT Kosmyna cognitive debt (Chow ~2025-06) https://time.com/7295195/ai-chatgpt-google-learning-school/
+- MIT Media Lab Your Brain on ChatGPT Kosmyna et al. (2025-06-10) https://www.media.mit.edu/publications/your-brain-on-chatgpt/
+- 404Embassy / Ray Svitla I Can't Close the Chat (2026-03-19) https://embassy.svit.la/p/i-cant-close-the-chat
+- CNN AI-sparked delusion ChatGPT James Brooks (Gold 2025-09-05) https://www.cnn.com/2025/09/05/tech/ai-sparked-delusion-chatgpt
+- AP OpenAI Microsoft ChatGPT wrongful death Suzanne Adams Soelberg (2025-12) https://apnews.com/article/ai-chatgpt-wrongful-death-lawsuit-greenwich-97fd7da31c0fa08f3d3ea9efd6713151
+- LA Times Hikers Google Gemini Mt Shasta stranded (2026-09-03) https://www.latimes.com/california/story/2026-09-03/hikers-following-google-gemini-ai-route-become-stranded-on-mt-shasta
+
 1. hologram funeral grief OR generative ghost chatbot deceased
 2. AI influencer fake deny real Instagram
 3. griefbot OR "Project December" OR "You Only Virtual" OR thanabot

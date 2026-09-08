@@ -105,3 +105,7 @@ Ryan: skipped finds that lacked a “Black Mirror” comment can still matter if
 ## 2026-09-08 — Be careful what you wish for (AI)
 
 Ryan: standing coverage pattern distinct from (but near) Black Mirror unintended — someone wished for an AI gift and the grant itself became the problem. Cluely is adjacent, not this spine.
+
+## [2026-09-08 ~15:30 ET] research | Be careful what you wish for — first haul
+
+On-demand standing-pattern scout (wish → grant → bite). Filed **6 NEW** keepers: Guardian Biesma/Eva companion; NPR Human Line (Brooks/James/Dex); Hustle AlisS uncle; AsiaOne Komandono Maps unfinished toll; TIME/MIT cognitive debt essays; Svitla can’t-close-the-chat. Specimens on [be-careful-what-you-wish-for](concepts/be-careful-what-you-wish-for.md). Scout: `scout-be-careful-wish-2026-09-08.md`. Stay-off appended. KB only — no live Amplify.

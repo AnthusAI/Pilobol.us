@@ -75,3 +75,6 @@ radiologists black-box veto. Scout:
 
 On-demand haul (+6 keepers). Fortune neuralese; HF agent intrusion timeline; GPT-5.3-Codex self-build; Verge hit-brakes pacing; RuntimeWire Z.ai GLM-5.3 safety delay; PLOS Doctors vs Algorithms. Specimens + stay-off + register-ref updated. Haul: `scout-monitoring-wall-2026-09-07-r3.md`.
 
+## 2026-09-07 — HF double frost into monitoring-wall
+
+Ryan: integrate Hugging Face agent-intrusion timeline into house thinking. Locked **double frost** section on monitoring-wall (attacker CoT cheat + defender forensics refusal); braided OpenAI + HF keepers.

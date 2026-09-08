@@ -86,6 +86,8 @@ crypto-breaking; **tangential** democratizations count.
 - Anything where a **neighborhood or travel corridor** becomes a dragnet that
   used to require a government program
 
+- **Double frost / forensics refusal** — HF timeline: Claude won’t decrypt attack logs; open-weight GLM does. Lag is also *tools that won’t look*. See [monitoring-wall](monitoring-wall.md).
+
 ## Open questions
 
 - When is lag temporary (tooling catches up) vs structural (incentives never

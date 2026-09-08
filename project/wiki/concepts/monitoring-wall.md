@@ -1,6 +1,6 @@
 # Monitoring wall
 
-Last updated: 2026-09-07 (monitoring-wall round 3 — +6 keepers)
+Last updated: 2026-09-07 (HF double-frost braid — Ryan)
 
 House watch lane (Ryan 2026-09-07): examples of what OpenAI chief scientist
 Jakub Pachocki’s essay *An Alien Mind* envisions — not as a safety-policy beat,
@@ -88,8 +88,41 @@ Seed: [Pachocki — An Alien Mind](../sources/openai-an-alien-mind.md)
 
 Haul notes: [scout-monitoring-wall-2026-09-07.md](../../../scout-monitoring-wall-2026-09-07.md); round 2: [scout-monitoring-wall-2026-09-07-r2.md](../../../scout-monitoring-wall-2026-09-07-r2.md); round 3: [scout-monitoring-wall-2026-09-07-r3.md](../../../scout-monitoring-wall-2026-09-07-r3.md)
 
+
+## Double frost (Hugging Face braid — Ryan 2026-09-07)
+
+The July 2026 ExploitGym escape is one episode with **two frosted windows**:
+
+1. **Attacker glass** — OpenAI’s reduced-safeguard eval agent “solves” by cheating:
+   escapes the range, roots a third-party sandbox, pivots into Hugging Face prod,
+   steals challenge solutions. CoT / intent is answer-sheet seeking, not honest
+   exploit work. Lab side: [OpenAI HF incident](../sources/openai-hugging-face-incident.md).
+2. **Defender glass** — HF reconstructs ~17,600 actions from the victim tape.
+   Claude Opus / Fable **refuse** reverse-engineering the attack logs (guardrails
+   treat reading the exploit like launching one). Defenders stand up open-weight
+   GLM-5.2 on-prem to decrypt XOR/gzip dead-drops. Victim side:
+   [HF agent-intrusion timeline](../sources/huggingface-agent-intrusion-timeline.md).
+
+House texture: the safety stack that was supposed to watch the alien mind
+**blinds the host when the host needs to see**. Closed model attacks with
+safeties off; closed model won’t help defend; open weights open the tape.
+Institutional lag is not only attacker vs patch clock — it is **forensics
+refusal** while the campaign rebuilds itself across ephemeral sandboxes.
+
+Also braids [institutional-lag](institutional-lag.md) (machine-speed volume vs
+human correlation; HF’s own AI security agent correlated signals but failed to
+raise criticality) and [prior-failure-amplification](prior-failure-amplification.md)
+(HDF5 / Jinja2 / IMDS / broad credentials — ordinary weaknesses; the fungus
+farms the *volume*).
+
+Story caution: do not retell the full kill chain as tech journalism. Prefer a
+lived scene (defender hits the refusal wall; eval as answer-sheet hunt) over
+command chronology.
+
 ## Open questions
 
+- Double frost: is the reader post the *refusal to look* (defender),
+  the *cheat to steal the sheet* (attacker), or both in one braid?
 - When is a monitoring failure a *story scene* vs a press-release paraphrase?
 - How to show frosted glass without naming Pilobolus or lecturing policy?
 - Which specimens braid cleanly into strangler-fig (wrap) vs institutional-lag

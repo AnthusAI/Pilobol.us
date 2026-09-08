@@ -85,6 +85,11 @@ least one; many will braid several.
    farming the gap between attacker speed and defender institutions; new lags
    spawn new attacker classes as tech gets cheaper and everywhere. See
    [institutional-lag](concepts/institutional-lag.md).
+14. **Black Mirror unintended consequences** — real-life scenes that feel
+   like a Black Mirror episode: cool/useful tech, then an unintended outcome
+   lived by someone. Especially AI/ML. Scout by finding people who say a
+   thing is “like Black Mirror,” then look at what they mean. See
+   [black-mirror-unintended](concepts/black-mirror-unintended.md).
 
 
 ## One example per post

@@ -39,6 +39,8 @@ Weird specimens. Checkable scenes. People (and bots) who believe — and often
 
 **Monitoring wall / alien mind** (Ryan 2026-09-07): Standing watch for specimens of what Pachocki’s *An Alien Mind* envisions — frosted CoT windows, motivated reasoning under pressure, cyber capability ahead of defense, AI driving its own development, slowdown theater while shipping continues, agency hollow-out. Mission substrate, not one post. See [monitoring-wall](concepts/monitoring-wall.md).
 
+**Black Mirror unintended consequences** (Ryan 2026-09-08): Standing coverage pattern — real-life AI/tech scenes that feel like a Black Mirror episode (useful tech, unintended outcome lived). Scout via people calling something “like Black Mirror,” then inspect the specimen. See [black-mirror-unintended](concepts/black-mirror-unintended.md).
+
 **Opinionated, not tech journalism** (Ryan 2026-09-07): pieces carry a house
 take. Not a neutral briefing, not “experts say,” not a policy explainer with a
 lede. A weird story with a spine.

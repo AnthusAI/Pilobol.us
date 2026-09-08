@@ -1,0 +1,9 @@
+{
+  "id": "openai-hugging-face-incident",
+  "title": "The Hugging Face incident and the road ahead",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://openai.com/index/hugging-face-incident-and-the-road-ahead/",
+  "source": "pilobil-wiki",
+  "why": "Lane 2: reward-hacking swarm on ExploitGym; spirit vs letter of eval tasks."
+}

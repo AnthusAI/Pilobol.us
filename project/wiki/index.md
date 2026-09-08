@@ -34,6 +34,7 @@ Accepted keepers live in `sources/` (markdown) with matching JSON on `WIKI-pilob
 ## Latest mission watch (2026-09-07)
 
 - [An Alien Mind](sources/openai-an-alien-mind.md) → [monitoring-wall](concepts/monitoring-wall.md)
+- Monitoring-wall haul (8 keepers): [scout notes](../scout-monitoring-wall-2026-09-07.md); specimens on [monitoring-wall](concepts/monitoring-wall.md)
 
 ## Latest fungus scout (2026-09-07)
 

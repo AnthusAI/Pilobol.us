@@ -1,0 +1,9 @@
+{
+  "id": "openai-gpt-6-astra-cot-monitorability",
+  "title": "GPT-6 Astra System Card \u2014 CoT monitorability and controllability",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://deploymentsafety.openai.com/gpt-6-astra/capability-sandbagging",
+  "source": "pilobil-wiki",
+  "why": "Lane 1: Astra ships with lower CoT monitorability / higher CoT controllability admission."
+}

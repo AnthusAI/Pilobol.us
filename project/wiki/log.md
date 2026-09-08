@@ -49,3 +49,14 @@ Ryan: *An Alien Mind* cuts core to mission — standing lookout for specimens it
 envisions (not one story). Added concept [monitoring-wall](concepts/monitoring-wall.md),
 source [openai-an-alien-mind](sources/openai-an-alien-mind.md), mission + institutional-lag
 touches; 4am desk briefed to rotate this lane.
+
+## 2026-09-07 — Monitoring-wall haul (Alien Mind watch)
+
+On-demand scout for six monitoring-wall lanes. Filed 8 NEW keepers (not re-filing
+An Alien Mind): accidental CoT grading; Astra CoT monitorability regression;
+Hugging Face incident; Anthropic N-day exploits; When AI builds itself; Path to
+Astra; Verge Astra AGI-era; Yale ambient AI scribes. Updated
+[monitoring-wall](concepts/monitoring-wall.md) Specimens; light touches
+institutional-lag + fungus-among-us. Scout notes:
+`scout-monitoring-wall-2026-09-07.md`. Register-ref JSON on
+`WIKI-pilobil-accepted`. KB only — no live Amplify.

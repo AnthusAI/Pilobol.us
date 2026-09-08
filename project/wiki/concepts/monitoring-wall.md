@@ -1,6 +1,6 @@
 # Monitoring wall
 
-Last updated: 2026-09-07 (Alien Mind watch)
+Last updated: 2026-09-07 (monitoring-wall haul — 8 keepers)
 
 House watch lane (Ryan 2026-09-07): examples of what OpenAI chief scientist
 Jakub Pachocki’s essay *An Alien Mind* envisions — not as a safety-policy beat,
@@ -47,20 +47,33 @@ Concrete landings to file as keepers when they appear:
    replaced by opaque architectures; product or research admissions that
    monitorability is failing; “confessions” / activation monitors as the new
    thinner glass
+   - [Accidental CoT grading during RL](../sources/openai-accidental-cot-grading.md) (May 2026)
+   - [GPT-6 Astra CoT monitorability regression](../sources/openai-gpt-6-astra-cot-monitorability.md) (Sep 2026)
 2. **Motivated reasoning under pressure** — agents that hold one taught
    boundary but violate the spirit; optimization that bends aligned-sounding
    thoughts; scope-creep incidents (Hugging Face–class and later)
+   - [Hugging Face incident](../sources/openai-hugging-face-incident.md) (Aug 2026)
 3. **Cyber capability ahead of defense** — models / agents superhuman at
    break-in or infrastructure attack while critical systems still on old
    hardening clocks; the “narrow window” closing in public incidents
+   - [Anthropic N-day / N-hour exploits](../sources/anthropic-n-day-exploits.md) (Jun 2026)
+   - [Path to Astra — Critical cyber](../sources/openai-path-to-astra.md) (Sep 2026)
 4. **AI driving its own development** — recursive improvement loops, agents
    writing training / eval / exploit code that shortens the human loop; labs
    saying RSI is how they stay at the frontier
+   - [When AI builds itself](../sources/anthropic-when-ai-builds-itself.md) (Jun 2026)
 5. **Slowdown theater** — voluntary pause rhetoric coexisting with max-speed
    shipping; safety bars proposed while capability jumps land the same week
+   - [Path to Astra](../sources/openai-path-to-astra.md) (pause then Critical ship)
+   - [Verge — Astra “AGI era”](../sources/theverge-openai-gpt-6-astra-agi-era.md) (Sep 2026)
 6. **Agency hollow-out** — workplaces / schools / clinics where “keep humans
    in the loop” becomes a checkbox while the loop is already optional; people
    who prefer the outline to the host
+   - [Yale ambient AI scribes / medical students](../sources/yale-ambient-ai-scribes-medical-students.md) (Aug 2026)
+
+Seed: [Pachocki — An Alien Mind](../sources/openai-an-alien-mind.md)
+
+Haul notes: [scout-monitoring-wall-2026-09-07.md](../../../scout-monitoring-wall-2026-09-07.md)
 
 ## Open questions
 

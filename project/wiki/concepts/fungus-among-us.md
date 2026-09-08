@@ -40,6 +40,11 @@ viral posts, spores as copy-paste personas). Drop it when it becomes costume.
 ### Addendum — monitoring wall 2026-09-07
 
 - [Pachocki — An Alien Mind](../sources/openai-an-alien-mind.md) → [monitoring-wall](monitoring-wall.md)
+- Haul keepers: [Astra CoT frost](../sources/openai-gpt-6-astra-cot-monitorability.md),
+  [HF incident](../sources/openai-hugging-face-incident.md),
+  [N-day exploits](../sources/anthropic-n-day-exploits.md),
+  [When AI builds itself](../sources/anthropic-when-ai-builds-itself.md),
+  [Yale ambient scribes](../sources/yale-ambient-ai-scribes-medical-students.md)
 
 ## Open questions
 

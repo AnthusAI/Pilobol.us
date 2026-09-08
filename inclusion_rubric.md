@@ -606,6 +606,15 @@ the weird preference.
 - NY Focus Salamanca robot teacher paused (Manno 2026-07-24) https://nysfocus.com/2026/07/24/new-york-robot-teacher-plan-paused
 - Newsweek How to Tell if an Influencer Is AI Emily Rae Yan Mun (Afshar 2026-02-22) https://www.newsweek.com/how-to-tell-influencer-ai-11541965
 
+- OpenAI Alignment accidental CoT grading RL (Carroll et al. 2026-05) https://alignment.openai.com/accidental-cot-grading/
+- OpenAI GPT-6 Astra system card CoT monitorability / capability-sandbagging (2026-09-03) https://deploymentsafety.openai.com/gpt-6-astra/capability-sandbagging
+- OpenAI The Hugging Face incident and the road ahead (2026-08-26) https://openai.com/index/hugging-face-incident-and-the-road-ahead/
+- Anthropic Measuring LLMs’ impact on N-day exploits (2026-06-08) https://www.anthropic.com/research/n-days
+- Anthropic When AI builds itself / recursive self-improvement (Favaro Clark ~2026-06-06) https://www.anthropic.com/institute/recursive-self-improvement
+- OpenAI Path to Astra critical capabilities (2026-09-01) https://openai.com/index/path-to-astra/
+- Verge OpenAI GPT-6 Astra entered the AGI era (Field 2026-09-03) https://www.theverge.com/ai-artificial-intelligence/989601/openai-gpt-6-astra-release
+- Yale How Ambient AI Scribes Impact Medical Students (Crawford/Talwalkar 2026-08-18) https://medicine.yale.edu/news-article/ambient-ai-scribes-impact-medical-students/
+
 ## Search seeds
 
 Each run, after named radars:

@@ -54,7 +54,11 @@ only shows the fake (hoodwink) misses the shape; coverage that shows the
 - **Monitoring wall** (lab/customer lag): ability to *see* what models are
   doing loses to capability — CoT opacity, gamed reasoning, defense clocks behind
   cyber-capable agents. Seed: [An Alien Mind](../sources/openai-an-alien-mind.md);
-  concept: [monitoring-wall](monitoring-wall.md)
+  concept: [monitoring-wall](monitoring-wall.md). Haul 2026-09-07:
+  [Astra CoT frost](../sources/openai-gpt-6-astra-cot-monitorability.md),
+  [HF reward-hack swarm](../sources/openai-hugging-face-incident.md),
+  [N-hour exploits](../sources/anthropic-n-day-exploits.md),
+  [Claude writes Anthropic](../sources/anthropic-when-ai-builds-itself.md).
 
 
 ## Democratized state-grade attacks on households (watch lane)

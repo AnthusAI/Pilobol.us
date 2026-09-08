@@ -1,0 +1,9 @@
+{
+  "id": "openai-accidental-cot-grading",
+  "title": "Investigating the consequences of accidentally grading CoT during RL",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://alignment.openai.com/accidental-cot-grading/",
+  "source": "pilobil-wiki",
+  "why": "Lane 1 frosted window: accidental CoT grading despite no-grade policy; Slack regex catch."
+}

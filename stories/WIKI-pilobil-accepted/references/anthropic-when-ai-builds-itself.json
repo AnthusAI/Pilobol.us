@@ -1,0 +1,9 @@
+{
+  "id": "anthropic-when-ai-builds-itself",
+  "title": "When AI builds itself",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://www.anthropic.com/institute/recursive-self-improvement",
+  "source": "pilobil-wiki",
+  "why": "Lane 4: Claude authors >80% Anthropic code; RSI approaching, pause option asked."
+}

@@ -19,6 +19,7 @@ Accepted sources live as pages in `sources/` **and** as pod references on
 - [Fungus among us](concepts/fungus-among-us.md) — house metaphor for synthetic
   speakers colonizing discourse
 
+- [Synthetic nostalgia](concepts/synthetic-nostalgia.md) — AI rewriting the family album (restoration doppelgängers)
 - [Synthetic sightings of the missing](concepts/synthetic-sightings.md) — AI “breakthroughs” mid-search
 - [Competing event narratives](concepts/competing-event-narratives.md) — rumor/cascade/myth proliferation after focal events
 - [Prior failure amplification](concepts/prior-failure-amplification.md) — AI accelerates old human weaknesses; not a hoodwink series
@@ -27,7 +28,7 @@ Accepted sources live as pages in `sources/` **and** as pod references on
 
 ## Sources
 
-Accepted keepers live in `sources/` (markdown) with matching JSON on `WIKI-pilobil-accepted`. Latest 4am: [Cat in the Hat AI scare](sources/usatoday-cat-in-the-hat-ai-trend.md). Research hauls: [synthetic sightings](concepts/synthetic-sightings.md) (Gus/Ben); [competing event narratives](concepts/competing-event-narratives.md) (theory lanes).
+Accepted keepers live in `sources/` (markdown) with matching JSON on `WIKI-pilobil-accepted`. Latest 4am research: [synthetic nostalgia](concepts/synthetic-nostalgia.md) (family-album restores). Also: [synthetic sightings](concepts/synthetic-sightings.md) (Gus/Ben); [competing event narratives](concepts/competing-event-narratives.md); [Cat in the Hat](sources/usatoday-cat-in-the-hat-ai-trend.md).
 - [More real than real](concepts/more-real-than-real.md) — uncanny hyperreality niche
 - [Hyperreality](concepts/hyperreality.md) — realer than real as current-events lens
 

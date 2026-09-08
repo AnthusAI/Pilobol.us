@@ -78,3 +78,14 @@ On-demand haul (+6 keepers). Fortune neuralese; HF agent intrusion timeline; GPT
 ## 2026-09-07 — HF double frost into monitoring-wall
 
 Ryan: integrate Hugging Face agent-intrusion timeline into house thinking. Locked **double frost** section on monitoring-wall (attacker CoT cheat + defender forensics refusal); braided OpenAI + HF keepers.
+
+## [2026-09-08 ~04:34 ET] research+story | Synthetic nostalgia — AI rewriting the family album
+
+Board `PILO-1f260e` (idea→assignment→research). Theme: generative restoration / memory reconstruction that replaces family faces with preferred doppelgängers. Filed 7 keepers (How-To Geek; MIT TR Synthetic Memories; CHI Pataranutaporn/Loftus false-memory; PetaPixel ON1; BestPhoto Remini stranger-grandma; PhotoSharpener identity drift; Guardian ChatGPT Avtar/Nicci reunion). New concept `synthetic-nostalgia.md`. Draft article: Facebook dad’s restored album (inside the user / over one shoulder). Stay-off appended. Skipped FastCo Plum twin + Omni Hotels (fetch blocked/thin for lane); Newsweek pet grief (adjacent griefbot); TOI companion to Guardian.
+
+## 2026-09-08 — Cloud Amplify bind parked (no AWS)
+
+Ryan: AWS / M1 mint will not be available anytime soon. Local Papyrus pod
+wiki + `WIKI-pilobil-accepted` refs + `corpora/` Biblicus seed are the durable
+KB. Do not wait on `amplify_outputs` / GraphQL JWT for newsroom Topics accept.
+Live `/newsroom` bind remains blocked until Ryan can mint later.

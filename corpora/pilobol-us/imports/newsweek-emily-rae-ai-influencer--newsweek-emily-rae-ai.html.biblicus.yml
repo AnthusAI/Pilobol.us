@@ -1,0 +1,17 @@
+title: "How to Tell if an Influencer Is AI—and Why You Should Care"
+media_type: text/html
+abstract: "@aiemilyrae (Emily Rae) posts Rhode / Nobu / ski-chalet perfection with “AI” in handle and bio, yet ~68k followers leave adoring comments — disclosure buried where scroll never pauses. Piece also flags Yan Mun (@yangmunus), AI Buddhist monk with 2.5M+ Instagram followers giving wellness advice among temples. SAS’s Kristi Boyd: platforms reward trust-by-familiarity; buried labels don’t interrupt th"
+biblicus:
+  id: newsweek-emily-rae-ai-influencer
+  source: https://www.newsweek.com/how-to-tell-influencer-ai-11541965
+dates:
+  published_at: "2026-02-22"
+  retrieved_at: "2026-09-07T19:50:41Z"
+tags:
+  - pilobolus
+  - news
+curation:
+  corpus_role: source-material
+ingestion_rationale: >
+  Seeded from Pilobol.us accepted wiki keepers / standing accepted-refs story
+  for Biblicus taxonomy and knowledge-graph work.

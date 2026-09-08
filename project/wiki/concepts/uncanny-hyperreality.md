@@ -1,6 +1,6 @@
 # Uncanny hyperreality
 
-Last updated: 2026-09-07 09:20 ET
+Last updated: 2026-09-08 04:34 ET
 
 ## What it is
 
@@ -25,3 +25,8 @@ that preference is the point.
 - [NY Focus Salamanca Sally](../sources/nysfocus-salamanca-realbotix-sally.md)
 - [USA TODAY Cat in the Hat AI scare](../sources/usatoday-cat-in-the-hat-ai-trend.md)
 - [Atlantic chatbot marriage](../sources/atlantic-chatbot-marriage.md)
+
+## Specimens — synthetic nostalgia (2026-09-08)
+
+- [How-To Geek](../sources/howtogeek-ai-photo-restoration-erasing-family-history.md); [PetaPixel ON1](../sources/petapixel-on1-restore-ai-nightmare-fuel.md); [BestPhoto Remini](../sources/bestphoto-ai-restored-photos-change-too-much.md)
+- [synthetic-nostalgia](synthetic-nostalgia.md)

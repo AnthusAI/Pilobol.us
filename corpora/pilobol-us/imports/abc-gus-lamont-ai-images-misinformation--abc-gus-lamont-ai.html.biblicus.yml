@@ -1,0 +1,18 @@
+title: "AI-generated images of missing 4yo Gus raise legal concerns (ABC)"
+media_type: text/html
+abstract: "After four-year-old Gus disappears from a South Australia outback homestead near Yunta, Facebook pages push AI images of him — a blonde child loaded into a four-wheel drive (“Is this a kidnapping case?”), fake “breakthroughs,” even a “miracle in the outback” reunion with US-style police uniforms. Posts rack up hundreds/thousands of reactions; experts flag family trauma, false hope, and trust colla"
+biblicus:
+  id: abc-gus-lamont-ai-images-misinformation
+  source: https://www.abc.net.au/news/2025-10-11/ai-generated-images-of-4yo-gus-prompt-call-for-stronger-laws/105873218
+dates:
+  published_at: "2025-10-11"
+  retrieved_at: "2026-09-07T19:50:30Z"
+tags:
+  - pilobolus
+  - surreal-specimen
+  - news
+curation:
+  corpus_role: source-material
+ingestion_rationale: >
+  Seeded from Pilobol.us accepted wiki keepers / standing accepted-refs story
+  for Biblicus taxonomy and knowledge-graph work.

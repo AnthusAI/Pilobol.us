@@ -1,0 +1,16 @@
+title: "A Theory of Fads… as Informational Cascades (Bikhchandani, Hirshleifer & Welch)"
+media_type: text/markdown
+abstract: "An **informational cascade** starts when it is optimal for an individual, having seen predecessors’ *actions*, to follow them and ignore private information. Explains localized conformity *and* fragility — small shocks or a little new public information can reverse long-running mass behavior. When only previous actions are observable (not signals), cascades can be wrong yet brittle. Microfoundatio"
+biblicus:
+  id: bikhchandani-hirshleifer-welch-informational-cascades
+  source: https://snap.stanford.edu/class/cs224w-readings/bikhchandani92fads.pdf
+dates:
+  published_at: "1992-10"
+  retrieved_at: "2026-09-07T19:49:43Z"
+tags:
+  - pilobolus
+curation:
+  corpus_role: source-material
+ingestion_rationale: >
+  Seeded from Pilobol.us accepted wiki keepers / standing accepted-refs story
+  for Biblicus taxonomy and knowledge-graph work.

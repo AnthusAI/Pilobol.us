@@ -1,0 +1,9 @@
+{
+  "id": "photosharpener-com-how-do-i-restore-an-old-family-photo",
+  "title": "How do I restore an old family photo when AI keeps changing the person's face? (PhotoSharpener)",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://photosharpener.com/blog/how-do-i-restore-an-old-family-photo-when-ai-keeps-changing-the-persons-face/",
+  "source": "pilobil-wiki",
+  "why": "Identity-drift mechanism: AI generates statistically likely faces; beautification bundled; missing detail = plausible stranger"
+}

@@ -1,0 +1,17 @@
+title: "Western New York School District Hits Pause on Robot Teacher Amid Scrutiny"
+media_type: text/html
+abstract: "Hours after NYSED Commissioner Betty Rosa warns about “robots that resemble humans” in a high-school classroom, Salamanca pauses the Realbotix Sally pilot for “enhanced student data privacy agreements” and community outreach. NYSUT president: “a robot built by a company associated with sex dolls has no business in our classrooms.” Physical unit never deployed. Companion to launch report: `nysfocus"
+biblicus:
+  id: nysfocus-salamanca-robot-paused
+  source: https://nysfocus.com/2026/07/24/new-york-robot-teacher-plan-paused
+dates:
+  published_at: "2026-07-24"
+  retrieved_at: "2026-09-07T19:50:42Z"
+tags:
+  - pilobolus
+  - news
+curation:
+  corpus_role: source-material
+ingestion_rationale: >
+  Seeded from Pilobol.us accepted wiki keepers / standing accepted-refs story
+  for Biblicus taxonomy and knowledge-graph work.

@@ -1,0 +1,18 @@
+title: "False claims about missing Gus Lamont spread on social media (AAP FactCheck)"
+media_type: text/html
+abstract: "Engagement-bait pages (Vietnam-managed) claim Gus found alive, hidden cave, soaked backpack “breakthrough,” Minions shirt, bloodstains/body part, shimmering green item — all false. One page posts an AI-looking “kidnap into vehicle” still with an unnaturally long finger. SA Police Assistant Commissioner Ian Parrott: “no trace… no tangible pieces of evidence.” The feed invents a whole investigation "
+biblicus:
+  id: aap-gus-lamont-false-claims-social
+  source: https://www.aap.com.au/factcheck/false-claims-about-missing-gus-lamont-spread-on-social-media/
+dates:
+  published_at: "2025-10-10"
+  retrieved_at: "2026-09-07T19:50:29Z"
+tags:
+  - pilobolus
+  - surreal-specimen
+  - fact-check
+curation:
+  corpus_role: source-material
+ingestion_rationale: >
+  Seeded from Pilobol.us accepted wiki keepers / standing accepted-refs story
+  for Biblicus taxonomy and knowledge-graph work.

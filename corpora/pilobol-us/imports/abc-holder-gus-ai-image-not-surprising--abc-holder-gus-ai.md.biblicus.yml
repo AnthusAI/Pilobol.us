@@ -1,0 +1,18 @@
+title: "Expert: AI image of missing Gus “concerning but not surprising” (ABC)"
+media_type: text/markdown
+abstract: "Facebook circulates an AI image of a curly-haired boy being put into a 4WD beside Gus’s real released photo. University of Sydney AI ethicist Rebecca Johnson: clickbait farms exploit the stress void. SA Commissioner for Victims’ Rights Sarah Quick: “extra layer of trauma” for the family, “very real consequences” for community and searchers. SA Police: only trust official images. Earlier, Facebook’"
+biblicus:
+  id: abc-holder-gus-ai-image-not-surprising
+  source: https://www.abc.net.au/news/2025-10-09/sa-ai-image-of-missing-child-appears-online/105868548
+dates:
+  published_at: "2025-10-09"
+  retrieved_at: "2026-09-07T19:49:43Z"
+tags:
+  - pilobolus
+  - surreal-specimen
+  - news
+curation:
+  corpus_role: source-material
+ingestion_rationale: >
+  Seeded from Pilobol.us accepted wiki keepers / standing accepted-refs story
+  for Biblicus taxonomy and knowledge-graph work.

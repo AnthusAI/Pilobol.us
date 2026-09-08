@@ -1,6 +1,6 @@
 # More real than real / uncanny hyperreality
 
-Last updated: 2026-09-07 04:10 ET
+Last updated: 2026-09-08 04:34 ET
 
 ## What it is
 
@@ -92,3 +92,10 @@ Pilobol.us lives on that seam.
 - [Atlantic Zurich Reddit AI](../sources/atlantic-reddit-zurich-ai.md)
 - [Guardian TikTok AI doctors](../sources/guardian-tiktok-ai-doctors.md)
 - [TOI look like selfie](../sources/toi-look-like-my-selfie.md)
+
+## Specimens — synthetic nostalgia (2026-09-08)
+
+- [How-To Geek AI photo restoration](../sources/howtogeek-ai-photo-restoration-erasing-family-history.md) — shiny Facebook copy preferred; kid can’t ID dad’s real pre-birth face
+- [MIT TR Synthetic Memories](../sources/technologyreview-synthetic-memories-domestic-data-streamers.md) — visceral “it was like that” for photos that never existed
+- [CHI false-memory study](../sources/chi-pataranutaporn-synthetic-human-memories.md) — confidence rises with AI-edited copies
+- Concept: [synthetic-nostalgia](synthetic-nostalgia.md)

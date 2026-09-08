@@ -1,0 +1,16 @@
+title: "Availability Cascades and Risk Regulation (Kuran & Sunstein)"
+media_type: application/pdf
+abstract: "An **availability cascade** is a self-reinforcing process of collective belief: an expressed perception triggers a chain reaction that makes the perception more plausible as it becomes more available in public discourse. Combines informational cascades (learn from others’ apparent beliefs) and reputational cascades (endorse to keep social acceptance). **Availability entrepreneurs** try to trigger "
+biblicus:
+  id: kuran-sunstein-availability-cascades
+  source: https://sites.duke.edu/timurkuran/files/2016/10/availability-cascades-1.original.pdf
+dates:
+  published_at: "1999-04"
+  retrieved_at: "2026-09-07T19:50:40Z"
+tags:
+  - pilobolus
+curation:
+  corpus_role: source-material
+ingestion_rationale: >
+  Seeded from Pilobol.us accepted wiki keepers / standing accepted-refs story
+  for Biblicus taxonomy and knowledge-graph work.

@@ -1,0 +1,18 @@
+title: "AI pages claim Ben Needham (and other missing kids) “found” (The Star)"
+media_type: text/html
+abstract: "Official Help Find Ben Needham page warns of AI-generated “reunited” photos. Facebook “UK Hot News” / Midnight Wire branding runs a farm of solved-case fantasies — Ben Needham “DNA confirmation,” Madeleine McCann as a homeless woman in America, Andrew Gosden reunited — built from police age-progressions. One false Ben post gets 1,700+ reactions; page links to Vietnam-hosted sites. Industrial synth"
+biblicus:
+  id: thestar-ben-needham-ai-found-claims
+  source: https://www.thestar.co.uk/news/crime/family-of-missing-sheffield-boy-ben-needham-ai-claims-march-23-6166849
+dates:
+  published_at: "2026-03-24"
+  retrieved_at: "2026-09-07T19:50:44Z"
+tags:
+  - pilobolus
+  - surreal-specimen
+  - news
+curation:
+  corpus_role: source-material
+ingestion_rationale: >
+  Seeded from Pilobol.us accepted wiki keepers / standing accepted-refs story
+  for Biblicus taxonomy and knowledge-graph work.

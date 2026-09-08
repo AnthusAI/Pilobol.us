@@ -4,7 +4,7 @@ Living filter for the daily 4:00am ET find→explain scout. Read `AGENTS.md`
 (enduring vibes) then this file every run. Do not freeze search queries in the routine prompt — derive them from this
 file + open questions on concept pages.
 
-Last updated: 2026-09-07 22:15 ET (monitoring-wall round 2)
+Last updated: 2026-09-08 04:34 ET (synthetic nostalgia 4am)
 
 ## Center of gravity
 
@@ -630,6 +630,18 @@ the weird preference.
 - Verge OpenAI hit the brakes pacing (Hart 2026-08-19) https://www.theverge.com/ai-artificial-intelligence/982323/openai-hit-brakes-voluntary-pacing-ai
 - RuntimeWire Z.ai GLM-5.3 weights after safety delay (Merket 2026-08-26) https://runtimewire.com/article/zai-glm-53-weights-release-august-28-cyber-safety
 - PLOS Digital Health Doctors vs. Algorithms (Vinas/Blanco/Matute 2026-07-09) https://journals.plos.org/digitalhealth/article?id=10.1371%2Fjournal.pdig.0001490
+
+
+
+### Synthetic nostalgia / family-album restores (2026-09-08)
+
+- How-To Geek AI photo restoration erasing family history https://www.howtogeek.com/ai-photo-restoration-is-erasing-your-familys-real-history/
+- MIT Technology Review Synthetic Memories / Domestic Data Streamers (2024-04-10) https://www.technologyreview.com/2024/04/10/1091053/generative-ai-turn-your-most-precious-memories-into-photos/
+- CHI ’25 Synthetic Human Memories Pataranutaporn et al. https://doi.org/10.1145/3706598.3713697 / PDF https://bpb-us-e2.wpmucdn.com/faculty.sites.uci.edu/dist/c/571/files/2025/08/Pataranutaporn_SyntheticHumanMemorieschi2025.pdf
+- PetaPixel ON1 Restore AI nightmare fuel (Schneider 2026-03-25) https://petapixel.com/2026/03/25/on1-restore-ai-turns-old-family-photos-into-grotesque-nightmare-fuel/
+- BestPhoto Do AI-Restored Photos Change Too Much Remini grandma (2026-06-02) https://bestphoto.ai/blog/do-ai-restored-photos-change-too-much
+- PhotoSharpener AI keeps changing the person's face (Ana Clara 2026-04-22) https://photosharpener.com/blog/how-do-i-restore-an-old-family-photo-when-ai-keeps-changing-the-persons-face/
+- Guardian ChatGPT long-lost family Avtar Singh / Nicci Dhamu (2026-07-25) https://www.theguardian.com/lifeandstyle/ng-interactive/2026/jul/25/long-lost-family-reunited-chatgpt-artificial-intelligence-ai
 
 ## Search seeds
 

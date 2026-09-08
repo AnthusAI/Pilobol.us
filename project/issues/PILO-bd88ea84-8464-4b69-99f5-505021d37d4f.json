@@ -1,0 +1,18 @@
+{
+  "id": "PILO-bd88ea84-8464-4b69-99f5-505021d37d4f",
+  "title": "Experiment: expose KB/taxonomy on Pilobolus site",
+  "description": "",
+  "type": "story",
+  "status": "assignment",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-09-07T19:56:04.534227Z",
+  "updated_at": "2026-09-07T19:56:04.953671Z",
+  "closed_at": null,
+  "custom": {}
+}

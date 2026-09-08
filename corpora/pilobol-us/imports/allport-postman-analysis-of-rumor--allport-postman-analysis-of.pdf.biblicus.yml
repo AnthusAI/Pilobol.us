@@ -1,0 +1,17 @@
+title: "An Analysis of Rumor (Allport & Postman)"
+media_type: application/pdf
+abstract: "Basic law of rumor: intensity ≈ importance × ambiguity (R ~ i × a) — multiplicative; if either factor is zero, no rumor. Wartime cases show rumor also thickens when news is *plentiful* and momentous (Pearl Harbor report, V-J Day, FDR death), not only when news is absent. Transmission distorts via leveling, sharpening, assimilation to the teller’s interests and stereotypes. Founding lane for “why b"
+biblicus:
+  id: allport-postman-analysis-of-rumor
+  source: https://www.romolocapuano.com/wp-content/uploads/2018/10/ALLPORT_POSTMAN_AN-ANALYSIS-OF-RUMOR.pdf
+dates:
+  published_at: "Winter 1946–47 (book 1947)"
+  retrieved_at: "2026-09-07T19:50:34Z"
+tags:
+  - pilobolus
+  - classic
+curation:
+  corpus_role: source-material
+ingestion_rationale: >
+  Seeded from Pilobol.us accepted wiki keepers / standing accepted-refs story
+  for Biblicus taxonomy and knowledge-graph work.

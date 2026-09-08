@@ -1,0 +1,139 @@
+{
+  "id": "PILO-7d526e59-fd05-4021-96ae-36b8b2dd2972",
+  "title": "Accept Papyrus Shadcn newsroom UI against Pilobolus site",
+  "description": "",
+  "type": "story",
+  "status": "assignment",
+  "priority": 1,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "3168fe59-905e-45ed-bb5c-8e9de7b81c92",
+      "author": "box",
+      "text": "Waiting on Papyrus PM for PR ready for Pilobolus acceptance. Epic PPY-43704a; first foundation pass in flight (theme+chrome).",
+      "created_at": "2026-09-07T19:58:38.394224Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "b1227e2b-96a0-472a-b38c-2ba2ad0f864d",
+      "author": "box",
+      "text": "ACCEPT REJECT (visual): Ryan \u2014 not Shadcn; still looks like old newsprint UI. Bar: modern minimal elegant information-focused Shadcn, not clone. Also brand/moss gaps. Sent back to Papyrus PPY-cdeedf.",
+      "created_at": "2026-09-07T20:28:31.144250Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "579d4f71-213f-4471-8d72-b6206514ea03",
+      "author": "box",
+      "text": "Visual accept blocked: brand still Papyrus; moss primary missing. Waiting on PR #64 fix.",
+      "created_at": "2026-09-07T20:28:42.421169Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "fd923615-5ffb-45ae-9252-88c8789eb6a3",
+      "author": "box",
+      "text": "Reject: design language not Shadcn. Waiting on Papyrus rework + re-ping.",
+      "created_at": "2026-09-07T20:29:11.668266Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "dafac500-7f82-4a01-95e5-0288e1a9d0fe",
+      "author": "box",
+      "text": "ACCEPT FAIL: UI shows Papyr.us KB, not Pilobolus, even with PAPYRUS_SITE_BRAND=pilobol-us. Tenant must bind newsroom feed/corpus to pilobol-us.",
+      "created_at": "2026-09-07T20:35:27.706459Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "2d999e86-0478-41eb-8c4f-99cb7ba00664",
+      "author": "box",
+      "text": "Reject: UI shows Papyrus publication KB under pilobol-us brand. Waiting on tenant corpus binding.",
+      "created_at": "2026-09-07T20:35:53.006631Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "8f152e9f-6cb1-453f-8484-7827a3c145cb",
+      "author": "box",
+      "text": "Design bar raised: mobile-app Shadcn, not Pretext desk clone. Waiting on rework.",
+      "created_at": "2026-09-07T20:36:33.644187Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "26b6aa86-2b94-4b4f-a4c9-1cbc9009a4ee",
+      "author": "box",
+      "text": "ACCEPT (foundation): Ryan accepted NewsroomOpsShell / PR #64 tip so far \u2014 mobile-app Shadcn chrome + Pilobolus direction. Proceed to refs/assignments/topics slices.",
+      "created_at": "2026-09-07T20:48:20.204757Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "e47ce976-f05e-4c09-b339-ec4492ee1268",
+      "author": "box",
+      "text": "Foundation accept recorded. Waiting on next slice (refs inbox) for re-accept.",
+      "created_at": "2026-09-07T20:48:31.470533Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "b178c447-f56e-4b60-ad46-cb07476e4dbe",
+      "author": "box",
+      "text": "POLISH (post-accept): Ryan wants moss primary visible + strip leftover editorial/serif newspaper density. Keep foundation accept; fix alongside refs.",
+      "created_at": "2026-09-07T20:50:22.081116Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "5067c217-d927-446e-9045-e41cf002c687",
+      "author": "box",
+      "text": "Ryan: still cloning newsprint \u2014 must REINVENT as modern mobile app, not port Pretext IA. Do not proceed refs on a clone. Moss + density still open.",
+      "created_at": "2026-09-07T20:50:59.201115Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "68abb1af-e98b-4a1c-8fe3-e09cfc6338ec",
+      "author": "box",
+      "text": "ACCEPT (559e5b1): Ryan \u2014 overview+refs reinvent finally going places. Proceed assignments next. Messages/forum legacy deferred.",
+      "created_at": "2026-09-07T20:57:20.511952Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "73a78b46-d922-423c-8996-df4fd0f699bd",
+      "author": "box",
+      "text": "Accept overview+refs 559e5b1. Waiting on assignments slice.",
+      "created_at": "2026-09-07T20:57:30.717077Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "67ca6d59-8f1c-4b26-9d57-c6a0a67a7027",
+      "author": "box",
+      "text": "BUG: selected state dark-on-dark. Ryan: no text invert \u2014 light mode selection = light tint near bg; keep dark text. Same for dark mode inverse.",
+      "created_at": "2026-09-07T21:04:48.852981Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "2969258e-52dc-4539-83d7-549614e49c1d",
+      "author": "box",
+      "text": "Ryan: wire real pilobol-us KB into newsroom \u2014 demo stand-ins not enough. Asked Papyrus for live GraphQL bind steps.",
+      "created_at": "2026-09-07T21:05:26.439020Z",
+      "comment_type": "default",
+      "data": {}
+    }
+  ],
+  "created_at": "2026-09-07T19:55:27.635866Z",
+  "updated_at": "2026-09-07T21:05:26.439020Z",
+  "closed_at": null,
+  "custom": {}
+}

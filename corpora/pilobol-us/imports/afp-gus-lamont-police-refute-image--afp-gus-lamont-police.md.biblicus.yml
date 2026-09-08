@@ -1,0 +1,18 @@
+title: "Australia police refute authenticity of missing-boy image (AFP Fact Check)"
+media_type: text/markdown
+abstract: "Instagram/Facebook “potential breakthrough” posts (Celebrity Today, ~200k followers) collage a man carrying a curly-haired child into a car ~100km from Yunta as a “crucial lead.” SA Police tell AFP the carrying image is “not factual”; warped fingers and a floating ghost-tree give the AI away. Real Gus photo and real search photos are mixed in as bait. Police urge official channels only while Missi"
+biblicus:
+  id: afp-gus-lamont-police-refute-image
+  source: https://factcheck.afp.com/doc.afp.com.78B22ZR
+dates:
+  published_at: "2025-10-14"
+  retrieved_at: "2026-09-07T19:50:32Z"
+tags:
+  - pilobolus
+  - surreal-specimen
+  - fact-check
+curation:
+  corpus_role: source-material
+ingestion_rationale: >
+  Seeded from Pilobol.us accepted wiki keepers / standing accepted-refs story
+  for Biblicus taxonomy and knowledge-graph work.

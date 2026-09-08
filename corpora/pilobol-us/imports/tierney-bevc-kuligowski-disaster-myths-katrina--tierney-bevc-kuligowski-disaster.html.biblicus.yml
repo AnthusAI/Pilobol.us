@@ -1,0 +1,16 @@
+title: "Metaphors Matter: Disaster Myths, Media Frames, and Katrina (Tierney, Bevc & Kuligowski)"
+media_type: text/html
+abstract: "Decades of field research show popular “disaster myths” (panic, widespread looting, social breakdown, passive victims) are largely false — survivors tend toward prosocial behavior. After Katrina, media framed victims via “civil unrest” then “urban warfare,” exaggerating lawlessness and feeding militarized response discourse. Classic specimen of how a focal crisis sprouts *wrong but sticky narrativ"
+biblicus:
+  id: tierney-bevc-kuligowski-disaster-myths-katrina
+  source: https://www.rti.org/publication/metaphors-matter-disaster-myths-media-frames-consequences-hurricane-katrina
+dates:
+  published_at: "2006"
+  retrieved_at: "2026-09-07T19:50:44Z"
+tags:
+  - pilobolus
+curation:
+  corpus_role: source-material
+ingestion_rationale: >
+  Seeded from Pilobol.us accepted wiki keepers / standing accepted-refs story
+  for Biblicus taxonomy and knowledge-graph work.

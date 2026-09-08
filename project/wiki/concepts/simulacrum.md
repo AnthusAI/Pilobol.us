@@ -1,6 +1,6 @@
 # Simulacrum
 
-Last updated: 2026-09-07 04:10 ET
+Last updated: 2026-09-08 04:34 ET
 
 ## What it is
 
@@ -49,3 +49,7 @@ metrics until it behaves like a copy of itself.
 ## Specimens
 
 - [USA TODAY Cat in the Hat AI scare](../sources/usatoday-cat-in-the-hat-ai-trend.md)
+
+## Specimens — synthetic nostalgia (2026-09-08)
+
+Family-album copies that detach from the referent: [synthetic-nostalgia](synthetic-nostalgia.md); How-To Geek Facebook restores; Synthetic Memories; CHI AI-implanted recollection; ChatGPT as synthetic genealogy ([Guardian Avtar/Nicci](../sources/guardian-chatgpt-long-lost-family-avtar-nicci.md)).

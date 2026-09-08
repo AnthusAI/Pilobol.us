@@ -1,0 +1,16 @@
+title: "False flags: real ops vs social-media template (PolitiFact)"
+media_type: text/markdown
+abstract: "Confirmed historical false-flag *operations* exist (e.g. Gleiwitz 1939, Mukden 1931) but are outnumbered by baseless claims that *real* crises were staged. After 9/11 and Iraq WMD deception, “false flag” became a reusable interpretive frame (Sandy Hook “crisis actors,” Jan. 6, school shootings). Olmsted: proven government lies feed attraction; Radnitz: intuition that politicians exploit crises mak"
+biblicus:
+  id: politifact-false-flags-social-media
+  source: https://www.politifact.com/article/2022/02/08/false-flags-theyre-real-far-less-widespread-social/
+dates:
+  published_at: "2022-02-08"
+  retrieved_at: "2026-09-07T19:49:43Z"
+tags:
+  - pilobolus
+curation:
+  corpus_role: source-material
+ingestion_rationale: >
+  Seeded from Pilobol.us accepted wiki keepers / standing accepted-refs story
+  for Biblicus taxonomy and knowledge-graph work.

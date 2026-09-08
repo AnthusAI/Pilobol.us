@@ -1,6 +1,6 @@
 # Counterfeit persons
 
-Last updated: 2026-09-07 09:20 ET
+Last updated: 2026-09-08 04:34 ET
 
 Child of [counterfeiting](counterfeiting.md); specimen lane for
 [infiltrated circle](infiltrated-circle.md).
@@ -92,3 +92,7 @@ Concept: [industrial AI catfishing](industrial-ai-catfishing.md). **Contrast** w
 
 - Best first one-example post among Acutus journalists vs Godsin byline vs Yang Mun robe?
 - Where does “labeled AI OK” (Harari / Shaykh AI) stop being enough once the form is human?
+
+## Specimens — synthetic nostalgia (2026-09-08)
+
+- Restored/Remini/ON1 faces that are strangers wearing grandma’s dress — forged kin in the album ([synthetic-nostalgia](synthetic-nostalgia.md); [How-To Geek](../sources/howtogeek-ai-photo-restoration-erasing-family-history.md); [PetaPixel ON1](../sources/petapixel-on1-restore-ai-nightmare-fuel.md); [BestPhoto](../sources/bestphoto-ai-restored-photos-change-too-much.md)).

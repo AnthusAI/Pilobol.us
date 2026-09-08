@@ -1,0 +1,580 @@
+{
+  "schema_version": 2,
+  "generated_at": "2026-09-07T19:50:26.713899+00:00",
+  "corpus_uri": "file:///workspace/pilobol.us/corpora/pilobol-us",
+  "raw_dir": "imports",
+  "latest_run_id": null,
+  "latest_snapshot_id": null,
+  "items": {
+    "7news-gus-lamont-fake-ai-images": {
+      "id": "7news-gus-lamont-fake-ai-images",
+      "relpath": "imports/7news-gus-lamont-fake-ai-images--7news-gus-lamont-fake.html",
+      "sha256": "97f8e1d47ec14c31e8d5881557a0583906d8aed438b201168ac11a098de62591",
+      "bytes": 511219,
+      "media_type": "text/html",
+      "title": "Fake AI images spark false claims in Gus Lamont search (7NEWS)",
+      "tags": [
+        "pilobolus",
+        "surreal-specimen",
+        "news"
+      ],
+      "source_uri": "https://7news.com.au/news/fake-ai-images-sparks-wave-of-false-claims-in-search-for-missing-sa-boy-gus-lamont-c-20305471",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "Fake AI images spark false claims in Gus Lamont search (7NEWS)",
+        "tags": [
+          "pilobolus",
+          "surreal-specimen",
+          "news"
+        ],
+        "biblicus": {
+          "id": "7news-gus-lamont-fake-ai-images",
+          "source": "https://7news.com.au/news/fake-ai-images-sparks-wave-of-false-claims-in-search-for-missing-sa-boy-gus-lamont-c-20305471"
+        }
+      }
+    },
+    "aap-gus-lamont-false-claims-social": {
+      "id": "aap-gus-lamont-false-claims-social",
+      "relpath": "imports/aap-gus-lamont-false-claims-social--aap-gus-lamont-false.html",
+      "sha256": "7aa4ab0748eb4c04892c0c2cbe682b666b0558fb086c6d1a3fba9a31b58c8c9a",
+      "bytes": 50567,
+      "media_type": "text/html",
+      "title": "False claims about missing Gus Lamont spread on social media (AAP FactCheck)",
+      "tags": [
+        "pilobolus",
+        "surreal-specimen",
+        "fact-check"
+      ],
+      "source_uri": "https://www.aap.com.au/factcheck/false-claims-about-missing-gus-lamont-spread-on-social-media/",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "False claims about missing Gus Lamont spread on social media (AAP FactCheck)",
+        "tags": [
+          "pilobolus",
+          "surreal-specimen",
+          "fact-check"
+        ],
+        "biblicus": {
+          "id": "aap-gus-lamont-false-claims-social",
+          "source": "https://www.aap.com.au/factcheck/false-claims-about-missing-gus-lamont-spread-on-social-media/"
+        }
+      }
+    },
+    "abc-gus-lamont-ai-images-misinformation": {
+      "id": "abc-gus-lamont-ai-images-misinformation",
+      "relpath": "imports/abc-gus-lamont-ai-images-misinformation--abc-gus-lamont-ai.html",
+      "sha256": "0d331fa0e1b90e1c2662544b42e633e2acda37339d3116e5fed8ba34175b65ea",
+      "bytes": 410067,
+      "media_type": "text/html",
+      "title": "AI-generated images of missing 4yo Gus raise legal concerns (ABC)",
+      "tags": [
+        "pilobolus",
+        "surreal-specimen",
+        "news"
+      ],
+      "source_uri": "https://www.abc.net.au/news/2025-10-11/ai-generated-images-of-4yo-gus-prompt-call-for-stronger-laws/105873218",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "AI-generated images of missing 4yo Gus raise legal concerns (ABC)",
+        "tags": [
+          "pilobolus",
+          "surreal-specimen",
+          "news"
+        ],
+        "biblicus": {
+          "id": "abc-gus-lamont-ai-images-misinformation",
+          "source": "https://www.abc.net.au/news/2025-10-11/ai-generated-images-of-4yo-gus-prompt-call-for-stronger-laws/105873218"
+        }
+      }
+    },
+    "abc-holder-gus-ai-image-not-surprising": {
+      "id": "abc-holder-gus-ai-image-not-surprising",
+      "relpath": "imports/abc-holder-gus-ai-image-not-surprising--abc-holder-gus-ai.html",
+      "sha256": "df950c40c5f0cfc3a893ee6873647b2ca28d60768a162756905802071d4078f2",
+      "bytes": 368265,
+      "media_type": "text/html",
+      "title": "Expert: AI image of missing Gus \u201cconcerning but not surprising\u201d (ABC)",
+      "tags": [
+        "pilobolus",
+        "surreal-specimen",
+        "news"
+      ],
+      "source_uri": "https://www.abc.net.au/news/2025-10-09/sa-ai-image-of-missing-child-appears-online/105868548",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "Expert: AI image of missing Gus \u201cconcerning but not surprising\u201d (ABC)",
+        "tags": [
+          "pilobolus",
+          "surreal-specimen",
+          "news"
+        ],
+        "biblicus": {
+          "id": "abc-holder-gus-ai-image-not-surprising",
+          "source": "https://www.abc.net.au/news/2025-10-09/sa-ai-image-of-missing-child-appears-online/105868548"
+        }
+      }
+    },
+    "afp-gus-lamont-police-refute-image": {
+      "id": "afp-gus-lamont-police-refute-image",
+      "relpath": "imports/afp-gus-lamont-police-refute-image--afp-gus-lamont-police.md",
+      "sha256": "8c53ad2d74acb704bb5ed1cb14a45ad5e25e1a8a3f894e683d8f7c6b5dc8807e",
+      "bytes": 836,
+      "media_type": "text/markdown",
+      "title": "Australia police refute authenticity of missing-boy image (AFP Fact Check)",
+      "tags": [
+        "pilobolus",
+        "surreal-specimen",
+        "fact-check"
+      ],
+      "source_uri": "https://factcheck.afp.com/doc.afp.com.78B22ZR",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "Australia police refute authenticity of missing-boy image (AFP Fact Check)",
+        "tags": [
+          "pilobolus",
+          "surreal-specimen",
+          "fact-check"
+        ],
+        "biblicus": {
+          "id": "afp-gus-lamont-police-refute-image",
+          "source": "https://factcheck.afp.com/doc.afp.com.78B22ZR"
+        }
+      }
+    },
+    "allport-postman-analysis-of-rumor": {
+      "id": "allport-postman-analysis-of-rumor",
+      "relpath": "imports/allport-postman-analysis-of-rumor--allport-postman-analysis-of.pdf",
+      "sha256": "67975b211a790dfb5864615e73f8769c9095faf6993e8e837af713c262791014",
+      "bytes": 804848,
+      "media_type": "application/pdf",
+      "title": "An Analysis of Rumor (Allport & Postman)",
+      "tags": [
+        "pilobolus",
+        "classic"
+      ],
+      "source_uri": "https://www.romolocapuano.com/wp-content/uploads/2018/10/ALLPORT_POSTMAN_AN-ANALYSIS-OF-RUMOR.pdf",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "An Analysis of Rumor (Allport & Postman)",
+        "tags": [
+          "pilobolus",
+          "classic"
+        ],
+        "biblicus": {
+          "id": "allport-postman-analysis-of-rumor",
+          "source": "https://www.romolocapuano.com/wp-content/uploads/2018/10/ALLPORT_POSTMAN_AN-ANALYSIS-OF-RUMOR.pdf"
+        }
+      }
+    },
+    "bikhchandani-hirshleifer-welch-informational-cascades": {
+      "id": "bikhchandani-hirshleifer-welch-informational-cascades",
+      "relpath": "imports/bikhchandani-hirshleifer-welch-informational-cascades--bikhchandani-hirshleifer-welch-informational.pdf",
+      "sha256": "112ee2c4b7b925e587610ed273f1e5fd1ab40bac68be0a5c3839484b012796fb",
+      "bytes": 3316910,
+      "media_type": "application/pdf",
+      "title": "A Theory of Fads\u2026 as Informational Cascades (Bikhchandani, Hirshleifer & Welch)",
+      "tags": [
+        "pilobolus"
+      ],
+      "source_uri": "https://snap.stanford.edu/class/cs224w-readings/bikhchandani92fads.pdf",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "A Theory of Fads\u2026 as Informational Cascades (Bikhchandani, Hirshleifer & Welch)",
+        "tags": [
+          "pilobolus"
+        ],
+        "biblicus": {
+          "id": "bikhchandani-hirshleifer-welch-informational-cascades",
+          "source": "https://snap.stanford.edu/class/cs224w-readings/bikhchandani92fads.pdf"
+        }
+      }
+    },
+    "boin-hart-mcconnell-crisis-exploitation": {
+      "id": "boin-hart-mcconnell-crisis-exploitation",
+      "relpath": "imports/boin-hart-mcconnell-crisis-exploitation--boin-hart-mcconnell-crisis.html",
+      "sha256": "002510818abaea140d854ac5d65f605393d70b10237a0255a33b6fe4d1725696",
+      "bytes": 42388,
+      "media_type": "text/html",
+      "title": "Crisis Exploitation: Framing Contests after Emergencies (Boin, \u2019t Hart & McConnell)",
+      "tags": [
+        "pilobolus"
+      ],
+      "source_uri": "https://strathprints.strath.ac.uk/26398/",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "Crisis Exploitation: Framing Contests after Emergencies (Boin, \u2019t Hart & McConnell)",
+        "tags": [
+          "pilobolus"
+        ],
+        "biblicus": {
+          "id": "boin-hart-mcconnell-crisis-exploitation",
+          "source": "https://strathprints.strath.ac.uk/26398/"
+        }
+      }
+    },
+    "hyzen-van-den-bulck-ideological-entrepreneurs": {
+      "id": "hyzen-van-den-bulck-ideological-entrepreneurs",
+      "relpath": "imports/hyzen-van-den-bulck-ideological-entrepreneurs--hyzen-van-den-bulck.html",
+      "sha256": "7e7d793f4c9814ff08155bb25b05be658d1a50448222e9beba38f9bd27e0499e",
+      "bytes": 192460,
+      "media_type": "text/html",
+      "title": "Conspiracies, Ideological Entrepreneurs, and Digital Popular Culture (Hyzen & Van den Bulck)",
+      "tags": [
+        "pilobolus"
+      ],
+      "source_uri": "https://www.cogitatiopress.com/mediaandcommunication/article/viewFile/4092/2268",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "Conspiracies, Ideological Entrepreneurs, and Digital Popular Culture (Hyzen & Van den Bulck)",
+        "tags": [
+          "pilobolus"
+        ],
+        "biblicus": {
+          "id": "hyzen-van-den-bulck-ideological-entrepreneurs",
+          "source": "https://www.cogitatiopress.com/mediaandcommunication/article/viewFile/4092/2268"
+        }
+      }
+    },
+    "isd-false-flag-moments-of-crises": {
+      "id": "isd-false-flag-moments-of-crises",
+      "relpath": "imports/isd-false-flag-moments-of-crises--isd-false-flag-moments.html",
+      "sha256": "feeebc22d4330c6f867c1108ee0cea33eec94b3acd8f2fcae05dd9c2525d277f",
+      "bytes": 164690,
+      "media_type": "text/html",
+      "title": "The rise of false flag conspiracy theories in moments of crises (ISD)",
+      "tags": [
+        "pilobolus"
+      ],
+      "source_uri": "https://www.isdglobal.org/digital-dispatch/the-rise-of-false-flag-conspiracy-theories-in-moments-of-crises/",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "The rise of false flag conspiracy theories in moments of crises (ISD)",
+        "tags": [
+          "pilobolus"
+        ],
+        "biblicus": {
+          "id": "isd-false-flag-moments-of-crises",
+          "source": "https://www.isdglobal.org/digital-dispatch/the-rise-of-false-flag-conspiracy-theories-in-moments-of-crises/"
+        }
+      }
+    },
+    "kuran-sunstein-availability-cascades": {
+      "id": "kuran-sunstein-availability-cascades",
+      "relpath": "imports/kuran-sunstein-availability-cascades--kuran-sunstein-availability-cascades.pdf",
+      "sha256": "75328a80cc4b7b7ac696c47d5cf9c705fce1f2f608238080c0d75795e859b4d8",
+      "bytes": 2333599,
+      "media_type": "application/pdf",
+      "title": "Availability Cascades and Risk Regulation (Kuran & Sunstein)",
+      "tags": [
+        "pilobolus"
+      ],
+      "source_uri": "https://sites.duke.edu/timurkuran/files/2016/10/availability-cascades-1.original.pdf",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "Availability Cascades and Risk Regulation (Kuran & Sunstein)",
+        "tags": [
+          "pilobolus"
+        ],
+        "biblicus": {
+          "id": "kuran-sunstein-availability-cascades",
+          "source": "https://sites.duke.edu/timurkuran/files/2016/10/availability-cascades-1.original.pdf"
+        }
+      }
+    },
+    "mirror-ben-needham-ai-reunion-post": {
+      "id": "mirror-ben-needham-ai-reunion-post",
+      "relpath": "imports/mirror-ben-needham-ai-reunion-post--mirror-ben-needham-ai.html",
+      "sha256": "c671bd7b95d0fde1fbe279803fc979a6b41edd9471e5937dfdc61adccc528bfd",
+      "bytes": 538083,
+      "media_type": "text/html",
+      "title": "Ben Needham\u2019s mum reports \u201csick\u201d AI reunion post (Mirror)",
+      "tags": [
+        "pilobolus",
+        "surreal-specimen",
+        "news"
+      ],
+      "source_uri": "https://www.mirror.co.uk/news/uk-news/ben-needhams-mum-distraught-over-36903820",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "Ben Needham\u2019s mum reports \u201csick\u201d AI reunion post (Mirror)",
+        "tags": [
+          "pilobolus",
+          "surreal-specimen",
+          "news"
+        ],
+        "biblicus": {
+          "id": "mirror-ben-needham-ai-reunion-post",
+          "source": "https://www.mirror.co.uk/news/uk-news/ben-needhams-mum-distraught-over-36903820"
+        }
+      }
+    },
+    "newsweek-emily-rae-ai-influencer": {
+      "id": "newsweek-emily-rae-ai-influencer",
+      "relpath": "imports/newsweek-emily-rae-ai-influencer--newsweek-emily-rae-ai.html",
+      "sha256": "f6be73b8aee7f7950722e6b43ef7a198b62bfd41027fed77c61acca59e96696c",
+      "bytes": 476863,
+      "media_type": "text/html",
+      "title": "How to Tell if an Influencer Is AI\u2014and Why You Should Care",
+      "tags": [
+        "pilobolus",
+        "news"
+      ],
+      "source_uri": "https://www.newsweek.com/how-to-tell-influencer-ai-11541965",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "How to Tell if an Influencer Is AI\u2014and Why You Should Care",
+        "tags": [
+          "pilobolus",
+          "news"
+        ],
+        "biblicus": {
+          "id": "newsweek-emily-rae-ai-influencer",
+          "source": "https://www.newsweek.com/how-to-tell-influencer-ai-11541965"
+        }
+      }
+    },
+    "nysfocus-salamanca-realbotix-sally": {
+      "id": "nysfocus-salamanca-realbotix-sally",
+      "relpath": "imports/nysfocus-salamanca-realbotix-sally--nysfocus-salamanca-realbotix-sally.html",
+      "sha256": "e6d1f0aa76ba03f6a49d5cb93ca100b8ae54d5240805a70f7b1aa9cd3a2dc995",
+      "bytes": 144340,
+      "media_type": "text/html",
+      "title": "Western NY School To Launch Humanoid Robot Teacher (Sally / Realbotix)",
+      "tags": [
+        "pilobolus",
+        "news"
+      ],
+      "source_uri": "https://nysfocus.com/2026/07/14/new-york-humanoid-robot-teacher-salamanca-school-district",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "Western NY School To Launch Humanoid Robot Teacher (Sally / Realbotix)",
+        "tags": [
+          "pilobolus",
+          "news"
+        ],
+        "biblicus": {
+          "id": "nysfocus-salamanca-realbotix-sally",
+          "source": "https://nysfocus.com/2026/07/14/new-york-humanoid-robot-teacher-salamanca-school-district"
+        }
+      }
+    },
+    "nysfocus-salamanca-robot-paused": {
+      "id": "nysfocus-salamanca-robot-paused",
+      "relpath": "imports/nysfocus-salamanca-robot-paused--nysfocus-salamanca-robot-paused.html",
+      "sha256": "aab78be888a7a81834f72c678e9f2639a7e74d87ee0969728425a232957512d1",
+      "bytes": 112835,
+      "media_type": "text/html",
+      "title": "Western New York School District Hits Pause on Robot Teacher Amid Scrutiny",
+      "tags": [
+        "pilobolus",
+        "news"
+      ],
+      "source_uri": "https://nysfocus.com/2026/07/24/new-york-robot-teacher-plan-paused",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "Western New York School District Hits Pause on Robot Teacher Amid Scrutiny",
+        "tags": [
+          "pilobolus",
+          "news"
+        ],
+        "biblicus": {
+          "id": "nysfocus-salamanca-robot-paused",
+          "source": "https://nysfocus.com/2026/07/24/new-york-robot-teacher-plan-paused"
+        }
+      }
+    },
+    "politifact-false-flags-social-media": {
+      "id": "politifact-false-flags-social-media",
+      "relpath": "imports/politifact-false-flags-social-media--politifact-false-flags-social.html",
+      "sha256": "2d83155c5dd2229a38db8ed9b1fa217b5cf3565a523d8e740ab9d7d59e228c0b",
+      "bytes": 573950,
+      "media_type": "text/html",
+      "title": "False flags: real ops vs social-media template (PolitiFact)",
+      "tags": [
+        "pilobolus"
+      ],
+      "source_uri": "https://www.politifact.com/article/2022/02/08/false-flags-theyre-real-far-less-widespread-social/",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "False flags: real ops vs social-media template (PolitiFact)",
+        "tags": [
+          "pilobolus"
+        ],
+        "biblicus": {
+          "id": "politifact-false-flags-social-media",
+          "source": "https://www.politifact.com/article/2022/02/08/false-flags-theyre-real-far-less-widespread-social/"
+        }
+      }
+    },
+    "skift-tiktok-go-ambiente-ai": {
+      "id": "skift-tiktok-go-ambiente-ai",
+      "relpath": "imports/skift-tiktok-go-ambiente-ai--skift-tiktok-go-ambiente.html",
+      "sha256": "176c73dcb1ee2eac1e6346872a493dc716d06f4fb6f27896fa61dda8553d0b32",
+      "bytes": 230431,
+      "media_type": "text/html",
+      "title": "Your Hotel Is Hot on TikTok Go. But AI Got All The Facts Wrong.",
+      "tags": [
+        "pilobolus",
+        "news"
+      ],
+      "source_uri": "https://skift.com/2026/08/31/ai-generated-tiktok-go-hotel-videos/",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "Your Hotel Is Hot on TikTok Go. But AI Got All The Facts Wrong.",
+        "tags": [
+          "pilobolus",
+          "news"
+        ],
+        "biblicus": {
+          "id": "skift-tiktok-go-ambiente-ai",
+          "source": "https://skift.com/2026/08/31/ai-generated-tiktok-go-hotel-videos/"
+        }
+      }
+    },
+    "sunstein-vermeule-conspiracy-theories": {
+      "id": "sunstein-vermeule-conspiracy-theories",
+      "relpath": "imports/sunstein-vermeule-conspiracy-theories--sunstein-vermeule-conspiracy-theories.html",
+      "sha256": "a7cf35a7ade76fee6c7cbe2cc29d27bcc69599515d3489281ae466925d3e697b",
+      "bytes": 62603,
+      "media_type": "text/html",
+      "title": "Conspiracy Theories: Causes and Cures (Sunstein & Vermeule)",
+      "tags": [
+        "pilobolus"
+      ],
+      "source_uri": "https://doi.org/10.1111/j.1467-9760.2008.00325.x",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "Conspiracy Theories: Causes and Cures (Sunstein & Vermeule)",
+        "tags": [
+          "pilobolus"
+        ],
+        "biblicus": {
+          "id": "sunstein-vermeule-conspiracy-theories",
+          "source": "https://doi.org/10.1111/j.1467-9760.2008.00325.x"
+        }
+      }
+    },
+    "thestar-ben-needham-ai-found-claims": {
+      "id": "thestar-ben-needham-ai-found-claims",
+      "relpath": "imports/thestar-ben-needham-ai-found-claims--thestar-ben-needham-ai.html",
+      "sha256": "21eb226353eb22b4fc43d5b5aff5ff093f44eea5a3ae4d53caf9a8fe0507966d",
+      "bytes": 237125,
+      "media_type": "text/html",
+      "title": "AI pages claim Ben Needham (and other missing kids) \u201cfound\u201d (The Star)",
+      "tags": [
+        "pilobolus",
+        "surreal-specimen",
+        "news"
+      ],
+      "source_uri": "https://www.thestar.co.uk/news/crime/family-of-missing-sheffield-boy-ben-needham-ai-claims-march-23-6166849",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "AI pages claim Ben Needham (and other missing kids) \u201cfound\u201d (The Star)",
+        "tags": [
+          "pilobolus",
+          "surreal-specimen",
+          "news"
+        ],
+        "biblicus": {
+          "id": "thestar-ben-needham-ai-found-claims",
+          "source": "https://www.thestar.co.uk/news/crime/family-of-missing-sheffield-boy-ben-needham-ai-claims-march-23-6166849"
+        }
+      }
+    },
+    "tierney-bevc-kuligowski-disaster-myths-katrina": {
+      "id": "tierney-bevc-kuligowski-disaster-myths-katrina",
+      "relpath": "imports/tierney-bevc-kuligowski-disaster-myths-katrina--tierney-bevc-kuligowski-disaster.html",
+      "sha256": "b193232bd8f4c08d97c0766ba68c744ddf895c6860822657ef1f6b1c824d2489",
+      "bytes": 244822,
+      "media_type": "text/html",
+      "title": "Metaphors Matter: Disaster Myths, Media Frames, and Katrina (Tierney, Bevc & Kuligowski)",
+      "tags": [
+        "pilobolus"
+      ],
+      "source_uri": "https://www.rti.org/publication/metaphors-matter-disaster-myths-media-frames-consequences-hurricane-katrina",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "Metaphors Matter: Disaster Myths, Media Frames, and Katrina (Tierney, Bevc & Kuligowski)",
+        "tags": [
+          "pilobolus"
+        ],
+        "biblicus": {
+          "id": "tierney-bevc-kuligowski-disaster-myths-katrina",
+          "source": "https://www.rti.org/publication/metaphors-matter-disaster-myths-media-frames-consequences-hurricane-katrina"
+        }
+      }
+    },
+    "usatoday-cat-in-the-hat-ai-trend": {
+      "id": "usatoday-cat-in-the-hat-ai-trend",
+      "relpath": "imports/usatoday-cat-in-the-hat-ai-trend--usatoday-cat-in-the.html",
+      "sha256": "5bef31eb9841f573509a0e369d866a6e44e03434dfa84ebb5abab1d41cfce9ef",
+      "bytes": 229557,
+      "media_type": "text/html",
+      "title": "Viral 'Cat in the Hat' trend linked to arrests and school lockdowns",
+      "tags": [
+        "pilobolus",
+        "news"
+      ],
+      "source_uri": "https://www.usatoday.com/story/tech/news/2026/09/01/cat-in-the-hat-viral-trend-safety-concerns/91562322007/",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "Viral 'Cat in the Hat' trend linked to arrests and school lockdowns",
+        "tags": [
+          "pilobolus",
+          "news"
+        ],
+        "biblicus": {
+          "id": "usatoday-cat-in-the-hat-ai-trend",
+          "source": "https://www.usatoday.com/story/tech/news/2026/09/01/cat-in-the-hat-viral-trend-safety-concerns/91562322007/"
+        }
+      }
+    },
+    "wikipedia-ostension-folklore": {
+      "id": "wikipedia-ostension-folklore",
+      "relpath": "imports/wikipedia-ostension-folklore--wikipedia-ostension-folklore.html",
+      "sha256": "c4133276c0ea1bd2330cb5737ea1c40a51e5cf79b64689c53d5a80bf66e9ca07",
+      "bytes": 93098,
+      "media_type": "text/html",
+      "title": "Ostension (folklore) \u2014 legend enacted / misread as reality",
+      "tags": [
+        "pilobolus"
+      ],
+      "source_uri": "https://en.wikipedia.org/wiki/Ostension_(folklore)",
+      "created_at": "2026-09-07T19:50:26.713899+00:00",
+      "metadata": {
+        "title": "Ostension (folklore) \u2014 legend enacted / misread as reality",
+        "tags": [
+          "pilobolus"
+        ],
+        "biblicus": {
+          "id": "wikipedia-ostension-folklore",
+          "source": "https://en.wikipedia.org/wiki/Ostension_(folklore)"
+        }
+      }
+    }
+  },
+  "order": [
+    "7news-gus-lamont-fake-ai-images",
+    "aap-gus-lamont-false-claims-social",
+    "abc-gus-lamont-ai-images-misinformation",
+    "abc-holder-gus-ai-image-not-surprising",
+    "afp-gus-lamont-police-refute-image",
+    "allport-postman-analysis-of-rumor",
+    "bikhchandani-hirshleifer-welch-informational-cascades",
+    "boin-hart-mcconnell-crisis-exploitation",
+    "hyzen-van-den-bulck-ideological-entrepreneurs",
+    "isd-false-flag-moments-of-crises",
+    "kuran-sunstein-availability-cascades",
+    "mirror-ben-needham-ai-reunion-post",
+    "newsweek-emily-rae-ai-influencer",
+    "nysfocus-salamanca-realbotix-sally",
+    "nysfocus-salamanca-robot-paused",
+    "politifact-false-flags-social-media",
+    "skift-tiktok-go-ambiente-ai",
+    "sunstein-vermeule-conspiracy-theories",
+    "thestar-ben-needham-ai-found-claims",
+    "tierney-bevc-kuligowski-disaster-myths-katrina",
+    "usatoday-cat-in-the-hat-ai-trend",
+    "wikipedia-ostension-folklore"
+  ]
+}

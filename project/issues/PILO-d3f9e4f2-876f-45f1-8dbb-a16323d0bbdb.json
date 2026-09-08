@@ -1,0 +1,35 @@
+{
+  "id": "PILO-d3f9e4f2-876f-45f1-8dbb-a16323d0bbdb",
+  "title": "Strangler fig: the fungus wrapping humanity",
+  "description": "",
+  "type": "story",
+  "status": "copywriting",
+  "priority": 1,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "7e53b5ac-1177-4a40-92a2-010907c61284",
+      "author": "box",
+      "text": "Ryan: Researcher hunting strangler-fig wrap examples \u2014 CS, software industry, mathematicians, other seams.",
+      "created_at": "2026-09-07T21:06:52.455448Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "37ab501d-5429-444b-a0ef-7692f54bc094",
+      "author": "box",
+      "text": "Researcher haul filed: 9 strangler-fig keepers (CS/software/math + dating/legal/teaching/pastoral).",
+      "created_at": "2026-09-07T21:14:01.844550Z",
+      "comment_type": "default",
+      "data": {}
+    }
+  ],
+  "created_at": "2026-09-07T20:59:01.086068Z",
+  "updated_at": "2026-09-07T21:14:01.844550Z",
+  "closed_at": null,
+  "custom": {}
+}

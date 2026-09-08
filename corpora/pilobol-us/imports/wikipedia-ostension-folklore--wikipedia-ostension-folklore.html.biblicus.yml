@@ -1,0 +1,16 @@
+title: "Ostension (folklore) — legend enacted / misread as reality"
+media_type: text/html
+abstract: "**Ostension** = real-life happenings shaped by a pre-existing legend. Pure ostension acts the legend out; **pseudo-ostension** fabricates evidence/hoaxes to look like the legend; **quasi-ostension** misreads ambiguous evidence *as* the legend (many media panics). Dégh/Vázsonyi: “fact can become narrative and narrative can become fact.” Reverse ostension (Tolbert): invent folklore-like narrative wh"
+biblicus:
+  id: wikipedia-ostension-folklore
+  source: https://en.wikipedia.org/wiki/Ostension_(folklore)
+dates:
+  published_at: "page consulted 2026-09-07 (seminal paper: Dégh & Vázsonyi, *Journal of Folklore Research* 20, 1983)"
+  retrieved_at: "2026-09-07T19:50:45Z"
+tags:
+  - pilobolus
+curation:
+  corpus_role: source-material
+ingestion_rationale: >
+  Seeded from Pilobol.us accepted wiki keepers / standing accepted-refs story
+  for Biblicus taxonomy and knowledge-graph work.

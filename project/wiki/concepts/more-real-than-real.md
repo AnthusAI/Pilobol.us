@@ -1,6 +1,6 @@
 # More real than real / uncanny hyperreality
 
-Last updated: 2026-09-08 18:30 ET (prefer-AI-over-people haul)
+Last updated: 2026-09-08 evening ET (Aschenbrenner riding-high haul)
 
 ## What it is
 
@@ -29,6 +29,7 @@ existential diaries when told they aren’t real.
 Pilobol.us lives on that seam.
 
 - [Atlantic — Aschenbrenner / Prodigy Problem](../sources/atlantic-aschenbrenner-prodigy-problem.md) — preferred the clear picture of AI’s future until it ate the pile
+- Riding-high haul (2026-09-08): [Situational Awareness essay](../sources/aschenbrenner-situational-awareness-essay.md); [Fortune prophet profile](../sources/fortune-aschenbrenner-prophet-hedge-fund-2025.md); [Aaronson “extraordinary document”](../sources/aaronson-situational-awareness-extraordinary.md); [Dwarkesh launch podcast](../sources/dwarkesh-aschenbrenner-agi-2027.md); [WSJ/$20B peak (Yahoo)](../sources/investing-aschenbrenner-20b-wsj-june-2026.md); [Short Squeez Gen-Z boss](../sources/shortsqueeze-aschenbrenner-genz-hedge-fund-boss.md); [Filingtrack $5.5B](../sources/filingtrack-aschenbrenner-5-5b-hedge-fund.md); [BI OpenAI firing](../sources/bi-aschenbrenner-openai-firing-interview.md) — prophecy treated as underpriced reality / investable clear picture
 
 ## Open questions
 

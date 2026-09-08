@@ -1,6 +1,6 @@
 # Be careful what you wish for (AI)
 
-Last updated: 2026-09-08 (haul: 6 NEW wish→grant→bite keepers)
+Last updated: 2026-09-08 evening (Aschenbrenner riding-high sources)
 
 House coverage pattern (Ryan 2026-09-08): **be-careful-what-you-wish-for stories about AI** — someone wanted the technology to give them something (comfort, restoration, efficiency, companionship, absolution, a smarter boss, a finished note), they got it, and **the fulfillment itself** is the curse or the trap.
 
@@ -56,6 +56,7 @@ Do not invent abstract wish categories first. Search for **wish language** — p
 - [Svitla — can’t close the chat](../sources/embassy-svitla-i-cant-close-the-chat.md) — wished AI to draft; own contract never occurs as a blank page
 
 - [Atlantic — Aschenbrenner / Prodigy Problem](../sources/atlantic-aschenbrenner-prodigy-problem.md) — wished for a prophet who could see AGI; the grant of certainty became the loss
+- Riding-high context (how the wish looked while granted): [essay](../sources/aschenbrenner-situational-awareness-essay.md); [Fortune “prophet of the AI age”](../sources/fortune-aschenbrenner-prophet-hedge-fund-2025.md); [Aaronson](../sources/aaronson-situational-awareness-extraordinary.md); [Dwarkesh](../sources/dwarkesh-aschenbrenner-agi-2027.md); [Short Squeez / WSJ peak](../sources/shortsqueeze-aschenbrenner-genz-hedge-fund-boss.md); [Filingtrack](../sources/filingtrack-aschenbrenner-5-5b-hedge-fund.md); [BI firing myth](../sources/bi-aschenbrenner-openai-firing-interview.md)
 
 ## Open questions
 

@@ -1,6 +1,6 @@
 # Fungus among us
 
-Last updated: 2026-09-07 (monitoring-wall watch)
+Last updated: 2026-09-08 evening (Aschenbrenner riding-high haul)
 
 ## What it is
 
@@ -45,6 +45,10 @@ viral posts, spores as copy-paste personas). Drop it when it becomes costume.
   [N-day exploits](../sources/anthropic-n-day-exploits.md),
   [When AI builds itself](../sources/anthropic-when-ai-builds-itself.md),
   [Yale ambient scribes](../sources/yale-ambient-ai-scribes-medical-students.md)
+
+### Addendum — Aschenbrenner riding-high 2026-09-08
+
+Clear-picture mycelium into capital: essay + prophet profiles + 13F copycats treated AGI-by-2027 as priced reality until leverage ate the pile. Keepers: [essay](../sources/aschenbrenner-situational-awareness-essay.md), [Fortune](../sources/fortune-aschenbrenner-prophet-hedge-fund-2025.md), [Aaronson](../sources/aaronson-situational-awareness-extraordinary.md), [Dwarkesh](../sources/dwarkesh-aschenbrenner-agi-2027.md), [Short Squeez](../sources/shortsqueeze-aschenbrenner-genz-hedge-fund-boss.md), [Filingtrack](../sources/filingtrack-aschenbrenner-5-5b-hedge-fund.md), [WSJ peak reprint](../sources/investing-aschenbrenner-20b-wsj-june-2026.md), [BI firing](../sources/bi-aschenbrenner-openai-firing-interview.md); crash frame on [Atlantic](../sources/atlantic-aschenbrenner-prodigy-problem.md).
 
 ## Open questions
 

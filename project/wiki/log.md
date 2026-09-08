@@ -97,3 +97,7 @@ Ryan: new standing coverage archetype — Black Mirror–style unintended conseq
 ## [2026-09-08 ~14:15 ET] research+story | Black Mirror unintended — first haul
 
 Board `PILO-aaf1cc` (idea→assignment→research). Standing pattern scout: find “like Black Mirror” comments, then open the pointed-at incident. Filed 6 NEW keepers (TechCrunch Cluely; Dexerto Overtone; Verge RAW Ring; Decrypt Friend; WIRED Meta NameTag; Guardian Meta glasses Bero). Specimens on [black-mirror-unintended](concepts/black-mirror-unintended.md). Scout: `scout-black-mirror-2026-09-08.md`. Stay-off appended. KB only — no live Amplify.
+
+## 2026-09-08 — Black Mirror lived-harm restore
+
+Ryan: skipped finds that lacked a “Black Mirror” comment can still matter if something went wrong for a real person. Filed Andon Luna firing + Meta AI layoff lawsuit; Newsweek 2wai as BM-tagged grief product (Forbes stay-off).

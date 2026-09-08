@@ -1,6 +1,6 @@
 # Black Mirror unintended consequences
 
-Last updated: 2026-09-08 (Ryan — standing coverage pattern)
+Last updated: 2026-09-08 (Ryan — prefer lived harm)
 
 House coverage pattern (Ryan 2026-09-08): **Black Mirror–style unintended
 consequences of technology**, especially AI / machine learning / related
@@ -46,6 +46,14 @@ finding people who already named the feeling:
 Then open what they are pointing at and evaluate the underlying real-world
 incident for Pilobolus (weird story, AI/tech seam, sourceable). File keepers
 for strong landings; draft only when the scene clears the reader bar.
+
+
+## Prefer lived harm (Ryan 2026-09-08)
+
+Prefer specimens where **something actually went wrong for a real person**
+(fired, sued, suspended, secretly recorded, selected for layoff, bereaved into
+a product) over product announcements that only *feel* like Black Mirror.
+Product vibes can be wiki texture; the feed wants the lived bad outcome.
 
 ## Thesis
 

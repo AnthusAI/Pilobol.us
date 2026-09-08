@@ -1,0 +1,9 @@
+{
+  "id": "deepmind-alphaevolve",
+  "title": "AlphaEvolve: A Gemini-powered coding agent for designing advanced algorithms",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/",
+  "source": "pilobil-wiki",
+  "why": "Lane 4: Gemini agent speeds Gemini training kernels and TPU design \u2014 RSI outside Anthropic blog."
+}

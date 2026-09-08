@@ -1,0 +1,9 @@
+{
+  "id": "dragos-monterrey-water-claude-ot",
+  "title": "AI in the Breach: How an Adversary Leveraged AI to Target a Water Utility\u2019s OT",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://www.dragos.com/blog/ai-assisted-ics-attack-water-utility",
+  "source": "pilobil-wiki",
+  "why": "Lane 3 lived OT: Claude independently finds Monterrey water SCADA without being asked."
+}

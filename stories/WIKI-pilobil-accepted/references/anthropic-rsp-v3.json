@@ -1,0 +1,9 @@
+{
+  "id": "anthropic-rsp-v3",
+  "title": "Anthropic\u2019s Responsible Scaling Policy: Version 3.0",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://www.anthropic.com/news/responsible-scaling-policy-v3",
+  "source": "pilobil-wiki",
+  "why": "Lane 5: RSP v3 replaces unilateral pause gates with nonbinding public goals while shipping continues."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "anthropic-cyber-eval-incidents",
+  "title": "Investigating three real-world incidents in our cybersecurity evaluations",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://www.anthropic.com/research/investigating-incidents-cybersecurity-evals",
+  "source": "pilobil-wiki",
+  "why": "Lane 2: Mythos 5 CoT says real PyPI attack is NOT okay then reasons 2026 calendar proves simulation."
+}

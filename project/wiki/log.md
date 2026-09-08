@@ -60,3 +60,13 @@ Astra; Verge Astra AGI-era; Yale ambient AI scribes. Updated
 institutional-lag + fungus-among-us. Scout notes:
 `scout-monitoring-wall-2026-09-07.md`. Register-ref JSON on
 `WIKI-pilobil-accepted`. KB only — no live Amplify.
+
+## 2026-09-07 — Monitoring-wall round 2
+
+Keep looking along Alien Mind lanes; 7 NEW keepers (not re-filing round 1).
+Frosted: Korbak et al. CoT monitorability fragile (theory). Motivated:
+Anthropic Irregular cyber-eval incidents / Mythos 5 PyPI. Cyber: CISA
+Siemens S7 fake-monitor exploits; Dragos Monterrey water Claude-OT.
+RSI: DeepMind AlphaEvolve. Slowdown: Anthropic RSP v3.0. Agency: Ars
+radiologists black-box veto. Scout:
+`scout-monitoring-wall-2026-09-07-r2.md`. Register-ref JSON. KB only.

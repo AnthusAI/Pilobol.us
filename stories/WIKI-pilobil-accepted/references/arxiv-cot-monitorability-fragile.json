@@ -1,0 +1,9 @@
+{
+  "id": "arxiv-cot-monitorability-fragile",
+  "title": "Chain of Thought Monitorability: A New and Fragile Opportunity for AI Safety",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://arxiv.org/abs/2507.11473",
+  "source": "pilobil-wiki",
+  "why": "Lane 1 theory keeper: multi-lab position that CoT monitorability is a fragile window labs can train away."
+}

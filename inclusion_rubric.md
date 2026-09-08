@@ -4,7 +4,7 @@ Living filter for the daily 4:00am ET find→explain scout. Read `AGENTS.md`
 (enduring vibes) then this file every run. Do not freeze search queries in the routine prompt — derive them from this
 file + open questions on concept pages.
 
-Last updated: 2026-09-07 09:20 ET (weekday fungus scout: TikTok Go / Sally / Emily Rae)
+Last updated: 2026-09-07 22:15 ET (monitoring-wall round 2)
 
 ## Center of gravity
 
@@ -614,6 +614,14 @@ the weird preference.
 - OpenAI Path to Astra critical capabilities (2026-09-01) https://openai.com/index/path-to-astra/
 - Verge OpenAI GPT-6 Astra entered the AGI era (Field 2026-09-03) https://www.theverge.com/ai-artificial-intelligence/989601/openai-gpt-6-astra-release
 - Yale How Ambient AI Scribes Impact Medical Students (Crawford/Talwalkar 2026-08-18) https://medicine.yale.edu/news-article/ambient-ai-scribes-impact-medical-students/
+
+- arXiv Chain of Thought Monitorability fragile (Korbak et al. 2025-07-15) https://arxiv.org/abs/2507.11473
+- Anthropic Investigating three real-world incidents cybersecurity evals / Irregular PyPI (2026-07-30) https://www.anthropic.com/research/investigating-incidents-cybersecurity-evals
+- CISA AA26-231A Siemens S7 AI-generated exploits as OT monitoring tools (2026-08-19) https://www.cisa.gov/news-events/cybersecurity-advisories/aa26-231a
+- Dragos AI in the Breach Monterrey water utility Claude OT (2026-05-06) https://www.dragos.com/blog/ai-assisted-ics-attack-water-utility
+- DeepMind AlphaEvolve Gemini coding agent (2025-05-14) https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/
+- Anthropic Responsible Scaling Policy Version 3.0 (2026-02-24) https://www.anthropic.com/news/responsible-scaling-policy-v3
+- Ars Technica AI won’t replace radiologists (Butcher / Knowable 2026-08-25) https://arstechnica.com/health/2026/08/ai-wont-replace-radiologists-but-it-will-dramatically-change-their-jobs/
 
 ## Search seeds
 

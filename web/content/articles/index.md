@@ -1,6 +1,6 @@
 ---
 title: Spores
-description: Glimpses of a moldy future.
+description: Glimpses of our moldy future.
 ---
 
 ### [Society Has a Strangler Fig Creeping Around It](society-has-a-strangler-fig-creeping-around-it.html)

@@ -1,7 +1,7 @@
 ---
 title: ""
 description: >-
-  Glimpses of a moldy future, as society is gradually infected by a fungus that grows on its own bullshit.
+  Glimpses of our moldy future, as society is gradually infected by a fungus that grows on its own bullshit.
 cover: assets/the-search-in-the-feed-kept-finding-him/og-cover.jpg
 ---
 

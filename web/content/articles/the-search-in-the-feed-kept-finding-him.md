@@ -30,4 +30,14 @@ South Australia Police told [AFP Fact Check](https://factcheck.afp.com/doc.afp.c
 
 The search on the ground had scaled back. The search in the feed kept minting breakthroughs.
 
+
+:::note{title="A cousin problem"}
+When the feed invents a kidnapping so the search looks settled, that is the same
+authenticity collapse as [AI text crowding out the words people used to write for
+themselves](https://anth.us/blog/jevons-paradox-ai-slop/) and as
+[bots that pretend to be people in a discussion](https://chattic.us/thoughts/dont-pretend-bots-are-human/):
+the copy arrives looking like the real thing until you cannot tell which search
+still matters.
+:::
+
 Nobody had to dig a shaft or fly a drone to make those scenes. They only had to prefer the picture.

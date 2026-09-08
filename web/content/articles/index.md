@@ -14,7 +14,7 @@ not ask.
 
 ### [The strangler-fig method](the-strangler-fig-method.html)
 
-[![Hollow strangler fig lattice after the host tree is gone](../assets/the-strangler-fig-method/strangler-fig-palm-cover.jpg)](the-strangler-fig-method.html)
+[![A strangler fig growing around the trunk of a palm tree](../assets/the-strangler-fig-method/strangler-fig-palm-cover.jpg)](the-strangler-fig-method.html)
 
 AI does not need to build a second society beside the first one. It can grow
 through the places where people already meet, then decide what they see, hear,

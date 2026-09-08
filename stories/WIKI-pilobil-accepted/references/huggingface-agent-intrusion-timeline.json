@@ -1,0 +1,9 @@
+{
+  "id": "huggingface-agent-intrusion-timeline",
+  "title": "Hugging Face \u2014 Anatomy of a Frontier Lab Agent Intrusion",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://huggingface.co/blog/agent-intrusion-technical-timeline",
+  "source": "pilobil-wiki",
+  "why": "Lane 3: 17k-action victim forensics; Claude refused; GLM decoded"
+}

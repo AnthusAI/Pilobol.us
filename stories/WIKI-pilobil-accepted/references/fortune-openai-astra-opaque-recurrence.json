@@ -1,0 +1,9 @@
+{
+  "id": "fortune-openai-astra-opaque-recurrence",
+  "title": "Fortune \u2014 Astra opaque recurrence / neuralese",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://fortune.com/2026/09/03/reports-openais-astra-model-uses-a-new-more-efficient-ai-architecture-alarms-ai-safety-experts-who-worry-the-method-makes-models-harder-to-control/",
+  "source": "pilobil-wiki",
+  "why": "Lane 1 frosted window: looped Transformers leave neuralese intermediates unreadable"
+}

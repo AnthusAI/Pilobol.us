@@ -623,6 +623,14 @@ the weird preference.
 - Anthropic Responsible Scaling Policy Version 3.0 (2026-02-24) https://www.anthropic.com/news/responsible-scaling-policy-v3
 - Ars Technica AI won’t replace radiologists (Butcher / Knowable 2026-08-25) https://arstechnica.com/health/2026/08/ai-wont-replace-radiologists-but-it-will-dramatically-change-their-jobs/
 
+
+- Fortune Astra opaque recurrence / neuralese (Kahn 2026-09-03) https://fortune.com/2026/09/03/reports-openais-astra-model-uses-a-new-more-efficient-ai-architecture-alarms-ai-safety-experts-who-worry-the-method-makes-models-harder-to-control/
+- Hugging Face Anatomy of a Frontier Lab Agent Intrusion technical timeline (2026-07-27) https://huggingface.co/blog/agent-intrusion-technical-timeline
+- OpenAI Introducing GPT-5.3-Codex instrumental in creating itself (2026-02-05) https://openai.com/index/introducing-gpt-5-3-codex/
+- Verge OpenAI hit the brakes pacing (Hart 2026-08-19) https://www.theverge.com/ai-artificial-intelligence/982323/openai-hit-brakes-voluntary-pacing-ai
+- RuntimeWire Z.ai GLM-5.3 weights after safety delay (Merket 2026-08-26) https://runtimewire.com/article/zai-glm-53-weights-release-august-28-cyber-safety
+- PLOS Digital Health Doctors vs. Algorithms (Vinas/Blanco/Matute 2026-07-09) https://journals.plos.org/digitalhealth/article?id=10.1371%2Fjournal.pdig.0001490
+
 ## Search seeds
 
 Each run, after named radars:

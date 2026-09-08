@@ -1,0 +1,9 @@
+{
+  "id": "runtimewire-zai-glm-5-3-safety-delay",
+  "title": "RuntimeWire \u2014 Z.ai GLM-5.3 weights after safety delay",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://runtimewire.com/article/zai-glm-53-weights-release-august-28-cyber-safety",
+  "source": "pilobil-wiki",
+  "why": "Lane 5: two-week cyber safety hold then irreversible open weights"
+}

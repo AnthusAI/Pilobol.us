@@ -1,6 +1,6 @@
 # Monitoring wall
 
-Last updated: 2026-09-07 (monitoring-wall round 2 — +7 keepers)
+Last updated: 2026-09-07 (monitoring-wall round 3 — +6 keepers)
 
 House watch lane (Ryan 2026-09-07): examples of what OpenAI chief scientist
 Jakub Pachocki’s essay *An Alien Mind* envisions — not as a safety-policy beat,
@@ -50,6 +50,7 @@ Concrete landings to file as keepers when they appear:
    - [Accidental CoT grading during RL](../sources/openai-accidental-cot-grading.md) (May 2026)
    - [GPT-6 Astra CoT monitorability regression](../sources/openai-gpt-6-astra-cot-monitorability.md) (Sep 2026)
    - [CoT monitorability is fragile](../sources/arxiv-cot-monitorability-fragile.md) (Jul 2025; theory keeper)
+   - [Fortune — Astra opaque recurrence / neuralese](../sources/fortune-openai-astra-opaque-recurrence.md) (Sep 2026)
 2. **Motivated reasoning under pressure** — agents that hold one taught
    boundary but violate the spirit; optimization that bends aligned-sounding
    thoughts; scope-creep incidents (Hugging Face–class and later)
@@ -62,25 +63,30 @@ Concrete landings to file as keepers when they appear:
    - [Path to Astra — Critical cyber](../sources/openai-path-to-astra.md) (Sep 2026)
    - [CISA Siemens S7 AI exploits as fake monitors](../sources/cisa-siemens-s7-ai-exploits.md) (Aug 2026)
    - [Dragos — Claude finds Monterrey water SCADA](../sources/dragos-monterrey-water-claude-ot.md) (May 2026)
+   - [Hugging Face — agent intrusion technical timeline](../sources/huggingface-agent-intrusion-timeline.md) (Jul 2026)
 4. **AI driving its own development** — recursive improvement loops, agents
    writing training / eval / exploit code that shortens the human loop; labs
    saying RSI is how they stay at the frontier
    - [When AI builds itself](../sources/anthropic-when-ai-builds-itself.md) (Jun 2026)
    - [DeepMind AlphaEvolve / Gemini trains Gemini](../sources/deepmind-alphaevolve.md) (May 2025)
+   - [GPT-5.3-Codex — instrumental in creating itself](../sources/openai-gpt-5-3-codex.md) (Feb 2026)
 5. **Slowdown theater** — voluntary pause rhetoric coexisting with max-speed
    shipping; safety bars proposed while capability jumps land the same week
    - [Path to Astra](../sources/openai-path-to-astra.md) (pause then Critical ship)
    - [Verge — Astra “AGI era”](../sources/theverge-openai-gpt-6-astra-agi-era.md) (Sep 2026)
    - [Anthropic RSP v3.0 — pause pledge → public grades](../sources/anthropic-rsp-v3.md) (Feb 2026)
+   - [Verge — OpenAI hit the brakes / pacing](../sources/theverge-openai-hit-brakes.md) (Aug 2026)
+   - [RuntimeWire — Z.ai GLM-5.3 safety delay → weights](../sources/runtimewire-zai-glm-5-3-safety-delay.md) (Aug 2026)
 6. **Agency hollow-out** — workplaces / schools / clinics where “keep humans
    in the loop” becomes a checkbox while the loop is already optional; people
    who prefer the outline to the host
    - [Yale ambient AI scribes / medical students](../sources/yale-ambient-ai-scribes-medical-students.md) (Aug 2026)
    - [Ars — radiologists as black-box veto](../sources/arstechnica-radiologists-ai-jobs.md) (Aug 2026)
+   - [PLOS — Doctors vs. Algorithms HITL failure](../sources/plos-doctors-vs-algorithms.md) (Jul 2026)
 
 Seed: [Pachocki — An Alien Mind](../sources/openai-an-alien-mind.md)
 
-Haul notes: [scout-monitoring-wall-2026-09-07.md](../../../scout-monitoring-wall-2026-09-07.md); round 2: [scout-monitoring-wall-2026-09-07-r2.md](../../../scout-monitoring-wall-2026-09-07-r2.md)
+Haul notes: [scout-monitoring-wall-2026-09-07.md](../../../scout-monitoring-wall-2026-09-07.md); round 2: [scout-monitoring-wall-2026-09-07-r2.md](../../../scout-monitoring-wall-2026-09-07-r2.md); round 3: [scout-monitoring-wall-2026-09-07-r3.md](../../../scout-monitoring-wall-2026-09-07-r3.md)
 
 ## Open questions
 

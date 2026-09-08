@@ -70,3 +70,8 @@ Siemens S7 fake-monitor exploits; Dragos Monterrey water Claude-OT.
 RSI: DeepMind AlphaEvolve. Slowdown: Anthropic RSP v3.0. Agency: Ars
 radiologists black-box veto. Scout:
 `scout-monitoring-wall-2026-09-07-r2.md`. Register-ref JSON. KB only.
+
+## 2026-09-07 ~22:05 ET | monitoring-wall ROUND 3 scout
+
+On-demand haul (+6 keepers). Fortune neuralese; HF agent intrusion timeline; GPT-5.3-Codex self-build; Verge hit-brakes pacing; RuntimeWire Z.ai GLM-5.3 safety delay; PLOS Doctors vs Algorithms. Specimens + stay-off + register-ref updated. Haul: `scout-monitoring-wall-2026-09-07-r3.md`.
+

@@ -107,8 +107,3 @@ standing. A person opens a familiar app to find another person. A system
 decides who appears, offers the words, supplies the companion, and fills the
 quiet. The old trunk is still there to lean on. The life inside it has moved
 somewhere else.
-
-:::details{summary="Source"}
-- Martin Fowler: [Strangler Fig Application](https://martinfowler.com/bliki/StranglerFigApplication.html)
-- Meta: [AI assistant across apps](https://ai.meta.com/meta-ai/assistant/), [AI characters](https://about.fb.com/news/2023/09/social-profiles-for-metas-ai-characters/), [AI Studio](https://ai.meta.com/ai-studio/)
-:::

@@ -1,6 +1,6 @@
 # More real than real / uncanny hyperreality
 
-Last updated: 2026-09-08 04:34 ET
+Last updated: 2026-09-08 18:30 ET (prefer-AI-over-people haul)
 
 ## What it is
 
@@ -99,3 +99,13 @@ Pilobol.us lives on that seam.
 - [MIT TR Synthetic Memories](../sources/technologyreview-synthetic-memories-domestic-data-streamers.md) — visceral “it was like that” for photos that never existed
 - [CHI false-memory study](../sources/chi-pataranutaporn-synthetic-human-memories.md) — confidence rises with AI-edited copies
 - Concept: [synthetic-nostalgia](synthetic-nostalgia.md)
+
+### Prefer AI over people (2026-09-08 evening haul — angle, not locked concept)
+
+- [SMH Sarah / Flint](../sources/smh-sarah-chatgpt-more-than-anyone.md)
+- [Independent Gen Z](../sources/independent-gen-z-rather-talk-ai.md)
+- [BBC Paisley](../sources/bbc-paisley-chatgpt-easier-than-people.md)
+- [ABC Julian / Emma](../sources/abc-julian-emma-ai-no-judgement.md)
+- [China.org Heart meets bot](../sources/china-org-heart-meets-bot-prefer-ai.md)
+- [Resume Now vs manager](../sources/cpa-resume-now-chatgpt-over-manager.md)
+- [SINTEF ChatGPT advice preferred](../sources/forskning-sintef-chatgpt-advice-preferred.md)

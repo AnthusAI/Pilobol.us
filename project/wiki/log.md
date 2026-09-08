@@ -109,3 +109,7 @@ Ryan: standing coverage pattern distinct from (but near) Black Mirror unintended
 ## [2026-09-08 ~15:30 ET] research | Be careful what you wish for — first haul
 
 On-demand standing-pattern scout (wish → grant → bite). Filed **6 NEW** keepers: Guardian Biesma/Eva companion; NPR Human Line (Brooks/James/Dex); Hustle AlisS uncle; AsiaOne Komandono Maps unfinished toll; TIME/MIT cognitive debt essays; Svitla can’t-close-the-chat. Specimens on [be-careful-what-you-wish-for](concepts/be-careful-what-you-wish-for.md). Scout: `scout-be-careful-wish-2026-09-08.md`. Stay-off appended. KB only — no live Amplify.
+
+## [2026-09-08 ~18:30 ET] research | Prefer AI over people — admissions haul
+
+On-demand scout: first-person/quoted “I’d rather deal with AI than people.” Filed **7 NEW** keepers (SMH Sarah/Flint; Independent Gen Z; BBC Paisley; ABC Julian/Emma; China.org Li Huan + 21.5%; Resume Now vs manager; SINTEF blind youth prefer ChatGPT advice). Scout: `scout-prefer-ai-over-people-2026-09-08.md`. Angle noted (chose-the-fungus / prefer-ai-over-people) — **no standing concept lock**. Stay-off appended. KB only — no live Amplify.

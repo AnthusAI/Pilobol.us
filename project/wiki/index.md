@@ -29,6 +29,8 @@ Accepted sources live as pages in `sources/` **and** as pod references on
 - [Monitoring wall](concepts/monitoring-wall.md) — frosted window into alien mind; CoT/monitorability lag (Alien Mind watch)
 
 ## Sources
+- Prefer-AI-over-people haul (2026-09-08 evening): [scout](../../scout-prefer-ai-over-people-2026-09-08.md) — 7 keepers; angle only (no concept lock yet).
+
 
 Accepted keepers live in `sources/` (markdown) with matching JSON on `WIKI-pilobil-accepted`. Latest 4am research: [synthetic nostalgia](concepts/synthetic-nostalgia.md) (family-album restores). Also: [synthetic sightings](concepts/synthetic-sightings.md) (Gus/Ben); [competing event narratives](concepts/competing-event-narratives.md); [Cat in the Hat](sources/usatoday-cat-in-the-hat-ai-trend.md).
 - [More real than real](concepts/more-real-than-real.md) — uncanny hyperreality niche

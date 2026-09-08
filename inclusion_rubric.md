@@ -659,6 +659,20 @@ the weird preference.
 - TechCrunch Friend lonely AI wearable returns voice (2026-07-30) https://techcrunch.com/2026/07/30/friend-the-lonely-ai-wearable-returns-with-a-new-voice-and-a-much-bigger-price-tag/
 - Fortune Instagram cracks down pervert glasses Ray-Ban Meta (2026-07-28) https://fortune.com/2026/07/28/ray-ban-meta-pervert-glasses-secret-videos-women/
 
+
+
+### Prefer AI over people — admissions haul (2026-09-08 evening)
+
+- SMH Sarah ChatGPT more than almost anyone / Ben Flint midnight (2025-08-15) https://www.smh.com.au/technology/incredibly-comforting-sarah-speaks-to-chatgpt-more-than-she-does-almost-anyone-20250813-p5mmpp.html
+- Independent Gen Z rather talk AI / rush home ChatGPT (2026-06-05) https://www.the-independent.com/news/uk/home-news/ai-chatgpt-gen-z-loneliness-social-media-b2989612.html
+- BBC Paisley ChatGPT 8 times a day easier than people (Gawne 2026-01-31) https://www.bbc.com/news/articles/cg4ewrw2drpo
+- ABC AU Julian Emma AI therapists don’t judge (Silva 2025-11-07) https://www.abc.net.au/news/2025-11-07/australians-use-artificial-intelligence-ptsd-trauma-recovery/105946020
+- China.org.cn Heart meets bot rather talk AI / Li Huan (Lu 2026-08-24) http://www.china.org.cn/2026-08/24/content_118661640.shtml
+- CPA Practice Advisor Resume Now ChatGPT over manager (2025-09-16) https://www.cpapracticeadvisor.com/2025/09/16/most-employees-would-rather-ask-chatgpt-for-advice-than-their-manager-survey-finds/169045/
+- forskning.no / SINTEF Skjuve ChatGPT advice preferred over professionals (2026-04-09) https://www.forskning.no/barn-og-ungdom-helsetjenester-informasjonsteknologi/mental-helse-unge-far-bedre-svar-av-chatgpt-enn-av-fagfolk/2645803
+- Fortune Gen Z want boss replaced by AI bots more human (Royle 2026-06 runner) https://fortune.com/article/gen-z-wants-boss-to-be-replaced-by-ai/
+- Metro Paisley lonely ChatGPT eight times (mirror BBC — skip refile) https://metro.co.uk/2026/01/21/i-lonely-ended-talking-chatgpt-eight-times-a-day-26405494/
+
 ## Search seeds
 
 Each run, after named radars:

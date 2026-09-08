@@ -57,3 +57,14 @@ the lived unintended outcome without naming our house or lecturing the show.
 - When is “people said Black Mirror” enough vs when the scene must also clear
   fungus / strangler / belief bars on its own?
 - How often to rotate this lane in the 4am desk vs monitoring-wall / nostalgia?
+
+## Specimens (2026-09-08 first haul)
+
+Scout method: Black Mirror comment → open the pointed-at incident.
+
+- [Cluely “cheat on everything”](../sources/techcrunch-cluely-cheat-on-everything.md) — invisible AI overlay; date-ad called a Black Mirror short (TechCrunch)
+- [Overtone AI matchmaking](../sources/dexerto-overtone-hinge-black-mirror.md) — “straight out of Black Mirror” / Hang the DJ (Dexerto)
+- [RAW Ring emotion loyalty](../sources/verge-raw-ring-emotion-tracking.md) — “Black Mirror episode come to life” (KnowTechie → Verge)
+- [Friend AI necklace](../sources/decrypt-friend-ai-necklace.md) — promo compared to Black Mirror by nearly everyone writing about it (Decrypt)
+- [Meta NameTag faceprints](../sources/wired-meta-nametag-smart-glasses.md) — dormant biometrics on 50M phones; BM stack with glasses (WIRED)
+- [Meta smart glasses / pervert glasses](../sources/guardian-meta-smart-glasses-bero.md) — “sounds like something out of a Black Mirror episode” → lived secret recording (Guardian)

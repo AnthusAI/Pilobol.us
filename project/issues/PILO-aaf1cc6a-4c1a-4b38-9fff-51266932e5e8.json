@@ -1,0 +1,24 @@
+{
+  "id": "PILO-aaf1cc6a-4c1a-4b38-9fff-51266932e5e8",
+  "title": "Black Mirror unintended consequences \u2014 first haul",
+  "description": "Scout via Black Mirror comments \u2192 file 4\u20138 NEW real-world AI/tech unintended-outcome specimens. Pattern: black-mirror-unintended.",
+  "type": "story",
+  "status": "research",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-09-08T18:12:35.823805Z",
+  "updated_at": "2026-09-08T18:12:54.592029Z",
+  "closed_at": null,
+  "right_now_summary": null,
+  "right_now_updated_at": null,
+  "custom": {
+    "source": "shared",
+    "project_label": "PILO"
+  },
+  "agent": null
+}

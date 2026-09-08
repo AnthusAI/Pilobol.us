@@ -643,6 +643,22 @@ the weird preference.
 - PhotoSharpener AI keeps changing the person's face (Ana Clara 2026-04-22) https://photosharpener.com/blog/how-do-i-restore-an-old-family-photo-when-ai-keeps-changing-the-persons-face/
 - Guardian ChatGPT long-lost family Avtar Singh / Nicci Dhamu (2026-07-25) https://www.theguardian.com/lifeandstyle/ng-interactive/2026/jul/25/long-lost-family-reunited-chatgpt-artificial-intelligence-ai
 
+
+
+### Black Mirror unintended — first haul (2026-09-08)
+
+- TechCrunch Columbia student Cluely cheat on everything / Interview Coder (Rollet 2025-04-21) https://techcrunch.com/2025/04/21/columbia-student-suspended-over-interview-cheating-tool-raises-5-3m-to-cheat-on-everything/
+- Dexerto Hinge founder Overtone AI dating app straight out of Black Mirror (2026-07-14) https://www.dexerto.com/entertainment/hinge-founder-announces-new-ai-dating-app-straight-out-of-black-mirror-3387437/
+- Verge RAW Ring smart ring proves you're not a cheater (Song 2025-04-30) https://www.theverge.com/wearables/657475/raw-ring-wearables-emotion-tracking-smart-ring
+- Decrypt Friend AI necklace Avi Schiffmann (2024-07-31) https://decrypt.co/242629/friend-necklace-avi-schiffmann
+- WIRED Meta NameTag face-recognition smart glasses (Mehrotra/Cameron 2026-06-04) https://www.wired.com/story/meta-smart-glasses-face-recognition-nametag-connections/
+- Guardian Smart glasses deeply creepy Kylie Jenner Meta (Bero 2026-07-17) https://www.theguardian.com/commentisfree/2026/jul/17/ai-meta-smart-glasses
+- KnowTechie emotional loyalty tracker Raw Ring (runner BM pointer) https://knowtechie.com/emotional-loyalty-tracker-ring/
+- Morning Brew Cluely AI app for cheating (2025-04-24) https://www.morningbrew.com/stories/2025/04/24/an-ai-app-for-cheating-just-dropped
+- Good Law Project smart glasses Black Mirror women's safety (runner) https://goodlawproject.org/smart-glasses-a-clear-risk-to-womens-safety/
+- TechCrunch Friend lonely AI wearable returns voice (2026-07-30) https://techcrunch.com/2026/07/30/friend-the-lonely-ai-wearable-returns-with-a-new-voice-and-a-much-bigger-price-tag/
+- Fortune Instagram cracks down pervert glasses Ray-Ban Meta (2026-07-28) https://fortune.com/2026/07/28/ray-ban-meta-pervert-glasses-secret-videos-women/
+
 ## Search seeds
 
 Each run, after named radars:

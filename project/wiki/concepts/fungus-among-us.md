@@ -57,4 +57,6 @@ viral posts, spores as copy-paste personas). Drop it when it becomes costume.
 
 ## Specimens
 
+- Black Mirror unintended first haul (2026-09-08): Cluely date-overlay; Overtone Hang-the-DJ matchmaker; RAW emotion ring; Friend pendant; Meta NameTag + pervert glasses — see [black-mirror-unintended](black-mirror-unintended.md).
+
 - [USA TODAY Cat in the Hat AI scare](../sources/usatoday-cat-in-the-hat-ai-trend.md)

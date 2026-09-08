@@ -93,3 +93,7 @@ Live `/newsroom` bind remains blocked until Ryan can mint later.
 ## 2026-09-08 — Black Mirror unintended consequences pattern
 
 Ryan: new standing coverage archetype — Black Mirror–style unintended consequences of technology (esp. AI), scouted by finding people who say something is like Black Mirror, then inspecting the specimen. Concept + VOICE/mission/doctrine + 4am desk.
+
+## [2026-09-08 ~14:15 ET] research+story | Black Mirror unintended — first haul
+
+Board `PILO-aaf1cc` (idea→assignment→research). Standing pattern scout: find “like Black Mirror” comments, then open the pointed-at incident. Filed 6 NEW keepers (TechCrunch Cluely; Dexerto Overtone; Verge RAW Ring; Decrypt Friend; WIRED Meta NameTag; Guardian Meta glasses Bero). Specimens on [black-mirror-unintended](concepts/black-mirror-unintended.md). Scout: `scout-black-mirror-2026-09-08.md`. Stay-off appended. KB only — no live Amplify.

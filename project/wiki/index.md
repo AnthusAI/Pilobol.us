@@ -38,6 +38,12 @@ Accepted keepers live in `sources/` (markdown) with matching JSON on `WIKI-pilob
 - [An Alien Mind](sources/openai-an-alien-mind.md) → [monitoring-wall](concepts/monitoring-wall.md)
 - Monitoring-wall haul (8 keepers): [scout notes](../scout-monitoring-wall-2026-09-07.md); specimens on [monitoring-wall](concepts/monitoring-wall.md)
 
+## Latest Black Mirror haul (2026-09-08)
+
+- Pattern: [black-mirror-unintended](concepts/black-mirror-unintended.md)
+- Scout: [scout-black-mirror-2026-09-08.md](../scout-black-mirror-2026-09-08.md)
+- Keepers: [Cluely](sources/techcrunch-cluely-cheat-on-everything.md); [Overtone](sources/dexerto-overtone-hinge-black-mirror.md); [RAW Ring](sources/verge-raw-ring-emotion-tracking.md); [Friend](sources/decrypt-friend-ai-necklace.md); [NameTag](sources/wired-meta-nametag-smart-glasses.md); [Guardian glasses](sources/guardian-meta-smart-glasses-bero.md)
+
 ## Latest fungus scout (2026-09-07)
 
 - [Skift TikTok Go Ambiente](sources/skift-tiktok-go-ambiente-ai.md)

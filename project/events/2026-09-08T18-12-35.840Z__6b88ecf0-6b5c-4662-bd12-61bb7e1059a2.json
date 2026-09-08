@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "6b88ecf0-6b5c-4662-bd12-61bb7e1059a2",
+  "issue_id": "PILO-aaf1cc6a-4c1a-4b38-9fff-51266932e5e8",
+  "event_type": "issue_created",
+  "occurred_at": "2026-09-08T18:12:35.840Z",
+  "actor_id": "box",
+  "payload": {
+    "title": "Black Mirror unintended consequences — first haul",
+    "description": "Scout via Black Mirror comments → file 4–8 NEW real-world AI/tech unintended-outcome specimens. Pattern: black-mirror-unintended.",
+    "issue_type": "story",
+    "status": "idea",
+    "priority": 2,
+    "assignee": null,
+    "parent": null,
+    "labels": []
+  }
+}

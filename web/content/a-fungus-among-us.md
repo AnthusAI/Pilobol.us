@@ -9,6 +9,8 @@ cover: assets/pilobolus/pilobolus-crystallinus.jpg
 :::figure{id="pilobolus-specimen" src="assets/pilobolus/pilobolus-crystallinus.jpg" alt="Pilobolus crystallinus — a translucent stalk with a clear bulb and a black spore case on top" caption="Pilobolus crystallinus, the dung cannon. A clear vesicle aims the black spore case at the brightest patch of sky." credit="Photo: Jerry Cooper / iNaturalist, CC BY 4.0"}
 :::
 
+::video{src="https://www.youtube.com/watch?v=mttsvzzKirI" title="Pilobolus firing its spore case"}
+
 There’s a fungus among us. *Pilobolus* grows on bullshit — cow shit, horse
 shit, whatever a grazing animal leaves on the ground — and it does something
 no mold in your fridge does: it aims. The fungus builds a lens out of its own

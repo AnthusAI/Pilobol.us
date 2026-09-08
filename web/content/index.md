@@ -9,7 +9,7 @@ cover: assets/gus-lamont/og-cover.jpg
 :::card{span="full"}
 ### [The wrap that learned your shape](articles/the-wrap-that-learned-your-shape.html)
 
-![A strangler fig growing around the trunk of a palm tree](assets/the-wrap-that-learned-your-shape/strangler-fig-palm-cover.jpg)
+![Hollow strangler fig lattice after the host tree is gone](assets/the-wrap-that-learned-your-shape/hollow-strangler-cover.jpg)
 
 Monday morning the phone already knew which coffee shop would be open. It did
 not ask.
@@ -19,7 +19,7 @@ not ask.
 :::card{span="full"}
 ### [The strangler-fig method](articles/the-strangler-fig-method.html)
 
-![A strangler fig growing around the trunk of a palm tree](assets/the-strangler-fig-method/strangler-fig-palm-cover.jpg)
+![Hollow strangler fig lattice after the host tree is gone](assets/the-strangler-fig-method/strangler-fig-palm-cover.jpg)
 
 AI does not need to build a second society beside the first one. It can grow
 through the places where people already meet, then decide what they see, hear,

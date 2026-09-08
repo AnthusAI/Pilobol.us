@@ -34,16 +34,17 @@ screen is still a number. It just stops holding weight.
 In May 2022, a coin called TerraUSD was supposed to always be worth exactly a
 dollar — not backed by a vault of cash, but by a second coin, Luna, and an
 algorithm that would mint more Luna on demand to defend the peg whenever
-people sold. On a Saturday evening, enough people sold at once that the peg
-cracked, and the algorithm did exactly what it was built to do: mint more
-Luna to catch the fall, which only meant more Luna chasing the same shrinking
-pile of belief. Luna went from around eighty dollars to a fraction of a cent
-in four days. Something close to forty billion dollars stopped existing
-overnight — nobody stole it, nobody burned it, people just stopped agreeing
-it was there. In South Korea alone, close to 280,000 people felt that loss
-land in a personal account. The rescue mechanism had only ever worked because
-people trusted it; once that cracked, printing more of the coin just made it
-worthless faster.
+people sold. On a Saturday evening, enough people sold at once that [the peg
+cracked](https://mitsloan.mit.edu/cfi/anatomy-a-run-terra-luna-crash), and the
+algorithm did exactly what it was built to do: mint more Luna to catch the
+fall, which only meant more Luna chasing the same shrinking pile of belief.
+Luna went from around eighty dollars to a fraction of a cent in four days.
+Something close to forty billion dollars stopped existing overnight — nobody
+stole it, nobody burned it, people just stopped agreeing it was there. In
+South Korea alone, [close to 280,000 people felt that loss land in a personal
+account](https://www.forbes.com/sites/qai/2022/09/20/what-really-happened-to-luna-crypto/).
+The rescue mechanism had only ever worked because people trusted it; once
+that cracked, printing more of the coin just made it worthless faster.
 
 :::aside{title="The commercial, in one beat"}
 On the rainbow, doubt doesn’t get a debate. It gets a hole. The spot doesn’t
@@ -72,8 +73,3 @@ people as agreed to sit.
 The candy ad was selling sugar. The ledger was selling forty billion dollars’
 worth of the right to keep sitting — until, one Saturday evening, not enough
 people still wanted to.
-
-:::details{summary="Sources"}
-- MIT Sloan CFI: [Anatomy of a Run: The Terra Luna Crash](https://mitsloan.mit.edu/cfi/anatomy-a-run-terra-luna-crash)
-- Forbes: [What Really Happened To LUNA Crypto?](https://www.forbes.com/sites/qai/2022/09/20/what-really-happened-to-luna-crypto/)
-:::

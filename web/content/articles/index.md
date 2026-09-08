@@ -1,6 +1,6 @@
 ---
 title: Spores
-description: Glimpses of our moldy future.
+description: Glimpses of a moldy future.
 ---
 
 ### [The wrap that learned your shape](the-wrap-that-learned-your-shape.html)

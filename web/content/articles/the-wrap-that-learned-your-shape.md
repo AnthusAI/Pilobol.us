@@ -52,8 +52,7 @@ He put the phone face down.
 
 In the morning the coffee route was waiting. He took it. The foam was still
 good. Somewhere under the wrap, he thought, there had been a tree. He could
-not point to where it had gone. The shape around him was almost the same size
-as a life.
+not point to where it had gone. The outline around him was still his.
 
 :::details{summary="Source"}
 - Martin Fowler: [Strangler Fig Application](https://martinfowler.com/bliki/StranglerFigApplication.html)

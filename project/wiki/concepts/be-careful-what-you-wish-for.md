@@ -55,6 +55,8 @@ Do not invent abstract wish categories first. Search for **wish language** — p
 - [TIME / MIT cognitive debt](../sources/time-chatgpt-brain-mit-cognitive-debt.md) — wished AI to write essays; cannot quote own work
 - [Svitla — can’t close the chat](../sources/embassy-svitla-i-cant-close-the-chat.md) — wished AI to draft; own contract never occurs as a blank page
 
+- [Atlantic — Aschenbrenner / Prodigy Problem](../sources/atlantic-aschenbrenner-prodigy-problem.md) — wished for a prophet who could see AGI; the grant of certainty became the loss
+
 ## Open questions
 
 - When is the wisher a company (“we wished for AI managers”) vs a private person?

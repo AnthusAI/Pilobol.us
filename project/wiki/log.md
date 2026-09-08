@@ -117,3 +117,7 @@ On-demand scout: first-person/quoted “I’d rather deal with AI than people.�
 ## 2026-09-08 — Prefer AI = strangler social seam
 
 Ryan: people preferring AI over humans (patience, no judgment) is not weird enough alone; it is strangler-fig wrapping human-to-human connection into human-to-machine. Concept strangler-fig.md updated; no separate prefer-AI archetype.
+
+## 2026-09-08 — Aschenbrenner (Atlantic)
+
+Ryan: Pilobolus green light — kid who said he could see AI’s future, sold certainty, lost tens of billions when the picture failed. Story PILO-29b5ba. Source Atlantic Theo Baker.

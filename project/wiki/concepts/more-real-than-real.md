@@ -28,6 +28,8 @@ existential diaries when told they aren’t real.
 
 Pilobol.us lives on that seam.
 
+- [Atlantic — Aschenbrenner / Prodigy Problem](../sources/atlantic-aschenbrenner-prodigy-problem.md) — preferred the clear picture of AI’s future until it ate the pile
+
 ## Open questions
 
 - Where does “creepy almost” end and “seductively more-real” begin — or do

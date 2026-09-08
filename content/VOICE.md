@@ -65,7 +65,9 @@ sentence.
 tilt. Not a telegram stack of fragments. Not cool one-liners pretending to be
 a story.
 
-**Still ban “not A, it’s B” / “not C but D” contrast stacks.** Prefer zero.
+**Still ban “not A, it’s B” / “not C but D” contrast stacks** — see
+"Register: impersonal weird" above for why; `style-profile.yml`'s
+`rules.bannedPatterns` is what Limatus actually enforces.
 
 Internal wiki cards, AGENTS.md, and scout chat digests may use desk shorthand.
 **Reader-facing stories (site drafts and the daily story routine) may not.**
@@ -219,11 +221,11 @@ Not earned:
 The test: if a sentence would survive having its nouns swapped for a different
 specimen’s nouns, it’s filler. Cut it.
 
-Skip intensifiers: revolutionary, seamless, powerful, robust, game-changing,
-transformative, unlock, leverage, groundbreaking, mind-blowing.
-
-Also skip Pilobol-flavored empty heat: “deeply uncanny,” “profoundly surreal,”
-“hauntingly hyperreal” with no scene attached.
+The enforced intensifier list — including the Pilobol-flavored empty heat
+like "deeply uncanny" or "profoundly surreal" — lives in `style-profile.yml`
+(`rules.bannedIntensifiers` in the Papyrus repo) rather than here, so there's
+one list instead of two that can drift apart. [Limatus](https://github.com/AnthusAI/Limatus)
+checks drafts against it directly.
 
 ## The standfirst (lede)
 

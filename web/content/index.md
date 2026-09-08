@@ -2,7 +2,7 @@
 title: ""
 description: >-
   Glimpses of a moldy future, as society is gradually infected by a fungus that grows on its own bullshit.
-cover: assets/gus-lamont/og-cover.jpg
+cover: assets/the-search-in-the-feed-kept-finding-him/og-cover.jpg
 ---
 
 :::card-grid{columns="6"}
@@ -17,11 +17,11 @@ host is gone. Soft systems transform the same way.
 *Monday, September 7, 2026*
 :::
 :::card{span="full"}
-### [A miracle in the outback](articles/gus-lamont-ai-sighting.html)
+### [The Search in the Feed Kept Finding Him](articles/the-search-in-the-feed-kept-finding-him.html)
 
-![Celebrity Today AI kidnapping collage, labeled AI-generated](assets/gus-lamont/celebrity-today-kidnap-ai-labeled.jpg)
+![Celebrity Today AI kidnapping collage, labeled AI-generated](assets/the-search-in-the-feed-kept-finding-him/celebrity-today-kidnap-ai-labeled.jpg)
 
-An AI picture of a kidnapping landed in the search for a missing boy. Thousands shared it. The ground had nothing.
+An AI picture of a kidnapping landed in the search for a missing boy, and thousands shared it — the real search on the ground had turned up nothing.
 
 *Monday, September 7, 2026*
 :::
@@ -35,9 +35,9 @@ A number on a screen is worth something only while enough people agree that it i
 *Sunday, September 6, 2026*
 :::
 :::card{span="3"}
-### [Father Justin](articles/father-justin.html)
+### [You Confessed to a Bag of Numbers](articles/you-confessed-to-a-bag-of-numbers.html)
 
-![Father Justin in collar on the Assisi balcony](assets/father-justin/father-justin-osv-collar.jpg)
+![Father Justin in collar on the Assisi balcony](assets/you-confessed-to-a-bag-of-numbers/father-justin-osv-collar.jpg)
 
 You email for a code. A man with a beard and a collar loads. He says he can hear your confession.
 

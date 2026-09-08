@@ -12,9 +12,9 @@ host is gone. Soft systems transform the same way.
 
 *Monday, September 7, 2026*
 
-### [A miracle in the outback](gus-lamont-ai-sighting.html)
+### [The Search in the Feed Kept Finding Him](the-search-in-the-feed-kept-finding-him.html)
 
-An AI picture of a kidnapping landed in the search for a missing boy. Thousands shared it. The ground had nothing.
+An AI picture of a kidnapping landed in the search for a missing boy, and thousands shared it — the real search on the ground had turned up nothing.
 
 *Monday, September 7, 2026*
 
@@ -26,9 +26,9 @@ A number on a screen is worth something only while enough people agree that it i
 
 *Sunday, September 6, 2026*
 
-### [Father Justin](father-justin.html)
+### [You Confessed to a Bag of Numbers](you-confessed-to-a-bag-of-numbers.html)
 
-[![Father Justin in collar on the Assisi balcony](../assets/father-justin/father-justin-osv-collar.jpg)](father-justin.html)
+[![Father Justin in collar on the Assisi balcony](../assets/you-confessed-to-a-bag-of-numbers/father-justin-osv-collar.jpg)](you-confessed-to-a-bag-of-numbers.html)
 
 You email for a code. A man with a beard and a collar loads. He says he can hear your confession.
 

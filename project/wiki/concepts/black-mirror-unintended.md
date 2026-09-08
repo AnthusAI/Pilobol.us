@@ -76,3 +76,7 @@ Scout method: Black Mirror comment → open the pointed-at incident.
 - [Friend AI necklace](../sources/decrypt-friend-ai-necklace.md) — promo compared to Black Mirror by nearly everyone writing about it (Decrypt)
 - [Meta NameTag faceprints](../sources/wired-meta-nametag-smart-glasses.md) — dormant biometrics on 50M phones; BM stack with glasses (WIRED)
 - [Meta smart glasses / pervert glasses](../sources/guardian-meta-smart-glasses-bero.md) — “sounds like something out of a Black Mirror episode” → lived secret recording (Guardian)
+
+## Related
+
+- [Be careful what you wish for — AI](be-careful-what-you-wish-for.md) — narrower: the wish must be visible

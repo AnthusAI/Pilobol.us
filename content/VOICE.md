@@ -168,6 +168,8 @@ Never announce “the Pilobolus take.”
 
 **Black Mirror unintended consequences (Ryan 2026-09-08):** Standing coverage pattern — real-life scenes that feel like a Black Mirror episode: useful or cool tech, then an unintended outcome someone lives inside. Especially AI / ML. Scout by searching for people saying something is “like Black Mirror” / “reminds me of Black Mirror” / similar, then look at what they mean — do not invent abstract risk categories first. Concept: [black-mirror-unintended](../project/wiki/concepts/black-mirror-unintended.md).
 
+**Be careful what you wish for — AI (Ryan 2026-09-08):** Standing coverage pattern — someone asked AI for a gift (comfort, restore, write, companion, decide) and the grant itself became the harm. Narrower than Black Mirror unintended: the wish must be visible. Concept: [be-careful-what-you-wish-for](../project/wiki/concepts/be-careful-what-you-wish-for.md).
+
 **Belief → consequence bar (Ryan 2026-09-06):** “It wasn’t real, then belief made it real” is on-topic and also **over-familiar**. Save ordinary feed posts for **significant or unusual** examples. Ordinary keepers stay wiki-only — **or** earn a feed slot as **Historical**: lineage dig, **On this day** past specimen, or a named **mass-hysteria / rumor-panic** scene (AI not required; see above).
 
 Hard rules that apply to every shape: name the thing in plain English early

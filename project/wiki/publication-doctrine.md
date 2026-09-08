@@ -90,6 +90,9 @@ least one; many will braid several.
    lived by someone. Especially AI/ML. Scout by finding people who say a
    thing is “like Black Mirror,” then look at what they mean. See
    [black-mirror-unintended](concepts/black-mirror-unintended.md).
+15. **Be careful what you wish for — AI** — someone asked the tech for a
+   gift; the grant itself is the curse. Narrower than Black Mirror unintended.
+   See [be-careful-what-you-wish-for](concepts/be-careful-what-you-wish-for.md).
 
 
 ## One example per post

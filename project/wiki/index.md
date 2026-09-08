@@ -24,6 +24,7 @@ Accepted sources live as pages in `sources/` **and** as pod references on
 - [Competing event narratives](concepts/competing-event-narratives.md) — rumor/cascade/myth proliferation after focal events
 - [Prior failure amplification](concepts/prior-failure-amplification.md) — AI accelerates old human weaknesses; not a hoodwink series
 - [Institutional lag](concepts/institutional-lag.md) — attacker/defender capability disparity; new lags → new attacker classes
+- [Be careful what you wish for — AI](concepts/be-careful-what-you-wish-for.md) — wished for the gift; the grant is the harm
 - [Black Mirror unintended](concepts/black-mirror-unintended.md) — real-life unintended tech/AI outcomes; scout via “like Black Mirror” comments
 - [Monitoring wall](concepts/monitoring-wall.md) — frosted window into alien mind; CoT/monitorability lag (Alien Mind watch)
 

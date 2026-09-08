@@ -101,3 +101,7 @@ Board `PILO-aaf1cc` (idea→assignment→research). Standing pattern scout: find
 ## 2026-09-08 — Black Mirror lived-harm restore
 
 Ryan: skipped finds that lacked a “Black Mirror” comment can still matter if something went wrong for a real person. Filed Andon Luna firing + Meta AI layoff lawsuit; Newsweek 2wai as BM-tagged grief product (Forbes stay-off).
+
+## 2026-09-08 — Be careful what you wish for (AI)
+
+Ryan: standing coverage pattern distinct from (but near) Black Mirror unintended — someone wished for an AI gift and the grant itself became the problem. Cluely is adjacent, not this spine.

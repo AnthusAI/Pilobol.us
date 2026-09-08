@@ -41,6 +41,8 @@ Weird specimens. Checkable scenes. People (and bots) who believe — and often
 
 **Black Mirror unintended consequences** (Ryan 2026-09-08): Standing coverage pattern — real-life AI/tech scenes that feel like a Black Mirror episode (useful tech, unintended outcome lived). Scout via people calling something “like Black Mirror,” then inspect the specimen. See [black-mirror-unintended](concepts/black-mirror-unintended.md).
 
+**Be careful what you wish for — AI** (Ryan 2026-09-08): Standing pattern — someone asked AI for a gift and the grant itself became the harm. See [be-careful-what-you-wish-for](concepts/be-careful-what-you-wish-for.md).
+
 **Opinionated, not tech journalism** (Ryan 2026-09-07): pieces carry a house
 take. Not a neutral briefing, not “experts say,” not a policy explainer with a
 lede. A weird story with a spine.

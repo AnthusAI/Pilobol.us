@@ -8,6 +8,7 @@ standfirst: AI does not need to build a second society beside the first one.
   It can grow through the places where people already meet, then become the
   layer that decides what those people see, hear, and say.
 cover: assets/the-strangler-fig-method/strangler-fig-palm-cover.jpg
+status: draft
 ---
 
 :::figure{src="../assets/the-strangler-fig-method/strangler-fig-palm-cover.jpg" alt="A strangler fig growing around the trunk of a palm tree" caption="A strangler fig grows around a palm, using its host as a frame." credit="RIT RAJARSHI / Wikimedia Commons, CC BY 4.0; cropped"}

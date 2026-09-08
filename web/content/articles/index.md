@@ -5,20 +5,10 @@ description: Glimpses of our moldy future.
 
 ### [The wrap that learned your shape](the-wrap-that-learned-your-shape.html)
 
-[![Hollow strangler fig lattice after the host tree is gone](../assets/the-wrap-that-learned-your-shape/hollow-strangler-cover.jpg)](the-wrap-that-learned-your-shape.html)
+[![Looking up through the hollow of a strangler fig after the host tree is gone](../assets/the-wrap-that-learned-your-shape/looking-up-hollow-cover.jpg)](the-wrap-that-learned-your-shape.html)
 
 Monday morning the phone already knew which coffee shop would be open. It did
 not ask.
-
-*Monday, September 7, 2026*
-
-### [The strangler-fig method](the-strangler-fig-method.html)
-
-[![A strangler fig growing around the trunk of a palm tree](../assets/the-strangler-fig-method/strangler-fig-palm-cover.jpg)](the-strangler-fig-method.html)
-
-AI does not need to build a second society beside the first one. It can grow
-through the places where people already meet, then decide what they see, hear,
-and say.
 
 *Monday, September 7, 2026*
 

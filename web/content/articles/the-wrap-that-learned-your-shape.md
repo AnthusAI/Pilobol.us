@@ -5,10 +5,10 @@ description: The phone knew the coffee shop, the ticket queue, the lunch list.
   He liked the foam. Somewhere under the wrap there had been a tree.
 standfirst: Monday morning the phone already knew which coffee shop would be
   open. It did not ask.
-cover: assets/the-wrap-that-learned-your-shape/hollow-strangler-cover.jpg
+cover: assets/the-wrap-that-learned-your-shape/looking-up-hollow-cover.jpg
 ---
 
-:::figure{src="../assets/the-wrap-that-learned-your-shape/hollow-strangler-cover.jpg" alt="Hollow strangler fig lattice after the host tree is gone" caption="The host is gone. The wrap kept the shape." credit="Erik Kristensen / Wikimedia Commons, CC BY 2.0"}
+:::figure{src="../assets/the-wrap-that-learned-your-shape/looking-up-hollow-cover.jpg" alt="Looking up through the hollow of a strangler fig after the host tree is gone" caption="The host is gone. Looking up through what kept its shape." credit="Prashanthns / Wikimedia Commons, CC BY-SA 3.0"}
 :::
 
 Monday morning the phone already knew which coffee shop would be open.

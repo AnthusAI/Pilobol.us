@@ -1,15 +1,15 @@
 ---
-title: The wrap that learned your shape
+title: Society Has a Strangler Fig Creeping Around It
 date: 'Monday, September 7, 2026'
 description: A strangler fig learns a living tree’s shape, then keeps the
   outline after the host is gone. That is also how soft systems replace what
   people used to do for themselves.
 standfirst: The plant wraps the host first. The hollow comes later. In between,
   the day still looks like yours.
-cover: assets/the-wrap-that-learned-your-shape/strangler-fig-palm-cover.jpg
+cover: assets/society-has-a-strangler-fig-creeping-around-it/strangler-fig-palm-cover.jpg
 ---
 
-:::figure{src="../assets/the-wrap-that-learned-your-shape/strangler-fig-palm-cover.jpg" alt="A strangler fig growing around the trunk of a palm tree" caption="A strangler fig grows around a palm, using its host as a frame." credit="RIT RAJARSHI / Wikimedia Commons, CC BY 4.0; cropped"}
+:::figure{src="../assets/society-has-a-strangler-fig-creeping-around-it/strangler-fig-palm-cover.jpg" alt="A strangler fig growing around the trunk of a palm tree" caption="A strangler fig grows around a palm, using its host as a frame." credit="RIT RAJARSHI / Wikimedia Commons, CC BY 4.0; cropped"}
 :::
 
 A strangler fig begins high in somebody else’s tree.
@@ -88,7 +88,7 @@ enough to feel like help. The old social world keeps teaching the new layer
 which face, phrase, and grievance makes a person stop scrolling. The familiar
 setting makes an answer feel like it came from somewhere they know.
 
-:::figure{src="../assets/the-wrap-that-learned-your-shape/looking-up-hollow-cover.jpg" alt="Looking up through the hollow of a strangler fig after the host tree is gone" caption="The host is gone. Looking up through what kept its shape." credit="Prashanthns / Wikimedia Commons, CC BY-SA 3.0"}
+:::figure{src="../assets/society-has-a-strangler-fig-creeping-around-it/looking-up-hollow-cover.jpg" alt="Looking up through the hollow of a strangler fig after the host tree is gone" caption="The host is gone. Looking up through what kept its shape." credit="Prashanthns / Wikimedia Commons, CC BY-SA 3.0"}
 :::
 
 That night he read, because a friend had sent a link without commentary, about

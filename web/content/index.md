@@ -1,15 +1,15 @@
 ---
 title: ""
 description: >-
-  Glimpses of our moldy future, as our society is gradually infected by a fungus that grows on our bullshit.
+  Glimpses of a moldy future, as society is gradually infected by a fungus that grows on its own bullshit.
 cover: assets/gus-lamont/og-cover.jpg
 ---
 
 :::card-grid{columns="6"}
 :::card{span="full"}
-### [The wrap that learned your shape](articles/the-wrap-that-learned-your-shape.html)
+### [Society Has a Strangler Fig Creeping Around It](articles/society-has-a-strangler-fig-creeping-around-it.html)
 
-![A strangler fig growing around the trunk of a palm tree](assets/the-wrap-that-learned-your-shape/strangler-fig-palm-cover.jpg)
+![A strangler fig growing around the trunk of a palm tree](assets/society-has-a-strangler-fig-creeping-around-it/strangler-fig-palm-cover.jpg)
 
 A strangler fig learns a living tree’s shape, then keeps the outline after the
 host is gone. Soft systems transform the same way.

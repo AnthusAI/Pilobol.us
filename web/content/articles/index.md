@@ -3,9 +3,9 @@ title: Spores
 description: Glimpses of a moldy future.
 ---
 
-### [The wrap that learned your shape](the-wrap-that-learned-your-shape.html)
+### [Society Has a Strangler Fig Creeping Around It](society-has-a-strangler-fig-creeping-around-it.html)
 
-[![A strangler fig growing around the trunk of a palm tree](../assets/the-wrap-that-learned-your-shape/strangler-fig-palm-cover.jpg)](the-wrap-that-learned-your-shape.html)
+[![A strangler fig growing around the trunk of a palm tree](../assets/society-has-a-strangler-fig-creeping-around-it/strangler-fig-palm-cover.jpg)](society-has-a-strangler-fig-creeping-around-it.html)
 
 A strangler fig learns a living tree’s shape, then keeps the outline after the
 host is gone. Soft systems transform the same way.

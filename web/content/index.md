@@ -7,6 +7,16 @@ cover: assets/gus-lamont/og-cover.jpg
 
 :::card-grid{columns="6"}
 :::card{span="full"}
+### [The wrap that learned your shape](articles/the-wrap-that-learned-your-shape.html)
+
+![A strangler fig growing around the trunk of a palm tree](assets/the-wrap-that-learned-your-shape/strangler-fig-palm-cover.jpg)
+
+Monday morning the phone already knew which coffee shop would be open. It did
+not ask.
+
+*Monday, September 7, 2026*
+:::
+:::card{span="full"}
 ### [The strangler-fig method](articles/the-strangler-fig-method.html)
 
 ![A strangler fig growing around the trunk of a palm tree](assets/the-strangler-fig-method/strangler-fig-palm-cover.jpg)

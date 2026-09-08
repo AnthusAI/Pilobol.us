@@ -3,6 +3,15 @@ title: Spores
 description: Glimpses of our moldy future.
 ---
 
+### [The wrap that learned your shape](the-wrap-that-learned-your-shape.html)
+
+[![A strangler fig growing around the trunk of a palm tree](../assets/the-wrap-that-learned-your-shape/strangler-fig-palm-cover.jpg)](the-wrap-that-learned-your-shape.html)
+
+Monday morning the phone already knew which coffee shop would be open. It did
+not ask.
+
+*Monday, September 7, 2026*
+
 ### [The strangler-fig method](the-strangler-fig-method.html)
 
 [![A strangler fig growing around the trunk of a palm tree](../assets/the-strangler-fig-method/strangler-fig-palm-cover.jpg)](the-strangler-fig-method.html)

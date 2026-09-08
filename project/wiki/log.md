@@ -113,3 +113,7 @@ On-demand standing-pattern scout (wish → grant → bite). Filed **6 NEW** keep
 ## [2026-09-08 ~18:30 ET] research | Prefer AI over people — admissions haul
 
 On-demand scout: first-person/quoted “I’d rather deal with AI than people.” Filed **7 NEW** keepers (SMH Sarah/Flint; Independent Gen Z; BBC Paisley; ABC Julian/Emma; China.org Li Huan + 21.5%; Resume Now vs manager; SINTEF blind youth prefer ChatGPT advice). Scout: `scout-prefer-ai-over-people-2026-09-08.md`. Angle noted (chose-the-fungus / prefer-ai-over-people) — **no standing concept lock**. Stay-off appended. KB only — no live Amplify.
+
+## 2026-09-08 — Prefer AI = strangler social seam
+
+Ryan: people preferring AI over humans (patience, no judgment) is not weird enough alone; it is strangler-fig wrapping human-to-human connection into human-to-machine. Concept strangler-fig.md updated; no separate prefer-AI archetype.

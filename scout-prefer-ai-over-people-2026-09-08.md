@@ -27,27 +27,20 @@ confession; Gen Z loneliness; China youth surveys. Never invented quotes.
 | cpa-resume-now-chatgpt-over-manager | Resume Now ~1k employees | Safer than boss; fear retaliation; judgment-free; better advice/support | https://www.cpapracticeadvisor.com/2025/09/16/most-employees-would-rather-ask-chatgpt-for-advice-than-their-manager-survey-finds/169045/ |
 | forskning-sintef-chatgpt-advice-preferred | Skjuve et al. blind youth MH study | Young people graded ChatGPT answers above human pros (relevance/utility) | https://www.forskning.no/barn-og-ungdom-helsetjenester-informasjonsteknologi/mental-helse-unge-far-bedre-svar-av-chatgpt-enn-av-fagfolk/2645803 |
 
-## Angle note (not a standing lock)
+## Angle note (Ryan 2026-09-08 — locked)
 
-Clear pattern: **chose the fungus / prefer-AI-over-people** — the interlocutor
-copy wins on patience, availability, non-judgment, and cognitive ease, so people
-*admit* they pick the bot over friends, therapists’ after-hours, bosses, and
-sometimes professionals. Fits [more-real-than-real](project/wiki/concepts/more-real-than-real.md)
-+ hyperreality (“prefer the copy”) without needing a new locked concept yet.
-**Do not invent a standing concept lock** until Ryan wants a named desk lane;
-haul is strong enough to draft later as `prefer-ai-over-people` /
-`chose-the-fungus` if he greenlights.
+**Not weird enough alone** for a Pilobolus reader post. Prefer-AI admissions are
+a **strangler-fig social seam**: AI wraps human-to-human connection and replaces
+it with human-to-machine connection until the living tie is optional. Do **not**
+stand up a separate “prefer AI” weird-story archetype. File and braid under
+[strangler-fig](project/wiki/concepts/strangler-fig.md) (and fungus / more-real-than-real
+as texture inside the wrap).
 
-## Weird-story candidates (Pilobolus)
+## Specimens as wrap evidence (not solo pitches)
 
-- **Anding Hospital girl** — “friend she couldn’t live without” was the chatbot
-  (China.org.cn) — uncanny belief/preference specimen.
-- **Li Huan** — after human office friction, only the AI voice has energy left;
-  never annoyed, never judges.
-- **Paisley** — hoped ChatGPT “just would be my friend”; easier than people.
-- **Ben Flint** — worried he’s *not leaning hard enough* on the midnight
-  non-judging therapist-bot.
-- **Sarah** — ChatGPT > almost anyone else as best friend / safe space.
+Use these as strangler evidence — friendship, midnight care, boss, therapy:
+Sarah/Flint; Independent civil servant; Paisley; Julian/Emma; Li Huan / Anding
+girl; Resume Now vs manager.
 
 ## Runners-up (scout only — not filed)
 

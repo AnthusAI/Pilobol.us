@@ -1,0 +1,9 @@
+{
+  "id": "ars-2009-narayanan-shmatikov-twitter-flickr",
+  "title": "Narayanan & Shmatikov: De-anonymizing social networks (classic baseline)",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://arstechnica.com/tech-policy/2009/03/pulling-back-the-curtain-on-anonymous-twitterers/",
+  "source": "pilobil-wiki",
+  "why": "Pre-LLM practical obscurity break via graph structure (Twitter\u2194Flickr). Contrast specimen: then topology+effort; now unstructured prose+cheap agents."
+}

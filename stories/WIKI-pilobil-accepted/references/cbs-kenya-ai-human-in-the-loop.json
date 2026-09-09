@@ -1,0 +1,9 @@
+{
+  "id": "cbs-kenya-ai-human-in-the-loop",
+  "title": "CBS: Kenya AI human-in-the-loop exploitation",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://www.cbsnews.com/news/ai-work-kenya-exploitation-60-minutes/",
+  "source": "pilobil-wiki",
+  "why": "Meta OpenAI Microsoft Google named; Sama + Remotasks"
+}

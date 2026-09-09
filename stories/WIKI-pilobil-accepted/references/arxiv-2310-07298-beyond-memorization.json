@@ -1,0 +1,9 @@
+{
+  "id": "arxiv-2310-07298-beyond-memorization",
+  "title": "Beyond Memorization: Violating Privacy Via Inference with LLMs (Staab et al.)",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://arxiv.org/abs/2310.07298",
+  "source": "pilobil-wiki",
+  "why": "Seed paper behind kjam attribute-inference section. LLMs infer location, income, sex etc. from Reddit free text (~85% top-1); anonymization and alignment ineffective. Extract step for practical-obscurity / WSJ haul."
+}

@@ -288,6 +288,9 @@ _PILOBOLUS_DEFAULT_AUTHOR = "by various bots and Ryan Porter"
 # slug -> project_id, filled during main() before HTML render.
 _AUDIO_NATIVE_PROJECT_IDS: dict[str, str] = {}
 
+# Root-level pages that get Audio Native (not homepage/index).
+_AUDIO_NATIVE_STANDALONE_HREFS = frozenset({"a-fungus-among-us.html"})
+
 
 def _audio_native_widget(project_id: str | None = None) -> str:
     project_attr = ""
@@ -349,14 +352,22 @@ def _inject_audio_native_script(html: str) -> str:
     return html2
 
 
+def _href_has_audio_native(href: str) -> bool:
+    """True for article pages and explicitly listed standalone pages."""
+    href = (href or "").lstrip("./")
+    if href.endswith("/index.html") or href in ("", "index.html"):
+        return False
+    if href.startswith("articles/"):
+        return Path(href).stem != "index"
+    return href in _AUDIO_NATIVE_STANDALONE_HREFS
+
+
 def _fix_article_header(html: str, *, active_href: str) -> str:
-    """Article chrome: h1 → lede → byline → Audio Native → body."""
+    """Reader chrome: h1 → lede → byline → Audio Native → body."""
     href = (active_href or "").lstrip("./")
-    if not href.startswith("articles/") or href.endswith("/index.html"):
+    if not _href_has_audio_native(href):
         return html
     slug = Path(href).stem
-    if slug == "index":
-        return html
 
     header_m = _ARTICLE_HEADER_RE.search(html)
     if not header_m:
@@ -492,6 +503,23 @@ def _prepare_articles(content_dir: Path) -> list[tuple[str, Path, dict[str, str]
     return prepared
 
 
+def _prepare_audio_native_pages(
+    content_dir: Path,
+) -> list[tuple[str, Path, dict[str, str], str]]:
+    """Article slugs plus standalone pages that should sync Audio Native."""
+    payloads = _prepare_articles(content_dir)
+    for href in sorted(_AUDIO_NATIVE_STANDALONE_HREFS):
+        source = content_dir / href.replace(".html", ".md")
+        if not source.is_file():
+            continue
+        slug = Path(href).stem
+        _ensure_author_front_matter(source)
+        fm, _ = parse_front_matter(source.read_text(encoding="utf-8"))
+        fragment = markus_build.convert_fragment(source, theme=None)
+        payloads.append((slug, source, fm, fragment))
+    return payloads
+
+
 def main() -> int:
     content_dir = POD_ROOT / "content"
     global _AUDIO_NATIVE_PROJECT_IDS
@@ -500,10 +528,10 @@ def main() -> int:
     write_generated_feed_pages(content_dir)
 
     print("Preparing ElevenLabs Audio Native projects…")
-    article_payloads = _prepare_articles(content_dir)
+    audio_native_payloads = _prepare_audio_native_pages(content_dir)
     _AUDIO_NATIVE_PROJECT_IDS = sync_all_articles(
         pod_root=POD_ROOT,
-        articles=article_payloads,
+        articles=audio_native_payloads,
     )
 
     result = build_markus_site(

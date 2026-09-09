@@ -41,6 +41,13 @@ Accepted keepers live in `sources/` (markdown) with matching JSON on `WIKI-pilob
 - [An Alien Mind](sources/openai-an-alien-mind.md) → [monitoring-wall](concepts/monitoring-wall.md)
 - Monitoring-wall haul (8 keepers): [scout notes](../scout-monitoring-wall-2026-09-07.md); specimens on [monitoring-wall](concepts/monitoring-wall.md)
 
+## Latest Black Mirror haul (2026-09-09 4am)
+
+- Pattern: [black-mirror-unintended](concepts/black-mirror-unintended.md) — training room behind the glasses
+- Board: `PILO-280ead`
+- Scout: [scout-2026-09-09.md](../../scout-2026-09-09.md)
+- Keepers: [SvD We see everything](sources/svd-meta-glasses-we-see-everything.md); [Stuff BM tag](sources/stuff-meta-glasses-black-mirror-sex.md); [Verge](sources/verge-meta-glasses-kenya-reviewers.md); [BBC ICO](sources/bbc-meta-glasses-ico-concerning.md); [BBC jobs](sources/bbc-sama-meta-glasses-workers-lose-jobs.md); [TechCabal](sources/techcabal-sama-layoffs-meta.md); [Decrypt](sources/decrypt-rayban-glasses-controversy-sama.md)
+
 ## Latest Black Mirror haul (2026-09-08)
 
 - Pattern: [black-mirror-unintended](concepts/black-mirror-unintended.md)

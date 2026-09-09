@@ -1,0 +1,9 @@
+{
+  "id": "arxiv-2601-05918-li-anthropic-interviewer",
+  "title": "Agentic LLMs as Powerful Deanonymizers: Anthropic Interviewer (Tianshi Li)",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://arxiv.org/abs/2601.05918",
+  "source": "pilobil-wiki",
+  "why": "Prior specimen: off-the-shelf agentic LLMs re-identify scientists in Anthropic Interviewer dataset (6/24 in reported run); safeguards bypassed by task decomposition. Cited and scaled by Lermen/Paleka."
+}

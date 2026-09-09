@@ -121,3 +121,7 @@ Ryan: people preferring AI over humans (patience, no judgment) is not weird enou
 ## 2026-09-08 — Aschenbrenner (Atlantic)
 
 Ryan: Pilobolus green light — kid who said he could see AI’s future, sold certainty, lost tens of billions when the picture failed. Story PILO-29b5ba. Source Atlantic Theo Baker.
+
+## [2026-09-09 ~04:14 ET] 4am research+story | Behind the share button
+
+Board `PILO-280ead` (idea→assignment→research). Theme: Black Mirror unintended — Meta AI glasses training room (Sama Nairobi intimate annotation → 1,108 redundancies). Filed 7 keepers. Draft: witness. Stay-off appended. KB only — no publish.

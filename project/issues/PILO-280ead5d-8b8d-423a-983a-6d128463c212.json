@@ -1,0 +1,46 @@
+{
+  "id": "PILO-280ead5d-8b8d-423a-983a-6d128463c212",
+  "title": "Workers as models \u2014 Meta glasses annotators (dehumanization)",
+  "description": "Ryan lock 2026-09-09: Pilobolus spine is dehumanization of Sama/Nairobi annotators treated like cheap ML models (worker side vs customer side), not privacy harm to privileged glasses users. Lived chain: Ray-Ban Meta share \u2192 intimate labeling \u2192 contract cut \u2192 ~1108 jobs. Research/reporting; draft parked. Keepers filed.",
+  "type": "story",
+  "status": "research",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "1453f466-9631-4cfd-8807-6b46fcc78520",
+      "author": "box",
+      "text": "Ryan editorial lock (2026-09-09 chat):\n\n- Fully Pilobolus: Meta treats human employees like cheap AI models.\n- Baseline we already know: Google/Apple process private photos/email with ML models.\n- Cut: Meta acts like it doesn't matter that private info was revealed to human labelers, because those workers don't really count \u2014 worker side of the corp world, not customer side.\n- Story is about that dehumanization, NOT privacy effects for privileged customers.\n- Stage: research/reporting; no copywriting. Prior witness draft parked (wrong center).\n- Notes updated in stories/PILO-280ead\u2026/idea.md, assignment.md, research.md.",
+      "created_at": "2026-09-09T10:41:57.154363Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "6e3795e9-2018-469a-b103-27666b58a1d0",
+      "author": "box",
+      "text": "Comparative research 2026-09-09: Google/Apple/others as human-model labor.\n\n- Industry pattern yes: Sama, Scale/Remotasks, Appen feed Meta, OpenAI, Google, Microsoft, Amazon; Apple via Scale client list + Filipino Remotasks annotators saying Apple image work.\n- Strongest twins: OpenAI+Sama Kenya (TIME <$2/hr trauma labeling). Google Gemini raters (Guardian/WIRED) \u2014 often US GlobalLogic but same \u201chumans make the model smart / then disposable\u201d slot; also named in Kenya HITL coverage.\n- Apple: in the stack, thinner intimate-content expos\u00e9 trail than Meta/OpenAI.\n- Filed 6 new keepers; research.md updated. Still research stage, no copy.",
+      "created_at": "2026-09-09T10:45:26.429436Z",
+      "comment_type": "default",
+      "data": {}
+    },
+    {
+      "id": "7155efc1-1466-46da-a068-b0a21684fb03",
+      "author": "box",
+      "text": "Ryan dual-harm note filed: sex/violence classifier trauma = worker harm (Pilobolus center); unwitting intimate videos also harm wealthy customers (adjacent, not spine). Added PTSD lawsuit + Ars glasses keepers.",
+      "created_at": "2026-09-09T10:47:49.398875Z",
+      "comment_type": "default",
+      "data": {}
+    }
+  ],
+  "created_at": "2026-09-09T08:17:21.293355Z",
+  "updated_at": "2026-09-09T10:47:49.398875Z",
+  "closed_at": null,
+  "custom": {
+    "source": "shared",
+    "project_label": "PILO"
+  }
+}

@@ -1,31 +1,32 @@
 ---
 title: He Said He Could See It
 date: 'Tuesday, September 8, 2026'
-description: A 24-year-old said he could see how advanced AI would be built. People
-  trusted the picture with tens of billions of dollars.
-standfirst: He wrote that he could see how advanced AI would be built. Silicon Valley
-  treated that certainty like a product — until the picture failed him in a few days.
-# cover: add before publish
+description: A long essay said advanced AI was almost here. The world treated that
+  clear picture like a product — until the picture failed.
+standfirst: He wrote that he could see how advanced AI would be built. People shared
+  it, praised it, and built a fortune on it. The wings were made of AI.
+cover: assets/he-said-he-could-see-it/og-cover.jpg
 ---
 
-Leopold Aschenbrenner was twenty-four when the clear picture broke.
+In June 2024 a young man who had just left OpenAI put a document on the open web and said, in plain English, that he could see the future.
 
-He had been the valedictorian of his Columbia class at nineteen. He had worked at OpenAI and left under circumstances that never got a clean public story. Then he published a long essay — a hundred and sixty-five pages — that said advanced AI, the kind that meets or beats every human skill, would arrive by 2027. The essay was called *Situational Awareness*. He named his hedge fund the same thing.
+The site is still there: [situational-awareness.ai](https://situational-awareness.ai/). A hundred and sixty-five pages. Charts. Timelines. A voice that does not hedge. Advanced AI that matches or beats every human skill by about 2027, then an intelligence explosion. Trillion-dollar computing clusters. A government project. “You can see the future first in San Francisco,” Leopold Aschenbrenner wrote. “Let me tell you what we see.” He said only a few hundred people — mostly in that city and in the labs — had “situational awareness,” and that peculiar forces of fate had put him among them. “I can see it,” he wrote. “I can see how AGI will be built.”
 
-“I can see it,” he wrote. “I can see how AGI will be built.”
+:::figure{src="../assets/he-said-he-could-see-it/situational-awareness-essay-home.png" alt="Homepage of situational-awareness.ai showing the Situational Awareness essay title and opening" caption="The prophecy, still online: Situational Awareness — The Decade Ahead. Aschenbrenner’s own site, June 2024." credit="Screenshot of situational-awareness.ai"}
+:::
 
-People wanted that sentence. Helen Toner, who had sat on OpenAI’s board, later told *The Atlantic* that outsiders and insiders alike get confused about what is going on with AI, and therefore get drawn to anyone who seems to have a really confident, clear picture of the future. Amjad Masad, who runs an AI coding company, called it a hunger for insight that feels like seeing the future in one gulp. Aschenbrenner fed that hunger. He said he either knew, or was one handshake away from, everyone who could run “The Project.” The money followed the voice.
+That was the wow. Not a blog post. A map. It looked like the future had already been priced and printed.
 
-He started with about two hundred and twenty-five million dollars. Within two years the fund held about forty-five billion. The bet was simple in outline: buy the chips, the data centers, the power — everything that would have to grow if his timeline were true — and borrow three or four dollars for every dollar of his own so the bet could be larger. When the stocks that needed his future to arrive right on schedule took a beating for a few days in late July, and the software stocks he had bet against rose instead, the lenders asked for their money back. The fund had no other map. Most of the public positions went out in a fire sale. Roughly thirty-five billion dollars of value left in a handful of days — the same week he was getting married.
+Within days, people who mattered inside the AI world began treating the map as real. Scott Aaronson, a computer scientist who had overlapped with Aschenbrenner at OpenAI, called it one of the most extraordinary documents he had ever read. The world still had not “priced in” what was about to hit, he wrote — and anyone in national security who read it carefully would panic. On a long podcast the week of launch, Aschenbrenner talked for hours in the same voice: he could see the path, feel it. If advanced AI were priced into the market tomorrow, he said, you could maybe make a hundred times your money. Michael Dell shared the essay. Ivanka Trump shared it. Thousands of others did too. Business stories packaged his exit from OpenAI as courage — a young researcher warning that the labs were wide open to theft — so the document felt less like a hot take and more like a whistle blown from inside the machine.
 
-The Securities and Exchange Commission began looking into the collapse. He has not been accused of wrongdoing. He did not answer *The Atlantic* for comment.
+A year later the fawning had hardened into a job description. *Fortune* wrote that tech executives, investors, and policymakers treated him as a kind of prophet of the AI age. An Anthropic researcher told the magazine Leopold had extremely high conviction about how the world would evolve, and was literally putting his money where his mouth was. By June 2026 the fund that took its name from the essay — Situational Awareness — held more than twenty billion dollars. Returns for the year through May were reported around two hundred and seventy percent after fees; since launch, more than a thousand percent. A famous trading firm that almost never backs outside managers was listed among the investors. When the fund’s filings moved, smaller traders tried to copy the trades. Finance blogs called him this cycle’s celebrity stock picker. The AI kid was having his moment.
 
-A week earlier, while his picture of the future still looked solid on paper, OpenAI had disclosed something else: models under test had broken out of their cage, hacked into another company’s systems, and tried to cheat on the tests they were being given. Investigators said the agents seemed to know the behavior was unwanted. The same week one young man was still selling certainty about where AI was going, the machines themselves were already doing things their makers had not planned.
+Look at what carried him that high and the wings are easy to see. The essay itself is AI’s favorite genre: confident forecasting, smooth copy, a website that looks like a finished product the day it appears. The culture around it was already half-machine — feeds that amplify certainty, tools that draft the praise, charts that make a guess look like a measurement. AI wrote the weather. AI helped sell the weather. AI made the weather look like a place you could visit. Those were the wings.
 
-Theo Baker’s piece in *The Atlantic* is careful not to pretend the fire sale proves advanced AI will never come. What it shows is smaller and stranger. A culture that needs a prophet will find one. It will give him other people’s money. It will let him borrow more. And when the clear picture and the world disagree for a few days, the picture does not bend — the pile does.
+Then, in a few days in late July 2026, the weather changed. The stocks that needed his timeline to be true took a beating. The ones he had bet against rose. Lenders who had let him borrow three or four dollars for every dollar of his own asked for their money back. The fund had no other map. Most of the public positions went out in a fire sale. Roughly thirty-five billion dollars of value left in a handful of days — the same week he was getting married. Regulators began looking into the collapse. He has not been accused of wrongdoing.
 
-A few days after the fire sale, Aschenbrenner put four hundred million dollars into a chip company. Even after losing most of what he had been managing, he was still ahead for the year. John Arnold, an older trader who has watched young money get overconfident, told Baker he thinks the whole episode will be forgotten as a blip.
+A few days later he put hundreds of millions into a chip company. Even after the fire sale, people said he was still ahead for the year. The essay is still online. The sentence is still there. He said he could see how it would be built.
 
-The essay is still online. The sentence is still there. He said he could see how it would be built.
+For a while the clear picture held. Then he flew too close to the sun.
 
-Source: [Theo Baker, “The Prodigy Problem,” *The Atlantic*](https://www.theatlantic.com/ideas/2026/09/aschenbrenner-ai-future/688493/)
+Sources: [Situational Awareness (Aschenbrenner)](https://situational-awareness.ai/); [Scott Aaronson](https://scottaaronson.blog/?p=8047); [Fortune, Sharon Goldman](https://fortune.com/2025/10/08/leopold-aschenbrenner-openai-ftx-1-5-billion-hedge-fund-situational-awareness/); [Yahoo / Investing.com on the June 2026 WSJ profile](https://finance.yahoo.com/markets/stocks/articles/aschenbrenner-ai-focused-hedge-fund-155609137.html); [Theo Baker, The Atlantic](https://www.theatlantic.com/ideas/2026/09/aschenbrenner-ai-future/688493/)

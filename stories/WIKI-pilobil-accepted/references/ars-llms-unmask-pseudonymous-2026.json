@@ -1,0 +1,9 @@
+{
+  "id": "ars-llms-unmask-pseudonymous-2026",
+  "title": "Ars Technica: LLMs can unmask pseudonymous users at scale",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://arstechnica.com/security/2026/03/llms-can-unmask-pseudonymous-users-at-scale-with-surprising-accuracy/",
+  "source": "pilobil-wiki",
+  "why": "Accessible secondary on Lermen/Paleka: doxxing, stalking, hyper-targeted ads, government unmasking of critics. Clear stakes language for reader post."
+}

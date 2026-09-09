@@ -1,0 +1,9 @@
+{
+  "id": "clearview-ai-product",
+  "title": "Clearview AI product / face search of public web",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://www.clearview.ai/",
+  "source": "pilobil-wiki",
+  "why": "Vendor primary; LE-only face index over scraped public images"
+}

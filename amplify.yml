@@ -26,6 +26,7 @@ frontend:
         # Requires ELEVENLABS_API_KEY in Amplify environment variables.
         - rm -rf web/dist-papyrus
         - cd web && PAPYRUS_ROOT="$PWD/../.amplify-cache/papyrus-src" python3 build_via_papyrus.py
+        - cat web/elevenlabs-audio-native-projects.json
   artifacts:
     baseDirectory: web/dist-papyrus
     files:
@@ -33,15 +34,3 @@ frontend:
   cache:
     paths:
       - .amplify-cache/**/*
-# HTML must not sit on CloudFront for a year -- the first deploy shipped
-# s-maxage=31536000 and the homepage stayed on stale content after new
-# stories landed in git.
-customHeaders:
-  - pattern: '**/*.html'
-    headers:
-      - key: Cache-Control
-        value: 'public, max-age=0, s-maxage=60, must-revalidate'
-  - pattern: '/'
-    headers:
-      - key: Cache-Control
-        value: 'public, max-age=0, s-maxage=60, must-revalidate'

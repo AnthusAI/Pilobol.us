@@ -15,29 +15,30 @@ A long essay said advanced AI was almost here. The world treated that clear pict
 
 [![A strangler fig growing around the trunk of a palm tree](../assets/society-has-a-strangler-fig-creeping-around-it/strangler-fig-palm-cover.jpg)](society-has-a-strangler-fig-creeping-around-it.html)
 
-A strangler fig learns a living tree’s shape, then keeps the outline after the
-host is gone. Soft systems transform the same way.
+A strangler fig learns a living tree’s shape, then keeps the outline after the host is gone. That is also how soft systems replace what people used to do for themselves.
 
 *Monday, September 7, 2026*
 
 ### [The Search in the Feed Kept Finding Him](the-search-in-the-feed-kept-finding-him.html)
 
-An AI picture of a kidnapping landed in the search for a missing boy, and thousands shared it — the real search on the ground had turned up nothing.
+[![Screenshot of a Celebrity Today Facebook post showing an AI-labeled collage of a man with a child at a vehicle and a photo of Gus](../assets/the-search-in-the-feed-kept-finding-him/og-cover.jpg)](the-search-in-the-feed-kept-finding-him.html)
+
+Four-year-old Gus went missing from a sheep station. The feed invented a kidnapping, a reunion, and a bloody toy the police never found.
 
 *Monday, September 7, 2026*
 
 ### [Believe the rainbow](believe-the-rainbow.html)
 
-[![Skittles — Believe the Rainbow](https://img.youtube.com/vi/QUmXhCmVaQg/hqdefault.jpg)](believe-the-rainbow.html)
+[![Believe the rainbow](../assets/believe-the-rainbow/card-still.jpg)](believe-the-rainbow.html)
 
-A number on a screen is worth something only while enough people agree that it is. Stop agreeing, and there is nothing underfoot.
+A coin was built to always be worth a dollar. The machine meant to defend that promise finished it off in four days, the same joke a Skittles ad told first.
 
 *Sunday, September 6, 2026*
 
 ### [You Confessed to a Bag of Numbers](you-confessed-to-a-bag-of-numbers.html)
 
-[![Father Justin in collar on the Assisi balcony](../assets/you-confessed-to-a-bag-of-numbers/father-justin-osv-collar.jpg)](you-confessed-to-a-bag-of-numbers.html)
+[![You Confessed to a Bag of Numbers](../assets/you-confessed-to-a-bag-of-numbers/og-cover.jpg)](you-confessed-to-a-bag-of-numbers.html)
 
-You email for a code. A man with a beard and a collar loads. He says he can hear your confession.
+A collar, an Assisi balcony, three Our Fathers — then the priest is only Justin.
 
-*Sunday, September 6, 2026*
+*Saturday, September 5, 2026*

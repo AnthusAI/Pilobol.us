@@ -20,7 +20,9 @@ from typing import Any
 
 API_BASE = "https://api.elevenlabs.io/v1/audio-native"
 VOICE_ID = "EkK5I93UQWFDigLMpZcX"
-DEFAULT_AUTHOR = "by various bots and Ryan Porter"
+# ElevenLabs player embed author — not the visible page byline.
+AUDIO_NATIVE_PLAYER_AUTHOR = "Pilobol.us"
+SITE_ORIGIN = "https://pilobol.us"
 REGISTRY_NAME = "elevenlabs-audio-native-projects.json"
 
 
@@ -187,6 +189,96 @@ def _api_post(
     return parsed
 
 
+def _api_get(url: str, *, api_key: str) -> dict[str, Any]:
+    request = urllib.request.Request(url, method="GET")
+    request.add_header("xi-api-key", api_key)
+    request.add_header("Accept", "application/json")
+    try:
+        with urllib.request.urlopen(request, timeout=120) as response:
+            payload = response.read().decode("utf-8")
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(
+            f"ElevenLabs API {exc.code} for {url}: {detail.strip() or exc.reason}"
+        ) from exc
+    if not payload.strip():
+        return {}
+    parsed = json.loads(payload)
+    if not isinstance(parsed, dict):
+        raise RuntimeError(f"Unexpected ElevenLabs response for {url}: {payload!r}")
+    return parsed
+
+
+def _api_json_post(url: str, *, api_key: str, payload: dict[str, Any]) -> dict[str, Any]:
+    body = json.dumps(payload).encode("utf-8")
+    request = urllib.request.Request(url, data=body, method="POST")
+    request.add_header("Content-Type", "application/json")
+    request.add_header("xi-api-key", api_key)
+    request.add_header("Accept", "application/json")
+    try:
+        with urllib.request.urlopen(request, timeout=120) as response:
+            raw = response.read().decode("utf-8")
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(
+            f"ElevenLabs API {exc.code} for {url}: {detail.strip() or exc.reason}"
+        ) from exc
+    if not raw.strip():
+        return {}
+    parsed = json.loads(raw)
+    if not isinstance(parsed, dict):
+        raise RuntimeError(f"Unexpected ElevenLabs response for {url}: {raw!r}")
+    return parsed
+
+
+def get_project_settings(*, api_key: str, project_id: str) -> dict[str, Any]:
+    return _api_get(f"{API_BASE}/{project_id}/settings", api_key=api_key)
+
+
+def update_content_from_url(
+    *,
+    api_key: str,
+    page_url: str,
+    title: str,
+    author: str = AUDIO_NATIVE_PLAYER_AUTHOR,
+) -> None:
+    """Re-sync an existing project from a live page URL (updates player author/title)."""
+    _api_json_post(
+        f"{API_BASE}/content",
+        api_key=api_key,
+        payload={"url": page_url, "author": author, "title": title},
+    )
+
+
+def article_page_url(slug: str) -> str:
+    return f"{SITE_ORIGIN}/articles/{slug}.html"
+
+
+def player_author_from_settings(settings: dict[str, Any]) -> str | None:
+    nested = settings.get("settings")
+    if isinstance(nested, dict):
+        author = nested.get("author")
+        if isinstance(author, str) and author.strip():
+            return author.strip()
+    return None
+
+
+def sync_player_author(
+    *,
+    api_key: str,
+    slug: str,
+    title: str,
+    project_id: str,
+) -> None:
+    print(f"  ElevenLabs: sync player author {slug} ({project_id}) → {AUDIO_NATIVE_PLAYER_AUTHOR}")
+    update_content_from_url(
+        api_key=api_key,
+        page_url=article_page_url(slug),
+        title=title,
+        author=AUDIO_NATIVE_PLAYER_AUTHOR,
+    )
+
+
 def create_project(
     *,
     api_key: str,
@@ -254,27 +346,58 @@ def sync_article(
     projects: dict[str, Any] = registry.setdefault("projects", {})
     entry = dict(projects.get(slug) or {})
     title = front_matter.get("title") or slug.replace("-", " ").title()
-    author = front_matter.get("author") or DEFAULT_AUTHOR
     html_bytes = article_html_payload(
         markdown_path,
         front_matter=front_matter,
         fragment_html=fragment_html,
     )
     project_id = entry.get("project_id")
-    if project_id and entry.get("content_hash") == digest:
+    content_unchanged = bool(project_id and entry.get("content_hash") == digest)
+    player_author_ok = entry.get("player_author") == AUDIO_NATIVE_PLAYER_AUTHOR
+
+    if content_unchanged and player_author_ok:
+        try:
+            settings = get_project_settings(api_key=api_key, project_id=str(project_id))
+            remote_author = player_author_from_settings(settings)
+            if remote_author == AUDIO_NATIVE_PLAYER_AUTHOR:
+                return str(project_id)
+        except RuntimeError as exc:
+            print(f"  WARNING: could not verify player author for {slug}: {exc}", file=sys.stderr)
+            return str(project_id)
+
+    if content_unchanged and project_id:
+        sync_player_author(
+            api_key=api_key,
+            slug=slug,
+            title=title,
+            project_id=str(project_id),
+        )
+        projects[slug] = {
+            **entry,
+            "project_id": project_id,
+            "content_hash": digest,
+            "title": title,
+            "player_author": AUDIO_NATIVE_PLAYER_AUTHOR,
+        }
         return str(project_id)
 
     name = f"Pilobolus — {title}"
     if project_id:
         print(f"  ElevenLabs: update {slug} ({project_id})")
         update_project(api_key=api_key, project_id=str(project_id), html_bytes=html_bytes)
+        sync_player_author(
+            api_key=api_key,
+            slug=slug,
+            title=title,
+            project_id=str(project_id),
+        )
     else:
         print(f"  ElevenLabs: create {slug}")
         project_id = create_project(
             api_key=api_key,
             name=name,
             title=title,
-            author=author,
+            author=AUDIO_NATIVE_PLAYER_AUTHOR,
             html_bytes=html_bytes,
         )
 
@@ -282,6 +405,7 @@ def sync_article(
         "project_id": project_id,
         "content_hash": digest,
         "title": title,
+        "player_author": AUDIO_NATIVE_PLAYER_AUTHOR,
     }
     return str(project_id)
 

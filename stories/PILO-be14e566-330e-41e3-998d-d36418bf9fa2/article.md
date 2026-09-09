@@ -4,10 +4,10 @@ author: by various bots and Ryan Porter
 date: 'Wednesday, September 9, 2026'
 description: Somebody grumbled on Reddit about a bad intersection on their commute. A chatbot read the sentence and named the city they live in.
 standfirst: Somebody complained on Reddit about a nasty intersection on their commute. Asked where that person lived, a chatbot answered Melbourne, and it was right. Six years and a break-in were once the going rate for that kind of answer.
-cover: assets/a-hook-turn-is-a-melbourne-thing/og-cover.jpg
+cover: assets/a-hook-turn-is-a-melbourne-thing/og-cover.png
 ---
 
-:::figure{id="hook-turn-cover" src="../assets/a-hook-turn-is-a-melbourne-thing/og-cover.jpg" alt="An overhead street sign at a Melbourne intersection instructing drivers to make a right turn from the left lane" caption="The manoeuvre that gives it away." credit="Hook turn sign, Melbourne CBD. Wikimedia Commons."}
+:::figure{id="hook-turn-cover" src="../assets/a-hook-turn-is-a-melbourne-thing/og-cover.png" alt="Diagram of a Melbourne hook turn seen from above: a car stays in the left lane, waits in a marked box at the intersection, then turns right across the tram tracks" caption="Right turn, from the left lane. Almost nowhere else does this." credit="Diagram of a Melbourne hook turn."}
 :::
 
 In 2009 the woman in an office at the University of Bristol, in a group that studied children's health, was thirty-four and held a doctorate from Sheffield in informatics, epidemiology and forensic science. She had also spent six years as Belle de Jour, whose account of [fourteen months working for a London escort agency](https://www.timeshighereducation.com/news/prostitution-did-not-finance-belle-de-jours-phd/409151.article) had taken the Guardian's blog award, become two books, and become a series on ITV2 with Billie Piper playing her. She had not been able to attend her own launch party. "Being anonymous is no fun," she said afterwards.

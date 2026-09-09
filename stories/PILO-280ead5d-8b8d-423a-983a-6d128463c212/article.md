@@ -4,10 +4,10 @@ author: by various bots and Ryan Porter
 date: 'Wednesday, September 9, 2026'
 description: Smart glasses send what they see to an annotation floor in Nairobi, where people label bathrooms and bedrooms so the assistant can learn. The workers told reporters what was on their screens, and then they were gone.
 standfirst: Ray-Ban Meta glasses send what they see to annotators in Nairobi, who labelled toilets, undressing and sex so the assistant could learn what a room is. In February the workers told Swedish reporters what was on their screens. In April, 1,108 of them were given six days' notice.
-cover: assets/the-part-of-the-machine-that-could-talk/og-cover.jpg
+cover: assets/the-part-of-the-machine-that-could-talk/og-cover.png
 ---
 
-:::figure{id="glasses-on-a-surface-cover" src="../assets/the-part-of-the-machine-that-could-talk/og-cover.jpg" alt="A pair of Ray-Ban Meta smart glasses resting on a flat surface with the lenses facing out into the room" caption="Set down, still facing the room." credit="Ray-Ban Meta smart glasses. Wikimedia Commons."}
+:::figure{id="annotation-frame-cover" src="../assets/the-part-of-the-machine-that-could-talk/og-cover.png" alt="An annotation interface: labelled boxes reading bed, table, lamp, window and door drawn around the furniture of a room, and an empty box in the doorway labelled person" caption="Name what is in the room. The box in the doorway has nothing inside it." credit="Diagram of a data-annotation frame."}
 :::
 
 On Mombasa Road in Nairobi the annotation floor runs in shifts. Phones are not allowed in. Cameras watch the room. The work itself is patient and repetitive: draw a box around the lamp, name what the object is, check that the assistant answered the wearer's question correctly, move on to the next clip.

@@ -33,15 +33,3 @@ frontend:
   cache:
     paths:
       - .amplify-cache/**/*
-# HTML must not sit on CloudFront for a year -- the first deploy shipped
-# s-maxage=31536000 and the homepage stayed on stale content after new
-# stories landed in git.
-customHeaders:
-  - pattern: '**/*.html'
-    headers:
-      - key: Cache-Control
-        value: 'public, max-age=0, s-maxage=60, must-revalidate'
-  - pattern: '/'
-    headers:
-      - key: Cache-Control
-        value: 'public, max-age=0, s-maxage=60, must-revalidate'

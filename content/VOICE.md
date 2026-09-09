@@ -139,6 +139,26 @@ a description rather than a name, there is no piece yet.
    app icon, “how long since my last confession.” Use sparingly; don’t open
    every faith/care piece here (Ryan: don’t lead Justin with theology).
 
+7. **Diptych** — exactly two real scenes, far apart in time, held in the same
+   posture so the second is read through the first. A rhyme, not a survey. Use
+   when the subject is a change rather than a moment: the gap between the two
+   panels carries what a timeline would otherwise have to narrate. Hard limits:
+   two, never three; both fully scened; neither compressed into a summary line.
+   The later panel gets the weight, the headline and the ending.
+
+8. **The one who went first** — a real person who lived through the old version
+   of something and is on the record about it, while the new version arrives
+   cheap. The whole arc sits inside one documented life, so nothing has to be
+   listed. Model: Brooke Magnanti, unmasked in 2009 by six years of newsroom
+   effort, against agents that now do the same work for a dollar a head.
+
+9. **The chair on the other side** — close third on whoever is *doing* the
+   thing, rather than whoever it lands on. Distinct from Witness (3), where the
+   weird arrives at someone; here the camera sits with the people causing it.
+   Works because nobody in these scenes is a villain — they are curious, it
+   takes an afternoon, and the ordinariness is the tilt. Model: the students
+   who wired face search into sunglasses to show it could be done.
+
 ### Historical (post type) — Ryan 2026-09-06
 
 Two related moves, both looking **backward through history**:

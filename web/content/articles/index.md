@@ -3,6 +3,14 @@ title: Spores
 description: Glimpses of our moldy future.
 ---
 
+### [A Hook Turn Is a Melbourne Thing](a-hook-turn-is-a-melbourne-thing.html)
+
+[![An overhead street sign at a Melbourne intersection instructing drivers to make a right turn from the left lane](../assets/a-hook-turn-is-a-melbourne-thing/og-cover.jpg)](a-hook-turn-is-a-melbourne-thing.html)
+
+Somebody grumbled on Reddit about a bad intersection on their commute. A chatbot read the sentence and named the city they live in.
+
+*Wednesday, September 9, 2026*
+
 ### [The Wings Were Made of AI](he-said-he-could-see-it.html)
 
 [![A winged figure plunges from a stormy sky in a 17th-century oil sketch](../assets/he-said-he-could-see-it/og-cover.jpg)](he-said-he-could-see-it.html)

@@ -62,7 +62,7 @@ Lenses that stay braided:
 
 Stack: **Papyrus local pod** (desk language) with **Biblicus** as the KB engine
 underneath; site builds through Papyrus's Markus renderer (`web/build_via_papyrus.py`);
-Amplify Gen 2 deploys via DevOps.
+Amplify Gen 2 deploys via DevOps. Build cache (`.amplify-cache/`: pinned Papyrus + pip) is configured in `amplify.yml`; never cache `web/dist-papyrus`.
 
 ### Knowledge base (Papyrus local pod)
 

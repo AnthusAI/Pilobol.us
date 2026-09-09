@@ -1,3 +1,7 @@
-og-cover.jpg / bruegel-landscape-with-the-fall-of-icarus.jpg
-Pieter Bruegel the Elder (attr.), Landscape with the Fall of Icarus, c.1560
-Public domain (Wikimedia Commons / Royal Museums of Fine Arts of Belgium)
+og-cover.jpg = rubens-fall-of-icarus-sketch.jpg
+Peter Paul Rubens, The Fall of Icarus (oil sketch for Torre de la Parada), c.1636
+Public domain (Wikimedia Commons)
+
+Also on file (not cover):
+- gowy-fall-of-icarus.jpg / gowy-fall-of-icarus-fxd.jpg — Jacob Peter Gowy after Rubens, Prado
+- bruegel-landscape-with-the-fall-of-icarus.jpg — Bruegel (attr.), legs-in-water version (parked)

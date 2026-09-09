@@ -64,7 +64,7 @@ PILOBOL_CHROME = SiteChrome(
         "assets/background-manager.js",
         "assets/organic-image.js",
         "assets/cinematic-gallery.js",
-        "assets/theme-toggle.js",
+        "assets/audio-native-theme.js",
     ),
 )
 

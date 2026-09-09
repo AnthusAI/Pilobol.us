@@ -10,7 +10,7 @@ cover: assets/pilobolus/pilobolus-crystallinus.jpg
 :::
 
 
-There’s a fungus among us. *Pilobolus* grows on bullshit — cow shit, horse
+*Pilobolus* grows on bullshit — cow shit, horse
 shit, whatever a grazing animal leaves on the ground — and it does something
 no mold in your fridge does: it aims. The fungus builds a lens out of its own
 cell wall, tracks the brightest patch of sky, and fires its spore case

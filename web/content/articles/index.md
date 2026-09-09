@@ -3,6 +3,14 @@ title: Spores
 description: Glimpses of our moldy future.
 ---
 
+### [The Wings Were Made of AI](he-said-he-could-see-it.html)
+
+[![A winged figure plunges from a stormy sky in a 17th-century oil sketch](../assets/he-said-he-could-see-it/og-cover.jpg)](he-said-he-could-see-it.html)
+
+A long essay said advanced AI was almost here. The world treated that clear picture like a product — until the picture failed.
+
+*Wednesday, September 9, 2026*
+
 ### [Society Has a Strangler Fig Creeping Around It](society-has-a-strangler-fig-creeping-around-it.html)
 
 [![A strangler fig growing around the trunk of a palm tree](../assets/society-has-a-strangler-fig-creeping-around-it/strangler-fig-palm-cover.jpg)](society-has-a-strangler-fig-creeping-around-it.html)

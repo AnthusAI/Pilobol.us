@@ -2,7 +2,7 @@
 
 Creates one Audio Native project per article slug (ElevenLabs requires a
 project per URL/content bundle). Reuses persisted project_id values and
-updates content only when the Markdown source hash changes.
+updates content only when the spoken HTML upload hash changes.
 
 Registry: ``web/elevenlabs-audio-native-projects.json`` (committed).
 """
@@ -24,6 +24,10 @@ VOICE_ID = "EkK5I93UQWFDigLMpZcX"
 AUDIO_NATIVE_PLAYER_AUTHOR = "Pilobol.us"
 SITE_ORIGIN = "https://pilobol.us"
 REGISTRY_NAME = "elevenlabs-audio-native-projects.json"
+
+# Markus article chrome present in convert_fragment HTML but omitted from TTS.
+_ARTICLE_LEDE_RE = re.compile(r'<p class="markus-lede">.*?</p>', re.S)
+_ARTICLE_BYLINE_RE = re.compile(r'<p class="markus-byline">.*?</p>', re.S)
 
 
 def _is_truthy(value: str | None) -> bool:
@@ -71,9 +75,16 @@ def save_registry(pod_root: Path, data: dict[str, Any]) -> None:
     )
 
 
-def content_hash(markdown_path: Path) -> str:
-    raw = markdown_path.read_text(encoding="utf-8")
-    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+def upload_content_hash(html_bytes: bytes) -> str:
+    """SHA-256 of the HTML bytes uploaded to ElevenLabs Audio Native."""
+    return hashlib.sha256(html_bytes).hexdigest()
+
+
+def _strip_spoken_chrome(html: str) -> str:
+    """Remove subtitle and byline/date from Markus fragment HTML for TTS only."""
+    stripped = _ARTICLE_LEDE_RE.sub("", html)
+    stripped = _ARTICLE_BYLINE_RE.sub("", stripped)
+    return stripped.strip()
 
 
 def _strip_front_matter(text: str) -> str:
@@ -91,10 +102,15 @@ def article_html_payload(
     front_matter: dict[str, str],
     fragment_html: str,
 ) -> bytes:
-    """Wrap Markus article HTML for Audio Native upload."""
+    """Wrap Markus article HTML for Audio Native upload.
+
+    Spoken track is headline + body only — no standfirst/lede or byline/date.
+    Visible page chrome is unchanged; stripping happens here before upload.
+    """
     title = front_matter.get("title") or markdown_path.stem.replace("-", " ").title()
     body = fragment_html.strip()
     if not body:
+        # Title from front matter; body from markdown after front matter only.
         plain = _strip_front_matter(markdown_path.read_text(encoding="utf-8"))
         plain = re.sub(r"!\[[^\]]*\]\([^)]+\)", "", plain)
         plain = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", plain)
@@ -112,7 +128,7 @@ def article_html_payload(
         )
         inner = f"<h1>{title}</h1>{paragraphs}"
     else:
-        inner = body
+        inner = _strip_spoken_chrome(body)
     document = (
         "<html><body><div>"
         f"{inner}"
@@ -310,7 +326,6 @@ def sync_article(
 ) -> str | None:
     if _audio_disabled(front_matter):
         return None
-    digest = content_hash(markdown_path)
     projects: dict[str, Any] = registry.setdefault("projects", {})
     entry = dict(projects.get(slug) or {})
     title = front_matter.get("title") or slug.replace("-", " ").title()
@@ -319,6 +334,7 @@ def sync_article(
         front_matter=front_matter,
         fragment_html=fragment_html,
     )
+    digest = upload_content_hash(html_bytes)
     name = f"Pilobolus — {title}"
     project_id = entry.get("project_id")
     content_unchanged = bool(project_id and entry.get("content_hash") == digest)
@@ -415,3 +431,35 @@ def sync_all_articles(
 
     save_registry(pod_root, registry)
     return project_ids
+
+
+def _self_check() -> None:
+    """Quick regression checks for spoken-chrome stripping (no pytest in repo)."""
+    sample = (
+        "<h1>Believe the rainbow</h1>"
+        '<p class="markus-lede">TerraUSD was supposed to always equal a dollar.</p>'
+        '<p class="markus-byline">by various bots and Ryan Porter · Sunday, September 6, 2026</p>'
+        "<p>There is an old Skittles commercial still sitting on YouTube.</p>"
+    )
+    stripped = _strip_spoken_chrome(sample)
+    assert "markus-lede" not in stripped
+    assert "markus-byline" not in stripped
+    assert "<h1>Believe the rainbow</h1>" in stripped
+    assert "Skittles commercial" in stripped
+
+    pod = Path(__file__).resolve().parent
+    article = pod / "content" / "articles" / "believe-the-rainbow.md"
+    payload = article_html_payload(
+        article,
+        front_matter={"title": "Believe the rainbow"},
+        fragment_html=sample,
+    )
+    html = payload.decode("utf-8")
+    assert "markus-lede" not in html
+    assert "markus-byline" not in html
+    assert "Believe the rainbow" in html
+
+
+if __name__ == "__main__":
+    _self_check()
+    print("elevenlabs_audio_native: self-check OK")

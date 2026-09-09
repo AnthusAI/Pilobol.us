@@ -1,0 +1,16 @@
+# Amplify Hosting custom HTTP headers (replaces amplify.yml customHeaders).
+# AWS docs: customHttp.yml in repo root overrides console headers.
+# Patterns must not use a leading slash (Amplify hosting quirk).
+customHeaders:
+  - pattern: '**/*.html'
+    headers:
+      - key: Cache-Control
+        value: 'public, max-age=0, s-maxage=60, must-revalidate'
+  - pattern: 'articles/**'
+    headers:
+      - key: Cache-Control
+        value: 'public, max-age=0, s-maxage=60, must-revalidate'
+  - pattern: 'index.html'
+    headers:
+      - key: Cache-Control
+        value: 'public, max-age=0, s-maxage=60, must-revalidate'

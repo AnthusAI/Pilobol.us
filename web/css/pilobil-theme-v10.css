@@ -1004,3 +1004,9 @@
     overscroll-behavior: none;
   }
 }
+
+/* ElevenLabs Audio Native — after article byline */
+#elevenlabs-audionative-widget {
+  margin: 0.75rem 0 1.25rem;
+  max-width: 100%;
+}

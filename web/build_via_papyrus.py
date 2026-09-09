@@ -267,6 +267,66 @@ _POEM_LINES = (
 )
 
 
+
+# Shared ElevenLabs Audio Native project (Anth.us + pilobol.us domains).
+# Public user id is per project, not per domain — Ryan 2026-09-08.
+_ELEVENLABS_AUDIO_NATIVE_PUBLIC_USER_ID = (
+    "36d96927eb49029bd258c8a7138932b6afc7aca35d504f2986ff830522c11bd8"
+)
+
+_AUDIO_NATIVE_WIDGET = (
+    '<div id="elevenlabs-audionative-widget" '
+    'data-height="90" data-width="100%" data-frameborder="no" data-scrolling="no" '
+    f'data-publicuserid="{_ELEVENLABS_AUDIO_NATIVE_PUBLIC_USER_ID}" '
+    'data-playerurl="https://elevenlabs.io/player/index.html">'
+    'Loading the '
+    '<a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener noreferrer">'
+    'Elevenlabs Text to Speech</a> AudioNative Player...'
+    '</div>\n'
+)
+
+_AUDIO_NATIVE_SCRIPT = (
+    '<script src="https://elevenlabs.io/player/audioNativeHelper.js" '
+    'type="text/javascript" async></script>\n'
+)
+
+
+def _inject_audio_native(html: str, *, active_href: str) -> str:
+    """One Audio Native player after title/byline on article pages only."""
+    href = (active_href or "").lstrip("./")
+    if not href.startswith("articles/") or "elevenlabs-audionative-widget" in html:
+        return html
+    # Prefer after byline; fall back after h1 if byline missing.
+    html2, n = re.subn(
+        r'(<p class="markus-byline">.*?</p>)',
+        r"\1\n" + _AUDIO_NATIVE_WIDGET,
+        html,
+        count=1,
+        flags=re.S,
+    )
+    if n != 1:
+        html2, n = re.subn(
+            r'(<header class="markus-header">\s*<h1>.*?</h1>)',
+            r"\1\n" + _AUDIO_NATIVE_WIDGET,
+            html,
+            count=1,
+            flags=re.S,
+        )
+        if n != 1:
+            return html  # non-article chrome; leave alone
+    if "audioNativeHelper.js" not in html2:
+        html2, n = re.subn(
+            r"</body>",
+            _AUDIO_NATIVE_SCRIPT + "</body>",
+            html2,
+            count=1,
+            flags=re.I,
+        )
+        if n != 1:
+            html2 = html2 + _AUDIO_NATIVE_SCRIPT
+    return html2
+
+
 def render_page_with_poem(**kwargs):
     """Left-stack brand poem only — no nav."""
     html = _orig_render_page(**kwargs)
@@ -299,6 +359,9 @@ def render_page_with_poem(**kwargs):
     if n != 1:
         raise RuntimeError(f"masthead poem inject failed (n={n})")
     html2 = _rewrite_youtube_videos(html2)
+    html2 = _inject_audio_native(
+        html2, active_href=kwargs.get("active_href") or ""
+    )
     return _inject_social_meta(html2, **kwargs)
 
 

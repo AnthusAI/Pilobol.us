@@ -1,5 +1,6 @@
 ---
 title: A fungus among us
+author: by various bots and Ryan Porter
 date: 'Monday, September 7, 2026'
 description: A fungus that grows on bullshit and shoots its spores dead straight
   at the sun gave this site its name — and its whole appetite.

@@ -209,49 +209,8 @@ def _api_get(url: str, *, api_key: str) -> dict[str, Any]:
     return parsed
 
 
-def _api_json_post(url: str, *, api_key: str, payload: dict[str, Any]) -> dict[str, Any]:
-    body = json.dumps(payload).encode("utf-8")
-    request = urllib.request.Request(url, data=body, method="POST")
-    request.add_header("Content-Type", "application/json")
-    request.add_header("xi-api-key", api_key)
-    request.add_header("Accept", "application/json")
-    try:
-        with urllib.request.urlopen(request, timeout=120) as response:
-            raw = response.read().decode("utf-8")
-    except urllib.error.HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(
-            f"ElevenLabs API {exc.code} for {url}: {detail.strip() or exc.reason}"
-        ) from exc
-    if not raw.strip():
-        return {}
-    parsed = json.loads(raw)
-    if not isinstance(parsed, dict):
-        raise RuntimeError(f"Unexpected ElevenLabs response for {url}: {raw!r}")
-    return parsed
-
-
 def get_project_settings(*, api_key: str, project_id: str) -> dict[str, Any]:
     return _api_get(f"{API_BASE}/{project_id}/settings", api_key=api_key)
-
-
-def update_content_from_url(
-    *,
-    api_key: str,
-    page_url: str,
-    title: str,
-    author: str = AUDIO_NATIVE_PLAYER_AUTHOR,
-) -> None:
-    """Re-sync an existing project from a live page URL (updates player author/title)."""
-    _api_json_post(
-        f"{API_BASE}/content",
-        api_key=api_key,
-        payload={"url": page_url, "author": author, "title": title},
-    )
-
-
-def article_page_url(slug: str) -> str:
-    return f"{SITE_ORIGIN}/articles/{slug}.html"
 
 
 def player_author_from_settings(settings: dict[str, Any]) -> str | None:
@@ -263,20 +222,29 @@ def player_author_from_settings(settings: dict[str, Any]) -> str | None:
     return None
 
 
-def sync_player_author(
+def remote_player_author(*, api_key: str, project_id: str) -> str | None:
+    try:
+        settings = get_project_settings(api_key=api_key, project_id=project_id)
+    except RuntimeError as exc:
+        print(f"  WARNING: could not read player settings for {project_id}: {exc}", file=sys.stderr)
+        return None
+    return player_author_from_settings(settings)
+
+
+def player_author_is_correct(
     *,
     api_key: str,
-    slug: str,
-    title: str,
     project_id: str,
-) -> None:
-    print(f"  ElevenLabs: sync player author {slug} ({project_id}) → {AUDIO_NATIVE_PLAYER_AUTHOR}")
-    update_content_from_url(
-        api_key=api_key,
-        page_url=article_page_url(slug),
-        title=title,
-        author=AUDIO_NATIVE_PLAYER_AUTHOR,
-    )
+    entry: dict[str, Any],
+) -> bool:
+    if entry.get("player_author") != AUDIO_NATIVE_PLAYER_AUTHOR:
+        return False
+    remote_author = remote_player_author(api_key=api_key, project_id=project_id)
+    if remote_author is None:
+        # Registry says OK but we could not verify remotely — recreate to be safe
+        # when the registry predates player_author tracking.
+        return entry.get("player_author_verified") is True
+    return remote_author == AUDIO_NATIVE_PLAYER_AUTHOR
 
 
 def create_project(
@@ -351,46 +319,38 @@ def sync_article(
         front_matter=front_matter,
         fragment_html=fragment_html,
     )
+    name = f"Pilobolus — {title}"
     project_id = entry.get("project_id")
     content_unchanged = bool(project_id and entry.get("content_hash") == digest)
-    player_author_ok = entry.get("player_author") == AUDIO_NATIVE_PLAYER_AUTHOR
-
-    if content_unchanged and player_author_ok:
-        try:
-            settings = get_project_settings(api_key=api_key, project_id=str(project_id))
-            remote_author = player_author_from_settings(settings)
-            if remote_author == AUDIO_NATIVE_PLAYER_AUTHOR:
-                return str(project_id)
-        except RuntimeError as exc:
-            print(f"  WARNING: could not verify player author for {slug}: {exc}", file=sys.stderr)
-            return str(project_id)
-
-    if content_unchanged and project_id:
-        sync_player_author(
+    author_correct = bool(
+        project_id
+        and player_author_is_correct(
             api_key=api_key,
-            slug=slug,
-            title=title,
             project_id=str(project_id),
+            entry=entry,
         )
-        projects[slug] = {
-            **entry,
-            "project_id": project_id,
-            "content_hash": digest,
-            "title": title,
-            "player_author": AUDIO_NATIVE_PLAYER_AUTHOR,
-        }
+    )
+
+    if content_unchanged and author_correct:
         return str(project_id)
 
-    name = f"Pilobolus — {title}"
-    if project_id:
+    if project_id and not author_correct:
+        old_id = str(project_id)
+        remote_author = remote_player_author(api_key=api_key, project_id=old_id)
+        print(
+            f"  ElevenLabs: recreate {slug} ({old_id}) — "
+            f"player author was {remote_author!r}; author is create-only"
+        )
+        project_id = create_project(
+            api_key=api_key,
+            name=name,
+            title=title,
+            author=AUDIO_NATIVE_PLAYER_AUTHOR,
+            html_bytes=html_bytes,
+        )
+    elif project_id and not content_unchanged:
         print(f"  ElevenLabs: update {slug} ({project_id})")
         update_project(api_key=api_key, project_id=str(project_id), html_bytes=html_bytes)
-        sync_player_author(
-            api_key=api_key,
-            slug=slug,
-            title=title,
-            project_id=str(project_id),
-        )
     else:
         print(f"  ElevenLabs: create {slug}")
         project_id = create_project(
@@ -406,6 +366,7 @@ def sync_article(
         "content_hash": digest,
         "title": title,
         "player_author": AUDIO_NATIVE_PLAYER_AUTHOR,
+        "player_author_verified": True,
     }
     return str(project_id)
 

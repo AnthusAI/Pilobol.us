@@ -312,48 +312,79 @@ _AUDIO_NATIVE_SCRIPT = (
     'type="text/javascript" async></script>\n'
 )
 
+_ARTICLE_HEADER_RE = re.compile(
+    r'(<header class="markus-header">)(.*?)(</header>)',
+    re.S,
+)
+_ARTICLE_H1_RE = re.compile(r'<h1>.*?</h1>', re.S)
+_ARTICLE_LEDE_RE = re.compile(r'<p class="markus-lede">.*?</p>', re.S)
+_ARTICLE_BYLINE_RE = re.compile(r'<p class="markus-byline">.*?</p>', re.S)
+_AUDIO_NATIVE_WIDGET_RE = re.compile(
+    r'<div id="elevenlabs-audionative-widget"[^>]*>[\s\S]*?</div>\s*',
+    re.I,
+)
 
-def _inject_audio_native(html: str, *, active_href: str) -> str:
-    """One Audio Native player after title/byline on article pages only."""
+
+def _article_subheadline(fm: dict[str, str]) -> str | None:
+    text = (fm.get("standfirst") or fm.get("description") or "").strip()
+    return text or None
+
+
+def _lede_paragraph(text: str) -> str:
+    return f'<p class="markus-lede">{escape(text)}</p>'
+
+
+def _inject_audio_native_script(html: str) -> str:
+    if "audioNativeHelper.js" in html:
+        return html
+    html2, n = re.subn(
+        r"</body>",
+        _AUDIO_NATIVE_SCRIPT + "</body>",
+        html,
+        count=1,
+        flags=re.I,
+    )
+    if n != 1:
+        html2 = html2 + _AUDIO_NATIVE_SCRIPT
+    return html2
+
+
+def _fix_article_header(html: str, *, active_href: str) -> str:
+    """Article chrome: h1 → lede → byline → Audio Native → body."""
     href = (active_href or "").lstrip("./")
     if not href.startswith("articles/") or href.endswith("/index.html"):
-        return html
-    if "elevenlabs-audionative-widget" in html:
         return html
     slug = Path(href).stem
     if slug == "index":
         return html
-    project_id = _AUDIO_NATIVE_PROJECT_IDS.get(slug)
-    widget = _audio_native_widget(project_id)
-    # Prefer after byline; fall back after h1 if byline missing.
-    html2, n = re.subn(
-        r'(<p class="markus-byline">.*?</p>)',
-        r"\1\n" + widget,
-        html,
-        count=1,
-        flags=re.S,
-    )
-    if n != 1:
-        html2, n = re.subn(
-            r'(<header class="markus-header">\s*<h1>.*?</h1>)',
-            r"\1\n" + widget,
-            html,
-            count=1,
-            flags=re.S,
-        )
-        if n != 1:
-            return html  # non-article chrome; leave alone
-    if "audioNativeHelper.js" not in html2:
-        html2, n = re.subn(
-            r"</body>",
-            _AUDIO_NATIVE_SCRIPT + "</body>",
-            html2,
-            count=1,
-            flags=re.I,
-        )
-        if n != 1:
-            html2 = html2 + _AUDIO_NATIVE_SCRIPT
-    return html2
+
+    header_m = _ARTICLE_HEADER_RE.search(html)
+    if not header_m:
+        return html
+
+    inner = _AUDIO_NATIVE_WIDGET_RE.sub("", header_m.group(2))
+    h1_m = _ARTICLE_H1_RE.search(inner)
+    byline_m = _ARTICLE_BYLINE_RE.search(inner)
+    lede_m = _ARTICLE_LEDE_RE.search(inner)
+
+    fm_path = _source_markdown_for_href(active_href)
+    fm = _parse_front_matter(fm_path) if fm_path else {}
+    subhead = _article_subheadline(fm)
+
+    parts: list[str] = []
+    if h1_m:
+        parts.append(h1_m.group(0))
+    if subhead:
+        parts.append(_lede_paragraph(subhead))
+    elif lede_m:
+        parts.append(lede_m.group(0))
+    if byline_m:
+        parts.append(byline_m.group(0))
+    parts.append(_audio_native_widget(_AUDIO_NATIVE_PROJECT_IDS.get(slug)))
+
+    new_header = f"{header_m.group(1)}{''.join(parts)}{header_m.group(3)}"
+    html2 = html[: header_m.start()] + new_header + html[header_m.end() :]
+    return _inject_audio_native_script(html2)
 
 
 def render_page_with_poem(**kwargs):
@@ -388,7 +419,7 @@ def render_page_with_poem(**kwargs):
     if n != 1:
         raise RuntimeError(f"masthead poem inject failed (n={n})")
     html2 = _rewrite_youtube_videos(html2)
-    html2 = _inject_audio_native(
+    html2 = _fix_article_header(
         html2, active_href=kwargs.get("active_href") or ""
     )
     return _inject_social_meta(html2, **kwargs)

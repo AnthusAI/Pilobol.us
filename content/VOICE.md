@@ -83,6 +83,37 @@ belief — someone trusted a convincing copy — but **first-person “I/you on 
 inside” is only one shape**, not the only one (Ryan 2026-09-06). Pick a shape
 that fits *this* example; rotate across the feed so posts don’t rhyme.
 
+### Real people, real scenes — HARD (Ryan 2026-09-09)
+
+**Every story is told through documented people and documented events.** Named
+person, named place, named year, linkable source. The house tells the tale by
+telling real stories — not by illustrating an idea with somebody who does not
+exist.
+
+Composite protagonists are out. So are invented users, invented messages,
+invented demands, invented nights. If a piece opens on “someone who made a
+throwaway account eleven years ago,” it is fiction wearing reportage clothes,
+and it fails here no matter how well the prose reads. The weirdness has to
+belong to the world, not to the writer.
+
+The story shapes below are **camera positions, not permission to invent**.
+Close second person means standing near a real person whose night is on the
+record. It does not mean writing a character.
+
+When the material only supports an abstraction, the piece is not ready. Two
+honest ways out: find the real specimen that carries it, or run the beat as
+**Historical** — a chain of real unmaskings, panics, or arrivals, each one
+named and dated. A documented past scene always beats an invented present one.
+
+Two things that are *not* violations: a real scene reconstructed from reporting
+(what the person typed, what the screen said, per the source) is reporting, and
+statistics stay statistics — the FBI's sextortion counts or a paper's recall
+number can close a piece as scale, but a number never gets promoted into a
+protagonist.
+
+Test before drafting: **name the person the piece is about.** If the answer is
+a description rather than a name, there is no piece yet.
+
 ### Story shapes (pick one)
 
 1. **Inside the user** — close second person (“you”) or first person. They use
@@ -174,10 +205,11 @@ Never announce “the Pilobolus take.”
 
 **Belief → consequence bar (Ryan 2026-09-06):** “It wasn’t real, then belief made it real” is on-topic and also **over-familiar**. Save ordinary feed posts for **significant or unusual** examples. Ordinary keepers stay wiki-only — **or** earn a feed slot as **Historical**: lineage dig, **On this day** past specimen, or a named **mass-hysteria / rumor-panic** scene (AI not required; see above).
 
-Hard rules that apply to every shape: name the thing in plain English early
-(therapy chat, map pin, AI priest app). One example. Street-readable prose.
-No “not A, it’s B.” No theory labels. Don’t clone the Justin spine (care
-works → revoked → sadness) unless the scene is unmistakably different.
+Hard rules that apply to every shape: real named people and documented events
+only — no composites. Name the thing in plain English early (therapy chat, map
+pin, AI priest app). One example. Street-readable prose. No “not A, it’s B.” No
+theory labels. Don’t clone the Justin spine (care works → revoked → sadness)
+unless the scene is unmistakably different.
 
 Classic inside-user beat (still valid when you choose shape 1):
 

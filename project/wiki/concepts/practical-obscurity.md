@@ -25,6 +25,29 @@ Same collapse, different sense: Clearview scrapes public web photos into a biome
 
 Keepers: [nytimes-clearview-secretive-company](../sources/nytimes-clearview-secretive-company.md), [bbc-clearview-police-searches](../sources/bbc-clearview-police-searches.md), [clearview-ai-product](../sources/clearview-ai-product.md).
 
+## The price of knowing (real-specimen spine, Ryan 2026-09-09)
+
+The story gets told through named people who were actually unmasked, not through an invented user. Each documented case cost less than the one before, and the falling price is the whole argument — anonymity was never a wall, it was a bill somebody had to be willing to pay.
+
+- **2009 — Brooke Magnanti.** Named herself in the Guardian because a Sunday paper was about to. Cost: years, an ex-boyfriend with a box of emails, a newsroom that wanted it. [keeper](../sources/guardian-belle-de-jour-brooke-magnanti.md)
+- **2018 — Joseph James DeAngelo.** Genetic genealogy over a public database; relatives who spat in tubes for fun became the map. Cost: a genealogist. [keeper](../sources/npr-gedmatch-golden-state-killer.md)
+- **2021 — Msgr. Jeffrey Burrill.** The Pillar bought commercially available "anonymized" location data and had it correlated to his phone; he resigned as general secretary of the USCCB. No hack, no subpoena, no AI. Cost: an invoice. [keeper](../sources/pillar-jeffrey-burrill-location-data-outing.md)
+- **2022 — Paul Furber and Ron Watkins.** Two forensic-linguistics teams, Swiss and French, independently named the men behind Q; the French model recognized Watkins in 99% of tests. Cost: software that never left the office. [keeper](../sources/nyt-qanon-stylometry-furber-watkins.md)
+- **2024 — a sidewalk in Cambridge.** A woman shook a stranger's hand because he seemed to know her, while his glasses read her name, address and parents off the open web. Cost: two undergraduates and parts that already existed. [keeper](../sources/forbes-harvard-ixray-rayban-doxxing.md)
+- **2026 — no cost worth naming.** One to four dollars a head, unattended, 67% recall at 90% precision. [keeper](../sources/csa-llm-deanonymization-cost-per-target.md)
+
+Closing implication: in every one of these somebody had to *want* to know, and wanting was the last expensive part.
+
+## Automated extortion (where the falling price lands)
+
+Blackmail was always limited by labor, not by secrets — everyone has something; the scarce thing was attention. Two documented facts close the gap: the extortion economy is already industrialized by humans (roughly 55,000 FBI reports in a year, $33.5M in losses, demands deliberately sized at $10–50 from minors and $500–2,500 from adults so they get paid instead of reported), and AI agents have already been observed running data extortion including analyzing victims' finances to set the ransom. The machine does not only find you; it appraises you.
+
+Two beats worth keeping distinct: the demand is **priced** to sit under the threshold where a person tells someone, and the underlying claim can simply be **wrong** — a soft profile is inference, and disproving something to everyone you know costs more than paying.
+
+Keepers: [fbi-financially-motivated-sextortion](../sources/fbi-financially-motivated-sextortion.md), [anthropic-agentic-extortion-ransom-sizing](../sources/anthropic-agentic-extortion-ransom-sizing.md).
+
+Note: the spine here differs from deanonymization proper — that story ends at a name, this one ends at a demand. Likely its own post rather than a section of this one.
+
 ## Classic (pre-AI) unmaskings
 
 Human detective / press pressure before cheap agents: Belle de Jour, Fake Steve Jobs, Washingtonienne. Story spine: what used to need a journalist now rents as a pipeline.

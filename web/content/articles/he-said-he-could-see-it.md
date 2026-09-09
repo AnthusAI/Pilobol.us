@@ -1,22 +1,23 @@
 ---
 title: The Wings Were Made of AI
+author: by various bots and Ryan Porter
 date: 'Wednesday, September 9, 2026'
 description: A long essay said advanced AI was almost here. The world treated that clear picture like a product — until the picture failed.
 standfirst: He wrote that he could see how advanced AI would be built. People shared it, praised it, and built a fortune on it. Then the picture failed.
 cover: assets/he-said-he-could-see-it/og-cover.jpg
 ---
 
-:::figure{src="../assets/he-said-he-could-see-it/og-cover.jpg" alt="A winged figure plunges from a stormy sky in a 17th-century oil sketch" caption="Wings, sky, a long fall." credit="Peter Paul Rubens, oil sketch, c. 1636. Public domain, Wikimedia Commons."}
+:::figure{id="icarus-og-cover" src="../assets/he-said-he-could-see-it/og-cover.jpg" alt="A winged figure plunges from a stormy sky in a 17th-century oil sketch" caption="Wings, sky, a long fall." credit="Peter Paul Rubens, oil sketch, c. 1636. Public domain, Wikimedia Commons."}
 :::
 
 In June 2024 a young man who had just left OpenAI put a document on the open web and said, in plain English, that he could see the future.
 
 The site is still there: [situational-awareness.ai](https://situational-awareness.ai/). A hundred and sixty-five pages. Charts. Timelines. A voice that does not hedge. Advanced AI that matches or beats every human skill by about 2027, then an intelligence explosion. Trillion-dollar computing clusters. A government project. “You can see the future first in San Francisco,” Leopold Aschenbrenner wrote. “Let me tell you what we see.” Only a few hundred people — mostly in that city and in the labs — had “situational awareness,” he said, and peculiar forces of fate had put him among them. “I can see it,” he wrote. “I can see how AGI will be built.”
 
+That was the wow. Not a blog post. A map. It looked like the future had already been priced and printed.
+
 :::figure{src="../assets/he-said-he-could-see-it/situational-awareness-essay-home.png" alt="Homepage of situational-awareness.ai showing the Situational Awareness essay title and opening" caption="The prophecy, still online: Situational Awareness — The Decade Ahead. Aschenbrenner’s own site, June 2024." credit="Screenshot of situational-awareness.ai"}
 :::
-
-That was the wow. Not a blog post. A map. It looked like the future had already been priced and printed.
 
 Within days, people who mattered inside the AI world began treating the map as real. Scott Aaronson, a computer scientist who had overlapped with Aschenbrenner at OpenAI, called it one of the most extraordinary documents he had ever read. The world still had not "priced in" what was about to hit, he wrote — and anyone in national security who read it carefully would panic. On a long podcast the week of launch, Aschenbrenner talked for hours in the same register: he could see the path, feel it. If advanced AI were priced into the market tomorrow, he said, you could maybe make a hundred times your money. Michael Dell shared the essay. Ivanka Trump shared it. Thousands of others did too. Business writers framed his exit from OpenAI as courage — a young researcher warning that the labs were wide open to theft — so the document read less like a hot take and more like a whistle blown from inside the machine.
 

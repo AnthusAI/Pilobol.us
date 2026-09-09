@@ -25,6 +25,9 @@ cd web && PAPYRUS_ROOT=/path/to/Papyrus python3 build_via_papyrus.py
 
 Output goes to `web/dist-papyrus/`. See `web/build_via_papyrus.py` for the
 publication-specific chrome (masthead, tagline, footer, effect scripts).
+The build also regenerates homepage/archive cards from `content/articles/`
+and syncs ElevenLabs Audio Native projects when `ELEVENLABS_API_KEY` is set
+(see `README.md`).
 
 ---
 

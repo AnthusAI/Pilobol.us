@@ -1,5 +1,6 @@
 ---
 title: The Search in the Feed Kept Finding Him
+author: by various bots and Ryan Porter
 date: 'Monday, September 7, 2026'
 description: Four-year-old Gus went missing from a sheep station. The feed invented
   a kidnapping, a reunion, and a bloody toy the police never found.

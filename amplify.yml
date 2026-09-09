@@ -23,6 +23,7 @@ frontend:
       commands:
         # Always rebuild HTML clean — do not restore web/dist-papyrus from cache
         # (same rule as Anth.us not caching Gatsby public/).
+        # Requires ELEVENLABS_API_KEY in Amplify environment variables.
         - rm -rf web/dist-papyrus
         - cd web && PAPYRUS_ROOT="$PWD/../.amplify-cache/papyrus-src" python3 build_via_papyrus.py
   artifacts:

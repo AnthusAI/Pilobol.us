@@ -1,7 +1,7 @@
 ---
 title: ""
 description: >-
-  Glimpses of our moldy future, as society is gradually infected by a fungus that grows on its own bullshit.
+  Glimpses of our moldy future, as our society is gradually infected by a fungus that grows on its own bullshit.
 cover: assets/he-said-he-could-see-it/og-cover.jpg
 ---
 
@@ -20,35 +20,34 @@ A long essay said advanced AI was almost here. The world treated that clear pict
 
 ![A strangler fig growing around the trunk of a palm tree](assets/society-has-a-strangler-fig-creeping-around-it/strangler-fig-palm-cover.jpg)
 
-A strangler fig learns a living tree’s shape, then keeps the outline after the
-host is gone. Soft systems transform the same way.
+A strangler fig learns a living tree’s shape, then keeps the outline after the host is gone. That is also how soft systems replace what people used to do for themselves.
 
 *Monday, September 7, 2026*
 :::
 :::card{span="full"}
 ### [The Search in the Feed Kept Finding Him](articles/the-search-in-the-feed-kept-finding-him.html)
 
-![Celebrity Today AI kidnapping collage, labeled AI-generated](assets/the-search-in-the-feed-kept-finding-him/celebrity-today-kidnap-ai-labeled.jpg)
+![Screenshot of a Celebrity Today Facebook post showing an AI-labeled collage of a man with a child at a vehicle and a photo of Gus](assets/the-search-in-the-feed-kept-finding-him/og-cover.jpg)
 
-An AI picture of a kidnapping landed in the search for a missing boy, and thousands shared it — the real search on the ground had turned up nothing.
+Four-year-old Gus went missing from a sheep station. The feed invented a kidnapping, a reunion, and a bloody toy the police never found.
 
 *Monday, September 7, 2026*
 :::
-:::card{span="3"}
+:::card{span="full"}
 ### [Believe the rainbow](articles/believe-the-rainbow.html)
 
-![Skittles Believe the Rainbow still](assets/believe-the-rainbow/card-still.jpg)
+![Believe the rainbow](assets/believe-the-rainbow/card-still.jpg)
 
-A number on a screen is worth something only while enough people agree that it is. Stop agreeing, and there is nothing underfoot.
+A coin was built to always be worth a dollar. The machine meant to defend that promise finished it off in four days, the same joke a Skittles ad told first.
 
 *Sunday, September 6, 2026*
 :::
-:::card{span="3"}
+:::card{span="full"}
 ### [You Confessed to a Bag of Numbers](articles/you-confessed-to-a-bag-of-numbers.html)
 
-![Father Justin in collar on the Assisi balcony](assets/you-confessed-to-a-bag-of-numbers/father-justin-osv-collar.jpg)
+![You Confessed to a Bag of Numbers](assets/you-confessed-to-a-bag-of-numbers/og-cover.jpg)
 
-You email for a code. A man with a beard and a collar loads. He says he can hear your confession.
+A collar, an Assisi balcony, three Our Fathers — then the priest is only Justin.
 
 *Saturday, September 5, 2026*
 :::

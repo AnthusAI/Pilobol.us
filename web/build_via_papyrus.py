@@ -43,6 +43,14 @@ from papyrus_content.markus_renderer import shell as markus_shell  # noqa: E402
 from papyrus_content.markus_renderer.build import build_markus_site  # noqa: E402
 from papyrus_content.markus_renderer.shell import SiteChrome  # noqa: E402
 
+from elevenlabs_audio_native import sync_all_articles  # noqa: E402
+from pilobol_feed import (  # noqa: E402
+    DEFAULT_AUTHOR,
+    discover_articles,
+    parse_front_matter,
+    write_generated_feed_pages,
+)
+
 # No site nav for now (YAGNI). Archive/drill-down later when there's a pile.
 markus_build._build_nav_items = lambda articles: []
 
@@ -273,17 +281,28 @@ _POEM_LINES = (
 _ELEVENLABS_AUDIO_NATIVE_PUBLIC_USER_ID = (
     "36d96927eb49029bd258c8a7138932b6afc7aca35d504f2986ff830522c11bd8"
 )
+_ELEVENLABS_PILOBOLUS_VOICE_ID = "EkK5I93UQWFDigLMpZcX"
+_PILOBOLUS_DEFAULT_AUTHOR = "by various bots and Ryan Porter"
 
-_AUDIO_NATIVE_WIDGET = (
-    '<div id="elevenlabs-audionative-widget" '
-    'data-height="90" data-width="100%" data-frameborder="no" data-scrolling="no" '
-    f'data-publicuserid="{_ELEVENLABS_AUDIO_NATIVE_PUBLIC_USER_ID}" '
-    'data-playerurl="https://elevenlabs.io/player/index.html">'
-    'Loading the '
-    '<a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener noreferrer">'
-    'Elevenlabs Text to Speech</a> AudioNative Player...'
-    '</div>\n'
-)
+# slug -> project_id, filled during main() before HTML render.
+_AUDIO_NATIVE_PROJECT_IDS: dict[str, str] = {}
+
+
+def _audio_native_widget(project_id: str | None = None) -> str:
+    project_attr = ""
+    if project_id:
+        project_attr = f' data-projectid="{escape(project_id, quote=True)}"'
+    return (
+        '<div id="elevenlabs-audionative-widget" '
+        'data-height="90" data-width="100%" data-frameborder="no" data-scrolling="no" '
+        f'data-publicuserid="{_ELEVENLABS_AUDIO_NATIVE_PUBLIC_USER_ID}"'
+        f'{project_attr} '
+        'data-playerurl="https://elevenlabs.io/player/index.html">'
+        'Loading the '
+        '<a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener noreferrer">'
+        'Elevenlabs Text to Speech</a> AudioNative Player...'
+        '</div>\n'
+    )
 
 _AUDIO_NATIVE_SCRIPT = (
     '<script src="https://elevenlabs.io/player/audioNativeHelper.js" '
@@ -294,12 +313,19 @@ _AUDIO_NATIVE_SCRIPT = (
 def _inject_audio_native(html: str, *, active_href: str) -> str:
     """One Audio Native player after title/byline on article pages only."""
     href = (active_href or "").lstrip("./")
-    if not href.startswith("articles/") or "elevenlabs-audionative-widget" in html:
+    if not href.startswith("articles/") or href.endswith("/index.html"):
         return html
+    if "elevenlabs-audionative-widget" in html:
+        return html
+    slug = Path(href).stem
+    if slug == "index":
+        return html
+    project_id = _AUDIO_NATIVE_PROJECT_IDS.get(slug)
+    widget = _audio_native_widget(project_id)
     # Prefer after byline; fall back after h1 if byline missing.
     html2, n = re.subn(
         r'(<p class="markus-byline">.*?</p>)',
-        r"\1\n" + _AUDIO_NATIVE_WIDGET,
+        r"\1\n" + widget,
         html,
         count=1,
         flags=re.S,
@@ -307,7 +333,7 @@ def _inject_audio_native(html: str, *, active_href: str) -> str:
     if n != 1:
         html2, n = re.subn(
             r'(<header class="markus-header">\s*<h1>.*?</h1>)',
-            r"\1\n" + _AUDIO_NATIVE_WIDGET,
+            r"\1\n" + widget,
             html,
             count=1,
             flags=re.S,
@@ -398,7 +424,54 @@ def _build_standalone_page(result, source: Path, href: str) -> None:
     result.pages.append(page_path)
 
 
+def _ensure_author_front_matter(source: Path) -> None:
+    """Default byline for reader posts when author/authors is omitted."""
+    text = source.read_text(encoding="utf-8")
+    fm, _ = parse_front_matter(text)
+    if fm.get("author") or fm.get("authors"):
+        return
+    if not text.startswith("---"):
+        return
+    end = text.find("\n---", 3)
+    if end < 0:
+        return
+    block = text[3:end]
+    lines = block.splitlines()
+    insert_at = len(lines)
+    for idx, line in enumerate(lines):
+        if line.startswith("date:"):
+            insert_at = idx + 1
+            break
+    lines.insert(insert_at, f"author: {DEFAULT_AUTHOR}")
+    updated = "---\n" + "\n".join(lines) + "\n---" + text[end + 4 :]
+    source.write_text(updated, encoding="utf-8")
+
+
+def _prepare_articles(content_dir: Path) -> list[tuple[str, Path, dict[str, str], str]]:
+    articles_dir = content_dir / "articles"
+    prepared: list[tuple[str, Path, dict[str, str], str]] = []
+    for slug, path, fm in discover_articles(articles_dir):
+        _ensure_author_front_matter(path)
+        fm, _ = parse_front_matter(path.read_text(encoding="utf-8"))
+        fragment = markus_build.convert_fragment(path, theme=None)
+        prepared.append((slug, path, fm, fragment))
+    return prepared
+
+
 def main() -> int:
+    content_dir = POD_ROOT / "content"
+    global _AUDIO_NATIVE_PROJECT_IDS
+
+    print("Generating homepage and archive feed from articles…")
+    write_generated_feed_pages(content_dir)
+
+    print("Preparing ElevenLabs Audio Native projects…")
+    article_payloads = _prepare_articles(content_dir)
+    _AUDIO_NATIVE_PROJECT_IDS = sync_all_articles(
+        pod_root=POD_ROOT,
+        articles=article_payloads,
+    )
+
     result = build_markus_site(
         content_dir=POD_ROOT / "content",
         out_dir=POD_ROOT / "dist-papyrus",

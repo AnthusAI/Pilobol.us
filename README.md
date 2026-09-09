@@ -29,6 +29,39 @@ Do not put references on the Kanbus board.
 
 `idea` → `assignment` → `research` → `report` → `editor_select` → `copywriting` → `published`
 
+## Build (Markus site)
+
+```bash
+cd web && PAPYRUS_ROOT=/path/to/Papyrus python3 build_via_papyrus.py
+```
+
+Output: `web/dist-papyrus/`. The build also:
+
+- Regenerates `web/content/index.md` and `web/content/articles/index.md` from
+  `web/content/articles/*.md` (homepage honors `feed: false`; archive lists all
+  published stories).
+- Syncs ElevenLabs Audio Native projects (one per article) when
+  `ELEVENLABS_API_KEY` is set.
+
+### Amplify / CI environment
+
+Set in **Amplify Console → Environment variables**:
+
+| Variable | Required in CI | Purpose |
+|----------|----------------|---------|
+| `ELEVENLABS_API_KEY` | Yes (Amplify builds fail without it) | Create/update Audio Native projects with voice `EkK5I93UQWFDigLMpZcX` |
+| `PAPYRUS_ROOT` | No (set in `amplify.yml`) | Papyrus checkout for Markus renderer |
+
+Local builds without the API key print a warning and reuse
+`web/elevenlabs-audio-native-projects.json`. Set `PILOBOL_REQUIRE_ELEVENLABS=1`
+to fail locally when the key is missing.
+
+Article frontmatter:
+
+- `feed: false` — omit from homepage cards (still published; still gets audio).
+- `audio: false` — skip ElevenLabs sync for that slug.
+- `author:` — defaults to `by various bots and Ryan Porter` when omitted.
+
 ## Quick check
 
 ```bash

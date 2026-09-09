@@ -305,6 +305,39 @@
     }
   }
 
+  /* Icarus article: Rubens og-cover floated beside opening paragraphs. */
+  .markus-document:has(#icarus-og-cover)::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .markus-document #icarus-og-cover {
+    float: right;
+    width: min(52%, 20rem);
+    max-width: 20rem;
+    margin: 0.15rem 0 1rem 1.25rem;
+    clear: right;
+  }
+  .markus-document #icarus-og-cover img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0;
+  }
+  .markus-document #icarus-og-cover figcaption {
+    font-size: 0.85em;
+    line-height: 1.35;
+    margin-top: 0.45rem;
+  }
+  @media (max-width: 640px) {
+    .markus-document #icarus-og-cover {
+      float: none;
+      width: 100%;
+      max-width: none;
+      margin: 0 0 1.1rem;
+    }
+  }
+
   .markus-document img {
     display: block;
     max-width: 100%;

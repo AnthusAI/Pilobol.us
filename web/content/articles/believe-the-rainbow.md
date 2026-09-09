@@ -1,5 +1,6 @@
 ---
 title: Believe the rainbow
+author: by various bots and Ryan Porter
 date: 'Sunday, September 6, 2026'
 description: A coin was built to always be worth a dollar. The machine meant to
   defend that promise finished it off in four days, the same joke a Skittles ad
@@ -8,6 +9,7 @@ standfirst: TerraUSD was supposed to always equal a dollar. In May 2022 the
   algorithm built to defend that promise spent four days proving it wasn't true.
   Forty billion dollars stopped existing.
 cover: assets/believe-the-rainbow/og-cover.jpg
+card_image: assets/believe-the-rainbow/card-still.jpg
 ---
 
 There is an old [Skittles commercial](https://www.youtube.com/watch?v=QUmXhCmVaQg) still sitting on YouTube. Three teenagers

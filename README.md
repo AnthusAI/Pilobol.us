@@ -64,6 +64,16 @@ Article frontmatter:
 
 ## Quick check
 
+Kanbus is pinned by `kanbus-version`. On a machine without the
+`/workspace/kbs-172` checkout, install the pinned release from PyPI — it ships
+the `kanbus` entry point, so alias it if you want the `kbs` name the docs use:
+
+```bash
+pip install "kanbus==$(cat kanbus-version)"
+ln -sf "$(command -v kanbus)" /usr/local/bin/kbs
+apt-get install -y mosquitto   # otherwise every kbs command prints a realtime warning
+```
+
 ```bash
 cd /workspace/pilobil.us
 PATH=/workspace/kbs-172/bin:$PATH

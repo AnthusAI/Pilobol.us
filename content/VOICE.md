@@ -83,6 +83,37 @@ belief — someone trusted a convincing copy — but **first-person “I/you on 
 inside” is only one shape**, not the only one (Ryan 2026-09-06). Pick a shape
 that fits *this* example; rotate across the feed so posts don’t rhyme.
 
+### Real people, real scenes — HARD (Ryan 2026-09-09)
+
+**Every story is told through documented people and documented events.** Named
+person, named place, named year, linkable source. The house tells the tale by
+telling real stories — not by illustrating an idea with somebody who does not
+exist.
+
+Composite protagonists are out. So are invented users, invented messages,
+invented demands, invented nights. If a piece opens on “someone who made a
+throwaway account eleven years ago,” it is fiction wearing reportage clothes,
+and it fails here no matter how well the prose reads. The weirdness has to
+belong to the world, not to the writer.
+
+The story shapes below are **camera positions, not permission to invent**.
+Close second person means standing near a real person whose night is on the
+record. It does not mean writing a character.
+
+When the material only supports an abstraction, the piece is not ready. Two
+honest ways out: find the real specimen that carries it, or run the beat as
+**Historical** — a chain of real unmaskings, panics, or arrivals, each one
+named and dated. A documented past scene always beats an invented present one.
+
+Two things that are *not* violations: a real scene reconstructed from reporting
+(what the person typed, what the screen said, per the source) is reporting, and
+statistics stay statistics — the FBI's sextortion counts or a paper's recall
+number can close a piece as scale, but a number never gets promoted into a
+protagonist.
+
+Test before drafting: **name the person the piece is about.** If the answer is
+a description rather than a name, there is no piece yet.
+
 ### Story shapes (pick one)
 
 1. **Inside the user** — close second person (“you”) or first person. They use
@@ -107,6 +138,26 @@ that fits *this* example; rotate across the feed so posts don’t rhyme.
 6. **Morning after** — start *after* the copy worked. Kitchen, parish, dead
    app icon, “how long since my last confession.” Use sparingly; don’t open
    every faith/care piece here (Ryan: don’t lead Justin with theology).
+
+7. **Diptych** — exactly two real scenes, far apart in time, held in the same
+   posture so the second is read through the first. A rhyme, not a survey. Use
+   when the subject is a change rather than a moment: the gap between the two
+   panels carries what a timeline would otherwise have to narrate. Hard limits:
+   two, never three; both fully scened; neither compressed into a summary line.
+   The later panel gets the weight, the headline and the ending.
+
+8. **The one who went first** — a real person who lived through the old version
+   of something and is on the record about it, while the new version arrives
+   cheap. The whole arc sits inside one documented life, so nothing has to be
+   listed. Model: Brooke Magnanti, unmasked in 2009 by six years of newsroom
+   effort, against agents that now do the same work for a dollar a head.
+
+9. **The chair on the other side** — close third on whoever is *doing* the
+   thing, rather than whoever it lands on. Distinct from Witness (3), where the
+   weird arrives at someone; here the camera sits with the people causing it.
+   Works because nobody in these scenes is a villain — they are curious, it
+   takes an afternoon, and the ordinariness is the tilt. Model: the students
+   who wired face search into sunglasses to show it could be done.
 
 ### Historical (post type) — Ryan 2026-09-06
 
@@ -174,10 +225,11 @@ Never announce “the Pilobolus take.”
 
 **Belief → consequence bar (Ryan 2026-09-06):** “It wasn’t real, then belief made it real” is on-topic and also **over-familiar**. Save ordinary feed posts for **significant or unusual** examples. Ordinary keepers stay wiki-only — **or** earn a feed slot as **Historical**: lineage dig, **On this day** past specimen, or a named **mass-hysteria / rumor-panic** scene (AI not required; see above).
 
-Hard rules that apply to every shape: name the thing in plain English early
-(therapy chat, map pin, AI priest app). One example. Street-readable prose.
-No “not A, it’s B.” No theory labels. Don’t clone the Justin spine (care
-works → revoked → sadness) unless the scene is unmistakably different.
+Hard rules that apply to every shape: real named people and documented events
+only — no composites. Name the thing in plain English early (therapy chat, map
+pin, AI priest app). One example. Street-readable prose. No “not A, it’s B.” No
+theory labels. Don’t clone the Justin spine (care works → revoked → sadness)
+unless the scene is unmistakably different.
 
 Classic inside-user beat (still valid when you choose shape 1):
 

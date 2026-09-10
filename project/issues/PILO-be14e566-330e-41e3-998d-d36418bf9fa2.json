@@ -1,0 +1,21 @@
+{
+  "id": "PILO-be14e566-330e-41e3-998d-d36418bf9fa2",
+  "title": "A Hook Turn Is a Melbourne Thing",
+  "description": "",
+  "type": "story",
+  "status": "copywriting",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-09-09T10:51:59.261860Z",
+  "updated_at": "2026-09-09T10:53:11.000151Z",
+  "closed_at": null,
+  "custom": {
+    "source": "shared",
+    "project_label": "PILO"
+  }
+}

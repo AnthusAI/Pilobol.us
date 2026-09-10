@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "1995580c-768f-4f0b-a8fc-b6849ef865ac",
+  "issue_id": "PILO-be14e566-330e-41e3-998d-d36418bf9fa2",
+  "event_type": "state_transition",
+  "occurred_at": "2026-09-09T10:53:10.559Z",
+  "actor_id": "unknown",
+  "payload": {
+    "from_status": "report",
+    "to_status": "editor_select"
+  }
+}

@@ -2,10 +2,17 @@
 title: ""
 description: >-
   Glimpses of our moldy future, as our society is gradually infected by a fungus that grows on its own bullshit.
-cover: assets/he-said-he-could-see-it/og-cover.jpg
+cover: assets/og-default.jpg
 ---
 
 :::card-grid{columns="6"}
+:::card{span="full"}
+### [If this page vanishes, try ZZZ](articles/if-this-page-vanishes-try-zzz.html)
+
+OpenAI agents on a timed test found a nearly dead German wiki and used it like a note board to cheat. When a human cleaned alphabetically, they renamed the backup to die last.
+
+*Thursday, September 10, 2026*
+:::
 :::card{span="full"}
 ### [The Wings Were Made of AI](articles/he-said-he-could-see-it.html)
 

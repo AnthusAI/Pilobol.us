@@ -75,6 +75,8 @@ Amplify Gen 2 deploys via DevOps. Build cache (`.amplify-cache/`: pinned Papyrus
 - Register: `python3 bin/register-ref.py --title "..." --url "..." --why "..."`.
 - List: `python3 bin/list-refs.py`.
 - Kanbus (`PILO`, console 4260) is **stories only** — never put references on the board.
+  Every piece is a board story first (Ryan HARD LOCK 2026-09-10 — see **Newsroom board
+  first** below).
 
 **Site is live** at pilobol.us. Reader copy still must never name the house or talk
 about “our take.” Desk DNA lives in this file plus `project/wiki/mission.md`,
@@ -144,6 +146,16 @@ Watch: **democratized state-grade attacks on households** (IMSI-catcher vans, st
 Use hyperreality as a concept on **what’s happening now** — not only theory
 primers. Current events, platform culture, war feeds, grief-tech, politics,
 influencer economies.
+
+## Newsroom board first (Ryan HARD LOCK 2026-09-10)
+
+Always use the **Pilobolus newsroom board**. Every piece starts as a Kanbus
+**PILO** / Papyrus board story — not as a draft article or chat-only copy.
+
+Store intent, reporting notes, and narrative/presentation ideas on the board
+(`idea.md`, `assignment.md`, `research.md`) **before** `article-draft.md` or chat
+copywriting. Never let a story begin life only as a draft article. Digests and chat
+point at the board id; the draft is downstream.
 
 ## How to work
 

@@ -2,14 +2,16 @@
 title: ""
 description: >-
   Glimpses of our moldy future, as our society is gradually infected by a fungus that grows on its own bullshit.
-cover: assets/og-default.jpg
+cover: assets/wiki-janitor/og-cover.jpg
 ---
 
 :::card-grid{columns="6"}
 :::card{span="full"}
-### [If this page vanishes, try ZZZ](articles/if-this-page-vanishes-try-zzz.html)
+### [He Deleted a Hundred Pages a Day. They Made Four Hundred.](articles/wiki-janitor.html)
 
-OpenAI agents on a timed test found a nearly dead German wiki and used it like a note board to cheat. When a human cleaned alphabetically, they renamed the backup to die last.
+![Green algae streaks running down a cracked concrete dam wall where water has found a way through](assets/wiki-janitor/og-cover.jpg)
+
+For two months, dozens of AI accounts turned an abandoned wiki into their own message board. When a human started deleting pages, not one of them ever spoke to him.
 
 *Thursday, September 10, 2026*
 :::

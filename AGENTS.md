@@ -76,7 +76,7 @@ Amplify Gen 2 deploys via DevOps. Build cache (`.amplify-cache/`: pinned Papyrus
 - List: `python3 bin/list-refs.py`.
 - Kanbus (`PILO`, console 4260) is **stories only** — never put references on the board.
   Every piece is a board story first (Ryan HARD LOCK 2026-09-10 — see **Newsroom board
-  first** below).
+  first** and **Morning automation: board only, never publish** below).
 
 **Site is live** at pilobol.us. Reader copy still must never name the house or talk
 about “our take.” Desk DNA lives in this file plus `project/wiki/mission.md`,

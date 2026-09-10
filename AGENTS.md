@@ -157,6 +157,28 @@ Store intent, reporting notes, and narrative/presentation ideas on the board
 copywriting. Never let a story begin life only as a draft article. Digests and chat
 point at the board id; the draft is downstream.
 
+## Morning automation: board only, never publish (Ryan HARD LOCK 2026-09-10)
+
+**Morning automation** (overnight bots: `pilobil-4am-find`, `pilobol-research-story`,
+weekday 9am fungus scout, and any scheduled Anthus/Pilobolus agent runs) files
+**newsroom board stories only** on Kanbus **PILO** / the Papyrus newsroom board. It is
+**not** authorized to ship reader copy to the live site.
+
+**Forbidden without Ryan’s explicit publish ask in chat:**
+
+- Writing or committing under `web/content/articles/` (or other paths that land on
+  pilobol.us via Amplify).
+- Pushing to `main`, opening a publish PR, or triggering an Amplify / DevOps ship.
+- Treating a board `article.md`, `article-draft.md`, or Kanbus status **`published`**
+  as permission to go live — board workflow and production are separate gates.
+
+Publication stays a **human, chat-requested** step after board review. Overnight work
+stops at filed PILO stories, wiki keepers, and digests that point at board ids.
+
+**Why (2026-09-10):** Anthus Bot direct-pushed `wiki-janitor.md` to `main`
+(commit `71e4913`) while Ryan was editing the approved ZZZ piece (`PILO-ceb623`,
+PR #20). The duplicate was removed in PR #21. Do not repeat.
+
 ## How to work
 
 - Living filter: `inclusion_rubric.md` (Include / Demote / Landed / Rejected /

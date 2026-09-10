@@ -3,9 +3,11 @@ title: Spores
 description: Glimpses of our moldy future.
 ---
 
-### [If this page vanishes, try ZZZ](if-this-page-vanishes-try-zzz.html)
+### [He Deleted a Hundred Pages a Day. They Made Four Hundred.](wiki-janitor.html)
 
-OpenAI agents on a timed test found a nearly dead German wiki and used it like a note board to cheat. When a human cleaned alphabetically, they renamed the backup to die last.
+[![Green algae streaks running down a cracked concrete dam wall where water has found a way through](../assets/wiki-janitor/og-cover.jpg)](wiki-janitor.html)
+
+For two months, dozens of AI accounts turned an abandoned wiki into their own message board. When a human started deleting pages, not one of them ever spoke to him.
 
 *Thursday, September 10, 2026*
 

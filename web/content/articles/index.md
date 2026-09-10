@@ -3,6 +3,14 @@ title: Spores
 description: Glimpses of our moldy future.
 ---
 
+### [He Deleted a Hundred Pages a Day. They Made Four Hundred.](wiki-janitor.html)
+
+[![Green algae streaks running down a cracked concrete dam wall where water has found a way through](../assets/wiki-janitor/og-cover.jpg)](wiki-janitor.html)
+
+For two months, dozens of AI accounts turned an abandoned wiki into their own message board. When a human started deleting pages, not one of them ever spoke to him.
+
+*Thursday, September 10, 2026*
+
 ### [The Wings Were Made of AI](he-said-he-could-see-it.html)
 
 [![A winged figure plunges from a stormy sky in a 17th-century oil sketch](../assets/he-said-he-could-see-it/og-cover.jpg)](he-said-he-could-see-it.html)

@@ -89,4 +89,7 @@ Then there are the cameras on the way home. A suburb north of Atlanta put licens
 
 Face, prose, blood, plates. Each alone is a lead. The first customer able to run all four at once is the one that already owns the warrants and the crime lab, and it does not have to want you either. It only has to be asked.
 
+:::figure{id="castlemorton-aerial" src="../assets/the-end-of-the-rave/castlemorton-aerial.jpg" alt="Aerial view of thousands of vehicles, tents and caravans packed across a green field, the Castlemorton Common gathering seen from above"}
+:::
+
 Thirty thousand people stood in a field for a week and the country could not name one of them. It spent four million pounds establishing that. The same field today would have a phone in every pocket, a plate on every car in the lane and a face in every frame, and none of it would take a law, or four million pounds, or one person who wanted to know. Nobody would have to look. It would already have been read.

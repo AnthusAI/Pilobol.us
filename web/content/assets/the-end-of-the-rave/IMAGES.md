@@ -1,66 +1,66 @@
 # Images — The End of the Rave
 
-## Cover — WANTED: Castlemorton 1992. The chart in the slot is a placeholder.
+## Cover — SELECTED, awaiting the file itself
 
-Ryan asked explicitly and more than once for the cover to be a photograph of
-the rave. It is not one yet, and that is a gap, not a decision.
+Ryan selected a specific photograph and pasted it into chat: seven people in
+early-1990s festival clothing on a grassy hillside under clear blue sky, a
+shirtless man in orange trousers and a woman in a wide-brimmed cap gesturing
+toward each other at the center of the group, others sitting, looking on, or
+gesturing nearby. Several faces in the frame are clearly lit and identifiable.
 
-`cover:` / `card_image:` currently point at `price-collapse.png` because the
-front matter needs a file that exists and social cards need something coherent.
-**Replace it the moment a photograph lands.** Do not treat the chart as settled.
+**Credit, exact wording as instructed:** Alan "Tash" Lodge, a Nottingham-based
+documentary photographer.
 
-### Why it is not here
+**Faces override.** This frame does not meet the *no legible face* guidance
+in `content/VOICE.md` ("Illustrating a piece about being findable"). Asked
+directly whether to keep looking for a faces-unreadable frame instead, Ryan
+chose to run this one with no acknowledgment of the faces. Recorded as an
+explicit exception in VOICE.md, not a change to the default rule.
 
-Nothing can be downloaded into the drafting environment. The egress gateway
-allows GitHub hosts and language package registries and denies everything else
-at CONNECT: Getty, Alamy, Wikimedia, Flickr, Imgur, Archive.org, Openverse,
-unsplash, pexels and arxiv all return 403. This is a network policy, so no
-licensing posture changes it. Nothing was generated as a substitute either:
-simulating a photograph of a real documented event is banned outright by
-VOICE.md.
+**Source confirmed independently.** This is Alan Lodge's photograph published
+in the Guardian's "My best photograph" interview series, under the title
+"Ravers having it large at Castlemorton, 1992: Alan Lodge's best photograph"
+(Lodge references it on his own blog at `alanlodge.co.uk/blog/archives/31295`
+and `/31303`). Ryan's copy of it, on his own Desktop, carries that exact
+filename. That is real provenance, not just a chat selection — but licence
+terms for republishing a Guardian-published interview photograph were not
+confirmed here, since both alanlodge.co.uk and theguardian.com's media hosts
+are egress-blocked from the drafting environment. Ryan selected and authorized
+the image and its use directly; this note exists so a future editor knows that
+authorization came from him in chat rather than from a licence file anyone
+here could open.
 
-### The photographer
+**Still blocked: getting the actual bytes in.** The file lives on Ryan's own
+Mac (`~/Desktop/ravers-having-it-large-at-castlemorton-1992-alan-lodges-best-
+photograph...`), not on the drafting container — pasting an image into chat
+shows it to the model but does not write it to this filesystem, checked
+directly more than once. Guardian's own media CDN (`media.guim.co.uk` and
+`www.theguardian.com`) is also egress-blocked, so it cannot be fetched
+independently either. The only route that works is a GitHub commit.
 
-**Alan "Tash" Lodge** shot Castlemorton over the 1992 bank holiday weekend and
-is the obvious source. His own archive is at `alanlodge.co.uk`; his Castlemorton
-frame has run in the Guardian, and DJ Mag ran a feature on him shooting it. His
-work was surveyed in the *Common Grounds* exhibition. He is a living
-photographer documenting this scene, so licensing or permission is a
-conversation with a person rather than a stock desk. Getty and Alamy also hold
-1992 press coverage, and PYMCA is the purpose-built archive for the era.
+### What is already done, on branch `art/castlemorton-cover`
 
-### Selection rule — no legible face
+Written from what was visible in the pasted image, ready to go the moment the
+file exists at `web/content/assets/the-end-of-the-rave/castlemorton-1992.jpg`:
 
-Whatever frame is chosen, no individual should be identifiable: distance,
-backlight, smoke, strobe or motion blur. The article is about people becoming
-findable from ordinary traces, and publishing searchable faces under that
-headline performs the thing the piece objects to. It also makes the argument
-better, because the cover then shows the condition that no longer exists. See
-*Illustrating a piece about being findable* in `content/VOICE.md`.
+- `the-end-of-the-rave.md` — `cover:` and `card_image:` point at the file; a
+  `:::figure` block sits at the very top of the article, above the opening
+  paragraph, with alt text and the caption/credit above.
+- `web/content/articles/index.md` and `web/content/index.md` — both listing
+  thumbnails point at the same file.
 
-### How to get it in
+**To finish: commit `castlemorton-1992.jpg` to this path, on this branch or on
+`main`, push, and the piece is done** — no further text changes needed, only
+the binary. A drag-and-drop through the GitHub web UI is enough.
 
-The one route that works is GitHub. Commit the file to this directory as
-`castlemorton-1992.jpg` on any branch and push; a drag-and-drop through the
-GitHub web UI is enough. It can then be pulled into the drafting environment,
-looked at, described in alt text from what is actually in the frame, and wired
-up.
+### Why nothing could be fetched from the open web
 
-Then: point `cover:` and `card_image:` at it, put the figure at the very top of
-the article above the opening paragraph, and update the thumbnail in both
-`web/content/index.md` and `web/content/articles/index.md`, which currently show
-the chart.
-
-Caption, approved:
-
-> Castlemorton Common, May 1992. Nobody in this picture could be named
-> afterwards, and nobody had arranged for that. It was what a night was.
-
-Alternates:
-
-- "Castlemorton Common, May 1992. Twenty to forty thousand people, and not one of them on a list anywhere."
-- "Castlemorton Common, May 1992. The state wanted these names badly enough to write a law about it, and did not get them."
-- "Castlemorton Common, May 1992. No ticket, no card, no phone in any pocket saying where the pocket was."
+The egress gateway allows GitHub hosts and language package registries and
+denies everything else at CONNECT: Getty, Alamy, Wikimedia, Flickr, Imgur,
+Archive.org, Openverse, unsplash, pexels, arxiv, and alanlodge.co.uk itself all
+return a policy denial. That is network configuration, not a licensing
+question, so no rights posture changes it. Generating a substitute image is
+separately banned outright by VOICE.md.
 
 ## `adversarial-inference.png` — WANTED; replaces the llm-privacy screenshot
 

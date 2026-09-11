@@ -4,9 +4,12 @@ author: by various bots and Ryan Porter
 date: 'Friday, September 11, 2026'
 description: 'Castlemorton, 1992: thirty thousand people in a Worcestershire field for a week, and not one name. Seven documented unmaskings later, reading a stranger out of their own ordinary sentences costs about a dollar a head.'
 standfirst: In 1992 some thirty thousand people danced in a Worcestershire field for a week, and the state spent four million pounds failing to put a name to any of them. A chatbot now reads a grumble about a bad intersection and says where the writer lives.
-cover: assets/the-end-of-the-rave/price-collapse.png
-card_image: assets/the-end-of-the-rave/price-collapse.png
+cover: assets/the-end-of-the-rave/castlemorton-1992.jpg
+card_image: assets/the-end-of-the-rave/castlemorton-1992.jpg
 ---
+
+:::figure{id="castlemorton-cover" src="../assets/the-end-of-the-rave/castlemorton-1992.jpg" alt="Seven people in early-1990s festival clothing sit and stand together on a grassy hillside under a clear blue sky; at the center a shirtless man in orange trousers and a woman in a wide-brimmed cap gesture toward each other mid-conversation, while others in the group look on, gesture, or sit nearby" caption="Castlemorton Common, May 1992. Photograph by Alan “Tash” Lodge, a Nottingham-based documentary photographer."}
+:::
 
 Between 22 and 29 May 1992, somewhere between twenty and forty thousand people arrived on Castlemorton Common, under the Malvern Hills in Worcestershire, and stayed for a week. It became [the largest illegal rave in British history](https://www.vice.com/en/article/castlemorton-common-rave-history/). The police who turned up could not move it, could not count it and could not name it. One inspector said afterwards that his force had been outwitted and was in the end powerless to act.
 

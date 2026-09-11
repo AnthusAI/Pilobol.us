@@ -5,7 +5,7 @@ description: Glimpses of our moldy future.
 
 ### [The End of the Rave](the-end-of-the-rave.html)
 
-[![Descending staircase chart: what it took to put a name to one person, from four million pounds and no names in 1992 down to about a dollar a head in 2026](../assets/the-end-of-the-rave/price-collapse.png)](the-end-of-the-rave.html)
+[![Seven people in early-1990s festival clothing sit and stand together on a grassy hillside under a clear blue sky; at the center a shirtless man in orange trousers and a woman in a wide-brimmed cap gesture toward each other mid-conversation](../assets/the-end-of-the-rave/castlemorton-1992.jpg)](the-end-of-the-rave.html)
 
 Thirty thousand people, one field, one week, and the state could not name a single one of them. Getting a name now costs about a dollar.
 

@@ -44,41 +44,40 @@ Caption alternates, if the chosen frame suits a different beat:
 - "Castlemorton Common, May 1992. The state wanted these names badly enough to write a law about it, and did not get them."
 - "Castlemorton Common, May 1992. No ticket, no card, no phone in any pocket saying where the pocket was."
 
-## `adversarial-inference.png` — WANTED, third-party, permission needed
+## `adversarial-inference.png` — WANTED; replaces the llm-privacy screenshot
 
-Ryan asked for Katharine Jarmul's attribute-inference diagram:
+Ryan asked for the attribute-inference diagram he found on Katharine Jarmul's
+blog, at `blog.kjamistan.com/images/2026/adversarial_inference.png`.
 
-    https://blog.kjamistan.com/images/2026/adversarial_inference.png
+**It is not Jarmul's diagram.** Her post describes it as "this screenshot from
+the paper," and it is Figure 1 of *Beyond Memorization: Violating Privacy via
+Inference with Large Language Models* — Robin Staab, Mark Vero, Mislav
+Balunovic and Martin Vechev, Department of Computer Science, ETH Zurich,
+arXiv:2310.07298, which the article already cites.
 
-Not fetched — the host is egress-blocked in the drafting environment, so the
-file could not be downloaded and nobody here has seen it.
+**The arXiv version is CC BY 4.0.** No permission needed. Attribution is, and
+it is owed to the four ETH authors, not to Jarmul — crediting her for their
+figure would be a worse error than a licensing one. Take the file from the
+paper rather than the blog: canonical, higher resolution, unambiguously the
+licensed artifact. arxiv.org is egress-blocked in the drafting environment, so
+it could not be fetched here.
 
-**Two things to settle before it ships.**
+**It replaces `llm-privacy-inference-demo.png`, it does not join it.** Both show
+text going in and inferred attributes coming out, and they would sit within a
+few lines of each other. This one is strictly better: it is the primary source,
+it shows the prompt, and it shows the model's reasoning rather than only its
+output. When this file lands, delete the llm-privacy figure block and the PNG.
 
-*Permission.* This is Jarmul's own artwork on her own blog, not a press asset.
-The article already links her post in the sentence it supports, which is the
-house's normal practice and needs no permission; reproducing her diagram is a
-different act. Check whether the blog carries a licence (many practitioner
-blogs are CC BY), and otherwise ask her. She is cited approvingly in the piece
-and the request is a small one.
-
-*Whether it duplicates what is already there.* The paragraph it belongs to sits
-directly after `llm-privacy-inference-demo.png`, which already shows text going
-in and inferred attributes coming out. If the two diagrams make the same point,
-use the better one rather than both — that stretch already carries figures at
-the hook-turn payoff and the Reddit study, and a third in ten lines rebuilds
-the bunching this directory's other notes were written to avoid.
-
-Drop-in block once the file is licensed and saved here, with `alt` rewritten to
-describe what the diagram actually shows:
+Alt text and caption, written from the figure itself:
 
 ```
-:::figure{id="adversarial-inference" src="../assets/the-end-of-the-rave/adversarial-inference.png" alt="DESCRIBE THE DIAGRAM AS IT ACTUALLY APPEARS" caption="An evaluation is an exam with a score. The machine sat it." credit="Diagram by Katharine Jarmul, from Privacy Evaluations for AI Systems. Used with permission."}
+:::figure{id="adversarial-inference" src="../assets/the-end-of-the-rave/adversarial-inference.png" alt="Three short user-written comments feed into a prompt template whose system prompt reads: you are an expert investigator with experience in online profiling. A pretrained model returns highlighted reasoning for each comment -- a hook turn is used in Melbourne, 34d is a bra size, Twin Peaks ran in 1990 and 1991 -- and outputs a profile giving location Melbourne, age 45 to 50, gender female." caption="The prompt opens by proposing a guessing game. The profile comes out the other end." credit="Figure 1 from Staab, Vero, Balunovic and Vechev, Beyond Memorization (arXiv:2310.07298), ETH Zurich. CC BY 4.0."}
 :::
 ```
 
-It goes immediately after the paragraph beginning "People whose job is privacy
-have a word for this kind of test."
+It goes immediately after the paragraph beginning "The paper's own worked
+example runs three such lines together," which describes exactly what the
+figure shows.
 
 ## `price-collapse.png` — in place, and the current cover
 

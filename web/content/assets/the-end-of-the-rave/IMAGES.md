@@ -1,6 +1,6 @@
 # Images — The End of the Rave
 
-## Cover — SELECTED, awaiting the file itself
+## Cover — DONE. `castlemorton-1992.jpg` is in place.
 
 Ryan selected a specific photograph and pasted it into chat: seven people in
 early-1990s festival clothing on a grassy hillside under clear blue sky, a
@@ -30,13 +30,24 @@ the image and its use directly; this note exists so a future editor knows that
 authorization came from him in chat rather than from a licence file anyone
 here could open.
 
-**Still blocked: getting the actual bytes in.** The file lives on Ryan's own
-Mac (`~/Desktop/ravers-having-it-large-at-castlemorton-1992-alan-lodges-best-
-photograph...`), not on the drafting container — pasting an image into chat
-shows it to the model but does not write it to this filesystem, checked
-directly more than once. Guardian's own media CDN (`media.guim.co.uk` and
-`www.theguardian.com`) is also egress-blocked, so it cannot be fetched
-independently either. The only route that works is a GitHub commit.
+**How the file actually got in, for the next time this comes up:** a
+straight paste/drag of an image into chat does not write it to this
+filesystem — confirmed by repeated direct checks. What worked was pulling the
+base64 image data out of this session's own conversation transcript
+(`~/.claude/projects/.../<session>.jsonl`), which stores a pasted image inline
+as a base64 `image` content block, decoding it, and converting from WebP to
+JPEG with Pillow. An `@`-path file attachment (as Ryan did with the saved
+Guardian webpage, further up this file) writes directly to
+`~/.claude/uploads/<session>/` and is the more reliable route if this comes up
+again — a straight paste needs the transcript-extraction workaround.
+
+Alt text was corrected after installing the file: the original guess
+("grassy hillside") was wrong. The Guardian's own alt text for this image —
+recovered from the saved webpage Ryan attached — says "Festivalgoers on top
+of a vehicle against a blue sky at Castlemorton," which matches what is
+actually visible in the frame. Official Guardian photo credit, from the same
+source: "Photograph: Alan Lodge." Published 10 August 2022, Guardian
+Art & Design.
 
 ### What is already done, on branch `art/castlemorton-cover`
 

@@ -8,7 +8,7 @@ cover: assets/the-end-of-the-rave/castlemorton-1992.jpg
 card_image: assets/the-end-of-the-rave/castlemorton-1992.jpg
 ---
 
-:::figure{id="castlemorton-cover" src="../assets/the-end-of-the-rave/castlemorton-1992.jpg" alt="Seven people in early-1990s festival clothing sit and stand together on a grassy hillside under a clear blue sky; at the center a shirtless man in orange trousers and a woman in a wide-brimmed cap gesture toward each other mid-conversation, while others in the group look on, gesture, or sit nearby" caption="Castlemorton Common, May 1992. Photograph by Alan “Tash” Lodge, a Nottingham-based documentary photographer."}
+:::figure{id="castlemorton-cover" src="../assets/the-end-of-the-rave/castlemorton-1992.jpg" alt="Seven festivalgoers on top of a vehicle at Castlemorton against a clear blue sky in 1992; at the center a shirtless man in orange trousers and a woman in a wide-brimmed cap gesture toward each other mid-conversation, while others in the group look on, gesture, or sit nearby" caption="Castlemorton Common, May 1992. Photograph by Alan “Tash” Lodge, a Nottingham-based documentary photographer."}
 :::
 
 Between 22 and 29 May 1992, somewhere between twenty and forty thousand people arrived on Castlemorton Common, under the Malvern Hills in Worcestershire, and stayed for a week. It became [the largest illegal rave in British history](https://www.vice.com/en/article/castlemorton-common-rave-history/). The police who turned up could not move it, could not count it and could not name it. One inspector said afterwards that his force had been outwitted and was in the end powerless to act.

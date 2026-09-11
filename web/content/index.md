@@ -9,7 +9,7 @@ cover: assets/wiki-janitor/og-cover.jpg
 :::card{span="full"}
 ### [The End of the Rave](articles/the-end-of-the-rave.html)
 
-![Diagram of a Melbourne hook turn seen from above](assets/the-end-of-the-rave/og-cover.png)
+![Descending staircase chart: what it took to put a name to one person, from four million pounds and no names in 1992 down to about a dollar a head in 2026](assets/the-end-of-the-rave/price-collapse.png)
 
 Thirty thousand people, one field, one week, and the state could not name a single one of them. Getting a name now costs about a dollar.
 

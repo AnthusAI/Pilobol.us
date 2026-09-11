@@ -1,11 +1,12 @@
 # Images — The End of the Rave
 
-## Cover — to be licensed, NOT yet in place
+## Cover — `price-collapse.png` for now, Castlemorton still wanted
 
-The article opens on Castlemorton Common and the cover should too. The file
-currently referenced by `cover:` / `card_image:` is still `og-cover.png`, the
-hook-turn diagram, which now also serves as an inline figure further down the
-piece. That is an interim state, not the intended one.
+The article opens on Castlemorton Common and the cover should too. Until that
+photograph is licensed, `cover:` / `card_image:` point at `price-collapse.png`,
+the chart drawn for this piece. That is on-message and house-drawn, so the
+listings and social cards are coherent rather than showing a traffic diagram
+under a headline about a rave, but it is still an interim state.
 
 **What to license:** a photograph of the Castlemorton Common Festival,
 22–29 May 1992, Malvern Hills, Worcestershire. Wide crowd, field, night or
@@ -43,24 +44,48 @@ Caption alternates, if the chosen frame suits a different beat:
 - "Castlemorton Common, May 1992. The state wanted these names badly enough to write a law about it, and did not get them."
 - "Castlemorton Common, May 1992. No ticket, no card, no phone in any pocket saying where the pocket was."
 
-## `og-cover.png` — in place, now an inline figure
+## `price-collapse.png` — in place, and the current cover
+
+Descending staircase of what it took to put a name to one person, 1992 to
+2026, drawn for this piece. Sits directly under the thesis line, where the
+argument is stated but not yet shown.
+
+Only the two ends carry published figures — roughly four million pounds and no
+names at Wolverhampton in 1994, and about two thousand dollars for 338 people
+in 2026. The four steps between are what the reporting says each case cost in
+time and people, not prices, and the chart says so on its face. Do not add
+invented numbers to the middle steps.
+
+## `genealogy-triangulation.png` — in place
+
+How two weekend uploads reached a third person who never uploaded anything.
+Sits beside the GEDmatch case.
+
+## `hook-turn-diagram.png` — in place, inline figure
 
 Original overhead diagram of a Melbourne hook turn, drawn for the earlier
 version of this piece: stay in the left lane, wait in the marked box at the
-intersection, then turn right across the tram tracks. Source is
-`hook-turn-diagram.svg` in this directory; re-render after editing with
+intersection, then turn right across the tram tracks. It sits beside the
+Melbourne section in the body. It was previously doing double duty as
+`og-cover.png`; that duplicate is gone, so the cover can be swapped without
+silently changing the figure.
+
+## Re-rendering any of the diagrams
+
+Each `.svg` in this directory is the source of the `.png` beside it. After
+editing one:
 
 ```bash
-python3 -c "import cairosvg; cairosvg.svg2png(url='hook-turn-diagram.svg', write_to='og-cover.png', output_width=1200, output_height=630)"
+python3 -c "import cairosvg; cairosvg.svg2png(url='NAME.svg', write_to='NAME.png', output_width=1200, output_height=630)"
 ```
 
 Palette is taken from `web/css/pilobolus-theme.css` — paper `#f1ead9`, ink
-`#211d17`, moss `#3f5d43` for the path, ochre `#a35a2a` for the waiting box.
+`#211d17`, muted `#6b6153`, moss `#3f5d43`, ochre `#a35a2a` for whatever the
+diagram wants to land on. Type is `Georgia, 'Times New Roman', serif` to match
+the other house diagrams. Render and look at the PNG before committing: cairosvg
+does not wrap or shrink text, so a long line silently runs off the right edge.
 
-It is captioned and credited as a diagram, not as a photograph. It now sits
-beside the Melbourne section in the body. When the Castlemorton cover lands,
-`cover:` and `card_image:` should point at that instead, and this file stays
-where it is as the inline figure.
+All three are captioned and credited as diagrams, not photographs.
 
 ## `llm-privacy-inference-demo.png` — in place
 

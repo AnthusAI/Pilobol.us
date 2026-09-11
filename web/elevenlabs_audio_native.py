@@ -238,6 +238,20 @@ def player_author_from_settings(settings: dict[str, Any]) -> str | None:
     return None
 
 
+def remote_convert_status(*, api_key: str, project_id: str) -> str | None:
+    try:
+        settings = get_project_settings(api_key=api_key, project_id=project_id)
+    except RuntimeError as exc:
+        print(f"  WARNING: could not read convert status for {project_id}: {exc}", file=sys.stderr)
+        return None
+    nested = settings.get("settings")
+    if isinstance(nested, dict):
+        status = nested.get("status")
+        if isinstance(status, str) and status.strip():
+            return status.strip()
+    return None
+
+
 def remote_player_author(*, api_key: str, project_id: str) -> str | None:
     try:
         settings = get_project_settings(api_key=api_key, project_id=project_id)
@@ -449,6 +463,19 @@ def sync_article(
             html_bytes=html_bytes,
         )
     elif project_id and not content_unchanged:
+        status = remote_convert_status(api_key=api_key, project_id=str(project_id))
+        if status == "processing":
+            print(
+                f"  ElevenLabs: skip {slug} ({project_id}) — still converting"
+            )
+            projects[slug] = {
+                "project_id": project_id,
+                "content_hash": entry.get("content_hash") or digest,
+                "title": title,
+                "player_author": AUDIO_NATIVE_PLAYER_AUTHOR,
+                "player_author_verified": True,
+            }
+            return str(project_id)
         print(f"  ElevenLabs: update {slug} ({project_id})")
         update_project(api_key=api_key, project_id=str(project_id), html_bytes=html_bytes)
     else:

@@ -1111,8 +1111,14 @@
   }
 }
 
-/* ElevenLabs Audio Native — after article byline */
-#elevenlabs-audionative-widget {
+# ElevenLabs Audio Native — after article byline. Only rendered when a
+# published snapshot URL exists (no iframe that loads then hides).
+.pilo-audio-native {
   margin: 0.75rem 0 1.25rem;
   max-width: 100%;
+}
+
+.pilo-audio-native audio {
+  display: block;
+  width: 100%;
 }

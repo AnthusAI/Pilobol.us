@@ -43,7 +43,11 @@ from papyrus_content.markus_renderer import shell as markus_shell  # noqa: E402
 from papyrus_content.markus_renderer.build import build_markus_site  # noqa: E402
 from papyrus_content.markus_renderer.shell import SiteChrome  # noqa: E402
 
-from elevenlabs_audio_native import load_registry, sync_all_articles  # noqa: E402
+from elevenlabs_audio_native import (  # noqa: E402
+    collect_published_audio_urls,
+    load_registry,
+    sync_all_articles,
+)
 from pilobol_feed import (  # noqa: E402
     DEFAULT_AUTHOR,
     discover_articles,
@@ -288,6 +292,7 @@ _PILOBOLUS_DEFAULT_AUTHOR = "by various bots and Ryan Porter"
 # slug -> project_id, filled during main() before HTML render.
 _AUDIO_NATIVE_PROJECT_IDS: dict[str, str] = {}
 _AUDIO_NATIVE_CONTENT_HASHES: dict[str, str] = {}
+_AUDIO_NATIVE_AUDIO_URLS: dict[str, str] = {}
 
 # Root-level pages that get Audio Native (not homepage/index).
 _AUDIO_NATIVE_STANDALONE_HREFS = frozenset({"a-fungus-among-us.html"})
@@ -296,25 +301,27 @@ _AUDIO_NATIVE_STANDALONE_HREFS = frozenset({"a-fungus-among-us.html"})
 def _audio_native_widget(
     project_id: str | None = None,
     content_hash: str | None = None,
+    audio_url: str | None = None,
 ) -> str:
+    """Embed playable audio only. No ElevenLabs iframe until there is an MP3.
+
+    The official Audio Native iframe loads, then posts audioNativeHideRequest
+    when there is no snapshot — the player appears and vanishes. If ElevenLabs
+    has published a snapshot, use that file directly.
+    """
+    if not audio_url:
+        return ""
     project_attr = ""
     if project_id:
         project_attr = f' data-projectid="{escape(project_id, quote=True)}"'
     hash_attr = ""
     if content_hash:
         hash_attr = f' data-contenthash="{escape(content_hash, quote=True)}"'
+    src = escape(audio_url, quote=True)
     return (
-        '<div id="elevenlabs-audionative-widget" '
-        'data-height="90" data-width="100%" data-frameborder="no" data-scrolling="no" '
-        f'data-publicuserid="{_ELEVENLABS_AUDIO_NATIVE_PUBLIC_USER_ID}"'
-        f'{project_attr}{hash_attr} '
-        'data-textcolor="rgba(223, 222, 208, 1.0)" '
-        'data-backgroundcolor="rgba(20, 23, 15, 1.0)" '
-        'data-playerurl="https://elevenlabs.io/player/index.html">'
-        'Loading the '
-        '<a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener noreferrer">'
-        'Elevenlabs Text to Speech</a> AudioNative Player...'
-        '</div>\n'
+        f'<div class="pilo-audio-native"{project_attr}{hash_attr}>'
+        f'<audio controls preload="metadata" src="{src}">Listen to this article.</audio>'
+        "</div>\n"
     )
 
 _AUDIO_NATIVE_SCRIPT = (
@@ -330,7 +337,8 @@ _ARTICLE_H1_RE = re.compile(r'<h1>.*?</h1>', re.S)
 _ARTICLE_LEDE_RE = re.compile(r'<p class="markus-lede">.*?</p>', re.S)
 _ARTICLE_BYLINE_RE = re.compile(r'<p class="markus-byline">.*?</p>', re.S)
 _AUDIO_NATIVE_WIDGET_RE = re.compile(
-    r'<div id="elevenlabs-audionative-widget"[^>]*>[\s\S]*?</div>\s*',
+    r'(?:<div id="elevenlabs-audionative-widget"[^>]*>[\s\S]*?</div>'
+    r'|<div class="pilo-audio-native"[^>]*>[\s\S]*?</div>)\s*',
     re.I,
 )
 
@@ -398,16 +406,17 @@ def _fix_article_header(html: str, *, active_href: str) -> str:
         parts.append(lede_m.group(0))
     if byline_m:
         parts.append(byline_m.group(0))
-    parts.append(
-        _audio_native_widget(
-            _AUDIO_NATIVE_PROJECT_IDS.get(slug),
-            _AUDIO_NATIVE_CONTENT_HASHES.get(slug),
-        )
+    audio_url = _AUDIO_NATIVE_AUDIO_URLS.get(slug)
+    widget = _audio_native_widget(
+        _AUDIO_NATIVE_PROJECT_IDS.get(slug),
+        _AUDIO_NATIVE_CONTENT_HASHES.get(slug),
+        audio_url,
     )
+    if widget:
+        parts.append(widget)
 
     new_header = f"{header_m.group(1)}{''.join(parts)}{header_m.group(3)}"
-    html2 = html[: header_m.start()] + new_header + html[header_m.end() :]
-    return _inject_audio_native_script(html2)
+    return html[: header_m.start()] + new_header + html[header_m.end() :]
 
 
 def render_page_with_poem(**kwargs):
@@ -545,7 +554,7 @@ def _content_hashes_from_registry(pod_root: Path) -> dict[str, str]:
 
 def main() -> int:
     content_dir = POD_ROOT / "content"
-    global _AUDIO_NATIVE_PROJECT_IDS, _AUDIO_NATIVE_CONTENT_HASHES
+    global _AUDIO_NATIVE_PROJECT_IDS, _AUDIO_NATIVE_CONTENT_HASHES, _AUDIO_NATIVE_AUDIO_URLS
 
     print("Generating homepage and archive feed from articles…")
     write_generated_feed_pages(content_dir)
@@ -557,6 +566,18 @@ def main() -> int:
         articles=audio_native_payloads,
     )
     _AUDIO_NATIVE_CONTENT_HASHES = _content_hashes_from_registry(POD_ROOT)
+    api_key = os.environ.get("ELEVENLABS_API_KEY", "").strip()
+    if api_key:
+        _AUDIO_NATIVE_AUDIO_URLS = collect_published_audio_urls(
+            api_key=api_key,
+            project_ids=_AUDIO_NATIVE_PROJECT_IDS,
+        )
+        print(
+            f"  Audio Native published snapshots: {len(_AUDIO_NATIVE_AUDIO_URLS)}/"
+            f"{len(_AUDIO_NATIVE_PROJECT_IDS)}"
+        )
+    else:
+        _AUDIO_NATIVE_AUDIO_URLS = {}
 
     result = build_markus_site(
         content_dir=POD_ROOT / "content",

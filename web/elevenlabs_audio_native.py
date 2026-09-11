@@ -23,6 +23,10 @@ API_BASE = "https://api.elevenlabs.io/v1/audio-native"
 VOICE_ID = "EkK5I93UQWFDigLMpZcX"
 # ElevenLabs player embed author — not the visible page byline.
 AUDIO_NATIVE_PLAYER_AUTHOR = "Pilobol.us"
+
+
+class ElevenLabsQuotaError(RuntimeError):
+    """ElevenLabs character/credit quota is exhausted."""
 SITE_ORIGIN = "https://pilobol.us"
 REGISTRY_NAME = "elevenlabs-audio-native-projects.json"
 
@@ -195,8 +199,13 @@ def _api_post(
             payload = response.read().decode("utf-8")
     except urllib.error.HTTPError as exc:
         detail = exc.read().decode("utf-8", errors="replace")
+        blob = detail.strip() or str(exc.reason)
+        if "quota_exceeded" in blob:
+            raise ElevenLabsQuotaError(
+                f"ElevenLabs API {exc.code} for {url}: {blob}"
+            ) from exc
         raise RuntimeError(
-            f"ElevenLabs API {exc.code} for {url}: {detail.strip() or exc.reason}"
+            f"ElevenLabs API {exc.code} for {url}: {blob}"
         ) from exc
     if not payload.strip():
         return {}
@@ -503,21 +512,6 @@ def sync_article(
     )
 
     if content_unchanged and author_correct:
-        if project_has_published_audio(api_key=api_key, project_id=str(project_id)):
-            projects[slug] = {
-                "project_id": project_id,
-                "content_hash": digest,
-                "title": title,
-                "player_author": AUDIO_NATIVE_PLAYER_AUTHOR,
-                "player_author_verified": True,
-            }
-            return str(project_id)
-        print(
-            f"  ElevenLabs: {slug} ({project_id}) has no published audio — republish"
-        )
-        update_project(api_key=api_key, project_id=str(project_id), html_bytes=html_bytes)
-        if not wait_for_published_audio(api_key=api_key, project_id=str(project_id)):
-            raise SystemExit(f"ElevenLabs never published audio for {slug} ({project_id})")
         projects[slug] = {
             "project_id": project_id,
             "content_hash": digest,
@@ -525,6 +519,11 @@ def sync_article(
             "player_author": AUDIO_NATIVE_PLAYER_AUTHOR,
             "player_author_verified": True,
         }
+        if not project_has_published_audio(api_key=api_key, project_id=str(project_id)):
+            print(
+                f"  ElevenLabs: {slug} ({project_id}) has no published snapshot "
+                "(quota or convert still empty) — omit player"
+            )
         return str(project_id)
 
     if project_id and not author_correct:
@@ -554,8 +553,14 @@ def sync_article(
             html_bytes=html_bytes,
         )
 
-    if not wait_for_published_audio(api_key=api_key, project_id=str(project_id)):
-        raise SystemExit(f"ElevenLabs never published audio for {slug} ({project_id})")
+    if not wait_for_published_audio(
+        api_key=api_key, project_id=str(project_id), timeout_s=90, interval_s=15
+    ):
+        print(
+            f"  WARNING: {slug} ({project_id}) has no published audio yet; "
+            "player will be omitted until ElevenLabs has credits and a snapshot",
+            file=sys.stderr,
+        )
 
     projects[slug] = {
         "project_id": project_id,
@@ -565,6 +570,28 @@ def sync_article(
         "player_author_verified": True,
     }
     return str(project_id)
+
+
+def collect_published_audio_urls(
+    *,
+    api_key: str,
+    project_ids: dict[str, str],
+) -> dict[str, str]:
+    """slug -> CDN mp3 for projects that already have a published snapshot."""
+    urls: dict[str, str] = {}
+    for slug, project_id in project_ids.items():
+        try:
+            settings = get_project_settings(api_key=api_key, project_id=project_id)
+        except RuntimeError as exc:
+            print(f"  WARNING: no settings for {slug} ({project_id}): {exc}", file=sys.stderr)
+            continue
+        nested = settings.get("settings")
+        if not isinstance(nested, dict):
+            continue
+        audio_url = nested.get("audio_url")
+        if isinstance(audio_url, str) and audio_url.strip():
+            urls[slug] = audio_url.strip()
+    return urls
 
 
 def sync_all_articles(
@@ -597,15 +624,34 @@ def sync_all_articles(
 
     registry = load_registry(pod_root)
     project_ids: dict[str, str] = {}
+    quota_hit = False
     for slug, path, front_matter, fragment_html in articles:
-        project_id = sync_article(
-            slug=slug,
-            markdown_path=path,
-            front_matter=front_matter,
-            fragment_html=fragment_html,
-            registry=registry,
-            api_key=api_key,
-        )
+        if quota_hit:
+            entry = registry.get("projects", {}).get(slug)
+            if isinstance(entry, dict) and entry.get("project_id"):
+                project_ids[slug] = str(entry["project_id"])
+            continue
+        try:
+            project_id = sync_article(
+                slug=slug,
+                markdown_path=path,
+                front_matter=front_matter,
+                fragment_html=fragment_html,
+                registry=registry,
+                api_key=api_key,
+            )
+        except ElevenLabsQuotaError as exc:
+            print(
+                "ERROR: ElevenLabs quota is exhausted. Add credits, then the "
+                "next deploy can publish Audio Native for new articles.\n"
+                f"  {exc}",
+                file=sys.stderr,
+            )
+            quota_hit = True
+            entry = registry.get("projects", {}).get(slug)
+            if isinstance(entry, dict) and entry.get("project_id"):
+                project_ids[slug] = str(entry["project_id"])
+            continue
         if project_id:
             project_ids[slug] = project_id
 

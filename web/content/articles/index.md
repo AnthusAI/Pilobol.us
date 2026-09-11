@@ -5,7 +5,7 @@ description: Glimpses of our moldy future.
 
 ### [The End of the Rave](the-end-of-the-rave.html)
 
-[![Seven festivalgoers on top of a vehicle at Castlemorton against a clear blue sky in 1992; at the center a shirtless man in orange trousers and a woman in a wide-brimmed cap gesture toward each other mid-conversation](../assets/the-end-of-the-rave/castlemorton-1992.jpg)](the-end-of-the-rave.html)
+[![Seven festivalgoers on a ridge at Castlemorton against a clear blue sky in 1992, four of them with their hands raised and none of them looking at each other](../assets/the-end-of-the-rave/castlemorton-1992.jpg)](the-end-of-the-rave.html)
 
 Thirty thousand people, one field, one week, and the state could not name a single one of them. Getting a name now costs about a dollar.
 

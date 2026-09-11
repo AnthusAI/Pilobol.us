@@ -279,7 +279,9 @@ def create_project(
             "title": title,
             "author": author,
             "voice_id": VOICE_ID,
-            "auto_convert": "true",
+            # Convert happens on the follow-up content update, which is the
+            # only Audio Native endpoint that accepts auto_publish.
+            "auto_convert": "false",
         },
         file_field="file",
         filename="article.html",
@@ -291,14 +293,85 @@ def create_project(
     return str(project_id)
 
 
+def create_and_publish_project(
+    *,
+    api_key: str,
+    name: str,
+    title: str,
+    author: str,
+    html_bytes: bytes,
+) -> str:
+    """Create a project, then convert+publish it.
+
+    POST /v1/audio-native has auto_convert but no auto_publish. Without a
+    published snapshot the embed loads and then hides itself. Content update
+    is the endpoint that publishes.
+    """
+    project_id = create_project(
+        api_key=api_key,
+        name=name,
+        title=title,
+        author=author,
+        html_bytes=html_bytes,
+    )
+    print(f"  ElevenLabs: publish {project_id}")
+    update_project(api_key=api_key, project_id=project_id, html_bytes=html_bytes)
+    return project_id
+
+
+_LIVE_PROJECT_ID_RE = re.compile(r'data-projectid="([^"]+)"', re.I)
+_LIVE_CONTENT_HASH_RE = re.compile(r'data-contenthash="([^"]+)"', re.I)
+
+
+def recover_live_embed(slug: str) -> tuple[str | None, str | None]:
+    """Read project_id / content hash from the live article embed, if any.
+
+    Amplify writes an updated registry during the build but never commits it.
+    New slugs would otherwise create a fresh unpublished project on every
+    deploy. The live HTML is the project-id that readers already have.
+    """
+    urls = (
+        f"{SITE_ORIGIN}/articles/{slug}.html",
+        f"{SITE_ORIGIN}/{slug}.html",
+    )
+    for url in urls:
+        request = urllib.request.Request(
+            url,
+            method="GET",
+            headers={"User-Agent": "Pilobol.us Audio Native sync"},
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=20) as response:
+                html = response.read().decode("utf-8", errors="replace")
+        except urllib.error.HTTPError as exc:
+            if exc.code == 404:
+                continue
+            print(f"  WARNING: could not recover {slug} from {url}: {exc}", file=sys.stderr)
+            continue
+        except urllib.error.URLError as exc:
+            print(f"  WARNING: could not recover {slug} from {url}: {exc}", file=sys.stderr)
+            continue
+        project_id = None
+        pid_m = _LIVE_PROJECT_ID_RE.search(html)
+        if pid_m:
+            project_id = pid_m.group(1).strip() or None
+        content_hash = None
+        hash_m = _LIVE_CONTENT_HASH_RE.search(html)
+        if hash_m:
+            content_hash = hash_m.group(1).strip() or None
+        if project_id:
+            return project_id, content_hash
+    return None, None
+
+
 def update_project(
     *,
     api_key: str,
     project_id: str,
     html_bytes: bytes,
-) -> None:
+) -> dict[str, Any]:
     url = f"{API_BASE}/{project_id}/content"
-    _api_post(
+    return _api_post(
         url,
         api_key=api_key,
         fields={"auto_convert": "true", "auto_publish": "true"},
@@ -328,6 +401,17 @@ def sync_article(
         return None
     projects: dict[str, Any] = registry.setdefault("projects", {})
     entry = dict(projects.get(slug) or {})
+    if not entry.get("project_id"):
+        live_id, live_hash = recover_live_embed(slug)
+        if live_id:
+            print(f"  ElevenLabs: recover {slug} from live site ({live_id})")
+            entry["project_id"] = live_id
+            if live_hash and not entry.get("content_hash"):
+                entry["content_hash"] = live_hash
+    elif not entry.get("content_hash"):
+        _, live_hash = recover_live_embed(slug)
+        if live_hash:
+            entry["content_hash"] = live_hash
     title = front_matter.get("title") or slug.replace("-", " ").title()
     html_bytes = article_html_payload(
         markdown_path,
@@ -357,7 +441,7 @@ def sync_article(
             f"  ElevenLabs: recreate {slug} ({old_id}) — "
             f"player author was {remote_author!r}; author is create-only"
         )
-        project_id = create_project(
+        project_id = create_and_publish_project(
             api_key=api_key,
             name=name,
             title=title,
@@ -369,7 +453,7 @@ def sync_article(
         update_project(api_key=api_key, project_id=str(project_id), html_bytes=html_bytes)
     else:
         print(f"  ElevenLabs: create {slug}")
-        project_id = create_project(
+        project_id = create_and_publish_project(
             api_key=api_key,
             name=name,
             title=title,
@@ -458,6 +542,16 @@ def _self_check() -> None:
     assert "markus-lede" not in html
     assert "markus-byline" not in html
     assert "Believe the rainbow" in html
+
+    sample_embed = (
+        '<div id="elevenlabs-audionative-widget" '
+        'data-projectid="qqnKQKwfIuSDXTkY1858" '
+        'data-contenthash="abc123"></div>'
+    )
+    pid_m = _LIVE_PROJECT_ID_RE.search(sample_embed)
+    hash_m = _LIVE_CONTENT_HASH_RE.search(sample_embed)
+    assert pid_m is not None and pid_m.group(1) == "qqnKQKwfIuSDXTkY1858"
+    assert hash_m is not None and hash_m.group(1) == "abc123"
 
 
 if __name__ == "__main__":

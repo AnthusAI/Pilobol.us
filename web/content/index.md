@@ -7,6 +7,15 @@ cover: assets/wiki-janitor/og-cover.jpg
 
 :::card-grid{columns="6"}
 :::card{span="full"}
+### [The End of the Rave](articles/the-end-of-the-rave.html)
+
+![Diagram of a Melbourne hook turn seen from above](assets/the-end-of-the-rave/og-cover.png)
+
+Thirty thousand people, one field, one week, and the state could not name a single one of them. Getting a name now costs about a dollar.
+
+*Friday, September 11, 2026*
+:::
+:::card{span="full"}
 ### [He Deleted a Hundred Pages a Day. They Made Four Hundred.](articles/wiki-janitor.html)
 
 ![Green algae streaks running down a cracked concrete dam wall where water has found a way through](assets/wiki-janitor/og-cover.jpg)

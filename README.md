@@ -37,9 +37,10 @@ cd web && PAPYRUS_ROOT=/path/to/Papyrus python3 build_via_papyrus.py
 
 Output: `web/dist-papyrus/`. The build also:
 
-- Regenerates `web/content/index.md` and `web/content/articles/index.md` from
-  `web/content/articles/*.md` (homepage honors `feed: false`; archive lists all
-  published stories).
+- Regenerates homepage and archive listings from `web/content/articles/*.md`
+  at build time, newest date first. Do not hand-edit or commit
+  `web/content/index.md` or `web/content/articles/index.md`. Homepage honors
+  `feed: false`; the archive lists every published story.
 - Syncs ElevenLabs Audio Native projects (one per article) when
   `ELEVENLABS_API_KEY` is set.
 

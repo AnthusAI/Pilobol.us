@@ -115,3 +115,56 @@ Still true from the note above: no keeper card exists yet for the Pole/Target
 facts in project/wiki/sources/. One should be registered from the primary NYT
 piece once egress allows it, citing Pole's own reasoning rather than the
 confrontation.
+
+## Reframe to "The End of the Rave", 2026-09-11
+
+Ryan redirected the piece around a single premise: the loss of the anonymous
+night. The ladder of documented unmaskings is unchanged; what changed is the
+opening scene, the title, the standfirst and the ending, which now open and
+close on Castlemorton rather than on a shoebox.
+
+Title history this session: "The Wanting Was the Expensive Part" (published)
+was killed for leaning on a coined abstraction, which VOICE.md already bans in
+body copy and now bans in titles. "Nobody Cared Enough to Look. Something Reads
+You Anyway." was written and applied as an intermediate. Final title is Ryan's:
+**The End of the Rave**.
+
+### New facts and how far they were verified
+
+Outbound page fetching is blocked by egress policy for every source below —
+Wikipedia, legislation.gov.uk, DJ Mag, Vice, ABC and every lyrics site all
+returned EGRESS_BLOCKED. Each fact was corroborated across multiple independent
+search-result summaries that quote the underlying pages, which is weaker than
+this desk's "read the actual page" standard. The URLs cited in the article came
+back from those searches and are real, but none was opened. **Anything below
+should be re-checked against the primary page once egress allows it.**
+
+| Fact | State |
+| --- | --- |
+| Castlemorton Common Festival, 22–29 May 1992, Malvern Hills, Worcestershire | corroborated, multiple sources |
+| 20,000–40,000 attendance; largest illegal rave in UK history | corroborated; article uses the range, not a single figure |
+| Police "outwitted... powerless to act" (inspector, unnamed in sources found) | corroborated wording; speaker not named in any source reached, so the article attributes it to "one inspector" and does not quote a name |
+| CJPOA 1994 s.63 applies to open-air gatherings of 100+ | corroborated |
+| s.63 defines music as "sounds wholly or predominantly characterised by the emission of a succession of repetitive beats" | corroborated verbatim across sources; **quoted directly in the article, so worth confirming against legislation.gov.uk itself** |
+| 13 Spiral Tribe members arrested, charged with conspiracy to cause a public nuisance | corroborated |
+| Trial at Wolverhampton Crown Court, ~4 months, ~£4m, all acquitted March 1994 | corroborated; article says "about four months" and "roughly four million pounds" |
+| Marea (We've Lost Dancing), Fred again.. feat. The Blessed Madonna, released 22 Feb 2021 | corroborated |
+| Vocal is a sampled voicemail Marea Stamper left Fred Gibson about the loss of club culture | corroborated |
+| "We've lost dancing" | corroborated verbatim |
+| "they've lost love, they've lost dancing" | **NOT verified.** Every lyrics source is egress-blocked. Ryan raised this line and it is the one he wants cited. The article deliberately does not quote it; it renders the sense as "we have lost dancing" instead. Confirm the exact wording before adding it. |
+
+### Illustration
+
+Cover is to become a licensed Castlemorton 1992 photograph with no legible
+face, per Ryan's selection. Not acquired — image hosts are egress-blocked and
+nothing was generated as a substitute. Spec, sourcing routes and the approved
+caption are in
+`web/content/assets/a-hook-turn-is-a-melbourne-thing/IMAGES.md`. The hook-turn
+diagram moved from cover to an inline figure beside the Melbourne section and
+remains the interim `cover:` / `card_image:` so social cards keep working.
+
+### Filename
+
+`a-hook-turn-is-a-melbourne-thing.md` is unchanged and the live URL is
+unchanged, though the slug no longer matches the title. Renaming would 404 the
+published piece; a redirect would be needed first.

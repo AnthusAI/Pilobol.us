@@ -288,6 +288,51 @@ like "deeply uncanny" or "profoundly surreal" — lives in `style-profile.yml`
 one list instead of two that can drift apart. [Limatus](https://github.com/AnthusAI/Limatus)
 checks drafts against it directly.
 
+## The headline (title)
+
+Every article carries a `title` above the standfirst. The two are one system
+doing two jobs: the title is the hook and the cold idea, the standfirst is the
+explanation. When a title tries to explain as well, it duplicates the only
+paragraph guaranteed to be read and spends the one slot that could have carried
+a picture.
+
+Four rules:
+
+**It has to hold something you can see.** Every published house title carries a
+concrete noun or a physical verb — wings, a strangler fig, a machine that could
+talk, a bag of numbers, a hundred pages a day, a search that kept finding him.
+A title assembled entirely out of abstractions is the tell that the piece has
+not found its image yet.
+
+**It must not be a riddle the body solves.** A reader meeting it cold, in a
+feed, with no standfirst and no cover, should get something on the first pass.
+“Six years and a door handle” means nothing until paragraph nine; that is a
+promise, not a headline. (Ryan 2026-09-11: “perplexing and inaccessible.”)
+
+**It must not assign the reader an age.** See *Don’t assign the reader an age*
+below — the rule bites openings and endings too.
+
+**It must not spend the ending.** The house ends on an image worth remembering.
+Lift that image into the title and the ending arrives as a callback instead of
+a hit.
+
+### How to write one
+
+1. **Write it last, after the standfirst.** Then check the two against each
+   other. If the standfirst would survive unchanged with the title deleted, the
+   title is not doing a job.
+2. **Take a noun or a verb the article already earned.** Same discipline as the
+   standfirst: find the piece’s most physical word. Do not invent a metaphor
+   that exists only in the headline.
+3. **Sentence shape beats label shape.** The corpus is flat declaratives — “The
+   Search in the Feed Kept Finding Him,” “You Confessed to a Bag of Numbers.”
+   Two short sentences with a turn are house as well: “He Deleted a Hundred
+   Pages a Day. They Made Four Hundred.”
+4. **Check it against *Don’t coin an abstraction* below.** The definite article
+   welded to a nominalised verb fails in a title exactly as it fails in body
+   copy, and fails louder, because the title is read most. (“The Wanting Was
+   the Expensive Part,” killed 2026-09-11 for precisely this.)
+
 ## The standfirst (lede)
 
 Every article carries a `standfirst` (also called dek/lede in conversation):
@@ -337,6 +382,52 @@ you may echo it.
 
 Fungus / strangler-fig / simulacrum metaphors **earn** their keep when tied to
 a scene. They fail when they replace the scene.
+
+## Don’t assign the reader an age — HARD (Ryan 2026-09-11)
+
+“If you were a teenager in 1993” tells every reader who was not a teenager in
+1993 that the piece is not for them, and it does it in the first six words. A
+ladder built from the reader’s own family does the same thing more quietly:
+*your mother’s nights, yours, your children’s* only resolves for somebody
+standing on the middle rung, and the house has readers on all three. For a
+reader in their twenties, their mother’s nights were already being written
+down.
+
+This is not a taste preference. The audience line in `style-profile.yml` is
+general readers with no assumed background, and a cohort assignment breaks it
+in the two positions that carry the most weight — the opening and the ending.
+
+Two ways through, both cheap:
+
+**Describe the year; do not hand it to the reader.** “In 1993 the worst
+Saturday night of a teenager’s life left behind a headache and one photograph
+in a shoebox” costs nothing and excludes nobody. Close second person can still
+arrive later, once the piece has earned it.
+
+**Put a generational ladder into grammar instead of into relatives.** Tense
+carries change across time without telling anyone how old they are: *the
+shoebox is gone, everything since has been written down, all of it will be
+read.* Is, has been, will be — three generations, no birthdays.
+
+Applies to the title, the standfirst, the opening, the ending, and to any
+“remember when” construction in the body.
+
+## Illustrating a piece about being findable
+
+When an article is about people becoming identifiable, the artwork is part of
+the argument and can contradict it. A crowd photograph published under that
+headline hands the tools in the piece a fresh set of faces, and the people in
+the frame did not agree to stand in as the example.
+
+Choose a frame where no individual is identifiable — distance, backlight,
+smoke, strobe, motion blur. It is the safer choice and the better one: the
+picture then shows the condition the article says is gone, rather than
+demonstrating its absence at somebody's expense. (Ryan 2026-09-11, on the
+Castlemorton cover.)
+
+Never generate or simulate a photograph of a real documented event. If the
+image cannot be licensed, ship without it and say so in the piece's
+`IMAGES.md`, per *Real people, real scenes*.
 
 ## Names and links
 

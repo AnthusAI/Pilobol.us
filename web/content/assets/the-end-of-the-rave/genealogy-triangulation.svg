@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f1ead9"/>
+
+  <g font-family="Georgia, 'Times New Roman', serif" fill="#211d17">
+    <text x="60" y="72" font-size="38">Nobody has to upload you</text>
+    <text x="60" y="104" font-size="21" fill="#6b6153">GEDmatch, 2018</text>
+  </g>
+
+  <g stroke="#cabd9f" stroke-width="3" fill="none">
+    <path d="M 600 202 L 600 236 L 250 236 L 250 316"/>
+    <path d="M 600 236 L 600 316"/>
+    <path d="M 600 236 L 950 236 L 950 316"/>
+  </g>
+
+  <circle cx="600" cy="176" r="26" fill="#6b6153"/>
+  <text x="600" y="132" font-family="Georgia, 'Times New Roman', serif" font-size="22" fill="#211d17" text-anchor="middle">a shared ancestor, born in the 1800s</text>
+
+  <circle cx="250" cy="342" r="26" fill="#3f5d43"/>
+  <circle cx="600" cy="342" r="26" fill="#3f5d43"/>
+  <circle cx="950" cy="342" r="27" fill="#f6ecd8" stroke="#a35a2a" stroke-width="6" stroke-dasharray="11 8"/>
+
+  <g font-family="Georgia, 'Times New Roman', serif" font-size="21" text-anchor="middle" fill="#3f5d43">
+    <text x="250" y="404">a distant cousin<tspan x="250" dy="27">who mailed in a kit</tspan></text>
+    <text x="600" y="404">another one,<tspan x="600" dy="27">on a weekend, for fun</tspan></text>
+  </g>
+  <text x="950" y="404" font-family="Georgia, 'Times New Roman', serif" font-size="21" text-anchor="middle" fill="#a35a2a">Joseph James DeAngelo<tspan x="950" dy="27">never spat in a tube</tspan></text>
+
+  <line x1="60" y1="504" x2="1140" y2="504" stroke="#d7cbb2" stroke-width="2"/>
+
+  <text x="60" y="552" font-family="Georgia, 'Times New Roman', serif" font-size="26" fill="#211d17">Two weekend uploads and one genealogist. The third name fell out.</text>
+  <text x="60" y="592" font-family="Georgia, 'Times New Roman', serif" font-size="17" fill="#8d8065">Investigators uploaded crime-scene DNA to the site as though it were a customer's own kit result.</text>
+</svg>

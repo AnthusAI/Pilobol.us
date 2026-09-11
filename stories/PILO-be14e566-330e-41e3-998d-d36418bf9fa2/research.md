@@ -79,3 +79,39 @@ then register a keeper. No direct quotation is used.
 Deliberately still out: automated extortion (its own post), Clearview as a
 scene (named only in the "face" chord), the second-hand-privacy paper's
 method.
+
+## Correction before publish, 2026-09-11 (fact-check on the Target scene)
+
+Re-attempted the two blocked fetches (NYT, Forbes) before merge; both still
+blocked by egress. Used WebSearch instead, which surfaced convergent secondary
+reporting on the Pole/pregnancy-score facts AND a documented critique: Colin
+Fraser, "Target didn't figure out a teenager was pregnant before her father
+did, and that one article that said they did was silly and bad" (Medium).
+Fraser's objection is specifically to the confrontation anecdote — the father,
+the manager, the apology call — which traces in Duhigg's own NYT piece to an
+unnamed Target employee's secondhand account, not to Pole, not to the family,
+not to any named or court-documented source. That does not meet this desk's
+"real named people and documented events only" bar, which every other case in
+this piece does meet (Magnanti, DeAngelo, Burrill, Furber/Watkins, the two
+named Harvard students).
+
+The underlying capability claim is on much firmer ground and is NOT what
+Fraser disputes: Pole existed, built a pregnancy-prediction score from ~25
+product categories, could estimate a due-date window, and Target began mixing
+baby coupons among unrelated ones specifically because an accurate
+"congratulations" mailer would unsettle people. That motivation is reported as
+Pole's own on-the-record reasoning in Duhigg's piece, independent of the
+confrontation anecdote, and is corroborated across every secondary source
+found.
+
+Fix applied: dropped the father/manager anecdote entirely; kept the score, the
+due-date estimate, and the camouflage decision, reframed on what worried Pole
+rather than on an unverifiable confrontation. No sentence in the published
+version rests on the disputed anecdote. The dead Forbes link (Kashmir Hill,
+cited only for the anecdote) is removed; the NYT link (Duhigg, cited for the
+score itself) stays.
+
+Still true from the note above: no keeper card exists yet for the Pole/Target
+facts in project/wiki/sources/. One should be registered from the primary NYT
+piece once egress allows it, citing Pole's own reasoning rather than the
+confrontation.

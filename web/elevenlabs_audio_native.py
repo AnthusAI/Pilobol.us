@@ -13,6 +13,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -252,6 +253,54 @@ def remote_convert_status(*, api_key: str, project_id: str) -> str | None:
     return None
 
 
+def settings_has_published_audio(settings: dict[str, Any]) -> bool:
+    if not settings.get("snapshot_id"):
+        return False
+    nested = settings.get("settings")
+    if isinstance(nested, dict) and nested.get("audio_url"):
+        return True
+    return False
+
+
+def project_has_published_audio(*, api_key: str, project_id: str) -> bool:
+    try:
+        settings = get_project_settings(api_key=api_key, project_id=project_id)
+    except RuntimeError:
+        return False
+    return settings_has_published_audio(settings)
+
+
+def wait_for_published_audio(
+    *,
+    api_key: str,
+    project_id: str,
+    timeout_s: int = 420,
+    interval_s: int = 15,
+) -> bool:
+    """Block until Audio Native has a playable snapshot, or time out."""
+    deadline = time.monotonic() + timeout_s
+    last_status = None
+    while time.monotonic() < deadline:
+        try:
+            settings = get_project_settings(api_key=api_key, project_id=project_id)
+        except RuntimeError as exc:
+            print(f"  WARNING: publish poll failed for {project_id}: {exc}", file=sys.stderr)
+            time.sleep(interval_s)
+            continue
+        nested = settings.get("settings") if isinstance(settings.get("settings"), dict) else {}
+        last_status = nested.get("status")
+        if settings_has_published_audio(settings):
+            print(f"  ElevenLabs: published {project_id} ({last_status})")
+            return True
+        time.sleep(interval_s)
+    print(
+        f"  ERROR: {project_id} has no published audio after {timeout_s}s "
+        f"(last status {last_status!r})",
+        file=sys.stderr,
+    )
+    return False
+
+
 def remote_player_author(*, api_key: str, project_id: str) -> str | None:
     try:
         settings = get_project_settings(api_key=api_key, project_id=project_id)
@@ -436,6 +485,14 @@ def sync_article(
     name = f"Pilobolus — {title}"
     project_id = entry.get("project_id")
     content_unchanged = bool(project_id and entry.get("content_hash") == digest)
+    if project_id and not content_unchanged:
+        # Amplify never commits the registry. Last deploy's widget hash is the
+        # payload already uploaded — do not reconvert the whole catalog.
+        _, live_hash = recover_live_embed(slug)
+        if live_hash and live_hash == digest:
+            print(f"  ElevenLabs: {slug} matches live upload hash, skip reconvert")
+            entry["content_hash"] = live_hash
+            content_unchanged = True
     author_correct = bool(
         project_id
         and player_author_is_correct(
@@ -446,6 +503,28 @@ def sync_article(
     )
 
     if content_unchanged and author_correct:
+        if project_has_published_audio(api_key=api_key, project_id=str(project_id)):
+            projects[slug] = {
+                "project_id": project_id,
+                "content_hash": digest,
+                "title": title,
+                "player_author": AUDIO_NATIVE_PLAYER_AUTHOR,
+                "player_author_verified": True,
+            }
+            return str(project_id)
+        print(
+            f"  ElevenLabs: {slug} ({project_id}) has no published audio — republish"
+        )
+        update_project(api_key=api_key, project_id=str(project_id), html_bytes=html_bytes)
+        if not wait_for_published_audio(api_key=api_key, project_id=str(project_id)):
+            raise SystemExit(f"ElevenLabs never published audio for {slug} ({project_id})")
+        projects[slug] = {
+            "project_id": project_id,
+            "content_hash": digest,
+            "title": title,
+            "player_author": AUDIO_NATIVE_PLAYER_AUTHOR,
+            "player_author_verified": True,
+        }
         return str(project_id)
 
     if project_id and not author_correct:
@@ -463,19 +542,6 @@ def sync_article(
             html_bytes=html_bytes,
         )
     elif project_id and not content_unchanged:
-        status = remote_convert_status(api_key=api_key, project_id=str(project_id))
-        if status == "processing":
-            print(
-                f"  ElevenLabs: skip {slug} ({project_id}) — still converting"
-            )
-            projects[slug] = {
-                "project_id": project_id,
-                "content_hash": entry.get("content_hash") or digest,
-                "title": title,
-                "player_author": AUDIO_NATIVE_PLAYER_AUTHOR,
-                "player_author_verified": True,
-            }
-            return str(project_id)
         print(f"  ElevenLabs: update {slug} ({project_id})")
         update_project(api_key=api_key, project_id=str(project_id), html_bytes=html_bytes)
     else:
@@ -487,6 +553,9 @@ def sync_article(
             author=AUDIO_NATIVE_PLAYER_AUTHOR,
             html_bytes=html_bytes,
         )
+
+    if not wait_for_published_audio(api_key=api_key, project_id=str(project_id)):
+        raise SystemExit(f"ElevenLabs never published audio for {slug} ({project_id})")
 
     projects[slug] = {
         "project_id": project_id,

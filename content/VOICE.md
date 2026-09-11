@@ -429,6 +429,13 @@ Never generate or simulate a photograph of a real documented event. If the
 image cannot be licensed, ship without it and say so in the piece's
 `IMAGES.md`, per *Real people, real scenes*.
 
+**Override, Ryan 2026-09-11, the-end-of-the-rave cover:** given a specific
+faces-legible Castlemorton frame and asked directly, Ryan chose to run it with
+no acknowledgment of the faces rather than keep looking for one with none
+identifiable. The no-legible-face guidance above is still the default and still
+the right call absent a specific instruction otherwise; this is a recorded
+exception on one piece, not a repeal.
+
 ## Names and links
 
 - Brand: **Pilobolus**. Domain/agent/repo: **Pilobol.us** /

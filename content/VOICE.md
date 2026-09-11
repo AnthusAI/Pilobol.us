@@ -75,6 +75,15 @@ Internal wiki cards, AGENTS.md, and scout chat digests may use desk shorthand.
 Link a source naturally in the sentence it supports. Reader posts do not end
 with a bibliography or a labeled source list.
 
+## Length
+
+There is no word limit, and there never was one; the 400–900 words most posts
+run to is what one scene usually needs, not a ceiling. A **lineage** post — a
+chain of named, dated, sourced cases held together by one spine (see
+Historical, below) — may run 1,200 to 2,000 words and must not be cut to look
+like the single-scene pieces around it. Cut a long piece only where a scene has
+stopped earning its place. (Ryan 2026-09-11, on the practical-obscurity piece.)
+
 ## Storytelling: inside the belief
 
 Pilobolus articles are **weird stories**, not technical explainers. Start

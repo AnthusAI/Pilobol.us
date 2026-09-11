@@ -48,3 +48,34 @@ them in would turn the piece into the roundup the house forbids.
 
 Also skipped: the price-of-knowing chain on the concept page. It is research
 texture. Marching six dated cases past a reader is a listicle.
+
+## Added 2026-09-11 (editor redirect to the generational arc)
+
+Keepers now used, beyond the four above:
+
+- `pillar-jeffrey-burrill-location-data-outing` — 2021, a purchase order.
+- `npr-gedmatch-golden-state-killer` — 2018, a cousin's spit; arrest April
+  2018, genealogy work over the preceding months (the draft says "that April").
+- `nyt-qanon-stylometry-furber-watkins` — 2022; Engadget link carries the 99%
+  figure in-sentence.
+- `forbes-harvard-ixray-rayban-doxxing` — 2024, the handshake.
+- `wired-flock-alpharetta-sharing` — the cameras on the way home; wording
+  softened to "a graph its own administrators had not known the size of".
+- `acm-second-hand-privacy-llm-agents` — the door with no lock on your side.
+- `kjamistan-privacy-evals-attribute-inference` — the word "evaluation". The
+  page was unreachable from the drafting environment (egress blocked); the
+  draft uses the desk's keeper card only and quotes nothing.
+
+**Target 2012 — NO KEEPER, UNVERIFIED HERE.** Duhigg, "How Companies Learn
+Your Secrets", NYT Magazine (Feb 2012) and Hill, Forbes (16 Feb 2012). Both
+pages blocked by egress in the drafting environment; the scene is from the
+writer's knowledge of that reporting: Andrew Pole, a pregnancy score over
+roughly two dozen products (unscented lotion, cotton balls, supplements), a
+due-date estimate, the Minneapolis father, the manager's follow-up call in
+which the father apologised, and the coupons later mixed with lawn mowers and
+wine glasses. Read both pages before publish, correct anything that differs,
+then register a keeper. No direct quotation is used.
+
+Deliberately still out: automated extortion (its own post), Clearview as a
+scene (named only in the "face" chord), the second-hand-privacy paper's
+method.

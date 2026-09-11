@@ -51,11 +51,11 @@ While police searched the outback for Gus Lamont, pages run from the other side 
 
 *Monday, September 7, 2026*
 
-### [Believe the rainbow](believe-the-rainbow.html)
+### [Forty Billion Dollars Stopped Existing in Four Days](believe-the-rainbow.html)
 
 [![Believe the rainbow](../assets/believe-the-rainbow/card-still.jpg)](believe-the-rainbow.html)
 
-A coin was built to always be worth a dollar. The machine meant to defend that promise finished it off in four days, the same joke a Skittles ad told first.
+TerraUSD promised it would always be worth a dollar. The algorithm built to defend that promise is the thing that broke it, and nobody had to steal anything.
 
 *Sunday, September 6, 2026*
 

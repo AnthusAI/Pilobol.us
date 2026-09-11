@@ -1,44 +1,62 @@
 # Images — The End of the Rave
 
-## Cover — `price-collapse.png` for now, Castlemorton still wanted
+## Cover — WANTED: Castlemorton 1992. The chart in the slot is a placeholder.
 
-The article opens on Castlemorton Common and the cover should too. Until that
-photograph is licensed, `cover:` / `card_image:` point at `price-collapse.png`,
-the chart drawn for this piece. That is on-message and house-drawn, so the
-listings and social cards are coherent rather than showing a traffic diagram
-under a headline about a rave, but it is still an interim state.
+Ryan asked explicitly and more than once for the cover to be a photograph of
+the rave. It is not one yet, and that is a gap, not a decision.
 
-**What to license:** a photograph of the Castlemorton Common Festival,
-22–29 May 1992, Malvern Hills, Worcestershire. Wide crowd, field, night or
-dawn.
+`cover:` / `card_image:` currently point at `price-collapse.png` because the
+front matter needs a file that exists and social cards need something coherent.
+**Replace it the moment a photograph lands.** Do not treat the chart as settled.
 
-**Hard requirement — no legible face.** Choose a frame where no individual is
-identifiable: distance, backlight, smoke, strobe or motion blur. Two reasons.
-The article is about people becoming findable from ordinary traces, and
-publishing searchable faces under that headline would perform the thing the
-piece objects to. It also makes the argument better: the cover should show the
-condition that no longer exists.
+### Why it is not here
 
-**Where to look:** Getty and Alamy both hold 1992 press coverage of
-Castlemorton. PYMCA (Photographic Youth Music Culture Archive) is the
-purpose-built archive for this material. Dave Swindells, Gavin Watson,
-Matthew Smith and Vinca Petersen all shot the era and are licensable.
+Nothing can be downloaded into the drafting environment. The egress gateway
+allows GitHub hosts and language package registries and denies everything else
+at CONNECT: Getty, Alamy, Wikimedia, Flickr, Imgur, Archive.org, Openverse,
+unsplash, pexels and arxiv all return 403. This is a network policy, so no
+licensing posture changes it. Nothing was generated as a substitute either:
+simulating a photograph of a real documented event is banned outright by
+VOICE.md.
 
-Outbound image fetching is blocked by egress policy in the drafting
-environment, so no candidate could be retrieved, compared or embedded here.
-Nothing was generated as a substitute: an invented or AI-made "rave photo"
-would break the house rule against illustrating a real documented night with
-something that did not happen.
+### The photographer
 
-**Paste this in at the top of the article once the file is in place**, with
-`src` and `credit` corrected to the licensed image:
+**Alan "Tash" Lodge** shot Castlemorton over the 1992 bank holiday weekend and
+is the obvious source. His own archive is at `alanlodge.co.uk`; his Castlemorton
+frame has run in the Guardian, and DJ Mag ran a feature on him shooting it. His
+work was surveyed in the *Common Grounds* exhibition. He is a living
+photographer documenting this scene, so licensing or permission is a
+conversation with a person rather than a stock desk. Getty and Alamy also hold
+1992 press coverage, and PYMCA is the purpose-built archive for the era.
 
-```
-:::figure{id="castlemorton-cover" src="../assets/the-end-of-the-rave/castlemorton-1992.jpg" alt="A large crowd at night in an open field at the Castlemorton Common Festival, May 1992; the figures are distant and lit from behind, and no individual face is distinguishable" caption="Castlemorton Common, May 1992. Nobody in this picture could be named afterwards, and nobody had arranged for that. It was what a night was." credit="PHOTOGRAPHER / ARCHIVE — licence reference"}
-:::
-```
+### Selection rule — no legible face
 
-Caption alternates, if the chosen frame suits a different beat:
+Whatever frame is chosen, no individual should be identifiable: distance,
+backlight, smoke, strobe or motion blur. The article is about people becoming
+findable from ordinary traces, and publishing searchable faces under that
+headline performs the thing the piece objects to. It also makes the argument
+better, because the cover then shows the condition that no longer exists. See
+*Illustrating a piece about being findable* in `content/VOICE.md`.
+
+### How to get it in
+
+The one route that works is GitHub. Commit the file to this directory as
+`castlemorton-1992.jpg` on any branch and push; a drag-and-drop through the
+GitHub web UI is enough. It can then be pulled into the drafting environment,
+looked at, described in alt text from what is actually in the frame, and wired
+up.
+
+Then: point `cover:` and `card_image:` at it, put the figure at the very top of
+the article above the opening paragraph, and update the thumbnail in both
+`web/content/index.md` and `web/content/articles/index.md`, which currently show
+the chart.
+
+Caption, approved:
+
+> Castlemorton Common, May 1992. Nobody in this picture could be named
+> afterwards, and nobody had arranged for that. It was what a night was.
+
+Alternates:
 
 - "Castlemorton Common, May 1992. Twenty to forty thousand people, and not one of them on a list anywhere."
 - "Castlemorton Common, May 1992. The state wanted these names badly enough to write a law about it, and did not get them."

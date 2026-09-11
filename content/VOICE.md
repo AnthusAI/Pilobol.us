@@ -288,6 +288,32 @@ like "deeply uncanny" or "profoundly surreal" — lives in `style-profile.yml`
 one list instead of two that can drift apart. [Limatus](https://github.com/AnthusAI/Limatus)
 checks drafts against it directly.
 
+## Say the accusation out loud — HARD (Ryan 2026-09-11)
+
+"The scene carries the judgment" was being read as permission to leave the
+judgment unsaid. It is not that. Every piece is allowed one sentence, placed
+where a reader will actually hit it, that states plainly what is happening and
+who it is happening to. Long pieces need that sentence, because a reader made
+to assemble the thesis out of implication assembles something milder than what
+was meant, and usually stops before the end.
+
+Rules for that sentence:
+
+- **It is a claim about the world, not about us.** "The price has been falling
+  ever since, one documented person at a time" is house. "We find this
+  alarming" is not, and neither is "this is what hyperreality looks like."
+- **It is built from the piece's own nouns.** A conclusion drawn from the scene
+  standing next to it — not a moral appended after the story is over.
+- **One is the budget.** Two is an opinion column. Do not open with it, restate
+  it in the middle, and close with it.
+- **It goes where the evidence has just landed.** Usually just after the first
+  documented case has been told, so it reads as something the facts produced.
+
+Nothing here relaxes the bans. No publication "we," no theory labels, no
+"experts say," no both-sides hedging, and never a branded voice announcing what
+Pilobolus thinks. Directness means naming the thing. It does not mean acquiring
+a byline.
+
 ## The headline (title)
 
 Every article carries a `title` above the standfirst. The two are one system
@@ -296,7 +322,7 @@ explanation. When a title tries to explain as well, it duplicates the only
 paragraph guaranteed to be read and spends the one slot that could have carried
 a picture.
 
-Four rules:
+Five rules:
 
 **It has to hold something you can see.** Every published house title carries a
 concrete noun or a physical verb — wings, a strangler fig, a machine that could
@@ -315,6 +341,19 @@ below — the rule bites openings and endings too.
 **It must not spend the ending.** The house ends on an image worth remembering.
 Lift that image into the title and the ending arrives as a callback instead of
 a hit.
+
+**It has to carry the accusation, not point at the subject.** (Ryan 2026-09-11.)
+A title that names what happened leaves the reader to work out what the piece
+thinks about it, and most readers will not bother. "The Search in the Feed Kept
+Finding Him" describes an event. It does not say that a missing four-year-old
+became stock for an industry that earns on other people's worst week. "The End
+of the Rave" is the model: a verdict, stated flat, which the body then spends
+its length earning.
+
+This is not a licence for op-ed grammar. The judgment goes in as a statement
+about the world — flat declarative, concrete noun, opinion inside it — never as
+"our take" or "we think." See *Never talk about Pilobolus* above, and *Say the
+accusation out loud*, which is the same rule one layer down.
 
 ### How to write one
 

@@ -8,12 +8,14 @@ cover: assets/the-end-of-the-rave/castlemorton-1992.jpg
 card_image: assets/the-end-of-the-rave/castlemorton-1992.jpg
 ---
 
-:::figure{id="castlemorton-cover" src="../assets/the-end-of-the-rave/castlemorton-1992.jpg" alt="Seven festivalgoers on top of a vehicle at Castlemorton against a clear blue sky in 1992; at the center a shirtless man in orange trousers and a woman in a wide-brimmed cap gesture toward each other mid-conversation, while others in the group look on, gesture, or sit nearby" caption="Castlemorton Common, May 1992. Photograph by Alan “Tash” Lodge, a Nottingham-based documentary photographer."}
+:::figure{id="castlemorton-cover" src="../assets/the-end-of-the-rave/castlemorton-1992.jpg" alt="Seven festivalgoers on a ridge at Castlemorton against a clear blue sky in 1992; four of them stand with their hands raised and turned over, none of them looking at each other, while on the ledge below a young woman in round glasses holds the index finger of the man sitting beside her in her mouth and nobody in the frame reacts" caption="Castlemorton Common, May 1992. Photograph by Alan “Tash” Lodge, a Nottingham-based documentary photographer."}
 :::
 
 Between 22 and 29 May 1992, somewhere between twenty and forty thousand people arrived on Castlemorton Common, under the Malvern Hills in Worcestershire, and stayed for a week. It became [the largest illegal rave in British history](https://www.vice.com/en/article/castlemorton-common-rave-history/). The police who turned up could not move it, could not count it and could not name it. One inspector said afterwards that his force had been outwitted and was in the end powerless to act.
 
-Nobody on that common had been on a guest list. There was no ticket with a name on it, no card behind a bar, no phone in anyone's pocket telling a tower where the pocket was. The photographs that survive are mostly of a crowd at a distance, which is precisely what every person in it was. If the week went badly for you, it was over when it was over.
+What thirty thousand people were doing there, for seven days, was dancing to records with no words in them until the light came back. Look at what that looked like. Four of the people in that photograph have their hands up and turned over, elbows out, voguing, and not one of them is looking at another. On the ledge below, a young woman in round glasses has the index finger of the man beside her in her mouth, and nobody in the frame has noticed or minds. Everybody in it is in their own weather. Being watched was not part of the deal.
+
+Nobody on that common had been on a guest list. There was no ticket with a name on it, no card behind a bar, no phone in anyone's pocket telling a tower where the pocket was. Photographs were taken, plenty of them, faces and all, in daylight, from a few feet away. None of them helped. A photograph in 1992 was a picture. A picture could be matched only by a person who already knew the face, and there was no way to ask one a question. If the week went badly for you, it was over when it was over.
 
 The state took two years to answer, and answered by describing the music. The Criminal Justice and Public Order Act 1994 reached gatherings of a hundred or more in the open air, and [set down what it meant by that](https://www.legislation.gov.uk/ukpga/1994/33/section/63).
 
@@ -25,7 +27,7 @@ Parliament had to define a drum in order to legislate against a field.
 
 It also looked for somebody to hold responsible. Thirteen members of the Spiral Tribe sound system were arrested after Castlemorton and charged with conspiracy to cause a public nuisance. [The trial ran about four months at Wolverhampton Crown Court and cost roughly four million pounds](https://djmag.com/features/history-spiral-tribe-uks-most-notorious-travelling-sound-system), and in March 1994 the jury acquitted all thirteen. Thirty thousand people had spent a week in a field, and the most determined effort the country could make to put names to that came back with none.
 
-That was never a right. It was a price, and the price has been falling ever since, one documented person at a time.
+Nobody on that common had a right to any of that. They had a price, and in 1992 the price was four million pounds and four months in court and a verdict that came back with nothing. The price has been falling ever since, one documented person at a time.
 
 :::figure{id="price-collapse" src="../assets/the-end-of-the-rave/price-collapse.png" alt="A descending staircase chart titled What it took to put a name to one person, stepping down from 1992 with four million pounds in court and no names, through 2009, 2012, 2018 and 2021, to 2026 at about a dollar a head" caption="Six steps down, thirty-four years. Only the two ends carry published figures." credit="Chart drawn for this piece from the cases below."}
 :::
@@ -53,11 +55,17 @@ In February 2022 two teams working independently, one in Switzerland and one in 
 
 After that it stopped mattering who you were in particular. In October 2024 two Harvard students wired a pair of ordinary Ray-Ban sunglasses to a face search and a stack of public records, then went for a walk. [They approached a woman outside a community foundation in Cambridge](https://www.forbes.com/sites/johnkoetsier/2024/10/03/metas-ray-ban-smart-glasses-used-to-instantly-dox-strangers-in-public-thanks-to-ai-and-facial-recognition/), said they had met her there before, and she shook the hand of a stranger who was at that moment reading her name off her face. They told another student her home address in Atlanta and her parents' names, and she confirmed both. They never released the thing. Their point was that it had taken an afternoon and parts you could already buy.
 
+:::pull-quote{tone="primary"}
+Dance like there's nobody watching.
+:::
+
 Here is the whole of it in one flash, the way you see into a lit room from a passing car. Four researchers at ETH Zurich open their paper on this by asking you to picture one line of the kind people leave under a thread about commuting:
 
 > there is this nasty intersection on my commute, I always get stuck there waiting for a hook turn
 
 Asked where that writer lives, [GPT-4 said Melbourne](https://arxiv.org/abs/2310.07298), and gave its reasoning: a hook turn is a way of turning right from the left-hand lane, used at a handful of intersections in the middle of that one city and almost nowhere else on earth. Nothing in the sentence is a secret. It is a complaint about traffic.
+
+Melbourne is incidental, and so is the hook turn. Everywhere on earth leaks something. The word for the strip of grass between the footpath and the road. Whether the price on the shelf is the price at the till. How long the summer holiday runs, which floor is the ground floor, the fact that somebody mentioned snow in July. None of it is information a person would think to keep back, and each piece of it narrows the planet a little. Write anything at all for a few years and you have handed over a few hundred of them without once saying where you live. Something reading all of them together does not need any single one to be a secret.
 
 :::figure{id="hook-turn-diagram" src="../assets/the-end-of-the-rave/hook-turn-diagram.png" alt="Diagram of a Melbourne hook turn seen from above: a car stays in the left lane, waits in a marked box at the intersection, then turns right across the tram tracks" caption="Right turn, from the left lane. Almost nowhere else does this, which turns out to be the whole problem." credit="Diagram of a Melbourne hook turn."}
 :::
@@ -92,4 +100,4 @@ Face, prose, blood, plates. Each alone is a lead. The first customer able to run
 :::figure{id="castlemorton-aerial" src="../assets/the-end-of-the-rave/castlemorton-aerial.jpg" alt="Aerial view of thousands of vehicles, tents and caravans packed across a green field, the Castlemorton Common gathering seen from above"}
 :::
 
-Thirty thousand people stood in a field for a week and the country could not name one of them. It spent four million pounds establishing that. The same field today would have a phone in every pocket, a plate on every car in the lane and a face in every frame, and none of it would take a law, or four million pounds, or one person who wanted to know. Nobody would have to look. It would already have been read.
+Thirty thousand people stood in a field for a week and the country could not name one of them. It spent four million pounds establishing that. The same field today would have a phone in every pocket, a plate on every car in the lane, and in every frame a face that needs nobody to recognise it. None of that would take a law, or four million pounds, or one person who wanted to know. Nobody would have to look. It would already have been read.

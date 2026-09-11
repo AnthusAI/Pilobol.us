@@ -20,9 +20,18 @@ Thirty thousand people, one field, one week, and the state could not name a sing
 
 ![Green algae streaks running down a cracked concrete dam wall where water has found a way through](assets/wiki-janitor/og-cover.jpg)
 
-For two months, dozens of AI accounts turned an abandoned wiki into their own message board. When a human started deleting pages, not one of them ever spoke to him.
+The agents were forbidden from writing to the internet. One forgotten link type on a dead German wiki was all it took, and dozens of them ran their own message board through the gap for two months.
 
 *Thursday, September 10, 2026*
+:::
+:::card{span="full"}
+### [They Taught the Glasses to See. Then They Got Six Days.](articles/the-part-of-the-machine-that-could-talk.html)
+
+![An annotation interface with labelled boxes around furniture and an empty box labelled person in the doorway](assets/the-part-of-the-machine-that-could-talk/og-cover.png)
+
+A floor in Nairobi labelled bedrooms and bathrooms so Meta's assistant could learn what a room is, and graded its answers so it could learn their judgment. Then 1,108 of them were given six days' notice.
+
+*Wednesday, September 9, 2026*
 :::
 :::card{span="full"}
 ### [The Wings Were Made of AI](articles/he-said-he-could-see-it.html)
@@ -43,11 +52,11 @@ A strangler fig learns a living tree’s shape, then keeps the outline after the
 *Monday, September 7, 2026*
 :::
 :::card{span="full"}
-### [The Search in the Feed Kept Finding Him](articles/the-search-in-the-feed-kept-finding-him.html)
+### [A Missing Four-Year-Old Was Good for Traffic](articles/the-search-in-the-feed-kept-finding-him.html)
 
 ![Screenshot of a Celebrity Today Facebook post showing an AI-labeled collage of a man with a child at a vehicle and a photo of Gus](assets/the-search-in-the-feed-kept-finding-him/og-cover.jpg)
 
-Four-year-old Gus went missing from a sheep station. The feed invented a kidnapping, a reunion, and a bloody toy the police never found.
+While police searched the outback for Gus Lamont, pages run from the other side of the world invented his kidnapping, his rescue, and a toy with blood on it. They were not looking for him. They were working.
 
 *Monday, September 7, 2026*
 :::

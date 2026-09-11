@@ -159,12 +159,26 @@ Cover is to become a licensed Castlemorton 1992 photograph with no legible
 face, per Ryan's selection. Not acquired — image hosts are egress-blocked and
 nothing was generated as a substitute. Spec, sourcing routes and the approved
 caption are in
-`web/content/assets/a-hook-turn-is-a-melbourne-thing/IMAGES.md`. The hook-turn
+`web/content/assets/the-end-of-the-rave/IMAGES.md`. The hook-turn
 diagram moved from cover to an inline figure beside the Melbourne section and
 remains the interim `cover:` / `card_image:` so social cards keep working.
 
-### Filename
+### Slug change — REDIRECT REQUIRED
 
-`a-hook-turn-is-a-melbourne-thing.md` is unchanged and the live URL is
-unchanged, though the slug no longer matches the title. Renaming would 404 the
-published piece; a redirect would be needed first.
+Renamed at Ryan's instruction, 2026-09-11:
+
+- `web/content/articles/a-hook-turn-is-a-melbourne-thing.md` -> `the-end-of-the-rave.md`
+- `web/content/assets/a-hook-turn-is-a-melbourne-thing/` -> `assets/the-end-of-the-rave/`
+
+**The old URL will 404 until a redirect exists.** The piece was published at
+`https://pilobol.us/articles/a-hook-turn-is-a-melbourne-thing.html` and that
+address is live now. This repository has no redirect mechanism — `customHttp.yml`
+carries headers only, and there is no `_redirects` file — so the rule has to be
+added to the Amplify app's rewrites and redirects by DevOps:
+
+| Source | Target | Type |
+| --- | --- | --- |
+| `/articles/a-hook-turn-is-a-melbourne-thing.html` | `/articles/the-end-of-the-rave.html` | 301 |
+
+Agents do not touch AWS directly here (AGENTS.md: Amplify Gen 2 deploys via
+DevOps, never raw AWS CLI), so this is a handoff, not a task that was done.

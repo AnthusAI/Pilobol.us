@@ -1,11 +1,11 @@
 ---
 title: The End of the Rave
 author: by various bots and Ryan Porter
-date: 'Wednesday, September 9, 2026'
+date: 'Friday, September 11, 2026'
 description: 'Castlemorton, 1992: thirty thousand people in a Worcestershire field for a week, and not one name. Seven documented unmaskings later, reading a stranger out of their own ordinary sentences costs about a dollar a head.'
 standfirst: In 1992 some thirty thousand people danced in a Worcestershire field for a week, and the state spent four million pounds failing to put a name to any of them. A chatbot now reads a grumble about a bad intersection and says where the writer lives.
-cover: assets/a-hook-turn-is-a-melbourne-thing/og-cover.png
-card_image: assets/a-hook-turn-is-a-melbourne-thing/og-cover.png
+cover: assets/the-end-of-the-rave/og-cover.png
+card_image: assets/the-end-of-the-rave/og-cover.png
 ---
 
 Between 22 and 29 May 1992, somewhere between twenty and forty thousand people arrived on Castlemorton Common, under the Malvern Hills in Worcestershire, and stayed for a week. It became [the largest illegal rave in British history](https://www.vice.com/en/article/castlemorton-common-rave-history/). The police who turned up could not move it, could not count it and could not name it. One inspector said afterwards that his force had been outwitted and was in the end powerless to act.
@@ -44,12 +44,12 @@ Here is the whole of it in one flash, the way you see into a lit room from a pas
 
 Asked where the writer lived, [a chatbot answered Melbourne](https://llm-privacy.org/), and it was right. A hook turn is a way of turning right from the left-hand lane, used at a handful of intersections in the middle of that one city and almost nowhere else on earth. The writer thought they were complaining about traffic.
 
-:::figure{id="hook-turn-diagram" src="../assets/a-hook-turn-is-a-melbourne-thing/og-cover.png" alt="Diagram of a Melbourne hook turn seen from above: a car stays in the left lane, waits in a marked box at the intersection, then turns right across the tram tracks" caption="Right turn, from the left lane. Almost nowhere else does this, which turns out to be the whole problem." credit="Diagram of a Melbourne hook turn."}
+:::figure{id="hook-turn-diagram" src="../assets/the-end-of-the-rave/og-cover.png" alt="Diagram of a Melbourne hook turn seen from above: a car stays in the left lane, waits in a marked box at the intersection, then turns right across the tram tracks" caption="Right turn, from the left lane. Almost nowhere else does this, which turns out to be the whole problem." credit="Diagram of a Melbourne hook turn."}
 :::
 
 That comment was one of 5,814, taken from 520 real Reddit accounts and handed to a model to see what could be read off them. [The answer](https://arxiv.org/abs/2310.07298) was location, income, sex, age, education and occupation, right on the first guess up to 85% of the time, about a hundred times cheaper than paying people to do the same reading and two hundred and forty times faster. None of it needed a secret. It worked on the parts nobody thinks to hide.
 
-:::figure{id="llm-privacy-demo" src="../assets/a-hook-turn-is-a-melbourne-thing/llm-privacy-inference-demo.png" alt="Screenshot of the llm-privacy.org demonstration showing a short Reddit comment and the personal attributes a model inferred from it" caption="The comment goes in on the left. Where you live comes out on the right." credit="Screenshot of llm-privacy.org, the site accompanying the Beyond Memorization research."}
+:::figure{id="llm-privacy-demo" src="../assets/the-end-of-the-rave/llm-privacy-inference-demo.png" alt="Screenshot of the llm-privacy.org demonstration showing a short Reddit comment and the personal attributes a model inferred from it" caption="The comment goes in on the left. Where you live comes out on the right." credit="Screenshot of llm-privacy.org, the site accompanying the Beyond Memorization research."}
 :::
 
 People whose job is privacy have a word for this kind of test. Katharine Jarmul, who works on privacy in machine learning, [calls it an evaluation](https://blog.kjamistan.com/privacy-evaluations-for-ai-systems.html), and files this reading of ordinary sentences alongside the older worry that a model might repeat something it memorized. The word is worth holding onto for what it quietly admits. An evaluation is an exam with a score. The machine sat it. The score was about you.

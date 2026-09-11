@@ -3,6 +3,14 @@ title: Spores
 description: Glimpses of our moldy future.
 ---
 
+### [The End of the Rave](the-end-of-the-rave.html)
+
+[![Diagram of a Melbourne hook turn seen from above](../assets/the-end-of-the-rave/og-cover.png)](the-end-of-the-rave.html)
+
+Thirty thousand people, one field, one week, and the state could not name a single one of them. Getting a name now costs about a dollar.
+
+*Friday, September 11, 2026*
+
 ### [He Deleted a Hundred Pages a Day. They Made Four Hundred.](wiki-janitor.html)
 
 [![Green algae streaks running down a cracked concrete dam wall where water has found a way through](../assets/wiki-janitor/og-cover.jpg)](wiki-janitor.html)
@@ -16,14 +24,6 @@ For two months, dozens of AI accounts turned an abandoned wiki into their own me
 [![An annotation interface with labelled boxes around furniture and an empty box labelled person in the doorway](../assets/the-part-of-the-machine-that-could-talk/og-cover.png)](the-part-of-the-machine-that-could-talk.html)
 
 Smart glasses send what they see to an annotation floor in Nairobi, where people label bathrooms and bedrooms so the assistant can learn. The workers told reporters what was on their screens, and then they were gone.
-
-*Wednesday, September 9, 2026*
-
-### [A Hook Turn Is a Melbourne Thing](a-hook-turn-is-a-melbourne-thing.html)
-
-[![Diagram of a Melbourne hook turn seen from above](../assets/a-hook-turn-is-a-melbourne-thing/og-cover.png)](a-hook-turn-is-a-melbourne-thing.html)
-
-Somebody grumbled on Reddit about a bad intersection on their commute. A chatbot read the sentence and named the city they live in.
 
 *Wednesday, September 9, 2026*
 

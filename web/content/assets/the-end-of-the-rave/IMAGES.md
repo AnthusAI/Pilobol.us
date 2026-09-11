@@ -33,7 +33,7 @@ something that did not happen.
 `src` and `credit` corrected to the licensed image:
 
 ```
-:::figure{id="castlemorton-cover" src="../assets/a-hook-turn-is-a-melbourne-thing/castlemorton-1992.jpg" alt="A large crowd at night in an open field at the Castlemorton Common Festival, May 1992; the figures are distant and lit from behind, and no individual face is distinguishable" caption="Castlemorton Common, May 1992. Nobody in this picture could be named afterwards, and nobody had arranged for that. It was what a night was." credit="PHOTOGRAPHER / ARCHIVE — licence reference"}
+:::figure{id="castlemorton-cover" src="../assets/the-end-of-the-rave/castlemorton-1992.jpg" alt="A large crowd at night in an open field at the Castlemorton Common Festival, May 1992; the figures are distant and lit from behind, and no individual face is distinguishable" caption="Castlemorton Common, May 1992. Nobody in this picture could be named afterwards, and nobody had arranged for that. It was what a night was." credit="PHOTOGRAPHER / ARCHIVE — licence reference"}
 :::
 ```
 

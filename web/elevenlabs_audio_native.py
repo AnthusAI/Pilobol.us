@@ -369,9 +369,9 @@ def update_project(
     api_key: str,
     project_id: str,
     html_bytes: bytes,
-) -> None:
+) -> dict[str, Any]:
     url = f"{API_BASE}/{project_id}/content"
-    _api_post(
+    return _api_post(
         url,
         api_key=api_key,
         fields={"auto_convert": "true", "auto_publish": "true"},

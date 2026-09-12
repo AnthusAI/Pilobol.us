@@ -4,7 +4,7 @@ Living filter for the daily 4:00am ET find→explain scout. Read `AGENTS.md`
 (enduring vibes) then this file every run. Do not freeze search queries in the routine prompt — derive them from this
 file + open questions on concept pages.
 
-Last updated: 2026-09-08 04:34 ET (synthetic nostalgia 4am)
+Last updated: 2026-09-12 ET (GEO board haul PILO-72bae0)
 
 ## Center of gravity
 
@@ -257,6 +257,12 @@ the weird preference.
 - 404 Media Companies Are Using Reddit to Manipulate ChatGPT and Google AI Search https://www.404media.co/companies-are-using-reddit-to-manipulate-chatgpt-and-google-ai-search/
 - WIRED Spotify Confirms Streaming Fraud After Kalshi Trader Cries Foul https://www.wired.com/story/spotify-streaming-manipulation-prediction-markets-polymarket-kalshi/
 - Verge Can Reddit fend off a new wave of AI SEO spam? https://www.theverge.com/ai-artificial-intelligence/973098/reddit-ai-search-seo-marketing-brands-spam
+- Crackle PR AI Search Runs on Earned Media PR Owns GEO field guide https://www.cracklepr.com/field-guide/ai-search-runs-on-earned-media
+- Wildfire PR What one million AI searches tell us about media relations https://www.wildfirepr.com/blog/what-one-million-ai-searches-tell-us-about-media-relations
+- Reddit Inc How We're Keeping Reddit Real and Safe in the AI Era https://redditinc.com/news/how-were-keeping-reddit-real-and-safe-in-the-ai-era
+- TechCrunch Reddit is using LLMs to solve a problem LLMs largely created https://techcrunch.com/2026/07/06/reddit-is-using-llms-to-solve-a-problem-llms-largely-created/
+- Search Engine Land A 13-word edit can steer what deep-research AI agents recommend https://searchengineland.com/deep-research-ai-agents-poison-ugc-480952
+- arXiv Deep-Research Agents Can Be Poisoned via User-Generated Content 2605.24245 https://arxiv.org/html/2605.24245v1
 - Rest of World Google Maps in India has been blamed for fatal accidents https://restofworld.org/2025/google-maps-india-misdirection-fatal-accidents/
 - CBS Google finds 10,000 fake listings on Google Maps, sues alleged network of scammers https://www.cbsnews.com/news/google-maps-fake-listings-lawsuit-scams/
 - RESONEO Google Map dissected: 72 ranking signals https://think.resoneo.com/google-map-dissected/

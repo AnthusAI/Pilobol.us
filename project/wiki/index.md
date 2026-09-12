@@ -27,6 +27,7 @@ Accepted sources live as pages in `sources/` **and** as pod references on
 - [Be careful what you wish for — AI](concepts/be-careful-what-you-wish-for.md) — wished for the gift; the grant is the harm
 - [Black Mirror unintended](concepts/black-mirror-unintended.md) — real-life unintended tech/AI outcomes; scout via “like Black Mirror” comments
 - [Monitoring wall](concepts/monitoring-wall.md) — frosted window into alien mind; CoT/monitorability lag (Alien Mind watch)
+- [Generative engine optimization](concepts/generative-engine-optimization.md) — GEO/AEO; PR sells AI citations; UGC retrieval bait
 
 ## Sources
 - Prefer-AI-over-people haul (2026-09-08 evening): [scout](../../scout-prefer-ai-over-people-2026-09-08.md) — 7 keepers; angle only (no concept lock yet).
@@ -40,6 +41,13 @@ Accepted keepers live in `sources/` (markdown) with matching JSON on `WIKI-pilob
 
 - [An Alien Mind](sources/openai-an-alien-mind.md) → [monitoring-wall](concepts/monitoring-wall.md)
 - Monitoring-wall haul (8 keepers): [scout notes](../scout-monitoring-wall-2026-09-07.md); specimens on [monitoring-wall](concepts/monitoring-wall.md)
+
+## Latest GEO haul (2026-09-12)
+
+- Pattern: [generative-engine-optimization](concepts/generative-engine-optimization.md) — Ouroboros citation loop
+- Board: `PILO-72bae0`
+- Scout: [scout-geo-2026-09-12.md](../../scout-geo-2026-09-12.md)
+- Keepers: [Crackle PR](sources/cracklepr-ai-search-earned-media-geo.md); [Wildfire / Muck Rack](sources/wildfirepr-muck-rack-million-ai-searches-geo.md); [Reddit Inc](sources/redditinc-keeping-reddit-real-ai-era.md); [TechCrunch Reddit LLMs](sources/techcrunch-reddit-llms-spam-ai-era.md); [Search Engine Land WARP](sources/searchengineland-warp-deep-research-ugc-poison.md); [arXiv WARP](sources/arxiv-warp-deep-research-agents-poison-ugc.md)
 
 ## Latest Black Mirror haul (2026-09-09 4am)
 

@@ -125,3 +125,7 @@ Ryan: Pilobolus green light — kid who said he could see AI’s future, sold ce
 ## [2026-09-09 ~04:14 ET] 4am research+story | Behind the share button
 
 Board `PILO-280ead` (idea→assignment→research). Theme: Black Mirror unintended — Meta AI glasses training room (Sama Nairobi intimate annotation → 1,108 redundancies). Filed 7 keepers. Draft: witness. Stay-off appended. KB only — no publish.
+
+## [2026-09-12] board | GEO / PR owns the oracle
+
+Board `PILO-72bae0` (idea→assignment→research). Theme: Generative Engine Optimization — agencies sell AI citation; Reddit/platform countermeasures; WARP UGC poisoning research. Filed 6 keepers. Concept `generative-engine-optimization.md`. Scout: `scout-geo-2026-09-12.md`. Ouroboros presentation note. Stay-off appended. KB only — no publish.

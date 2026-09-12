@@ -1,6 +1,6 @@
 # Simulacrum
 
-Last updated: 2026-09-08 04:34 ET
+Last updated: 2026-09-12 (GEO cross-link)
 
 ## What it is
 
@@ -27,7 +27,9 @@ when trust collapses.
 
 Desk residue: treat “AI-generated” as too narrow. The infection includes
 scripted personas, engagement farms, and human speech tuned to platform
-metrics until it behaves like a copy of itself.
+metrics until it behaves like a copy of itself. **Generative engine
+optimization** treats the cited answer as territory — see
+[generative-engine-optimization](generative-engine-optimization.md).
 
 ## Anchors (seed — thin until verified)
 

@@ -971,20 +971,7 @@
   .markus-body[data-pilo-page="effect"] .pilo-physarum-canvas {
     mask-image: none !important;
     -webkit-mask-image: none !important;
-    opacity: calc(var(--pilo-fx-opacity) * var(--pilo-fx-intensity, 0.72) * 0.95);
-  }
-  .markus-body[data-pilo-page="effect"] .markus-document {
-    background: rgba(245, 243, 237, 0.88);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: 8px;
-    padding: 2.2rem 2.6rem;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-  }
-  @media (prefers-color-scheme: dark) {
-    .markus-body[data-pilo-page="effect"] .markus-document {
-      background: rgba(30, 29, 27, 0.88);
-    }
+    opacity: calc(var(--pilo-fx-opacity) * var(--pilo-fx-intensity, 0.72) * 1.35);
   }
 
   /* Reaction-diffusion is made of fine boundaries rather than broad opaque

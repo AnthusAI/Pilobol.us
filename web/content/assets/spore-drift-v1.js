@@ -91,14 +91,14 @@ const SporeDrift = (() => {
       vec4 agent = texture(uAgents, uv);
       vec2 ndc = (agent.xy / uResolution) * 2.0 - 1.0;
       gl_Position = vec4(ndc, 0.0, 1.0);
-      gl_PointSize = 1.0;
+      gl_PointSize = 1.5;
     }
   `;
 
   const fsRenderAgents = `#version 300 es
     precision highp float;
     out vec4 outColor;
-    void main() { outColor = vec4(1.0, 1.0, 1.0, 1.0); }
+    void main() { outColor = vec4(0.7, 0.7, 0.7, 1.0); }
   `;
 
   const fsProcessTrail = `#version 300 es
@@ -246,10 +246,11 @@ const SporeDrift = (() => {
       }
 
       this.fx = readFxConfig('spore-drift');
+      // Substantially increased spore counts (3x-4x) for lush, visible motes & ribbons
       this.presets = {
-        'still-air': { agentCount: 4800, moveSpeed: 0.22, drift: [0.00, 0.04], diffusion: 0.035, decay: 0.016 },
-        crosswind: { agentCount: 6400, moveSpeed: 0.40, drift: [0.82, 0.03], diffusion: 0.020, decay: 0.024 },
-        updraft: { agentCount: 5400, moveSpeed: 0.32, drift: [0.05, 0.92], diffusion: 0.028, decay: 0.020 }
+        'still-air': { agentCount: 16384, moveSpeed: 0.22, drift: [0.00, 0.04], diffusion: 0.032, decay: 0.022 },
+        crosswind: { agentCount: 22500, moveSpeed: 0.40, drift: [0.82, 0.03], diffusion: 0.020, decay: 0.028 },
+        updraft: { agentCount: 19600, moveSpeed: 0.32, drift: [0.05, 0.92], diffusion: 0.026, decay: 0.024 }
       };
       const presetNames = Object.keys(this.presets);
       const chosenName = this.presets[this.fx.presetName]
@@ -334,37 +335,53 @@ const SporeDrift = (() => {
       const gl = this.gl;
       const agentsData = new Float32Array(this.numAgents * 4);
 
-      // Seed spores across header, margins, and body
-      const seedPoints = [];
-      if (this.fx.seedRegions && this.fx.seedRegions.length) {
-        for (const r of this.fx.seedRegions) {
-          seedPoints.push([r.x * this.simWidth, (1 - r.y) * this.simHeight]);
-        }
-      }
-      const fallbackNodes = [
-        [0.72 * this.simWidth, 0.86 * this.simHeight],
-        [0.85 * this.simWidth, 0.80 * this.simHeight],
-        [0.65 * this.simWidth, 0.88 * this.simHeight],
-        [0.08 * this.simWidth, 0.75 * this.simHeight],
-        [0.06 * this.simWidth, 0.50 * this.simHeight],
-        [0.09 * this.simWidth, 0.25 * this.simHeight],
-        [0.93 * this.simWidth, 0.65 * this.simHeight],
-        [0.94 * this.simWidth, 0.40 * this.simHeight],
-        [0.92 * this.simWidth, 0.18 * this.simHeight],
-        [0.35 * this.simWidth, 0.08 * this.simHeight],
-        [0.65 * this.simWidth, 0.05 * this.simHeight]
+      // Header-anchored nodes in WebGL bottom-up coordinates (y = 1.0 - page_fraction)
+      // Viewport header height in sim coordinates:
+      const viewportFraction = Math.min(1.0, window.innerHeight / Math.max(1, this.canvas.clientHeight || window.innerHeight));
+      const headerTop = this.simHeight;
+      const headerBottom = Math.max(0, this.simHeight * (1.0 - 0.35 * viewportFraction));
+
+      // Dense spore clusters in the top-right header area next to H1:
+      // In WebGL bottom-up, top of page is y ~ 0.85 - 0.98
+      const headerClusters = [
+        [0.68 * this.simWidth, 0.92 * this.simHeight, 45.0], // Top right header immediate beside H1
+        [0.78 * this.simWidth, 0.90 * this.simHeight, 55.0], // Top right header bloom center
+        [0.88 * this.simWidth, 0.88 * this.simHeight, 60.0], // Top right outer corner
+        [0.62 * this.simWidth, 0.85 * this.simHeight, 50.0], // Under header bloom
+        [0.82 * this.simWidth, 0.82 * this.simHeight, 50.0]  // Diagonal drift plume
       ];
-      for (const node of fallbackNodes) seedPoints.push(node);
+
+      // Margin and body coverage nodes
+      const marginNodes = [
+        [0.08 * this.simWidth, 0.78 * this.simHeight, 40.0],
+        [0.06 * this.simWidth, 0.50 * this.simHeight, 45.0],
+        [0.09 * this.simWidth, 0.25 * this.simHeight, 40.0],
+        [0.93 * this.simWidth, 0.65 * this.simHeight, 45.0],
+        [0.94 * this.simWidth, 0.40 * this.simHeight, 45.0],
+        [0.92 * this.simWidth, 0.18 * this.simHeight, 40.0],
+        [0.35 * this.simWidth, 0.08 * this.simHeight, 50.0],
+        [0.65 * this.simWidth, 0.05 * this.simHeight, 50.0]
+      ];
 
       for (let i = 0; i < this.numAgents; i++) {
         let seedX, seedY;
-        if (Math.random() < 0.65) {
-          // Concentrate around header and margins
-          const base = seedPoints[i % seedPoints.length];
-          seedX = Math.max(1, Math.min(this.simWidth - 1, base[0] + (Math.random() - 0.5) * 60.0));
-          seedY = Math.max(1, Math.min(this.simHeight - 1, base[1] + (Math.random() - 0.5) * 60.0));
+        const roll = Math.random();
+        if (roll < 0.55) {
+          // 55% of all spores densely seeded in the top-right header beside H1
+          const cluster = headerClusters[i % headerClusters.length];
+          const angle = Math.random() * Math.PI * 2;
+          const dist = Math.sqrt(Math.random()) * cluster[2];
+          seedX = Math.max(1, Math.min(this.simWidth - 1, cluster[0] + Math.cos(angle) * dist));
+          seedY = Math.max(headerBottom, Math.min(this.simHeight - 1, cluster[1] + Math.sin(angle) * dist));
+        } else if (roll < 0.80) {
+          // 25% along margin paths
+          const node = marginNodes[i % marginNodes.length];
+          const angle = Math.random() * Math.PI * 2;
+          const dist = Math.sqrt(Math.random()) * node[2];
+          seedX = Math.max(1, Math.min(this.simWidth - 1, node[0] + Math.cos(angle) * dist));
+          seedY = Math.max(1, Math.min(this.simHeight - 1, node[1] + Math.sin(angle) * dist));
         } else {
-          // Broad atmosphere
+          // 20% broad atmospheric drift
           seedX = Math.random() * this.simWidth;
           seedY = Math.random() * this.simHeight;
         }
@@ -383,8 +400,8 @@ const SporeDrift = (() => {
       this.fboTrailA = createFBO(gl, this.texTrailA);
       this.fboTrailB = createFBO(gl, this.texTrailB);
 
-      // GPU Warm-Start: 60 iterations so drifting ribbons and trails are fully formed on frame 0
-      this.stepSimulation(60, 0, null);
+      // GPU Warm-Start: 70 iterations so drifting ribbons and trails are fully formed on frame 0
+      this.stepSimulation(70, 0, null);
     }
 
     readColors() {

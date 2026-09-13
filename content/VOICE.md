@@ -72,6 +72,52 @@ a story.
 Internal wiki cards, AGENTS.md, and scout chat digests may use desk shorthand.
 **Reader-facing stories (site drafts and the daily story routine) may not.**
 
+## No assumed general knowledge — HARD (Ryan 2026-09-13)
+
+The street-reader rule above bans desk jargon. It was being read as though
+ordinary words were safe, and they are not. A reader who has never heard of
+William Randolph Hearst, the Spanish-American War, Pulitzer, Hearst's papers, or
+any other thing an older writer takes for granted is the reader this publication
+is for. Assume they have not been taught it, do not remember it, and are not
+going to look it up.
+
+**Every proper noun arrives with the one fact the sentence needs, inside the
+sentence.** Not a definition, not a paragraph of background — a clause. "A
+newspaper owner named William Randolph Hearst." "Cursor, the tool programmers use
+to write software with an AI's help." If a name would send a reader to a search
+box to follow the sentence it is in, the sentence is not finished.
+
+This is the same standard already applied to theory words, extended to history,
+politics, business and technology. The test is identical: if a sentence needs
+knowledge the reader may not have, rewrite the sentence.
+
+Note how this interacts with *Don't assign the reader an age* below. The fix is
+never "you may remember," "the famous," "the infamous," "everyone knows," or
+"that old story about" — those hand the reader a test and tell the ones who fail
+it that the piece was written for somebody else. Supply the fact flatly and move.
+
+### Never argue with the myth
+
+Do not spend copy correcting a misconception the reader may not hold. A
+paragraph explaining that the popular version of some old story is wrong only
+works on somebody who arrived holding the popular version; to everybody else it
+is a stranger contradicting a stranger about nothing.
+
+When the received version of a thing is false, the move is to not repeat it.
+Tell what happened. Let the accurate version be the only one on the page.
+
+The correction still belongs in `research.md`, where it does its real job:
+keeping the draft from claiming something that will not survive a reader who
+does know. Research protects the piece. It does not get to appear in it.
+
+### A historical panel is a scene before it is evidence
+
+Any passage set in the past has to work as a story about people first — someone
+wanted something, someone did something, here is what happened — for a reader to
+whom the period means nothing. If the panel only lands for somebody who already
+knows why the era matters, it is doing history-lesson work and will lose the
+reader before the piece reaches its point.
+
 Link a source naturally in the sentence it supports. Reader posts do not end
 with a bibliography or a labeled source list.
 

@@ -114,8 +114,7 @@
            currentPath.endsWith('/' + stem) ||
            currentPath.endsWith(stem);
   });
-
-  // ?fx=<script-stem> forces a specific effect. Without it the effect is
+  const isEffectPage = Boolean(pageMatch) || currentPath.includes('/effects/');
   // locked to the effect page if applicable, or random across all effects.
   let chosen = pageMatch || effects[Math.floor(Math.random() * effects.length)];
   let chosenLayout = Object.keys(layouts)[Math.floor(Math.random() * Object.keys(layouts).length)];
@@ -217,6 +216,16 @@
   const createNutrientField = () => {
     const queue = [];
     const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+    const pagePoint = (clientX, clientY) => {
+      const width = Math.max(1, window.innerWidth);
+      const canvas = document.getElementById('pilo-physarum-bg');
+      const height = Math.max(1, canvas ? canvas.clientHeight : document.documentElement.scrollHeight);
+      return {
+        x: clamp((Number(clientX) || 0) / width, 0, 1),
+        y: clamp((window.scrollY + (Number(clientY) || 0)) / height, 0, 1)
+      };
+    };
 
     const habitatPoint = (clientX, clientY) => {
       const width = Math.max(1, window.innerWidth);
@@ -338,8 +347,36 @@
       }, 720);
     };
 
+    const touchBlooms = [];
+    const updateTouchMask = () => {
+      const canvas = document.getElementById('pilo-physarum-bg');
+      if (!canvas) return;
+      const now = performance.now();
+      const active = touchBlooms.filter(b => now - b.time < 18000);
+      touchBlooms.length = 0;
+      touchBlooms.push(...active);
+      if (touchBlooms.length === 0) {
+        canvas.style.removeProperty('--pilo-touch-mask');
+      } else {
+        const grads = touchBlooms.map(b => {
+          const progress = (now - b.time) / 18000;
+          const alpha = (1 - progress * 0.35).toFixed(2);
+          return `radial-gradient(circle 9.5rem at ${b.xPercent}% ${b.yPx}px, black 0%, rgba(0,0,0,${alpha}) 48%, transparent 100%)`;
+        }).join(', ');
+        canvas.style.setProperty('--pilo-touch-mask', grads);
+      }
+    };
+
     const onPointerDown = (event) => {
-      deposit(habitatPoint(event.clientX, event.clientY), 0.88, event.pointerType === 'touch' ? 0.07 : 0.052, 'inoculation');
+      const pt = pagePoint(event.clientX, event.clientY);
+      deposit(pt, 1.0, event.pointerType === 'touch' ? 0.085 : 0.065, 'inoculation');
+      touchBlooms.push({
+        xPercent: ((event.clientX / window.innerWidth) * 100).toFixed(1),
+        yPx: Math.round(window.scrollY + event.clientY),
+        time: performance.now()
+      });
+      if (touchBlooms.length > 8) touchBlooms.shift();
+      updateTouchMask();
     };
 
     let selectionTimer = 0;
@@ -411,6 +448,10 @@
     document.body.dataset.piloFxLayout = chosenLayout;
     document.body.dataset.piloFxEffect = config.effect;
     canvas.dataset.piloFxLayout = chosenLayout;
+    if (isEffectPage) {
+      document.body.dataset.piloPage = 'effect';
+      canvas.dataset.piloPage = 'effect';
+    }
     canvas.style.setProperty('--pilo-fx-intensity', String(layout.intensity));
     return config;
   };

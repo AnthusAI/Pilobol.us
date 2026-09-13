@@ -21,10 +21,12 @@ const Lichen = (() => {
 
     uniform sampler2D uState;
     uniform vec2 uResolution;
+    uniform float uTime;
     uniform float uResistanceScale;
     uniform float uResistanceAmplitude;
     uniform float uRelaxation;
     uniform float uDecay;
+    uniform vec4 uTaps[4];
 
     float hash(vec2 p) { return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x)))); }
 
@@ -41,18 +43,38 @@ const Lichen = (() => {
       }
       float avg = sum / 8.0;
 
-      // A static per-pixel resistance (does not depend on time, only
-      // position) stands in for the substrate's own texture -- growth only
-      // takes where the neighborhood average clears the local resistance,
-      // so the colony's edge comes out irregular and patchy rather than a
-      // smooth expanding circle.
-      float resistance = hash(vUv * uResolution * uResistanceScale) * uResistanceAmplitude;
+      // Slow dynamic micro-variation keeps lichen frontiers continually breathing and creeping
+      float timeWobble = sin(uTime * 0.4 + vUv.x * 6.0 + vUv.y * 8.0) * 0.05;
+
+      // Static per-pixel resistance field + time micro-wobble
+      float resistance = hash(vUv * uResolution * uResistanceScale) * (uResistanceAmplitude + timeWobble);
       float target = avg > resistance ? 1.0 : val * (1.0 - uDecay);
-      // Slow relaxation toward the target -- this is what makes the spread
-      // gradual instead of the whole frontier jumping in one step.
+      
+      // Slow relaxation toward target
       float nextVal = mix(val, target, uRelaxation);
 
-      outColor = vec4(nextVal, 0.0, 0.0, 1.0);
+      // Continuous subtle renewal: very rare spontaneous thallus crust spore in margins
+      float spontaneous = hash(vUv * 45.0 + vec2(uTime * 0.05, 3.14));
+      if (spontaneous > 0.9997 && avg > 0.02) {
+        nextVal = max(nextVal, 0.6);
+      }
+
+      // Smooth circular tap inoculation: new lichen crust blooms directly under touch
+      for (int i = 0; i < 4; i++) {
+        if (uTaps[i].z > 0.0 && uTaps[i].w > 0.0) {
+          vec2 tapCoord = uTaps[i].xy;
+          vec2 aspectDiff = (vUv - tapCoord) * vec2(uResolution.x / uResolution.y, 1.0);
+          float dist = length(aspectDiff);
+          float rad = uTaps[i].z;
+          if (dist < rad) {
+            float falloff = smoothstep(rad, 0.0, dist);
+            float mottle = 0.8 + 0.2 * hash(vUv * 60.0 + uTaps[i].xy * 17.0);
+            nextVal = max(nextVal, falloff * mottle * uTaps[i].w);
+          }
+        }
+      }
+
+      outColor = vec4(clamp(nextVal, 0.0, 1.0), 0.0, 0.0, 1.0);
     }
   `;
 
@@ -84,21 +106,19 @@ const Lichen = (() => {
       val += texture(uState, vUv + vec2(texel.x, -texel.y)).r * 0.025;
       val += texture(uState, vUv + vec2(-texel.x, texel.y)).r * 0.025;
 
-      float a = smoothstep(0.15, 0.6, val);
-      // A static mottling texture multiplied into the alpha -- crustose
-      // lichen isn't a flat wash of color, it's grainy/textured even within
-      // a single colony patch.
+      float a = smoothstep(0.12, 0.55, val);
+      // Crustose lichen mottling texture
       float mottle = 0.75 + 0.25 * hash(vUv * uResolution * 1.3);
 
       vec3 col = mix(uColorTip, uColorMid, smoothstep(0.0, 0.5, a));
       col = mix(col, uColorBase, smoothstep(0.4, 1.0, a));
 
-      // See dla-v1.js fsScreen for why this rare tiny highlight exists.
+      // Tiny glint highlight
       float glintGate = step(0.986, fract(sin(dot(vUv, vec2(41.3, 289.1))) * 43758.5453));
       float glint = glintGate * smoothstep(0.85, 1.0, a) * 0.12;
       col = mix(col, vec3(1.0), glint);
 
-      float alpha = a * mottle * 0.65 * uOpacity * uFade;
+      float alpha = a * mottle * 0.75 * uOpacity * uFade;
       outColor = vec4(col * alpha, alpha);
     }
   `;
@@ -117,30 +137,11 @@ const Lichen = (() => {
     return {
       presetName: typeof source.preset === 'string' ? source.preset : '',
       opacity: Math.max(0, Math.min(1, finite(source.opacity ?? source.intensity ?? root.opacity ?? root.intensity, 0.72))),
-      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 4200)),
+      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 400)),
       motionScale: Math.max(0, Math.min(1, finite(source.motionScale ?? root.motionScale, 1))),
       reducedMotion: Boolean(source.reducedMotion ?? root.reducedMotion ?? (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)),
       seedRegions: Array.isArray(source.seedRegions ?? root.seedRegions) ? (source.seedRegions ?? root.seedRegions) : []
     };
-  }
-
-  function pickSeed(regions, width, height, fallback) {
-    if (!regions.length) return fallback();
-    const total = regions.reduce((sum, region) => sum + Math.max(0, Number(region.weight) || 0), 0);
-    let roll = Math.random() * (total || regions.length);
-    let selected = regions[0];
-    for (const region of regions) {
-      roll -= total ? Math.max(0, Number(region.weight) || 0) : 1;
-      if (roll <= 0) { selected = region; break; }
-    }
-    const radiusX = Math.max(0, Number(selected.radiusX ?? selected.radius) || 0.08);
-    const radiusY = Math.max(0, Number(selected.radiusY ?? selected.radius) || 0.08);
-    const x = Number.isFinite(Number(selected.x)) ? Number(selected.x) : Math.random();
-    const y = Number.isFinite(Number(selected.y)) ? Number(selected.y) : Math.random();
-    return [
-      Math.max(0, Math.min(width - 1, (x + (Math.random() - 0.5) * radiusX) * width)),
-      Math.max(0, Math.min(height - 1, (1 - y + (Math.random() - 0.5) * radiusY) * height))
-    ];
   }
 
   class Simulation {
@@ -155,13 +156,10 @@ const Lichen = (() => {
       }
 
       this.fx = readFxConfig('lichen');
-      // Surface families vary the substrate rather than the colour: dusting
-      // stays granular, islands joins into rounded colonies, and old-wall
-      // spreads as patient, resistant patches.
       this.presets = {
-        dusting: { seedCount: 34, seedRadius: [1, 2], resistanceScale: 1.30, resistanceAmplitude: 0.70, relaxation: 0.018, decay: 0.0012 },
-        islands: { seedCount: 9, seedRadius: [4, 7], resistanceScale: 0.42, resistanceAmplitude: 0.34, relaxation: 0.035, decay: 0.0003 },
-        'old-wall': { seedCount: 19, seedRadius: [2, 5], resistanceScale: 0.82, resistanceAmplitude: 0.54, relaxation: 0.022, decay: 0.00065 }
+        dusting: { seedCount: 48, seedRadius: [2, 4], resistanceScale: 1.30, resistanceAmplitude: 0.65, relaxation: 0.035, decay: 0.0006 },
+        islands: { seedCount: 22, seedRadius: [4, 8], resistanceScale: 0.42, resistanceAmplitude: 0.32, relaxation: 0.045, decay: 0.0002 },
+        'old-wall': { seedCount: 32, seedRadius: [3, 6], resistanceScale: 0.82, resistanceAmplitude: 0.50, relaxation: 0.038, decay: 0.0004 }
       };
       const presetNames = Object.keys(this.presets);
       const chosenName = this.presets[this.fx.presetName]
@@ -169,6 +167,9 @@ const Lichen = (() => {
         : presetNames[Math.floor(Math.random() * presetNames.length)];
       this.currentPreset = this.presets[chosenName];
       this.canvas.dataset.piloFxVariant = chosenName;
+
+      this.emptyTaps = new Float32Array(16);
+      this.activeTaps = [];
 
       this.colorBase = [0, 0, 0];
       this.colorTip = [1, 1, 1];
@@ -238,10 +239,34 @@ const Lichen = (() => {
     resetTextures() {
       const gl = this.gl;
       const data = new Float32Array(this.simWidth * this.simHeight * 4);
-      // A handful of small colony seeds, scattered across the full canvas.
+
+      // Distribute initial lichen colonies across header, margins, and body
+      const seedPoints = [];
+      if (this.fx.seedRegions && this.fx.seedRegions.length) {
+        for (const r of this.fx.seedRegions) {
+          seedPoints.push([r.x * this.simWidth, (1 - r.y) * this.simHeight]);
+        }
+      }
+      const fallbackNodes = [
+        [0.72 * this.simWidth, 0.86 * this.simHeight],
+        [0.85 * this.simWidth, 0.80 * this.simHeight],
+        [0.65 * this.simWidth, 0.88 * this.simHeight],
+        [0.08 * this.simWidth, 0.75 * this.simHeight],
+        [0.06 * this.simWidth, 0.50 * this.simHeight],
+        [0.09 * this.simWidth, 0.25 * this.simHeight],
+        [0.93 * this.simWidth, 0.65 * this.simHeight],
+        [0.94 * this.simWidth, 0.40 * this.simHeight],
+        [0.92 * this.simWidth, 0.18 * this.simHeight],
+        [0.35 * this.simWidth, 0.08 * this.simHeight],
+        [0.65 * this.simWidth, 0.05 * this.simHeight]
+      ];
+      for (const node of fallbackNodes) seedPoints.push(node);
+
       const seedCount = this.currentPreset.seedCount;
       for (let s = 0; s < seedCount; s++) {
-        const [cx, cy] = pickSeed(this.fx.seedRegions, this.simWidth, this.simHeight, () => [Math.random() * this.simWidth, Math.random() * this.simHeight]);
+        const base = seedPoints[s % seedPoints.length];
+        const cx = Math.max(2, Math.min(this.simWidth - 3, base[0] + (Math.random() - 0.5) * 24.0));
+        const cy = Math.max(2, Math.min(this.simHeight - 3, base[1] + (Math.random() - 0.5) * 24.0));
         const r = this.currentPreset.seedRadius[0] + Math.floor(Math.random() * (this.currentPreset.seedRadius[1] - this.currentPreset.seedRadius[0] + 1));
         for (let y = Math.max(0, Math.floor(cy - r)); y < Math.min(this.simHeight, Math.ceil(cy + r)); y++) {
           for (let x = Math.max(0, Math.floor(cx - r)); x < Math.min(this.simWidth, Math.ceil(cx + r)); x++) {
@@ -249,11 +274,14 @@ const Lichen = (() => {
             if (dx * dx + dy * dy <= r * r) {
               const idx = (y * this.simWidth + x) * 4;
               data[idx] = 1.0;
+              data[idx + 3] = 1.0;
             }
           }
         }
       }
-      for (let i = 3; i < data.length; i += 4) data[i] = 1.0;
+      for (let i = 3; i < data.length; i += 4) {
+        if (data[i] === 0) data[i] = 1.0;
+      }
 
       const createTex = (d) => {
         const tex = gl.createTexture();
@@ -274,6 +302,9 @@ const Lichen = (() => {
       this.fboB = gl.createFramebuffer();
       gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
       gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, this.texB, 0);
+
+      // GPU Warm-Start: 80 iterations on frame 0 so full crustose pattern is immediately visible
+      this.stepSimulation(80, 0, null);
     }
 
     readColors() {
@@ -289,40 +320,71 @@ const Lichen = (() => {
       document.body.removeChild(div);
     }
 
-    render(timestamp) {
-      if (!this.running) return;
-      requestAnimationFrame((t) => this.render(t));
-
-      if (!this.lastTime) this.lastTime = timestamp;
-      if (timestamp - this.lastTime < 180) return;
-      this.lastTime = timestamp;
-
-      this.time += 0.01 * (this.fx.reducedMotion ? 0.12 : this.fx.motionScale);
-      if (Math.floor(this.time * 100) % 60 === 0) {
-        this.readColors();
-      }
-
+    stepSimulation(iterations, simTime, tapData) {
       const gl = this.gl;
-      if (window.__piloNutrients) {
-        window.__piloNutrients.paint(gl, this.texA, this.simWidth, this.simHeight, 'density');
-      }
       gl.bindVertexArray(this.vao);
-
       gl.useProgram(this.progProcess);
       gl.uniform2f(gl.getUniformLocation(this.progProcess, 'uResolution'), this.simWidth, this.simHeight);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uResistanceScale'), this.currentPreset.resistanceScale);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uResistanceAmplitude'), this.currentPreset.resistanceAmplitude);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uRelaxation'), this.currentPreset.relaxation);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uDecay'), this.currentPreset.decay);
+      gl.uniform4fv(gl.getUniformLocation(this.progProcess, 'uTaps'), tapData || this.emptyTaps);
 
-      gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
-      gl.viewport(0, 0, this.simWidth, this.simHeight);
-      gl.bindTexture(gl.TEXTURE_2D, this.texA);
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      for (let i = 0; i < iterations; i++) {
+        gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uTime'), simTime + i * 0.05);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
+        gl.viewport(0, 0, this.simWidth, this.simHeight);
+        gl.bindTexture(gl.TEXTURE_2D, this.texA);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
 
-      let tempTex = this.texA; this.texA = this.texB; this.texB = tempTex;
-      let tempFbo = this.fboA; this.fboA = this.fboB; this.fboB = tempFbo;
+        let tempTex = this.texA; this.texA = this.texB; this.texB = tempTex;
+        let tempFbo = this.fboA; this.fboA = this.fboB; this.fboB = tempFbo;
+      }
+    }
 
+    render(timestamp) {
+      if (!this.running) return;
+      requestAnimationFrame((t) => this.render(t));
+
+      if (!this.lastTime) this.lastTime = timestamp;
+      if (timestamp - this.lastTime < 32) return; // ~30 FPS cadence
+      this.lastTime = timestamp;
+
+      this.time += 0.015 * (this.fx.reducedMotion ? 0.15 : this.fx.motionScale);
+      if (Math.floor(this.time * 100) % 60 === 0) {
+        this.readColors();
+      }
+
+      // Inoculate user taps directly as smooth shader uniforms
+      if (window.__piloNutrients) {
+        const deposits = window.__piloNutrients.drain(4);
+        for (const item of deposits) {
+          this.activeTaps.push({
+            x: item.x,
+            y: 1.0 - item.y, // WebGL UV bottom-up
+            radius: item.radius * 1.5,
+            strength: item.strength,
+            framesLeft: 8
+          });
+        }
+      }
+      const tapData = new Float32Array(16);
+      for (let i = 0; i < this.activeTaps.length && i < 4; i++) {
+        const tap = this.activeTaps[i];
+        tapData[i * 4 + 0] = tap.x;
+        tapData[i * 4 + 1] = tap.y;
+        tapData[i * 4 + 2] = tap.radius;
+        tapData[i * 4 + 3] = tap.strength;
+        tap.framesLeft--;
+      }
+      this.activeTaps = this.activeTaps.filter(t => t.framesLeft > 0);
+
+      const stepsPerFrame = this.fx.reducedMotion ? 1 : 2;
+      this.stepSimulation(stepsPerFrame, this.time, tapData);
+
+      // Screen Pass
+      const gl = this.gl;
       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
       gl.viewport(0, 0, this.canvas.width, this.canvas.height);
       gl.clearColor(0, 0, 0, 0);

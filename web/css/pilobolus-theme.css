@@ -954,15 +954,37 @@
        derives from the actual column width but bottoms out at about one
        mobile side-padding, so it remains perceptible at 320px wide. */
     mask-image:
+      var(--pilo-touch-mask, radial-gradient(circle 0 at 0 0, transparent 0, transparent 0)),
       radial-gradient(ellipse var(--pilo-fx-header-width, 46rem) var(--pilo-fx-header-height, 22rem) at var(--pilo-fx-header-x, 72%) 9rem, black 0%, rgba(0, 0, 0, .85) 45%, rgba(0, 0, 0, .28) 75%, transparent 100%),
       linear-gradient(to right, black 0, black calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) - var(--pilo-fx-gutter)), rgba(0, 0, 0, .46) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + .8rem), transparent calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + 3rem), transparent calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - 3rem), rgba(0, 0, 0, .46) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - .8rem), black calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) + var(--pilo-fx-gutter)), black 100%),
       radial-gradient(ellipse var(--pilo-fx-footer-width, 70%) var(--pilo-fx-footer-height, 19rem) at 55% 103%, black 0%, rgba(0, 0, 0, .64) 39%, rgba(0, 0, 0, .18) 70%, transparent 100%);
     -webkit-mask-image:
+      var(--pilo-touch-mask, radial-gradient(circle 0 at 0 0, transparent 0, transparent 0)),
       radial-gradient(ellipse var(--pilo-fx-header-width, 46rem) var(--pilo-fx-header-height, 22rem) at var(--pilo-fx-header-x, 72%) 9rem, black 0%, rgba(0, 0, 0, .85) 45%, rgba(0, 0, 0, .28) 75%, transparent 100%),
       linear-gradient(to right, black 0, black calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) - var(--pilo-fx-gutter)), rgba(0, 0, 0, .46) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + .8rem), transparent calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + 3rem), transparent calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - 3rem), rgba(0, 0, 0, .46) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - .8rem), black calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) + var(--pilo-fx-gutter)), black 100%),
       radial-gradient(ellipse var(--pilo-fx-footer-width, 70%) var(--pilo-fx-footer-height, 19rem) at 55% 103%, black 0%, rgba(0, 0, 0, .64) 39%, rgba(0, 0, 0, .18) 70%, transparent 100%);
-    mask-composite: add, add;
-    -webkit-mask-composite: source-over, source-over;
+    mask-composite: add, add, add;
+    -webkit-mask-composite: source-over, source-over, source-over;
+  }
+
+  /* Dedicated effect showcase pages: full canvas exposure */
+  .markus-body[data-pilo-page="effect"] .pilo-physarum-canvas {
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+    opacity: calc(var(--pilo-fx-opacity) * var(--pilo-fx-intensity, 0.72) * 0.95);
+  }
+  .markus-body[data-pilo-page="effect"] .markus-document {
+    background: rgba(245, 243, 237, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 8px;
+    padding: 2.2rem 2.6rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    .markus-body[data-pilo-page="effect"] .markus-document {
+      background: rgba(30, 29, 27, 0.88);
+    }
   }
 
   /* Reaction-diffusion is made of fine boundaries rather than broad opaque

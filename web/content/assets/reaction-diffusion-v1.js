@@ -15,10 +15,12 @@ const ReactionDiffusion = (() => {
     
     uniform sampler2D uState;
     uniform vec2 uResolution;
+    uniform float uTime;
     uniform float f;
     uniform float k;
     uniform float dA;
     uniform float dB;
+    uniform vec4 uTaps[4];
     
     void main() {
       vec2 texel = 1.0 / uResolution;
@@ -38,8 +40,28 @@ const ReactionDiffusion = (() => {
       
       float reaction = A * B * B;
       
-      float nextA = A + (dA * laplace.r - reaction + f * (1.0 - A));
-      float nextB = B + (dB * laplace.g + reaction - (k + f) * B);
+      // Subtle dynamic spatio-temporal modulation keeps the Gray-Scott patterns continually
+      // dividing, branching, and evolving rather than locking into a dead static state
+      float localF = f + sin(uTime * 0.15 + vUv.x * 6.28) * 0.0008;
+      float localK = k + cos(uTime * 0.12 + vUv.y * 6.28) * 0.0008;
+      
+      float nextA = A + (dA * laplace.r - reaction + localF * (1.0 - A));
+      float nextB = B + (dB * laplace.g + reaction - (localK + localF) * B);
+      
+      // Smooth circular tap inoculation: inject chemical B at user touch spots
+      for (int i = 0; i < 4; i++) {
+        if (uTaps[i].z > 0.0 && uTaps[i].w > 0.0) {
+          vec2 tapCoord = uTaps[i].xy;
+          vec2 aspectDiff = (vUv - tapCoord) * vec2(uResolution.x / uResolution.y, 1.0);
+          float dist = length(aspectDiff);
+          float rad = uTaps[i].z;
+          if (dist < rad) {
+            float falloff = smoothstep(rad, 0.0, dist);
+            nextB = max(nextB, falloff * 0.92);
+            nextA = min(nextA, 1.0 - falloff * 0.75);
+          }
+        }
+      }
       
       outColor = vec4(clamp(nextA, 0.0, 1.0), clamp(nextB, 0.0, 1.0), 0.0, 1.0);
     }
@@ -68,28 +90,19 @@ const ReactionDiffusion = (() => {
         texture(uState, vUv - vec2(0.0, texel.y)).g
       ) * 0.25;
 
-      // Show the living boundary and mid-concentration bands, not merely a
-      // smooth, filled B-concentration blob. This is where the recognisable
-      // coral / mitosis / maze structure lives in a Gray-Scott field.
-      float band = smoothstep(0.045, 0.15, B) * (1.0 - smoothstep(0.34, 0.54, B));
-      float core = smoothstep(0.20, 0.44, B);
-      float boundary = smoothstep(0.006, 0.075, abs(B - neighbours));
-      float val = clamp(band * 0.74 + core * 0.34 + boundary * 0.68, 0.0, 1.0);
-      // See physarum-v17.js fsDrawScreen for why this mixes toward uColorBase
-      // (dark ink in light mode) rather than uColorTip (accent) as density
-      // rises: the densest pattern should read as the strongest stain, not
-      // the lightest pixel on the page. Two-stage mix through uColorMid
-      // (--markus-accent-2) for a real color gradient instead of a flat
-      // two-tone interpolation.
+      float band = smoothstep(0.04, 0.15, B) * (1.0 - smoothstep(0.34, 0.54, B));
+      float core = smoothstep(0.18, 0.44, B);
+      float boundary = smoothstep(0.005, 0.075, abs(B - neighbours));
+      float val = clamp(band * 0.74 + core * 0.38 + boundary * 0.70, 0.0, 1.0);
+      
       vec3 col = mix(uColorTip, uColorMid, smoothstep(0.0, 0.5, val));
       col = mix(col, uColorBase, smoothstep(0.4, 1.0, val));
 
-      // See dla-v1.js fsScreen for why this rare tiny highlight exists.
       float glintGate = step(0.986, fract(sin(dot(vUv, vec2(41.3, 289.1))) * 43758.5453));
       float glint = glintGate * smoothstep(0.85, 1.0, val) * 0.12;
       col = mix(col, vec3(1.0), glint);
 
-      float alpha = val * 0.92 * uOpacity * uFade;
+      float alpha = val * 0.95 * uOpacity * uFade;
       outColor = vec4(col * alpha, alpha);
     }
   `;
@@ -100,44 +113,21 @@ const ReactionDiffusion = (() => {
     return [parseInt(match[1])/255, parseInt(match[2])/255, parseInt(match[3])/255];
   }
 
-  // Optional manager contract. Standalone effect pages continue to use the
-  // built-in random presets when no config was published.
   function readFxConfig(name, presets) {
     const root = window.__piloFxConfig || {};
     const scoped = (root.effects && root.effects[name]) || root[name] || {};
     const source = typeof scoped === 'object' ? scoped : {};
-    // Root preset names describe placement (header-bloom, footer-rise, ...),
-    // so only an effect-scoped preset may select this algorithm's variant.
     const presetName = typeof source.preset === 'string' ? source.preset : '';
     const finite = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
     return {
       presetName,
       preset: presets[presetName] || null,
       opacity: Math.max(0, Math.min(1, finite(source.opacity ?? source.intensity ?? root.opacity ?? root.intensity, 0.72))),
-      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 4200)),
+      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 400)),
       motionScale: Math.max(0, Math.min(1, finite(source.motionScale ?? root.motionScale, 1))),
       reducedMotion: Boolean(source.reducedMotion ?? root.reducedMotion ?? (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)),
       seedRegions: Array.isArray(source.seedRegions ?? root.seedRegions) ? (source.seedRegions ?? root.seedRegions) : []
     };
-  }
-
-  function pickSeed(regions, width, height, fallback) {
-    if (!regions.length) return fallback();
-    const total = regions.reduce((sum, region) => sum + Math.max(0, Number(region.weight) || 0), 0);
-    let roll = Math.random() * (total || regions.length);
-    let selected = regions[0];
-    for (const region of regions) {
-      roll -= total ? Math.max(0, Number(region.weight) || 0) : 1;
-      if (roll <= 0) { selected = region; break; }
-    }
-    const radiusX = Math.max(0, Number(selected.radiusX ?? selected.radius) || 0.08);
-    const radiusY = Math.max(0, Number(selected.radiusY ?? selected.radius) || 0.08);
-    const x = Number.isFinite(Number(selected.x)) ? Number(selected.x) : Math.random();
-    const y = Number.isFinite(Number(selected.y)) ? Number(selected.y) : Math.random();
-    return [
-      Math.max(0, Math.min(width - 1, (x + (Math.random() - 0.5) * radiusX) * width)),
-      Math.max(0, Math.min(height - 1, (1 - y + (Math.random() - 0.5) * radiusY) * height))
-    ];
   }
 
   class Simulation {
@@ -146,10 +136,6 @@ const ReactionDiffusion = (() => {
       this.gl = canvas.getContext('webgl2', { alpha: true, antialias: false });
       if (!this.gl) throw new Error("WebGL2 not supported");
 
-      // Required before any RGBA32F texture is attached to a framebuffer.
-      // Without it WebGL2 float textures are not color-renderable and every
-      // draw fails with 'Framebuffer is incomplete: Attachment is not
-      // renderable', leaving the canvas blank with no visible error.
       if (!this.gl.getExtension('EXT_color_buffer_float')) {
         console.warn('reaction-diffusion: EXT_color_buffer_float unavailable; skipping effect');
         return;
@@ -163,8 +149,6 @@ const ReactionDiffusion = (() => {
 
       this.fx = readFxConfig('reaction-diffusion', this.presets);
 
-      // An explicitly named profile is exact; only the unconfigured gallery
-      // chooses a point inside the deliberately narrow family range.
       const chooseRange = (min, max) => this.fx.preset ? (min + max) / 2 : min + Math.random() * (max - min);
       const keys = Object.keys(this.presets);
       const chosen = this.fx.preset ? this.fx.presetName : keys[Math.floor(Math.random() * keys.length)];
@@ -176,12 +160,10 @@ const ReactionDiffusion = (() => {
         dA: 1.0,
         dB: 0.5
       };
-      this.warmupRemaining = 600;
 
-      // See physarum-v17.js constructor for why readColors() is called here
-      // immediately rather than left to the periodic call ~60 frames in --
-      // that's now ~11 real seconds of using these arbitrary placeholder
-      // colors instead of the theme's actual palette.
+      this.emptyTaps = new Float32Array(16);
+      this.activeTaps = [];
+
       this.colorBase = [0, 0, 0];
       this.colorTip = [1, 1, 1];
       this.colorMid = [0.6, 0.6, 0.6];
@@ -237,9 +219,6 @@ const ReactionDiffusion = (() => {
     }
     
     resize() {
-      // One simulation pixel becomes four CSS pixels. That is large enough
-      // for the characteristic cellular bands to survive page compositing,
-      // while keeping a full-document framebuffer practical on mobile.
       const pageHeight = Math.max(window.innerHeight, this.canvas.clientHeight || 0);
       const maxCanvas = this.gl.getParameter(this.gl.MAX_RENDERBUFFER_SIZE) || 8192;
       const dprLimit = pageHeight > window.innerHeight * 2 ? 1.25 : 2.0;
@@ -261,20 +240,34 @@ const ReactionDiffusion = (() => {
         data[i+3] = 1.0;
       }
       
-      // Many small inoculation points generate separated fronts and cellular
-      // interiors. The old 5-10px discs were so large that their first phase
-      // read as a handful of creeping radial gradients.
-      const seedCount = Math.max(24, Math.min(48, Math.round(this.simHeight / 26)));
+      // Habitat coverage nodes (header bloom whitespace, left/right margins, footer)
+      const seedPoints = [];
+      if (this.fx.seedRegions && this.fx.seedRegions.length) {
+        for (const r of this.fx.seedRegions) {
+          seedPoints.push([r.x * this.simWidth, (1 - r.y) * this.simHeight]);
+        }
+      }
+      const fallbackCoverage = [
+        [0.70 * this.simWidth, 0.85 * this.simHeight],
+        [0.86 * this.simWidth, 0.80 * this.simHeight],
+        [0.08 * this.simWidth, 0.75 * this.simHeight],
+        [0.06 * this.simWidth, 0.50 * this.simHeight],
+        [0.09 * this.simWidth, 0.25 * this.simHeight],
+        [0.93 * this.simWidth, 0.65 * this.simHeight],
+        [0.94 * this.simWidth, 0.40 * this.simHeight],
+        [0.92 * this.simWidth, 0.18 * this.simHeight],
+        [0.35 * this.simWidth, 0.06 * this.simHeight],
+        [0.65 * this.simWidth, 0.04 * this.simHeight]
+      ];
+      for (const p of fallbackCoverage) seedPoints.push(p);
+
+      const seedCount = Math.max(32, Math.min(64, Math.round(this.simHeight / 20)));
       for (let s = 0; s < seedCount; s++) {
-        let isLeft = Math.random() > 0.5;
-        const [seedX, seedY] = pickSeed(this.fx.seedRegions, this.simWidth, this.simHeight, () => [
-          isLeft ? Math.random() * (this.simWidth * 0.25) : this.simWidth - Math.random() * (this.simWidth * 0.25),
-          Math.random() * this.simHeight
-        ]);
-        let cx = seedX;
-        let cy = seedY;
+        const base = seedPoints[s % seedPoints.length];
+        const cx = Math.max(2, Math.min(this.simWidth - 3, base[0] + (Math.random() - 0.5) * 24.0));
+        const cy = Math.max(2, Math.min(this.simHeight - 3, base[1] + (Math.random() - 0.5) * 24.0));
         
-        let radius = 1.25 + Math.random() * 1.5;
+        let radius = 1.5 + Math.random() * 2.0;
         for (let y = Math.max(0, Math.floor(cy - radius)); y < Math.min(this.simHeight, cy + radius); y++) {
           for (let x = Math.max(0, Math.floor(cx - radius)); x < Math.min(this.simWidth, cx + radius); x++) {
             let dist = Math.sqrt((x - cx)*(x - cx) + (y - cy)*(y - cy));
@@ -307,7 +300,9 @@ const ReactionDiffusion = (() => {
       this.fboB = gl.createFramebuffer();
       gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
       gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, this.texB, 0);
-      this.warmupRemaining = 600;
+
+      // GPU Warm-Start: run 450 passes synchronously so patterns are fully formed on frame 0
+      this.stepSimulation(450, 0, null);
     }
     
     readColors() {
@@ -323,43 +318,18 @@ const ReactionDiffusion = (() => {
       document.body.removeChild(div);
     }
 
-    render(timestamp) {
-      if (!this.running) return;
-      requestAnimationFrame((t) => this.render(t));
-      
-      // The display remains deliberately unhurried, but chemical time cannot
-      // run at display time: Gray-Scott structure takes hundreds of numerical
-      // iterations to form. The old one-step/150ms loop needed minutes before
-      // it showed anything beyond the initial soft discs.
-      if (!this.lastTime) this.lastTime = timestamp;
-      if (timestamp - this.lastTime < 120) return;
-      this.lastTime = timestamp;
-      
-      this.time += 0.01 * (this.fx.reducedMotion ? 0.12 : this.fx.motionScale);
-      if (Math.floor(this.time * 100) % 60 === 0) {
-          this.readColors();
-      }
-      
+    stepSimulation(iterations, simTime, tapData) {
       const gl = this.gl;
-      if (window.__piloNutrients) {
-        window.__piloNutrients.paint(gl, this.texA, this.simWidth, this.simHeight, 'reaction');
-      }
       gl.bindVertexArray(this.vao);
-      
-      // Process Pass
       gl.useProgram(this.progProcess);
       gl.uniform2f(gl.getUniformLocation(this.progProcess, "uResolution"), this.simWidth, this.simHeight);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, "uTime"), simTime);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, "f"), this.currentPreset.f);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, "k"), this.currentPreset.k);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, "dA"), this.currentPreset.dA);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, "dB"), this.currentPreset.dB);
+      gl.uniform4fv(gl.getUniformLocation(this.progProcess, "uTaps"), tapData || this.emptyTaps);
 
-      const baseIterations = this.fx.reducedMotion
-        ? 1
-        : Math.max(6, Math.round(12 * this.fx.motionScale));
-      const warmupIterations = Math.min(30, this.warmupRemaining);
-      const iterations = baseIterations + warmupIterations;
-      this.warmupRemaining = Math.max(0, this.warmupRemaining - warmupIterations);
       for (let i = 0; i < iterations; i++) {
         gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
         gl.viewport(0, 0, this.simWidth, this.simHeight);
@@ -369,8 +339,50 @@ const ReactionDiffusion = (() => {
         let tempTex = this.texA; this.texA = this.texB; this.texB = tempTex;
         let tempFbo = this.fboA; this.fboA = this.fboB; this.fboB = tempFbo;
       }
+    }
+
+    render(timestamp) {
+      if (!this.running) return;
+      requestAnimationFrame((t) => this.render(t));
+      
+      if (!this.lastTime) this.lastTime = timestamp;
+      if (timestamp - this.lastTime < 32) return; // ~30 FPS cadence
+      this.lastTime = timestamp;
+      
+      this.time += 0.015 * (this.fx.reducedMotion ? 0.15 : this.fx.motionScale);
+      if (Math.floor(this.time * 100) % 60 === 0) {
+        this.readColors();
+      }
+      
+      // Drain nutrients and pass as smooth shader uniforms
+      if (window.__piloNutrients) {
+        const deposits = window.__piloNutrients.drain(4);
+        for (const item of deposits) {
+          this.activeTaps.push({
+            x: item.x,
+            y: 1.0 - item.y, // WebGL UV bottom-up
+            radius: item.radius * 1.5,
+            strength: item.strength,
+            framesLeft: 8
+          });
+        }
+      }
+      const tapData = new Float32Array(16);
+      for (let i = 0; i < this.activeTaps.length && i < 4; i++) {
+        const tap = this.activeTaps[i];
+        tapData[i * 4 + 0] = tap.x;
+        tapData[i * 4 + 1] = tap.y;
+        tapData[i * 4 + 2] = tap.radius;
+        tapData[i * 4 + 3] = tap.strength;
+        tap.framesLeft--;
+      }
+      this.activeTaps = this.activeTaps.filter(t => t.framesLeft > 0);
+
+      const stepsPerFrame = this.fx.reducedMotion ? 2 : Math.max(6, Math.round(10 * this.fx.motionScale));
+      this.stepSimulation(stepsPerFrame, this.time, tapData);
       
       // Screen Pass
+      const gl = this.gl;
       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
       gl.viewport(0, 0, this.canvas.width, this.canvas.height);
       gl.clearColor(0, 0, 0, 0);

@@ -1,11 +1,4 @@
 // Diffusion-Limited Aggregation: dendritic frost/coral branching.
-//
-// Classic DLA (Witten & Sander 1981) walks random particles until they touch
-// existing structure and freeze there. A literal random-walk needs one agent
-// per particle; this is a shader-friendly approximation of the same visual
-// result -- a cell freezes with a small, per-step probability if it already
-// borders frozen structure -- which produces the same sparse, branching
-// "growth reaches out, doesn't fill in" look without per-particle tracking.
 const DLA = (() => {
   const vsQuad = `#version 300 es
     in vec2 position;
@@ -27,8 +20,9 @@ const DLA = (() => {
     uniform float uFrontierThreshold;
     uniform float uFreezeChance;
     uniform float uErosion;
+    uniform vec4 uTaps[4];
 
-    float hash(vec2 p) { return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x)))); }
+    float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453123); }
 
     void main() {
       vec2 texel = 1.0 / uResolution;
@@ -42,23 +36,33 @@ const DLA = (() => {
         }
       }
 
-      float roll = hash(vUv * uResolution + uTime * 41.0);
+      float roll = hash(vUv * uResolution + vec2(uTime * 37.0, 1.23));
       float nextVal = val;
-      // Freeze only at the frontier (touches existing structure) and only
-      // sometimes -- a low, roughly-constant freeze chance per exposed cell
-      // is what makes DLA branch sparsely instead of filling in solid the
-      // way a straight neighbor-majority rule (like the cellular-automata
-      // effect) does.
+      
+      // Freeze only at the frontier (touches existing structure)
       if (val < 0.5 && neighborSum > uFrontierThreshold && roll < uFreezeChance) {
         nextVal = 1.0;
       }
-      // Frozen structure erodes very slowly instead of being permanent, so
-      // the frost pattern keeps slowly turning over -- new branches reach
-      // out from the frontier as old growth fades, rather than the whole
-      // canvas eventually freezing solid and stopping.
+      
+      // Slow erosion allows turnover and continuous regrowth of new dendritic branches
       nextVal = max(0.0, nextVal - uErosion);
 
-      outColor = vec4(nextVal, 0.0, 0.0, 1.0);
+      // Smooth circular tap inoculation: plant new crystalline frost seeds
+      for (int i = 0; i < 4; i++) {
+        if (uTaps[i].z > 0.0 && uTaps[i].w > 0.0) {
+          vec2 tapCoord = uTaps[i].xy;
+          vec2 aspectDiff = (vUv - tapCoord) * vec2(uResolution.x / uResolution.y, 1.0);
+          float dist = length(aspectDiff);
+          float rad = uTaps[i].z;
+          if (dist < rad) {
+            float falloff = smoothstep(rad, 0.0, dist);
+            float seedNoise = hash(vUv * 80.0 + uTaps[i].xy * 23.0);
+            nextVal = max(nextVal, falloff * (0.85 + 0.15 * seedNoise));
+          }
+        }
+      }
+
+      outColor = vec4(clamp(nextVal, 0.0, 1.0), 0.0, 0.0, 1.0);
     }
   `;
 
@@ -88,22 +92,15 @@ const DLA = (() => {
       val += texture(uState, vUv + vec2(texel.x, -texel.y)).r * 0.03;
       val += texture(uState, vUv + vec2(-texel.x, texel.y)).r * 0.03;
 
-      float a = smoothstep(0.06, 0.5, val);
+      float a = smoothstep(0.04, 0.45, val);
       vec3 col = mix(uColorTip, uColorMid, smoothstep(0.0, 0.5, a));
       col = mix(col, uColorBase, smoothstep(0.4, 1.0, a));
 
-      // A fungal stain reads as darker paper, not lighter -- normal blending
-      // (see pilobolus-theme.css; multiply guaranteed darker-or-equal but
-      // could never go lighter even briefly) means the shader itself must
-      // keep results darker than the page almost always. This is the one
-      // deliberate exception: a rare, tiny bright fleck at peak density,
-      // gated to a small fraction of pixels so it reads as an occasional
-      // glinting frost crystal, not a general lightening.
       float glintGate = step(0.986, fract(sin(dot(vUv, vec2(41.3, 289.1))) * 43758.5453));
       float glint = glintGate * smoothstep(0.85, 1.0, a) * 0.12;
       col = mix(col, vec3(1.0), glint);
 
-      float alpha = a * 0.7 * uOpacity * uFade;
+      float alpha = a * 0.88 * uOpacity * uFade;
       outColor = vec4(col * alpha, alpha);
     }
   `;
@@ -122,30 +119,11 @@ const DLA = (() => {
     return {
       presetName: typeof source.preset === 'string' ? source.preset : '',
       opacity: Math.max(0, Math.min(1, finite(source.opacity ?? source.intensity ?? root.opacity ?? root.intensity, 0.72))),
-      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 4200)),
+      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 400)),
       motionScale: Math.max(0, Math.min(1, finite(source.motionScale ?? root.motionScale, 1))),
       reducedMotion: Boolean(source.reducedMotion ?? root.reducedMotion ?? (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)),
       seedRegions: Array.isArray(source.seedRegions ?? root.seedRegions) ? (source.seedRegions ?? root.seedRegions) : []
     };
-  }
-
-  function pickSeed(regions, width, height, fallback) {
-    if (!regions.length) return fallback();
-    const total = regions.reduce((sum, region) => sum + Math.max(0, Number(region.weight) || 0), 0);
-    let roll = Math.random() * (total || regions.length);
-    let selected = regions[0];
-    for (const region of regions) {
-      roll -= total ? Math.max(0, Number(region.weight) || 0) : 1;
-      if (roll <= 0) { selected = region; break; }
-    }
-    const radiusX = Math.max(0, Number(selected.radiusX ?? selected.radius) || 0.08);
-    const radiusY = Math.max(0, Number(selected.radiusY ?? selected.radius) || 0.08);
-    const x = Number.isFinite(Number(selected.x)) ? Number(selected.x) : Math.random();
-    const y = Number.isFinite(Number(selected.y)) ? Number(selected.y) : Math.random();
-    return [
-      Math.max(0, Math.min(width - 1, (x + (Math.random() - 0.5) * radiusX) * width)),
-      Math.max(0, Math.min(height - 1, (1 - y + (Math.random() - 0.5) * radiusY) * height))
-    ];
   }
 
   class Simulation {
@@ -160,13 +138,10 @@ const DLA = (() => {
       }
 
       this.fx = readFxConfig('dla');
-      // Sparse, low-contrast branch families. Frost is the finest and most
-      // transient; coral is denser and rounded; rootlets hold longer, with
-      // fewer initiation points and outward-reaching forks.
       this.presets = {
-        frost: { seedCount: 46, seedRadius: [1, 2], frontierThreshold: 0.45, freezeChance: 0.036, erosion: 0.00019 },
-        coral: { seedCount: 34, seedRadius: [2, 3], frontierThreshold: 0.30, freezeChance: 0.064, erosion: 0.00014 },
-        rootlets: { seedCount: 18, seedRadius: [1, 2], frontierThreshold: 0.55, freezeChance: 0.042, erosion: 0.000075 }
+        frost: { seedCount: 54, seedRadius: [1, 2], frontierThreshold: 0.45, freezeChance: 0.038, erosion: 0.00018 },
+        coral: { seedCount: 42, seedRadius: [2, 3], frontierThreshold: 0.30, freezeChance: 0.065, erosion: 0.00014 },
+        rootlets: { seedCount: 26, seedRadius: [1, 2], frontierThreshold: 0.52, freezeChance: 0.044, erosion: 0.00008 }
       };
       const presetNames = Object.keys(this.presets);
       const chosenName = this.presets[this.fx.presetName]
@@ -174,6 +149,9 @@ const DLA = (() => {
         : presetNames[Math.floor(Math.random() * presetNames.length)];
       this.currentPreset = this.presets[chosenName];
       this.canvas.dataset.piloFxVariant = chosenName;
+
+      this.emptyTaps = new Float32Array(16);
+      this.activeTaps = [];
 
       this.colorBase = [0, 0, 0];
       this.colorTip = [1, 1, 1];
@@ -243,13 +221,33 @@ const DLA = (() => {
     resetTextures() {
       const gl = this.gl;
       const data = new Float32Array(this.simWidth * this.simHeight * 4);
-      // Many small nucleation seeds scattered across the full canvas (not
-      // just the outer margins) -- unlike a single-source DLA cluster, this
-      // gives several independent frost structures that read well whether
-      // only a narrow strip either side of the mask ends up visible.
+
+      // Well-distributed habitat seeds
+      const seedPoints = [];
+      if (this.fx.seedRegions && this.fx.seedRegions.length) {
+        for (const r of this.fx.seedRegions) {
+          seedPoints.push([r.x * this.simWidth, (1 - r.y) * this.simHeight]);
+        }
+      }
+      const fallbackNodes = [
+        [0.70 * this.simWidth, 0.85 * this.simHeight],
+        [0.85 * this.simWidth, 0.80 * this.simHeight],
+        [0.08 * this.simWidth, 0.75 * this.simHeight],
+        [0.06 * this.simWidth, 0.50 * this.simHeight],
+        [0.09 * this.simWidth, 0.25 * this.simHeight],
+        [0.93 * this.simWidth, 0.65 * this.simHeight],
+        [0.94 * this.simWidth, 0.40 * this.simHeight],
+        [0.92 * this.simWidth, 0.18 * this.simHeight],
+        [0.35 * this.simWidth, 0.06 * this.simHeight],
+        [0.65 * this.simWidth, 0.04 * this.simHeight]
+      ];
+      for (const node of fallbackNodes) seedPoints.push(node);
+
       const seedCount = this.currentPreset.seedCount;
       for (let s = 0; s < seedCount; s++) {
-        const [cx, cy] = pickSeed(this.fx.seedRegions, this.simWidth, this.simHeight, () => [Math.random() * this.simWidth, Math.random() * this.simHeight]);
+        const base = seedPoints[s % seedPoints.length];
+        const cx = Math.max(1, Math.min(this.simWidth - 2, base[0] + (Math.random() - 0.5) * 20.0));
+        const cy = Math.max(1, Math.min(this.simHeight - 2, base[1] + (Math.random() - 0.5) * 20.0));
         const r = this.currentPreset.seedRadius[0] + Math.floor(Math.random() * (this.currentPreset.seedRadius[1] - this.currentPreset.seedRadius[0] + 1));
         for (let y = Math.max(0, Math.floor(cy - r)); y < Math.min(this.simHeight, Math.ceil(cy + r)); y++) {
           for (let x = Math.max(0, Math.floor(cx - r)); x < Math.min(this.simWidth, Math.ceil(cx + r)); x++) {
@@ -282,6 +280,9 @@ const DLA = (() => {
       this.fboB = gl.createFramebuffer();
       gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
       gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, this.texB, 0);
+
+      // GPU Warm-Start: run 75 iterations synchronously so frost crystals already branch on frame 0
+      this.stepSimulation(75, 0, null);
     }
 
     readColors() {
@@ -297,40 +298,70 @@ const DLA = (() => {
       document.body.removeChild(div);
     }
 
+    stepSimulation(iterations, simTime, tapData) {
+      const gl = this.gl;
+      gl.bindVertexArray(this.vao);
+      gl.useProgram(this.progProcess);
+      gl.uniform2f(gl.getUniformLocation(this.progProcess, 'uResolution'), this.simWidth, this.simHeight);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uFrontierThreshold'), this.currentPreset.frontierThreshold);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uFreezeChance'), this.currentPreset.freezeChance);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uErosion'), this.currentPreset.erosion);
+      gl.uniform4fv(gl.getUniformLocation(this.progProcess, 'uTaps'), tapData || this.emptyTaps);
+
+      for (let i = 0; i < iterations; i++) {
+        gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uTime'), simTime + i * 0.02);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
+        gl.viewport(0, 0, this.simWidth, this.simHeight);
+        gl.bindTexture(gl.TEXTURE_2D, this.texA);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+        let tempTex = this.texA; this.texA = this.texB; this.texB = tempTex;
+        let tempFbo = this.fboA; this.fboA = this.fboB; this.fboB = tempFbo;
+      }
+    }
+
     render(timestamp) {
       if (!this.running) return;
       requestAnimationFrame((t) => this.render(t));
 
       if (!this.lastTime) this.lastTime = timestamp;
-      if (timestamp - this.lastTime < 150) return;
+      if (timestamp - this.lastTime < 32) return; // ~30 FPS cadence
       this.lastTime = timestamp;
 
-      this.time += 0.01 * (this.fx.reducedMotion ? 0.12 : this.fx.motionScale);
+      this.time += 0.015 * (this.fx.reducedMotion ? 0.15 : this.fx.motionScale);
       if (Math.floor(this.time * 100) % 60 === 0) {
         this.readColors();
       }
 
-      const gl = this.gl;
+      // Drain nutrients and pass as smooth shader uniforms
       if (window.__piloNutrients) {
-        window.__piloNutrients.paint(gl, this.texA, this.simWidth, this.simHeight, 'density');
+        const deposits = window.__piloNutrients.drain(4);
+        for (const item of deposits) {
+          this.activeTaps.push({
+            x: item.x,
+            y: 1.0 - item.y, // WebGL UV bottom-up
+            radius: item.radius * 1.5,
+            strength: item.strength,
+            framesLeft: 8
+          });
+        }
       }
-      gl.bindVertexArray(this.vao);
+      const tapData = new Float32Array(16);
+      for (let i = 0; i < this.activeTaps.length && i < 4; i++) {
+        const tap = this.activeTaps[i];
+        tapData[i * 4 + 0] = tap.x;
+        tapData[i * 4 + 1] = tap.y;
+        tapData[i * 4 + 2] = tap.radius;
+        tapData[i * 4 + 3] = tap.strength;
+        tap.framesLeft--;
+      }
+      this.activeTaps = this.activeTaps.filter(t => t.framesLeft > 0);
 
-      gl.useProgram(this.progProcess);
-      gl.uniform2f(gl.getUniformLocation(this.progProcess, 'uResolution'), this.simWidth, this.simHeight);
-      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uTime'), this.time);
-      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uFrontierThreshold'), this.currentPreset.frontierThreshold);
-      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uFreezeChance'), this.currentPreset.freezeChance);
-      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uErosion'), this.currentPreset.erosion);
+      const stepsPerFrame = this.fx.reducedMotion ? 1 : 2;
+      this.stepSimulation(stepsPerFrame, this.time, tapData);
 
-      gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
-      gl.viewport(0, 0, this.simWidth, this.simHeight);
-      gl.bindTexture(gl.TEXTURE_2D, this.texA);
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
-
-      let tempTex = this.texA; this.texA = this.texB; this.texB = tempTex;
-      let tempFbo = this.fboA; this.fboA = this.fboB; this.fboB = tempFbo;
-
+      // Screen Pass
+      const gl = this.gl;
       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
       gl.viewport(0, 0, this.canvas.width, this.canvas.height);
       gl.clearColor(0, 0, 0, 0);

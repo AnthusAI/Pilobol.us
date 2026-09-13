@@ -23,6 +23,7 @@ const SporeDrift = (() => {
     uniform float uTime;
     uniform float uMoveSpeed;
     uniform vec2 uDrift;
+    uniform vec4 uTaps[4];
 
     float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }
 
@@ -37,9 +38,7 @@ const SporeDrift = (() => {
       return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
     }
 
-    // Curl of a scalar noise potential is divergence-free, which is what
-    // keeps a flow field looking like drifting air/current rather than
-    // particles all sliding toward or away from a point.
+    // Curl of a scalar noise potential is divergence-free
     vec2 curl(vec2 p) {
       float e = 0.7;
       float n1 = valueNoise(p + vec2(0.0, e));
@@ -58,8 +57,22 @@ const SporeDrift = (() => {
       vec2 flow = curl(pos * 0.006 + vec2(uTime * 0.03, -uTime * 0.02));
       pos += (flow + uDrift) * uMoveSpeed;
 
-      // Wrap rather than reflect: a drifting spore field should feel
-      // boundless, not bounce off the edges of the viewport.
+      // Touch responsiveness: if an agent is near a tap, burst/scatter outward
+      for (int i = 0; i < 4; i++) {
+        if (uTaps[i].z > 0.0 && uTaps[i].w > 0.0) {
+          vec2 tapCoord = uTaps[i].xy * uResolution;
+          vec2 diff = pos - tapCoord;
+          float dist = length(diff);
+          float rad = uTaps[i].z * uResolution.y;
+          if (dist < rad && dist > 0.001) {
+            float burstForce = (1.0 - dist / rad) * 12.0 * uTaps[i].w;
+            vec2 dir = diff / dist;
+            pos += dir * burstForce;
+          }
+        }
+      }
+
+      // Wrap rather than reflect
       pos = mod(pos, uResolution);
 
       outColor = vec4(pos, agent.z, 1.0);
@@ -96,6 +109,9 @@ const SporeDrift = (() => {
     uniform vec2 uResolution;
     uniform float uDiffusion;
     uniform float uDecay;
+    uniform vec4 uTaps[4];
+
+    float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453123); }
 
     void main() {
       vec2 texel = 1.0 / uResolution;
@@ -107,21 +123,24 @@ const SporeDrift = (() => {
         }
       }
       float blurred = sum / 9.0;
-      // Replacing the trail outright with its blurred average every frame
-      // (rather than mostly keeping the existing value, the way
-      // physarum-v17.js does with mix(current, blurred, 0.02)) diffuses
-      // every deposit outward every single step. Combined with continuous
-      // new deposits from agents passing back through the same areas, that
-      // grows faster than the decay term below could remove it -- verified:
-      // the whole canvas saturated to fully opaque within ~16 real seconds.
-      // A mostly-rigid mix (95% current, 5% blurred) plus decay keeps
-      // deposits as short, localized comet-tails instead.
       float finalBlur = mix(current, blurred, uDiffusion);
-      // Clamped, not just decayed: deposits are unbounded additive (however
-      // many agents land on one cell in a frame), so without a hard ceiling
-      // a recirculation hotspot in the flow field can accumulate faster
-      // than any reasonable decay rate removes it.
       float decayed = clamp(finalBlur - uDecay, 0.0, 1.0);
+
+      // Smooth circular tap deposit in the trail buffer
+      for (int i = 0; i < 4; i++) {
+        if (uTaps[i].z > 0.0 && uTaps[i].w > 0.0) {
+          vec2 tapCoord = uTaps[i].xy;
+          vec2 aspectDiff = (vUv - tapCoord) * vec2(uResolution.x / uResolution.y, 1.0);
+          float dist = length(aspectDiff);
+          float rad = uTaps[i].z;
+          if (dist < rad) {
+            float falloff = smoothstep(rad, 0.0, dist);
+            float mottle = 0.8 + 0.2 * hash(vUv * 50.0 + uTaps[i].xy * 19.0);
+            decayed = max(decayed, falloff * mottle * uTaps[i].w * 0.95);
+          }
+        }
+      }
+
       outColor = vec4(decayed, decayed, decayed, 1.0);
     }
   `;
@@ -142,13 +161,12 @@ const SporeDrift = (() => {
       vec3 col = mix(uColorTip, uColorMid, smoothstep(0.0, 0.5, val));
       col = mix(col, uColorBase, smoothstep(0.4, 1.0, val));
 
-      // See dla-v1.js fsScreen for why this rare tiny highlight exists --
-      // a spore catching light, not a general lightening of the page.
+      // Tiny glint highlight
       float glintGate = step(0.986, fract(sin(dot(vUv, vec2(41.3, 289.1))) * 43758.5453));
       float glint = glintGate * smoothstep(0.85, 1.0, val) * 0.12;
       col = mix(col, vec3(1.0), glint);
 
-      float alpha = val * 0.6 * uOpacity * uFade;
+      float alpha = val * 0.75 * uOpacity * uFade;
       outColor = vec4(col * alpha, alpha);
     }
   `;
@@ -209,30 +227,11 @@ const SporeDrift = (() => {
     return {
       presetName: typeof source.preset === 'string' ? source.preset : '',
       opacity: Math.max(0, Math.min(1, finite(source.opacity ?? source.intensity ?? root.opacity ?? root.intensity, 0.72))),
-      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 4200)),
+      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 400)),
       motionScale: Math.max(0, Math.min(1, finite(source.motionScale ?? root.motionScale, 1))),
       reducedMotion: Boolean(source.reducedMotion ?? root.reducedMotion ?? (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)),
       seedRegions: Array.isArray(source.seedRegions ?? root.seedRegions) ? (source.seedRegions ?? root.seedRegions) : []
     };
-  }
-
-  function pickSeed(regions, width, height, fallback) {
-    if (!regions.length) return fallback();
-    const total = regions.reduce((sum, region) => sum + Math.max(0, Number(region.weight) || 0), 0);
-    let roll = Math.random() * (total || regions.length);
-    let selected = regions[0];
-    for (const region of regions) {
-      roll -= total ? Math.max(0, Number(region.weight) || 0) : 1;
-      if (roll <= 0) { selected = region; break; }
-    }
-    const radiusX = Math.max(0, Number(selected.radiusX ?? selected.radius) || 0.08);
-    const radiusY = Math.max(0, Number(selected.radiusY ?? selected.radius) || 0.08);
-    const x = Number.isFinite(Number(selected.x)) ? Number(selected.x) : Math.random();
-    const y = Number.isFinite(Number(selected.y)) ? Number(selected.y) : Math.random();
-    return [
-      Math.max(0, Math.min(width - 1, (x + (Math.random() - 0.5) * radiusX) * width)),
-      Math.max(0, Math.min(height - 1, (1 - y + (Math.random() - 0.5) * radiusY) * height))
-    ];
   }
 
   class Simulation {
@@ -247,13 +246,10 @@ const SporeDrift = (() => {
       }
 
       this.fx = readFxConfig('spore-drift');
-      // Air profiles keep the same slow, stain-like density ceiling but vary
-      // direction, persistence, and population: suspended dust, a horizontal
-      // draft, or a quiet warm updraft.
       this.presets = {
-        'still-air': { agentCount: 3200, moveSpeed: 0.16, drift: [0.00, 0.04], diffusion: 0.030, decay: 0.022 },
-        crosswind: { agentCount: 4800, moveSpeed: 0.34, drift: [0.82, 0.03], diffusion: 0.012, decay: 0.037 },
-        updraft: { agentCount: 3900, moveSpeed: 0.27, drift: [0.05, 0.92], diffusion: 0.024, decay: 0.029 }
+        'still-air': { agentCount: 4800, moveSpeed: 0.22, drift: [0.00, 0.04], diffusion: 0.035, decay: 0.016 },
+        crosswind: { agentCount: 6400, moveSpeed: 0.40, drift: [0.82, 0.03], diffusion: 0.020, decay: 0.024 },
+        updraft: { agentCount: 5400, moveSpeed: 0.32, drift: [0.05, 0.92], diffusion: 0.028, decay: 0.020 }
       };
       const presetNames = Object.keys(this.presets);
       const chosenName = this.presets[this.fx.presetName]
@@ -262,12 +258,10 @@ const SporeDrift = (() => {
       this.currentPreset = this.presets[chosenName];
       this.canvas.dataset.piloFxVariant = chosenName;
 
+      this.emptyTaps = new Float32Array(16);
+      this.activeTaps = [];
+
       this.moveSpeed = this.currentPreset.moveSpeed * this.fx.motionScale;
-      // Far fewer than physarum's 50000: unlike physarum, agents here have
-      // no sensor-based steering away from dense trail, so a curl-noise
-      // flow field's recirculation zones let deposits pile up at hotspots
-      // with nothing to spread them back out. Fewer agents plus the tighter
-      // decay/clamp below keep that bounded instead of saturating.
       this.agentTexSize = Math.ceil(Math.sqrt(this.currentPreset.agentCount));
       this.numAgents = this.agentTexSize * this.agentTexSize;
 
@@ -339,8 +333,41 @@ const SporeDrift = (() => {
     resetTextures() {
       const gl = this.gl;
       const agentsData = new Float32Array(this.numAgents * 4);
+
+      // Seed spores across header, margins, and body
+      const seedPoints = [];
+      if (this.fx.seedRegions && this.fx.seedRegions.length) {
+        for (const r of this.fx.seedRegions) {
+          seedPoints.push([r.x * this.simWidth, (1 - r.y) * this.simHeight]);
+        }
+      }
+      const fallbackNodes = [
+        [0.72 * this.simWidth, 0.86 * this.simHeight],
+        [0.85 * this.simWidth, 0.80 * this.simHeight],
+        [0.65 * this.simWidth, 0.88 * this.simHeight],
+        [0.08 * this.simWidth, 0.75 * this.simHeight],
+        [0.06 * this.simWidth, 0.50 * this.simHeight],
+        [0.09 * this.simWidth, 0.25 * this.simHeight],
+        [0.93 * this.simWidth, 0.65 * this.simHeight],
+        [0.94 * this.simWidth, 0.40 * this.simHeight],
+        [0.92 * this.simWidth, 0.18 * this.simHeight],
+        [0.35 * this.simWidth, 0.08 * this.simHeight],
+        [0.65 * this.simWidth, 0.05 * this.simHeight]
+      ];
+      for (const node of fallbackNodes) seedPoints.push(node);
+
       for (let i = 0; i < this.numAgents; i++) {
-        const [seedX, seedY] = pickSeed(this.fx.seedRegions, this.simWidth, this.simHeight, () => [Math.random() * this.simWidth, Math.random() * this.simHeight]);
+        let seedX, seedY;
+        if (Math.random() < 0.65) {
+          // Concentrate around header and margins
+          const base = seedPoints[i % seedPoints.length];
+          seedX = Math.max(1, Math.min(this.simWidth - 1, base[0] + (Math.random() - 0.5) * 60.0));
+          seedY = Math.max(1, Math.min(this.simHeight - 1, base[1] + (Math.random() - 0.5) * 60.0));
+        } else {
+          // Broad atmosphere
+          seedX = Math.random() * this.simWidth;
+          seedY = Math.random() * this.simHeight;
+        }
         agentsData[i * 4 + 0] = seedX;
         agentsData[i * 4 + 1] = seedY;
         agentsData[i * 4 + 2] = 0.0;
@@ -355,6 +382,9 @@ const SporeDrift = (() => {
       this.texTrailB = createTexture(gl, this.simWidth, this.simHeight, null, gl.R32F, gl.RED, gl.FLOAT);
       this.fboTrailA = createFBO(gl, this.texTrailA);
       this.fboTrailB = createFBO(gl, this.texTrailB);
+
+      // GPU Warm-Start: 60 iterations so drifting ribbons and trails are fully formed on frame 0
+      this.stepSimulation(60, 0, null);
     }
 
     readColors() {
@@ -370,68 +400,104 @@ const SporeDrift = (() => {
       document.body.removeChild(div);
     }
 
+    stepSimulation(iterations, simTime, tapData) {
+      const gl = this.gl;
+      for (let i = 0; i < iterations; i++) {
+        const stepTime = simTime + i * 0.02;
+
+        // 1. Update Spore Positions
+        gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboAgentsB);
+        gl.viewport(0, 0, this.agentTexSize, this.agentTexSize);
+        gl.useProgram(this.progUpdate);
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, this.texAgentsA);
+        gl.uniform1i(gl.getUniformLocation(this.progUpdate, 'uAgents'), 0);
+        gl.uniform2f(gl.getUniformLocation(this.progUpdate, 'uResolution'), this.simWidth, this.simHeight);
+        gl.uniform1f(gl.getUniformLocation(this.progUpdate, 'uTime'), stepTime);
+        gl.uniform1f(gl.getUniformLocation(this.progUpdate, 'uMoveSpeed'), this.moveSpeed);
+        gl.uniform2f(gl.getUniformLocation(this.progUpdate, 'uDrift'), this.currentPreset.drift[0], this.currentPreset.drift[1]);
+        gl.uniform4fv(gl.getUniformLocation(this.progUpdate, 'uTaps'), tapData || this.emptyTaps);
+        gl.bindVertexArray(this.vaoQuad);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+        // 2. Render Spore Points to Trail
+        gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboTrailA);
+        gl.viewport(0, 0, this.simWidth, this.simHeight);
+        gl.useProgram(this.progRenderAgents);
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, this.texAgentsB);
+        gl.uniform1i(gl.getUniformLocation(this.progRenderAgents, 'uAgents'), 0);
+        gl.uniform2f(gl.getUniformLocation(this.progRenderAgents, 'uResolution'), this.simWidth, this.simHeight);
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.ONE, gl.ONE);
+        gl.bindVertexArray(this.vaoAgents);
+        gl.drawArrays(gl.POINTS, 0, this.numAgents);
+        gl.disable(gl.BLEND);
+
+        let tempTex = this.texAgentsA; this.texAgentsA = this.texAgentsB; this.texAgentsB = tempTex;
+        let tempFbo = this.fboAgentsA; this.fboAgentsA = this.fboAgentsB; this.fboAgentsB = tempFbo;
+
+        // 3. Process Trail Diffusion, Decay, and Circular Tap Deposits
+        gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboTrailB);
+        gl.viewport(0, 0, this.simWidth, this.simHeight);
+        gl.useProgram(this.progProcess);
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, this.texTrailA);
+        gl.uniform1i(gl.getUniformLocation(this.progProcess, 'uTrail'), 0);
+        gl.uniform2f(gl.getUniformLocation(this.progProcess, 'uResolution'), this.simWidth, this.simHeight);
+        gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uDiffusion'), this.currentPreset.diffusion);
+        gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uDecay'), this.currentPreset.decay);
+        gl.uniform4fv(gl.getUniformLocation(this.progProcess, 'uTaps'), tapData || this.emptyTaps);
+        gl.bindVertexArray(this.vaoQuad);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+        tempTex = this.texTrailA; this.texTrailA = this.texTrailB; this.texTrailB = tempTex;
+        tempFbo = this.fboTrailA; this.fboTrailA = this.fboTrailB; this.fboTrailB = tempFbo;
+      }
+    }
+
     render(timestamp) {
       if (!this.running) return;
       requestAnimationFrame((t) => this.render(t));
 
       if (!this.lastTime) this.lastTime = timestamp;
-      if (timestamp - this.lastTime < 180) return;
+      if (timestamp - this.lastTime < 32) return; // ~30 FPS cadence
       this.lastTime = timestamp;
 
-      this.time += 0.01 * (this.fx.reducedMotion ? 0.12 : this.fx.motionScale);
+      this.time += 0.015 * (this.fx.reducedMotion ? 0.15 : this.fx.motionScale);
       if (Math.floor(this.time * 100) % 60 === 0) {
         this.readColors();
       }
 
-      const gl = this.gl;
+      // Inoculate user taps directly as smooth shader uniforms
       if (window.__piloNutrients) {
-        window.__piloNutrients.paint(gl, this.texTrailA, this.simWidth, this.simHeight, 'trail');
+        const deposits = window.__piloNutrients.drain(4);
+        for (const item of deposits) {
+          this.activeTaps.push({
+            x: item.x,
+            y: 1.0 - item.y, // WebGL UV bottom-up
+            radius: item.radius * 1.5,
+            strength: item.strength,
+            framesLeft: 8
+          });
+        }
       }
+      const tapData = new Float32Array(16);
+      for (let i = 0; i < this.activeTaps.length && i < 4; i++) {
+        const tap = this.activeTaps[i];
+        tapData[i * 4 + 0] = tap.x;
+        tapData[i * 4 + 1] = tap.y;
+        tapData[i * 4 + 2] = tap.radius;
+        tapData[i * 4 + 3] = tap.strength;
+        tap.framesLeft--;
+      }
+      this.activeTaps = this.activeTaps.filter(t => t.framesLeft > 0);
 
-      gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboAgentsB);
-      gl.viewport(0, 0, this.agentTexSize, this.agentTexSize);
-      gl.useProgram(this.progUpdate);
-      gl.activeTexture(gl.TEXTURE0);
-      gl.bindTexture(gl.TEXTURE_2D, this.texAgentsA);
-      gl.uniform1i(gl.getUniformLocation(this.progUpdate, 'uAgents'), 0);
-      gl.uniform2f(gl.getUniformLocation(this.progUpdate, 'uResolution'), this.simWidth, this.simHeight);
-      gl.uniform1f(gl.getUniformLocation(this.progUpdate, 'uTime'), this.time);
-      gl.uniform1f(gl.getUniformLocation(this.progUpdate, 'uMoveSpeed'), this.moveSpeed);
-      gl.uniform2f(gl.getUniformLocation(this.progUpdate, 'uDrift'), this.currentPreset.drift[0], this.currentPreset.drift[1]);
-      gl.bindVertexArray(this.vaoQuad);
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      const stepsPerFrame = this.fx.reducedMotion ? 1 : 2;
+      this.stepSimulation(stepsPerFrame, this.time, tapData);
 
-      gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboTrailA);
-      gl.viewport(0, 0, this.simWidth, this.simHeight);
-      gl.useProgram(this.progRenderAgents);
-      gl.activeTexture(gl.TEXTURE0);
-      gl.bindTexture(gl.TEXTURE_2D, this.texAgentsB);
-      gl.uniform1i(gl.getUniformLocation(this.progRenderAgents, 'uAgents'), 0);
-      gl.uniform2f(gl.getUniformLocation(this.progRenderAgents, 'uResolution'), this.simWidth, this.simHeight);
-      gl.enable(gl.BLEND);
-      gl.blendFunc(gl.ONE, gl.ONE);
-      gl.bindVertexArray(this.vaoAgents);
-      gl.drawArrays(gl.POINTS, 0, this.numAgents);
-      gl.disable(gl.BLEND);
-
-      let tempTex = this.texAgentsA; this.texAgentsA = this.texAgentsB; this.texAgentsB = tempTex;
-      let tempFbo = this.fboAgentsA; this.fboAgentsA = this.fboAgentsB; this.fboAgentsB = tempFbo;
-
-      gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboTrailB);
-      gl.viewport(0, 0, this.simWidth, this.simHeight);
-      gl.useProgram(this.progProcess);
-      gl.activeTexture(gl.TEXTURE0);
-      gl.bindTexture(gl.TEXTURE_2D, this.texTrailA);
-      gl.uniform1i(gl.getUniformLocation(this.progProcess, 'uTrail'), 0);
-      gl.uniform2f(gl.getUniformLocation(this.progProcess, 'uResolution'), this.simWidth, this.simHeight);
-      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uDiffusion'), this.currentPreset.diffusion);
-      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uDecay'), this.currentPreset.decay);
-      gl.bindVertexArray(this.vaoQuad);
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
-
-      tempTex = this.texTrailA; this.texTrailA = this.texTrailB; this.texTrailB = tempTex;
-      tempFbo = this.fboTrailA; this.fboTrailA = this.fboTrailB; this.fboTrailB = tempFbo;
-
+      // Screen Pass
+      const gl = this.gl;
       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
       gl.viewport(0, 0, this.canvas.width, this.canvas.height);
       gl.useProgram(this.progScreen);

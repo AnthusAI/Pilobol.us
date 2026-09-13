@@ -68,6 +68,7 @@ PILOBOL_CHROME = SiteChrome(
         "assets/background-manager.js",
         "assets/organic-image.js",
         "assets/cinematic-gallery.js",
+        "assets/image-treatment-lab.js",
         "assets/audio-native-theme.js",
     ),
 )
@@ -377,6 +378,115 @@ def _href_has_audio_native(href: str) -> bool:
     return href in _AUDIO_NATIVE_STANDALONE_HREFS
 
 
+def _decorate_article_media(html: str, *, active_href: str) -> str:
+    """Instantiate an explicitly requested image treatment in an article.
+
+    Effects are opt-in front-matter so the desk can compare one treatment at a
+    time without changing every image in the publication. The original image
+    remains in the wrapper as a no-JavaScript fallback.
+    """
+    href = (active_href or "").lstrip("./")
+    source = _source_markdown_for_href(href)
+    fm = _parse_front_matter(source) if source else {}
+    effect = fm.get("image_effect")
+    if effect not in {"organic", "cinematic", "mask", "pixel", "lenticular"}:
+        return html
+
+    figure_re = re.compile(
+        r'(<figure\b[^>]*>\s*)(<img\b([^>]*\bsrc="([^"]+)"[^>]*)>)(.*?</figure>)',
+        re.S | re.I,
+    )
+
+    def replace(match: re.Match[str]) -> str:
+        prefix, img_tag, _attrs, src, tail = match.groups()
+        if "pilo-" in prefix or "pilo-" in img_tag:
+            return match.group(0)
+        return f'{prefix}{_wrap_effect_image(img_tag, src, effect)}{tail}'
+
+    html2, count = figure_re.subn(replace, html, count=1)
+    if count:
+        return html2
+
+    # A few standalone/article layouts use a bare Markdown image instead of a
+    # :::figure{} block. Keep the front-matter option useful there too by
+    # treating the first rendered image as the cover candidate.
+    image_re = re.compile(r'(<img\b([^>]*\bsrc="([^"]+)"[^>]*)>)', re.I)
+
+    def replace_bare(match: re.Match[str]) -> str:
+        img_tag, _attrs, src = match.groups()
+        return _wrap_effect_image(img_tag, src, effect)
+
+    return image_re.sub(replace_bare, html, count=1)
+
+
+def _wrap_effect_image(img_tag: str, src: str, effect: str) -> str:
+    """Wrap one rendered image in a selected, fallback-safe treatment."""
+    wrappers = {
+        "cinematic": "pilo-cinematic-gallery",
+        "mask": "pilo-mask-reveal",
+        "pixel": "pilo-pixel-dissolve",
+        "lenticular": "pilo-lenticular",
+    }
+    if effect in wrappers:
+        return f'<span class="{wrappers[effect]}">{img_tag}</span>'
+    data_src = escape(src, quote=True)
+    return (
+        f'<span class="pilo-organic-image" data-src="{data_src}">'
+        f'<img class="pilo-organic-fallback" {img_tag[4:]}'
+        f'</span>'
+    )
+
+
+def _effect_front_matter_for_slug(slug: str) -> dict[str, str]:
+    source = POD_ROOT / "content" / "articles" / f"{slug}.md"
+    return _parse_front_matter(source) if source.is_file() else {}
+
+
+def _decorate_index_media(html: str, *, active_href: str) -> str:
+    """Apply per-article image treatments to generated home/archive feeds."""
+    href = (active_href or "").lstrip("./")
+    if href not in {"index.html", "articles/index.html"}:
+        return html
+
+    def decorate_block(block: str, link_href: str) -> str:
+        slug = Path(link_href).stem
+        effect = _effect_front_matter_for_slug(slug).get("image_effect")
+        if effect not in {"organic", "cinematic", "mask", "pixel", "lenticular"} or "pilo-" in block:
+            return block
+        image_re = re.compile(r'<img\b([^>]*\bsrc="([^"]+)"[^>]*)>', re.I)
+
+        def wrap(match: re.Match[str]) -> str:
+            return _wrap_effect_image(
+                f'<img{match.group(1)}>', match.group(2), effect
+            )
+
+        return image_re.sub(wrap, block, count=1)
+
+    # Homepage cards are discrete article elements.
+    card_re = re.compile(
+        r'(<article\b[^>]*class="markus-card"[^>]*>.*?</article>)',
+        re.S | re.I,
+    )
+
+    def card_replace(match: re.Match[str]) -> str:
+        block = match.group(1)
+        link = re.search(r'<h3>\s*<a\s+href="([^"]+)"', block, re.I)
+        return decorate_block(block, link.group(1)) if link else block
+
+    html = card_re.sub(card_replace, html)
+
+    # The archive is a flat sequence of h3-linked entries rather than cards.
+    entry_re = re.compile(
+        r'(<h3>\s*<a\s+href="([^"]+)"[^>]*>.*?</h3>.*?)(?=<h3\b|</article>|$)',
+        re.S | re.I,
+    )
+
+    def entry_replace(match: re.Match[str]) -> str:
+        return decorate_block(match.group(1), match.group(2))
+
+    return entry_re.sub(entry_replace, html)
+
+
 def _fix_article_header(html: str, *, active_href: str) -> str:
     """Reader chrome: h1 → lede → byline → Audio Native → body."""
     href = (active_href or "").lstrip("./")
@@ -451,6 +561,12 @@ def render_page_with_poem(**kwargs):
     if n != 1:
         raise RuntimeError(f"masthead poem inject failed (n={n})")
     html2 = _rewrite_youtube_videos(html2)
+    html2 = _decorate_article_media(
+        html2, active_href=kwargs.get("active_href") or ""
+    )
+    html2 = _decorate_index_media(
+        html2, active_href=kwargs.get("active_href") or ""
+    )
     html2 = _fix_article_header(
         html2, active_href=kwargs.get("active_href") or ""
     )

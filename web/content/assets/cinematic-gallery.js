@@ -22,6 +22,10 @@ const CinematicGallery = (() => {
     uniform vec2 uMouse;     // normalized mouse coords
     uniform float uIntensity;
     
+    float random(vec3 scale, float seed) {
+      return fract(sin(dot(gl_FragCoord.xyz + seed, scale)) * 43758.5453 + seed);
+    }
+
     // Zoom blur function
     vec4 zoomBlur(sampler2D tex, vec2 uv, vec2 center, float strength) {
       vec4 color = vec4(0.0);
@@ -39,17 +43,16 @@ const CinematicGallery = (() => {
       return color / total;
     }
     
-    float random(vec3 scale, float seed) {
-      return fract(sin(dot(gl_FragCoord.xyz + seed, scale)) * 43758.5453 + seed);
-    }
-
     void main() {
-      // Background parallax slightly
-      vec2 uv = vUv + (uMouse - 0.5) * 0.05 * (1.0 - uProgress);
+      // The image is most distorted at the edge of the reading window and
+      // settles as it arrives. The treatment is scroll-only; the center stays
+      // fixed so pointer movement cannot pull attention away from the image.
+      vec2 uv = vUv + vec2(0.0, (1.0 - uProgress) * 0.035);
       
-      // Calculate blur strength
-      float strength = smoothstep(0.0, 0.5, uProgress) * smoothstep(1.0, 0.5, uProgress) * 0.5;
-      strength += uIntensity * 0.1; // Add mouse speed intensity
+      // Scroll reveal: strong zoom blur before arrival, clean image in the
+      // center plateau. A trace of speed-sensitive blur keeps it alive.
+      float strength = (1.0 - smoothstep(0.18, 0.92, uProgress)) * 0.48;
+      strength += uIntensity * 0.04;
       
       // We flip uMouse Y to match WebGL UVs
       vec2 center = vec2(uMouse.x, 1.0 - uMouse.y);
@@ -92,15 +95,13 @@ const CinematicGallery = (() => {
       if (imgs.length === 0) return;
       
       this.srcs = imgs.map(img => img.src);
-      
-      // Hide original images
-      imgs.forEach(img => img.style.display = 'none');
+      this.fallbackImages = imgs;
       
       this.canvas = document.createElement('canvas');
       this.canvas.style.width = '100%';
       this.canvas.style.height = '100%';
       this.canvas.style.display = 'block';
-      this.canvas.style.cursor = 'pointer';
+      this.canvas.style.pointerEvents = 'none';
       this.container.appendChild(this.canvas);
       
       this.currentIndex = 0;
@@ -128,6 +129,10 @@ const CinematicGallery = (() => {
         });
       });
       this.loadedImages = await Promise.all(promises);
+      const first = this.loadedImages[0];
+      if (first && first.width && first.height) {
+        this.container.style.aspectRatio = `${first.width} / ${first.height}`;
+      }
     }
     
     init() {
@@ -135,6 +140,9 @@ const CinematicGallery = (() => {
       if (!gl) return;
       this.gl = gl;
       this.program = program;
+      // Only hide the originals after the renderer is ready; if WebGL is
+      // unavailable, the semantic image remains visible as a fallback.
+      this.fallbackImages.forEach(img => { img.style.display = 'none'; });
       
       // Create textures
       this.textures = this.loadedImages.map(img => {
@@ -164,25 +172,7 @@ const CinematicGallery = (() => {
       this.resize();
       window.addEventListener('resize', () => this.resize());
       
-      this.canvas.addEventListener('mousemove', (e) => {
-        const rect = this.canvas.getBoundingClientRect();
-        this.targetMouse.x = (e.clientX - rect.left) / rect.width;
-        this.targetMouse.y = (e.clientY - rect.top) / rect.height;
-        
-        // Add intensity based on mouse movement speed
-        const dx = this.targetMouse.x - this.lastMouse.x;
-        const dy = this.targetMouse.y - this.lastMouse.y;
-        this.intensity = Math.min(1.0, this.intensity + Math.sqrt(dx*dx + dy*dy) * 5.0);
-        this.lastMouse.x = this.targetMouse.x;
-        this.lastMouse.y = this.targetMouse.y;
-      });
-      
-      this.canvas.addEventListener('click', () => {
-        if (this.targetProgress !== 1) {
-          this.nextIndex = (this.currentIndex + 1) % this.textures.length;
-          this.targetProgress = 1;
-        }
-      });
+      window.addEventListener('scroll', () => this.onScroll(), { passive: true });
       
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -192,7 +182,22 @@ const CinematicGallery = (() => {
       }, { threshold: 0.0 });
       observer.observe(this.container);
       
+      this.onScroll();
       this.render();
+    }
+
+    onScroll() {
+      const rect = this.container.getBoundingClientRect();
+      const distance = Math.abs(
+        rect.top + rect.height / 2 - window.innerHeight / 2
+      );
+      const plateau = window.innerHeight * 0.30;
+      const edge = window.innerHeight * 0.95;
+      const reveal = distance <= plateau
+        ? 1
+        : 1 - (distance - plateau) / (edge - plateau);
+      const clamped = Math.max(0, Math.min(1, reveal));
+      this.targetProgress = clamped * clamped * (3 - 2 * clamped);
     }
     
     resize() {
@@ -207,17 +212,7 @@ const CinematicGallery = (() => {
       if (!this.isVisible) return;
       requestAnimationFrame(() => this.render());
       
-      this.mouse.x += (this.targetMouse.x - this.mouse.x) * 0.1;
-      this.mouse.y += (this.targetMouse.y - this.mouse.y) * 0.1;
-      this.intensity *= 0.9; // decay
-      
       this.progress += (this.targetProgress - this.progress) * 0.05;
-      
-      if (this.progress > 0.99 && this.targetProgress === 1) {
-        this.currentIndex = this.nextIndex;
-        this.progress = 0;
-        this.targetProgress = 0;
-      }
       
       const gl = this.gl;
       gl.clearColor(0, 0, 0, 0);
@@ -231,7 +226,9 @@ const CinematicGallery = (() => {
       gl.uniform1i(gl.getUniformLocation(this.program, "uTexCurrent"), 0);
       
       gl.activeTexture(gl.TEXTURE1);
-      gl.bindTexture(gl.TEXTURE_2D, this.textures[this.nextIndex]);
+      // Keep both shader inputs on the same frame; scroll controls the
+      // treatment rather than a click changing the subject.
+      gl.bindTexture(gl.TEXTURE_2D, this.textures[this.currentIndex]);
       gl.uniform1i(gl.getUniformLocation(this.program, "uTexNext"), 1);
       
       gl.uniform1f(gl.getUniformLocation(this.program, "uProgress"), this.progress);

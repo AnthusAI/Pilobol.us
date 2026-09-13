@@ -5,7 +5,7 @@ date: 'Sunday, September 6, 2026'
 
 # Backgrounds
 
-Pilobolus features a rotating gallery of subtle, generative background animations inspired by biological and mathematical systems. Every time you load a page, a different algorithmic effect is chosen to dynamically generate the background visuals in your browser.
+Pilobolus features a rotating set of subtle, generative background animations inspired by biological and mathematical systems. Every time you load a page, a different algorithmic effect is chosen to dynamically generate the background visuals in your browser.
 
 Here is an index of the current backgrounds in rotation and the artists and researchers who inspired them:
 

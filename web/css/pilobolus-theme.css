@@ -571,7 +571,12 @@
     font-optical-sizing: auto;
     font-size: 1.1875rem;
     line-height: 2rem;
-    max-width: 66ch;
+    /* The article column is already deliberately bounded by
+       --pilo-content-width and the page gutters. A second character-based
+       cap here left a 200px+ dead strip on the right at normal desktop
+       widths, making the copy read as though it had been pushed left. */
+    width: 100%;
+    max-width: none;
   }
 
   .markus-document > * + * {
@@ -1071,6 +1076,7 @@
 
   .pilo-organic-image {
     position: relative;
+    display: block;
     width: 100%;
     aspect-ratio: 4/3;
     margin: 2rem 0;
@@ -1078,8 +1084,98 @@
     background: transparent;
   }
 
+  /* Additional scroll-only image treatments. Each keeps the source image in
+     the DOM so a page remains useful when JavaScript or a canvas context is
+     unavailable. */
+  .pilo-mask-reveal,
+  .pilo-pixel-dissolve,
+  .pilo-lenticular {
+    position: relative;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    background: var(--markus-card);
+  }
+
+  .pilo-mask-reveal img,
+  .pilo-pixel-dissolve img,
+  .pilo-lenticular img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .pilo-mask-reveal img {
+    clip-path: inset(0 var(--mask-right, 0%) 0 0);
+    transform: scale(calc(1.04 - var(--mask-progress, 1) * .04));
+    transform-origin: center;
+  }
+
+  .pilo-mask-reveal::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: var(--mask-grain, 0);
+    background:
+      repeating-linear-gradient(112deg, transparent 0 7px, rgba(255, 255, 255, .12) 8px 9px),
+      linear-gradient(90deg, color-mix(in srgb, var(--markus-ink) 65%, transparent), transparent 68%);
+    mix-blend-mode: screen;
+  }
+
+  .pilo-pixel-dissolve-canvas {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pilo-pixel-dissolve::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: calc((1 - var(--pixel-progress, 1)) * .42);
+    background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .18) 0 1px, transparent 1px 5px);
+    mix-blend-mode: screen;
+  }
+
+  .pilo-lenticular img {
+    position: absolute;
+    inset: 0;
+  }
+
+  .pilo-lenticular > img:first-child {
+    position: relative;
+    transform: translate3d(calc(var(--lenticular-drift, 0) * -.14px), calc(var(--lenticular-drift, 0) * .08px), 0);
+    filter: saturate(calc(1 + (1 - var(--lenticular-progress, 1)) * .3));
+  }
+
+  .pilo-lenticular .pilo-lenticular-ghost {
+    opacity: calc(var(--lenticular-opacity, 0) * .68);
+    mix-blend-mode: normal;
+    pointer-events: none;
+  }
+
+  .pilo-lenticular .pilo-lenticular-ghost-a {
+    transform: translate3d(calc(var(--lenticular-drift, 0) * 1.6px), calc(var(--lenticular-drift, 0) * -.24px), 0) rotate(calc(var(--lenticular-drift, 0) * .05deg));
+    filter: sepia(.7) saturate(3.6) hue-rotate(-30deg) contrast(1.22);
+    clip-path: inset(0 48% 0 0);
+  }
+
+  .pilo-lenticular .pilo-lenticular-ghost-b {
+    transform: translate3d(calc(var(--lenticular-drift, 0) * -1.6px), calc(var(--lenticular-drift, 0) * .22px), 0) rotate(calc(var(--lenticular-drift, 0) * -.05deg));
+    filter: sepia(.7) saturate(3.6) hue-rotate(24deg) contrast(1.22);
+    clip-path: inset(0 0 0 48%);
+  }
+
   .pilo-cinematic-gallery {
     position: relative;
+    display: block;
     width: 100%;
     aspect-ratio: 16/9;
     margin: 2rem 0;
@@ -1087,6 +1183,21 @@
     background: var(--markus-pre-bg);
     border-radius: 4px;
     box-shadow: 0 4px 12px var(--pilo-shadow);
+  }
+
+  /* Effects can also be attached to generated homepage/archive cards. Keep
+     their media box in the same column geometry as an ordinary thumbnail. */
+  .markus-card .pilo-organic-image,
+  .markus-card .pilo-cinematic-gallery,
+  .markus-card .pilo-mask-reveal,
+  .markus-card .pilo-pixel-dissolve,
+  .markus-card .pilo-lenticular {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    margin: 0.55rem 0 0.15rem;
+    overflow: hidden;
+    border-radius: 0.35rem;
   }
 
   /* ---------------------------------------------------------------------

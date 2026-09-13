@@ -5,6 +5,7 @@ date: 'Wednesday, September 9, 2026'
 description: A long essay said advanced AI was almost here. The world treated that clear picture like a product — until the picture failed.
 standfirst: He wrote that he could see how advanced AI would be built. People shared it, praised it, and built a fortune on it. Then the picture failed.
 cover: assets/he-said-he-could-see-it/og-cover.jpg
+image_effect: cinematic
 ---
 
 :::figure{id="icarus-og-cover" src="../assets/he-said-he-could-see-it/og-cover.jpg" alt="A winged figure plunges from a stormy sky in a 17th-century oil sketch" caption="Wings, sky, a long fall." credit="Peter Paul Rubens, oil sketch, c. 1636. Public domain, Wikimedia Commons."}

@@ -1,4 +1,11 @@
 // Diffusion-Limited Aggregation: dendritic frost/coral branching.
+//
+// Classic DLA (Witten & Sander 1981) walks random particles until they touch
+// existing structure and freeze there. In this continuous shader implementation,
+// cells freeze at the exposed frontier when bordering existing frozen structure.
+// To prevent the pattern from freezing solid and burning itself out, periodic
+// crystallization and thaw waves cycle through the domain, while spontaneous
+// nucleation seeds gently resprout new branches in cleared patches.
 const DLA = (() => {
   const vsQuad = `#version 300 es
     in vec2 position;
@@ -36,18 +43,34 @@ const DLA = (() => {
         }
       }
 
+      // Spatio-temporal breathing cycle (~45 second wave)
+      // Modulates local freeze affinity and erosion so clusters periodically
+      // reach outward, mature, dissolve gracefully, and resprout.
+      float cycleWave = sin(uTime * 0.14 + vUv.x * 2.8 + vUv.y * 3.4);
+      float localFreezeChance = uFreezeChance * (0.8 + 0.5 * cycleWave);
+      
+      // Accelerated thaw in older/dense clusters when cycleWave dips low
+      float localErosion = uErosion * (1.0 + max(0.0, -cycleWave) * 1.8);
+
       float roll = hash(vUv * uResolution + vec2(uTime * 37.0, 1.23));
       float nextVal = val;
       
-      // Freeze only at the frontier (touches existing structure)
-      if (val < 0.5 && neighborSum > uFrontierThreshold && roll < uFreezeChance) {
+      // 1. Freeze only at the frontier (touches existing structure)
+      if (val < 0.5 && neighborSum > uFrontierThreshold && roll < localFreezeChance) {
         nextVal = 1.0;
       }
       
-      // Slow erosion allows turnover and continuous regrowth of new dendritic branches
-      nextVal = max(0.0, nextVal - uErosion);
+      // 2. Slow erosion allows turnover and continuous regrowth of new dendritic branches
+      nextVal = max(0.0, nextVal - localErosion);
 
-      // Smooth circular tap inoculation: plant new crystalline frost seeds
+      // 3. Spontaneous subtle nucleation: rare micropoint seeds in empty patches
+      // This prevents total burnout and guarantees infinite cyclical renewal.
+      float seedRoll = hash(vUv * 73.0 + vec2(uTime * 0.08, 9.17));
+      if (val < 0.05 && neighborSum < 0.1 && seedRoll > 0.99994) {
+        nextVal = 0.95;
+      }
+
+      // 4. Smooth circular tap inoculation: plant new crystalline frost seeds
       for (int i = 0; i < 4; i++) {
         if (uTaps[i].z > 0.0 && uTaps[i].w > 0.0) {
           vec2 tapCoord = uTaps[i].xy;
@@ -138,10 +161,11 @@ const DLA = (() => {
       }
 
       this.fx = readFxConfig('dla');
+      // Tuned erosion parameters so turnover happens continuously on human timescales (~20-40s)
       this.presets = {
-        frost: { seedCount: 54, seedRadius: [1, 2], frontierThreshold: 0.45, freezeChance: 0.038, erosion: 0.00018 },
-        coral: { seedCount: 42, seedRadius: [2, 3], frontierThreshold: 0.30, freezeChance: 0.065, erosion: 0.00014 },
-        rootlets: { seedCount: 26, seedRadius: [1, 2], frontierThreshold: 0.52, freezeChance: 0.044, erosion: 0.00008 }
+        frost: { seedCount: 54, seedRadius: [1, 2], frontierThreshold: 0.45, freezeChance: 0.048, erosion: 0.0011 },
+        coral: { seedCount: 42, seedRadius: [2, 3], frontierThreshold: 0.30, freezeChance: 0.075, erosion: 0.0009 },
+        rootlets: { seedCount: 26, seedRadius: [1, 2], frontierThreshold: 0.52, freezeChance: 0.054, erosion: 0.0007 }
       };
       const presetNames = Object.keys(this.presets);
       const chosenName = this.presets[this.fx.presetName]

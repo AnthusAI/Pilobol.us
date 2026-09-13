@@ -104,10 +104,20 @@
     }
   ];
   
+  // If viewing an effect's dedicated page (e.g. /effects/cellular-automata.html),
+  // lock to that effect by default instead of picking randomly.
+  const currentPath = window.location.pathname.replace(/\/$/, '');
+  const pageMatch = effects.find((e) => {
+    const stem = e.creditUrl.replace(/\.html$/, '');
+    return currentPath.endsWith('/' + e.creditUrl) ||
+           currentPath.endsWith(e.creditUrl) ||
+           currentPath.endsWith('/' + stem) ||
+           currentPath.endsWith(stem);
+  });
+
   // ?fx=<script-stem> forces a specific effect. Without it the effect is
-  // random, which makes a broken one look intermittent and is miserable to
-  // debug -- two of the three were silently failing and it read as flaky.
-  let chosen = effects[Math.floor(Math.random() * effects.length)];
+  // locked to the effect page if applicable, or random across all effects.
+  let chosen = pageMatch || effects[Math.floor(Math.random() * effects.length)];
   let chosenLayout = Object.keys(layouts)[Math.floor(Math.random() * Object.keys(layouts).length)];
   let chosenVariant = '';
   try {
@@ -136,7 +146,7 @@
       }
     }
   } catch (e) {
-    /* no URLSearchParams: keep the random pick */
+    /* no URLSearchParams: keep the default pick */
   }
   
   const isArticle = window.location.pathname.includes('/articles/') || window.location.pathname.includes('/effects/');

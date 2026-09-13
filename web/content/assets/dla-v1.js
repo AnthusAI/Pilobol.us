@@ -3,9 +3,11 @@
 // Classic DLA (Witten & Sander 1981) walks random particles until they touch
 // existing structure and freeze there. In this continuous shader implementation,
 // cells freeze at the exposed frontier when bordering existing frozen structure.
-// To prevent the pattern from freezing solid and burning itself out, periodic
-// crystallization and thaw waves cycle through the domain, while spontaneous
-// nucleation seeds gently resprout new branches in cleared patches.
+// To keep the pattern endlessly cyclic and shifting between light and dark phases:
+// - A spatio-temporal breathing wave modulates growth affinity vs thaw across the page.
+// - Overgrowth/interior crowding triggers active thawing from within dense clusters,
+//   keeping branches thin, delicate, and constantly dissolving/resprouting.
+// - Spontaneous nucleation in cleared spaces initiates new crystal trees.
 const DLA = (() => {
   const vsQuad = `#version 300 es
     in vec2 position;
@@ -43,31 +45,41 @@ const DLA = (() => {
         }
       }
 
-      // Spatio-temporal breathing cycle (~45 second wave)
-      // Modulates local freeze affinity and erosion so clusters periodically
-      // reach outward, mature, dissolve gracefully, and resprout.
-      float cycleWave = sin(uTime * 0.14 + vUv.x * 2.8 + vUv.y * 3.4);
-      float localFreezeChance = uFreezeChance * (0.8 + 0.5 * cycleWave);
+      // Smooth traveling breathing wave (~28 second cycle):
+      // Gently moves across the page, alternating regions between a lush "growth"
+      // phase and a clear "thaw" phase so the page cycles between light and dark.
+      float cycleWave = sin(uTime * 0.22 + vUv.x * 2.2 + vUv.y * 2.8);
       
-      // Accelerated thaw in older/dense clusters when cycleWave dips low
-      float localErosion = uErosion * (1.0 + max(0.0, -cycleWave) * 1.8);
+      // Growth probability: high during the positive wave, drops near zero in negative wave
+      float localFreezeChance = uFreezeChance * clamp(0.7 + 0.9 * cycleWave, 0.05, 1.5);
+      
+      // Dynamic erosion:
+      // 1. Base erosion that speeds up significantly during the thaw phase (cycleWave < 0)
+      float thawFactor = 1.0 + max(0.0, -cycleWave) * 3.5;
+      
+      // 2. Overcrowding suppression: if surrounded by dense neighbors (> 3.5),
+      // melt out the core so it cannot solidify into a flat dark block.
+      // DLA branches must remain delicate reaching filigree.
+      float crowdFactor = smoothstep(2.5, 6.0, neighborSum) * 5.0;
+      
+      float totalErosion = uErosion * (thawFactor + crowdFactor);
 
-      float roll = hash(vUv * uResolution + vec2(uTime * 37.0, 1.23));
+      float roll = hash(vUv * uResolution + vec2(uTime * 19.0, 1.23));
       float nextVal = val;
       
-      // 1. Freeze only at the frontier (touches existing structure)
-      if (val < 0.5 && neighborSum > uFrontierThreshold && roll < localFreezeChance) {
-        nextVal = 1.0;
+      // 1. Freeze only at the frontier (sparse thin edge, not packed interior)
+      if (val < 0.35 && neighborSum >= uFrontierThreshold && neighborSum <= 3.8 && roll < localFreezeChance) {
+        nextVal = 0.95;
       }
       
-      // 2. Slow erosion allows turnover and continuous regrowth of new dendritic branches
-      nextVal = max(0.0, nextVal - localErosion);
+      // 2. Continuous cyclical erosion
+      nextVal = max(0.0, nextVal - totalErosion);
 
-      // 3. Spontaneous subtle nucleation: rare micropoint seeds in empty patches
-      // This prevents total burnout and guarantees infinite cyclical renewal.
-      float seedRoll = hash(vUv * 73.0 + vec2(uTime * 0.08, 9.17));
-      if (val < 0.05 && neighborSum < 0.1 && seedRoll > 0.99994) {
-        nextVal = 0.95;
+      // 3. Spontaneous subtle nucleation: plant fresh seed points in cleared areas
+      // during the rising growth cycle so new dendritic crystals bloom as old ones melt.
+      float seedRoll = hash(vUv * 67.0 + vec2(uTime * 0.05, 8.41));
+      if (cycleWave > -0.2 && val < 0.02 && neighborSum < 0.05 && seedRoll > 0.99988) {
+        nextVal = 0.9;
       }
 
       // 4. Smooth circular tap inoculation: plant new crystalline frost seeds
@@ -115,7 +127,7 @@ const DLA = (() => {
       val += texture(uState, vUv + vec2(texel.x, -texel.y)).r * 0.03;
       val += texture(uState, vUv + vec2(-texel.x, texel.y)).r * 0.03;
 
-      float a = smoothstep(0.04, 0.45, val);
+      float a = smoothstep(0.06, 0.50, val);
       vec3 col = mix(uColorTip, uColorMid, smoothstep(0.0, 0.5, a));
       col = mix(col, uColorBase, smoothstep(0.4, 1.0, a));
 
@@ -161,11 +173,11 @@ const DLA = (() => {
       }
 
       this.fx = readFxConfig('dla');
-      // Tuned erosion parameters so turnover happens continuously on human timescales (~20-40s)
+      // Gentle balanced speed with ~10-25s cyclic turnover
       this.presets = {
-        frost: { seedCount: 54, seedRadius: [1, 2], frontierThreshold: 0.45, freezeChance: 0.048, erosion: 0.0011 },
-        coral: { seedCount: 42, seedRadius: [2, 3], frontierThreshold: 0.30, freezeChance: 0.075, erosion: 0.0009 },
-        rootlets: { seedCount: 26, seedRadius: [1, 2], frontierThreshold: 0.52, freezeChance: 0.054, erosion: 0.0007 }
+        frost: { seedCount: 28, seedRadius: [1, 2], frontierThreshold: 0.55, freezeChance: 0.024, erosion: 0.0022 },
+        coral: { seedCount: 22, seedRadius: [1, 2], frontierThreshold: 0.40, freezeChance: 0.032, erosion: 0.0018 },
+        rootlets: { seedCount: 16, seedRadius: [1, 2], frontierThreshold: 0.60, freezeChance: 0.028, erosion: 0.0015 }
       };
       const presetNames = Object.keys(this.presets);
       const chosenName = this.presets[this.fx.presetName]
@@ -246,7 +258,7 @@ const DLA = (() => {
       const gl = this.gl;
       const data = new Float32Array(this.simWidth * this.simHeight * 4);
 
-      // Well-distributed habitat seeds
+      // Distribute initial seed points
       const seedPoints = [];
       if (this.fx.seedRegions && this.fx.seedRegions.length) {
         for (const r of this.fx.seedRegions) {
@@ -254,29 +266,30 @@ const DLA = (() => {
         }
       }
       const fallbackNodes = [
-        [0.70 * this.simWidth, 0.85 * this.simHeight],
+        [0.72 * this.simWidth, 0.86 * this.simHeight],
         [0.85 * this.simWidth, 0.80 * this.simHeight],
+        [0.65 * this.simWidth, 0.88 * this.simHeight],
         [0.08 * this.simWidth, 0.75 * this.simHeight],
         [0.06 * this.simWidth, 0.50 * this.simHeight],
         [0.09 * this.simWidth, 0.25 * this.simHeight],
         [0.93 * this.simWidth, 0.65 * this.simHeight],
         [0.94 * this.simWidth, 0.40 * this.simHeight],
         [0.92 * this.simWidth, 0.18 * this.simHeight],
-        [0.35 * this.simWidth, 0.06 * this.simHeight],
-        [0.65 * this.simWidth, 0.04 * this.simHeight]
+        [0.35 * this.simWidth, 0.08 * this.simHeight],
+        [0.65 * this.simWidth, 0.05 * this.simHeight]
       ];
       for (const node of fallbackNodes) seedPoints.push(node);
 
       const seedCount = this.currentPreset.seedCount;
       for (let s = 0; s < seedCount; s++) {
         const base = seedPoints[s % seedPoints.length];
-        const cx = Math.max(1, Math.min(this.simWidth - 2, base[0] + (Math.random() - 0.5) * 20.0));
-        const cy = Math.max(1, Math.min(this.simHeight - 2, base[1] + (Math.random() - 0.5) * 20.0));
-        const r = this.currentPreset.seedRadius[0] + Math.floor(Math.random() * (this.currentPreset.seedRadius[1] - this.currentPreset.seedRadius[0] + 1));
+        const cx = Math.max(1, Math.min(this.simWidth - 2, base[0] + (Math.random() - 0.5) * 28.0));
+        const cy = Math.max(1, Math.min(this.simHeight - 2, base[1] + (Math.random() - 0.5) * 28.0));
+        const r = this.currentPreset.seedRadius[0];
         for (let y = Math.max(0, Math.floor(cy - r)); y < Math.min(this.simHeight, Math.ceil(cy + r)); y++) {
           for (let x = Math.max(0, Math.floor(cx - r)); x < Math.min(this.simWidth, Math.ceil(cx + r)); x++) {
             const idx = (y * this.simWidth + x) * 4;
-            data[idx] = 1.0;
+            data[idx] = 0.95;
             data[idx + 3] = 1.0;
           }
         }
@@ -305,8 +318,8 @@ const DLA = (() => {
       gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
       gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, this.texB, 0);
 
-      // GPU Warm-Start: run 75 iterations synchronously so frost crystals already branch on frame 0
-      this.stepSimulation(75, 0, null);
+      // GPU Warm-Start: run 40 iterations synchronously so initial crystal filigree is visible on frame 0
+      this.stepSimulation(40, 0, null);
     }
 
     readColors() {
@@ -333,7 +346,7 @@ const DLA = (() => {
       gl.uniform4fv(gl.getUniformLocation(this.progProcess, 'uTaps'), tapData || this.emptyTaps);
 
       for (let i = 0; i < iterations; i++) {
-        gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uTime'), simTime + i * 0.02);
+        gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uTime'), simTime + i * 0.015);
         gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
         gl.viewport(0, 0, this.simWidth, this.simHeight);
         gl.bindTexture(gl.TEXTURE_2D, this.texA);
@@ -349,10 +362,12 @@ const DLA = (() => {
       requestAnimationFrame((t) => this.render(t));
 
       if (!this.lastTime) this.lastTime = timestamp;
-      if (timestamp - this.lastTime < 32) return; // ~30 FPS cadence
+      // 40ms cadence (~25 FPS) for calm, organic motion
+      if (timestamp - this.lastTime < 40) return;
       this.lastTime = timestamp;
 
-      this.time += 0.015 * (this.fx.reducedMotion ? 0.15 : this.fx.motionScale);
+      // Slow down simulation clock by 2x
+      this.time += 0.008 * (this.fx.reducedMotion ? 0.1 : this.fx.motionScale);
       if (Math.floor(this.time * 100) % 60 === 0) {
         this.readColors();
       }
@@ -381,8 +396,8 @@ const DLA = (() => {
       }
       this.activeTaps = this.activeTaps.filter(t => t.framesLeft > 0);
 
-      const stepsPerFrame = this.fx.reducedMotion ? 1 : 2;
-      this.stepSimulation(stepsPerFrame, this.time, tapData);
+      // 1 step per frame instead of 2 for 2x calmer animation
+      this.stepSimulation(1, this.time, tapData);
 
       // Screen Pass
       const gl = this.gl;

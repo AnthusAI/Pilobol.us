@@ -274,10 +274,15 @@ const SporeDrift = (() => {
       this.currentPreset = this.presets[chosenName];
       this.canvas.dataset.piloFxVariant = chosenName;
 
+      // The drift reads better as an atmosphere than a screensaver. Keep the
+      // existing preset relationships/config override, but run the whole
+      // simulation at half speed so the trails have time to breathe.
+      this.speedFactor = 0.5;
+
       this.emptyTaps = new Float32Array(16);
       this.activeTaps = [];
 
-      this.moveSpeed = this.currentPreset.moveSpeed * this.fx.motionScale;
+      this.moveSpeed = this.currentPreset.moveSpeed * this.fx.motionScale * this.speedFactor;
       this.agentTexSize = Math.ceil(Math.sqrt(this.currentPreset.agentCount));
       this.numAgents = this.agentTexSize * this.agentTexSize;
 
@@ -490,7 +495,7 @@ const SporeDrift = (() => {
       this.lastTime = timestamp;
 
       // Active time progression for constantly shifting currents
-      this.time += 0.025 * (this.fx.reducedMotion ? 0.15 : this.fx.motionScale);
+      this.time += 0.025 * (this.fx.reducedMotion ? 0.15 : this.fx.motionScale) * this.speedFactor;
       if (Math.floor(this.time * 100) % 60 === 0) {
         this.readColors();
       }

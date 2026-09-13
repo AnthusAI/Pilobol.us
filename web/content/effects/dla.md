@@ -13,4 +13,4 @@ DLA structures form because growth is rare and only happens at the exposed edge 
 
 DLA was introduced by **T. A. Witten and L. M. Sander** in their 1981 paper *Diffusion-Limited Aggregation, a Kinetic Critical Phenomenon*, and the same process describes real-world branching growths from frost crystals to mineral dendrites to some fungal and bacterial colonies.
 
-[See this effect running full-size in the effects gallery →](../assets/effects-gallery.html#dla)
+[← All background effects](index.html)

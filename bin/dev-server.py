@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import argparse
 import sys
-from http.server import HTTPServer, SimpleHTTPRequestHandler
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -60,7 +60,14 @@ def main() -> int:
         return 1
 
     server_address = (args.bind, args.port)
-    httpd = HTTPServer(server_address, PilobolDevHandler)
+    # A browser can leave a slow or abandoned asset request open while it is
+    # navigating (the effects lab loads several large images and canvases).
+    # The plain HTTPServer handles one connection at a time, which lets that
+    # single request make the entire dev site appear to be down. Keep each
+    # client on its own daemon thread so one stalled tab cannot block `/` or
+    # any other page.
+    httpd = ThreadingHTTPServer(server_address, PilobolDevHandler)
+    httpd.daemon_threads = True
     print(f"Pilobol.us dev server running at http://{args.bind}:{args.port}/")
     print(f"Serving from: {DIST_DIR}")
     print(f"Live assets from: {CONTENT_ASSETS_DIR}")

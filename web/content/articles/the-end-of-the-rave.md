@@ -6,6 +6,7 @@ description: 'Castlemorton, 1992: thirty thousand people in a Worcestershire fie
 standfirst: In 1992 some thirty thousand people danced in a Worcestershire field for a week, and the state spent four million pounds failing to put a name to any of them. A chatbot now reads a grumble about a bad intersection and says where the writer lives.
 cover: assets/the-end-of-the-rave/castlemorton-1992.jpg
 card_image: assets/the-end-of-the-rave/castlemorton-1992.jpg
+image_effect: organic
 ---
 
 :::figure{id="castlemorton-cover" src="../assets/the-end-of-the-rave/castlemorton-1992.jpg" alt="Seven festivalgoers on a ridge at Castlemorton against a clear blue sky in 1992; four of them stand with their hands raised and turned over, none of them looking at each other, while on the ledge below a young woman in round glasses holds the index finger of the man sitting beside her in her mouth and nobody in the frame reacts" caption="Castlemorton Common, May 1992. Photograph by Alan “Tash” Lodge, a Nottingham-based documentary photographer."}

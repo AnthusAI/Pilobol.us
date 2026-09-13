@@ -50,6 +50,9 @@ const Lichen = (() => {
       float seasonThaw = max(0.0, -seasonWave) * 0.008;
 
       // Static per-pixel resistance field + time micro-wobble + seasonal resistance spike
+      // Keep the wobble deliberately small: it should make the colony edge
+      // breathe without changing the underlying resistance map each frame.
+      float timeWobble = 0.035 * (0.5 + 0.5 * sin(uTime * 0.23 + vUv.x * 5.0 - vUv.y * 3.0));
       float resistance = hash(vUv * uResolution * uResistanceScale) * (uResistanceAmplitude + timeWobble) + seasonThaw * 20.0;
       float target = avg > resistance ? 1.0 : max(0.0, val * (1.0 - uDecay) - seasonThaw);
       

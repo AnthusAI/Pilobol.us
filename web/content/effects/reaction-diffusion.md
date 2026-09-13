@@ -13,4 +13,4 @@ This mathematical model describes how two virtual chemicals diffuse and react wi
 
 This implementation builds upon the foundational mathematical biology proposed by **Alan Turing** in his 1952 paper *The Chemical Basis of Morphogenesis*, and the computational explorations of the Gray-Scott model popularized by **Karl Sims**.
 
-[See this effect running full-size in the effects gallery →](../assets/effects-gallery.html#reaction-diffusion)
+[← All background effects](index.html)

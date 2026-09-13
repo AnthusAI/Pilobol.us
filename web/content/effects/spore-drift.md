@@ -13,4 +13,4 @@ Each point follows a curl-noise flow field — a technique borrowed from fluid s
 
 Curl noise as a flow-field technique for particle motion is described in **Bridson, Hourihan, and Nordenstam**'s 2007 paper *Curl-Noise for Procedural Fluid Flow*.
 
-[See this effect running full-size in the effects gallery →](../assets/effects-gallery.html#spore-drift)
+[← All background effects](index.html)

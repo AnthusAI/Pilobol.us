@@ -36,13 +36,15 @@ Every limit on him was a limit of the thing he owned, and every one of those lim
 
 In February 2023 Elon Musk posted about the Super Bowl and got around 9.1 million views. Joe Biden posted about the Super Bowl and got around 29 million. Musk, who had bought the site the year before, flew from Phoenix to California that night, and eighty engineers were put on the problem of why his post had lost.
 
-What they built was a multiplier attached to one account. It is [reported to have been about a thousandfold](https://www.platformer.news/yes-elon-musk-created-a-special-system/), and it let his posts step around the rule that stops any single person from filling up somebody else's feed. Later, when the company published the code that decides what appears on the app's main page, there was a category sitting in it with a name:
+What they built was a multiplier attached to one account. It was [reported at about a thousandfold](https://www.platformer.news/yes-elon-musk-created-a-special-system/), and it let his posts step around the rule that stops any single person from filling up somebody else's feed. That part rests on the reporting of one journalist with sources inside the building, which is how most of what anybody knows about that week got out.
+
+The next month the company [published the code](https://github.com/twitter/the-algorithm/blob/ef4c5eb65e6e04fac4f0e1fa8bbeff56b75c1f98/home-mixer/server/src/main/scala/com/twitter/home_mixer/functional_component/decorator/HomeTweetTypePredicates.scala) behind the page everyone opens the app to. It contains a list of labels the system can hang on any post so the company can count what kinds of things people are seeing. The labels are broad categories — whether the writer is a heavy user, whether the writer is a Democrat, whether the writer is a Republican. Sitting in that list, at the same size as an entire political party, is one man:
 
 :::pull-quote{tone="primary"}
 author_is_elon
 :::
 
-Nobody has to work out whether the thumb is on the scale. Somebody typed the name of the thumb.
+The line does not make his posts travel further. It does something quieter. Somebody sat down and decided that the population of that website had four interesting kinds of author in it, and that one of the four was the owner.
 
 The next year the site [changed its rules](https://www.theregister.com/2024/10/18/x_train_data/) so that no other company could use what people post there to build an AI, while granting itself permission to use all of it to build its own. Hundreds of millions of people were still talking in the room. One company was allowed to learn from them.
 

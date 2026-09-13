@@ -967,11 +967,35 @@
     -webkit-mask-composite: source-over, source-over, source-over;
   }
 
-  /* Dedicated effect showcase pages: full canvas exposure */
+  /* Dedicated effect showcase pages: diffuse contrast-preserving mask for text */
   .markus-body[data-pilo-page="effect"] .pilo-physarum-canvas {
-    mask-image: none !important;
-    -webkit-mask-image: none !important;
-    opacity: calc(var(--pilo-fx-opacity) * var(--pilo-fx-intensity, 0.72) * 1.35);
+    mask-image:
+      var(--pilo-touch-mask, radial-gradient(circle 0 at 0 0, transparent 0, transparent 0)),
+      radial-gradient(ellipse var(--pilo-fx-header-width, 48rem) var(--pilo-fx-header-height, 24rem) at var(--pilo-fx-header-x, 72%) 9rem, black 0%, rgba(0, 0, 0, .92) 50%, rgba(0, 0, 0, .45) 80%, transparent 100%),
+      linear-gradient(to right,
+        black 0,
+        black calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) - var(--pilo-fx-gutter)),
+        rgba(0, 0, 0, .58) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + .5rem),
+        rgba(0, 0, 0, .14) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + 2.5rem),
+        rgba(0, 0, 0, .14) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - 2.5rem),
+        rgba(0, 0, 0, .58) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - .5rem),
+        black calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) + var(--pilo-fx-gutter)),
+        black 100%),
+      radial-gradient(ellipse var(--pilo-fx-footer-width, 70%) var(--pilo-fx-footer-height, 20rem) at 55% 103%, black 0%, rgba(0, 0, 0, .75) 45%, rgba(0, 0, 0, .28) 75%, transparent 100%) !important;
+    -webkit-mask-image:
+      var(--pilo-touch-mask, radial-gradient(circle 0 at 0 0, transparent 0, transparent 0)),
+      radial-gradient(ellipse var(--pilo-fx-header-width, 48rem) var(--pilo-fx-header-height, 24rem) at var(--pilo-fx-header-x, 72%) 9rem, black 0%, rgba(0, 0, 0, .92) 50%, rgba(0, 0, 0, .45) 80%, transparent 100%),
+      linear-gradient(to right,
+        black 0,
+        black calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) - var(--pilo-fx-gutter)),
+        rgba(0, 0, 0, .58) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + .5rem),
+        rgba(0, 0, 0, .14) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + 2.5rem),
+        rgba(0, 0, 0, .14) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - 2.5rem),
+        rgba(0, 0, 0, .58) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - .5rem),
+        black calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) + var(--pilo-fx-gutter)),
+        black 100%),
+      radial-gradient(ellipse var(--pilo-fx-footer-width, 70%) var(--pilo-fx-footer-height, 20rem) at 55% 103%, black 0%, rgba(0, 0, 0, .75) 45%, rgba(0, 0, 0, .28) 75%, transparent 100%) !important;
+    opacity: calc(var(--pilo-fx-opacity) * var(--pilo-fx-intensity, 0.72) * 1.15);
   }
 
   /* Reaction-diffusion is made of fine boundaries rather than broad opaque

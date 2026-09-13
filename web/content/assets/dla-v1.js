@@ -1,13 +1,13 @@
 // Diffusion-Limited Aggregation: dendritic frost/coral branching.
 //
-// Classic DLA (Witten & Sander 1981) walks random particles until they touch
-// existing structure and freeze there. In this continuous shader implementation,
-// cells freeze at the exposed frontier when bordering existing frozen structure.
-// To keep the pattern endlessly cyclic and shifting between light and dark phases:
-// - A spatio-temporal breathing wave modulates growth affinity vs thaw across the page.
-// - Overgrowth/interior crowding triggers active thawing from within dense clusters,
-//   keeping branches thin, delicate, and constantly dissolving/resprouting.
-// - Spontaneous nucleation in cleared spaces initiates new crystal trees.
+// Continuous simulation that cycles continuously between two distinct phases:
+// 1. DARKENING / GROWTH PHASE: Crystals slowly grow outward from seed nodes,
+//    branching across the margins and header, darkening the page with intricate filigree.
+// 2. LIGHTENING / THAW PHASE: Growth is completely shut off. A gentle thaw dissolves
+//    the crystals from the tips inward, eroding every pixel back to transparency
+//    so the page becomes 100% light, clean, and pristine again.
+// 3. GERMINATION & REPEAT: Fresh microscopic seed buds sprout at new randomized
+//    locations in the margins/header, and the darkening phase begins anew.
 const DLA = (() => {
   const vsQuad = `#version 300 es
     in vec2 position;
@@ -29,6 +29,10 @@ const DLA = (() => {
     uniform float uFrontierThreshold;
     uniform float uFreezeChance;
     uniform float uErosion;
+    uniform float uGrowthAllowed;
+    uniform float uThawRate;
+    uniform float uCyclePhase;
+    uniform float uCycleIndex;
     uniform vec4 uTaps[4];
 
     float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453123); }
@@ -45,44 +49,46 @@ const DLA = (() => {
         }
       }
 
-      // Smooth traveling breathing wave (~28 second cycle):
-      // Gently moves across the page, alternating regions between a lush "growth"
-      // phase and a clear "thaw" phase so the page cycles between light and dark.
-      float cycleWave = sin(uTime * 0.22 + vUv.x * 2.2 + vUv.y * 2.8);
-      
-      // Growth probability: high during the positive wave, drops near zero in negative wave
-      float localFreezeChance = uFreezeChance * clamp(0.7 + 0.9 * cycleWave, 0.05, 1.5);
-      
-      // Dynamic erosion:
-      // 1. Base erosion that speeds up significantly during the thaw phase (cycleWave < 0)
-      float thawFactor = 1.0 + max(0.0, -cycleWave) * 3.5;
-      
-      // 2. Overcrowding suppression: if surrounded by dense neighbors (> 3.5),
-      // melt out the core so it cannot solidify into a flat dark block.
-      // DLA branches must remain delicate reaching filigree.
-      float crowdFactor = smoothstep(2.5, 6.0, neighborSum) * 5.0;
-      
-      float totalErosion = uErosion * (thawFactor + crowdFactor);
-
-      float roll = hash(vUv * uResolution + vec2(uTime * 19.0, 1.23));
       float nextVal = val;
-      
-      // 1. Freeze only at the frontier (sparse thin edge, not packed interior)
-      if (val < 0.35 && neighborSum >= uFrontierThreshold && neighborSum <= 3.8 && roll < localFreezeChance) {
-        nextVal = 0.95;
-      }
-      
-      // 2. Continuous cyclical erosion
-      nextVal = max(0.0, nextVal - totalErosion);
+      float roll = hash(vUv * uResolution + vec2(uTime * 17.0, 1.23));
 
-      // 3. Spontaneous subtle nucleation: plant fresh seed points in cleared areas
-      // during the rising growth cycle so new dendritic crystals bloom as old ones melt.
-      float seedRoll = hash(vUv * 67.0 + vec2(uTime * 0.05, 8.41));
-      if (cycleWave > -0.2 && val < 0.02 && neighborSum < 0.05 && seedRoll > 0.99988) {
-        nextVal = 0.9;
+      // 1. DARKENING / GROWTH PHASE:
+      // STRICT REQUIREMENT: Only enabled when uGrowthAllowed > 0.001.
+      // During thaw/lightening phase, uGrowthAllowed is EXACTLY 0.0, so NO FREEZING CAN EVER OCCUR.
+      if (uGrowthAllowed > 0.001 && val < 0.25) {
+        if (neighborSum >= uFrontierThreshold && neighborSum <= 3.2) {
+          if (roll < uFreezeChance * uGrowthAllowed) {
+            nextVal = 0.95;
+          }
+        }
       }
 
-      // 4. Smooth circular tap inoculation: plant new crystalline frost seeds
+      // 2. LIGHTENING / THAW / DISSOLUTION PHASE:
+      // When uThawRate > 0, branches dissolve from tips inward, returning the page to light.
+      // Even during growth, subtle overcrowding suppression prevents solid black slabs.
+      float crowdFactor = smoothstep(2.0, 4.5, neighborSum) * 2.5;
+      float tipBoost = (1.0 - smoothstep(0.5, 3.5, neighborSum)) * 0.6;
+      float thawWave = 1.0 + 0.3 * sin(vUv.x * 3.0 + vUv.y * 2.0 + uTime * 0.5);
+      float currentThaw = (uThawRate * thawWave * (1.0 + tipBoost)) + (uErosion * (1.0 + crowdFactor));
+      
+      nextVal = max(0.0, nextVal - currentThaw);
+
+      // 3. CYCLIC GERMINATION:
+      // In the pristine window between cycles (when thaw has finished and canvas is light),
+      // sprout fresh seed candidates in the margins and top-right header.
+      if (uCyclePhase > 0.96 || uCyclePhase < 0.03) {
+        float seedHash = hash(vUv * 97.3 + vec2(uCycleIndex * 31.7, 19.3));
+        if (seedHash > 0.99988) {
+          bool isHeader = (vUv.x > 0.55 && vUv.y > 0.70);
+          bool isMargin = (vUv.x < 0.16 || vUv.x > 0.84);
+          if (isHeader || isMargin) {
+            nextVal = 0.95;
+          }
+        }
+      }
+
+      // 4. DIRECT TOUCH INOCULATION:
+      // Touching or tapping deposits seeds directly under pointer
       for (int i = 0; i < 4; i++) {
         if (uTaps[i].z > 0.0 && uTaps[i].w > 0.0) {
           vec2 tapCoord = uTaps[i].xy;
@@ -173,11 +179,11 @@ const DLA = (() => {
       }
 
       this.fx = readFxConfig('dla');
-      // Gentle balanced speed with ~10-25s cyclic turnover
+      // Calm, majestic growth speed (~3x slower) with full macro cyclic turnover
       this.presets = {
-        frost: { seedCount: 28, seedRadius: [1, 2], frontierThreshold: 0.55, freezeChance: 0.024, erosion: 0.0022 },
-        coral: { seedCount: 22, seedRadius: [1, 2], frontierThreshold: 0.40, freezeChance: 0.032, erosion: 0.0018 },
-        rootlets: { seedCount: 16, seedRadius: [1, 2], frontierThreshold: 0.60, freezeChance: 0.028, erosion: 0.0015 }
+        frost: { seedCount: 6, seedRadius: [1, 1], frontierThreshold: 0.55, freezeChance: 0.0060, erosion: 0.0004 },
+        coral: { seedCount: 8, seedRadius: [1, 1], frontierThreshold: 0.40, freezeChance: 0.0075, erosion: 0.0005 },
+        rootlets: { seedCount: 5, seedRadius: [1, 1], frontierThreshold: 0.60, freezeChance: 0.0065, erosion: 0.0004 }
       };
       const presetNames = Object.keys(this.presets);
       const chosenName = this.presets[this.fx.presetName]
@@ -195,6 +201,10 @@ const DLA = (() => {
       this.readColors();
       this.fadeStart = performance.now();
 
+      this.time = 0;
+      this.cycleTime = 0;
+      this.lastTime = 0;
+
       this.initGL();
       this.resize();
       this.canvas.dataset.piloFxReady = 'true';
@@ -202,7 +212,6 @@ const DLA = (() => {
       window.addEventListener('resize', () => this.resize());
       document.addEventListener('pilo:canvasresize', () => this.resize());
 
-      this.time = 0;
       this.running = true;
       requestAnimationFrame((t) => this.render(t));
       document.addEventListener('visibilitychange', () => {
@@ -258,7 +267,7 @@ const DLA = (() => {
       const gl = this.gl;
       const data = new Float32Array(this.simWidth * this.simHeight * 4);
 
-      // Distribute initial seed points
+      // Distribute initial seed points sparsely in margins and header
       const seedPoints = [];
       if (this.fx.seedRegions && this.fx.seedRegions.length) {
         for (const r of this.fx.seedRegions) {
@@ -266,25 +275,21 @@ const DLA = (() => {
         }
       }
       const fallbackNodes = [
-        [0.72 * this.simWidth, 0.86 * this.simHeight],
-        [0.85 * this.simWidth, 0.80 * this.simHeight],
-        [0.65 * this.simWidth, 0.88 * this.simHeight],
-        [0.08 * this.simWidth, 0.75 * this.simHeight],
-        [0.06 * this.simWidth, 0.50 * this.simHeight],
-        [0.09 * this.simWidth, 0.25 * this.simHeight],
-        [0.93 * this.simWidth, 0.65 * this.simHeight],
-        [0.94 * this.simWidth, 0.40 * this.simHeight],
-        [0.92 * this.simWidth, 0.18 * this.simHeight],
-        [0.35 * this.simWidth, 0.08 * this.simHeight],
-        [0.65 * this.simWidth, 0.05 * this.simHeight]
+        [0.72 * this.simWidth, 0.86 * this.simHeight], // Top-right header bloom beside H1
+        [0.85 * this.simWidth, 0.80 * this.simHeight], // Top-right outer corner
+        [0.08 * this.simWidth, 0.70 * this.simHeight], // Upper left margin
+        [0.06 * this.simWidth, 0.40 * this.simHeight], // Mid left margin
+        [0.93 * this.simWidth, 0.55 * this.simHeight], // Mid right margin
+        [0.92 * this.simWidth, 0.25 * this.simHeight], // Lower right margin
+        [0.35 * this.simWidth, 0.08 * this.simHeight]  // Footer margin
       ];
       for (const node of fallbackNodes) seedPoints.push(node);
 
       const seedCount = this.currentPreset.seedCount;
       for (let s = 0; s < seedCount; s++) {
         const base = seedPoints[s % seedPoints.length];
-        const cx = Math.max(1, Math.min(this.simWidth - 2, base[0] + (Math.random() - 0.5) * 28.0));
-        const cy = Math.max(1, Math.min(this.simHeight - 2, base[1] + (Math.random() - 0.5) * 28.0));
+        const cx = Math.max(1, Math.min(this.simWidth - 2, base[0] + (Math.random() - 0.5) * 16.0));
+        const cy = Math.max(1, Math.min(this.simHeight - 2, base[1] + (Math.random() - 0.5) * 16.0));
         const r = this.currentPreset.seedRadius[0];
         for (let y = Math.max(0, Math.floor(cy - r)); y < Math.min(this.simHeight, Math.ceil(cy + r)); y++) {
           for (let x = Math.max(0, Math.floor(cx - r)); x < Math.min(this.simWidth, Math.ceil(cx + r)); x++) {
@@ -318,8 +323,8 @@ const DLA = (() => {
       gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
       gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, this.texB, 0);
 
-      // GPU Warm-Start: run 40 iterations synchronously so initial crystal filigree is visible on frame 0
-      this.stepSimulation(40, 0, null);
+      // Gentle warmup: 10 steps so delicate seedlings are visible immediately without blanketing screen
+      this.stepSimulation(10, 0, null, 0.6, 0.0, 0.05, 0);
     }
 
     readColors() {
@@ -335,7 +340,7 @@ const DLA = (() => {
       document.body.removeChild(div);
     }
 
-    stepSimulation(iterations, simTime, tapData) {
+    stepSimulation(iterations, simTime, tapData, growthAllowed, thawRate, cyclePhase, cycleIndex) {
       const gl = this.gl;
       gl.bindVertexArray(this.vao);
       gl.useProgram(this.progProcess);
@@ -343,6 +348,10 @@ const DLA = (() => {
       gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uFrontierThreshold'), this.currentPreset.frontierThreshold);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uFreezeChance'), this.currentPreset.freezeChance);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uErosion'), this.currentPreset.erosion);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uGrowthAllowed'), growthAllowed);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uThawRate'), thawRate);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uCyclePhase'), cyclePhase);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uCycleIndex'), cycleIndex);
       gl.uniform4fv(gl.getUniformLocation(this.progProcess, 'uTaps'), tapData || this.emptyTaps);
 
       for (let i = 0; i < iterations; i++) {
@@ -364,10 +373,42 @@ const DLA = (() => {
       if (!this.lastTime) this.lastTime = timestamp;
       // 40ms cadence (~25 FPS) for calm, organic motion
       if (timestamp - this.lastTime < 40) return;
+      const dt = Math.min(0.1, (timestamp - this.lastTime) / 1000.0);
       this.lastTime = timestamp;
 
-      // Slow down simulation clock by 2x
-      this.time += 0.008 * (this.fx.reducedMotion ? 0.1 : this.fx.motionScale);
+      // Advance clocks
+      const speedScale = (this.fx.reducedMotion ? 0.2 : this.fx.motionScale);
+      this.time += dt * 0.3 * speedScale;
+      this.cycleTime += dt * speedScale;
+
+      // 32-second full macro cycle: Darkening -> Hold -> Lightening -> Pristine Reseed
+      const cycleDuration = 32.0;
+      const cyclePhase = (this.cycleTime % cycleDuration) / cycleDuration;
+      const cycleIndex = Math.floor(this.cycleTime / cycleDuration);
+
+      let growthAllowed = 0.0;
+      let thawRate = 0.0;
+
+      if (cyclePhase < 0.45) {
+        // DARKENING PHASE: Crystals slowly grow outward, darkening the page with filigree
+        const t = cyclePhase / 0.45;
+        growthAllowed = Math.sin(t * Math.PI);
+        thawRate = 0.0;
+      } else if (cyclePhase < 0.52) {
+        // PEAK MATURITY PAUSE: Growth stops, intricate branches hold at full bloom
+        growthAllowed = 0.0;
+        thawRate = 0.0005;
+      } else if (cyclePhase < 0.82) {
+        // LIGHTENING / THAW PHASE: Growth completely disabled. Thaw dissolves branches back to 0
+        growthAllowed = 0.0;
+        const t = (cyclePhase - 0.52) / 0.30;
+        thawRate = 0.007 + 0.009 * Math.sin(t * Math.PI);
+      } else {
+        // PRISTINE LIGHT & GERMINATION: Canvas is 100% light; new seeds sprout for next cycle
+        growthAllowed = 0.0;
+        thawRate = 0.0;
+      }
+
       if (Math.floor(this.time * 100) % 60 === 0) {
         this.readColors();
       }
@@ -396,8 +437,8 @@ const DLA = (() => {
       }
       this.activeTaps = this.activeTaps.filter(t => t.framesLeft > 0);
 
-      // 1 step per frame instead of 2 for 2x calmer animation
-      this.stepSimulation(1, this.time, tapData);
+      // 1 simulation step per frame with exact cycle parameters
+      this.stepSimulation(1, this.time, tapData, growthAllowed, thawRate, cyclePhase, cycleIndex);
 
       // Screen Pass
       const gl = this.gl;
@@ -429,4 +470,6 @@ const DLA = (() => {
   } else {
     init();
   }
+
+  return { Simulation };
 })();

@@ -43,19 +43,22 @@ const Lichen = (() => {
       }
       float avg = sum / 8.0;
 
-      // Slow dynamic micro-variation keeps lichen frontiers continually breathing and creeping
-      float timeWobble = sin(uTime * 0.4 + vUv.x * 6.0 + vUv.y * 8.0) * 0.05;
+      // Dynamic seasonal breathing wave:
+      // Lichen grows and darkens during the growth phase, then naturally recedes and thaws
+      // during the sloughing phase so the canvas breathes between dark and light cycles.
+      float seasonWave = sin(uTime * 0.16 + vUv.x * 2.5 + vUv.y * 3.2);
+      float seasonThaw = max(0.0, -seasonWave) * 0.008;
 
-      // Static per-pixel resistance field + time micro-wobble
-      float resistance = hash(vUv * uResolution * uResistanceScale) * (uResistanceAmplitude + timeWobble);
-      float target = avg > resistance ? 1.0 : val * (1.0 - uDecay);
+      // Static per-pixel resistance field + time micro-wobble + seasonal resistance spike
+      float resistance = hash(vUv * uResolution * uResistanceScale) * (uResistanceAmplitude + timeWobble) + seasonThaw * 20.0;
+      float target = avg > resistance ? 1.0 : max(0.0, val * (1.0 - uDecay) - seasonThaw);
       
       // Slow relaxation toward target
       float nextVal = mix(val, target, uRelaxation);
 
-      // Continuous subtle renewal: very rare spontaneous thallus crust spore in margins
+      // Continuous renewal: spontaneous thallus crust spores in margins during rising growth
       float spontaneous = hash(vUv * 45.0 + vec2(uTime * 0.05, 3.14));
-      if (spontaneous > 0.9997 && avg > 0.02) {
+      if (seasonWave > -0.1 && spontaneous > 0.9997 && avg > 0.02) {
         nextVal = max(nextVal, 0.6);
       }
 

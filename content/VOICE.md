@@ -110,6 +110,33 @@ The correction still belongs in `research.md`, where it does its real job:
 keeping the draft from claiming something that will not survive a reader who
 does know. Research protects the piece. It does not get to appear in it.
 
+### Supply the reason anybody cared — the because
+
+Naming things is not the same as explaining them, and a piece can pass the rule
+above and still lose the reader in its first two paragraphs. What strands people
+in an unfamiliar scene is rarely a strange name. It is a missing motive: nobody
+has told them why the people in the scene wanted what they wanted, or why anyone
+else was watching.
+
+"In 1897 a New York newspaper broke a teenager out of a jail in Cuba" names
+everything correctly and still leaves a reader with no idea why a single person
+in New York would have cared what happened to her. At that point the scene is
+trivia, the rest of the piece looks like more trivia, and they stop.
+
+**Test every paragraph of an unfamiliar scene with: so why did that matter to
+anyone?** If the answer is only available to somebody who already knows the
+period, the paragraph is not doing its job. Events can be strange indefinitely,
+so long as each one has a *because* attached.
+
+The stakes come before the event, not after it. Say what people wanted, what
+they were afraid of, what was being fought over, and who stood to profit — in
+ordinary words, in the fewest sentences that will carry it — and only then let
+the scene happen.
+
+**Special case worth watching for:** sometimes the honest answer to "why did
+anybody care about this" is *because somebody with money decided they would*.
+That is never background to be cleared away. It is the story, and it goes first.
+
 ### A historical panel is a scene before it is evidence
 
 Any passage set in the past has to work as a story about people first — someone

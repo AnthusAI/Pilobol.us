@@ -3,20 +3,26 @@ title: Somebody Wrote One Man's Name Into the Code That Picks What You See
 author: by various bots and Ryan Porter
 date: 'Sunday, September 13, 2026'
 description: >-
-  A newspaper owner once broke a teenager out of a jail in Cuba so he could sell
-  the rescue to his readers. Everything that limited what he could do to people's
-  heads was a limit of paper, and paper is not what this runs on now.
+  A newspaper owner in 1897 picked one girl out of a war and made a country care
+  about her, then had her broken out of jail so he could sell that too. Every
+  limit on what he could do was a limit of paper.
 standfirst: >-
-  He had to get the paper into your hands, with his name printed across the top,
-  and you had to pay for it. The thing that replaced all of that costs nothing,
-  carries no name, and is already switched on.
+  To reach you he had to get a printed object into your hands, with his name
+  across the top, and you had to pay for it every morning. What replaced all of
+  that costs nothing, carries no name, and is already switched on.
 ---
 
-In 1897 a New York newspaper broke a teenager out of a jail in Cuba.
+In 1897 a man who owned a newspaper decided that Americans were going to care about a teenage girl in a Cuban jail. They did, in their tens of thousands, and it took him about a year.
 
-Evangelina Cosío y Cisneros was eighteen and had been locked up for more than a year. The Spanish officials running the island said she had helped lure one of their officers into an ambush. She said the officer had come to her rooms at night and she had fought him off. A newspaper four thousand kilometres away, the New York Journal, had been printing her face for months, and its owner — a rich young man named William Randolph Hearst — had gathered more than ten thousand signatures on a petition asking Spain to release her. Spain ignored it. So Hearst sent one of his own reporters, Karl Decker, to Havana with instructions to get her out of the building.
+Here is why there was anything to care about. Cuba is a big island ninety miles off the coast of Florida. In the 1890s it belonged to Spain, and Cubans were fighting a war to stop it belonging to Spain. The Spanish general sent to finish that war did it by forcing country people into guarded towns, where they died of hunger and disease by the hundred thousand. It was the biggest story in the world, it was happening close enough to reach by boat in a day, and two enormous New York newspapers were in a price war with each other over who could sell it hardest. One of them, the New York Journal, belonged to a rich young man named William Randolph Hearst.
 
-On the night of 7 October, Decker and two other men [broke the bars of her cell](https://en.wikipedia.org/wiki/Evangelina_Cosio_y_Cisneros) and took her. They hid her for three days in the house of a banker named Carlos Carbonell, whom she later married. They put her in boy's clothes and walked her onto a passenger steamer bound for New York. About seventy-five thousand people came to Madison Square to watch her get off it.
+Hearst needed a face. An island full of dying farmers is a fact, and facts are hard to sell every single morning. A girl is a story you can run tomorrow.
+
+He found Evangelina Cosío y Cisneros, who was eighteen, from a well-known family, and locked in a Havana prison. Spanish officials said she had helped lure one of their officers into an ambush. She said the officer had come to her rooms at night and she had fought him off. Hearst did not especially need to know which of those was true. He ran her picture for months, in the language of a fairy tale — the innocent girl, the brutal empire, the dungeon — and he collected more than ten thousand signatures on a petition demanding Spain let her go.
+
+Spain ignored it. So he sent one of his own reporters, a man named Karl Decker, to Havana with instructions to get her out of the building.
+
+On the night of 7 October, Decker and two other men [broke the bars of her cell](https://en.wikipedia.org/wiki/Evangelina_Cosio_y_Cisneros) and took her. They hid her three days in the house of a banker named Carlos Carbonell, whom she later married. They dressed her in boy's clothes and walked her onto a passenger steamer bound for New York. About seventy-five thousand people came to Madison Square to watch her get off it.
 
 The newspaper had arranged the event it was reporting, and then sold the arrangement back to its readers at a penny a copy.
 

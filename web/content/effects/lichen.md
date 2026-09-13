@@ -13,4 +13,4 @@ The irregularity comes from a fixed per-pixel "resistance" texture standing in f
 
 Crustose growth form is one of the three basic lichen growth habits recognized in lichenology (alongside foliose and fruticose); this implementation is a loose abstraction of colony-merging growth, not a model of any specific species.
 
-[See this effect running full-size in the effects gallery →](../assets/effects-gallery.html#lichen)
+[← All background effects](index.html)

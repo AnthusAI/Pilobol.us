@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image treatments — Pilobolus</title>
+    <style>
+    :root { color-scheme: dark; font-family: Georgia, serif; background: #11150e; color: #e4dfd0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(1100px, calc(100% - 2.5rem)); margin: 0 auto; padding: 4rem 0 8rem; }
+    header { margin-bottom: 6rem; }
+    /* Keep the display headline at a deliberate measure, but let the
+       supporting copy use the same full column as the experiments below. */
+    header h1 { max-width: 46rem; }
+    h1 { margin: 0 0 .75rem; font-size: clamp(2.5rem, 7vw, 5.5rem); line-height: .88; font-weight: 400; }
+    h2 { margin: 0; font-size: clamp(1.65rem, 3vw, 2.6rem); font-weight: 400; line-height: 1; }
+    p { width: 100%; max-width: none; color: #bfbba9; line-height: 1.5; }
+    .label { color: #adb989; font: 700 .68rem/1.2 ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .experiment { margin: 0 0 9rem; }
+    .effect-frame { margin-top: 1.25rem; border: 1px solid #515b42; background: #1a2016; box-shadow: 0 2rem 5rem rgba(0, 0, 0, .35); }
+    .pilo-organic-image { position: relative; width: 100%; margin: 0; aspect-ratio: 16 / 9; overflow: hidden; }
+    .pilo-organic-image canvas { position: absolute !important; inset: 0 !important; display: block; width: 100% !important; height: 100% !important; mix-blend-mode: screen; }
+    .caption { margin: .85rem 1rem 1rem; font-size: .9rem; }
+    .card-test { display: grid; grid-template-columns: 1.15fr .85fr; min-height: 26rem; }
+    .card-copy { display: flex; flex-direction: column; justify-content: end; padding: clamp(1.5rem, 4vw, 4rem); background: #d8d0bd; color: #172011; }
+    .card-copy p { color: #3c4632; margin-bottom: 0; }
+    .card-test .pilo-organic-image { min-height: 100%; aspect-ratio: auto; }
+    .pilo-cinematic-gallery { margin: 0; aspect-ratio: 16 / 8; border-radius: 0; box-shadow: none; }
+    .cinema-note { color: #aeb59a; font-size: .9rem; }
+
+    /* New candidates ---------------------------------------------------- */
+    .pilo-mask-reveal,
+    .pilo-pixel-dissolve,
+    .pilo-lenticular {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #20271b;
+    }
+    .pilo-mask-reveal img,
+    .pilo-pixel-dissolve img,
+    .pilo-lenticular img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      margin: 0;
+      border-radius: 0;
+    }
+    .pilo-mask-reveal img {
+      clip-path: inset(0 var(--mask-right, 100%) 0 0);
+      transform: scale(calc(1.04 - var(--mask-progress, 0) * .04));
+      transform-origin: center;
+      transition: none;
+    }
+    .pilo-mask-reveal::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: var(--mask-grain, 1);
+      background:
+        repeating-linear-gradient(112deg, transparent 0 7px, rgba(224, 233, 189, .16) 8px 9px),
+        linear-gradient(90deg, rgba(19, 26, 14, .8), transparent 68%);
+      mix-blend-mode: screen;
+    }
+    .pilo-pixel-dissolve-canvas {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .pilo-pixel-dissolve::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: calc((1 - var(--pixel-progress, 0)) * .5);
+      background: repeating-linear-gradient(0deg, rgba(228, 223, 208, .25) 0 1px, transparent 1px 5px);
+      mix-blend-mode: screen;
+    }
+    .pilo-lenticular img { position: absolute; inset: 0; }
+    .pilo-lenticular > img:first-child {
+      position: relative;
+      transform: translate3d(calc(var(--lenticular-drift, 0) * -.14px), calc(var(--lenticular-drift, 0) * .08px), 0);
+      filter: saturate(calc(1 + (1 - var(--lenticular-progress, 0)) * .3));
+    }
+    .pilo-lenticular .pilo-lenticular-ghost {
+      opacity: calc(var(--lenticular-opacity, 1) * .68);
+      mix-blend-mode: normal;
+      pointer-events: none;
+    }
+    .pilo-lenticular .pilo-lenticular-ghost-a {
+      transform: translate3d(calc(var(--lenticular-drift, 0) * 1.6px), calc(var(--lenticular-drift, 0) * -.24px), 0) rotate(calc(var(--lenticular-drift, 0) * .05deg));
+      filter: sepia(.7) saturate(3.6) hue-rotate(-30deg) contrast(1.22);
+      clip-path: inset(0 48% 0 0);
+    }
+    .pilo-lenticular .pilo-lenticular-ghost-b {
+      transform: translate3d(calc(var(--lenticular-drift, 0) * -1.6px), calc(var(--lenticular-drift, 0) * .22px), 0) rotate(calc(var(--lenticular-drift, 0) * -.05deg));
+      filter: sepia(.7) saturate(3.6) hue-rotate(24deg) contrast(1.22);
+      clip-path: inset(0 0 0 48%);
+    }
+    .research {
+      border-top: 1px solid #515b42;
+      padding-top: 1.5rem;
+      margin-top: 2rem;
+    }
+    .research ul { padding-left: 1.2rem; color: #bfbba9; line-height: 1.55; }
+    .research a { color: #d7dfb2; }
+    @media (max-width: 680px) {
+      main { width: min(100% - 1.5rem, 1100px); padding-top: 2.5rem; }
+      header { margin-bottom: 4rem; }
+      .experiment { margin-bottom: 6rem; }
+      .card-test { grid-template-columns: 1fr; }
+      .card-test .pilo-organic-image { min-height: 17rem; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="label">Live design study / scroll through the images</p>
+      <h1>Pictures that do not hold still.</h1>
+      <p>Six ways a real image can arrive as something half-made: a slow assembly, a story-card specimen, a masked wipe, a pixel dissolve, a chromatic afterimage, and a smeared transition. Everything here is scroll-only.</p>
+    </header>
+
+    <section class="experiment">
+      <p class="label">01 / Cover as apparition</p>
+      <h2>The picture gathers itself at the reading line.</h2>
+      <p>Approach the frame, then pass it. The photograph should be least certain at the edge of attention and most legible where a reader naturally pauses.</p>
+      <div class="effect-frame">
+        <div class="pilo-organic-image" data-src="the-end-of-the-rave/castlemorton-1992.jpg" aria-label="Castlemorton photograph gradually assembling"></div>
+        <p class="caption">A large story image can behave like evidence slowly becoming admissible.</p>
+      </div>
+    </section>
+
+    <section class="experiment">
+      <p class="label">02 / Feed card as specimen</p>
+      <h2>A story card with a living image, not a thumbnail.</h2>
+      <p>This gives the visual side of a card its own small arrival while the headline stays immediately usable.</p>
+      <article class="effect-frame card-test">
+        <div class="card-copy">
+          <p class="label">September 11, 2026</p>
+          <h2>The End of the Rave</h2>
+          <p>Thirty thousand people in a Worcestershire field, and not one name. Later, ordinary sentences were enough to call them back out.</p>
+        </div>
+        <div class="pilo-organic-image" data-src="the-end-of-the-rave/castlemorton-1992.jpg" aria-label="Castlemorton story-card image gradually assembling"></div>
+      </article>
+    </section>
+
+    <section class="experiment">
+      <p class="label">03 / Image as unstable surface</p>
+      <h2>Let the scene settle as you arrive.</h2>
+      <p>The image arrives through a centered blur and slight parallax, then settles as it reaches the reading line. This feels better suited to a deliberately curated sequence than a standard article image.</p>
+      <div class="effect-frame">
+        <div class="pilo-cinematic-gallery" aria-label="Scroll-driven image sequence">
+          <img src="the-end-of-the-rave/castlemorton-1992.jpg" alt="Festivalgoers at Castlemorton">
+          <img src="wiki-janitor/og-cover.jpg" alt="Algae on a dam wall">
+          <img src="he-said-he-could-see-it/og-cover.jpg" alt="A winged figure falling">
+        </div>
+        <p class="caption cinema-note">The scroll treatment is a useful candidate for a short, one-story gallery—not a default decoration.</p>
+      </div>
+      <div class="aftercare" aria-label="Scroll test filler">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. The room keeps its shape while the reader moves through it, then the image begins to lose its certainty behind them.</p>
+        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; integer blandit, nulla at feugiat cursus, sem erat porttitor nibh, vitae dictum mi neque non justo.</p>
+        <p>Praesent sed ligula vitae massa consequat pretium. Donec vitae felis at nisl mattis aliquet. Suspendisse potenti. A paragraph like this is only here to give the eye somewhere to go after the picture.</p>
+        <p>Morbi interdum, arcu non pulvinar consectetur, eros lorem tincidunt justo, at interdum lectus nisi sed nunc. Sed euismod, nulla non faucibus maximus, sapien purus feugiat urna, vel fermentum nibh lectus a erat.</p>
+        <p>Integer quis sem id sapien elementum consequat. Nunc a justo vitae augue accumsan posuere. Nam at lectus sed neque laoreet vulputate. The image should be less certain now, behind the shoulder.</p>
+        <p>Curabitur ac mi sit amet neque scelerisque facilisis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla facilisi.</p>
+        <p>Donec rhoncus turpis at tortor convallis, a sodales justo placerat. Aliquam erat volutpat. Cras euismod tellus sed sem tincidunt, a malesuada purus feugiat.</p>
+      </div>
+    </section>
+
+    <section class="experiment">
+      <p class="label">04 / Masked evidence</p>
+      <h2>A picture dragged into view like a curtain.</h2>
+      <p>A hard-edged wipe is less dreamy than the other treatments. It may work when the image should feel withheld, redacted, or admitted in pieces.</p>
+      <div class="effect-frame">
+        <div class="pilo-mask-reveal">
+          <img src="wiki-janitor/og-cover.jpg" alt="Algae streaks on a dam wall">
+        </div>
+        <p class="caption">Candidate: a simple mask/clip reveal that can stay legible and cheap.</p>
+      </div>
+    </section>
+
+    <section class="experiment">
+      <p class="label">05 / Pixel dissolve</p>
+      <h2>The image resolves from a low-resolution witness.</h2>
+      <p>Pixelation is strongest at the edge and fades continuously toward a clean still. It has a useful “signal arriving” quality without the sudden snap of a glitch.</p>
+      <div class="effect-frame">
+        <div class="pilo-pixel-dissolve">
+          <img src="he-said-he-could-see-it/rubens-fall-of-icarus-sketch.jpg" alt="Rubens sketch of Icarus falling">
+        </div>
+        <p class="caption">Candidate: a quantized image that could suit screenshots, maps, or evidence.</p>
+      </div>
+    </section>
+
+    <section class="experiment">
+      <p class="label">06 / Chromatic afterimage</p>
+      <h2>Two ghosts trail the source, then vanish.</h2>
+      <p>A restrained RGB split makes the image feel lenticular or misregistered. It is deliberately subtle at the reading line and more uncanny while arriving or leaving.</p>
+      <div class="effect-frame">
+        <div class="pilo-lenticular">
+          <img src="the-part-of-the-machine-that-could-talk/og-cover.png" alt="An annotation interface labeling a room">
+        </div>
+        <p class="caption">Candidate: a low-cost chromatic offset for moments when the copy feels one frame behind reality.</p>
+      </div>
+    </section>
+
+    <section class="research">
+      <p class="label">Research queue / things worth stealing carefully</p>
+      <ul>
+        <li><a href="https://tympanus.net/codrops/2024/02/07/on-scroll-revealing-webgl-image-explorations/">Codrops: On-Scroll Revealing WebGL Images</a> — pixelated UV sampling, curtain reveals, and IntersectionObserver-driven shader progress.</li>
+        <li><a href="https://tympanus.net/Tutorials/ShaderOnScroll/">Codrops: On-Scroll Image Distortion and Grain</a> — a good reference for pairing a restrained distortion with surface grain.</li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Masking">MDN: CSS masking</a> — the browser-native route for clip and mask reveals when a full shader is unnecessary.</li>
+      </ul>
+    </section>
+  </main>
+  <script src="organic-image.js"></script>
+  <script src="cinematic-gallery.js"></script>
+  <script src="image-treatment-lab.js"></script>
+</body>
+</html>

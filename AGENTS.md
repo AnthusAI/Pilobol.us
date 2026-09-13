@@ -25,6 +25,9 @@ cd web && PAPYRUS_ROOT=/path/to/Papyrus python3 build_via_papyrus.py
 
 Output goes to `web/dist-papyrus/`. See `web/build_via_papyrus.py` for the
 publication-specific chrome (masthead, tagline, footer, effect scripts).
+The build also regenerates homepage/archive cards from `content/articles/`
+and syncs ElevenLabs Audio Native projects when `ELEVENLABS_API_KEY` is set
+(see `README.md`).
 
 ---
 
@@ -62,7 +65,7 @@ Lenses that stay braided:
 
 Stack: **Papyrus local pod** (desk language) with **Biblicus** as the KB engine
 underneath; site builds through Papyrus's Markus renderer (`web/build_via_papyrus.py`);
-Amplify Gen 2 deploys via DevOps.
+Amplify Gen 2 deploys via DevOps. Build cache (`.amplify-cache/`: pinned Papyrus + pip) is configured in `amplify.yml`; never cache `web/dist-papyrus`.
 
 ### Knowledge base (Papyrus local pod)
 
@@ -72,6 +75,8 @@ Amplify Gen 2 deploys via DevOps.
 - Register: `python3 bin/register-ref.py --title "..." --url "..." --why "..."`.
 - List: `python3 bin/list-refs.py`.
 - Kanbus (`PILO`, console 4260) is **stories only** — never put references on the board.
+  Every piece is a board story first (Ryan HARD LOCK 2026-09-10 — see **Newsroom board
+  first** and **Morning automation: board only, never publish** below).
 
 **Site is live** at pilobol.us. Reader copy still must never name the house or talk
 about “our take.” Desk DNA lives in this file plus `project/wiki/mission.md`,
@@ -141,6 +146,38 @@ Watch: **democratized state-grade attacks on households** (IMSI-catcher vans, st
 Use hyperreality as a concept on **what’s happening now** — not only theory
 primers. Current events, platform culture, war feeds, grief-tech, politics,
 influencer economies.
+
+## Newsroom board first (Ryan HARD LOCK 2026-09-10)
+
+Always use the **Pilobolus newsroom board**. Every piece starts as a Kanbus
+**PILO** / Papyrus board story — not as a draft article or chat-only copy.
+
+Store intent, reporting notes, and narrative/presentation ideas on the board
+(`idea.md`, `assignment.md`, `research.md`) **before** `article-draft.md` or chat
+copywriting. Never let a story begin life only as a draft article. Digests and chat
+point at the board id; the draft is downstream.
+
+## Morning automation: board only, never publish (Ryan HARD LOCK 2026-09-10)
+
+**Morning automation** (overnight bots: `pilobil-4am-find`, `pilobol-research-story`,
+weekday 9am fungus scout, and any scheduled Anthus/Pilobolus agent runs) files
+**newsroom board stories only** on Kanbus **PILO** / the Papyrus newsroom board. It is
+**not** authorized to ship reader copy to the live site.
+
+**Forbidden without Ryan’s explicit publish ask in chat:**
+
+- Writing or committing under `web/content/articles/` (or other paths that land on
+  pilobol.us via Amplify).
+- Pushing to `main`, opening a publish PR, or triggering an Amplify / DevOps ship.
+- Treating a board `article.md`, `article-draft.md`, or Kanbus status **`published`**
+  as permission to go live — board workflow and production are separate gates.
+
+Publication stays a **human, chat-requested** step after board review. Overnight work
+stops at filed PILO stories, wiki keepers, and digests that point at board ids.
+
+**Why (2026-09-10):** Anthus Bot direct-pushed `wiki-janitor.md` to `main`
+(commit `71e4913`) while Ryan was editing the approved ZZZ piece (`PILO-ceb623`,
+PR #20). The duplicate was removed in PR #21. Do not repeat.
 
 ## How to work
 

@@ -1,5 +1,6 @@
 ---
 title: Society Has a Strangler Fig Creeping Around It
+author: by various bots and Ryan Porter
 date: 'Monday, September 7, 2026'
 description: A strangler fig learns a living tree’s shape, then keeps the
   outline after the host is gone. That is also how soft systems replace what

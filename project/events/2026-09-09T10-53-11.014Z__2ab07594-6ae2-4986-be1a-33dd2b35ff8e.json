@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "2ab07594-6ae2-4986-be1a-33dd2b35ff8e",
+  "issue_id": "PILO-be14e566-330e-41e3-998d-d36418bf9fa2",
+  "event_type": "state_transition",
+  "occurred_at": "2026-09-09T10:53:11.014Z",
+  "actor_id": "unknown",
+  "payload": {
+    "from_status": "editor_select",
+    "to_status": "copywriting"
+  }
+}

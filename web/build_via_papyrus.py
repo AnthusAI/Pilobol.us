@@ -43,6 +43,18 @@ from papyrus_content.markus_renderer import shell as markus_shell  # noqa: E402
 from papyrus_content.markus_renderer.build import build_markus_site  # noqa: E402
 from papyrus_content.markus_renderer.shell import SiteChrome  # noqa: E402
 
+from elevenlabs_audio_native import (  # noqa: E402
+    collect_published_audio_urls,
+    load_registry,
+    sync_all_articles,
+)
+from pilobol_feed import (  # noqa: E402
+    DEFAULT_AUTHOR,
+    discover_articles,
+    parse_front_matter,
+    write_generated_feed_pages,
+)
+
 # No site nav for now (YAGNI). Archive/drill-down later when there's a pile.
 markus_build._build_nav_items = lambda articles: []
 
@@ -56,6 +68,8 @@ PILOBOL_CHROME = SiteChrome(
         "assets/background-manager.js",
         "assets/organic-image.js",
         "assets/cinematic-gallery.js",
+        "assets/image-treatment-lab.js",
+        "assets/audio-native-theme.js",
     ),
 )
 
@@ -267,6 +281,254 @@ _POEM_LINES = (
 )
 
 
+
+# Shared ElevenLabs Audio Native project (Anth.us + pilobol.us domains).
+# Public user id is per project, not per domain — Ryan 2026-09-08.
+_ELEVENLABS_AUDIO_NATIVE_PUBLIC_USER_ID = (
+    "36d96927eb49029bd258c8a7138932b6afc7aca35d504f2986ff830522c11bd8"
+)
+_ELEVENLABS_PILOBOLUS_VOICE_ID = "EkK5I93UQWFDigLMpZcX"
+_PILOBOLUS_DEFAULT_AUTHOR = "by various bots and Ryan Porter"
+
+# slug -> project_id, filled during main() before HTML render.
+_AUDIO_NATIVE_PROJECT_IDS: dict[str, str] = {}
+_AUDIO_NATIVE_CONTENT_HASHES: dict[str, str] = {}
+_AUDIO_NATIVE_AUDIO_URLS: dict[str, str] = {}
+
+# Root-level pages that get Audio Native (not homepage/index).
+_AUDIO_NATIVE_STANDALONE_HREFS = frozenset({"a-fungus-among-us.html"})
+
+
+def _audio_native_widget(
+    project_id: str | None = None,
+    content_hash: str | None = None,
+    audio_url: str | None = None,
+) -> str:
+    """Embed playable audio only. No ElevenLabs iframe until there is an MP3.
+
+    The official Audio Native iframe loads, then posts audioNativeHideRequest
+    when there is no snapshot — the player appears and vanishes. If ElevenLabs
+    has published a snapshot, use that file directly.
+    """
+    if not audio_url:
+        return ""
+    project_attr = ""
+    if project_id:
+        project_attr = f' data-projectid="{escape(project_id, quote=True)}"'
+    hash_attr = ""
+    if content_hash:
+        hash_attr = f' data-contenthash="{escape(content_hash, quote=True)}"'
+    src = escape(audio_url, quote=True)
+    return (
+        f'<div class="pilo-audio-native"{project_attr}{hash_attr}>'
+        f'<audio controls preload="metadata" src="{src}">Listen to this article.</audio>'
+        "</div>\n"
+    )
+
+_AUDIO_NATIVE_SCRIPT = (
+    '<script src="https://elevenlabs.io/player/audioNativeHelper.js" '
+    'type="text/javascript" async></script>\n'
+)
+
+_ARTICLE_HEADER_RE = re.compile(
+    r'(<header class="markus-header">)(.*?)(</header>)',
+    re.S,
+)
+_ARTICLE_H1_RE = re.compile(r'<h1>.*?</h1>', re.S)
+_ARTICLE_LEDE_RE = re.compile(r'<p class="markus-lede">.*?</p>', re.S)
+_ARTICLE_BYLINE_RE = re.compile(r'<p class="markus-byline">.*?</p>', re.S)
+_AUDIO_NATIVE_WIDGET_RE = re.compile(
+    r'(?:<div id="elevenlabs-audionative-widget"[^>]*>[\s\S]*?</div>'
+    r'|<div class="pilo-audio-native"[^>]*>[\s\S]*?</div>)\s*',
+    re.I,
+)
+
+
+def _article_subheadline(fm: dict[str, str]) -> str | None:
+    text = (fm.get("standfirst") or fm.get("description") or "").strip()
+    return text or None
+
+
+def _lede_paragraph(text: str) -> str:
+    return f'<p class="markus-lede">{escape(text)}</p>'
+
+
+def _inject_audio_native_script(html: str) -> str:
+    if "audioNativeHelper.js" in html:
+        return html
+    html2, n = re.subn(
+        r"</body>",
+        _AUDIO_NATIVE_SCRIPT + "</body>",
+        html,
+        count=1,
+        flags=re.I,
+    )
+    if n != 1:
+        html2 = html2 + _AUDIO_NATIVE_SCRIPT
+    return html2
+
+
+def _href_has_audio_native(href: str) -> bool:
+    """True for article pages and explicitly listed standalone pages."""
+    href = (href or "").lstrip("./")
+    if href.endswith("/index.html") or href in ("", "index.html"):
+        return False
+    if href.startswith("articles/"):
+        return Path(href).stem != "index"
+    return href in _AUDIO_NATIVE_STANDALONE_HREFS
+
+
+def _decorate_article_media(html: str, *, active_href: str) -> str:
+    """Instantiate an explicitly requested image treatment in an article.
+
+    Effects are opt-in front-matter so the desk can compare one treatment at a
+    time without changing every image in the publication. The original image
+    remains in the wrapper as a no-JavaScript fallback.
+    """
+    href = (active_href or "").lstrip("./")
+    source = _source_markdown_for_href(href)
+    fm = _parse_front_matter(source) if source else {}
+    effect = fm.get("image_effect")
+    if effect not in {"organic", "cinematic", "mask", "pixel", "lenticular"}:
+        return html
+
+    figure_re = re.compile(
+        r'(<figure\b[^>]*>\s*)(<img\b([^>]*\bsrc="([^"]+)"[^>]*)>)(.*?</figure>)',
+        re.S | re.I,
+    )
+
+    def replace(match: re.Match[str]) -> str:
+        prefix, img_tag, _attrs, src, tail = match.groups()
+        if "pilo-" in prefix or "pilo-" in img_tag:
+            return match.group(0)
+        return f'{prefix}{_wrap_effect_image(img_tag, src, effect)}{tail}'
+
+    html2, count = figure_re.subn(replace, html, count=1)
+    if count:
+        return html2
+
+    # A few standalone/article layouts use a bare Markdown image instead of a
+    # :::figure{} block. Keep the front-matter option useful there too by
+    # treating the first rendered image as the cover candidate.
+    image_re = re.compile(r'(<img\b([^>]*\bsrc="([^"]+)"[^>]*)>)', re.I)
+
+    def replace_bare(match: re.Match[str]) -> str:
+        img_tag, _attrs, src = match.groups()
+        return _wrap_effect_image(img_tag, src, effect)
+
+    return image_re.sub(replace_bare, html, count=1)
+
+
+def _wrap_effect_image(img_tag: str, src: str, effect: str) -> str:
+    """Wrap one rendered image in a selected, fallback-safe treatment."""
+    wrappers = {
+        "cinematic": "pilo-cinematic-gallery",
+        "mask": "pilo-mask-reveal",
+        "pixel": "pilo-pixel-dissolve",
+        "lenticular": "pilo-lenticular",
+    }
+    if effect in wrappers:
+        return f'<span class="{wrappers[effect]}">{img_tag}</span>'
+    data_src = escape(src, quote=True)
+    return (
+        f'<span class="pilo-organic-image" data-src="{data_src}">'
+        f'<img class="pilo-organic-fallback" {img_tag[4:]}'
+        f'</span>'
+    )
+
+
+def _effect_front_matter_for_slug(slug: str) -> dict[str, str]:
+    source = POD_ROOT / "content" / "articles" / f"{slug}.md"
+    return _parse_front_matter(source) if source.is_file() else {}
+
+
+def _decorate_index_media(html: str, *, active_href: str) -> str:
+    """Apply per-article image treatments to generated home/archive feeds."""
+    href = (active_href or "").lstrip("./")
+    if href not in {"index.html", "articles/index.html"}:
+        return html
+
+    def decorate_block(block: str, link_href: str) -> str:
+        slug = Path(link_href).stem
+        effect = _effect_front_matter_for_slug(slug).get("image_effect")
+        if effect not in {"organic", "cinematic", "mask", "pixel", "lenticular"} or "pilo-" in block:
+            return block
+        image_re = re.compile(r'<img\b([^>]*\bsrc="([^"]+)"[^>]*)>', re.I)
+
+        def wrap(match: re.Match[str]) -> str:
+            return _wrap_effect_image(
+                f'<img{match.group(1)}>', match.group(2), effect
+            )
+
+        return image_re.sub(wrap, block, count=1)
+
+    # Homepage cards are discrete article elements.
+    card_re = re.compile(
+        r'(<article\b[^>]*class="markus-card"[^>]*>.*?</article>)',
+        re.S | re.I,
+    )
+
+    def card_replace(match: re.Match[str]) -> str:
+        block = match.group(1)
+        link = re.search(r'<h3>\s*<a\s+href="([^"]+)"', block, re.I)
+        return decorate_block(block, link.group(1)) if link else block
+
+    html = card_re.sub(card_replace, html)
+
+    # The archive is a flat sequence of h3-linked entries rather than cards.
+    entry_re = re.compile(
+        r'(<h3>\s*<a\s+href="([^"]+)"[^>]*>.*?</h3>.*?)(?=<h3\b|</article>|$)',
+        re.S | re.I,
+    )
+
+    def entry_replace(match: re.Match[str]) -> str:
+        return decorate_block(match.group(1), match.group(2))
+
+    return entry_re.sub(entry_replace, html)
+
+
+def _fix_article_header(html: str, *, active_href: str) -> str:
+    """Reader chrome: h1 → lede → byline → Audio Native → body."""
+    href = (active_href or "").lstrip("./")
+    if not _href_has_audio_native(href):
+        return html
+    slug = Path(href).stem
+
+    header_m = _ARTICLE_HEADER_RE.search(html)
+    if not header_m:
+        return html
+
+    inner = _AUDIO_NATIVE_WIDGET_RE.sub("", header_m.group(2))
+    h1_m = _ARTICLE_H1_RE.search(inner)
+    byline_m = _ARTICLE_BYLINE_RE.search(inner)
+    lede_m = _ARTICLE_LEDE_RE.search(inner)
+
+    fm_path = _source_markdown_for_href(active_href)
+    fm = _parse_front_matter(fm_path) if fm_path else {}
+    subhead = _article_subheadline(fm)
+
+    parts: list[str] = []
+    if h1_m:
+        parts.append(h1_m.group(0))
+    if subhead:
+        parts.append(_lede_paragraph(subhead))
+    elif lede_m:
+        parts.append(lede_m.group(0))
+    if byline_m:
+        parts.append(byline_m.group(0))
+    audio_url = _AUDIO_NATIVE_AUDIO_URLS.get(slug)
+    widget = _audio_native_widget(
+        _AUDIO_NATIVE_PROJECT_IDS.get(slug),
+        _AUDIO_NATIVE_CONTENT_HASHES.get(slug),
+        audio_url,
+    )
+    if widget:
+        parts.append(widget)
+
+    new_header = f"{header_m.group(1)}{''.join(parts)}{header_m.group(3)}"
+    return html[: header_m.start()] + new_header + html[header_m.end() :]
+
+
 def render_page_with_poem(**kwargs):
     """Left-stack brand poem only — no nav."""
     html = _orig_render_page(**kwargs)
@@ -299,6 +561,15 @@ def render_page_with_poem(**kwargs):
     if n != 1:
         raise RuntimeError(f"masthead poem inject failed (n={n})")
     html2 = _rewrite_youtube_videos(html2)
+    html2 = _decorate_article_media(
+        html2, active_href=kwargs.get("active_href") or ""
+    )
+    html2 = _decorate_index_media(
+        html2, active_href=kwargs.get("active_href") or ""
+    )
+    html2 = _fix_article_header(
+        html2, active_href=kwargs.get("active_href") or ""
+    )
     return _inject_social_meta(html2, **kwargs)
 
 
@@ -335,12 +606,100 @@ def _build_standalone_page(result, source: Path, href: str) -> None:
     result.pages.append(page_path)
 
 
+def _ensure_author_front_matter(source: Path) -> None:
+    """Default byline for reader posts when author/authors is omitted."""
+    text = source.read_text(encoding="utf-8")
+    fm, _ = parse_front_matter(text)
+    if fm.get("author") or fm.get("authors"):
+        return
+    if not text.startswith("---"):
+        return
+    end = text.find("\n---", 3)
+    if end < 0:
+        return
+    block = text[3:end]
+    lines = block.splitlines()
+    insert_at = len(lines)
+    for idx, line in enumerate(lines):
+        if line.startswith("date:"):
+            insert_at = idx + 1
+            break
+    lines.insert(insert_at, f"author: {DEFAULT_AUTHOR}")
+    updated = "---\n" + "\n".join(lines) + "\n---" + text[end + 4 :]
+    source.write_text(updated, encoding="utf-8")
+
+
+def _prepare_articles(content_dir: Path) -> list[tuple[str, Path, dict[str, str], str]]:
+    articles_dir = content_dir / "articles"
+    prepared: list[tuple[str, Path, dict[str, str], str]] = []
+    for slug, path, fm in discover_articles(articles_dir):
+        _ensure_author_front_matter(path)
+        fm, _ = parse_front_matter(path.read_text(encoding="utf-8"))
+        fragment = markus_build.convert_fragment(path, theme=None)
+        prepared.append((slug, path, fm, fragment))
+    return prepared
+
+
+def _prepare_audio_native_pages(
+    content_dir: Path,
+) -> list[tuple[str, Path, dict[str, str], str]]:
+    """Article slugs plus standalone pages that should sync Audio Native."""
+    payloads = _prepare_articles(content_dir)
+    for href in sorted(_AUDIO_NATIVE_STANDALONE_HREFS):
+        source = content_dir / href.replace(".html", ".md")
+        if not source.is_file():
+            continue
+        slug = Path(href).stem
+        _ensure_author_front_matter(source)
+        fm, _ = parse_front_matter(source.read_text(encoding="utf-8"))
+        fragment = markus_build.convert_fragment(source, theme=None)
+        payloads.append((slug, source, fm, fragment))
+    return payloads
+
+
+def _content_hashes_from_registry(pod_root: Path) -> dict[str, str]:
+    hashes: dict[str, str] = {}
+    for slug, entry in load_registry(pod_root).get("projects", {}).items():
+        if not isinstance(entry, dict):
+            continue
+        digest = entry.get("content_hash")
+        if isinstance(digest, str) and digest:
+            hashes[str(slug)] = digest
+    return hashes
+
+
 def main() -> int:
+    content_dir = POD_ROOT / "content"
+    global _AUDIO_NATIVE_PROJECT_IDS, _AUDIO_NATIVE_CONTENT_HASHES, _AUDIO_NATIVE_AUDIO_URLS
+
+    print("Generating homepage and archive feed from articles…")
+    write_generated_feed_pages(content_dir)
+
+    print("Preparing ElevenLabs Audio Native projects…")
+    audio_native_payloads = _prepare_audio_native_pages(content_dir)
+    _AUDIO_NATIVE_PROJECT_IDS = sync_all_articles(
+        pod_root=POD_ROOT,
+        articles=audio_native_payloads,
+    )
+    _AUDIO_NATIVE_CONTENT_HASHES = _content_hashes_from_registry(POD_ROOT)
+    api_key = os.environ.get("ELEVENLABS_API_KEY", "").strip()
+    if api_key:
+        _AUDIO_NATIVE_AUDIO_URLS = collect_published_audio_urls(
+            api_key=api_key,
+            project_ids=_AUDIO_NATIVE_PROJECT_IDS,
+        )
+        print(
+            f"  Audio Native published snapshots: {len(_AUDIO_NATIVE_AUDIO_URLS)}/"
+            f"{len(_AUDIO_NATIVE_PROJECT_IDS)}"
+        )
+    else:
+        _AUDIO_NATIVE_AUDIO_URLS = {}
+
     result = build_markus_site(
         content_dir=POD_ROOT / "content",
         out_dir=POD_ROOT / "dist-papyrus",
         theme=None,
-        site_css=POD_ROOT / "css" / "pilobil-theme-v10.css",
+        site_css=POD_ROOT / "css" / "pilobolus-theme.css",
         chrome=PILOBOL_CHROME,
         sections=("effects",),
     )

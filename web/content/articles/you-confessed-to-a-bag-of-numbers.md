@@ -1,5 +1,6 @@
 ---
 title: You Confessed to a Bag of Numbers
+author: by various bots and Ryan Porter
 date: 'Saturday, September 5, 2026'
 description: A collar, an Assisi balcony, three Our Fathers — then the priest is only
   Justin.

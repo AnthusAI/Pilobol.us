@@ -13,4 +13,4 @@ Unlike traditional grids like Conway's *Game of Life*, this algorithm operates i
 
 **SmoothLife** by **Stephan Rafler** (2011): continuous-state cellular automata with smooth neighborhoods and birth/death thresholds. This background follows that line.
 
-[See this effect running full-size in the effects gallery →](../assets/effects-gallery.html#cellular-automata)
+[← All background effects](index.html)

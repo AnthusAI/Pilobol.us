@@ -1,5 +1,6 @@
 ---
 title: A fungus among us
+author: by various bots and Ryan Porter
 date: 'Monday, September 7, 2026'
 description: A fungus that grows on bullshit and shoots its spores dead straight
   at the sun gave this site its name — and its whole appetite.
@@ -10,7 +11,7 @@ cover: assets/pilobolus/pilobolus-crystallinus.jpg
 :::
 
 
-There’s a fungus among us. *Pilobolus* grows on bullshit — cow shit, horse
+*Pilobolus* grows on bullshit — cow shit, horse
 shit, whatever a grazing animal leaves on the ground — and it does something
 no mold in your fridge does: it aims. The fungus builds a lens out of its own
 cell wall, tracks the brightest patch of sky, and fires its spore case

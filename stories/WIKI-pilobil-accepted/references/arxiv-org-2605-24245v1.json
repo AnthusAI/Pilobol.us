@@ -1,0 +1,9 @@
+{
+  "id": "arxiv-org-2605-24245v1",
+  "title": "Deep-Research Agents Can Be Poisoned via User-Generated Content",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://arxiv.org/html/2605.24245v1",
+  "source": "pilobil-wiki",
+  "why": "WARP paper; Reddit retrieval surface"
+}

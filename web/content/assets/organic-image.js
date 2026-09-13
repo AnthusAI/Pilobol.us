@@ -111,6 +111,7 @@ const OrganicImage = (() => {
     constructor(container) {
       this.container = container;
       this.src = container.getAttribute('data-src');
+      this.fallback = container.querySelector('.pilo-organic-fallback');
       
       this.canvas = document.createElement('canvas');
       this.canvas.style.position = 'absolute';
@@ -128,7 +129,10 @@ const OrganicImage = (() => {
       this.scrollProgress = 0;
       this.targetScrollProgress = 0;
       this.time = 0;
-      this.isVisible = false;
+      // Begin drawing immediately. IntersectionObserver still pauses the
+      // animation later, but relying on its first asynchronous callback left
+      // some browsers with a permanently blank canvas.
+      this.isVisible = true;
       
       this.loadImage().then(() => this.init());
     }
@@ -142,30 +146,20 @@ const OrganicImage = (() => {
     }
     
     init() {
-      const { gl, program } = initWebGL(this.canvas);
-      if (!gl) return;
-      this.gl = gl;
-      this.program = program;
-      
-      // We don't need one particle per pixel, that's too heavy.
-      // We will render it at a fixed particle resolution, say 300x200
-      this.particleResX = 300;
-      this.particleResY = Math.floor((this.particleResX * this.img.height) / this.img.width);
-      this.numParticles = this.particleResX * this.particleResY;
-      
-      this.texture = gl.createTexture();
-      gl.bindTexture(gl.TEXTURE_2D, this.texture);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.img);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-      
-      // Empty VAO
-      this.vao = gl.createVertexArray();
+      // The WebGL point renderer silently painted a blank canvas in the local
+      // preview. A modest 2D mosaic has the same broken-to-assembled image
+      // behavior without depending on that GPU path.
+      this.ctx = this.canvas.getContext('2d');
+      if (!this.ctx) return;
+      if (this.fallback) this.fallback.hidden = true;
+      this.particleResX = 48;
+      this.particleResY = Math.max(28, Math.round(
+        this.particleResX * this.img.height / this.img.width
+      ));
       
       this.resize();
       window.addEventListener('resize', () => this.resize());
+      window.addEventListener('scroll', () => this.onScroll(), { passive: true });
       
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -175,8 +169,7 @@ const OrganicImage = (() => {
       }, { threshold: 0.0, rootMargin: '200px' });
       observer.observe(this.container);
       
-      this.scrollProgress = 1;
-      this.targetScrollProgress = 1;
+      this.onScroll();
       this.render();
     }
     
@@ -185,13 +178,23 @@ const OrganicImage = (() => {
       const dpr = Math.min(window.devicePixelRatio, 2.0);
       this.canvas.width = rect.width * dpr;
       this.canvas.height = rect.height * dpr;
-      this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+      this.onScroll();
     }
     
     onScroll() {
-      // Scroll is never an animation input; keep the image assembled.
-      this.targetScrollProgress = 1;
-      this.scrollProgress = 1;
+      const rect = this.container.getBoundingClientRect();
+      const distance = Math.abs(
+        rect.top + rect.height / 2 - window.innerHeight / 2
+      );
+      // Give the reader a generous fully-readable plateau. The image only
+      // breaks apart near the approach/departure edges of the viewport.
+      const plateau = window.innerHeight * 0.30;
+      const edge = window.innerHeight * 0.95;
+      const progress = distance <= plateau
+        ? 1
+        : 1 - (distance - plateau) / (edge - plateau);
+      const clamped = Math.max(0, Math.min(1, progress));
+      this.targetScrollProgress = clamped * clamped * (3 - 2 * clamped);
     }
     
     render() {
@@ -202,25 +205,43 @@ const OrganicImage = (() => {
       this.scrollProgress += (this.targetScrollProgress - this.scrollProgress) * 0.1;
       this.time += 0.002;
       
-      const gl = this.gl;
-      gl.clearColor(0, 0, 0, 0);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      
-      gl.useProgram(this.program);
-      gl.bindVertexArray(this.vao);
-      
-      gl.uniform2f(gl.getUniformLocation(this.program, "uResolution"), this.particleResX, this.particleResY);
-      gl.uniform1f(gl.getUniformLocation(this.program, "uScroll"), this.scrollProgress);
-      gl.uniform1f(gl.getUniformLocation(this.program, "uTime"), this.time);
-      
-      gl.activeTexture(gl.TEXTURE0);
-      gl.bindTexture(gl.TEXTURE_2D, this.texture);
-      gl.uniform1i(gl.getUniformLocation(this.program, "uImage"), 0);
-      
-      gl.enable(gl.BLEND);
-      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-      
-      gl.drawArrays(gl.POINTS, 0, this.numParticles);
+      const ctx = this.ctx;
+      const width = this.canvas.width;
+      const height = this.canvas.height;
+      const cols = this.particleResX;
+      const rows = this.particleResY;
+      const tileW = width / cols;
+      const tileH = height / rows;
+      const sourceW = this.img.width / cols;
+      const sourceH = this.img.height / rows;
+      const scatter = Math.pow(1 - this.scrollProgress, 2.0) * 0.82;
+      const fade = 0.12 + this.scrollProgress * 0.88;
+      const settleRaw = Math.max(0, Math.min(1, (this.scrollProgress - 0.52) / 0.43));
+      const settle = settleRaw * settleRaw * (3 - 2 * settleRaw);
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.imageSmoothingEnabled = true;
+      for (let row = 0; row < rows; row += 1) {
+        for (let col = 0; col < cols; col += 1) {
+          const seed = col * 73.13 + row * 29.71;
+          const driftX = Math.sin(seed + this.time * 11) * tileW * 8 * scatter;
+          const driftY = Math.cos(seed * 1.7 - this.time * 9) * tileH * 8 * scatter;
+          const grain = 0.38 + 0.62 * (0.5 + 0.5 * Math.sin(seed));
+          ctx.globalAlpha = fade * grain;
+          ctx.drawImage(
+            this.img,
+            col * sourceW, row * sourceH, sourceW + 1, sourceH + 1,
+            col * tileW + driftX, row * tileH + driftY, tileW + 1, tileH + 1
+          );
+        }
+      }
+      // Crossfade a clean source image over the last part of the assembly.
+      // This preserves the uncanny breakup without a visible threshold cut.
+      if (settle > 0) {
+        ctx.globalAlpha = settle;
+        ctx.drawImage(this.img, 0, 0, width, height);
+      }
+      ctx.globalAlpha = 1;
     }
   }
 

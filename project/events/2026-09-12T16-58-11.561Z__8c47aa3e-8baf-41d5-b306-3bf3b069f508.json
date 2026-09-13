@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "8c47aa3e-8baf-41d5-b306-3bf3b069f508",
+  "issue_id": "PILO-72bae0bb-c62a-435f-8dbe-57574853c32c",
+  "event_type": "state_transition",
+  "occurred_at": "2026-09-12T16:58:11.561Z",
+  "actor_id": "ubuntu",
+  "payload": {
+    "from_status": "assignment",
+    "to_status": "research"
+  }
+}

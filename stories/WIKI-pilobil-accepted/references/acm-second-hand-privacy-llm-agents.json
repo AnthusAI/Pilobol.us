@@ -1,0 +1,9 @@
+{
+  "id": "acm-second-hand-privacy-llm-agents",
+  "title": "Second-Hand Privacy Harms in LLM Agents (ACM)",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://doi.org/10.1145/3772363.3798860",
+  "source": "pilobil-wiki",
+  "why": "Friends authorize agents; your traces leak without your consent \u2014 Ryan private-circle beat"
+}

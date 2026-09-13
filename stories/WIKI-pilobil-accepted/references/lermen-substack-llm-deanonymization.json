@@ -1,0 +1,9 @@
+{
+  "id": "lermen-substack-llm-deanonymization",
+  "title": "Simon Lermen: Large-Scale Online Deanonymization with LLMs (author note)",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://simonlermen.substack.com/p/large-scale-online-deanonymization",
+  "source": "pilobil-wiki",
+  "why": "Author TL;DR + figures; scaling to tens of thousands of candidates; Anthropic Interviewer open-world attack notes."
+}

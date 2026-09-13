@@ -17,7 +17,7 @@
       intensity: 0.78,
       motionScale: 0.72,
       seedRegions: [
-        { x: 0.84, y: 0.16, radius: 0.34, radiusY: 0.17, weight: 0.62, anchor: 'header' },
+        { x: 0.70, y: 0.15, radius: 0.35, radiusY: 0.18, weight: 0.62, anchor: 'header' },
         { x: 0.96, y: 0.42, radius: 0.12, weight: 0.22 },
         { x: 0.08, y: 0.78, radius: 0.10, weight: 0.16 }
       ]
@@ -27,7 +27,7 @@
       intensity: 0.68,
       motionScale: 0.60,
       seedRegions: [
-        { x: 0.84, y: 0.16, radius: 0.32, radiusY: 0.17, weight: 0.34, anchor: 'header' },
+        { x: 0.70, y: 0.15, radius: 0.34, radiusY: 0.18, weight: 0.34, anchor: 'header' },
         { x: 0.06, y: 0.30, radius: 0.14, weight: 0.20 },
         { x: 0.94, y: 0.50, radius: 0.16, weight: 0.26 },
         { x: 0.11, y: 0.84, radius: 0.10, weight: 0.09 },
@@ -39,7 +39,7 @@
       intensity: 0.64,
       motionScale: 0.48,
       seedRegions: [
-        { x: 0.84, y: 0.16, radius: 0.30, radiusY: 0.16, weight: 0.20, anchor: 'header' },
+        { x: 0.70, y: 0.15, radius: 0.32, radiusY: 0.17, weight: 0.20, anchor: 'header' },
         { x: 0.06, y: 0.52, radius: 0.11, weight: 0.10 },
         { x: 0.94, y: 0.66, radius: 0.12, weight: 0.10 },
         { x: 0.17, y: 0.96, radius: 0.18, weight: 0.18 },
@@ -52,7 +52,7 @@
       intensity: 0.48,
       motionScale: 0.38,
       seedRegions: [
-        { x: 0.86, y: 0.17, radius: 0.28, radiusY: 0.15, weight: 0.44, anchor: 'header' },
+        { x: 0.70, y: 0.15, radius: 0.30, radiusY: 0.16, weight: 0.44, anchor: 'header' },
         { x: 0.07, y: 0.67, radius: 0.10, weight: 0.20 },
         { x: 0.92, y: 0.86, radius: 0.13, weight: 0.36 }
       ]
@@ -104,10 +104,19 @@
     }
   ];
   
-  // ?fx=<script-stem> forces a specific effect. Without it the effect is
-  // random, which makes a broken one look intermittent and is miserable to
-  // debug -- two of the three were silently failing and it read as flaky.
-  let chosen = effects[Math.floor(Math.random() * effects.length)];
+  // If viewing an effect's dedicated page (e.g. /effects/cellular-automata.html),
+  // lock to that effect by default instead of picking randomly.
+  const currentPath = window.location.pathname.replace(/\/$/, '');
+  const pageMatch = effects.find((e) => {
+    const stem = e.creditUrl.replace(/\.html$/, '');
+    return currentPath.endsWith('/' + e.creditUrl) ||
+           currentPath.endsWith(e.creditUrl) ||
+           currentPath.endsWith('/' + stem) ||
+           currentPath.endsWith(stem);
+  });
+  const isEffectPage = Boolean(pageMatch) || currentPath.includes('/effects/');
+  // locked to the effect page if applicable, or random across all effects.
+  let chosen = pageMatch || effects[Math.floor(Math.random() * effects.length)];
   let chosenLayout = Object.keys(layouts)[Math.floor(Math.random() * Object.keys(layouts).length)];
   let chosenVariant = '';
   try {
@@ -136,7 +145,7 @@
       }
     }
   } catch (e) {
-    /* no URLSearchParams: keep the random pick */
+    /* no URLSearchParams: keep the default pick */
   }
   
   const isArticle = window.location.pathname.includes('/articles/') || window.location.pathname.includes('/effects/');
@@ -207,6 +216,16 @@
   const createNutrientField = () => {
     const queue = [];
     const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+    const pagePoint = (clientX, clientY) => {
+      const width = Math.max(1, window.innerWidth);
+      const canvas = document.getElementById('pilo-physarum-bg');
+      const height = Math.max(1, canvas ? canvas.clientHeight : document.documentElement.scrollHeight);
+      return {
+        x: clamp((Number(clientX) || 0) / width, 0, 1),
+        y: clamp((window.scrollY + (Number(clientY) || 0)) / height, 0, 1)
+      };
+    };
 
     const habitatPoint = (clientX, clientY) => {
       const width = Math.max(1, window.innerWidth);
@@ -328,8 +347,36 @@
       }, 720);
     };
 
+    const touchBlooms = [];
+    const updateTouchMask = () => {
+      const canvas = document.getElementById('pilo-physarum-bg');
+      if (!canvas) return;
+      const now = performance.now();
+      const active = touchBlooms.filter(b => now - b.time < 18000);
+      touchBlooms.length = 0;
+      touchBlooms.push(...active);
+      if (touchBlooms.length === 0) {
+        canvas.style.removeProperty('--pilo-touch-mask');
+      } else {
+        const grads = touchBlooms.map(b => {
+          const progress = (now - b.time) / 18000;
+          const alpha = (1 - progress * 0.35).toFixed(2);
+          return `radial-gradient(circle 9.5rem at ${b.xPercent}% ${b.yPx}px, black 0%, rgba(0,0,0,${alpha}) 48%, transparent 100%)`;
+        }).join(', ');
+        canvas.style.setProperty('--pilo-touch-mask', grads);
+      }
+    };
+
     const onPointerDown = (event) => {
-      deposit(habitatPoint(event.clientX, event.clientY), 0.88, event.pointerType === 'touch' ? 0.07 : 0.052, 'inoculation');
+      const pt = pagePoint(event.clientX, event.clientY);
+      deposit(pt, 1.0, event.pointerType === 'touch' ? 0.085 : 0.065, 'inoculation');
+      touchBlooms.push({
+        xPercent: ((event.clientX / window.innerWidth) * 100).toFixed(1),
+        yPx: Math.round(window.scrollY + event.clientY),
+        time: performance.now()
+      });
+      if (touchBlooms.length > 8) touchBlooms.shift();
+      updateTouchMask();
     };
 
     let selectionTimer = 0;
@@ -401,6 +448,10 @@
     document.body.dataset.piloFxLayout = chosenLayout;
     document.body.dataset.piloFxEffect = config.effect;
     canvas.dataset.piloFxLayout = chosenLayout;
+    if (isEffectPage) {
+      document.body.dataset.piloPage = 'effect';
+      canvas.dataset.piloPage = 'effect';
+    }
     canvas.style.setProperty('--pilo-fx-intensity', String(layout.intensity));
     return config;
   };

@@ -1,0 +1,9 @@
+{
+  "id": "guardian-google-gemini-ai-raters",
+  "title": "Guardian: Google Gemini trained by underpaid human raters",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://www.theguardian.com/technology/2025/sep/11/google-gemini-ai-training-humans",
+  "source": "pilobil-wiki",
+  "why": "Google HITL via GlobalLogic; humans make model seem smart"
+}

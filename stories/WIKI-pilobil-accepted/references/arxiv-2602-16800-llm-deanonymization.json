@@ -1,0 +1,9 @@
+{
+  "id": "arxiv-2602-16800-llm-deanonymization",
+  "title": "Large-scale online deanonymization with LLMs (Lermen, Paleka, et al.)",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://arxiv.org/abs/2602.16800",
+  "source": "pilobil-wiki",
+  "why": "Seed paper behind WSJ. LLM agents re-identify HN/Reddit/LinkedIn and Anthropic Interviewer participants; up to ~68% recall at 90% precision vs near-zero classical baselines. Practical obscurity no longer holds."
+}

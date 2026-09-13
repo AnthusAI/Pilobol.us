@@ -1,0 +1,21 @@
+{
+  "id": "PILO-72bae0bb-c62a-435f-8dbe-57574853c32c",
+  "title": "The answer they optimized",
+  "description": "",
+  "type": "story",
+  "status": "research",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-09-12T16:56:42.309880Z",
+  "updated_at": "2026-09-12T16:58:11.551577Z",
+  "closed_at": null,
+  "custom": {
+    "source": "shared",
+    "project_label": "PILO"
+  }
+}

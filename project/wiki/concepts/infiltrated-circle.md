@@ -1,6 +1,6 @@
 # Infiltrated discussion circle
 
-Last updated: 2026-09-05 17:05 ET
+Last updated: 2026-09-12 (GEO haul cross-link)
 
 ## What it is
 
@@ -12,6 +12,9 @@ in this or that speaker.
 Pilobol.us takes that as a standing editorial frame. The robots are not a side
 cast; they are the infection inside the circle. See also
 [fungus among us](fungus-among-us.md) and [simulacrum](simulacrum.md).
+**GEO / AEO** extends the circle into synthesized answers: covert promo and
+optimized citations stand in for peers — see
+[generative-engine-optimization](generative-engine-optimization.md).
 
 ## Thesis
 

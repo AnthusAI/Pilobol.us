@@ -1,0 +1,9 @@
+{
+  "id": "kjamistan-privacy-evals-attribute-inference",
+  "title": "kjam: Privacy Evaluations for AI Systems (attribute inference section)",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://blog.kjamistan.com/privacy-evaluations-for-ai-systems.html",
+  "source": "pilobil-wiki",
+  "why": "Ryan tip adjacent to WSJ haul. Section Beyond Memorization: attribute inference \u2014 LLMs trivially infer age, gender, education, occupation, location, birthplace, income from free text. Same extract step that feeds deanonymization matching."
+}

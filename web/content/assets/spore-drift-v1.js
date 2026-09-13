@@ -1,8 +1,6 @@
-// Spores drifting on an air current: agents advected by a curl-noise flow
-// field (Bridson et al.), depositing a short, fast-decaying trail instead of
-// physarum-v17.js's reinforced, persistent trail network. Visually this
-// reads as loose drifting motes rather than a growing vein structure --
-// deliberately the most "ambient" of the effects, no branching or growth.
+// Spores drifting on an air current: agents advected by a dynamic multi-octave curl-noise flow
+// field with thermal updrafts and circulating air currents, continuously depositing drifting
+// ribbons and motes without settling into a static attractor.
 const SporeDrift = (() => {
   const vsQuad = `#version 300 es
     in vec2 position;
@@ -23,43 +21,73 @@ const SporeDrift = (() => {
     uniform float uTime;
     uniform float uMoveSpeed;
     uniform vec2 uDrift;
+    uniform vec4 uTaps[4];
 
-    float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }
-
-    float valueNoise(vec2 p) {
-      vec2 i = floor(p);
-      vec2 f = fract(p);
-      float a = hash(i);
-      float b = hash(i + vec2(1.0, 0.0));
-      float c = hash(i + vec2(0.0, 1.0));
-      float d = hash(i + vec2(1.0, 1.0));
-      vec2 u = f * f * (3.0 - 2.0 * f);
-      return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+    // Smooth gradient noise for continuous, high-quality curl flow
+    vec2 hash2(vec2 p) {
+      p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+      return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
     }
 
-    // Curl of a scalar noise potential is divergence-free, which is what
-    // keeps a flow field looking like drifting air/current rather than
-    // particles all sliding toward or away from a point.
-    vec2 curl(vec2 p) {
-      float e = 0.7;
-      float n1 = valueNoise(p + vec2(0.0, e));
-      float n2 = valueNoise(p - vec2(0.0, e));
-      float n3 = valueNoise(p + vec2(e, 0.0));
-      float n4 = valueNoise(p - vec2(e, 0.0));
-      float dx = (n1 - n2) / (2.0 * e);
-      float dy = (n3 - n4) / (2.0 * e);
-      return vec2(dy, -dx);
+    float gnoise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      vec2 u = f * f * (3.0 - 2.0 * f);
+      return mix(mix(dot(hash2(i + vec2(0.0, 0.0)), f - vec2(0.0, 0.0)),
+                     dot(hash2(i + vec2(1.0, 0.0)), f - vec2(1.0, 0.0)), u.x),
+                 mix(dot(hash2(i + vec2(0.0, 1.0)), f - vec2(0.0, 1.0)),
+                     dot(hash2(i + vec2(1.0, 1.0)), f - vec2(1.0, 1.0)), u.x), u.y);
+    }
+
+    // Two-octave continuously deforming noise potential (prevents limit cycles)
+    float potential(vec2 p, float t) {
+      vec2 p1 = p * 0.0035 + vec2(sin(t * 0.07) * 0.9 + t * 0.025, cos(t * 0.05) * 0.9 - t * 0.020);
+      vec2 p2 = p * 0.0080 + vec2(cos(t * 0.09) * 1.1 - t * 0.030, sin(t * 0.08) * 1.1 + t * 0.025);
+      float n1 = gnoise(p1);
+      float n2 = gnoise(p2) * 0.5;
+      return n1 + n2;
+    }
+
+    // Analytical curl derivative (divergence-free flow: dP/dy, -dP/dx)
+    vec2 curl(vec2 p, float t) {
+      float e = 1.0;
+      float ny_plus = potential(p + vec2(0.0, e), t);
+      float ny_minus = potential(p - vec2(0.0, e), t);
+      float nx_plus = potential(p + vec2(e, 0.0), t);
+      float nx_minus = potential(p - vec2(e, 0.0), t);
+      float dP_dx = (nx_plus - nx_minus) / (2.0 * e);
+      float dP_dy = (ny_plus - ny_minus) / (2.0 * e);
+      return vec2(dP_dy, -dP_dx) * 75.0; // Divergence-free velocity vector
     }
 
     void main() {
       vec4 agent = texture(uAgents, vUv);
       vec2 pos = agent.xy;
 
-      vec2 flow = curl(pos * 0.006 + vec2(uTime * 0.03, -uTime * 0.02));
-      pos += (flow + uDrift) * uMoveSpeed;
+      // Slowly evolving air currents
+      vec2 flow = curl(pos, uTime);
 
-      // Wrap rather than reflect: a drifting spore field should feel
-      // boundless, not bounce off the edges of the viewport.
+      // Large-scale atmospheric cycling: slow drifting wind that gently rocks direction
+      vec2 wind = uDrift + vec2(sin(uTime * 0.15) * 0.35, cos(uTime * 0.12) * 0.25);
+      
+      pos += (flow + wind) * uMoveSpeed;
+
+      // Touch responsiveness: burst and scatter spores outward on tap
+      for (int i = 0; i < 4; i++) {
+        if (uTaps[i].z > 0.0 && uTaps[i].w > 0.0) {
+          vec2 tapCoord = uTaps[i].xy * uResolution;
+          vec2 diff = pos - tapCoord;
+          float dist = length(diff);
+          float rad = uTaps[i].z * uResolution.y;
+          if (dist < rad && dist > 0.001) {
+            float burstForce = (1.0 - dist / rad) * 14.0 * uTaps[i].w;
+            vec2 dir = diff / dist;
+            pos += dir * burstForce;
+          }
+        }
+      }
+
+      // Toroidal wrap across canvas boundaries
       pos = mod(pos, uResolution);
 
       outColor = vec4(pos, agent.z, 1.0);
@@ -78,14 +106,14 @@ const SporeDrift = (() => {
       vec4 agent = texture(uAgents, uv);
       vec2 ndc = (agent.xy / uResolution) * 2.0 - 1.0;
       gl_Position = vec4(ndc, 0.0, 1.0);
-      gl_PointSize = 1.0;
+      gl_PointSize = 1.6;
     }
   `;
 
   const fsRenderAgents = `#version 300 es
     precision highp float;
     out vec4 outColor;
-    void main() { outColor = vec4(1.0, 1.0, 1.0, 1.0); }
+    void main() { outColor = vec4(0.8, 0.8, 0.8, 1.0); }
   `;
 
   const fsProcessTrail = `#version 300 es
@@ -96,6 +124,9 @@ const SporeDrift = (() => {
     uniform vec2 uResolution;
     uniform float uDiffusion;
     uniform float uDecay;
+    uniform vec4 uTaps[4];
+
+    float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453123); }
 
     void main() {
       vec2 texel = 1.0 / uResolution;
@@ -107,21 +138,24 @@ const SporeDrift = (() => {
         }
       }
       float blurred = sum / 9.0;
-      // Replacing the trail outright with its blurred average every frame
-      // (rather than mostly keeping the existing value, the way
-      // physarum-v17.js does with mix(current, blurred, 0.02)) diffuses
-      // every deposit outward every single step. Combined with continuous
-      // new deposits from agents passing back through the same areas, that
-      // grows faster than the decay term below could remove it -- verified:
-      // the whole canvas saturated to fully opaque within ~16 real seconds.
-      // A mostly-rigid mix (95% current, 5% blurred) plus decay keeps
-      // deposits as short, localized comet-tails instead.
       float finalBlur = mix(current, blurred, uDiffusion);
-      // Clamped, not just decayed: deposits are unbounded additive (however
-      // many agents land on one cell in a frame), so without a hard ceiling
-      // a recirculation hotspot in the flow field can accumulate faster
-      // than any reasonable decay rate removes it.
       float decayed = clamp(finalBlur - uDecay, 0.0, 1.0);
+
+      // Smooth circular tap deposit in the trail buffer
+      for (int i = 0; i < 4; i++) {
+        if (uTaps[i].z > 0.0 && uTaps[i].w > 0.0) {
+          vec2 tapCoord = uTaps[i].xy;
+          vec2 aspectDiff = (vUv - tapCoord) * vec2(uResolution.x / uResolution.y, 1.0);
+          float dist = length(aspectDiff);
+          float rad = uTaps[i].z;
+          if (dist < rad) {
+            float falloff = smoothstep(rad, 0.0, dist);
+            float mottle = 0.8 + 0.2 * hash(vUv * 50.0 + uTaps[i].xy * 19.0);
+            decayed = max(decayed, falloff * mottle * uTaps[i].w * 0.95);
+          }
+        }
+      }
+
       outColor = vec4(decayed, decayed, decayed, 1.0);
     }
   `;
@@ -142,13 +176,12 @@ const SporeDrift = (() => {
       vec3 col = mix(uColorTip, uColorMid, smoothstep(0.0, 0.5, val));
       col = mix(col, uColorBase, smoothstep(0.4, 1.0, val));
 
-      // See dla-v1.js fsScreen for why this rare tiny highlight exists --
-      // a spore catching light, not a general lightening of the page.
+      // Tiny glint highlight
       float glintGate = step(0.986, fract(sin(dot(vUv, vec2(41.3, 289.1))) * 43758.5453));
       float glint = glintGate * smoothstep(0.85, 1.0, val) * 0.12;
       col = mix(col, vec3(1.0), glint);
 
-      float alpha = val * 0.6 * uOpacity * uFade;
+      float alpha = val * 0.75 * uOpacity * uFade;
       outColor = vec4(col * alpha, alpha);
     }
   `;
@@ -209,30 +242,11 @@ const SporeDrift = (() => {
     return {
       presetName: typeof source.preset === 'string' ? source.preset : '',
       opacity: Math.max(0, Math.min(1, finite(source.opacity ?? source.intensity ?? root.opacity ?? root.intensity, 0.72))),
-      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 4200)),
+      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 400)),
       motionScale: Math.max(0, Math.min(1, finite(source.motionScale ?? root.motionScale, 1))),
       reducedMotion: Boolean(source.reducedMotion ?? root.reducedMotion ?? (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)),
       seedRegions: Array.isArray(source.seedRegions ?? root.seedRegions) ? (source.seedRegions ?? root.seedRegions) : []
     };
-  }
-
-  function pickSeed(regions, width, height, fallback) {
-    if (!regions.length) return fallback();
-    const total = regions.reduce((sum, region) => sum + Math.max(0, Number(region.weight) || 0), 0);
-    let roll = Math.random() * (total || regions.length);
-    let selected = regions[0];
-    for (const region of regions) {
-      roll -= total ? Math.max(0, Number(region.weight) || 0) : 1;
-      if (roll <= 0) { selected = region; break; }
-    }
-    const radiusX = Math.max(0, Number(selected.radiusX ?? selected.radius) || 0.08);
-    const radiusY = Math.max(0, Number(selected.radiusY ?? selected.radius) || 0.08);
-    const x = Number.isFinite(Number(selected.x)) ? Number(selected.x) : Math.random();
-    const y = Number.isFinite(Number(selected.y)) ? Number(selected.y) : Math.random();
-    return [
-      Math.max(0, Math.min(width - 1, (x + (Math.random() - 0.5) * radiusX) * width)),
-      Math.max(0, Math.min(height - 1, (1 - y + (Math.random() - 0.5) * radiusY) * height))
-    ];
   }
 
   class Simulation {
@@ -247,13 +261,11 @@ const SporeDrift = (() => {
       }
 
       this.fx = readFxConfig('spore-drift');
-      // Air profiles keep the same slow, stain-like density ceiling but vary
-      // direction, persistence, and population: suspended dust, a horizontal
-      // draft, or a quiet warm updraft.
+      // Plentiful spore population with continuous gentle movement and balanced trail turnover
       this.presets = {
-        'still-air': { agentCount: 3200, moveSpeed: 0.16, drift: [0.00, 0.04], diffusion: 0.030, decay: 0.022 },
-        crosswind: { agentCount: 4800, moveSpeed: 0.34, drift: [0.82, 0.03], diffusion: 0.012, decay: 0.037 },
-        updraft: { agentCount: 3900, moveSpeed: 0.27, drift: [0.05, 0.92], diffusion: 0.024, decay: 0.029 }
+        'still-air': { agentCount: 16384, moveSpeed: 0.28, drift: [0.08, 0.12], diffusion: 0.035, decay: 0.024 },
+        crosswind: { agentCount: 22500, moveSpeed: 0.45, drift: [0.65, 0.10], diffusion: 0.024, decay: 0.030 },
+        updraft: { agentCount: 19600, moveSpeed: 0.36, drift: [0.12, 0.75], diffusion: 0.030, decay: 0.026 }
       };
       const presetNames = Object.keys(this.presets);
       const chosenName = this.presets[this.fx.presetName]
@@ -262,12 +274,15 @@ const SporeDrift = (() => {
       this.currentPreset = this.presets[chosenName];
       this.canvas.dataset.piloFxVariant = chosenName;
 
-      this.moveSpeed = this.currentPreset.moveSpeed * this.fx.motionScale;
-      // Far fewer than physarum's 50000: unlike physarum, agents here have
-      // no sensor-based steering away from dense trail, so a curl-noise
-      // flow field's recirculation zones let deposits pile up at hotspots
-      // with nothing to spread them back out. Fewer agents plus the tighter
-      // decay/clamp below keep that bounded instead of saturating.
+      // The drift reads better as an atmosphere than a screensaver. Keep the
+      // existing preset relationships/config override, but run the whole
+      // simulation at half speed so the trails have time to breathe.
+      this.speedFactor = 0.5;
+
+      this.emptyTaps = new Float32Array(16);
+      this.activeTaps = [];
+
+      this.moveSpeed = this.currentPreset.moveSpeed * this.fx.motionScale * this.speedFactor;
       this.agentTexSize = Math.ceil(Math.sqrt(this.currentPreset.agentCount));
       this.numAgents = this.agentTexSize * this.agentTexSize;
 
@@ -339,8 +354,50 @@ const SporeDrift = (() => {
     resetTextures() {
       const gl = this.gl;
       const agentsData = new Float32Array(this.numAgents * 4);
+
+      const viewportFraction = Math.min(1.0, window.innerHeight / Math.max(1, this.canvas.clientHeight || window.innerHeight));
+      const headerBottom = Math.max(0, this.simHeight * (1.0 - 0.35 * viewportFraction));
+
+      // Dense spore clusters in the top-right header area next to H1
+      const headerClusters = [
+        [0.68 * this.simWidth, 0.92 * this.simHeight, 45.0],
+        [0.78 * this.simWidth, 0.90 * this.simHeight, 55.0],
+        [0.88 * this.simWidth, 0.88 * this.simHeight, 60.0],
+        [0.62 * this.simWidth, 0.85 * this.simHeight, 50.0],
+        [0.82 * this.simWidth, 0.82 * this.simHeight, 50.0]
+      ];
+
+      // Margin and body coverage nodes
+      const marginNodes = [
+        [0.08 * this.simWidth, 0.78 * this.simHeight, 40.0],
+        [0.06 * this.simWidth, 0.50 * this.simHeight, 45.0],
+        [0.09 * this.simWidth, 0.25 * this.simHeight, 40.0],
+        [0.93 * this.simWidth, 0.65 * this.simHeight, 45.0],
+        [0.94 * this.simWidth, 0.40 * this.simHeight, 45.0],
+        [0.92 * this.simWidth, 0.18 * this.simHeight, 40.0],
+        [0.35 * this.simWidth, 0.08 * this.simHeight, 50.0],
+        [0.65 * this.simWidth, 0.05 * this.simHeight, 50.0]
+      ];
+
       for (let i = 0; i < this.numAgents; i++) {
-        const [seedX, seedY] = pickSeed(this.fx.seedRegions, this.simWidth, this.simHeight, () => [Math.random() * this.simWidth, Math.random() * this.simHeight]);
+        let seedX, seedY;
+        const roll = Math.random();
+        if (roll < 0.55) {
+          const cluster = headerClusters[i % headerClusters.length];
+          const angle = Math.random() * Math.PI * 2;
+          const dist = Math.sqrt(Math.random()) * cluster[2];
+          seedX = Math.max(1, Math.min(this.simWidth - 1, cluster[0] + Math.cos(angle) * dist));
+          seedY = Math.max(headerBottom, Math.min(this.simHeight - 1, cluster[1] + Math.sin(angle) * dist));
+        } else if (roll < 0.80) {
+          const node = marginNodes[i % marginNodes.length];
+          const angle = Math.random() * Math.PI * 2;
+          const dist = Math.sqrt(Math.random()) * node[2];
+          seedX = Math.max(1, Math.min(this.simWidth - 1, node[0] + Math.cos(angle) * dist));
+          seedY = Math.max(1, Math.min(this.simHeight - 1, node[1] + Math.sin(angle) * dist));
+        } else {
+          seedX = Math.random() * this.simWidth;
+          seedY = Math.random() * this.simHeight;
+        }
         agentsData[i * 4 + 0] = seedX;
         agentsData[i * 4 + 1] = seedY;
         agentsData[i * 4 + 2] = 0.0;
@@ -355,6 +412,9 @@ const SporeDrift = (() => {
       this.texTrailB = createTexture(gl, this.simWidth, this.simHeight, null, gl.R32F, gl.RED, gl.FLOAT);
       this.fboTrailA = createFBO(gl, this.texTrailA);
       this.fboTrailB = createFBO(gl, this.texTrailB);
+
+      // Warm start 50 iterations
+      this.stepSimulation(50, 0, null);
     }
 
     readColors() {
@@ -370,68 +430,105 @@ const SporeDrift = (() => {
       document.body.removeChild(div);
     }
 
+    stepSimulation(iterations, simTime, tapData) {
+      const gl = this.gl;
+      for (let i = 0; i < iterations; i++) {
+        const stepTime = simTime + i * 0.03;
+
+        // 1. Update Spore Positions with dynamic curl & wind
+        gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboAgentsB);
+        gl.viewport(0, 0, this.agentTexSize, this.agentTexSize);
+        gl.useProgram(this.progUpdate);
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, this.texAgentsA);
+        gl.uniform1i(gl.getUniformLocation(this.progUpdate, 'uAgents'), 0);
+        gl.uniform2f(gl.getUniformLocation(this.progUpdate, 'uResolution'), this.simWidth, this.simHeight);
+        gl.uniform1f(gl.getUniformLocation(this.progUpdate, 'uTime'), stepTime);
+        gl.uniform1f(gl.getUniformLocation(this.progUpdate, 'uMoveSpeed'), this.moveSpeed);
+        gl.uniform2f(gl.getUniformLocation(this.progUpdate, 'uDrift'), this.currentPreset.drift[0], this.currentPreset.drift[1]);
+        gl.uniform4fv(gl.getUniformLocation(this.progUpdate, 'uTaps'), tapData || this.emptyTaps);
+        gl.bindVertexArray(this.vaoQuad);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+        // 2. Render Spore Points to Trail
+        gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboTrailA);
+        gl.viewport(0, 0, this.simWidth, this.simHeight);
+        gl.useProgram(this.progRenderAgents);
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, this.texAgentsB);
+        gl.uniform1i(gl.getUniformLocation(this.progRenderAgents, 'uAgents'), 0);
+        gl.uniform2f(gl.getUniformLocation(this.progRenderAgents, 'uResolution'), this.simWidth, this.simHeight);
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.ONE, gl.ONE);
+        gl.bindVertexArray(this.vaoAgents);
+        gl.drawArrays(gl.POINTS, 0, this.numAgents);
+        gl.disable(gl.BLEND);
+
+        let tempTex = this.texAgentsA; this.texAgentsA = this.texAgentsB; this.texAgentsB = tempTex;
+        let tempFbo = this.fboAgentsA; this.fboAgentsA = this.fboAgentsB; this.fboAgentsB = tempFbo;
+
+        // 3. Process Trail Diffusion, Decay, and Circular Tap Deposits
+        gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboTrailB);
+        gl.viewport(0, 0, this.simWidth, this.simHeight);
+        gl.useProgram(this.progProcess);
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, this.texTrailA);
+        gl.uniform1i(gl.getUniformLocation(this.progProcess, 'uTrail'), 0);
+        gl.uniform2f(gl.getUniformLocation(this.progProcess, 'uResolution'), this.simWidth, this.simHeight);
+        gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uDiffusion'), this.currentPreset.diffusion);
+        gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uDecay'), this.currentPreset.decay);
+        gl.uniform4fv(gl.getUniformLocation(this.progProcess, 'uTaps'), tapData || this.emptyTaps);
+        gl.bindVertexArray(this.vaoQuad);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+        tempTex = this.texTrailA; this.texTrailA = this.texTrailB; this.texTrailB = tempTex;
+        tempFbo = this.fboTrailA; this.fboTrailA = this.fboTrailB; this.fboTrailB = tempFbo;
+      }
+    }
+
     render(timestamp) {
       if (!this.running) return;
       requestAnimationFrame((t) => this.render(t));
 
       if (!this.lastTime) this.lastTime = timestamp;
-      if (timestamp - this.lastTime < 180) return;
+      if (timestamp - this.lastTime < 32) return; // ~30 FPS cadence
       this.lastTime = timestamp;
 
-      this.time += 0.01 * (this.fx.reducedMotion ? 0.12 : this.fx.motionScale);
+      // Active time progression for constantly shifting currents
+      this.time += 0.025 * (this.fx.reducedMotion ? 0.15 : this.fx.motionScale) * this.speedFactor;
       if (Math.floor(this.time * 100) % 60 === 0) {
         this.readColors();
       }
 
-      const gl = this.gl;
+      // Inoculate user taps directly as smooth shader uniforms
       if (window.__piloNutrients) {
-        window.__piloNutrients.paint(gl, this.texTrailA, this.simWidth, this.simHeight, 'trail');
+        const deposits = window.__piloNutrients.drain(4);
+        for (const item of deposits) {
+          this.activeTaps.push({
+            x: item.x,
+            y: 1.0 - item.y, // WebGL UV bottom-up
+            radius: item.radius * 1.5,
+            strength: item.strength,
+            framesLeft: 8
+          });
+        }
       }
+      const tapData = new Float32Array(16);
+      for (let i = 0; i < this.activeTaps.length && i < 4; i++) {
+        const tap = this.activeTaps[i];
+        tapData[i * 4 + 0] = tap.x;
+        tapData[i * 4 + 1] = tap.y;
+        tapData[i * 4 + 2] = tap.radius;
+        tapData[i * 4 + 3] = tap.strength;
+        tap.framesLeft--;
+      }
+      this.activeTaps = this.activeTaps.filter(t => t.framesLeft > 0);
 
-      gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboAgentsB);
-      gl.viewport(0, 0, this.agentTexSize, this.agentTexSize);
-      gl.useProgram(this.progUpdate);
-      gl.activeTexture(gl.TEXTURE0);
-      gl.bindTexture(gl.TEXTURE_2D, this.texAgentsA);
-      gl.uniform1i(gl.getUniformLocation(this.progUpdate, 'uAgents'), 0);
-      gl.uniform2f(gl.getUniformLocation(this.progUpdate, 'uResolution'), this.simWidth, this.simHeight);
-      gl.uniform1f(gl.getUniformLocation(this.progUpdate, 'uTime'), this.time);
-      gl.uniform1f(gl.getUniformLocation(this.progUpdate, 'uMoveSpeed'), this.moveSpeed);
-      gl.uniform2f(gl.getUniformLocation(this.progUpdate, 'uDrift'), this.currentPreset.drift[0], this.currentPreset.drift[1]);
-      gl.bindVertexArray(this.vaoQuad);
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      const stepsPerFrame = this.fx.reducedMotion ? 1 : 2;
+      this.stepSimulation(stepsPerFrame, this.time, tapData);
 
-      gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboTrailA);
-      gl.viewport(0, 0, this.simWidth, this.simHeight);
-      gl.useProgram(this.progRenderAgents);
-      gl.activeTexture(gl.TEXTURE0);
-      gl.bindTexture(gl.TEXTURE_2D, this.texAgentsB);
-      gl.uniform1i(gl.getUniformLocation(this.progRenderAgents, 'uAgents'), 0);
-      gl.uniform2f(gl.getUniformLocation(this.progRenderAgents, 'uResolution'), this.simWidth, this.simHeight);
-      gl.enable(gl.BLEND);
-      gl.blendFunc(gl.ONE, gl.ONE);
-      gl.bindVertexArray(this.vaoAgents);
-      gl.drawArrays(gl.POINTS, 0, this.numAgents);
-      gl.disable(gl.BLEND);
-
-      let tempTex = this.texAgentsA; this.texAgentsA = this.texAgentsB; this.texAgentsB = tempTex;
-      let tempFbo = this.fboAgentsA; this.fboAgentsA = this.fboAgentsB; this.fboAgentsB = tempFbo;
-
-      gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboTrailB);
-      gl.viewport(0, 0, this.simWidth, this.simHeight);
-      gl.useProgram(this.progProcess);
-      gl.activeTexture(gl.TEXTURE0);
-      gl.bindTexture(gl.TEXTURE_2D, this.texTrailA);
-      gl.uniform1i(gl.getUniformLocation(this.progProcess, 'uTrail'), 0);
-      gl.uniform2f(gl.getUniformLocation(this.progProcess, 'uResolution'), this.simWidth, this.simHeight);
-      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uDiffusion'), this.currentPreset.diffusion);
-      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uDecay'), this.currentPreset.decay);
-      gl.bindVertexArray(this.vaoQuad);
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
-
-      tempTex = this.texTrailA; this.texTrailA = this.texTrailB; this.texTrailB = tempTex;
-      tempFbo = this.fboTrailA; this.fboTrailA = this.fboTrailB; this.fboTrailB = tempFbo;
-
+      // Screen Pass
+      const gl = this.gl;
       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
       gl.viewport(0, 0, this.canvas.width, this.canvas.height);
       gl.useProgram(this.progScreen);

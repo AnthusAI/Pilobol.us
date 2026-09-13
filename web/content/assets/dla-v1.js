@@ -1,11 +1,13 @@
 // Diffusion-Limited Aggregation: dendritic frost/coral branching.
 //
-// Classic DLA (Witten & Sander 1981) walks random particles until they touch
-// existing structure and freeze there. A literal random-walk needs one agent
-// per particle; this is a shader-friendly approximation of the same visual
-// result -- a cell freezes with a small, per-step probability if it already
-// borders frozen structure -- which produces the same sparse, branching
-// "growth reaches out, doesn't fill in" look without per-particle tracking.
+// Continuous simulation that cycles continuously between two distinct phases:
+// 1. DARKENING / GROWTH PHASE: Crystals slowly grow outward from seed nodes,
+//    branching across the margins and header, darkening the page with intricate filigree.
+// 2. LIGHTENING / THAW PHASE: Growth is completely shut off. A gentle thaw dissolves
+//    the crystals from the tips inward, eroding every pixel back to transparency
+//    so the page becomes 100% light, clean, and pristine again.
+// 3. GERMINATION & REPEAT: Fresh microscopic seed buds sprout at new randomized
+//    locations in the margins/header, and the darkening phase begins anew.
 const DLA = (() => {
   const vsQuad = `#version 300 es
     in vec2 position;
@@ -27,8 +29,13 @@ const DLA = (() => {
     uniform float uFrontierThreshold;
     uniform float uFreezeChance;
     uniform float uErosion;
+    uniform float uGrowthAllowed;
+    uniform float uThawRate;
+    uniform float uCyclePhase;
+    uniform float uCycleIndex;
+    uniform vec4 uTaps[4];
 
-    float hash(vec2 p) { return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x)))); }
+    float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453123); }
 
     void main() {
       vec2 texel = 1.0 / uResolution;
@@ -42,23 +49,61 @@ const DLA = (() => {
         }
       }
 
-      float roll = hash(vUv * uResolution + uTime * 41.0);
       float nextVal = val;
-      // Freeze only at the frontier (touches existing structure) and only
-      // sometimes -- a low, roughly-constant freeze chance per exposed cell
-      // is what makes DLA branch sparsely instead of filling in solid the
-      // way a straight neighbor-majority rule (like the cellular-automata
-      // effect) does.
-      if (val < 0.5 && neighborSum > uFrontierThreshold && roll < uFreezeChance) {
-        nextVal = 1.0;
-      }
-      // Frozen structure erodes very slowly instead of being permanent, so
-      // the frost pattern keeps slowly turning over -- new branches reach
-      // out from the frontier as old growth fades, rather than the whole
-      // canvas eventually freezing solid and stopping.
-      nextVal = max(0.0, nextVal - uErosion);
+      float roll = hash(vUv * uResolution + vec2(uTime * 17.0, 1.23));
 
-      outColor = vec4(nextVal, 0.0, 0.0, 1.0);
+      // 1. DARKENING / GROWTH PHASE:
+      // STRICT REQUIREMENT: Only enabled when uGrowthAllowed > 0.001.
+      // During thaw/lightening phase, uGrowthAllowed is EXACTLY 0.0, so NO FREEZING CAN EVER OCCUR.
+      if (uGrowthAllowed > 0.001 && val < 0.25) {
+        if (neighborSum >= uFrontierThreshold && neighborSum <= 3.2) {
+          if (roll < uFreezeChance * uGrowthAllowed) {
+            nextVal = 0.95;
+          }
+        }
+      }
+
+      // 2. LIGHTENING / THAW / DISSOLUTION PHASE:
+      // When uThawRate > 0, branches dissolve from tips inward, returning the page to light.
+      // Even during growth, subtle overcrowding suppression prevents solid black slabs.
+      float crowdFactor = smoothstep(2.0, 4.5, neighborSum) * 2.5;
+      float tipBoost = (1.0 - smoothstep(0.5, 3.5, neighborSum)) * 0.6;
+      float thawWave = 1.0 + 0.3 * sin(vUv.x * 3.0 + vUv.y * 2.0 + uTime * 0.5);
+      float currentThaw = (uThawRate * thawWave * (1.0 + tipBoost)) + (uErosion * (1.0 + crowdFactor));
+      
+      nextVal = max(0.0, nextVal - currentThaw);
+
+      // 3. CYCLIC GERMINATION:
+      // In the pristine window between cycles (when thaw has finished and canvas is light),
+      // sprout fresh seed candidates in the margins and top-right header.
+      if (uCyclePhase > 0.96 || uCyclePhase < 0.03) {
+        float seedHash = hash(vUv * 97.3 + vec2(uCycleIndex * 31.7, 19.3));
+        if (seedHash > 0.99988) {
+          bool isHeader = (vUv.x > 0.55 && vUv.y > 0.70);
+          bool isMargin = (vUv.x < 0.16 || vUv.x > 0.84);
+          if (isHeader || isMargin) {
+            nextVal = 0.95;
+          }
+        }
+      }
+
+      // 4. DIRECT TOUCH INOCULATION:
+      // Touching or tapping deposits seeds directly under pointer
+      for (int i = 0; i < 4; i++) {
+        if (uTaps[i].z > 0.0 && uTaps[i].w > 0.0) {
+          vec2 tapCoord = uTaps[i].xy;
+          vec2 aspectDiff = (vUv - tapCoord) * vec2(uResolution.x / uResolution.y, 1.0);
+          float dist = length(aspectDiff);
+          float rad = uTaps[i].z;
+          if (dist < rad) {
+            float falloff = smoothstep(rad, 0.0, dist);
+            float seedNoise = hash(vUv * 80.0 + uTaps[i].xy * 23.0);
+            nextVal = max(nextVal, falloff * (0.85 + 0.15 * seedNoise));
+          }
+        }
+      }
+
+      outColor = vec4(clamp(nextVal, 0.0, 1.0), 0.0, 0.0, 1.0);
     }
   `;
 
@@ -88,22 +133,15 @@ const DLA = (() => {
       val += texture(uState, vUv + vec2(texel.x, -texel.y)).r * 0.03;
       val += texture(uState, vUv + vec2(-texel.x, texel.y)).r * 0.03;
 
-      float a = smoothstep(0.06, 0.5, val);
+      float a = smoothstep(0.06, 0.50, val);
       vec3 col = mix(uColorTip, uColorMid, smoothstep(0.0, 0.5, a));
       col = mix(col, uColorBase, smoothstep(0.4, 1.0, a));
 
-      // A fungal stain reads as darker paper, not lighter -- normal blending
-      // (see pilobil-theme-v10.css; multiply guaranteed darker-or-equal but
-      // could never go lighter even briefly) means the shader itself must
-      // keep results darker than the page almost always. This is the one
-      // deliberate exception: a rare, tiny bright fleck at peak density,
-      // gated to a small fraction of pixels so it reads as an occasional
-      // glinting frost crystal, not a general lightening.
       float glintGate = step(0.986, fract(sin(dot(vUv, vec2(41.3, 289.1))) * 43758.5453));
       float glint = glintGate * smoothstep(0.85, 1.0, a) * 0.12;
       col = mix(col, vec3(1.0), glint);
 
-      float alpha = a * 0.7 * uOpacity * uFade;
+      float alpha = a * 0.88 * uOpacity * uFade;
       outColor = vec4(col * alpha, alpha);
     }
   `;
@@ -122,30 +160,11 @@ const DLA = (() => {
     return {
       presetName: typeof source.preset === 'string' ? source.preset : '',
       opacity: Math.max(0, Math.min(1, finite(source.opacity ?? source.intensity ?? root.opacity ?? root.intensity, 0.72))),
-      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 4200)),
+      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 400)),
       motionScale: Math.max(0, Math.min(1, finite(source.motionScale ?? root.motionScale, 1))),
       reducedMotion: Boolean(source.reducedMotion ?? root.reducedMotion ?? (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)),
       seedRegions: Array.isArray(source.seedRegions ?? root.seedRegions) ? (source.seedRegions ?? root.seedRegions) : []
     };
-  }
-
-  function pickSeed(regions, width, height, fallback) {
-    if (!regions.length) return fallback();
-    const total = regions.reduce((sum, region) => sum + Math.max(0, Number(region.weight) || 0), 0);
-    let roll = Math.random() * (total || regions.length);
-    let selected = regions[0];
-    for (const region of regions) {
-      roll -= total ? Math.max(0, Number(region.weight) || 0) : 1;
-      if (roll <= 0) { selected = region; break; }
-    }
-    const radiusX = Math.max(0, Number(selected.radiusX ?? selected.radius) || 0.08);
-    const radiusY = Math.max(0, Number(selected.radiusY ?? selected.radius) || 0.08);
-    const x = Number.isFinite(Number(selected.x)) ? Number(selected.x) : Math.random();
-    const y = Number.isFinite(Number(selected.y)) ? Number(selected.y) : Math.random();
-    return [
-      Math.max(0, Math.min(width - 1, (x + (Math.random() - 0.5) * radiusX) * width)),
-      Math.max(0, Math.min(height - 1, (1 - y + (Math.random() - 0.5) * radiusY) * height))
-    ];
   }
 
   class Simulation {
@@ -160,13 +179,11 @@ const DLA = (() => {
       }
 
       this.fx = readFxConfig('dla');
-      // Sparse, low-contrast branch families. Frost is the finest and most
-      // transient; coral is denser and rounded; rootlets hold longer, with
-      // fewer initiation points and outward-reaching forks.
+      // Calm, majestic growth speed (~3x slower) with full macro cyclic turnover
       this.presets = {
-        frost: { seedCount: 46, seedRadius: [1, 2], frontierThreshold: 0.45, freezeChance: 0.036, erosion: 0.00019 },
-        coral: { seedCount: 34, seedRadius: [2, 3], frontierThreshold: 0.30, freezeChance: 0.064, erosion: 0.00014 },
-        rootlets: { seedCount: 18, seedRadius: [1, 2], frontierThreshold: 0.55, freezeChance: 0.042, erosion: 0.000075 }
+        frost: { seedCount: 6, seedRadius: [1, 1], frontierThreshold: 0.55, freezeChance: 0.0060, erosion: 0.0004 },
+        coral: { seedCount: 8, seedRadius: [1, 1], frontierThreshold: 0.40, freezeChance: 0.0075, erosion: 0.0005 },
+        rootlets: { seedCount: 5, seedRadius: [1, 1], frontierThreshold: 0.60, freezeChance: 0.0065, erosion: 0.0004 }
       };
       const presetNames = Object.keys(this.presets);
       const chosenName = this.presets[this.fx.presetName]
@@ -175,11 +192,18 @@ const DLA = (() => {
       this.currentPreset = this.presets[chosenName];
       this.canvas.dataset.piloFxVariant = chosenName;
 
+      this.emptyTaps = new Float32Array(16);
+      this.activeTaps = [];
+
       this.colorBase = [0, 0, 0];
       this.colorTip = [1, 1, 1];
       this.colorMid = [0.6, 0.6, 0.6];
       this.readColors();
       this.fadeStart = performance.now();
+
+      this.time = 0;
+      this.cycleTime = 0;
+      this.lastTime = 0;
 
       this.initGL();
       this.resize();
@@ -188,7 +212,6 @@ const DLA = (() => {
       window.addEventListener('resize', () => this.resize());
       document.addEventListener('pilo:canvasresize', () => this.resize());
 
-      this.time = 0;
       this.running = true;
       requestAnimationFrame((t) => this.render(t));
       document.addEventListener('visibilitychange', () => {
@@ -243,18 +266,35 @@ const DLA = (() => {
     resetTextures() {
       const gl = this.gl;
       const data = new Float32Array(this.simWidth * this.simHeight * 4);
-      // Many small nucleation seeds scattered across the full canvas (not
-      // just the outer margins) -- unlike a single-source DLA cluster, this
-      // gives several independent frost structures that read well whether
-      // only a narrow strip either side of the mask ends up visible.
+
+      // Distribute initial seed points sparsely in margins and header
+      const seedPoints = [];
+      if (this.fx.seedRegions && this.fx.seedRegions.length) {
+        for (const r of this.fx.seedRegions) {
+          seedPoints.push([r.x * this.simWidth, (1 - r.y) * this.simHeight]);
+        }
+      }
+      const fallbackNodes = [
+        [0.72 * this.simWidth, 0.86 * this.simHeight], // Top-right header bloom beside H1
+        [0.85 * this.simWidth, 0.80 * this.simHeight], // Top-right outer corner
+        [0.08 * this.simWidth, 0.70 * this.simHeight], // Upper left margin
+        [0.06 * this.simWidth, 0.40 * this.simHeight], // Mid left margin
+        [0.93 * this.simWidth, 0.55 * this.simHeight], // Mid right margin
+        [0.92 * this.simWidth, 0.25 * this.simHeight], // Lower right margin
+        [0.35 * this.simWidth, 0.08 * this.simHeight]  // Footer margin
+      ];
+      for (const node of fallbackNodes) seedPoints.push(node);
+
       const seedCount = this.currentPreset.seedCount;
       for (let s = 0; s < seedCount; s++) {
-        const [cx, cy] = pickSeed(this.fx.seedRegions, this.simWidth, this.simHeight, () => [Math.random() * this.simWidth, Math.random() * this.simHeight]);
-        const r = this.currentPreset.seedRadius[0] + Math.floor(Math.random() * (this.currentPreset.seedRadius[1] - this.currentPreset.seedRadius[0] + 1));
+        const base = seedPoints[s % seedPoints.length];
+        const cx = Math.max(1, Math.min(this.simWidth - 2, base[0] + (Math.random() - 0.5) * 16.0));
+        const cy = Math.max(1, Math.min(this.simHeight - 2, base[1] + (Math.random() - 0.5) * 16.0));
+        const r = this.currentPreset.seedRadius[0];
         for (let y = Math.max(0, Math.floor(cy - r)); y < Math.min(this.simHeight, Math.ceil(cy + r)); y++) {
           for (let x = Math.max(0, Math.floor(cx - r)); x < Math.min(this.simWidth, Math.ceil(cx + r)); x++) {
             const idx = (y * this.simWidth + x) * 4;
-            data[idx] = 1.0;
+            data[idx] = 0.95;
             data[idx + 3] = 1.0;
           }
         }
@@ -282,6 +322,9 @@ const DLA = (() => {
       this.fboB = gl.createFramebuffer();
       gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
       gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, this.texB, 0);
+
+      // Gentle warmup: 10 steps so delicate seedlings are visible immediately without blanketing screen
+      this.stepSimulation(10, 0, null, 0.6, 0.0, 0.05, 0);
     }
 
     readColors() {
@@ -297,40 +340,108 @@ const DLA = (() => {
       document.body.removeChild(div);
     }
 
+    stepSimulation(iterations, simTime, tapData, growthAllowed, thawRate, cyclePhase, cycleIndex) {
+      const gl = this.gl;
+      gl.bindVertexArray(this.vao);
+      gl.useProgram(this.progProcess);
+      gl.uniform2f(gl.getUniformLocation(this.progProcess, 'uResolution'), this.simWidth, this.simHeight);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uFrontierThreshold'), this.currentPreset.frontierThreshold);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uFreezeChance'), this.currentPreset.freezeChance);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uErosion'), this.currentPreset.erosion);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uGrowthAllowed'), growthAllowed);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uThawRate'), thawRate);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uCyclePhase'), cyclePhase);
+      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uCycleIndex'), cycleIndex);
+      gl.uniform4fv(gl.getUniformLocation(this.progProcess, 'uTaps'), tapData || this.emptyTaps);
+
+      for (let i = 0; i < iterations; i++) {
+        gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uTime'), simTime + i * 0.015);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
+        gl.viewport(0, 0, this.simWidth, this.simHeight);
+        gl.bindTexture(gl.TEXTURE_2D, this.texA);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+        let tempTex = this.texA; this.texA = this.texB; this.texB = tempTex;
+        let tempFbo = this.fboA; this.fboA = this.fboB; this.fboB = tempFbo;
+      }
+    }
+
     render(timestamp) {
       if (!this.running) return;
       requestAnimationFrame((t) => this.render(t));
 
       if (!this.lastTime) this.lastTime = timestamp;
-      if (timestamp - this.lastTime < 150) return;
+      // 40ms cadence (~25 FPS) for calm, organic motion
+      if (timestamp - this.lastTime < 40) return;
+      const dt = Math.min(0.1, (timestamp - this.lastTime) / 1000.0);
       this.lastTime = timestamp;
 
-      this.time += 0.01 * (this.fx.reducedMotion ? 0.12 : this.fx.motionScale);
+      // Advance clocks
+      const speedScale = (this.fx.reducedMotion ? 0.2 : this.fx.motionScale);
+      this.time += dt * 0.3 * speedScale;
+      this.cycleTime += dt * speedScale;
+
+      // 32-second full macro cycle: Darkening -> Hold -> Lightening -> Pristine Reseed
+      const cycleDuration = 32.0;
+      const cyclePhase = (this.cycleTime % cycleDuration) / cycleDuration;
+      const cycleIndex = Math.floor(this.cycleTime / cycleDuration);
+
+      let growthAllowed = 0.0;
+      let thawRate = 0.0;
+
+      if (cyclePhase < 0.45) {
+        // DARKENING PHASE: Crystals slowly grow outward, darkening the page with filigree
+        const t = cyclePhase / 0.45;
+        growthAllowed = Math.sin(t * Math.PI);
+        thawRate = 0.0;
+      } else if (cyclePhase < 0.52) {
+        // PEAK MATURITY PAUSE: Growth stops, intricate branches hold at full bloom
+        growthAllowed = 0.0;
+        thawRate = 0.0005;
+      } else if (cyclePhase < 0.82) {
+        // LIGHTENING / THAW PHASE: Growth completely disabled. Thaw dissolves branches back to 0
+        growthAllowed = 0.0;
+        const t = (cyclePhase - 0.52) / 0.30;
+        thawRate = 0.007 + 0.009 * Math.sin(t * Math.PI);
+      } else {
+        // PRISTINE LIGHT & GERMINATION: Canvas is 100% light; new seeds sprout for next cycle
+        growthAllowed = 0.0;
+        thawRate = 0.0;
+      }
+
       if (Math.floor(this.time * 100) % 60 === 0) {
         this.readColors();
       }
 
-      const gl = this.gl;
+      // Drain nutrients and pass as smooth shader uniforms
       if (window.__piloNutrients) {
-        window.__piloNutrients.paint(gl, this.texA, this.simWidth, this.simHeight, 'density');
+        const deposits = window.__piloNutrients.drain(4);
+        for (const item of deposits) {
+          this.activeTaps.push({
+            x: item.x,
+            y: 1.0 - item.y, // WebGL UV bottom-up
+            radius: item.radius * 1.5,
+            strength: item.strength,
+            framesLeft: 8
+          });
+        }
       }
-      gl.bindVertexArray(this.vao);
+      const tapData = new Float32Array(16);
+      for (let i = 0; i < this.activeTaps.length && i < 4; i++) {
+        const tap = this.activeTaps[i];
+        tapData[i * 4 + 0] = tap.x;
+        tapData[i * 4 + 1] = tap.y;
+        tapData[i * 4 + 2] = tap.radius;
+        tapData[i * 4 + 3] = tap.strength;
+        tap.framesLeft--;
+      }
+      this.activeTaps = this.activeTaps.filter(t => t.framesLeft > 0);
 
-      gl.useProgram(this.progProcess);
-      gl.uniform2f(gl.getUniformLocation(this.progProcess, 'uResolution'), this.simWidth, this.simHeight);
-      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uTime'), this.time);
-      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uFrontierThreshold'), this.currentPreset.frontierThreshold);
-      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uFreezeChance'), this.currentPreset.freezeChance);
-      gl.uniform1f(gl.getUniformLocation(this.progProcess, 'uErosion'), this.currentPreset.erosion);
+      // 1 simulation step per frame with exact cycle parameters
+      this.stepSimulation(1, this.time, tapData, growthAllowed, thawRate, cyclePhase, cycleIndex);
 
-      gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboB);
-      gl.viewport(0, 0, this.simWidth, this.simHeight);
-      gl.bindTexture(gl.TEXTURE_2D, this.texA);
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
-
-      let tempTex = this.texA; this.texA = this.texB; this.texB = tempTex;
-      let tempFbo = this.fboA; this.fboA = this.fboB; this.fboB = tempFbo;
-
+      // Screen Pass
+      const gl = this.gl;
       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
       gl.viewport(0, 0, this.canvas.width, this.canvas.height);
       gl.clearColor(0, 0, 0, 0);
@@ -359,4 +470,6 @@ const DLA = (() => {
   } else {
     init();
   }
+
+  return { Simulation };
 })();

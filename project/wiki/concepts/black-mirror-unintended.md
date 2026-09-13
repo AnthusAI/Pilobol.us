@@ -1,6 +1,6 @@
 # Black Mirror unintended consequences
 
-Last updated: 2026-09-08 (Ryan — prefer lived harm)
+Last updated: 2026-09-09 (4am — training-room glasses haul)
 
 House coverage pattern (Ryan 2026-09-08): **Black Mirror–style unintended
 consequences of technology**, especially AI / machine learning / related
@@ -76,6 +76,22 @@ Scout method: Black Mirror comment → open the pointed-at incident.
 - [Friend AI necklace](../sources/decrypt-friend-ai-necklace.md) — promo compared to Black Mirror by nearly everyone writing about it (Decrypt)
 - [Meta NameTag faceprints](../sources/wired-meta-nametag-smart-glasses.md) — dormant biometrics on 50M phones; BM stack with glasses (WIRED)
 - [Meta smart glasses / pervert glasses](../sources/guardian-meta-smart-glasses-bero.md) — “sounds like something out of a Black Mirror episode” → lived secret recording (Guardian)
+
+
+
+## Specimens (2026-09-09 second haul — training room behind the glasses)
+
+Distinct from street “pervert glasses” keepers (Bero / NameTag). HARD BM scout → Stuff tag → SvD/GP engine room.
+
+- [SvD/GP — We see everything](../sources/svd-meta-glasses-we-see-everything.md) — Nairobi Sama annotators; bathroom / sex / bedside undressing
+- [Stuff — straight out of Black Mirror](../sources/stuff-meta-glasses-black-mirror-sex.md) — culture-tag pointer
+- [Verge — Kenya reviewers](../sources/verge-meta-glasses-kenya-reviewers.md) — secondary + class-action
+- [BBC ICO concerning](../sources/bbc-meta-glasses-ico-concerning.md) — regulator write
+- [BBC — workers lose jobs](../sources/bbc-sama-meta-glasses-workers-lose-jobs.md) — 1,108 redundancies
+- [TechCabal — Sama layoffs](../sources/techcabal-sama-layoffs-meta.md) — formal notice on glasses workstream
+- [Decrypt — Ray-Ban controversy](../sources/decrypt-rayban-glasses-controversy-sama.md) — EPIC consent-for-others
+
+Board: `PILO-280ead`. Scout: [scout-2026-09-09.md](../../../scout-2026-09-09.md).
 
 ## Related
 

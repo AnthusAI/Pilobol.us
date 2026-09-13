@@ -23,3 +23,4 @@ dist-papyrus/
 
 # Amplify Hosting build cache (restored by Amplify, not committed)
 .amplify-cache/
+web/dist-preview/

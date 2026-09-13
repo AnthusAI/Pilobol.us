@@ -14,7 +14,7 @@ standfirst: >-
 
 In 1897 a man who owned a newspaper decided that Americans were going to care about a teenage girl in a Cuban jail. They did, in their tens of thousands, and it took him about a year.
 
-Here is why there was anything to care about. Cuba is a big island ninety miles off the coast of Florida. In the 1890s it belonged to Spain, and Cubans were fighting a war to stop it belonging to Spain. The Spanish general sent to finish that war did it by forcing country people into guarded towns, where they died of hunger and disease by the hundred thousand. It was the biggest story in the world, it was happening close enough to reach by boat in a day, and two enormous New York newspapers were in a price war with each other over who could sell it hardest. One of them, the New York Journal, belonged to a rich young man named William Randolph Hearst.
+Cuba was fighting to get free of Spain, and the Spanish general sent to end that war was doing it by herding country people into guarded towns, where they died of hunger and disease by the hundred thousand. It was the biggest story going, and two enormous New York newspapers were in a price war over who could sell it hardest. One of them belonged to a rich young man named William Randolph Hearst.
 
 Hearst needed a face. An island full of dying farmers is a fact, and facts are hard to sell every single morning. A girl is a story you can run tomorrow.
 

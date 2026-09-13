@@ -133,6 +133,14 @@ they were afraid of, what was being fought over, and who stood to profit — in
 ordinary words, in the fewest sentences that will carry it — and only then let
 the scene happen.
 
+This licenses motive, never orientation. Do not explain where a country is, how
+far it is from another country, or anything else a reader is already carrying —
+overexplaining loses people exactly as fast as underexplaining, and it reads as
+condescension while it does it. The missing piece is almost always why somebody
+wanted something, rarely where it happened. Two sentences of stakes beat a
+paragraph of geography. If a sentence would make a reader think *yes, obviously*,
+it is costing you the next one.
+
 **Special case worth watching for:** sometimes the honest answer to "why did
 anybody care about this" is *because somebody with money decided they would*.
 That is never background to be cleared away. It is the story, and it goes first.

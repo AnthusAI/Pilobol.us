@@ -1,8 +1,6 @@
-// Spores drifting on an air current: agents advected by a curl-noise flow
-// field (Bridson et al.), depositing a short, fast-decaying trail instead of
-// physarum-v17.js's reinforced, persistent trail network. Visually this
-// reads as loose drifting motes rather than a growing vein structure --
-// deliberately the most "ambient" of the effects, no branching or growth.
+// Spores drifting on an air current: agents advected by a dynamic multi-octave curl-noise flow
+// field with thermal updrafts and circulating air currents, continuously depositing drifting
+// ribbons and motes without settling into a static attractor.
 const SporeDrift = (() => {
   const vsQuad = `#version 300 es
     in vec2 position;
@@ -25,39 +23,56 @@ const SporeDrift = (() => {
     uniform vec2 uDrift;
     uniform vec4 uTaps[4];
 
-    float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }
-
-    float valueNoise(vec2 p) {
-      vec2 i = floor(p);
-      vec2 f = fract(p);
-      float a = hash(i);
-      float b = hash(i + vec2(1.0, 0.0));
-      float c = hash(i + vec2(0.0, 1.0));
-      float d = hash(i + vec2(1.0, 1.0));
-      vec2 u = f * f * (3.0 - 2.0 * f);
-      return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+    // Smooth gradient noise for continuous, high-quality curl flow
+    vec2 hash2(vec2 p) {
+      p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+      return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
     }
 
-    // Curl of a scalar noise potential is divergence-free
-    vec2 curl(vec2 p) {
-      float e = 0.7;
-      float n1 = valueNoise(p + vec2(0.0, e));
-      float n2 = valueNoise(p - vec2(0.0, e));
-      float n3 = valueNoise(p + vec2(e, 0.0));
-      float n4 = valueNoise(p - vec2(e, 0.0));
-      float dx = (n1 - n2) / (2.0 * e);
-      float dy = (n3 - n4) / (2.0 * e);
-      return vec2(dy, -dx);
+    float gnoise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      vec2 u = f * f * (3.0 - 2.0 * f);
+      return mix(mix(dot(hash2(i + vec2(0.0, 0.0)), f - vec2(0.0, 0.0)),
+                     dot(hash2(i + vec2(1.0, 0.0)), f - vec2(1.0, 0.0)), u.x),
+                 mix(dot(hash2(i + vec2(0.0, 1.0)), f - vec2(0.0, 1.0)),
+                     dot(hash2(i + vec2(1.0, 1.0)), f - vec2(1.0, 1.0)), u.x), u.y);
+    }
+
+    // Two-octave continuously deforming noise potential (prevents limit cycles)
+    float potential(vec2 p, float t) {
+      vec2 p1 = p * 0.0035 + vec2(sin(t * 0.07) * 0.9 + t * 0.025, cos(t * 0.05) * 0.9 - t * 0.020);
+      vec2 p2 = p * 0.0080 + vec2(cos(t * 0.09) * 1.1 - t * 0.030, sin(t * 0.08) * 1.1 + t * 0.025);
+      float n1 = gnoise(p1);
+      float n2 = gnoise(p2) * 0.5;
+      return n1 + n2;
+    }
+
+    // Analytical curl derivative (divergence-free flow: dP/dy, -dP/dx)
+    vec2 curl(vec2 p, float t) {
+      float e = 1.0;
+      float ny_plus = potential(p + vec2(0.0, e), t);
+      float ny_minus = potential(p - vec2(0.0, e), t);
+      float nx_plus = potential(p + vec2(e, 0.0), t);
+      float nx_minus = potential(p - vec2(e, 0.0), t);
+      float dP_dx = (nx_plus - nx_minus) / (2.0 * e);
+      float dP_dy = (ny_plus - ny_minus) / (2.0 * e);
+      return vec2(dP_dy, -dP_dx) * 75.0; // Divergence-free velocity vector
     }
 
     void main() {
       vec4 agent = texture(uAgents, vUv);
       vec2 pos = agent.xy;
 
-      vec2 flow = curl(pos * 0.006 + vec2(uTime * 0.03, -uTime * 0.02));
-      pos += (flow + uDrift) * uMoveSpeed;
+      // Slowly evolving air currents
+      vec2 flow = curl(pos, uTime);
 
-      // Touch responsiveness: if an agent is near a tap, burst/scatter outward
+      // Large-scale atmospheric cycling: slow drifting wind that gently rocks direction
+      vec2 wind = uDrift + vec2(sin(uTime * 0.15) * 0.35, cos(uTime * 0.12) * 0.25);
+      
+      pos += (flow + wind) * uMoveSpeed;
+
+      // Touch responsiveness: burst and scatter spores outward on tap
       for (int i = 0; i < 4; i++) {
         if (uTaps[i].z > 0.0 && uTaps[i].w > 0.0) {
           vec2 tapCoord = uTaps[i].xy * uResolution;
@@ -65,14 +80,14 @@ const SporeDrift = (() => {
           float dist = length(diff);
           float rad = uTaps[i].z * uResolution.y;
           if (dist < rad && dist > 0.001) {
-            float burstForce = (1.0 - dist / rad) * 12.0 * uTaps[i].w;
+            float burstForce = (1.0 - dist / rad) * 14.0 * uTaps[i].w;
             vec2 dir = diff / dist;
             pos += dir * burstForce;
           }
         }
       }
 
-      // Wrap rather than reflect
+      // Toroidal wrap across canvas boundaries
       pos = mod(pos, uResolution);
 
       outColor = vec4(pos, agent.z, 1.0);
@@ -91,14 +106,14 @@ const SporeDrift = (() => {
       vec4 agent = texture(uAgents, uv);
       vec2 ndc = (agent.xy / uResolution) * 2.0 - 1.0;
       gl_Position = vec4(ndc, 0.0, 1.0);
-      gl_PointSize = 1.5;
+      gl_PointSize = 1.6;
     }
   `;
 
   const fsRenderAgents = `#version 300 es
     precision highp float;
     out vec4 outColor;
-    void main() { outColor = vec4(0.7, 0.7, 0.7, 1.0); }
+    void main() { outColor = vec4(0.8, 0.8, 0.8, 1.0); }
   `;
 
   const fsProcessTrail = `#version 300 es
@@ -246,11 +261,11 @@ const SporeDrift = (() => {
       }
 
       this.fx = readFxConfig('spore-drift');
-      // Substantially increased spore counts (3x-4x) for lush, visible motes & ribbons
+      // Plentiful spore population with continuous gentle movement and balanced trail turnover
       this.presets = {
-        'still-air': { agentCount: 16384, moveSpeed: 0.22, drift: [0.00, 0.04], diffusion: 0.032, decay: 0.022 },
-        crosswind: { agentCount: 22500, moveSpeed: 0.40, drift: [0.82, 0.03], diffusion: 0.020, decay: 0.028 },
-        updraft: { agentCount: 19600, moveSpeed: 0.32, drift: [0.05, 0.92], diffusion: 0.026, decay: 0.024 }
+        'still-air': { agentCount: 16384, moveSpeed: 0.28, drift: [0.08, 0.12], diffusion: 0.035, decay: 0.024 },
+        crosswind: { agentCount: 22500, moveSpeed: 0.45, drift: [0.65, 0.10], diffusion: 0.024, decay: 0.030 },
+        updraft: { agentCount: 19600, moveSpeed: 0.36, drift: [0.12, 0.75], diffusion: 0.030, decay: 0.026 }
       };
       const presetNames = Object.keys(this.presets);
       const chosenName = this.presets[this.fx.presetName]
@@ -335,20 +350,16 @@ const SporeDrift = (() => {
       const gl = this.gl;
       const agentsData = new Float32Array(this.numAgents * 4);
 
-      // Header-anchored nodes in WebGL bottom-up coordinates (y = 1.0 - page_fraction)
-      // Viewport header height in sim coordinates:
       const viewportFraction = Math.min(1.0, window.innerHeight / Math.max(1, this.canvas.clientHeight || window.innerHeight));
-      const headerTop = this.simHeight;
       const headerBottom = Math.max(0, this.simHeight * (1.0 - 0.35 * viewportFraction));
 
-      // Dense spore clusters in the top-right header area next to H1:
-      // In WebGL bottom-up, top of page is y ~ 0.85 - 0.98
+      // Dense spore clusters in the top-right header area next to H1
       const headerClusters = [
-        [0.68 * this.simWidth, 0.92 * this.simHeight, 45.0], // Top right header immediate beside H1
-        [0.78 * this.simWidth, 0.90 * this.simHeight, 55.0], // Top right header bloom center
-        [0.88 * this.simWidth, 0.88 * this.simHeight, 60.0], // Top right outer corner
-        [0.62 * this.simWidth, 0.85 * this.simHeight, 50.0], // Under header bloom
-        [0.82 * this.simWidth, 0.82 * this.simHeight, 50.0]  // Diagonal drift plume
+        [0.68 * this.simWidth, 0.92 * this.simHeight, 45.0],
+        [0.78 * this.simWidth, 0.90 * this.simHeight, 55.0],
+        [0.88 * this.simWidth, 0.88 * this.simHeight, 60.0],
+        [0.62 * this.simWidth, 0.85 * this.simHeight, 50.0],
+        [0.82 * this.simWidth, 0.82 * this.simHeight, 50.0]
       ];
 
       // Margin and body coverage nodes
@@ -367,21 +378,18 @@ const SporeDrift = (() => {
         let seedX, seedY;
         const roll = Math.random();
         if (roll < 0.55) {
-          // 55% of all spores densely seeded in the top-right header beside H1
           const cluster = headerClusters[i % headerClusters.length];
           const angle = Math.random() * Math.PI * 2;
           const dist = Math.sqrt(Math.random()) * cluster[2];
           seedX = Math.max(1, Math.min(this.simWidth - 1, cluster[0] + Math.cos(angle) * dist));
           seedY = Math.max(headerBottom, Math.min(this.simHeight - 1, cluster[1] + Math.sin(angle) * dist));
         } else if (roll < 0.80) {
-          // 25% along margin paths
           const node = marginNodes[i % marginNodes.length];
           const angle = Math.random() * Math.PI * 2;
           const dist = Math.sqrt(Math.random()) * node[2];
           seedX = Math.max(1, Math.min(this.simWidth - 1, node[0] + Math.cos(angle) * dist));
           seedY = Math.max(1, Math.min(this.simHeight - 1, node[1] + Math.sin(angle) * dist));
         } else {
-          // 20% broad atmospheric drift
           seedX = Math.random() * this.simWidth;
           seedY = Math.random() * this.simHeight;
         }
@@ -400,8 +408,8 @@ const SporeDrift = (() => {
       this.fboTrailA = createFBO(gl, this.texTrailA);
       this.fboTrailB = createFBO(gl, this.texTrailB);
 
-      // GPU Warm-Start: 70 iterations so drifting ribbons and trails are fully formed on frame 0
-      this.stepSimulation(70, 0, null);
+      // Warm start 50 iterations
+      this.stepSimulation(50, 0, null);
     }
 
     readColors() {
@@ -420,9 +428,9 @@ const SporeDrift = (() => {
     stepSimulation(iterations, simTime, tapData) {
       const gl = this.gl;
       for (let i = 0; i < iterations; i++) {
-        const stepTime = simTime + i * 0.02;
+        const stepTime = simTime + i * 0.03;
 
-        // 1. Update Spore Positions
+        // 1. Update Spore Positions with dynamic curl & wind
         gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboAgentsB);
         gl.viewport(0, 0, this.agentTexSize, this.agentTexSize);
         gl.useProgram(this.progUpdate);
@@ -481,7 +489,8 @@ const SporeDrift = (() => {
       if (timestamp - this.lastTime < 32) return; // ~30 FPS cadence
       this.lastTime = timestamp;
 
-      this.time += 0.015 * (this.fx.reducedMotion ? 0.15 : this.fx.motionScale);
+      // Active time progression for constantly shifting currents
+      this.time += 0.025 * (this.fx.reducedMotion ? 0.15 : this.fx.motionScale);
       if (Math.floor(this.time * 100) % 60 === 0) {
         this.readColors();
       }

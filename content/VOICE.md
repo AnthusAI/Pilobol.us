@@ -75,6 +75,15 @@ Internal wiki cards, AGENTS.md, and scout chat digests may use desk shorthand.
 Link a source naturally in the sentence it supports. Reader posts do not end
 with a bibliography or a labeled source list.
 
+## Length
+
+There is no word limit, and there never was one; the 400–900 words most posts
+run to is what one scene usually needs, not a ceiling. A **lineage** post — a
+chain of named, dated, sourced cases held together by one spine (see
+Historical, below) — may run 1,200 to 2,000 words and must not be cut to look
+like the single-scene pieces around it. Cut a long piece only where a scene has
+stopped earning its place. (Ryan 2026-09-11, on the practical-obscurity piece.)
+
 ## Storytelling: inside the belief
 
 Pilobolus articles are **weird stories**, not technical explainers. Start
@@ -82,6 +91,37 @@ ordinary. Let the scene tilt surreal or uncanny. The house still cares about
 belief — someone trusted a convincing copy — but **first-person “I/you on the
 inside” is only one shape**, not the only one (Ryan 2026-09-06). Pick a shape
 that fits *this* example; rotate across the feed so posts don’t rhyme.
+
+### Real people, real scenes — HARD (Ryan 2026-09-09)
+
+**Every story is told through documented people and documented events.** Named
+person, named place, named year, linkable source. The house tells the tale by
+telling real stories — not by illustrating an idea with somebody who does not
+exist.
+
+Composite protagonists are out. So are invented users, invented messages,
+invented demands, invented nights. If a piece opens on “someone who made a
+throwaway account eleven years ago,” it is fiction wearing reportage clothes,
+and it fails here no matter how well the prose reads. The weirdness has to
+belong to the world, not to the writer.
+
+The story shapes below are **camera positions, not permission to invent**.
+Close second person means standing near a real person whose night is on the
+record. It does not mean writing a character.
+
+When the material only supports an abstraction, the piece is not ready. Two
+honest ways out: find the real specimen that carries it, or run the beat as
+**Historical** — a chain of real unmaskings, panics, or arrivals, each one
+named and dated. A documented past scene always beats an invented present one.
+
+Two things that are *not* violations: a real scene reconstructed from reporting
+(what the person typed, what the screen said, per the source) is reporting, and
+statistics stay statistics — the FBI's sextortion counts or a paper's recall
+number can close a piece as scale, but a number never gets promoted into a
+protagonist.
+
+Test before drafting: **name the person the piece is about.** If the answer is
+a description rather than a name, there is no piece yet.
 
 ### Story shapes (pick one)
 
@@ -107,6 +147,26 @@ that fits *this* example; rotate across the feed so posts don’t rhyme.
 6. **Morning after** — start *after* the copy worked. Kitchen, parish, dead
    app icon, “how long since my last confession.” Use sparingly; don’t open
    every faith/care piece here (Ryan: don’t lead Justin with theology).
+
+7. **Diptych** — exactly two real scenes, far apart in time, held in the same
+   posture so the second is read through the first. A rhyme, not a survey. Use
+   when the subject is a change rather than a moment: the gap between the two
+   panels carries what a timeline would otherwise have to narrate. Hard limits:
+   two, never three; both fully scened; neither compressed into a summary line.
+   The later panel gets the weight, the headline and the ending.
+
+8. **The one who went first** — a real person who lived through the old version
+   of something and is on the record about it, while the new version arrives
+   cheap. The whole arc sits inside one documented life, so nothing has to be
+   listed. Model: Brooke Magnanti, unmasked in 2009 by six years of newsroom
+   effort, against agents that now do the same work for a dollar a head.
+
+9. **The chair on the other side** — close third on whoever is *doing* the
+   thing, rather than whoever it lands on. Distinct from Witness (3), where the
+   weird arrives at someone; here the camera sits with the people causing it.
+   Works because nobody in these scenes is a villain — they are curious, it
+   takes an afternoon, and the ordinariness is the tilt. Model: the students
+   who wired face search into sunglasses to show it could be done.
 
 ### Historical (post type) — Ryan 2026-09-06
 
@@ -174,10 +234,11 @@ Never announce “the Pilobolus take.”
 
 **Belief → consequence bar (Ryan 2026-09-06):** “It wasn’t real, then belief made it real” is on-topic and also **over-familiar**. Save ordinary feed posts for **significant or unusual** examples. Ordinary keepers stay wiki-only — **or** earn a feed slot as **Historical**: lineage dig, **On this day** past specimen, or a named **mass-hysteria / rumor-panic** scene (AI not required; see above).
 
-Hard rules that apply to every shape: name the thing in plain English early
-(therapy chat, map pin, AI priest app). One example. Street-readable prose.
-No “not A, it’s B.” No theory labels. Don’t clone the Justin spine (care
-works → revoked → sadness) unless the scene is unmistakably different.
+Hard rules that apply to every shape: real named people and documented events
+only — no composites. Name the thing in plain English early (therapy chat, map
+pin, AI priest app). One example. Street-readable prose. No “not A, it’s B.” No
+theory labels. Don’t clone the Justin spine (care works → revoked → sadness)
+unless the scene is unmistakably different.
 
 Classic inside-user beat (still valid when you choose shape 1):
 
@@ -226,6 +287,90 @@ like "deeply uncanny" or "profoundly surreal" — lives in `style-profile.yml`
 (`rules.bannedIntensifiers` in the Papyrus repo) rather than here, so there's
 one list instead of two that can drift apart. [Limatus](https://github.com/AnthusAI/Limatus)
 checks drafts against it directly.
+
+## Say the accusation out loud — HARD (Ryan 2026-09-11)
+
+"The scene carries the judgment" was being read as permission to leave the
+judgment unsaid. It is not that. Every piece is allowed one sentence, placed
+where a reader will actually hit it, that states plainly what is happening and
+who it is happening to. Long pieces need that sentence, because a reader made
+to assemble the thesis out of implication assembles something milder than what
+was meant, and usually stops before the end.
+
+Rules for that sentence:
+
+- **It is a claim about the world, not about us.** "The price has been falling
+  ever since, one documented person at a time" is house. "We find this
+  alarming" is not, and neither is "this is what hyperreality looks like."
+- **It is built from the piece's own nouns.** A conclusion drawn from the scene
+  standing next to it — not a moral appended after the story is over.
+- **One is the budget.** Two is an opinion column. Do not open with it, restate
+  it in the middle, and close with it.
+- **It goes where the evidence has just landed.** Usually just after the first
+  documented case has been told, so it reads as something the facts produced.
+
+Nothing here relaxes the bans. No publication "we," no theory labels, no
+"experts say," no both-sides hedging, and never a branded voice announcing what
+Pilobolus thinks. Directness means naming the thing. It does not mean acquiring
+a byline.
+
+## The headline (title)
+
+Every article carries a `title` above the standfirst. The two are one system
+doing two jobs: the title is the hook and the cold idea, the standfirst is the
+explanation. When a title tries to explain as well, it duplicates the only
+paragraph guaranteed to be read and spends the one slot that could have carried
+a picture.
+
+Five rules:
+
+**It has to hold something you can see.** Every published house title carries a
+concrete noun or a physical verb — wings, a strangler fig, a machine that could
+talk, a bag of numbers, a hundred pages a day, a search that kept finding him.
+A title assembled entirely out of abstractions is the tell that the piece has
+not found its image yet.
+
+**It must not be a riddle the body solves.** A reader meeting it cold, in a
+feed, with no standfirst and no cover, should get something on the first pass.
+“Six years and a door handle” means nothing until paragraph nine; that is a
+promise, not a headline. (Ryan 2026-09-11: “perplexing and inaccessible.”)
+
+**It must not assign the reader an age.** See *Don’t assign the reader an age*
+below — the rule bites openings and endings too.
+
+**It must not spend the ending.** The house ends on an image worth remembering.
+Lift that image into the title and the ending arrives as a callback instead of
+a hit.
+
+**It has to carry the accusation, not point at the subject.** (Ryan 2026-09-11.)
+A title that names what happened leaves the reader to work out what the piece
+thinks about it, and most readers will not bother. "The Search in the Feed Kept
+Finding Him" describes an event. It does not say that a missing four-year-old
+became stock for an industry that earns on other people's worst week. "The End
+of the Rave" is the model: a verdict, stated flat, which the body then spends
+its length earning.
+
+This is not a licence for op-ed grammar. The judgment goes in as a statement
+about the world — flat declarative, concrete noun, opinion inside it — never as
+"our take" or "we think." See *Never talk about Pilobolus* above, and *Say the
+accusation out loud*, which is the same rule one layer down.
+
+### How to write one
+
+1. **Write it last, after the standfirst.** Then check the two against each
+   other. If the standfirst would survive unchanged with the title deleted, the
+   title is not doing a job.
+2. **Take a noun or a verb the article already earned.** Same discipline as the
+   standfirst: find the piece’s most physical word. Do not invent a metaphor
+   that exists only in the headline.
+3. **Sentence shape beats label shape.** The corpus is flat declaratives — “The
+   Search in the Feed Kept Finding Him,” “You Confessed to a Bag of Numbers.”
+   Two short sentences with a turn are house as well: “He Deleted a Hundred
+   Pages a Day. They Made Four Hundred.”
+4. **Check it against *Don’t coin an abstraction* below.** The definite article
+   welded to a nominalised verb fails in a title exactly as it fails in body
+   copy, and fails louder, because the title is read most. (“The Wanting Was
+   the Expensive Part,” killed 2026-09-11 for precisely this.)
 
 ## The standfirst (lede)
 
@@ -276,6 +421,59 @@ you may echo it.
 
 Fungus / strangler-fig / simulacrum metaphors **earn** their keep when tied to
 a scene. They fail when they replace the scene.
+
+## Don’t assign the reader an age — HARD (Ryan 2026-09-11)
+
+“If you were a teenager in 1993” tells every reader who was not a teenager in
+1993 that the piece is not for them, and it does it in the first six words. A
+ladder built from the reader’s own family does the same thing more quietly:
+*your mother’s nights, yours, your children’s* only resolves for somebody
+standing on the middle rung, and the house has readers on all three. For a
+reader in their twenties, their mother’s nights were already being written
+down.
+
+This is not a taste preference. The audience line in `style-profile.yml` is
+general readers with no assumed background, and a cohort assignment breaks it
+in the two positions that carry the most weight — the opening and the ending.
+
+Two ways through, both cheap:
+
+**Describe the year; do not hand it to the reader.** “In 1993 the worst
+Saturday night of a teenager’s life left behind a headache and one photograph
+in a shoebox” costs nothing and excludes nobody. Close second person can still
+arrive later, once the piece has earned it.
+
+**Put a generational ladder into grammar instead of into relatives.** Tense
+carries change across time without telling anyone how old they are: *the
+shoebox is gone, everything since has been written down, all of it will be
+read.* Is, has been, will be — three generations, no birthdays.
+
+Applies to the title, the standfirst, the opening, the ending, and to any
+“remember when” construction in the body.
+
+## Illustrating a piece about being findable
+
+When an article is about people becoming identifiable, the artwork is part of
+the argument and can contradict it. A crowd photograph published under that
+headline hands the tools in the piece a fresh set of faces, and the people in
+the frame did not agree to stand in as the example.
+
+Choose a frame where no individual is identifiable — distance, backlight,
+smoke, strobe, motion blur. It is the safer choice and the better one: the
+picture then shows the condition the article says is gone, rather than
+demonstrating its absence at somebody's expense. (Ryan 2026-09-11, on the
+Castlemorton cover.)
+
+Never generate or simulate a photograph of a real documented event. If the
+image cannot be licensed, ship without it and say so in the piece's
+`IMAGES.md`, per *Real people, real scenes*.
+
+**Override, Ryan 2026-09-11, the-end-of-the-rave cover:** given a specific
+faces-legible Castlemorton frame and asked directly, Ryan chose to run it with
+no acknowledgment of the faces rather than keep looking for one with none
+identifiable. The no-legible-face guidance above is still the default and still
+the right call absent a specific instruction otherwise; this is a recorded
+exception on one piece, not a repeal.
 
 ## Names and links
 

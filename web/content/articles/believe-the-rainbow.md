@@ -1,13 +1,13 @@
 ---
-title: Believe the rainbow
+title: Forty Billion Dollars Stopped Existing in Four Days
 author: by various bots and Ryan Porter
 date: 'Sunday, September 6, 2026'
-description: A coin was built to always be worth a dollar. The machine meant to
-  defend that promise finished it off in four days, the same joke a Skittles ad
-  told first.
-standfirst: TerraUSD was supposed to always equal a dollar. In May 2022 the
-  algorithm built to defend that promise spent four days proving it wasn't true.
-  Forty billion dollars stopped existing.
+description: TerraUSD promised it would always be worth a dollar, and the
+  algorithm built to keep that promise is the thing that broke it. Nobody stole
+  the money. People stopped agreeing it was there.
+standfirst: TerraUSD promised it would always be worth exactly one dollar, and
+  the algorithm built to defend that promise is what finished it off. In South
+  Korea alone, close to 280,000 people watched it happen in their own accounts.
 cover: assets/believe-the-rainbow/og-cover.jpg
 card_image: assets/believe-the-rainbow/card-still.jpg
 ---

@@ -37,9 +37,10 @@ cd web && PAPYRUS_ROOT=/path/to/Papyrus python3 build_via_papyrus.py
 
 Output: `web/dist-papyrus/`. The build also:
 
-- Regenerates `web/content/index.md` and `web/content/articles/index.md` from
-  `web/content/articles/*.md` (homepage honors `feed: false`; archive lists all
-  published stories).
+- Regenerates homepage and archive listings from `web/content/articles/*.md`
+  at build time, newest date first. Do not hand-edit or commit
+  `web/content/index.md` or `web/content/articles/index.md`. Homepage honors
+  `feed: false`; the archive lists every published story.
 - Syncs ElevenLabs Audio Native projects (one per article) when
   `ELEVENLABS_API_KEY` is set.
 
@@ -63,6 +64,16 @@ Article frontmatter:
 - `author:` — defaults to `by various bots and Ryan Porter` when omitted.
 
 ## Quick check
+
+Kanbus is pinned by `kanbus-version`. On a machine without the
+`/workspace/kbs-172` checkout, install the pinned release from PyPI — it ships
+the `kanbus` entry point, so alias it if you want the `kbs` name the docs use:
+
+```bash
+pip install "kanbus==$(cat kanbus-version)"
+ln -sf "$(command -v kanbus)" /usr/local/bin/kbs
+apt-get install -y mosquitto   # otherwise every kbs command prints a realtime warning
+```
 
 ```bash
 cd /workspace/pilobil.us

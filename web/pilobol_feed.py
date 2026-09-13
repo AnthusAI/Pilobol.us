@@ -152,7 +152,9 @@ def generate_homepage_markdown(
     feed_articles = [
         item for item in articles if not feed_hidden(item[2])
     ]
-    feed_articles.sort(key=lambda item: parse_article_date(item[2]), reverse=True)
+    feed_articles.sort(
+        key=lambda item: (-parse_article_date(item[2]).timestamp(), item[0]),
+    )
 
     cover = _DEFAULT_SITE_COVER
     if feed_articles:
@@ -203,7 +205,10 @@ def generate_archive_markdown(
     description: str,
     articles: list[tuple[str, Path, dict[str, str]]],
 ) -> str:
-    ordered = sorted(articles, key=lambda item: parse_article_date(item[2]), reverse=True)
+    ordered = sorted(
+        articles,
+        key=lambda item: (-parse_article_date(item[2]).timestamp(), item[0]),
+    )
     lines = [
         "---",
         f"title: {title}",

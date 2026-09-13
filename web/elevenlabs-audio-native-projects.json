@@ -1,35 +1,63 @@
 {
   "projects": {
+    "a-fungus-among-us": {
+      "content_hash": "e57beaf26c307f14766038cc8231eda1990491d884de897042bb66b151755370",
+      "player_author": "Pilobol.us",
+      "player_author_verified": true,
+      "project_id": "2M3zFMFlQCQ7oLCavw52",
+      "title": "A fungus among us"
+    },
     "believe-the-rainbow": {
-      "content_hash": "3e8460a55dc92ce9cf00722253fa025924ddb886f136ae6913377754b1d19cf5",
+      "content_hash": "d2300e4c3123e84fc41c0997509ed1022dcf8d71358d8ba767211315e9d31f6a",
       "player_author": "Pilobol.us",
       "player_author_verified": true,
       "project_id": "U7HUoZRaecUcH17hlbkv",
       "title": "Believe the rainbow"
     },
     "he-said-he-could-see-it": {
-      "content_hash": "ee32d74807218491b0b35e826a6fe4ad5b68f4569da63d5a99c2e1936e8c0277",
+      "content_hash": "85267e4121dd0e2dbe558bf2de5bec67c87dea02a98e351dfaeb0f12e737924f",
       "player_author": "Pilobol.us",
       "player_author_verified": true,
       "project_id": "LEa9bepuT0DZTP3DhnKh",
       "title": "The Wings Were Made of AI"
     },
     "society-has-a-strangler-fig-creeping-around-it": {
-      "content_hash": "645322405b1e966c3be1397421348b4d19a9f72a7bca753f7feaa029e9218a9b",
+      "content_hash": "13d0b0df224529f4ff550da5b0e5453ba03491b2d747d10ac9caf03430f71794",
       "player_author": "Pilobol.us",
       "player_author_verified": true,
       "project_id": "Nw8UO2ni15cFCNjB855C",
       "title": "Society Has a Strangler Fig Creeping Around It"
     },
+    "the-end-of-the-rave": {
+      "content_hash": "cf10631b3f85f9333522c8667cbacea9975e0d478d060311f8b377a3b4b9116f",
+      "player_author": "Pilobol.us",
+      "player_author_verified": true,
+      "project_id": "qqnKQKwfIuSDXTkY1858",
+      "title": "The End of the Rave"
+    },
+    "the-part-of-the-machine-that-could-talk": {
+      "content_hash": "70d81431fcecd6a700be48cc1cabc09546254e673d45c2004cf7fc1a6065264b",
+      "player_author": "Pilobol.us",
+      "player_author_verified": true,
+      "project_id": "g1vMzhaObrYNtw6ak4gw",
+      "title": "The Part of the Machine That Could Talk"
+    },
     "the-search-in-the-feed-kept-finding-him": {
-      "content_hash": "0bc829991e2edcdca1f83c571252c6ec7ccb64f667aab6da053bd41dccd57d81",
+      "content_hash": "b80967aef26fe58fc92e96992c480652be417d8099ed260b0d9d85d529ef989b",
       "player_author": "Pilobol.us",
       "player_author_verified": true,
       "project_id": "mmFUt5SBc6q02ZQ8bhyQ",
       "title": "The Search in the Feed Kept Finding Him"
     },
+    "wiki-janitor": {
+      "content_hash": "3f2dd5257cf6bc8274d2fddd9963c2eccf0699e36c74275bd25622a071615ac3",
+      "player_author": "Pilobol.us",
+      "player_author_verified": true,
+      "project_id": "B9hqTSF1wzjGeVTYkjkt",
+      "title": "He Deleted a Hundred Pages a Day. They Made Four Hundred."
+    },
     "you-confessed-to-a-bag-of-numbers": {
-      "content_hash": "02e46e3e7a12ca189e5ecad1fcb285794adf800a513119d62da43c010fc31049",
+      "content_hash": "6d72ff3d6a930c2301b1dea83fcacfd8c31b588b87ab4a7bdc77376302f7ec45",
       "player_author": "Pilobol.us",
       "player_author_verified": true,
       "project_id": "fh2IGI6SRmMGfkY5zB3H",

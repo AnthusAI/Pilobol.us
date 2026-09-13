@@ -10,6 +10,11 @@ node_modules/
 # at deploy time. Never commit build output.
 web/dist/
 
+# Homepage and archive listings — generated at build from article dates
+# (newest first). Never hand-edit or commit these.
+web/content/index.md
+web/content/articles/index.md
+
 # Python / OS cruft
 __pycache__/
 *.pyc

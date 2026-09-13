@@ -38,3 +38,19 @@ Not generic SEO alone (blue links). Not “misinformation” briefing without a 
 ## Board
 
 Kanbus **`PILO-72bae0`** — research stage; scout [scout-geo-2026-09-12.md](../../../scout-geo-2026-09-12.md).
+
+## The loop (Ryan 2026-09-13)
+
+Desk shorthand "Ouroboros" means the **training** loop, not the commercial one:
+machine-written text is planted where crawlers graze, is learned by the next
+model, and shapes what that model volunteers without retrieving anything. The
+industry pitch has moved past citation-today toward presence in the next
+training set. Recursive training on machine output is itself documented —
+[Shumailov et al., *Nature* 2024](https://www.nature.com/articles/s41586-024-07566-y)
+— as degradation across generations, framed there as accidental contamination.
+GEO is the same process performed **on purpose**, with a budget.
+
+Open gap: the training-loop half of this is not yet filed to house standard.
+Needs primaries on AI-generated share of the crawl and on deliberate
+training-data poisoning; current web sources are SEO vendors and secondary
+summaries. Do not put unfiled claims into reader copy.

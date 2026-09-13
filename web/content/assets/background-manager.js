@@ -17,7 +17,7 @@
       intensity: 0.78,
       motionScale: 0.72,
       seedRegions: [
-        { x: 0.84, y: 0.16, radius: 0.34, radiusY: 0.17, weight: 0.62, anchor: 'header' },
+        { x: 0.70, y: 0.15, radius: 0.35, radiusY: 0.18, weight: 0.62, anchor: 'header' },
         { x: 0.96, y: 0.42, radius: 0.12, weight: 0.22 },
         { x: 0.08, y: 0.78, radius: 0.10, weight: 0.16 }
       ]
@@ -27,7 +27,7 @@
       intensity: 0.68,
       motionScale: 0.60,
       seedRegions: [
-        { x: 0.84, y: 0.16, radius: 0.32, radiusY: 0.17, weight: 0.34, anchor: 'header' },
+        { x: 0.70, y: 0.15, radius: 0.34, radiusY: 0.18, weight: 0.34, anchor: 'header' },
         { x: 0.06, y: 0.30, radius: 0.14, weight: 0.20 },
         { x: 0.94, y: 0.50, radius: 0.16, weight: 0.26 },
         { x: 0.11, y: 0.84, radius: 0.10, weight: 0.09 },
@@ -39,7 +39,7 @@
       intensity: 0.64,
       motionScale: 0.48,
       seedRegions: [
-        { x: 0.84, y: 0.16, radius: 0.30, radiusY: 0.16, weight: 0.20, anchor: 'header' },
+        { x: 0.70, y: 0.15, radius: 0.32, radiusY: 0.17, weight: 0.20, anchor: 'header' },
         { x: 0.06, y: 0.52, radius: 0.11, weight: 0.10 },
         { x: 0.94, y: 0.66, radius: 0.12, weight: 0.10 },
         { x: 0.17, y: 0.96, radius: 0.18, weight: 0.18 },
@@ -52,7 +52,7 @@
       intensity: 0.48,
       motionScale: 0.38,
       seedRegions: [
-        { x: 0.86, y: 0.17, radius: 0.28, radiusY: 0.15, weight: 0.44, anchor: 'header' },
+        { x: 0.70, y: 0.15, radius: 0.30, radiusY: 0.16, weight: 0.44, anchor: 'header' },
         { x: 0.07, y: 0.67, radius: 0.10, weight: 0.20 },
         { x: 0.92, y: 0.86, radius: 0.13, weight: 0.36 }
       ]

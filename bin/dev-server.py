@@ -44,6 +44,8 @@ class PilobolDevHandler(SimpleHTTPRequestHandler):
             candidate = CONTENT_CSS_DIR / rel
             if candidate.is_file():
                 return str(candidate)
+            if rel == "site-theme.css" and (CONTENT_CSS_DIR / "pilobolus-theme.css").is_file():
+                return str(CONTENT_CSS_DIR / "pilobolus-theme.css")
         return super().translate_path(path)
 
 

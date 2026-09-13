@@ -23,10 +23,11 @@ const Physarum = (() => {
     uniform float uTurnSpeed;
     uniform float uMoveSpeed;
     uniform float uTime;
+    uniform vec4 uTaps[4];
     
-    // Hash function for random noise
-    float hash(float n) { return fract(sin(n) * 1e4); }
-    float hash(vec2 p) { return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x)))); }
+    // Standard robust GLSL hash functions
+    float hash(float n) { return fract(sin(n) * 43758.5453123); }
+    float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453123); }
     
     float sense(vec2 pos, float angle) {
       vec2 dir = vec2(cos(angle), sin(angle));
@@ -40,37 +41,63 @@ const Physarum = (() => {
       vec4 agent = texture(uAgents, vUv);
       vec2 pos = agent.xy;
       float angle = agent.z;
+
+      // Touch inoculation: burst a cluster of new exploratory agents
+      // directly at the tapped spot, radiating outward
+      for (int i = 0; i < 4; i++) {
+        if (uTaps[i].z > 0.0 && uTaps[i].w > 0.0) {
+          float agentHash = hash(vUv * 73.19 + vec2(uTime * 17.3, float(i) * 9.1));
+          if (agentHash < 0.045) { // ~3,000 agents per tap burst outward
+            vec2 tapSimPos = uTaps[i].xy * uResolution;
+            float r = sqrt(hash(vUv * 157.3 + vec2(uTime, 1.23))) * uTaps[i].z * min(uResolution.x, uResolution.y) * 0.8;
+            float a = hash(vUv * 91.7 + vec2(uTime * 2.1, 4.56)) * 6.2831853;
+            pos = tapSimPos + vec2(cos(a), sin(a)) * r;
+            angle = a;
+          }
+        }
+      }
       
       float weightF = sense(pos, angle);
       float weightL = sense(pos, angle + uSensorAngle);
       float weightR = sense(pos, angle - uSensorAngle);
       
-      float randomSteer = (hash(pos + uTime) - 0.5) * 0.1;
+      // Continuous subtle wandering noise so agents maintain organic curvature
+      float wander = (hash(pos + vec2(uTime * 0.2, vUv.x * 100.0)) - 0.5) * 0.14;
       
       if (weightF > weightL && weightF > weightR) {
-        // stay same
+        // Front smells strongest: advance with gentle wander
+        angle += wander * 0.4;
       } else if (weightF < weightL && weightF < weightR) {
-        if (hash(pos.x + uTime) > 0.5) {
-          angle += uTurnSpeed + randomSteer;
-        } else {
-          angle -= uTurnSpeed + randomSteer;
-        }
+        // Both flanks smell stronger than forward: choose a branch
+        float pick = hash(pos.xy + vec2(uTime, 3.14));
+        angle += (pick > 0.5 ? uTurnSpeed : -uTurnSpeed) + wander;
       } else if (weightL > weightR) {
-        angle += uTurnSpeed + randomSteer;
+        angle += uTurnSpeed + wander;
       } else if (weightR > weightL) {
-        angle -= uTurnSpeed + randomSteer;
+        angle -= uTurnSpeed + wander;
+      } else {
+        // Equal scent (open space or uniform trail): explore freely
+        angle += wander * 2.2;
+      }
+      
+      // Dynamic branching: when inside an overcrowded vein, break out
+      // to seek fresh uncolonized territory and spawn new shoots
+      if (weightF > 0.82) {
+        float branchNoise = hash(pos * 1.33 + vec2(uTime, 7.19));
+        angle += (branchNoise - 0.5) * 0.45;
       }
       
       vec2 dir = vec2(cos(angle), sin(angle));
       pos += dir * uMoveSpeed;
       
-      if (pos.x < 0.0 || pos.x >= uResolution.x) {
-        pos.x = clamp(pos.x, 0.0, uResolution.x - 1.0);
-        angle = 3.14159265 - angle;
+      // Soft boundary reflection
+      if (pos.x < 1.0 || pos.x >= uResolution.x - 1.0) {
+        pos.x = clamp(pos.x, 1.0, uResolution.x - 2.0);
+        angle = 3.14159265 - angle + wander;
       }
-      if (pos.y < 0.0 || pos.y >= uResolution.y) {
-        pos.y = clamp(pos.y, 0.0, uResolution.y - 1.0);
-        angle = -angle;
+      if (pos.y < 1.0 || pos.y >= uResolution.y - 1.0) {
+        pos.y = clamp(pos.y, 1.0, uResolution.y - 2.0);
+        angle = -angle + wander;
       }
       
       outColor = vec4(pos, angle, 1.0);
@@ -103,7 +130,8 @@ const Physarum = (() => {
     precision highp float;
     out vec4 outColor;
     void main() {
-      outColor = vec4(1.0, 1.0, 1.0, 1.0);
+      // Additive deposit per agent
+      outColor = vec4(0.20, 0.20, 0.20, 1.0);
     }
   `;
 
@@ -116,23 +144,47 @@ const Physarum = (() => {
     uniform sampler2D uTrail;
     uniform vec2 uResolution;
     uniform float uDecay;
+    uniform vec4 uTaps[4];
+    
+    float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453123); }
     
     void main() {
       vec2 texel = 1.0 / uResolution;
       
+      // 3x3 weighted Gaussian diffusion kernel
       float sum = 0.0;
-      for (int x = -1; x <= 1; x++) {
-        for (int y = -1; y <= 1; y++) {
-          vec2 offset = vec2(x, y) * texel;
-          sum += texture(uTrail, fract(vUv + offset)).r;
+      sum += texture(uTrail, vUv + vec2(-1.0, -1.0) * texel).r * 0.0625;
+      sum += texture(uTrail, vUv + vec2( 0.0, -1.0) * texel).r * 0.1250;
+      sum += texture(uTrail, vUv + vec2( 1.0, -1.0) * texel).r * 0.0625;
+      sum += texture(uTrail, vUv + vec2(-1.0,  0.0) * texel).r * 0.1250;
+      sum += texture(uTrail, vUv).r * 0.2500;
+      sum += texture(uTrail, vUv + vec2( 1.0,  0.0) * texel).r * 0.1250;
+      sum += texture(uTrail, vUv + vec2(-1.0,  1.0) * texel).r * 0.0625;
+      sum += texture(uTrail, vUv + vec2( 0.0,  1.0) * texel).r * 0.1250;
+      sum += texture(uTrail, vUv + vec2( 1.0,  1.0) * texel).r * 0.0625;
+      
+      float current = texture(uTrail, vUv).r;
+      float diffused = mix(current, sum, 0.22);
+      float decayed = max(0.0, diffused - uDecay);
+      
+      // Smooth circular tap nutrient deposits with mottled organic spore knot
+      for (int i = 0; i < 4; i++) {
+        if (uTaps[i].z > 0.0 && uTaps[i].w > 0.0) {
+          vec2 tapCoord = uTaps[i].xy;
+          // Scale aspect ratio so nutrient deposit is a true circle
+          vec2 aspectDiff = (vUv - tapCoord) * vec2(uResolution.x / uResolution.y, 1.0);
+          float dist = length(aspectDiff);
+          float rad = uTaps[i].z;
+          if (dist < rad) {
+            float knotNoise = hash(vUv * 90.0 + uTaps[i].xy * 41.0);
+            float falloff = smoothstep(rad, 0.0, dist);
+            // Persistent rich mold knot
+            decayed = max(decayed, falloff * (0.88 + 0.12 * knotNoise));
+          }
         }
       }
       
-      float current = texture(uTrail, vUv).r;
-      float blurred = sum / 9.0;
-      float finalBlur = mix(current, blurred, 0.02); // 98% rigid, 2% diffuse
-      float decayed = max(0.0, finalBlur - uDecay);
-      
+      decayed = clamp(decayed, 0.0, 1.0);
       outColor = vec4(decayed, decayed, decayed, 1.0);
     }
   `;
@@ -152,26 +204,15 @@ const Physarum = (() => {
 
     void main() {
       float val = texture(uTrail, vUv).r;
-      // Growth trends toward uColorBase (the theme's ink color: dark in light
-      // mode, pale in dark mode), not uColorTip (accent). With the old
-      // mix(colorBase, colorTip, val) the densest, most-established trails --
-      // the areas that should read as the strongest stain -- ended up
-      // *lighter* under a light-mode multiply blend than sparse trail edges
-      // did, since colorTip is lighter than colorBase there. A fungal stain
-      // should get darker where it's most established, not lighter.
-      //
-      // Two-stage mix through uColorMid (--markus-accent-2, a genuinely
-      // different hue) instead of a flat two-color interpolation -- a single
-      // background->accent mix read as nearly monochromatic.
-      vec3 col = mix(uColorTip, uColorMid, smoothstep(0.0, 0.5, val));
-      col = mix(col, uColorBase, smoothstep(0.4, 1.0, val));
+      vec3 col = mix(uColorTip, uColorMid, smoothstep(0.0, 0.45, val));
+      col = mix(col, uColorBase, smoothstep(0.35, 0.95, val));
 
-      // See dla-v1.js fsScreen for why this rare tiny highlight exists.
+      // Rare subtle spore glint
       float glintGate = step(0.986, fract(sin(dot(vUv, vec2(41.3, 289.1))) * 43758.5453));
       float glint = glintGate * smoothstep(0.85, 1.0, val) * 0.12;
       col = mix(col, vec3(1.0), glint);
 
-      float alpha = val * 0.7 * uOpacity * uFade;
+      float alpha = smoothstep(0.015, 0.30, val) * 0.88 * uOpacity * uFade;
       outColor = vec4(col * alpha, alpha);
     }
   `;
@@ -206,8 +247,8 @@ const Physarum = (() => {
     gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, data);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     return tex;
   }
 
@@ -226,99 +267,66 @@ const Physarum = (() => {
     return [0, 0, 0];
   }
 
-  // The page manager publishes this optional contract before loading an
-  // effect. Keep the effect usable in the gallery (and on older pages) when
-  // the contract is absent or partially populated.
   function readFxConfig(name, presets) {
     const root = window.__piloFxConfig || {};
     const scoped = (root.effects && root.effects[name]) || root[name] || {};
     const source = typeof scoped === 'object' ? scoped : {};
-    // The manager's root preset is a layout preset (header-bloom, etc.), not
-    // a Physarum simulation preset. Only an explicitly effect-scoped preset
-    // may select one of this script's algorithm variants.
     const presetName = typeof source.preset === 'string' ? source.preset : '';
     const finite = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
     return {
       presetName,
       preset: presets[presetName] || null,
       opacity: Math.max(0, Math.min(1, finite(source.opacity ?? source.intensity ?? root.opacity ?? root.intensity, 0.72))),
-      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 4200)),
+      fadeInMs: Math.max(0, finite(source.fadeInMs ?? root.fadeInMs, 400)),
       motionScale: Math.max(0, Math.min(1, finite(source.motionScale ?? root.motionScale, 1))),
-      reducedMotion: Boolean(source.reducedMotion ?? root.reducedMotion ?? (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)),
+      reducedMotion: Boolean(source.reducedMotion ?? root.reducedMotion ?? (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches)),
       seedRegions: Array.isArray(source.seedRegions ?? root.seedRegions) ? (source.seedRegions ?? root.seedRegions) : []
     };
-  }
-
-  function pickSeed(regions, width, height, fallback) {
-    if (!regions.length) return fallback();
-    const total = regions.reduce((sum, region) => sum + Math.max(0, Number(region.weight) || 0), 0);
-    let roll = Math.random() * (total || regions.length);
-    let selected = regions[0];
-    for (const region of regions) {
-      roll -= total ? Math.max(0, Number(region.weight) || 0) : 1;
-      if (roll <= 0) { selected = region; break; }
-    }
-    const radiusX = Math.max(0, Number(selected.radiusX ?? selected.radius) || 0.08);
-    const radiusY = Math.max(0, Number(selected.radiusY ?? selected.radius) || 0.08);
-    const x = Number.isFinite(Number(selected.x)) ? Number(selected.x) : Math.random();
-    const y = Number.isFinite(Number(selected.y)) ? Number(selected.y) : Math.random();
-    return [
-      Math.max(0, Math.min(width - 1, (x + (Math.random() - 0.5) * radiusX) * width)),
-      // Page coordinates put y=0 at the top; WebGL puts it at the bottom.
-      Math.max(0, Math.min(height - 1, (1 - y + (Math.random() - 0.5) * radiusY) * height))
-    ];
   }
 
   class Simulation {
     constructor(canvas) {
       this.canvas = canvas;
-      this.gl = canvas.getContext('webgl2', { alpha: true, antialias: false });
+      this.gl = canvas.getContext("webgl2", { alpha: true, antialias: false });
       if (!this.gl) throw new Error("WebGL2 not supported");
       
       const ext = this.gl.getExtension("EXT_color_buffer_float");
       if (!ext) console.warn("EXT_color_buffer_float not available, might fail");
 
-      // moveSpeed cut ~4x from the original presets (0.4-2.0 -> 0.1-0.5) and
-      // the frame throttle below slowed from ~12fps to ~5fps -- combined,
-      // roughly a 9x reduction in how fast agents visibly travel. It read as
-      // continuous flowing motion rather than the slow, gradual creep this
-      // effect is supposed to be.
+      // Calibrated presets: active continuous branching, balanced decay, and organic creep
       this.presets = {
-        'creeping_veins': {
-          sensorAngle: [0.30, 0.45],
-          sensorDist: [2.5, 4.0],
-          turnSpeed: [0.02, 0.05],
-          moveSpeed: [0.12, 0.25],
-          decay: [0.0001, 0.0002]
+        "creeping_veins": {
+          sensorAngle: [0.35, 0.50],
+          sensorDist: [8.0, 14.0],
+          turnSpeed: [0.15, 0.25],
+          moveSpeed: [0.75, 1.15],
+          decay: [0.003, 0.005]
         },
-        'spore_burst': {
-          sensorAngle: [0.5, 0.8],
-          sensorDist: [1.5, 3.0],
-          turnSpeed: [0.1, 0.2],
-          moveSpeed: [0.2, 0.38],
-          decay: [0.0002, 0.0005]
+        "spore_burst": {
+          sensorAngle: [0.5, 0.75],
+          sensorDist: [6.0, 10.0],
+          turnSpeed: [0.20, 0.35],
+          moveSpeed: [0.85, 1.30],
+          decay: [0.004, 0.006]
         },
-        'mycelium_threads': {
-          sensorAngle: [0.1, 0.2],
-          sensorDist: [5.0, 8.0],
-          turnSpeed: [0.01, 0.03],
-          moveSpeed: [0.25, 0.5],
-          decay: [0.00005, 0.0001]
+        "mycelium_threads": {
+          sensorAngle: [0.22, 0.38],
+          sensorDist: [12.0, 18.0],
+          turnSpeed: [0.10, 0.18],
+          moveSpeed: [0.80, 1.20],
+          decay: [0.002, 0.004]
         },
-        'crystallizing': {
-          sensorAngle: [0.7, 0.9],
-          sensorDist: [2.0, 4.0],
-          turnSpeed: [0.3, 0.5],
-          moveSpeed: [0.1, 0.2],
-          decay: [0.0001, 0.0003]
+        "crystallizing": {
+          sensorAngle: [0.65, 0.90],
+          sensorDist: [5.0, 9.0],
+          turnSpeed: [0.28, 0.45],
+          moveSpeed: [0.70, 1.05],
+          decay: [0.003, 0.005]
         }
       };
 
-      this.fx = readFxConfig('physarum', this.presets);
+      this.fx = readFxConfig("physarum", this.presets);
 
-      // Gallery visits get a gentle variation inside each family; an explicit
-      // effect-scoped preset is deliberately exact so art-directed pages and
-      // visual regression captures remain reproducible.
       const chooseRange = (min, max) => this.fx.preset ? (min + max) / 2 : min + Math.random() * (max - min);
       const presetKeys = Object.keys(this.presets);
       const chosenKey = this.fx.preset ? this.fx.presetName : presetKeys[Math.floor(Math.random() * presetKeys.length)];
@@ -331,8 +339,6 @@ const Physarum = (() => {
         moveSpeed: chooseRange(rawPreset.moveSpeed[0], rawPreset.moveSpeed[1]),
         decay: chooseRange(rawPreset.decay[0], rawPreset.decay[1])
       };
-      // A named manager preset wins over the random range, while preserving
-      // the legacy range-based presets used by the standalone gallery.
       if (this.fx.preset) {
         const p = this.fx.preset;
         this.currentPreset = {
@@ -343,32 +349,24 @@ const Physarum = (() => {
           decay: chooseRange(p.decay[0], p.decay[1])
         };
       }
-      this.agentTexSize = Math.ceil(Math.sqrt(50000)); 
-      this.numAgents = this.agentTexSize * this.agentTexSize;
+
+      this.agentTexSize = 256; 
+      this.numAgents = this.agentTexSize * this.agentTexSize; // 65,536 agents
+      this.emptyTaps = new Float32Array(16);
+      this.activeTaps = [];
       
-      // Placeholder fallbacks in case readColors() below can't run yet for
-      // some reason (no document.body). Not meant to ever actually be seen.
       this.colorBase = [0, 0, 0];
       this.colorTip = [0.5, 1, 0.5];
       this.colorMid = [0.6, 0.6, 0.6];
-      // readColors() was previously only called periodically, ~60 frames in
-      // -- at the current throttle that's ~11 real seconds before the theme's
-      // actual colors ever get used. Agents start tightly clustered at their
-      // spawn points, so peak density there swings from very-high (mapping to
-      // the black fallback above) down to moderate (mapping to the bright
-      // green fallback above) as the cluster disperses, all before the real
-      // colors ever apply -- exactly the "dark spots that suddenly turn
-      // light, and the light is too bright" sequence. Reading real colors
-      // immediately removes the placeholder window entirely.
       this.readColors();
       this.fadeStart = performance.now();
 
       this.init();
       this.resize();
-      this.canvas.dataset.piloFxReady = 'true';
-      this.canvas.dataset.piloFxMode = 'live';
-      window.addEventListener('resize', () => this.resize());
-      document.addEventListener('pilo:canvasresize', () => this.resize());
+      this.canvas.dataset.piloFxReady = "true";
+      this.canvas.dataset.piloFxMode = "live";
+      window.addEventListener("resize", () => this.resize());
+      document.addEventListener("pilo:canvasresize", () => this.resize());
       
       this.time = 0;
       this.running = true;
@@ -433,25 +431,62 @@ const Physarum = (() => {
       const gl = this.gl;
       
       const agentsData = new Float32Array(this.numAgents * 4);
-      const spores = [];
-      for (let s = 0; s < 7; s++) {
-         // Bias heavily towards edges (e.g. outer 20% of the screen)
-         let isLeft = Math.random() > 0.5;
-         const [seedX, seedY] = pickSeed(this.fx.seedRegions, this.simWidth, this.simHeight, () => [
-           isLeft ? Math.random() * (this.simWidth * 0.2) : this.simWidth - Math.random() * (this.simWidth * 0.2),
-           Math.random() * this.simHeight
-         ]);
-         spores.push({ x: seedX, y: seedY });
+      
+      // Establish key colony habitat nodes across the unmasked regions
+      // (header bloom whitespace, left margin, right margin, footer)
+      const habitatAnchors = [];
+      if (this.fx.seedRegions && this.fx.seedRegions.length) {
+        for (const region of this.fx.seedRegions) {
+          habitatAnchors.push({
+            x: region.x * this.simWidth,
+            y: (1 - region.y) * this.simHeight,
+            radius: (region.radius || 0.16) * Math.min(this.simWidth, this.simHeight)
+          });
+        }
+      }
+      
+      // Additional well-distributed nodes to guarantee full coverage across the margins and header
+      const coverageNodes = [
+        { x: 0.70, y: 0.15, r: 0.22 }, // Header bloom whitespace
+        { x: 0.86, y: 0.20, r: 0.15 }, // Header top right
+        { x: 0.08, y: 0.22, r: 0.14 }, // Left margin upper
+        { x: 0.06, y: 0.48, r: 0.15 }, // Left margin mid
+        { x: 0.09, y: 0.76, r: 0.14 }, // Left margin lower
+        { x: 0.93, y: 0.32, r: 0.14 }, // Right margin upper
+        { x: 0.94, y: 0.58, r: 0.15 }, // Right margin mid
+        { x: 0.92, y: 0.82, r: 0.14 }, // Right margin lower
+        { x: 0.32, y: 0.94, r: 0.18 }, // Footer left
+        { x: 0.68, y: 0.96, r: 0.18 }  // Footer right
+      ];
+      for (const node of coverageNodes) {
+        habitatAnchors.push({
+          x: node.x * this.simWidth,
+          y: (1 - node.y) * this.simHeight,
+          radius: node.r * Math.min(this.simWidth, this.simHeight)
+        });
       }
 
-      for (let i = 0; i < this.numAgents; i++) {
-        const spore = spores[i % spores.length];
-        const r = Math.random() * 20.0;
+      // Seed agents: 70% in habitat colonies, 30% as pioneer hyphae across margins
+      const clusterAgentCount = Math.floor(this.numAgents * 0.70);
+      for (let i = 0; i < clusterAgentCount; i++) {
+        const anchor = habitatAnchors[i % habitatAnchors.length];
+        const r = Math.sqrt(Math.random()) * anchor.radius;
         const theta = Math.random() * Math.PI * 2.0;
         
-        agentsData[i*4 + 0] = spore.x + Math.cos(theta) * r;
-        agentsData[i*4 + 1] = spore.y + Math.sin(theta) * r;
-        agentsData[i*4 + 2] = Math.random() * Math.PI * 2.0; // Random direction
+        agentsData[i*4 + 0] = Math.max(1, Math.min(this.simWidth - 2, anchor.x + Math.cos(theta) * r));
+        agentsData[i*4 + 1] = Math.max(1, Math.min(this.simHeight - 2, anchor.y + Math.sin(theta) * r));
+        agentsData[i*4 + 2] = Math.random() * Math.PI * 2.0;
+        agentsData[i*4 + 3] = 1.0;
+      }
+      
+      for (let i = clusterAgentCount; i < this.numAgents; i++) {
+        const isLeft = Math.random() > 0.5;
+        const marginX = isLeft 
+          ? Math.random() * (this.simWidth * 0.18) 
+          : this.simWidth - Math.random() * (this.simWidth * 0.18);
+        agentsData[i*4 + 0] = marginX;
+        agentsData[i*4 + 1] = Math.random() * (this.simHeight - 2) + 1;
+        agentsData[i*4 + 2] = Math.random() * Math.PI * 2.0;
         agentsData[i*4 + 3] = 1.0;
       }
       
@@ -466,14 +501,19 @@ const Physarum = (() => {
       
       this.fboTrailA = createFBO(gl, this.texTrailA);
       this.fboTrailB = createFBO(gl, this.texTrailB);
+
+      // GPU Warm-Start: run 70 simulation passes synchronously so that on frame 0,
+      // an intricate network of branching veins and hyphae already spans the page
+      for (let w = 0; w < 70; w++) {
+        this.stepSimulation(w * 0.05, null);
+      }
     }
     
     readColors() {
-      // Create a temporary element to read css variables accurately
-      const div = document.createElement('div');
-      div.style.color = 'var(--markus-ink)';
-      div.style.backgroundColor = 'var(--markus-accent)';
-      div.style.borderColor = 'var(--markus-accent-2)';
+      const div = document.createElement("div");
+      div.style.color = "var(--markus-ink)";
+      div.style.backgroundColor = "var(--markus-accent)";
+      div.style.borderColor = "var(--markus-accent-2)";
       document.body.appendChild(div);
       const computed = getComputedStyle(div);
 
@@ -483,24 +523,8 @@ const Physarum = (() => {
       document.body.removeChild(div);
     }
 
-    render(timestamp) {
-      if (!this.running) return;
-      requestAnimationFrame((t) => this.render(t));
-      
-      if (!this.lastTime) this.lastTime = timestamp;
-      if (timestamp - this.lastTime < 180) return; // ~5.5 FPS throttle (was ~12fps)
-      this.lastTime = timestamp;
-      
-      this.time += 0.01 * (this.fx.reducedMotion ? 0.12 : this.fx.motionScale);
-      // Read colors every 60 frames to save overhead
-      if (Math.floor(this.time * 100) % 60 === 0) {
-          this.readColors();
-      }
-      
+    stepSimulation(simTime, tapData) {
       const gl = this.gl;
-      if (window.__piloNutrients) {
-        window.__piloNutrients.paint(gl, this.texTrailA, this.simWidth, this.simHeight, 'trail');
-      }
 
       // 1. Update Agents
       gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboAgentsB);
@@ -520,7 +544,8 @@ const Physarum = (() => {
       gl.uniform1f(gl.getUniformLocation(this.progUpdate, "uSensorDist"), this.currentPreset.sensorDist);
       gl.uniform1f(gl.getUniformLocation(this.progUpdate, "uTurnSpeed"), this.currentPreset.turnSpeed);
       gl.uniform1f(gl.getUniformLocation(this.progUpdate, "uMoveSpeed"), this.currentPreset.moveSpeed);
-      gl.uniform1f(gl.getUniformLocation(this.progUpdate, "uTime"), this.time);
+      gl.uniform1f(gl.getUniformLocation(this.progUpdate, "uTime"), simTime);
+      gl.uniform4fv(gl.getUniformLocation(this.progUpdate, "uTaps"), tapData || this.emptyTaps);
       
       gl.bindVertexArray(this.vaoQuad);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
@@ -541,11 +566,11 @@ const Physarum = (() => {
       gl.drawArrays(gl.POINTS, 0, this.numAgents);
       gl.disable(gl.BLEND);
       
-      // Swap agents
+      // Swap agent buffers
       let tempTex = this.texAgentsA; this.texAgentsA = this.texAgentsB; this.texAgentsB = tempTex;
       let tempFbo = this.fboAgentsA; this.fboAgentsA = this.fboAgentsB; this.fboAgentsB = tempFbo;
       
-      // 3. Process Trail (Blur & Decay)
+      // 3. Process Trail (Diffusion, Decay, and smooth Tap nutrients)
       gl.bindFramebuffer(gl.FRAMEBUFFER, this.fboTrailB);
       gl.viewport(0, 0, this.simWidth, this.simHeight);
       gl.useProgram(this.progProcess);
@@ -555,15 +580,58 @@ const Physarum = (() => {
       gl.uniform1i(gl.getUniformLocation(this.progProcess, "uTrail"), 0);
       gl.uniform2f(gl.getUniformLocation(this.progProcess, "uResolution"), this.simWidth, this.simHeight);
       gl.uniform1f(gl.getUniformLocation(this.progProcess, "uDecay"), this.currentPreset.decay);
+      gl.uniform4fv(gl.getUniformLocation(this.progProcess, "uTaps"), tapData || this.emptyTaps);
       
       gl.bindVertexArray(this.vaoQuad);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
       
-      // Swap trails
+      // Swap trail buffers
       tempTex = this.texTrailA; this.texTrailA = this.texTrailB; this.texTrailB = tempTex;
       tempFbo = this.fboTrailA; this.fboTrailA = this.fboTrailB; this.fboTrailB = tempFbo;
+    }
+
+    render(timestamp) {
+      if (!this.running) return;
+      requestAnimationFrame((t) => this.render(t));
       
+      if (!this.lastTime) this.lastTime = timestamp;
+      if (timestamp - this.lastTime < 32) return; // Smooth ~30 FPS cadence
+      this.lastTime = timestamp;
+      
+      this.time += 0.015 * (this.fx.reducedMotion ? 0.15 : this.fx.motionScale);
+      if (Math.floor(this.time * 100) % 60 === 0) {
+        this.readColors();
+      }
+      
+      // Smooth circular tap nutrient deposits sustained across frames
+      if (window.__piloNutrients) {
+        const deposits = window.__piloNutrients.drain(4);
+        for (const item of deposits) {
+          this.activeTaps.push({
+            x: item.x,
+            y: 1.0 - item.y, // WebGL UV bottom-up
+            radius: item.radius * 1.6,
+            strength: item.strength,
+            framesLeft: 10 // sustain for 10 frames (~300ms)
+          });
+        }
+      }
+      
+      const tapData = new Float32Array(16);
+      for (let i = 0; i < this.activeTaps.length && i < 4; i++) {
+        const tap = this.activeTaps[i];
+        tapData[i * 4 + 0] = tap.x;
+        tapData[i * 4 + 1] = tap.y;
+        tapData[i * 4 + 2] = tap.radius;
+        tapData[i * 4 + 3] = tap.strength;
+        tap.framesLeft--;
+      }
+      this.activeTaps = this.activeTaps.filter(t => t.framesLeft > 0);
+
+      this.stepSimulation(this.time, tapData);
+
       // 4. Draw Screen
+      const gl = this.gl;
       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
       gl.viewport(0, 0, this.canvas.width, this.canvas.height);
       gl.useProgram(this.progScreen);
@@ -582,24 +650,17 @@ const Physarum = (() => {
       gl.disable(gl.BLEND);
       gl.bindVertexArray(this.vaoQuad);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
-      gl.disable(gl.BLEND);
     }
   }
 
-  // This script is injected dynamically (background-manager.js appends it to
-  // <head> well after initial page load), so DOMContentLoaded has already
-  // fired by the time this line runs. Listening for it here means the
-  // listener never fires and Simulation is never constructed -- 100%
-  // reproducible, not a random flake. Match the readyState-check pattern
-  // cellular-automata-v1.js and reaction-diffusion-v1.js already use.
   const init = () => {
-    const canvas = document.getElementById('pilo-physarum-bg');
+    const canvas = document.getElementById("pilo-physarum-bg");
     if (canvas) {
       window.piloPhysarum = new Simulation(canvas);
     }
   };
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
   } else {
     init();
   }

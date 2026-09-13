@@ -946,7 +946,7 @@
        high-contrast slab behind type. */
     opacity: calc(var(--pilo-fx-opacity) * var(--pilo-fx-intensity, 0.68));
     mix-blend-mode: multiply;
-    animation: pilo-fx-arrive 9s cubic-bezier(.22, .75, .28, 1) both;
+    animation: pilo-fx-arrive 1s cubic-bezier(.22, .75, .28, 1) both;
 
     /* Three additive exposure zones share one canvas: a top-right bloom in
        the header's deliberately empty space, responsive left/right marginal
@@ -954,15 +954,48 @@
        derives from the actual column width but bottoms out at about one
        mobile side-padding, so it remains perceptible at 320px wide. */
     mask-image:
-      radial-gradient(ellipse var(--pilo-fx-header-width, 34rem) var(--pilo-fx-header-height, 18rem) at var(--pilo-fx-header-x, 88%) 9rem, black 0%, rgba(0, 0, 0, .80) 30%, rgba(0, 0, 0, .24) 58%, transparent 88%),
+      var(--pilo-touch-mask, radial-gradient(circle 0 at 0 0, transparent 0, transparent 0)),
+      radial-gradient(ellipse var(--pilo-fx-header-width, 46rem) var(--pilo-fx-header-height, 22rem) at var(--pilo-fx-header-x, 72%) 9rem, black 0%, rgba(0, 0, 0, .85) 45%, rgba(0, 0, 0, .28) 75%, transparent 100%),
       linear-gradient(to right, black 0, black calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) - var(--pilo-fx-gutter)), rgba(0, 0, 0, .46) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + .8rem), transparent calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + 3rem), transparent calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - 3rem), rgba(0, 0, 0, .46) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - .8rem), black calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) + var(--pilo-fx-gutter)), black 100%),
       radial-gradient(ellipse var(--pilo-fx-footer-width, 70%) var(--pilo-fx-footer-height, 19rem) at 55% 103%, black 0%, rgba(0, 0, 0, .64) 39%, rgba(0, 0, 0, .18) 70%, transparent 100%);
     -webkit-mask-image:
-      radial-gradient(ellipse var(--pilo-fx-header-width, 34rem) var(--pilo-fx-header-height, 18rem) at var(--pilo-fx-header-x, 88%) 9rem, black 0%, rgba(0, 0, 0, .80) 30%, rgba(0, 0, 0, .24) 58%, transparent 88%),
+      var(--pilo-touch-mask, radial-gradient(circle 0 at 0 0, transparent 0, transparent 0)),
+      radial-gradient(ellipse var(--pilo-fx-header-width, 46rem) var(--pilo-fx-header-height, 22rem) at var(--pilo-fx-header-x, 72%) 9rem, black 0%, rgba(0, 0, 0, .85) 45%, rgba(0, 0, 0, .28) 75%, transparent 100%),
       linear-gradient(to right, black 0, black calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) - var(--pilo-fx-gutter)), rgba(0, 0, 0, .46) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + .8rem), transparent calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + 3rem), transparent calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - 3rem), rgba(0, 0, 0, .46) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - .8rem), black calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) + var(--pilo-fx-gutter)), black 100%),
       radial-gradient(ellipse var(--pilo-fx-footer-width, 70%) var(--pilo-fx-footer-height, 19rem) at 55% 103%, black 0%, rgba(0, 0, 0, .64) 39%, rgba(0, 0, 0, .18) 70%, transparent 100%);
-    mask-composite: add, add;
-    -webkit-mask-composite: source-over, source-over;
+    mask-composite: add, add, add;
+    -webkit-mask-composite: source-over, source-over, source-over;
+  }
+
+  /* Dedicated effect showcase pages: diffuse contrast-preserving mask for text */
+  .markus-body[data-pilo-page="effect"] .pilo-physarum-canvas {
+    mask-image:
+      var(--pilo-touch-mask, radial-gradient(circle 0 at 0 0, transparent 0, transparent 0)),
+      radial-gradient(ellipse var(--pilo-fx-header-width, 48rem) var(--pilo-fx-header-height, 24rem) at var(--pilo-fx-header-x, 72%) 9rem, black 0%, rgba(0, 0, 0, .92) 50%, rgba(0, 0, 0, .45) 80%, transparent 100%),
+      linear-gradient(to right,
+        black 0,
+        black calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) - var(--pilo-fx-gutter)),
+        rgba(0, 0, 0, .58) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + .5rem),
+        rgba(0, 0, 0, .14) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + 2.5rem),
+        rgba(0, 0, 0, .14) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - 2.5rem),
+        rgba(0, 0, 0, .58) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - .5rem),
+        black calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) + var(--pilo-fx-gutter)),
+        black 100%),
+      radial-gradient(ellipse var(--pilo-fx-footer-width, 70%) var(--pilo-fx-footer-height, 20rem) at 55% 103%, black 0%, rgba(0, 0, 0, .75) 45%, rgba(0, 0, 0, .28) 75%, transparent 100%) !important;
+    -webkit-mask-image:
+      var(--pilo-touch-mask, radial-gradient(circle 0 at 0 0, transparent 0, transparent 0)),
+      radial-gradient(ellipse var(--pilo-fx-header-width, 48rem) var(--pilo-fx-header-height, 24rem) at var(--pilo-fx-header-x, 72%) 9rem, black 0%, rgba(0, 0, 0, .92) 50%, rgba(0, 0, 0, .45) 80%, transparent 100%),
+      linear-gradient(to right,
+        black 0,
+        black calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) - var(--pilo-fx-gutter)),
+        rgba(0, 0, 0, .58) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + .5rem),
+        rgba(0, 0, 0, .14) calc(50% - min(calc(var(--pilo-content-width) / 2), 44vw) + 2.5rem),
+        rgba(0, 0, 0, .14) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - 2.5rem),
+        rgba(0, 0, 0, .58) calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) - .5rem),
+        black calc(50% + min(calc(var(--pilo-content-width) / 2), 44vw) + var(--pilo-fx-gutter)),
+        black 100%),
+      radial-gradient(ellipse var(--pilo-fx-footer-width, 70%) var(--pilo-fx-footer-height, 20rem) at 55% 103%, black 0%, rgba(0, 0, 0, .75) 45%, rgba(0, 0, 0, .28) 75%, transparent 100%) !important;
+    opacity: calc(var(--pilo-fx-opacity) * var(--pilo-fx-intensity, 0.72) * 1.15);
   }
 
   /* Reaction-diffusion is made of fine boundaries rather than broad opaque
@@ -975,29 +1008,31 @@
   /* The manager assigns these preset names on <body>; forcing one with
      ?fxPreset=footer-rise is useful for art direction and gallery pages. */
   .markus-body[data-pilo-fx-layout="header-bloom"] .pilo-physarum-canvas {
-    --pilo-fx-header-width: 40rem;
-    --pilo-fx-header-height: 21rem;
-    --pilo-fx-header-x: 91%;
+    --pilo-fx-header-width: 52rem;
+    --pilo-fx-header-height: 24rem;
+    --pilo-fx-header-x: 72%;
     --pilo-fx-footer-height: 15rem;
   }
 
   .markus-body[data-pilo-fx-layout="margin-creep"] .pilo-physarum-canvas {
-    --pilo-fx-header-width: 27rem;
-    --pilo-fx-header-height: 15rem;
-    --pilo-fx-header-x: 87%;
+    --pilo-fx-header-width: 44rem;
+    --pilo-fx-header-height: 20rem;
+    --pilo-fx-header-x: 72%;
     --pilo-fx-footer-height: 17rem;
   }
 
   .markus-body[data-pilo-fx-layout="footer-rise"] .pilo-physarum-canvas {
-    --pilo-fx-header-width: 26rem;
-    --pilo-fx-header-height: 14rem;
+    --pilo-fx-header-width: 42rem;
+    --pilo-fx-header-height: 18rem;
+    --pilo-fx-header-x: 72%;
     --pilo-fx-footer-width: 86%;
     --pilo-fx-footer-height: 26rem;
   }
 
   .markus-body[data-pilo-fx-layout="quiet-spores"] .pilo-physarum-canvas {
-    --pilo-fx-header-width: 24rem;
-    --pilo-fx-header-height: 13rem;
+    --pilo-fx-header-width: 42rem;
+    --pilo-fx-header-height: 18rem;
+    --pilo-fx-header-x: 72%;
     --pilo-fx-footer-width: 54%;
     --pilo-fx-footer-height: 14rem;
   }

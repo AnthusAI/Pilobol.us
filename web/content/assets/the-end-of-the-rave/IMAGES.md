@@ -156,3 +156,43 @@ All three are captioned and credited as diagrams, not photographs.
 Screenshot of the llm-privacy.org demonstration accompanying the Beyond
 Memorization research: a short Reddit comment on the left, the attributes a
 model inferred from it on the right. Credited as a screenshot.
+
+## Section-break art added 2026-09-14 (second pass)
+
+The piece got long enough that the turn from the dance floor into the
+identification cases needed a visible door, so the body now carries two `##`
+subheads (`The bill`, `Friday night`) and two new pictures that open panels
+inside the long middle.
+
+### `spit-tube.jpg` — opens the GEDmatch panel
+
+Stock, not drawn. Lisa Zins, "Wonder Who I Am??", taken 13 September 2018,
+posted to Flickr 15 September 2018, **CC BY 2.0** (confirmed on the photo page
+at `flickr.com/photos/94846844@N04/42875288260`). A saliva tube lying on an
+AncestryDNA instruction card, "ACTIVATION CODE" on the label. Credited in the
+figure as required by the licence.
+
+Only 1024×457 is available — Flickr has no `_h` or `_k` size for this photo,
+so it runs narrower than the 1200-wide diagrams. No faces, which keeps it
+inside the *Illustrating a piece about being findable* rule in `VOICE.md`.
+
+**Egress note for whoever comes next:** `upload.wikimedia.org` is blocked from
+the drafting environment (returns a Wikimedia error page whatever the user
+agent), so Commons-hosted candidates could not be pulled, including two decent
+CC BY-SA 4.0 shots of a 23andMe kit. `live.staticflickr.com` does work, with a
+browser user agent. Openverse's API (`api.openverse.org/v1/images`) is
+reachable and was how these were found.
+
+### `mailer-page.png` / `.svg` — opens the Target panel
+
+Drawn here, in the `price-collapse.svg` palette, rendered with
+`rsvg-convert -w 1200 -h 630`. Six dashed coupon tiles; five read "for nobody
+in particular"; the crib, in rust, reads "for a due date she never gave
+anyone."
+
+This one is drawn because the search for a photograph came up empty. Openverse
+has no usable CC-licensed image of a coupon circular, a pregnancy-prediction
+mailer, or the lotion-and-cotton-balls still life the paragraph describes — the
+coupon results are all hobbyist extreme-couponing snapshots, and the junk-mail
+results are political flyers. If a photograph is wanted here later, it probably
+has to be shot or licensed rather than found.

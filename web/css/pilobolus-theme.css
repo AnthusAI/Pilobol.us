@@ -262,7 +262,7 @@
     width: 100%;
     max-width: 40rem;
     aspect-ratio: 16 / 9;
-    margin: 1.25rem 0 1.5rem;
+    margin: 1.25rem auto 1.5rem;
     border-radius: 0.5rem;
     overflow: hidden;
     background: #111;
@@ -286,6 +286,16 @@
      rule at all and renders at its native pixel size, which for a real photo
      (e.g. the Father Justin screenshots) is much wider than the content
      column. Same treatment as .markus-figure img for consistency. */
+
+  /* A :::figure plate is full-column furniture. The vendored rule only caps
+     it at the column width, so any asset narrower than the column renders at
+     its own pixel width and sits left-aligned in a page where every other
+     plate is flush -- the 640px Castlemorton aerial did exactly that. Fill
+     the column. An undersized file will soften when it stretches; the fix
+     for that is a bigger file, not a narrower plate. */
+  .markus-document .markus-figure img {
+    width: 100%;
+  }
 
   /* Mission page: real Pilobolus photo, floated top-right beside the lede. */
   .markus-document:has(#pilobolus-specimen)::after {

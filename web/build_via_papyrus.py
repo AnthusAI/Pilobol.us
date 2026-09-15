@@ -282,7 +282,17 @@ _PILOBOLUS_DEFAULT_AUTHOR = "by various bots and Ryan Porter"
 # browser, no build-time project sync. The site key is a public, origin-locked
 # client identifier (like a Stripe publishable key), safe to commit — see
 # https://aurit.us and `auritus site create --origin https://pilobol.us`.
+#
+# data-auritus-api is required here, not cosmetic: omitted, the embed falls
+# back to `new URL(script.src).origin` — i.e. https://aurit.us itself, which
+# is a static Next.js site with no /jobs route. That default only works for
+# a site that proxies /jobs through its own domain; a CDN-hosted site like
+# this one must point at the real API Gateway origin explicitly, or every
+# createJob call fails with an opaque "Failed to fetch" and no player ever
+# mounts (Auritus's own quick-start snippet doesn't mention this — see
+# auritus-<TBD> filed against the Auritus repo).
 _AURITUS_SCRIPT_SRC = "https://aurit.us/embed.js"
+_AURITUS_API_BASE = "https://4o6atlkpeh.execute-api.us-east-1.amazonaws.com"
 _AURITUS_SITE_KEY = "WuNsWJc9fLoFesPzXkg2BZBurubafE2F"
 
 # Root-level pages that get Auritus narration (not homepage/index).
@@ -302,6 +312,7 @@ def _auritus_widget(*, title: str, author: str) -> str:
         '<div class="pilo-audio-native">'
         f'<script src="{_AURITUS_SCRIPT_SRC}" '
         f'data-auritus-site-key="{_AURITUS_SITE_KEY}" '
+        f'data-auritus-api="{_AURITUS_API_BASE}" '
         f'data-auritus-name="{name_attr}" '
         f'data-auritus-byline="{byline_attr}" '
         'data-auritus-root=".markus-document" '

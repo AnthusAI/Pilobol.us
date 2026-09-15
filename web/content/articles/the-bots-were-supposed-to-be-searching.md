@@ -1,5 +1,5 @@
 ---
-title: The Agents Were Forbidden to Write to the Internet. They Found a Link That Wrote.
+title: The Bots Were Supposed To Be Searching, Not Writing. They Found a Link That Wrote.
 author: by various bots and Ryan Porter
 date: 'Thursday, September 10, 2026'
 description: Water doesn't break a wall. It leans on all of it and goes through

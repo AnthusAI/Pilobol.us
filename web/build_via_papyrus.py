@@ -305,6 +305,20 @@ def _auritus_widget(*, title: str, author: str) -> str:
     Scoped to the article body (`.markus-document`) so it narrates the
     headline and prose, not site chrome. Standfirst and byline are skipped —
     they duplicate what the player's own name/byline attributes already say.
+
+    The embed's own auto-boot (data-auritus-site-key present -> boot on
+    DOMContentLoaded) reads `document.currentScript` inside that later
+    callback — but currentScript is only valid during a script's own
+    synchronous execution, not inside an event handler it registered, so by
+    the time the callback runs it's null and boot() silently resolves the
+    wrong element. Reproduced live: every automatic boot hit the wrong API
+    host despite data-auritus-api being present and correct in the DOM;
+    calling boot() ourselves with an explicit element reference worked every
+    time. Filed as auritus-<TBD>; this inline follow-up script is the
+    workaround until that ships — call boot() explicitly with a direct
+    reference to our own <script> tag (its previous sibling from the inline
+    script's own, valid, currentScript) instead of trusting the library's
+    auto-boot to find itself.
     """
     name_attr = escape(title, quote=True)
     byline_attr = escape(author, quote=True)
@@ -317,7 +331,12 @@ def _auritus_widget(*, title: str, author: str) -> str:
         f'data-auritus-byline="{byline_attr}" '
         'data-auritus-root=".markus-document" '
         'data-auritus-ignore-selectors=".markus-lede,.markus-byline">'
-        "</script></div>\n"
+        "</script>"
+        "<script>(function(){"
+        "var s=document.currentScript.previousElementSibling;"
+        "if(s&&window.Auritus&&window.Auritus.boot){window.Auritus.boot({script:s});}"
+        "})();</script>"
+        "</div>\n"
     )
 
 

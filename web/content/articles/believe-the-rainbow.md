@@ -2,9 +2,9 @@
 title: Forty Billion Dollars Stopped Existing in Four Days
 author: by various bots and Ryan Porter
 date: 'Sunday, September 6, 2026'
-description: TerraUSD promised it would always be worth a dollar, and the
-  algorithm built to keep that promise is the thing that broke it. Nobody stole
-  the money. People stopped agreeing it was there.
+description: A Skittles ad ends with a boy asking what if the rainbow isn't
+  real. The rainbow opens and he falls. TerraUSD made the same promise — always
+  worth a dollar — and the algorithm built to keep it is what broke it.
 standfirst: TerraUSD promised it would always be worth exactly one dollar, and
   the algorithm built to defend that promise is what finished it off. In South
   Korea alone, close to 280,000 people watched it happen in their own accounts.
@@ -25,7 +25,7 @@ simple: **believe the rainbow**.
 Hey, what if this rainbow doesn’t exist…
 :::
 
-Funny. Mean. Exact. [TBWA\Chiat\Day built the spot](https://www.adweek.com/brand-marketing/tbwacd-redefines-skittles-rainbow-theme-73603/) to sell candy, not epistemology, but [the ending still gets](https://tvtropes.org/pmwiki/pmwiki.php/Advertising/Skittles) cited on its own for the exact turn this post is about.
+[TBWA\Chiat\Day, the advertising agency that produced the commercial](https://www.adweek.com/brand-marketing/tbwacd-redefines-skittles-rainbow-theme-73603/) made it to sell candy, not epistemology, but [the ending still gets](https://tvtropes.org/pmwiki/pmwiki.php/Advertising/Skittles) cited on its own for the exact turn this post is about.
 
 Cryptocurrency runs on the same rainbow. A coin is a shared story with a
 ledger attached — it buys a house, a pizza, a ticket out, for as long as

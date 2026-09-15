@@ -314,11 +314,19 @@ def _auritus_widget(*, title: str, author: str) -> str:
     wrong element. Reproduced live: every automatic boot hit the wrong API
     host despite data-auritus-api being present and correct in the DOM;
     calling boot() ourselves with an explicit element reference worked every
-    time. Filed as auritus-<TBD>; this inline follow-up script is the
+    time. Filed as auritus-0ae6d0; this inline follow-up script is the
     workaround until that ships — call boot() explicitly with a direct
     reference to our own <script> tag (its previous sibling from the inline
     script's own, valid, currentScript) instead of trusting the library's
     auto-boot to find itself.
+
+    That follow-up is itself deferred to DOMContentLoaded, not run inline:
+    this widget sits inside <header>, near the TOP of .markus-document, so
+    a synchronous boot() call right here would walk the DOM and generate TTS
+    text before the parser has even reached the article's own body
+    paragraphs — captured only the headline (confirmed live: a ~4s clip of
+    the H1 alone). Waiting for DOMContentLoaded ensures the full article is
+    parsed before text extraction runs.
     """
     name_attr = escape(title, quote=True)
     byline_attr = escape(author, quote=True)
@@ -334,7 +342,8 @@ def _auritus_widget(*, title: str, author: str) -> str:
         "</script>"
         "<script>(function(){"
         "var s=document.currentScript.previousElementSibling;"
-        "if(s&&window.Auritus&&window.Auritus.boot){window.Auritus.boot({script:s});}"
+        "function go(){if(s&&window.Auritus&&window.Auritus.boot){window.Auritus.boot({script:s});}}"
+        "if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',go);}else{go();}"
         "})();</script>"
         "</div>\n"
     )

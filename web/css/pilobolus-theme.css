@@ -1281,8 +1281,18 @@
 /* Auritus narration — sits after the article byline. The embed script mints
    a shadow-DOM player right after itself; this wrapper only supplies layout
    spacing and hands down the --auritus-* theme tokens defined on :root,
-   which cross the shadow boundary by inheritance. */
+   which cross the shadow boundary by inheritance.
+
+   min-height is a layout-shift guard, not decoration: the wrapper is empty
+   light DOM until Auritus's own script runs on DOMContentLoaded and mints
+   the player inside it, so with no reserved height the whole card would
+   pop into existence and shove the figure below it down a beat after the
+   rest of the page has already settled. ~120px approximates the card's
+   real height (shadow-host padding + name + byline + a 40px controls row)
+   for the common single-line title; it's a floor, not exact, so a longer
+   wrapped title still grows the box normally — it just won't visibly jump. */
 .pilo-audio-native {
   margin: 0.75rem 0 1.25rem;
   max-width: 100%;
+  min-height: 7.5rem;
 }

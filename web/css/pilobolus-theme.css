@@ -112,6 +112,17 @@
        text with no breathing room; the original bug's 3+rem buffer read as
        a dead zone. This is the one number to change either direction. */
     --pilo-fx-gutter: 1.5rem;
+
+    /* Auritus embed player (shadow DOM) — these cross the shadow boundary by
+       inheritance, so one definition here covers both color schemes: it
+       aliases --markus-* tokens, which the dark-mode block below redefines
+       on the same :root, and the alias recomputes with them. No JS needed. */
+    --auritus-bg: var(--markus-paper);
+    --auritus-fg: var(--markus-ink);
+    --auritus-accent: var(--markus-accent);
+    --auritus-font: var(--markus-sans);
+    --auritus-radius: 0px;
+    --auritus-track: var(--markus-line);
     color-scheme: light;
   }
 
@@ -1267,14 +1278,11 @@
   }
 }
 
-# ElevenLabs Audio Native — after article byline. Only rendered when a
-# published snapshot URL exists (no iframe that loads then hides).
+/* Auritus narration — sits after the article byline. The embed script mints
+   a shadow-DOM player right after itself; this wrapper only supplies layout
+   spacing and hands down the --auritus-* theme tokens defined on :root,
+   which cross the shadow boundary by inheritance. */
 .pilo-audio-native {
   margin: 0.75rem 0 1.25rem;
   max-width: 100%;
-}
-
-.pilo-audio-native audio {
-  display: block;
-  width: 100%;
 }

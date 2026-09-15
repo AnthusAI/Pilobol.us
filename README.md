@@ -41,8 +41,12 @@ Output: `web/dist-papyrus/`. The build also:
   at build time, newest date first. Do not hand-edit or commit
   `web/content/index.md` or `web/content/articles/index.md`. Homepage honors
   `feed: false`; the archive lists every published story.
-- Syncs ElevenLabs Audio Native projects (one per article) when
-  `ELEVENLABS_API_KEY` is set.
+- Embeds an [Auritus](https://aurit.us) narration player on every article.
+  No build-time sync step: Auritus generates audio just-in-time, client-side,
+  in the reader's own browser, keyed off a site key that's baked into the
+  build (`_AURITUS_SITE_KEY` in `build_via_papyrus.py`) — see
+  `auritus site create` in the [Auritus README](https://github.com/AnthusAI/Auritus)
+  if that key ever needs rotating.
 
 ### Amplify / CI environment
 
@@ -50,17 +54,12 @@ Set in **Amplify Console → Environment variables**:
 
 | Variable | Required in CI | Purpose |
 |----------|----------------|---------|
-| `ELEVENLABS_API_KEY` | Yes (Amplify builds fail without it) | Create/update Audio Native projects with voice `EkK5I93UQWFDigLMpZcX` |
 | `PAPYRUS_ROOT` | No (set in `amplify.yml`) | Papyrus checkout for Markus renderer |
-
-Local builds without the API key print a warning and reuse
-`web/elevenlabs-audio-native-projects.json`. Set `PILOBOL_REQUIRE_ELEVENLABS=1`
-to fail locally when the key is missing.
 
 Article frontmatter:
 
 - `feed: false` — omit from homepage cards (still published; still gets audio).
-- `audio: false` — skip ElevenLabs sync for that slug.
+- `audio: false` — skip the Auritus embed for that slug.
 - `author:` — defaults to `by various bots and Ryan Porter` when omitted.
 
 ## Quick check

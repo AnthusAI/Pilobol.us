@@ -18,7 +18,8 @@ Set `PAPYRUS_ROOT` to a checkout that has it:
     python3 bin/dev-server.py --port 3002
 
 Needs `markdown-it-py`, `pydantic`, `mdit-py-plugins`, `linkify-it-py`.
-`ELEVENLABS_API_KEY` is optional locally; without it Audio Native is skipped.
+Article narration is an Auritus embed baked into every article page at build
+time — no API key, no build-time sync step.
 
 **Do not preview from a cloud session.** Nothing bound in the Claude Code cloud
 container is reachable from a browser — there is no port forwarding and no

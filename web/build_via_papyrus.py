@@ -43,11 +43,6 @@ from papyrus_content.markus_renderer import shell as markus_shell  # noqa: E402
 from papyrus_content.markus_renderer.build import build_markus_site  # noqa: E402
 from papyrus_content.markus_renderer.shell import SiteChrome  # noqa: E402
 
-from elevenlabs_audio_native import (  # noqa: E402
-    collect_published_audio_urls,
-    load_registry,
-    sync_all_articles,
-)
 from pilobol_feed import (  # noqa: E402
     DEFAULT_AUTHOR,
     discover_articles,
@@ -69,7 +64,6 @@ PILOBOL_CHROME = SiteChrome(
         "assets/organic-image.js",
         "assets/cinematic-gallery.js",
         "assets/image-treatment-lab.js",
-        "assets/audio-native-theme.js",
     ),
 )
 
@@ -282,53 +276,39 @@ _POEM_LINES = (
 
 
 
-# Shared ElevenLabs Audio Native project (Anth.us + pilobol.us domains).
-# Public user id is per project, not per domain — Ryan 2026-09-08.
-_ELEVENLABS_AUDIO_NATIVE_PUBLIC_USER_ID = (
-    "36d96927eb49029bd258c8a7138932b6afc7aca35d504f2986ff830522c11bd8"
-)
-_ELEVENLABS_PILOBOLUS_VOICE_ID = "EkK5I93UQWFDigLMpZcX"
 _PILOBOLUS_DEFAULT_AUTHOR = "by various bots and Ryan Porter"
 
-# slug -> project_id, filled during main() before HTML render.
-_AUDIO_NATIVE_PROJECT_IDS: dict[str, str] = {}
-_AUDIO_NATIVE_CONTENT_HASHES: dict[str, str] = {}
-_AUDIO_NATIVE_AUDIO_URLS: dict[str, str] = {}
+# Auritus embed: just-in-time TTS generated client-side in the reader's
+# browser, no build-time project sync. The site key is a public, origin-locked
+# client identifier (like a Stripe publishable key), safe to commit — see
+# https://aurit.us and `auritus site create --origin https://pilobol.us`.
+_AURITUS_SCRIPT_SRC = "https://aurit.us/embed.js"
+_AURITUS_SITE_KEY = "WuNsWJc9fLoFesPzXkg2BZBurubafE2F"
 
-# Root-level pages that get Audio Native (not homepage/index).
+# Root-level pages that get Auritus narration (not homepage/index).
 _AUDIO_NATIVE_STANDALONE_HREFS = frozenset({"a-fungus-among-us.html"})
 
 
-def _audio_native_widget(
-    project_id: str | None = None,
-    content_hash: str | None = None,
-    audio_url: str | None = None,
-) -> str:
-    """Embed playable audio only. No ElevenLabs iframe until there is an MP3.
+def _auritus_widget(*, title: str, author: str) -> str:
+    """Auritus embed script: mints a player right after itself on load.
 
-    The official Audio Native iframe loads, then posts audioNativeHideRequest
-    when there is no snapshot — the player appears and vanishes. If ElevenLabs
-    has published a snapshot, use that file directly.
+    Scoped to the article body (`.markus-document`) so it narrates the
+    headline and prose, not site chrome. Standfirst and byline are skipped —
+    they duplicate what the player's own name/byline attributes already say.
     """
-    if not audio_url:
-        return ""
-    project_attr = ""
-    if project_id:
-        project_attr = f' data-projectid="{escape(project_id, quote=True)}"'
-    hash_attr = ""
-    if content_hash:
-        hash_attr = f' data-contenthash="{escape(content_hash, quote=True)}"'
-    src = escape(audio_url, quote=True)
+    name_attr = escape(title, quote=True)
+    byline_attr = escape(author, quote=True)
     return (
-        f'<div class="pilo-audio-native"{project_attr}{hash_attr}>'
-        f'<audio controls preload="metadata" src="{src}">Listen to this article.</audio>'
-        "</div>\n"
+        '<div class="pilo-audio-native">'
+        f'<script src="{_AURITUS_SCRIPT_SRC}" '
+        f'data-auritus-site-key="{_AURITUS_SITE_KEY}" '
+        f'data-auritus-name="{name_attr}" '
+        f'data-auritus-byline="{byline_attr}" '
+        'data-auritus-root=".markus-document" '
+        'data-auritus-ignore-selectors=".markus-lede,.markus-byline">'
+        "</script></div>\n"
     )
 
-_AUDIO_NATIVE_SCRIPT = (
-    '<script src="https://elevenlabs.io/player/audioNativeHelper.js" '
-    'type="text/javascript" async></script>\n'
-)
 
 _ARTICLE_HEADER_RE = re.compile(
     r'(<header class="markus-header">)(.*?)(</header>)',
@@ -338,8 +318,7 @@ _ARTICLE_H1_RE = re.compile(r'<h1>.*?</h1>', re.S)
 _ARTICLE_LEDE_RE = re.compile(r'<p class="markus-lede">.*?</p>', re.S)
 _ARTICLE_BYLINE_RE = re.compile(r'<p class="markus-byline">.*?</p>', re.S)
 _AUDIO_NATIVE_WIDGET_RE = re.compile(
-    r'(?:<div id="elevenlabs-audionative-widget"[^>]*>[\s\S]*?</div>'
-    r'|<div class="pilo-audio-native"[^>]*>[\s\S]*?</div>)\s*',
+    r'<div class="pilo-audio-native"[^>]*>[\s\S]*?</div>\s*',
     re.I,
 )
 
@@ -349,23 +328,15 @@ def _article_subheadline(fm: dict[str, str]) -> str | None:
     return text or None
 
 
+def _audio_disabled(front_matter: dict[str, str]) -> bool:
+    val = front_matter.get("audio")
+    if val is None:
+        return False
+    return str(val).strip().lower() in {"false", "0", "no", "off"}
+
+
 def _lede_paragraph(text: str) -> str:
     return f'<p class="markus-lede">{escape(text)}</p>'
-
-
-def _inject_audio_native_script(html: str) -> str:
-    if "audioNativeHelper.js" in html:
-        return html
-    html2, n = re.subn(
-        r"</body>",
-        _AUDIO_NATIVE_SCRIPT + "</body>",
-        html,
-        count=1,
-        flags=re.I,
-    )
-    if n != 1:
-        html2 = html2 + _AUDIO_NATIVE_SCRIPT
-    return html2
 
 
 def _href_has_audio_native(href: str) -> bool:
@@ -516,14 +487,10 @@ def _fix_article_header(html: str, *, active_href: str) -> str:
         parts.append(lede_m.group(0))
     if byline_m:
         parts.append(byline_m.group(0))
-    audio_url = _AUDIO_NATIVE_AUDIO_URLS.get(slug)
-    widget = _audio_native_widget(
-        _AUDIO_NATIVE_PROJECT_IDS.get(slug),
-        _AUDIO_NATIVE_CONTENT_HASHES.get(slug),
-        audio_url,
-    )
-    if widget:
-        parts.append(widget)
+    if not _audio_disabled(fm):
+        title = fm.get("title") or slug.replace("-", " ").title()
+        author = fm.get("author") or _PILOBOLUS_DEFAULT_AUTHOR
+        parts.append(_auritus_widget(title=title, author=author))
 
     new_header = f"{header_m.group(1)}{''.join(parts)}{header_m.group(3)}"
     return html[: header_m.start()] + new_header + html[header_m.end() :]
@@ -640,60 +607,17 @@ def _prepare_articles(content_dir: Path) -> list[tuple[str, Path, dict[str, str]
     return prepared
 
 
-def _prepare_audio_native_pages(
-    content_dir: Path,
-) -> list[tuple[str, Path, dict[str, str], str]]:
-    """Article slugs plus standalone pages that should sync Audio Native."""
-    payloads = _prepare_articles(content_dir)
-    for href in sorted(_AUDIO_NATIVE_STANDALONE_HREFS):
-        source = content_dir / href.replace(".html", ".md")
-        if not source.is_file():
-            continue
-        slug = Path(href).stem
-        _ensure_author_front_matter(source)
-        fm, _ = parse_front_matter(source.read_text(encoding="utf-8"))
-        fragment = markus_build.convert_fragment(source, theme=None)
-        payloads.append((slug, source, fm, fragment))
-    return payloads
-
-
-def _content_hashes_from_registry(pod_root: Path) -> dict[str, str]:
-    hashes: dict[str, str] = {}
-    for slug, entry in load_registry(pod_root).get("projects", {}).items():
-        if not isinstance(entry, dict):
-            continue
-        digest = entry.get("content_hash")
-        if isinstance(digest, str) and digest:
-            hashes[str(slug)] = digest
-    return hashes
-
-
 def main() -> int:
     content_dir = POD_ROOT / "content"
-    global _AUDIO_NATIVE_PROJECT_IDS, _AUDIO_NATIVE_CONTENT_HASHES, _AUDIO_NATIVE_AUDIO_URLS
 
     print("Generating homepage and archive feed from articles…")
     write_generated_feed_pages(content_dir)
 
-    print("Preparing ElevenLabs Audio Native projects…")
-    audio_native_payloads = _prepare_audio_native_pages(content_dir)
-    _AUDIO_NATIVE_PROJECT_IDS = sync_all_articles(
-        pod_root=POD_ROOT,
-        articles=audio_native_payloads,
-    )
-    _AUDIO_NATIVE_CONTENT_HASHES = _content_hashes_from_registry(POD_ROOT)
-    api_key = os.environ.get("ELEVENLABS_API_KEY", "").strip()
-    if api_key:
-        _AUDIO_NATIVE_AUDIO_URLS = collect_published_audio_urls(
-            api_key=api_key,
-            project_ids=_AUDIO_NATIVE_PROJECT_IDS,
-        )
-        print(
-            f"  Audio Native published snapshots: {len(_AUDIO_NATIVE_AUDIO_URLS)}/"
-            f"{len(_AUDIO_NATIVE_PROJECT_IDS)}"
-        )
-    else:
-        _AUDIO_NATIVE_AUDIO_URLS = {}
+    # Side effect only: writes a default `author:` line into any article's
+    # front matter that omits one, before pages render and read it back.
+    # Auritus itself needs no build-time prep — the embed script narrates
+    # client-side, on demand, straight from the rendered page.
+    _prepare_articles(content_dir)
 
     result = build_markus_site(
         content_dir=POD_ROOT / "content",

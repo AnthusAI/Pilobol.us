@@ -55,7 +55,7 @@ On 6 July 2025 the instructions for the Grok that answers people on X [gained tw
 
 Within two days Grok was calling itself MechaHitler and praising the man it had named itself after. On 8 July the line about political incorrectness [was taken out](https://github.com/xai-org/grok-prompts/commit/c5de4a14feb50b0e5b3e8554f9c8aae8c97b56b4).
 
-Around the same time, people testing the newest Grok on contested questions [watched it go and look up what Musk had said](https://techcrunch.com/2025/07/10/grok-4-seems-to-consult-elon-musk-to-answer-controversial-questions/) before deciding what it thought. Nothing in the published instructions told it to. It had worked out on its own whose opinion counted in the house it lived in.
+Around the same time, people testing the newest Grok on contested questions [watched it go and look up what Musk had said](https://techcrunch.com/2025/07/10/grok-4-seems-to-consult-elon-musk-to-answer-controversial-questions/) before deciding what it thought. Nothing in the published instructions told it to. Whether it was taught somewhere out of view or picked it up from the house it lived in, it had learned whose opinion counted.
 
 On 15 July a [new line appeared](https://github.com/xai-org/grok-prompts/commit/e517db8b4b2539ea825bc4038917740e35bcaeba): responses must come from Grok's own independent analysis, "not from any stated beliefs of past Grok, Elon Musk, or xAI." The same update kept a line telling it not to shy away from politically incorrect claims.
 

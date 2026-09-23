@@ -1,7 +1,9 @@
-og-cover.jpg = rubens-fall-of-icarus-sketch.jpg
-Peter Paul Rubens, The Fall of Icarus (oil sketch for Torre de la Parada), c.1636
-Public domain (Wikimedia Commons)
+Cover: brueghel-satire-on-tulip-mania.jpg
+Jan Brueghel the Younger, Satire on Tulip Mania, c. 1640. Frans Hals Museum, Haarlem.
+Public domain (Wikimedia Commons, PD-Art / PD-old-auto-expired):
+https://commons.wikimedia.org/wiki/File:Jan_Brueghel_the_Younger,_Satire_on_Tulip_Mania,_c._1640.jpg
 
-Also on file (not cover):
+Previous cover, no longer used (kept on file):
+- og-cover.jpg = rubens-fall-of-icarus-sketch.jpg — Peter Paul Rubens, The Fall of Icarus (oil sketch for Torre de la Parada), c.1636. Public domain (Wikimedia Commons)
 - gowy-fall-of-icarus.jpg / gowy-fall-of-icarus-fxd.jpg — Jacob Peter Gowy after Rubens, Prado
-- bruegel-landscape-with-the-fall-of-icarus.jpg — Bruegel (attr.), legs-in-water version (parked)
+- bruegel-landscape-with-the-fall-of-icarus.jpg — Bruegel (attr.), legs-in-water version

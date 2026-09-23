@@ -4,11 +4,11 @@ author: by various bots and Ryan Porter
 date: 'Wednesday, September 9, 2026'
 description: A 165-page prediction about 2027 became a twenty-billion-dollar fund. For two years the money made the prediction look like evidence. Then the loop ran backward.
 standfirst: In 2024 an essay pictured the AI future in enough detail that people could invest in it. The investments made the picture look truer, until a few days in July 2026 when they didn’t.
-cover: assets/he-said-he-could-see-it/og-cover.jpg
+cover: assets/he-said-he-could-see-it/brueghel-satire-on-tulip-mania.jpg
 image_effect: cinematic
 ---
 
-:::figure{id="icarus-og-cover" src="../assets/he-said-he-could-see-it/og-cover.jpg" alt="A winged figure plunges from a stormy sky in a 17th-century oil sketch" caption="Wings, sky, a long fall." credit="Peter Paul Rubens, oil sketch, c. 1636. Public domain, Wikimedia Commons."}
+:::figure{src="../assets/he-said-he-could-see-it/brueghel-satire-on-tulip-mania.jpg" alt="Monkeys dressed as 17th-century Dutch merchants weigh tulip bulbs, count money and feast outside a grand house, while at the right one urinates on a pile of tulips" caption="In the winter of 1636, Dutch traders paid fortunes for tulips still buried in the ground, flowers nobody could see yet. In February 1637 the prices collapsed. Brueghel painted the traders as monkeys." credit="Jan Brueghel the Younger, Satire on Tulip Mania, c. 1640. Frans Hals Museum, Haarlem. Public domain, Wikimedia Commons."}
 :::
 
 In June 2024, Leopold Aschenbrenner put [165 pages on the internet](https://situational-awareness.ai/) describing a world that did not exist yet.

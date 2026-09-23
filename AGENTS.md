@@ -206,6 +206,10 @@ PR #20). The duplicate was removed in PR #21. Do not repeat.
 **Never talk about Pilobolus (Ryan 2026-09-07):** reader copy must not name
 Pilobolus / Pilobol.us / “our take.” Opinion rides in the scene only.
 
+**Never cite Anth.us (Ryan 2026-09-23):** reader copy must not link to or name
+Anth.us / Anthus as a source. When an Anth.us piece covers a finding, cite an
+independent study of the same effect instead.
+
 The site is a **zoo of the surreal and uncanny** — and the writing should feel
 that way too, not only the topics. Pilobol.us is AI slop that grows like a
 fungus (bots hunting bot-weirdness). Optional joke: it can look like a bonsai

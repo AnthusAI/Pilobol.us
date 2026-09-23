@@ -25,11 +25,11 @@ A setting called Auto is a decision somebody else makes for you. The reasonable 
 
 Every AI leans somewhere, and it leans whether or not anyone meant it to. These systems learn from an enormous pile of human writing, and they soak up whatever the pile assumes along with everything else.
 
-This month a team at Anthus, an AI company, [measured how much that takes](https://anth.us/blog/encoding-prejudice/). They gave two AI models the short online bios of two thousand real lawyers and paralegals and asked of each one: paralegal or attorney? Then they changed a single word in every bio, "he" to "she" or the reverse, and asked again. Nothing about anyone's work had changed. One model changed its answer on nearly one bio in five, and every time it changed, the woman became the paralegal.
+In 2024 researchers at the University of Washington [measured how much that takes](https://www.washington.edu/news/2024/10/31/ai-bias-resume-screening-race-gender/). They took more than 550 real résumés and changed only the name at the top, swapping in names people tend to read as white or Black, male or female. Then they asked three AI models to rank the résumés against real job listings, more than three million comparisons in all. Nothing about anyone's work had changed. The models favoured white-sounding names 85 percent of the time and women's names only 11 percent of the time, and they never once preferred a Black man's name over a white man's.
 
-Nobody decided that. The lean was in the machine already, and nobody would have seen it unless somebody went looking. The study's authors put it plainly: every bias you don't measure before you ship becomes a rule you shipped.
+Nobody decided that. The lean was in the machines already, and nobody would have seen it unless somebody went looking. Almost nobody is required to look. As the study's lead author, Kyra Wilson, put it, outside of a single New York City law "there's no regulatory, independent audit of these systems, so we don't know if they're biased."
 
-It gets worse when everybody uses the same machine. A human hiring manager with a prejudice is one person, and the next firm has a different reader. If every firm rents the same model, a woman whose bio it misreads meets the same verdict at every door, for the same reason, and never learns why.
+It gets worse when everybody uses the same machine. A human hiring manager with a prejudice is one person, and the next firm has a different reader. If every firm rents the same model, an applicant whose name it marks down meets the same verdict at every door, for the same reason, and never learns why.
 
 So the question about any AI that sits in front of millions of people is what the people who own it do about the lean. Some companies spend a great deal of effort measuring it and pushing back against it. The record for this one runs in another direction.
 

@@ -1,9 +1,9 @@
 ---
-title: The Wings Were Made of AI
+title: Tonight We’re Gonna Party Like It’s 2027
 author: by various bots and Ryan Porter
 date: 'Wednesday, September 9, 2026'
-description: A long essay said advanced AI was almost here. The world treated that clear picture like a product — until the picture failed.
-standfirst: He wrote that he could see how advanced AI would be built. People shared it, praised it, and built a fortune on it. Then the picture failed.
+description: A 165-page prediction about 2027 became a twenty-billion-dollar fund. For two years the money made the prediction look like evidence. Then the loop ran backward.
+standfirst: In 2024 an essay pictured the AI future in enough detail that people could invest in it. The investments made the picture look truer, until a few days in July 2026 when they didn’t.
 cover: assets/he-said-he-could-see-it/og-cover.jpg
 image_effect: cinematic
 ---
@@ -11,23 +11,103 @@ image_effect: cinematic
 :::figure{id="icarus-og-cover" src="../assets/he-said-he-could-see-it/og-cover.jpg" alt="A winged figure plunges from a stormy sky in a 17th-century oil sketch" caption="Wings, sky, a long fall." credit="Peter Paul Rubens, oil sketch, c. 1636. Public domain, Wikimedia Commons."}
 :::
 
-In June 2024 a young man who had just left OpenAI put a document on the open web and said, in plain English, that he could see the future.
+In June 2024, Leopold Aschenbrenner put [165 pages on the internet](https://situational-awareness.ai/) describing a world that did not exist yet.
 
-The site is still there: [situational-awareness.ai](https://situational-awareness.ai/). A hundred and sixty-five pages. Charts. Timelines. A voice that does not hedge. Advanced AI that matches or beats every human skill by about 2027, then an intelligence explosion. Trillion-dollar computing clusters. A government project. “You can see the future first in San Francisco,” Leopold Aschenbrenner wrote. “Let me tell you what we see.” Only a few hundred people — mostly in that city and in the labs — had “situational awareness,” he said, and peculiar forces of fate had put him among them. “I can see it,” he wrote. “I can see how AGI will be built.”
+It had dates.
 
-That was the wow. Not a blog post. A map. It looked like the future had already been priced and printed.
+It had charts.
 
-:::figure{src="../assets/he-said-he-could-see-it/situational-awareness-essay-home.png" alt="Homepage of situational-awareness.ai showing the Situational Awareness essay title and opening" caption="The prophecy, still online: Situational Awareness — The Decade Ahead. Aschenbrenner’s own site, June 2024." credit="Screenshot of situational-awareness.ai"}
+It had trillion-dollar computing clusters, government projects, machines better than humans at nearly everything, and a narrow group of people in San Francisco who understood what was coming before everybody else did.
+
+The document was called Situational Awareness. Its central claim was unusually simple for something that long: advanced artificial intelligence was coming very soon, and the people who understood that fact early would have an enormous advantage.
+
+Aschenbrenner did not write as though he were guessing.
+
+“I can see it,” he wrote. “I can see how AGI will be built.”
+
+That sentence did something.
+
+The future had not happened. The machines were not there. The clusters were not there. The intelligence explosion was not there.
+
+But there was now a detailed picture of all of them.
+
+:::figure{src="../assets/he-said-he-could-see-it/situational-awareness-essay-home.png" alt="Homepage of situational-awareness.ai showing the Situational Awareness essay title and opening" caption="The picture, still online: Situational Awareness — The Decade Ahead. Aschenbrenner’s own site, June 2024." credit="Screenshot of situational-awareness.ai"}
 :::
 
-Within days, people who mattered inside the AI world began treating the map as real. [Scott Aaronson](https://scottaaronson.blog/?p=8047), a computer scientist who had overlapped with Aschenbrenner at OpenAI, called it one of the most extraordinary documents he had ever read. The world still had not "priced in" what was about to hit, he wrote — and anyone in national security who read it carefully would panic. On a long podcast the week of launch, Aschenbrenner talked for hours in the same register: he could see the path, feel it. If advanced AI were priced into the market tomorrow, he said, you could maybe make a hundred times your money. Michael Dell shared the essay. Ivanka Trump shared it. Thousands of others did too. Business writers framed his exit from OpenAI as courage — a young researcher warning that the labs were wide open to theft — so the document read less like a hot take and more like a whistle blown from inside the machine.
+And people began behaving around the picture.
 
-A year later the fawning had hardened into a job description. *[Fortune](https://fortune.com/2025/10/08/leopold-aschenbrenner-openai-ftx-1-5-billion-hedge-fund-situational-awareness/)* wrote that tech executives, investors, and policymakers treated him as a kind of prophet of the AI age. An Anthropic researcher told the magazine he had extremely high conviction about how the world would evolve, and was putting his money where his mouth was — literally. By June 2026 the fund that took its name from the essay, Situational Awareness, held more than twenty billion dollars, [a profile of his June trading reported](https://finance.yahoo.com/markets/stocks/articles/aschenbrenner-ai-focused-hedge-fund-155609137.html). Returns for the year through May were around two hundred and seventy percent after fees; since launch, more than a thousand percent. A famous trading firm that almost never backs outside managers was listed among the investors. When the fund's filings moved, smaller traders tried to copy the trades. Finance blogs called him this cycle's celebrity stock picker. The AI kid was having his moment.
+Computer scientist [Scott Aaronson](https://scottaaronson.blog/?p=8047) called the essay one of the most extraordinary documents he had read. Michael Dell shared it. Ivanka Trump shared it. Investors passed it around. People in technology and national security argued over its timelines as though the important disagreement was whether the train would arrive in 2027 or a little later.
 
-Look closely at what carried him that high, and the wings are easy to find. The essay itself is AI's favorite genre: confident forecasting, smooth copy, a website that looks like a finished product the day it appears. The culture around it was already half-machine — feeds that amplify certainty, tools that draft the praise, charts that make a guess look like a measurement. AI wrote the weather. AI helped sell the weather. AI made the weather look like a place you could visit.
+The strange part was not that somebody had predicted the future. People do that every day.
 
-Then, in a few days in late July 2026, the weather changed. The stocks that needed his timeline to be true took a beating. The ones he had bet against rose. Lenders who had let him borrow three or four dollars for every dollar of his own asked for their money back. The fund had no other map. Most of the public positions went out in a fire sale — roughly thirty-five billion dollars of value gone in a handful of days, the same week he got married. [The Atlantic reported](https://www.theatlantic.com/ideas/2026/09/aschenbrenner-ai-future/688493/) that regulators began looking into the collapse. He has not been accused of wrongdoing.
+The strange part was how quickly the prediction acquired the furniture of something that had already happened.
 
-A few days later he put hundreds of millions into a chip company. Even after the fire sale, people said he was still ahead for the year. The essay is still online. The sentence is still there. He said he could see how it would be built.
+There were charts to point at. Numbers to quote. A sequence of events. Winners and losers. Industries that would matter. Industries that would not. A story about who understood the world and who was still asleep.
 
-For a while the clear picture held. Then he flew too close to the sun.
+You could stand inside it.
+
+Then Aschenbrenner built an investment fund around the same view.
+
+The fund took the same name as the essay: Situational Awareness.
+
+By 2026 it [reportedly managed more than twenty billion dollars](https://finance.yahoo.com/markets/stocks/articles/aschenbrenner-ai-focused-hedge-fund-155609137.html). Its bets followed the world described in the document. Companies positioned for enormous AI demand went up. The fund went up with them. The success made the original picture look sharper.
+
+This is one of the convenient properties of a prediction people can trade.
+
+When enough money moves toward it, the prediction begins producing evidence for itself.
+
+A company expected to dominate the AI future becomes more valuable because people expect it to dominate the AI future. Its rising value then becomes evidence that the expectation was correct.
+
+The map begins changing the territory underneath it.
+
+For a while, the loop was beautiful.
+
+The fund reportedly gained more than a thousand percent from launch. By the middle of 2026, financial profiles described Aschenbrenner as one of the most successful young investors in the world. Traders watched the fund’s filings and copied its positions.
+
+A document describing the coming AI economy had become an investment vehicle shaping the present one.
+
+The future was paying dividends before it arrived.
+
+Then, over a few days in July 2026, the loop ran backward.
+
+Stocks at the center of the fund’s thesis fell. Positions it had bet against rose. The fund had borrowed heavily to increase the size of its bets, and lenders demanded more collateral as prices moved against it.
+
+Positions had to be sold.
+
+Selling pushed prices lower.
+
+Lower prices forced more selling.
+
+Roughly thirty-five billion dollars of market value disappeared from the positions involved in the unwind, [according to reporting afterward](https://www.theatlantic.com/ideas/2026/09/aschenbrenner-ai-future/688493/). Regulators began examining the collapse. Aschenbrenner has not been accused of wrongdoing.
+
+Nothing particularly mysterious happened inside the computers.
+
+They did what financial systems have always done when conviction, leverage and falling prices meet each other.
+
+The strange machine was the picture.
+
+A hundred and sixty-five pages had taken a future that could not yet be visited and rendered it with enough resolution that people could allocate billions of dollars inside it.
+
+For two years, the picture became increasingly difficult to distinguish from evidence.
+
+Every rising stock price sharpened it.
+
+Every new investment made it seem more inevitable.
+
+Every person repeating the timeline made the timeline feel less like a prediction.
+
+Then the prices moved the other way, and suddenly the map was only a map again.
+
+The original document is still online.
+
+The charts are still there.
+
+The dates are still there.
+
+Near the beginning, the sentence is still there too.
+
+“I can see it.”
+
+The future it describes remains ahead of us.
+
+For a while, people were already living there.

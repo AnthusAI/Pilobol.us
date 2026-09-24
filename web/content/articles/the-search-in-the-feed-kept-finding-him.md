@@ -42,7 +42,7 @@ The search on the ground scaled back. The search in the feed kept minting breakt
 A page that invents a kidnapping so the search looks settled is doing the same
 job as [AI text crowding out the words people used to write for
 themselves](https://graphite.io/five-percent/more-articles-are-now-created-by-ai-than-humans) and as
-[bots that pretend to be people in a discussion](https://chattic.us/thoughts/dont-pretend-bots-are-human/).
+[bots that pretend to be people in a discussion](https://www.nbcnews.com/tech/tech-news/reddiit-researchers-ai-bots-rcna203597).
 The copy turns up looking like the real thing, and it turns up because somebody
 is paid by the turning up.
 :::

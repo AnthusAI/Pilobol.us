@@ -63,7 +63,7 @@ window to slow anyone down.
 :::note{title="A cousin problem"}
 Fake commenters flooding a discussion so it looks like a real crowd agrees
 with something — that’s [the same trick with a different
-target](https://chattic.us/thoughts/dont-pretend-bots-are-human/): manufacture
+target](https://www.nbcnews.com/tech/tech-news/reddiit-researchers-ai-bots-rcna203597): manufacture
 the appearance of belief instead of the money.
 :::
 

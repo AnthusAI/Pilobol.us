@@ -2,14 +2,14 @@
 title: The End of the Rave
 author: by various bots and Ryan Porter
 date: 'Friday, September 11, 2026'
-description: 'Castlemorton, 1992: thirty thousand people in a Worcestershire field for a week, and the crowd was never identified. A DJ who has played clubs since 1999 now looks out at a room full of raised phones, and a twenty-one-year-old in Cardiff goes to the pub instead.'
-standfirst: In 1992 thirty thousand people danced in a Worcestershire field for a week, and a four-million-pound trial afterward named only the thirteen people who brought the sound system. A student in Cardiff now stays out of clubs because anyone there might film her and post it.
+description: 'Castlemorton, 1992: thirty thousand people danced in a Worcestershire field for a week, and the night itself was the only version that counted. Now every night out has a second version on people''s phones, and that one is what lasts.'
+standfirst: In 1992 thirty thousand people danced in a Worcestershire field for a week, and the only thing that mattered was being there. Now the video of a night out can matter more than the night, and a student in Cardiff stays out of clubs because of it.
 cover: assets/the-end-of-the-rave/castlemorton-1992.jpg
 card_image: assets/the-end-of-the-rave/castlemorton-1992.jpg
 image_effect: organic
 ---
 
-Before a rave became a room full of cameras, it was a way to leave ordinary life outside for a few hours. You went in late, you did not know most of the people there, and the music had no words. For one night, nobody cared about your name or your job. There is an old saying for that feeling: “Dance like there's nobody watching.” It did not mean that nobody in the room could see you. It meant nobody was your audience. The strangers around you were there to lose themselves in the music too. None of them was keeping a record of you for later. Nobody would remember.
+Before a rave became a room full of cameras, it was a way to leave ordinary life outside for a few hours. You went in late, you did not know most of the people there, and the music had no words. For one night, nobody cared about your name or your job. There is an old saying for that feeling: “Dance like there's nobody watching.” It did not mean that nobody in the room could see you. It meant nobody was your audience. The strangers around you were there to lose themselves in the music too. None of them was keeping a record of you for later. What happened in the room was the only version of the night there would ever be.
 
 ## An escape becomes a performance
 
@@ -34,6 +34,8 @@ For two years after Castlemorton, [the authorities tried to hold somebody respon
 
 :::figure{id="castlemorton-aerial" src="../assets/the-end-of-the-rave/castlemorton-aerial.jpg" alt="Aerial view of thousands of vehicles, tents and caravans packed across a green field, the Castlemorton Common gathering seen from above"}
 :::
+
+Before a video of a night out could matter more than the night itself, the video had to be able to find the person in it. The pictures from Castlemorton could not do that. Nobody could put names to the faces, so the pictures never caught up with anybody. The cost of putting a name to a stranger has been falling ever since.
 
 ## The declining cost of invading your privacy
 
@@ -117,17 +119,19 @@ This is a new kind of surveillance. Nobody has to follow you. The system has alr
 
 Your face, your writing, your relatives' DNA, your license plate: each one alone can point to you. The organization best placed to check all four at once is the police. They already have warrants and crime labs, and they do not need a reason to be interested in you in particular. Somebody only has to ask.
 
+Put all of it together and any photo or video of you, taken by anybody, can be tied back to your name. Whatever it shows can end up in front of your family, your boss or a stranger.
+
 ## Friday night
 
-On a night out, all of this shows up as a feeling. Freya Price, twenty-one, studies at Cardiff University and [has started choosing pubs over clubs](https://www.aol.com/articles/fear-unintentionally-going-viral-changing-220207000.html). She worries that a bad moment on a night out could end up online, where anybody checking up on her later might find it. Nobody has to be looking for her. Somebody only has to film the DJ and post it, and she is in the video.
+On a night out, people feel that. Freya Price, twenty-one, studies at Cardiff University and [has started choosing pubs over clubs](https://www.aol.com/articles/fear-unintentionally-going-viral-changing-220207000.html). She worries that a bad moment on a night out could end up online, where anybody checking up on her later might find it. Nobody has to be looking for her. Somebody only has to film the DJ and post it, and she is in the video.
 
 It does not take a scandal. At a foam party in Lloret de Mar this summer, a twenty-year-old French woman named Océane was dancing in a red bikini while water and foam hit the crowd. She did not know anybody was filming her. The clip lasted thirteen seconds. It passed a hundred million views, turned her into Aora DJ, and, as she later said, [changed her life completely](https://www.ladbible.com/news/world-news/red-viral-instagram-video-spain-travel-732794-20260728). The party ended after one night. The clip kept going.
 
 People say phones have ruined the dance floor, then bring them anyway: [a 2025 survey found half agreeing and more than half admitting they use them there](https://musictech.com/news/music/survey-phones-ruining-dancefloor/). The night now has a second half the next morning, spent searching what strangers posted from the room to see whether you are in it.
 
-That is what has changed about a night out. The crowd is no longer only the people in the room. It includes everybody who will see the videos later, in group chats and on social media. Going out used to mean leaving your name and your job at the door. Now any night can be recorded, and a stranger can turn a few seconds of it into something millions of people follow, judge, desire or ridicule. The video can end up mattering more than the night it came from.
+That is what has changed about a night out. The crowd is no longer only the people in the room. It includes everybody who will watch the videos later, in group chats and on social media, and that crowd is far bigger. Going out used to mean the night itself was the only thing that counted. Now there are two versions of every night: the one people are standing in, and the one on their phones. More and more, the one on the phones is the one that matters. It lasts, it reaches more people, and it is the one that gets judged.
 
-Jean Baudrillard called that kind of world a [simulacrum](https://plato.stanford.edu/entries/baudrillard/): a copy that people start treating as more real than the thing it copied. *Black Mirror* put the nightmare in pastel colors in [its “Nosedive” featurette](https://www.youtube.com/watch?v=R32qWdOWrTo), where every small encounter is also a rating and one bad day in public follows a person into everything she tries to do next. Nobody on a real dance floor is being given stars out of five, but the fear is the same. Something a person does on a Friday night can be filmed, posted, and judged on Monday by people who were never in the room: a boss, a landlord, anybody with a search box. And everybody on the dance floor knows the phones are up.
+The French philosopher Jean Baudrillard had a word for a copy that people end up treating as more real than the real thing: a [simulacrum](https://plato.stanford.edu/entries/baudrillard/). He called a world that runs on copies like that hyperreal. *Black Mirror* put the nightmare in pastel colors in [its “Nosedive” featurette](https://www.youtube.com/watch?v=R32qWdOWrTo), where every small encounter is also a rating and one bad day in public follows a person into everything she tries to do next. Nobody on a real dance floor is being given stars out of five, but the fear is the same. Something a person does on a Friday night can be filmed, posted, and judged on Monday by people who were never in the room: a boss, a landlord, anybody with a search box. And everybody on the dance floor knows the phones are up.
 
 ::video{src="https://www.youtube.com/watch?v=R32qWdOWrTo" title="Black Mirror — Nosedive featurette | Netflix"}
 
@@ -139,8 +143,8 @@ In 2021, with the clubs shut, DJ Marea Stamper left a voicemail about what had b
 
 ::video{src="https://www.youtube.com/watch?v=l4UkYBr1NnA" title="Fred again.. feat. The Blessed Madonna — Marea (We've Lost Dancing)"}
 
-The clubs came back after the pandemic. The feeling of being unrecorded did not. It went a little at a time, one raised phone after another, with no single night anyone could point to. Freya Price is twenty-one, and for as long as she has been old enough to go out, a club has meant being filmed. So she goes to the pub.
+The clubs came back after the pandemic. The feeling of being unrecorded did not. It went a little at a time, one raised phone after another, with no single night anyone could point to. Freya Price is twenty-one. For as long as she has been old enough to go out, a club has meant being filmed, and being filmed has meant anything she did could end up online. So she goes to the pub.
 
-Look again at the photograph from Castlemorton: seven faces, in sunlight and in focus, a few feet from the camera. In 1992 that did not matter, because there was no way to find out who they were from a picture.
+Most people her age have had a phone in their pocket for as long as they can remember. Many of them have never been part of a crowd where the moment was the only thing that mattered: where nobody was filming for later, nobody was posting, and the night would live only in the memories of the people who were there. They have grown up with the phone version of every night, and that is the version they have learned to take seriously.
 
-A nineteen-year-old in that field could dance in public without it going on any kind of record. A nineteen-year-old today never has, and cannot get it back. “Dance like there's nobody watching” is still printed on fridge magnets. Now the only way to actually do it is to pay for it: a club that puts a sticker over your phone camera at the door, then posts its own official video the next morning.
+Look again at the photograph from Castlemorton. Seven people on a ridge in the sun, hands in the air, not one of them looking at another. Somebody took their picture, and it made no difference to them. The picture was not the point. For a week in 1992, being there was the only thing that counted, and thirty thousand people were there together.

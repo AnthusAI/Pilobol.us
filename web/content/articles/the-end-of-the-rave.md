@@ -9,7 +9,7 @@ card_image: assets/the-end-of-the-rave/castlemorton-1992.jpg
 image_effect: organic
 ---
 
-Before a rave became a room full of cameras, it was a way to leave ordinary life outside for a few hours. You went in late, you did not know most of the people there, and the music had no words. For one night, nobody cared about your name or your job. There is an old saying for that feeling: “Dance like there's nobody watching.” Everybody in the room could see you, but nobody there was your audience. The strangers around you were there to lose themselves in the music too. None of them was keeping a record of you for later. What happened in the room was the only version of the night there would ever be.
+Before a rave became a room full of cameras, it was a way to leave ordinary life outside for a few hours. You went in late, you did not know most of the people there, and the music had no words. For one night, nobody cared about your name or your job. There is an old saying for that feeling: “Dance like there's nobody watching.” Everybody in the room could see you, but nobody there was your audience. The strangers around you were there to lose themselves in the music too. None of them was keeping a record of you for later. What happened at the party stayed at the party.
 
 ## An escape becomes a performance
 

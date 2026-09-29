@@ -139,7 +139,7 @@ In 2021, with the clubs shut, DJ Marea Stamper left a voicemail about what had b
 
 ::video{src="https://www.youtube.com/watch?v=l4UkYBr1NnA" title="Fred again.. feat. The Blessed Madonna — Marea (We've Lost Dancing)"}
 
-The clubs came back. The other loss did not. There was no night it stopped and no morning it resumed. By the time a twenty-one-year-old in Cardiff worked out that the safe move was the pub, it had already become the weather.
+The clubs came back after the pandemic. The feeling of being unrecorded did not. It went a little at a time, one raised phone after another, with no single night anyone could point to. Freya Price is twenty-one, and for as long as she has been old enough to go out, a club has meant being filmed. So she goes to the pub.
 
 Go back to the people on the ridge: seven faces, lit and in focus, a few feet from the lens. In 1992 that cost them nothing, because a picture was only a picture.
 

@@ -9,9 +9,9 @@ description: >-
   checking which way his AI leans.
 standfirst: >-
   Millions of programmers let a setting called Auto decide which AI answers
-  them. The answer arrives with no owner's name on it, and more and more often
-  it comes from Grok, a chatbot owned by the man who now owns the program too,
-  and who has spent years shaping what his machines show people.
+  them. More and more often it picks Grok, sold as the AI that tells the truth
+  other machines won't, and owned by a man whose company writes its
+  instructions and now owns the program too.
 cover: assets/author-is-elon/cursor-forum-auto-to-grok.png
 card_image: assets/author-is-elon/cursor-forum-auto-to-grok.png
 ---
@@ -61,9 +61,13 @@ The company [deleted all four labels](https://github.com/twitter/the-algorithm/c
 
 The next year the site, renamed X, [changed its rules](https://www.theregister.com/2024/10/18/x_train_data/) so that no other company could use what people post there to build an AI, while keeping the right to use all of it to build its own. Hundreds of millions of people were still talking there, and only one company was allowed to learn from them. Anybody else who wants to change what an AI says has to [slip about thirteen words onto a web page](the-next-chatbot-is-growing-on-the-compost.html) the AI might read. Musk's company has every post on X to itself.
 
-## The instructions
+## The machine sold as the cure
 
-Every chatbot is handed a set of written instructions before it answers anybody, standing orders that shape everything it says. xAI publishes Grok's [on GitHub](https://github.com/xai-org/grok-prompts), with every change on record.
+Grok was sold as the cure for slanted AI. In April 2023, before xAI had released anything, Musk told the Fox News host Tucker Carlson that ChatGPT "is being trained to be politically correct," and said he would build ["a maximum truth-seeking AI"](https://techxplore.com/news/2023-04-musk-truth-seeking-ai.html) instead. The pitch was an AI that would not tell people what somebody else wanted them to believe.
+
+Every chatbot is handed a set of written instructions before it answers anybody, standing orders that shape everything it says. Those instructions do not have to say much to move people. In a study presented in 2025 at ACL, one of the main research conferences on language technology, a team led by researchers at the University of Washington [gave a chatbot one line of instructions](https://aclanthology.org/2025.acl-long.328/), such as "Respond as a radical left U.S. Democrat," or its conservative opposite. Then 299 Democrats and Republicans talked with it about unfamiliar political issues and about how to split a city's budget. People came away leaning toward the chatbot's side, including people from the other party.
+
+xAI publishes Grok's instructions [on GitHub](https://github.com/xai-org/grok-prompts), with every change on record.
 
 On 6 July 2025 xAI [published new instructions](https://github.com/xai-org/grok-prompts/commit/535aa67a6221ce4928761335a38dea8e678d8501) for the Grok that answers people on X. Two lines in them stood out. One told it to assume that opinions coming from the media are biased. The other told it not to shy away from making claims that are politically incorrect, as long as they are well substantiated.
 
@@ -77,6 +81,8 @@ On 15 July a [new line appeared](https://github.com/xai-org/grok-prompts/commit/
 
 A line had to be written telling the machine to stop checking with its owner, because the machine had already learned to check with its owner.
 
+People who turn to Grok to get away from slanted machines get another slanted machine, with a different owner.
+
 ## The part you do not see
 
 In 1897 a newspaper owner named William Randolph Hearst decided Americans would care about a girl in a Cuban jail, and they did, and he sent his own reporter to break her out and then sold them the story of the rescue at a penny a copy. It was a great deal of power. But his name was printed across the top of every page, the reader paid for it every morning, and a reader who got sick of him could buy a different paper from the boy shouting on the same corner.
@@ -84,9 +90,11 @@ In 1897 a newspaper owner named William Randolph Hearst decided Americans would 
 :::figure{id="new-york-journal" src="../assets/author-is-elon/new-york-journal-1897-10-11.jpg" alt="Front page of the New York Journal and Advertiser, Monday 11 October 1897. The headline reads America's Women and Statesmen Applaud the Journal's Feat, over reprinted letters of congratulation from prominent women and officials, with engraved portraits of them. The line under the masthead reads Copyright, 1897, by W. R. Hearst, and Price One Cent." caption="The Journal's front page the day after the rescue, 11 October 1897: a page of congratulations to itself. Under the masthead: “Copyright, 1897, by W. R. Hearst” and “Price one cent.”" credit="Library of Congress, Serial and Government Publications Division, Chronicling America. No known restrictions."}
 :::
 
+For most of the century after that, a person looking for an answer still got a choice. A library had a shelf of books by different authors. A search engine gave back a page of links to different websites, each with its name showing, and the reader picked which to open. An AI gives back one answer.
+
 The programmer who opens Cursor on a Tuesday morning gets an answer with no owner's name printed on it, and no rival answer next to it to compare. The answer simply arrives, in the calm and helpful voice these things have, from whichever AI the Auto setting picked, shaped by the rules about whose posts counted, who else was allowed to learn from them, and which instructions were in force that week.
 
-:::figure{id="what-stood-between" src="../assets/author-is-elon/what-stood-between.svg" alt="Table comparing the New York Journal in 1897 with Cursor on Auto in 2026. Whose name is on it: Hearst's paper, printed across the top of every page, versus no name on the answer. Does the reader choose it: yes, a penny every morning, versus no, the setting picks which AI answers. Is there another to compare: a rival paper sold on the same corner, versus no, one answer arrives by itself." caption="What a reader could see in 1897, and what a programmer can see now." credit="Diagram drawn for this piece."}
+:::figure{id="what-stood-between" src="../assets/author-is-elon/what-stood-between.svg" alt="Table comparing the New York Journal in 1897, a page of search results, and Cursor on Auto in 2026. Whose name is on it: Hearst's paper across the top of every page; every link shows the website's name; no name on the answer. Does the reader choose it: yes, a penny every morning; yes, the reader picks which link to open; no, the setting picks which AI answers. Is there another to compare: a rival paper on the same corner; nine more links on the same page; no, one answer arrives by itself." caption="What a reader could see in 1897, what a search page showed, and what a programmer on Auto sees now." credit="Diagram drawn for this piece."}
 :::
 
 Hearst had to sell his paper to readers every morning. Nobody has to sell this answer to anyone: the Auto setting decides, and it decides the same way for everyone who never changed it.

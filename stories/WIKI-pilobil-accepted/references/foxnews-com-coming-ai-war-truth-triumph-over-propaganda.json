@@ -1,0 +1,9 @@
+{
+  "id": "foxnews-com-coming-ai-war-truth-triumph-over-propaganda",
+  "title": "Fox News: The coming AI war will be about whether truth can triumph over propaganda",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://www.foxnews.com/opinion/coming-ai-war-truth-triumph-over-propaganda",
+  "source": "pilobil-wiki",
+  "why": "Background for PILO-9c4e21a7: frames the chatbot as the single synthesized answer between a person and the record; points to primary research on biased-model influence. Use as contextual reporting, not reader-story authority."
+}

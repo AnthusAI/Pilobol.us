@@ -10,12 +10,26 @@
   "parent": null,
   "labels": [],
   "dependencies": [],
-  "comments": [],
+  "comments": [
+    {
+      "id": "af41ee97-132b-4473-84e7-62d4c7164798",
+      "author": "home",
+      "text": "Research note (2026-09-29): Fox News opinion framing is useful background, not a reader-story source. Its central mechanism reinforces this pitch: AI is becoming the layer between a person and the record\u2014where a library or search result offered a field of sources, a chatbot supplies one synthesized answer. The relevant danger here is the branded feeling of independent thought: Grok can be sold as a way out of mediated consensus while its owner controls the system instructions, the information environment, and increasingly the work tool through which users receive that answer. Keep the story's present-tense scene on the person who hits Auto and never sees a masthead; do not turn the piece into a U.S.\u2013China policy argument. Supporting studies linked from the column: ACL 2025 found partisan-biased LLMs affected political decision-making, including among users whose affiliation opposed the model's bias; Nature Communications (4,829 participants) found LLM-generated persuasive messages shifted policy attitudes.",
+      "created_at": "2026-09-29T18:00:52.588646Z",
+      "comment_type": "default",
+      "data": {},
+      "agent": null
+    }
+  ],
   "created_at": "2026-09-13T11:27:56.412366Z",
-  "updated_at": "2026-09-13T11:27:56.412366Z",
+  "updated_at": "2026-09-29T18:00:52.588714Z",
   "closed_at": null,
+  "right_now_summary": null,
+  "right_now_updated_at": null,
   "custom": {
     "source": "shared",
     "project_label": "PILO"
-  }
+  },
+  "agent": null,
+  "agent_assignment": null
 }

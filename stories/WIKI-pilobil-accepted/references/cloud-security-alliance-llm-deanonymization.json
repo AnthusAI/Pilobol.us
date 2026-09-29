@@ -1,0 +1,9 @@
+{
+  "id": "cloud-security-alliance-llm-deanonymization",
+  "title": "Cloud Security Alliance: LLM deanonymization research note",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://labs.cloudsecurityalliance.org/research/csa-research-note-llm-deanonymization-privacy-20260307-csa-s/",
+  "source": "pilobil-wiki",
+  "why": "Cited deanonymization run cost"
+}

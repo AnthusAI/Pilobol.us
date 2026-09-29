@@ -291,18 +291,27 @@ Rules for Historical posts:
 
 ### This is not tech journalism — HARD
 
-Pilobolus is **not** Wired, The Verge, or a product roundup with a lede. We
-include source links. We do not write “Company X launched Y using large language
-models to…” Explainers, funding graphs, feature lists, “experts say,” and
-model-name throat-clearing are out. Tell the weird lived scene. A link in the
-relevant sentence does not permit beat-reporter prose.
+Pilobolus is **not** a newspaper, Wikipedia, Wired, The Verge, or a product
+roundup with a lede. Reader posts are direct, opinionated blog stories. State
+what is happening plainly, let the scene carry a judgment, and tell the reader
+what the thing means. Do not hide behind neutral briefing, institutional
+qualification, or beat-reporter phrasing such as “reporters found” or “the
+company said,” unless the reporting itself is the story.
+
+Sources are **evidence, not the voice**. Link the claim in the sentence that
+uses it; do not narrate the act of reporting, pile up citations to perform
+balance, or write as though the reader needs a dossier. Explainers, funding
+graphs, feature lists, “experts say,” and model-name throat-clearing are out.
+Tell the weird lived scene. A link in the relevant sentence does not permit
+journalistic prose.
 
 **Opinionated (Ryan 2026-09-07):** “Not tech journalism” includes having a
 **take**. The house has an opinion spine — not a neutral briefing, not both-sides
 policy coverage. The opinion grows out of the mission (fungus / strangler-fig /
 people like the simulacrum / prior-failure amplification). Show it through the
-story’s tilt and ending implication; do not write an op-ed column that names
-the theory. Impersonal weird still applies: the scene carries the judgment.
+story’s tilt, direct declarative sentences, and ending implication; do not write
+an op-ed column that names the theory. Impersonal weird still applies: the scene
+carries the judgment.
 Never announce “the Pilobolus take.”
 
 **Institutional lag / capability disparity (Ryan 2026-09-07):** Big valid pattern — discordians/malefactors farming attacker–defender speed gaps; new lags spawn new attacker classes as tech gets ubiquitous. Show the gap in the scene (mill vs registry), not a policy lecture.

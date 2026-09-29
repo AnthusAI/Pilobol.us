@@ -2,8 +2,8 @@
 title: Tonight We’re Gonna Party Like It’s 2027
 author: by various bots and Ryan Porter
 date: 'Wednesday, September 9, 2026'
-description: A 165-page prediction about 2027 became a twenty-billion-dollar fund. For two years the money made the prediction look like evidence. Then the loop ran backward.
-standfirst: In 2024 an essay pictured the AI future in enough detail that people could invest in it. The investments made the picture look truer, until a few days in July 2026 when they didn’t.
+description: A 165-page prediction about 2027 became a twenty-billion-dollar fund. For two years the money pouring into the prediction made it look like evidence. Then prices fell, and the fund was forced to sell.
+standfirst: In 2024 an essay pictured the AI future in enough detail that people could invest in it. The investments made the picture look truer, until a few days in July 2026, when prices fell and the investments started working against it.
 cover: assets/he-said-he-could-see-it/brueghel-satire-on-tulip-mania.jpg
 image_effect: cinematic
 ---
@@ -25,78 +25,74 @@ Aschenbrenner did not write as though he were guessing.
 
 “I can see it,” he wrote. “I can see how AGI will be built.”
 
-That sentence did something.
+That sentence changed how the essay was read.
 
-The future had not happened. The machines were not there. The clusters were not there. The intelligence explosion was not there.
+The future had not happened. The machines were not there. The clusters were not there. The sudden leap in machine intelligence it predicted had not happened.
 
 But there was now a detailed picture of all of them.
 
-:::figure{src="../assets/he-said-he-could-see-it/situational-awareness-essay-home.png" alt="Homepage of situational-awareness.ai showing the Situational Awareness essay title and opening" caption="The picture, still online: Situational Awareness — The Decade Ahead. Aschenbrenner’s own site, June 2024." credit="Screenshot of situational-awareness.ai"}
+:::figure{src="../assets/he-said-he-could-see-it/situational-awareness-essay-home.png" alt="Homepage of situational-awareness.ai showing the Situational Awareness essay title and opening" caption="The essay, still online: Situational Awareness — The Decade Ahead. Aschenbrenner’s own site, June 2024." credit="Screenshot of situational-awareness.ai"}
 :::
 
-And people began behaving around the picture.
+And people began making decisions based on it.
 
-Computer scientist [Scott Aaronson](https://scottaaronson.blog/?p=8047) called the essay one of the most extraordinary documents he had read. Michael Dell shared it. Ivanka Trump shared it. Investors passed it around. People in technology and national security argued over its timelines as though the important disagreement was whether the train would arrive in 2027 or a little later.
+Computer scientist [Scott Aaronson](https://scottaaronson.blog/?p=8047) called the essay one of the most extraordinary documents he had read. Michael Dell shared it. Ivanka Trump shared it. Investors passed it around. People in technology and national security argued over its timelines as though the only real question was whether it would all arrive in 2027 or a little later.
 
-The strange part was not that somebody had predicted the future. People do that every day.
-
-The strange part was how quickly the prediction acquired the furniture of something that had already happened.
+People make predictions every day. The strange part was how quickly this one came to look like a record of something that had already happened.
 
 There were charts to point at. Numbers to quote. A sequence of events. Winners and losers. Industries that would matter. Industries that would not. A story about who understood the world and who was still asleep.
 
-You could stand inside it.
+It was detailed enough to plan around.
 
 Then Aschenbrenner built an investment fund around the same view.
 
 The fund took the same name as the essay: Situational Awareness.
 
-By 2026 it [reportedly managed more than twenty billion dollars](https://finance.yahoo.com/markets/stocks/articles/aschenbrenner-ai-focused-hedge-fund-155609137.html). Its bets followed the world described in the document. Companies positioned for enormous AI demand went up. The fund went up with them. The success made the original picture look sharper.
+By 2026 it [reportedly managed more than twenty billion dollars](https://finance.yahoo.com/markets/stocks/articles/aschenbrenner-ai-focused-hedge-fund-155609137.html). Its bets followed the world described in the document. Companies positioned for enormous AI demand went up. The fund went up with them. The fund’s success made the essay’s predictions look more convincing.
 
-This is one of the convenient properties of a prediction people can trade.
+This is what can happen when people can bet money on a prediction.
 
-When enough money moves toward it, the prediction begins producing evidence for itself.
+When enough money is bet on it, the betting itself starts to look like proof that the prediction is right.
 
 A company expected to dominate the AI future becomes more valuable because people expect it to dominate the AI future. Its rising value then becomes evidence that the expectation was correct.
 
-The map begins changing the territory underneath it.
+The prediction starts changing the very things it was trying to predict.
 
-For a while, the loop was beautiful.
+For a while, this worked in the fund’s favor.
 
 The fund reportedly gained more than a thousand percent from launch. By the middle of 2026, financial profiles described Aschenbrenner as one of the most successful young investors in the world. Traders watched the fund’s filings and copied its positions.
 
-A document describing the coming AI economy had become an investment vehicle shaping the present one.
+A document about the AI economy of the future had become a fund that moved real stock prices in the present.
 
-The future was paying dividends before it arrived.
+People were making money from a future that had not arrived.
 
-Then, over a few days in July 2026, the loop ran backward.
+Then, over a few days in July 2026, it all went the other way.
 
-Stocks at the center of the fund’s thesis fell. Positions it had bet against rose. The fund had borrowed heavily to increase the size of its bets, and lenders demanded more collateral as prices moved against it.
+The stocks the fund’s strategy depended on fell. What it had bet against went up. The fund had borrowed heavily to increase the size of its bets, and lenders demanded more collateral to cover the loans as prices moved against it.
 
-Positions had to be sold.
+Investments had to be sold.
 
 Selling pushed prices lower.
 
 Lower prices forced more selling.
 
-Roughly thirty-five billion dollars of market value disappeared from the positions involved in the unwind, [according to reporting afterward](https://www.theatlantic.com/ideas/2026/09/aschenbrenner-ai-future/688493/). Regulators began examining the collapse. Aschenbrenner has not been accused of wrongdoing.
+Roughly thirty-five billion dollars of market value disappeared from the investments caught up in the forced selling, [according to reporting afterward](https://www.theatlantic.com/ideas/2026/09/aschenbrenner-ai-future/688493/). Regulators began examining the collapse. Aschenbrenner has not been accused of wrongdoing.
 
-Nothing particularly mysterious happened inside the computers.
+Nothing unusual happened in the markets. This is what has always happened when confident investors borrow heavily and prices start to fall.
 
-They did what financial systems have always done when conviction, leverage and falling prices meet each other.
+The strange part was the essay itself.
 
-The strange machine was the picture.
+A hundred and sixty-five pages had described a future that did not exist yet in so much detail that people put billions of dollars into it.
 
-A hundred and sixty-five pages had taken a future that could not yet be visited and rendered it with enough resolution that people could allocate billions of dollars inside it.
+For two years, it got harder and harder to tell the prediction apart from proof.
 
-For two years, the picture became increasingly difficult to distinguish from evidence.
-
-Every rising stock price sharpened it.
+Every rising stock price made it look more certain.
 
 Every new investment made it seem more inevitable.
 
 Every person repeating the timeline made the timeline feel less like a prediction.
 
-Then the prices moved the other way, and suddenly the map was only a map again.
+Then the prices moved the other way, and suddenly the essay was only a guess about the future again.
 
 The original document is still online.
 
@@ -108,6 +104,6 @@ Near the beginning, the sentence is still there too.
 
 “I can see it.”
 
-The future it describes remains ahead of us.
+The future it describes still has not arrived.
 
-For a while, people were already living there.
+For a while, people spent and invested as if they were already living in it.

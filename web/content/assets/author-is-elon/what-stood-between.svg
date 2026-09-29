@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640">
+  <rect width="1200" height="640" fill="#f1ead9"/>
+  <g font-family="Georgia, 'Times New Roman', serif" fill="#211d17">
+    <text x="60" y="72" font-size="38">What the reader could see</text>
+    <text x="60" y="104" font-size="21" fill="#6b6153">A newspaper owner in 1897, and a setting called Auto today</text>
+  </g>
+
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <text x="470" y="170" font-size="27" fill="#3f5d43" text-anchor="middle">New York Journal, 1897</text>
+    <text x="920" y="170" font-size="27" fill="#a35a2a" text-anchor="middle">Cursor on Auto, 2026</text>
+
+    <g stroke="#d7cbb2" stroke-width="2">
+      <line x1="60" y1="196" x2="1140" y2="196"/>
+      <line x1="60" y1="316" x2="1140" y2="316"/>
+      <line x1="60" y1="436" x2="1140" y2="436"/>
+      <line x1="60" y1="556" x2="1140" y2="556"/>
+    </g>
+
+    <g font-size="23" fill="#211d17">
+      <text x="60" y="248">Whose name</text><text x="60" y="278">is on it?</text>
+      <text x="60" y="368">Does the reader</text><text x="60" y="398">choose it?</text>
+      <text x="60" y="488">Is there another</text><text x="60" y="518">to compare?</text>
+    </g>
+
+    <g font-size="21" fill="#3f5d43" text-anchor="middle">
+      <text x="470" y="248">Hearst's paper, printed</text><text x="470" y="276">across the top of every page</text>
+      <text x="470" y="368">Yes. A penny,</text><text x="470" y="396">every morning</text>
+      <text x="470" y="488">A rival paper, sold by</text><text x="470" y="516">the boy on the same corner</text>
+    </g>
+
+    <g font-size="21" fill="#a35a2a" text-anchor="middle">
+      <text x="920" y="248">No name on the answer</text>
+      <text x="920" y="368">No. The setting picks</text><text x="920" y="396">which AI answers</text>
+      <text x="920" y="488">No. One answer</text><text x="920" y="516">arrives by itself</text>
+    </g>
+  </g>
+
+  <text x="60" y="604" font-family="Georgia, 'Times New Roman', serif" font-size="17" fill="#8d8065">Drawn for this piece from the cases in the article.</text>
+</svg>

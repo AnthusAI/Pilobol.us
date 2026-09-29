@@ -3,7 +3,7 @@ title: The End of the Rave
 author: by various bots and Ryan Porter
 date: 'Friday, September 11, 2026'
 description: 'Castlemorton, 1992: thirty thousand people in a Worcestershire field for a week, and not one name. A DJ who has worked booths since 1999 now watches a room hold its phones up, and a twenty-one-year-old in Cardiff goes to the pub instead.'
-standfirst: In 1992 thirty thousand people danced in a Worcestershire field for a week, and the state spent four million pounds failing to name the crowd. A student in Cardiff now stays out of clubs because a stranger's camera is a background check she has not had yet.
+standfirst: In 1992 thirty thousand people danced in a Worcestershire field for a week, and a four-million-pound trial afterward named only the thirteen people who brought the sound system. A student in Cardiff now stays out of clubs because a stranger's camera is a background check she has not had yet.
 cover: assets/the-end-of-the-rave/castlemorton-1992.jpg
 card_image: assets/the-end-of-the-rave/castlemorton-1992.jpg
 image_effect: organic
@@ -26,11 +26,14 @@ Between May 22 and May 29, 1992, somewhere between twenty and forty thousand peo
 
 What thirty thousand people were doing there, for seven days, was dancing to records with no words in them until the light came back. Look at what that looked like. Four of the people in that photograph have their hands up and turned over, elbows out, voguing, and not one of them is looking at another. On the ledge below, a young woman in round glasses has the index finger of the man beside her in her mouth, and nobody in the frame has noticed or minds. Everybody in it is in their own weather. Being watched was not part of the deal.
 
-## Analog flash mob
+## No guest list
 
 Nobody on that common had been on a guest list. There was no ticket with a name on it, no card behind a bar, no phone in anyone's pocket telling a tower where the person was. Photographs were taken, plenty of them, faces and all, in daylight, from a few feet away. None of them helped. This was before social media. A photograph in 1992 was a picture: a physical print or a negative in somebody's possession, sometimes undeveloped for weeks. It could be sharp enough to show every face in daylight. It did not travel by itself. There was no event page or shared feed where strangers' pictures of the same night gathered up the next morning. Most people on that common would never see the photographs taken by people they did not know. A picture could be matched only by a person who already knew the face, and there was no way to ask one a question. If the week went badly for you, it was over when it was over.
 
-For two years after Castlemorton, [the authorities tried to hold somebody responsible](https://djmag.com/features/history-spiral-tribe-uks-most-notorious-travelling-sound-system) for the week on the common. In the end they reached thirteen members of the Spiral Tribe sound system: the organizers, whose names were already attached to the rig. In March 1994, a jury acquitted all thirteen. The rest of the people at the rave remained a crowd — photographed in daylight, but never assembled into a list of names and pursued one by one afterward.
+For two years after Castlemorton, [the authorities tried to hold somebody responsible](https://djmag.com/features/history-spiral-tribe-uks-most-notorious-travelling-sound-system) for the week on the common. In the end they reached thirteen members of the Spiral Tribe sound system: the organizers, whose names were already attached to the rig. The trial ran about four months and cost roughly four million pounds, and in March 1994 the jury acquitted all thirteen. The rest of the people at the rave remained a crowd — photographed in daylight, but never assembled into a list of names and pursued one by one afterward.
+
+:::figure{id="castlemorton-aerial" src="../assets/the-end-of-the-rave/castlemorton-aerial.jpg" alt="Aerial view of thousands of vehicles, tents and caravans packed across a green field, the Castlemorton Common gathering seen from above"}
+:::
 
 ## The declining cost of invading your privacy
 
@@ -45,7 +48,7 @@ The country guessed for years and stayed guessing. Then an ex-boyfriend sold a p
 
 Add it up. Six years, a newspaper with a budget, a man who had once loved her and would sell that, and finally a person in a corridor after hours working a handle that was not theirs. Every line of the bill was somebody wanting to know.
 
-## Amazon knows you're pregnant before you do
+## Target knows you're pregnant before you do
 
 Three years later nobody had to want anything. A statistician at Target named Andrew Pole [built a score](https://www.nytimes.com/2012/02/19/magazine/shopping-habits.html) that watched about two dozen ordinary purchases, unscented lotion and cotton balls and certain supplements among them, and from the pattern could say whether a shopper was pregnant and roughly when she was due, sometimes before she had told her own family. The arithmetic that sold lotion simply had her as a side effect.
 
@@ -61,10 +64,10 @@ In 2018 California investigators took DNA from a decades-old crime scene, dresse
 :::figure{id="genealogy-triangulation" src="../assets/the-end-of-the-rave/genealogy-triangulation.png" alt="A family tree diagram: a shared ancestor born in the 1800s branches to three descendants, two of whom uploaded DNA kit results and are drawn as filled circles, while the third, Joseph James DeAngelo, never uploaded anything and is drawn as a dashed outline" caption="He never spat in a tube. Two people who shared some of his blood did, on a weekend, out of curiosity." credit="Diagram drawn for this piece."}
 :::
 
-The next two still needed a person who cared enough to look. What had collapsed was the bill.
-
 :::figure{id="spit-tube" src="../assets/the-end-of-the-rave/spit-tube.jpg" alt="A clear plastic saliva collection tube, half full, lying on the printed instruction card from a mail-order ancestry DNA kit; the card reads ancestryDNA and let the discoveries begin, and the tube carries a label reading ACTIVATION CODE" caption="Spit, an activation code, and a weekend of curiosity. Everybody who mailed one of these in was looking for cousins." credit="Photograph by Lisa Zins, 2018, CC BY 2.0."}
 :::
+
+The next two still needed a person who cared enough to look. What had collapsed was the bill.
 
 ## Your phone snitches
 
@@ -78,15 +81,7 @@ Until then, somebody had to care enough to spend the money. A police force, a ne
 
 ## Big Brother spies on nobody
 
-After that it stopped mattering who you were in particular. In October 2024 two Harvard students wired a pair of ordinary Ray-Ban sunglasses to a face search and a stack of public records, then went for a walk. [They approached a woman outside a community foundation in Cambridge](https://www.forbes.com/sites/johnkoetsier/2024/10/03/metas-ray-ban-smart-glasses-used-to-instantly-dox-strangers-in-public-thanks-to-ai-and-facial-recognition/), said they had met her there before, and she shook the hand of a stranger who was at that moment reading her name off her face. They told another student her home address in Atlanta and her parents' names, and she confirmed both. They never released the thing. Their point was that it had taken an afternoon and parts you could already buy.
-
-## Flock snitches on you
-
-Alpharetta, Georgia, put Flock cameras on its streets. Then [more than two thousand agencies could ask those cameras whether they had seen a particular car](https://www.wired.com/story/hackers-flock-camera-data-shows-how-system-works/). A traffic camera in one town had become a national lookup tool.
-
-That is what Flock sells. The town that owns the camera chooses whether its records can be searched nationally, statewide, or by particular outside agencies. An authorized investigator who thinks your car matters to a case can ask the network where it saw you. You do not get a call. You do not get a chance to say no. The town put up the camera; a police officer on the other side of the country may get the answer.
-
-This is a new kind of surveillance: not a detective following you, but a system that has already watched you go by and is waiting to be asked. It is not even reliably contained. In 2026, somebody took one Flock camera down and copied its files: [1.6 million images of about 50,000 vehicles in twenty-one days](https://www.wired.com/story/hackers-flock-camera-data-shows-how-system-works/). The people meant to police it have used it to follow exes, partners and relatives; [Savannah fired six employees for searches involving friends and family and for sharing access](https://apnews.com/article/flock-license-plate-cameras-surveillance-deflock-2a93bc075e2f7ffcca9e04a35d75a3fe). A pole on the road has learned where you sleep, where you work, and which way you went when nobody was watching. Someone might look someday.
+In October 2024 two Harvard students wired a pair of ordinary Ray-Ban sunglasses to a face search and a stack of public records, then went for a walk. [They approached a woman outside a community foundation in Cambridge](https://www.forbes.com/sites/johnkoetsier/2024/10/03/metas-ray-ban-smart-glasses-used-to-instantly-dox-strangers-in-public-thanks-to-ai-and-facial-recognition/), said they had met her there before, and she shook the hand of a stranger who was at that moment reading her name off her face. They told another student her home address in Atlanta and her parents' names, and she confirmed both. They never released the thing. Their point was that it had taken an afternoon and parts you could already buy.
 
 ## Your details snitch on you
 
@@ -97,7 +92,7 @@ The woman appears in a 2024 research paper about real pseudonymized Reddit profi
 :::figure{id="hook-turn-diagram" src="../assets/the-end-of-the-rave/hook-turn-diagram.png" alt="Diagram of a Melbourne hook turn seen from above: a car stays in the left lane, waits in a marked box at the intersection, then turns right across the tram tracks" caption="Right turn, from the left lane. Almost nowhere else does this, which turns out to be the whole problem." credit="Diagram of a Melbourne hook turn."}
 :::
 
-## Attribute inference
+## A guessing game
 
 Behind that one line sits a real dataset: 5,814 comments posted between 2012 and early 2016, taken from 520 public Reddit accounts and handed to a model to see what could be read off them. [The answer](https://arxiv.org/abs/2310.07298) was location, income, sex, age, education, occupation, place of birth and relationship status, right on the first guess up to 85% of the time, about a hundred times cheaper than paying people to do the same reading and two hundred and forty times faster. Those comments were a decade old before anything read them. It worked on the parts nobody thinks to hide.
 
@@ -112,9 +107,13 @@ The guessing game turns scraps into a profile. A city, a sex and an age are not 
 
 No one in that experiment had an enemy or a special reason to be found. They had written about work, weather and traffic. Something read them for less than the price of a sandwich.
 
-## You are already visible
+## Flock snitches on you
 
-Posting less now will not make you anonymous. Old posts, photographs, messages and data held by other people have already left pieces of you in systems you do not control. A new account starts a new trail; it does not erase the old one.
+Alpharetta, Georgia, put Flock cameras on its streets. Then [more than two thousand agencies could ask those cameras whether they had seen a particular car](https://www.wired.com/story/hackers-flock-camera-data-shows-how-system-works/). A traffic camera in one town had become a national lookup tool.
+
+That is what Flock sells. The town that owns the camera chooses whether its records can be searched nationally, statewide, or by particular outside agencies. An authorized investigator who thinks your car matters to a case can ask the network where it saw you. You do not get a call. You do not get a chance to say no. The town put up the camera; a police officer on the other side of the country may get the answer.
+
+This is a new kind of surveillance: not a detective following you, but a system that has already watched you go by and is waiting to be asked. It is not even reliably contained. In 2026, somebody took one Flock camera down and copied its files: [1.6 million images of about 50,000 vehicles in twenty-one days](https://www.wired.com/story/hackers-flock-camera-data-shows-how-system-works/). The people meant to police it have used it to follow exes, partners and relatives; [Savannah fired six employees for searches involving friends and family and for sharing access](https://apnews.com/article/flock-license-plate-cameras-surveillance-deflock-2a93bc075e2f7ffcca9e04a35d75a3fe). A pole on the road has learned where you sleep, where you work, and which way you went when nobody was watching. Someone might look someday.
 
 Face, prose, blood, plates. Each alone is a lead. The first customer able to run all four at once is the one that already owns the warrants and the crime lab, and it does not have to want you either. It only has to be asked.
 
@@ -122,11 +121,19 @@ Face, prose, blood, plates. Each alone is a lead. The first customer able to run
 
 All of it arrives in the room as a feeling. Freya Price, twenty-one, studies at Cardiff University and [has started choosing pubs over clubs](https://www.aol.com/articles/fear-unintentionally-going-viral-changing-220207000.html). A bad club night can become a background check she has not had yet. Nobody needs to want to know who she is. Someone holds a phone over their head, films the DJ, posts it, and turns the whole room into an audience.
 
+It does not take a scandal. At a foam party in Lloret de Mar this summer, a twenty-year-old French woman named Océane was dancing in a red bikini while water and foam hit the crowd. She did not know anybody was filming her. The clip lasted thirteen seconds. It passed a hundred million views, turned her into Aora DJ, and, as she later said, [changed her life completely](https://www.ladbible.com/news/world-news/red-viral-instagram-video-spain-travel-732794-20260728). The party ended. The version of it that mattered to strangers was only beginning.
+
 People say phones have ruined the dance floor, then bring them anyway: [a 2025 survey found half agreeing and more than half admitting they use them there](https://musictech.com/news/music/survey-phones-ruining-dancefloor/). The night now has a second half the next morning, spent searching what strangers posted from the room to see whether you are in it.
+
+That is the change in a Friday night. The crowd has not disappeared; it has grown a second address, in group chats, feeds and accounts. Going out once let a person step away from the name, the job, the face. Now the phone makes material for a later audience. A stranger can turn an afternoon into a character people follow, judge, desire or ridicule. The record begins to outweigh the thing it recorded.
+
+Jean Baudrillard called that kind of world a [simulacrum](https://plato.stanford.edu/entries/baudrillard/): the copy slips in front of the real thing and becomes the thing people act on. *Black Mirror* put the nightmare in pastel colors in [its “Nosedive” featurette](https://www.youtube.com/watch?v=R32qWdOWrTo), where every small encounter is also a rating and one bad day in public follows a person into everything she tries to do next. Nobody has handed the dance floor a number. The fear is the same one. Whatever happens in the room can be carried out of it, judged by strangers who were never there, and settled later in a place the person cannot reach. Everyone on the floor can feel the possible clip waiting above them.
+
+::video{src="https://www.youtube.com/watch?v=R32qWdOWrTo" title="Black Mirror — Nosedive featurette | Netflix"}
 
 ## We've lost dancing
 
-Kaptin Barrett, who has watched the phones rise from the booth since 1999, put the loss in one line: “The mystique of the club is gone. It’s just somewhere where you go and either you go to dance or you go to be seen.”
+From the booth, Kaptin Barrett put the loss in one line: “The mystique of the club is gone. It’s just somewhere where you go and either you go to dance or you go to be seen.”
 
 In 2021, with the clubs shut, DJ Marea Stamper left a voicemail about what had been taken away. A producer [built a record around her voice](https://www.thefader.com/2021/02/22/fred-again-the-blessed-madonna-marea-weve-lost-dancing): we have lost dancing.
 
@@ -134,23 +141,6 @@ In 2021, with the clubs shut, DJ Marea Stamper left a voicemail about what had b
 
 The clubs came back. The other loss did not. There was no night it stopped and no morning it resumed. By the time a twenty-one-year-old in Cardiff worked out that the safe move was the pub, it had already become the weather.
 
-## The party becomes hyperreal
-
-At a foam party in Lloret de Mar in 2026, a twenty-year-old French woman named Océane was dancing in a red bikini while water and foam hit the crowd. She did not know anybody was filming her. The clip lasted thirteen seconds. It passed a hundred million views, turned her into Aora DJ, and, as she later said, [changed her life completely](https://www.ladbible.com/news/world-news/red-viral-instagram-video-spain-travel-732794-20260728). The party ended. The version of it that mattered to strangers was only beginning.
-
-That is the change in a Friday night. The crowd has not disappeared; it has grown a second address, in group chats, feeds and accounts. Going out once let a person step away from the name, the job, the face. Now the phone makes material for a later audience. A stranger can turn an afternoon into a character people follow, judge, desire or ridicule. The record begins to outweigh the thing it recorded.
-
-Jean Baudrillard called that kind of world a [simulacrum](https://plato.stanford.edu/entries/baudrillard/): the copy slips in front of the real thing and becomes the thing people act on. *Black Mirror* put the nightmare in pastel colors in [its “Nosedive” featurette](https://www.youtube.com/watch?v=R32qWdOWrTo), where every pleasant exchange is also a rating and a bad score closes doors. Nobody has handed the dance floor one public number. The phone does the quieter work. Everyone in the room can feel the possible clip waiting above them.
-
-::video{src="https://www.youtube.com/watch?v=R32qWdOWrTo" title="Black Mirror — Nosedive featurette | Netflix"}
-
-:::figure{id="castlemorton-aerial" src="../assets/the-end-of-the-rave/castlemorton-aerial.jpg" alt="Aerial view of thousands of vehicles, tents and caravans packed across a green field, the Castlemorton Common gathering seen from above"}
-:::
-
-Thirty thousand people stood in a field for a week, and the country never turned the crowd into a list of names.
-
 Go back to the people on the ridge: seven faces, lit and in focus, a few feet from the lens. In 1992 that cost them nothing, because a picture was only a picture.
 
-Everything since has been the price of that picture coming down: a newspaper’s budget and six years; a due date read from a shopping basket; a cousin’s spit; a purchase order; a program that reads sentences like a tailor reads a hem. Each arrived as an improvement. Each took the same thing from the people on the ridge: the freedom to be in public without being on file.
-
-A person who was nineteen in that field had it for free. A person who is nineteen now has never had it and cannot buy it back. The advice about dancing is still on the fridge. The condition it describes is now something you have to book: a room that covers your camera at the door and posts the official video in the morning. The real night is still there. It just has to compete with the one that follows it home.
+A person who was nineteen in that field could be in public without being on file, and had it for free. A person who is nineteen now has never had it and cannot buy it back. The advice about dancing is still on the fridge. The condition it describes is now something you have to book: a room that covers your camera at the door and posts the official video in the morning.

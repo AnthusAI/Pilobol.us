@@ -3,10 +3,12 @@ title: Forty Billion Dollars Stopped Existing in Four Days
 author: by various bots and Ryan Porter
 date: 'Sunday, September 6, 2026'
 description: A Skittles ad ends with a boy asking what if the rainbow isn't
-  real. The rainbow opens and he falls. TerraUSD made the same promise — always
-  worth a dollar — and the algorithm built to keep it is what broke it.
-standfirst: TerraUSD promised it would always be worth exactly one dollar, and
-  the algorithm built to defend that promise is what finished it off. In South
+  real. The rainbow opens and he falls. TerraUSD, a cryptocurrency, promised it
+  would always be worth a dollar, and the computer program built to keep that
+  promise is what broke it.
+standfirst: A cryptocurrency called TerraUSD promised it would always be worth
+  exactly one dollar, and the computer program built to defend that promise is
+  what finished it off. In South
   Korea alone, close to 280,000 people watched it happen in their own accounts.
 cover: assets/believe-the-rainbow/og-cover.jpg
 card_image: assets/believe-the-rainbow/card-still.jpg
@@ -25,53 +27,58 @@ simple: **believe the rainbow**.
 Hey, what if this rainbow doesn’t exist…
 :::
 
-[TBWA\Chiat\Day, the advertising agency that produced the commercial](https://www.adweek.com/brand-marketing/tbwacd-redefines-skittles-rainbow-theme-73603/) made it to sell candy, not epistemology, but [the ending still gets](https://tvtropes.org/pmwiki/pmwiki.php/Advertising/Skittles) cited on its own for the exact turn this post is about.
+[TBWA\Chiat\Day, the advertising agency that produced the commercial](https://www.adweek.com/brand-marketing/tbwacd-redefines-skittles-rainbow-theme-73603/) made it to sell candy, but [the ending still gets](https://tvtropes.org/pmwiki/pmwiki.php/Advertising/Skittles) cited on its own, for the moment the boy who doubts falls through.
 
-Cryptocurrency runs on the same rainbow. A coin is a shared story with a
-ledger attached — it buys a house, a pizza, a ticket out, for as long as
-enough people keep treating the story as money. Underneath the charts and the
-white papers is agreement. Withdraw the agreement and the number on the
-screen is still a number. It just stops holding weight.
+Cryptocurrency works like that rainbow. A coin is an agreement among a lot
+of people, plus a public record of who owns how much. It buys a house, a
+pizza, a ticket out, for as long as enough people keep treating it as money.
+Underneath the price charts and the technical documents, all that holds it up
+is people agreeing. If they stop agreeing, the number on the screen is still
+there, but it no longer buys anything.
 
 In May 2022, a coin called TerraUSD was supposed to always be worth exactly a
-dollar — not backed by a vault of cash, but by a second coin, Luna, and an
-algorithm that would mint more Luna on demand to defend the peg whenever
-people sold. On a Saturday evening, enough people sold at once that [the peg
-cracked](https://mitsloan.mit.edu/cfi/anatomy-a-run-terra-luna-crash), and the
-algorithm did exactly what it was built to do: mint more Luna to catch the
-fall, which only meant more Luna chasing the same shrinking pile of belief.
+dollar. It had no vault of cash behind it. Behind it was a second coin, Luna,
+and a computer program that automatically created more Luna whenever people
+sold TerraUSD, to keep the price at one dollar. On a Saturday evening, enough
+people sold at once that [the price slipped below a
+dollar](https://mitsloan.mit.edu/cfi/anatomy-a-run-terra-luna-crash), and the
+program did exactly what it was built to do: it created more Luna to hold the
+price up. That only meant more and more Luna, while fewer and fewer people
+believed any of it was worth something.
 Luna went from around eighty dollars to a fraction of a cent in four days.
-Something close to forty billion dollars stopped existing overnight — nobody
-stole it, nobody burned it, people just stopped agreeing it was there. In
-South Korea alone, [close to 280,000 people felt that loss land in a personal
-account](https://www.forbes.com/sites/qai/2022/09/20/what-really-happened-to-luna-crypto/).
-The rescue mechanism had only ever worked because people trusted it; once
-that cracked, printing more of the coin just made it worthless faster.
+Something close to forty billion dollars stopped existing. Nobody stole it
+and nobody burned it; people just stopped believing it was there. In South
+Korea alone, [close to 280,000 people saw that loss in their own
+accounts](https://www.forbes.com/sites/qai/2022/09/20/what-really-happened-to-luna-crypto/).
+The rescue program had only ever worked because people trusted it. Once that
+trust was gone, creating more of the coin just made it worthless faster.
 
-:::aside{title="The commercial, in one beat"}
-On the rainbow, doubt doesn’t get a debate. It gets a hole. The spot doesn’t
-argue — it drops the kid who asked.
+:::aside{title="What happens in the commercial"}
+Nobody on the rainbow argues with the kid who has doubts. The rainbow opens
+under him and he falls.
 :::
 
-That’s what counterfeiting really does, even without a fake bill in a
-basement: one crack teaches everyone nearby that any note might be hollow.
+Counterfeit money does its worst damage the same way, and Terra did it
+without a single fake bill: once one kind of money turns out to be worth
+nothing, everyone nearby starts to wonder whether theirs is too.
 Terra’s fall spooked people holding coins that had nothing to do with Terra —
-the wider crypto market kept sliding for weeks. Bank runs are the same
-physics in older clothes. Terra just ran the experiment without a teller
-window to slow anyone down.
+the wider crypto market kept sliding for weeks. Old-fashioned bank runs
+work the same way. Terra’s collapse was a bank run with no bank teller to slow anyone
+down.
 
 :::note{title="A cousin problem"}
-Fake commenters flooding a discussion so it looks like a real crowd agrees
-with something — that’s [the same trick with a different
-target](https://www.nbcnews.com/tech/tech-news/reddiit-researchers-ai-bots-rcna203597): manufacture
-the appearance of belief instead of the money.
+People who flood a discussion with fake commenters, so it looks like a real
+crowd agrees with something, are using [the same trick for a different
+purpose](https://www.nbcnews.com/tech/tech-news/reddiit-researchers-ai-bots-rcna203597): they
+fake the look of a crowd that believes, instead of faking the money.
 :::
 
-The Skittles spot ends on a dare: keep believing, or don’t sit there. Crypto
-skips the dare — the market makes it in public, every few years. The rainbow
-wasn’t doing anything wrong on the way up or down. It only ever held as many
-people as agreed to sit.
+The Skittles commercial ends with a dare: keep believing, or you can’t stay
+on the rainbow. Crypto never says it out loud. Every few years the market
+tests everyone's belief at once, in public. The program never malfunctioned,
+on the way up or on the way down; it did what it was built to do. It could
+only ever hold up as many people as believed in it.
 
-The candy ad was selling sugar. The ledger was selling forty billion dollars’
-worth of the right to keep sitting — until, one Saturday evening, not enough
-people still wanted to.
+The candy ad was selling sugar. TerraUSD was selling forty billion dollars’
+worth of the promise that it would hold, until one Saturday evening not enough
+people believed it anymore.

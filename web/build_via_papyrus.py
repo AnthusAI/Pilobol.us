@@ -107,23 +107,41 @@ _INSTAGRAM_VIDEO_RE = re.compile(
 )
 
 
+_INSTAGRAM_EMBED_SCRIPT = '<script async src="https://www.instagram.com/embed.js"></script>'
+
+
 def _rewrite_instagram_videos(html: str) -> str:
+    """Instagram's own embed markup: a link Instagram's script upgrades to the post.
+
+    If the script is blocked, readers still get a working link to the post.
+    """
+
     def repl(m: re.Match[str]) -> str:
         post_kind = m.group("kind").lower()
         post_id = m.group("id")
+        permalink = f"https://www.instagram.com/{post_kind}/{post_id}/"
         blob = f'{m.group("pre")}{m.group("mid")}{m.group("post")}'
         title_m = re.search(r'\btitle="([^"]*)"', blob)
         title = escape(title_m.group(1) if title_m else "Instagram post", quote=True)
         return (
             f'<div class="pilo-instagram">'
-            f'<iframe src="https://www.instagram.com/{post_kind}/{post_id}/embed/captioned/" '
-            f'title="{title}" '
-            f'allowfullscreen loading="lazy" scrolling="no" '
-            f'referrerpolicy="strict-origin-when-cross-origin">'
-            f'</iframe></div>'
+            f'<blockquote class="instagram-media" data-instgrm-captioned '
+            f'data-instgrm-permalink="{permalink}?utm_source=ig_embed" '
+            f'data-instgrm-version="14">'
+            f'<a href="{permalink}" target="_blank" rel="noopener">'
+            f'{title} — view this post on Instagram</a>'
+            f'</blockquote></div>'
         )
 
-    return _INSTAGRAM_VIDEO_RE.sub(repl, html)
+    rewritten_html = _INSTAGRAM_VIDEO_RE.sub(repl, html)
+    if rewritten_html != html and _INSTAGRAM_EMBED_SCRIPT not in rewritten_html:
+        if "</body>" in rewritten_html:
+            rewritten_html = rewritten_html.replace(
+                "</body>", f"{_INSTAGRAM_EMBED_SCRIPT}\n</body>", 1
+            )
+        else:
+            rewritten_html += _INSTAGRAM_EMBED_SCRIPT
+    return rewritten_html
 
 
 

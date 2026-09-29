@@ -288,18 +288,25 @@
   }
 
   .pilo-instagram {
+    display: flex;
+    justify-content: center;
     width: 100%;
-    max-width: 30rem;
     margin: 1.25rem auto 1.5rem;
   }
 
-  .pilo-instagram iframe {
-    display: block;
+  .pilo-instagram .instagram-media {
     width: 100%;
-    height: 46rem;
-    border: 0;
+    max-width: 30rem;
+    min-width: 0;
+    margin: 0;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 0.5rem;
     background: #fff;
+  }
+
+  .pilo-instagram iframe.instagram-media {
+    padding: 0;
   }
 
   .markus-document a {

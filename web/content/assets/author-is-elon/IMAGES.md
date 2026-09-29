@@ -1,117 +1,74 @@
-# Images — author_is_elon (PILO-9c4e21)
+# Images — The Button Marked Auto Has an Owner (PILO-9c4e21)
 
-Slug: `author-is-elon`. Draft:
-`stories/PILO-9c4e21a7-b83d-4f16-a5e2-71d0c9f38ab4/article-draft.md`.
+Updated 2026-09-29. Everything placed in the article is listed here with its
+source and rights. The standing rules at the bottom still apply.
 
-Nothing is acquired yet. This file records the decisions so a later editor does
-not have to re-derive them, and so the rejected option stays rejected.
+## Placed
 
-## Cover — ACQUIRED. The `author_is_elon` line in the published source.
+### `cursor-forum-auto-to-grok.png` — cover
+- Screenshot of https://forum.cursor.com/t/default-model-defaults-to-grok-instead-of-auto/168972,
+  taken 2026-09-29. First post 2026-08-20 by handle Ryan_9 (display name first
+  name only). Header and sidebar hidden; content unedited.
 
-`HomeTweetTypePredicates.scala` (the real file, from commit `ef4c5eb`, 31 March
-2023) and `author-is-elon-source.png` (screenshot of that commit on GitHub) are
-both in this directory. Repository `twitter/the-algorithm`, licensed AGPL v3.
-The line is 225, in
-`home-mixer/server/src/main/scala/com/twitter/home_mixer/functional_component/decorator/`.
+### `cursor-forum-grok-back-on.png`
+- Screenshot of https://forum.cursor.com/t/please-keep-groks-fingers-off-my-model-settings/169711,
+  taken 2026-09-29. First post 2026-08-27 by handle lloesche. The poster's full
+  real name and photo avatar are blurred; handle, title and text untouched.
 
-**What the file actually is, because the draft had it wrong.** These are tweet
-*type predicates* — labels the system attaches to a post so the company can count
-categories of thing people are shown. They are not a ranking boost. `author_is_elon`
-sits directly alongside `author_is_power_user`, `author_is_democrat` and
-`author_is_republican`.
+### `new-york-journal-1897-10-11.jpg`
+- New York Journal and Advertiser, Monday 11 October 1897, page 1.
+  https://www.loc.gov/resource/sn83030180/1897-10-11/ed-1/?sp=1
+- Library of Congress: "not aware of any U.S. copyright protection … or any
+  other restrictions." Public domain as a pre-1929 US publication.
+- Chosen because it carries no portrait of Evangelina Cisneros (see Rejected).
+  The Sunday 10 October rescue page is dominated by her portrait, and was
+  priced five cents, not one.
 
-The draft originally said the code was the thumb on the scale. It is not, and a
-reader who opens the file would have caught it. The thousandfold multiplier is
-Platformer's reporting and stays attributed to Platformer; the code proves
-something separate and stranger, which is that one individual is a tracking
-category of the same rank as a political party. Draft corrected 2026-09-13.
+### `same-model-every-door.svg`, `what-stood-between.svg`
+- Diagrams drawn for this piece.
 
-If the screenshot is used as cover, crop to show the four adjacent labels, not
-`author_is_elon` alone — isolated, it invites exactly the misreading the draft
-just had.
+### Video
+- "What to know about antisemitic comments posted by Grok, Elon Musk's AI
+  chatbot," CBS News, https://www.youtube.com/watch?v=vmXJJ1IhKJQ — confirmed
+  through YouTube's oEmbed endpoint on 2026-09-29.
 
+## Facts corrected while acquiring these (2026-09-29)
 
-A screenshot of the real recommendation source Twitter published in 2023, showing
-the category by name in monospace.
+- The thread `/t/stop-switching-my-default-model-to-grok/168398` is now hidden
+  from the public (404 to readers, 403 on /raw). Replaced in the article with
+  the live thread "Grok set as default every time" (168826, opened 2026-08-19).
+- `author_is_elon` and the three neighbouring labels were deleted in commit
+  ec83d01 ("Remove stats collection code measuring how often Tweets from
+  specific user groups are served"), three minutes after the code was first
+  published on 2023-03-31. The deleted code comment says the lists were "used
+  purely for metrics collection." The article now says so.
+- xAI commit 535aa67 (2025-07-06) published a new prompt file; the two lines
+  first appear there, rather than being added to an existing file.
+- Commit e517db8 (2025-07-15) re-added the "politically incorrect" line in its
+  original wording; the article now says "put back."
+- The file `HomeTweetTypePredicates.scala` in this folder is byte-identical to
+  the published file at commit ef4c5eb (blob 546cd13e…). The screenshot that
+  used to sit beside it was a GitHub error page and has been deleted.
 
-Why this and not a photograph: the diptych gives the later panel the weight, the
-headline and the ending, and the headline is the modern one. This is also the
-only object in the piece nobody can argue about. Everything else is somebody
-characterising what happened; this is the thing itself, and a man's name sitting
-inside machinery where a category label belongs is the uncanny the house wants.
+## Available, not placed
 
-Requirements: real file, real path visible if possible, no editing of the code
-text. A mocked-up or re-typed version is forbidden under *never generate or
-simulate*, and would be indefensible in a piece about manufactured evidence.
+- Public-domain Hearst portraits at the Library of Congress: c1898
+  (https://www.loc.gov/item/95502965/) and c1904 by B.M. Clinedinst
+  (https://www.loc.gov/item/2004671632/).
+- Other verified news videos on the Grok episode: CNN
+  (https://www.youtube.com/watch?v=z0h3z3V2J9A), France 24
+  (https://www.youtube.com/watch?v=BvmnOGx6crs), DW Shift
+  (https://www.youtube.com/watch?v=YAidYfMMQ-s); on the 2023 boost, WION
+  (https://www.youtube.com/watch?v=PQny371iw08).
 
 ## REJECTED — a portrait of Evangelina Cisneros.
 
-Public domain, dramatic, a face, and the obvious choice. It is also the exact act
-the piece accuses Hearst of: he put her face on the front page to sell papers, and
-putting her face on the front of this would sell this the same way, using the same
-eighteen-year-old, who did not agree to be anybody's illustration either time.
-
-Same failure the house already names under *Illustrating a piece about being
-findable* — the artwork is part of the argument and can contradict it. Do not
-revisit this without Ryan.
-
-## WANTED — the New York Journal front page, October 1897. BLOCKED HERE.
-
-`chroniclingamerica.loc.gov` is blocked by this environment's egress proxy (403
-at CONNECT), so whether the Journal's 1897 run is digitized is still unknown. Not
-answered, rather than answered no. Needs checking from an unblocked machine.
-
-
-Inline, top of the 1897 panel. It indicts the newspaper rather than reusing the
-girl, and it is the thesis as an object: the paper selling the rescue it arranged.
-
-Public domain as a pre-1929 US publication. Needs locating — Library of Congress
-holdings or Chronicling America are the first places to look. If it cannot be
-located or the scan cannot be licensed, ship without it and leave this note.
-
-Prefer a page where her portrait is small or absent. A full-bleed engraving of her
-face reintroduces the rejected image through the back door.
-
-## WANTED — Cursor forum threads. BLOCKED HERE.
-
-`forum.cursor.com` is blocked by the same proxy. The three thread URLs are quoted
-in the draft and were read via search results, not retrieved. Screenshots need an
-unblocked machine, and the post dates still need confirming before publish.
-
-
-Screenshots of the real threads, with dates and permalinks, handled the way the
-Gus Lamont piece handles screenshots of the fakes. The titles argue by themselves;
-the caption only has to say what the program is.
-
-Usernames are visible in these. They are public posts on a public support forum
-made under handles, which is the same standing as the Reddit handle quoted in the
-GEO draft — but if a thread carries a real full name, crop or blur it.
-
-## WANTED — the Grok system prompt line. NOT FOUND.
-
-An agent searched xAI's public GitHub repositories and did not find the published
-system prompts in a cloneable public repo. Either they live somewhere else or the
-draft's claim needs a different primary. Do not publish that sentence until the
-actual published text is in hand.
-
-
-The published instruction telling the model to weight its owner's posts. xAI put
-these prompts in public, so this is a real artifact rather than a paraphrase.
-
-## OPTIONAL — one original diagram, drawn for this piece.
-
-What stood between the owner and the reader in 1897 — a penny, a name across the
-top, the range of a delivery wagon, a rival being shouted about on the same corner
-— against the same diagram for now, where none of those exist.
-
-Only if it shows the mechanism. The piece's whole hinge is that every limit was a
-limit of the object, and prose works hard to carry that. Credit as drawn for this
-piece, the way the rave piece credits its staircase. Weird over infographic-clean;
-if it comes out looking like a consulting slide, drop it.
+It is the exact act the piece accuses Hearst of: he put her face on the front
+page to sell papers. Do not revisit this without Ryan.
 
 ## Standing rules
 
 - Never generate or simulate a photograph, a front page, or a screenshot.
-- A screenshot of real published code or a real public forum thread is evidence.
-  A recreation of one is a fabrication, in a piece about fabrication.
-- Anything that cannot be licensed ships as absent, recorded here.
+- A screenshot of real published code or a real public forum thread is
+  evidence. A recreation of one is a fabrication.
+- Blur real full names in forum screenshots; handles may stay.

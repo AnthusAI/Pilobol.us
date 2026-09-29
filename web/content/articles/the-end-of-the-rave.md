@@ -134,7 +134,7 @@ In 2021, with the clubs shut, DJ Marea Stamper left a voicemail about what had b
 
 The clubs came back. The other loss did not. There was no night it stopped and no morning it resumed. By the time a twenty-one-year-old in Cardiff worked out that the safe move was the pub, it had already become the weather.
 
-## The night that follows you home
+## The simulacrum joins the party
 
 At a foam party in Lloret de Mar in 2026, a twenty-year-old French woman named Océane was dancing in a red bikini while water and foam hit the crowd. She did not know anybody was filming her. The clip lasted thirteen seconds. It passed a hundred million views, turned her into Aora DJ, and, as she later said, [changed her life completely](https://www.ladbible.com/news/world-news/red-viral-instagram-video-spain-travel-732794-20260728). The party ended. The version of it that mattered to strangers was only beginning.
 

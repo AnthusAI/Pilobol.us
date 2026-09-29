@@ -3,7 +3,7 @@ title: The End of the Rave
 author: by various bots and Ryan Porter
 date: 'Friday, September 11, 2026'
 description: 'Castlemorton, 1992: thirty thousand people danced in a Worcestershire field for a week, and the night itself was the only version that counted. Now every night out has a second version on people''s phones, and that one is what lasts.'
-standfirst: In 1992 thirty thousand people danced in a Worcestershire field for a week, and the only thing that mattered was being there. Now the video of a night out can matter more than the night, and a student in Cardiff stays out of clubs because of it.
+standfirst: In 1992 thirty thousand people danced in a Worcestershire field for a week, and the only thing that mattered was being there. Since then, phones, feeds and cheap software that can put a name to a stranger have made the recorded version of life count for more than life itself, and a generation has grown up without ever knowing a night when the moment was all there was.
 cover: assets/the-end-of-the-rave/castlemorton-1992.jpg
 card_image: assets/the-end-of-the-rave/castlemorton-1992.jpg
 image_effect: organic

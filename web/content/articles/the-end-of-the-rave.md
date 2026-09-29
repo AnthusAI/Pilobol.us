@@ -81,8 +81,6 @@ In July 2021 a small Catholic newsletter [bought commercially available location
 
 In early 2022 two teams working independently, one in Switzerland and one in France, fed the posts of Q, the anonymous writer behind the QAnon conspiracy movement, into software that measures how a person builds sentences. [Both landed on the same two men](https://www.orphanalytics.com/en/news/whitepaper202201), a South African software developer named Paul Furber for the early posts and Ron Watkins, who ran the message board where Q posted, for the later ones, and in the [French team's tests](https://www.engadget.com/qanon-machine-learning-205618665.html) the model picked out Watkins ninety-nine times in a hundred. Both men denied it. Nobody had to sell a story or try an office door. The software named them from their writing style alone.
 
-Until then, somebody had to care enough to spend the money. A police force, a newspaper, an ex-boyfriend, a church paper: each identification began with a target and a reason to pursue them. Because it was expensive, it only happened to people somebody badly wanted to find. If nobody had a reason to name you, nobody did. Now the cost has fallen low enough that the target does not have to matter. It can happen to anybody, even if you're nobody.
-
 ## Big Brother spies on nobody
 
 In October 2024 two Harvard students, AnhPhu Nguyen and Caine Ardayfio, wired a pair of Meta's Ray-Ban smart glasses, which have a small camera built in, to a face search and a stack of public records, then went for a walk. [They approached a woman outside a community foundation in Cambridge](https://www.forbes.com/sites/johnkoetsier/2024/10/03/metas-ray-ban-smart-glasses-used-to-instantly-dox-strangers-in-public-thanks-to-ai-and-facial-recognition/), said they had met her there before, and she shook the hand of a stranger whose glasses had just identified her from her face. They told another student her home address in Atlanta and her parents' names, and she confirmed both. They never released the software. Their point was that it had taken an afternoon and parts you could already buy.
@@ -111,6 +109,8 @@ The guessing game turns scraps into a profile. A city, a sex and an age are not 
 
 No one in that experiment had an enemy or a special reason to be found. They had written about work, weather and traffic. Identifying each of them cost less than a sandwich.
 
+Until then, somebody had to care enough to spend the money. A police force, a newspaper, an ex-boyfriend, a church paper: each identification began with a target and a reason to pursue them. Because it was expensive, it only happened to people somebody badly wanted to find. If nobody had a reason to name you, nobody did. Now the cost has fallen low enough that the target does not have to matter. It can happen to anybody, even if you're nobody.
+
 ## Flock snitches on you
 
 Alpharetta, Georgia, put cameras from Flock, a company that sells cameras that read license plates, on its streets. Then [more than two thousand agencies could ask those cameras whether they had seen a particular car](https://www.wired.com/story/hackers-flock-camera-data-shows-how-system-works/). A traffic camera in one town had become a national lookup tool.
@@ -119,9 +119,7 @@ That is what Flock sells. The town that owns the camera chooses whether its reco
 
 This is a new kind of surveillance. Nobody has to follow you. The system has already watched you go by and is waiting for someone to ask. It is not always secure, either. In 2026, somebody took one Flock camera down and copied its files: [1.6 million images of about 50,000 vehicles in twenty-one days](https://www.wired.com/story/hackers-flock-camera-data-shows-how-system-works/). Some of the people with access have used it to follow exes, partners and relatives; [Savannah, Georgia, fired six employees for searches involving friends and family and for sharing access](https://apnews.com/article/flock-license-plate-cameras-surveillance-deflock-2a93bc075e2f7ffcca9e04a35d75a3fe). The network can hold a rough record of where you sleep, where you work, and which way you drove. Anybody with access can look it up.
 
-Your face, your writing, your relatives' DNA, your license plate: each one alone can point to you. The organization best placed to check all four at once is the police. They already have warrants and crime labs, and they do not need a reason to be interested in you in particular.
-
-Put all of it together and any photo or video of you, taken by anybody, can be tied back to your name. Whatever it shows can end up in front of your family, your boss or a stranger.
+Your face, your writing, your relatives' DNA, your license plate: each one alone can point to you. Put all of it together and any photo or video of you, taken by anybody, can be tied back to your name. Whatever it shows can end up in front of your family, your boss or a stranger.
 
 ## Friday night
 

@@ -287,6 +287,21 @@
     border: 0;
   }
 
+  .pilo-instagram {
+    width: 100%;
+    max-width: 30rem;
+    margin: 1.25rem auto 1.5rem;
+  }
+
+  .pilo-instagram iframe {
+    display: block;
+    width: 100%;
+    height: 46rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: #fff;
+  }
+
   .markus-document a {
     text-decoration-thickness: 1px;
     text-underline-offset: 0.15em;

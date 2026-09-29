@@ -98,6 +98,34 @@ def _rewrite_youtube_videos(html: str) -> str:
     return _YT_VIDEO_RE.sub(repl, html)
 
 
+# Instagram post and reel URLs in :::video get Instagram's own embed iframe.
+_INSTAGRAM_VIDEO_RE = re.compile(
+    r'<video(?P<pre>[^>]*?)\bclass="markus-video"(?P<mid>[^>]*?)\bsrc="'
+    r'(?P<src>https?://(?:www\.)?instagram\.com/(?P<kind>p|reel)/(?P<id>[\w-]{5,}))'
+    r'(?:[^"]*)"(?P<post>[^>]*)>\s*</video>',
+    re.I,
+)
+
+
+def _rewrite_instagram_videos(html: str) -> str:
+    def repl(m: re.Match[str]) -> str:
+        post_kind = m.group("kind").lower()
+        post_id = m.group("id")
+        blob = f'{m.group("pre")}{m.group("mid")}{m.group("post")}'
+        title_m = re.search(r'\btitle="([^"]*)"', blob)
+        title = escape(title_m.group(1) if title_m else "Instagram post", quote=True)
+        return (
+            f'<div class="pilo-instagram">'
+            f'<iframe src="https://www.instagram.com/{post_kind}/{post_id}/embed/captioned/" '
+            f'title="{title}" '
+            f'allowfullscreen loading="lazy" scrolling="no" '
+            f'referrerpolicy="strict-origin-when-cross-origin">'
+            f'</iframe></div>'
+        )
+
+    return _INSTAGRAM_VIDEO_RE.sub(repl, html)
+
+
 
 
 SITE_ORIGIN = "https://pilobol.us"
@@ -567,6 +595,7 @@ def render_page_with_poem(**kwargs):
     if n != 1:
         raise RuntimeError(f"masthead poem inject failed (n={n})")
     html2 = _rewrite_youtube_videos(html2)
+    html2 = _rewrite_instagram_videos(html2)
     html2 = _decorate_article_media(
         html2, active_href=kwargs.get("active_href") or ""
     )

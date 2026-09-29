@@ -755,6 +755,9 @@ fabrication. Never retype code or a post into an image.
 **Video.** Embed with `::video` only after confirming the video exists and
 what it is (the YouTube oEmbed endpoint returns the real title and channel).
 Prefer the people in the story, or reputable news footage of the event.
+`::video` also takes an Instagram post or reel URL and renders Instagram's own
+embed. When the footage is of a person who went viral, embed the post from
+their own account rather than a stranger's repost.
 
 **Rights.** Public domain, CC0, CC BY and CC BY-SA with credit; a real
 screenshot as evidence; or explicit permission recorded in the piece's

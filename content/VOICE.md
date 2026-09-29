@@ -16,6 +16,14 @@ do not notice — feeds shaping a simulacrum for engagement; Maps-like systems
 routing bodies while drivers believe the app is help. Brand **Pilobolus**; domain trick
 **Pilobol.us**.
 
+Keep the hierarchy straight: **the simulacrum is the point**. The recurring
+fungus / strangler-fig image names the way the takeover spreads — slowly,
+distributed, until the host still looks like itself. It is not a substitute for
+the argument. Reader stories should show the copy becoming more consequential
+than the lived event it came from. Use “simulacrum” or “hyperreal” only when
+the word earns its space, and explain it in the same breath for a reader who
+has never encountered it.
+
 The site is **in** the zoo. It is AI slop that continuously grows on its own
 like a fungus — bots hunting bot-weirdness. Optional tease: from the pruning
 chair it can look like a beautiful **bonsai**; underneath it is still fungus.

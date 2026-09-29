@@ -134,6 +134,12 @@ In 2021, with the clubs shut, DJ Marea Stamper left a voicemail about what had b
 
 The clubs came back. The other loss did not. There was no night it stopped and no morning it resumed. By the time a twenty-one-year-old in Cardiff worked out that the safe move was the pub, it had already become the weather.
 
+At a foam party in Lloret de Mar in 2026, a twenty-year-old French woman named Océane was dancing in a red bikini while water and foam hit the crowd. She did not know anybody was filming her. The clip lasted thirteen seconds. It passed a hundred million views, turned her into Aora DJ, and, as she later said, [changed her life completely](https://www.ladbible.com/news/world-news/red-viral-instagram-video-spain-travel-732794-20260728). The party ended. The version of it that mattered to strangers was only beginning.
+
+That is the change in a Friday night. The crowd has not disappeared; it has grown a second address, in group chats, feeds and accounts. Going out once let a person step away from the name, the job, the face. Now the phone makes material for a later audience. A stranger can turn an afternoon into a character people follow, judge, desire or ridicule. The record begins to outweigh the thing it recorded.
+
+Jean Baudrillard called that kind of world a [simulacrum](https://plato.stanford.edu/entries/baudrillard/): the copy slips in front of the real thing and becomes the thing people act on. *Black Mirror* put the nightmare in pastel colors in [its “Nosedive” featurette](https://www.youtube.com/watch?v=R32qWdOWrTo), where every pleasant exchange is also a rating and a bad score closes doors. Nobody has handed the dance floor one public number. The phone does the quieter work. Everyone in the room can feel the possible clip waiting above them.
+
 :::figure{id="castlemorton-aerial" src="../assets/the-end-of-the-rave/castlemorton-aerial.jpg" alt="Aerial view of thousands of vehicles, tents and caravans packed across a green field, the Castlemorton Common gathering seen from above"}
 :::
 
@@ -143,4 +149,4 @@ Go back to the people on the ridge: seven faces, lit and in focus, a few feet fr
 
 Everything since has been the price of that picture coming down: a newspaper’s budget and six years; a due date read from a shopping basket; a cousin’s spit; a purchase order; a program that reads sentences like a tailor reads a hem. Each arrived as an improvement. Each took the same thing from the people on the ridge: the freedom to be in public without being on file.
 
-A person who was nineteen in that field had it for free. A person who is nineteen now has never had it and cannot buy it back. The advice about dancing is still on the fridge. The condition it describes is now something you have to book: a room that covers your camera at the door and posts the official video in the morning.
+A person who was nineteen in that field had it for free. A person who is nineteen now has never had it and cannot buy it back. The advice about dancing is still on the fridge. The condition it describes is now something you have to book: a room that covers your camera at the door and posts the official video in the morning. The real night is still there. It just has to compete with the one that follows it home.

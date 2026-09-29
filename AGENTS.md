@@ -234,6 +234,17 @@ bot pretending to be a person — clever metaphors in place of facts, riddle
 closers, borrowed idioms used slightly wrong. The weirdness is in what
 happened; the sentences stay plain. Examples and tests: `content/VOICE.md`.
 
+**The spine (Ryan HARD 2026-09-29):** every piece is about the copy of life
+coming to matter more than life. Surveillance, fakes and feeds are causes, never
+the whole subject; bridge into and out of each evidence chain, cut true facts
+that don't serve the argument, and let the standfirst carry the whole argument,
+not its smallest example. Check characterizations against the primary record
+(Hansard, court papers, the code itself) and keep speakers' qualifiers.
+
+**Dress every piece (Ryan 2026-09-29):** no reader post ships as text alone —
+cover, scannable headings, drawn diagrams, research figures, verified video.
+Rules and rights: `content/VOICE.md`, *Dressing a piece*.
+
 **Street-readable** — full sentences; assume a non-technical Facebook-heavy
 reader who never heard “simulacrum.” No fake desk slang in reader copy. No
 “not A, it’s B” contrast stacks.
@@ -253,13 +264,16 @@ Editorial pack below).
 
 When drafting or reviewing reader-facing articles:
 
-1. `content/VOICE.md` — house voice (prose source of truth)
-2. `content/desks/` — `AGENTS-articles.md` / `AGENTS-concepts.md`
-3. `skills/publication-writing/` — workflow (`SKILL.md`) + gate
-   (`scripts/check_editorial_rules.py`, `rules.yml`)
-4. `skills/copywrite-article/SKILL.md` — thin SOP (defers to the above)
-5. `project/wiki/style-guide.md` — short index only
-6. `project/wiki/mission.md` + `publication-doctrine.md` — DNA
+1. `content/VOICE.md` — house voice, the single source of truth for prose,
+   structure, sourcing and presentation
+2. `project/wiki/style-guide.md` — short index only
+3. `project/wiki/mission.md` + `publication-doctrine.md` — DNA
+4. `web/content/articles/the-end-of-the-rave.md` — the reference piece for how a
+   finished article reads and looks (spine, bridges, headings, cover, diagrams,
+   research figures, video)
+
+The `content/desks/` guides and the `skills/publication-writing` gate script
+named in older notes do not exist in this repo; do not go looking for them.
 
 Sample Markus article for publisher testing:
 `publications/pilobol/content/articles/kuak-skyride-clip.md`

@@ -268,6 +268,26 @@ protagonist.
 Test before drafting: **name the person the piece is about.** If the answer is
 a description rather than a name, there is no piece yet.
 
+### Check the record before you characterize it — HARD (Ryan 2026-09-29)
+
+"Never invent" is not enough. The common failure is a real fact stretched one
+notch past what the source says: "lawbreaking on a huge scale" where the
+minister actually condemned "some of those who camped"; a group arrested
+"because their names were already known" where the record says plain-clothes
+police jumped onto their trucks as they left.
+
+- **Go to the primary record when one exists.** Parliamentary debates
+  (Hansard), court records, a company's own published code or statement, the
+  paper itself. A retrospective magazine piece is a lead to the primary, not a
+  substitute for it.
+- **Quote the exact words when the words are the evidence**, and keep any
+  qualifier the speaker used ("some of," "about," "tried").
+- **When two sources disagree on a date or a number, find a third** before
+  printing either, and use the version most sources support.
+- **Mark the piece's own reasoning as reasoning.** "In 1992 there was no
+  practical way to put names to thousands of faces" is the article's argument.
+  It must not be written as though a police officer said it.
+
 ### Story shapes (pick one)
 
 1. **Inside the user** — close second person (“you”) or first person. They use
@@ -465,6 +485,34 @@ Nothing here relaxes the bans. No publication "we," no theory labels, no
 Pilobolus thinks. Directness means naming the thing. It does not mean acquiring
 a byline.
 
+## The spine and what hangs off it — HARD (Ryan 2026-09-29)
+
+Every piece on this site is about the same thing underneath: machines have
+pulled a copy of life over people's eyes, and the copy has come to matter more
+than the life it copied. Surveillance, cheap identification, fake posts, feeds
+and ranking systems are the causes. They are never the subject by themselves.
+A long piece can spend most of its length on one cause (the rave piece spends
+half its length on the falling cost of putting a name to a stranger) as long as
+it says, in plain words, how that cause feeds the bigger change, and comes back
+to the bigger change before it ends.
+
+Three checks, learned the hard way on *The End of the Rave*:
+
+- **Bridge into and out of every long evidence section.** Before the chain of
+  cases, one or two sentences saying why the reader is about to see it. After
+  it, one or two sentences saying what it adds up to. Without the bridges, a
+  reader thinks the piece has changed subject.
+- **Every fact has to serve the spine, or it goes.** A fact can be true,
+  sourced and interesting and still not belong. A four-million-pound trial cost
+  kept creeping back into the rave piece; nothing in the argument depended on
+  it. What the argument needed was that the authorities wanted the crowd and
+  had no practical way to find them. Keep the fact the argument stands on and
+  cut its neighbours.
+- **The ending may only use what the piece still contains.** When a scene or a
+  source is cut, check the ending, the standfirst, the captions and the alt
+  text for anything that leaned on it. The rave piece briefly ended on a club
+  that no longer appeared anywhere in the article.
+
 ## The headline (title)
 
 Every article carries a `title` above the standfirst. The two are one system
@@ -544,6 +592,22 @@ about “AI fakes” without becoming false, it isn’t summarizing *this* one.
 **It has to read plainly.** Somebody’s parent who doesn’t work in AI should
 follow it on one pass. Insider grammar (“a write,” “the feed as territory”
 without picture) fails even when every word looks ordinary.
+
+**It has to carry the whole argument, not the smallest example of it — HARD
+(Ryan 2026-09-29).** A standfirst that ends on one person's reaction shrinks the
+piece to that person. *The End of the Rave* first ended its standfirst on "a
+student in Cardiff stays out of clubs because of it." That is true, and it is
+the smallest thing the piece says. The version that worked names the machines,
+the copy winning, and what a generation has lost:
+
+> In 1992 thirty thousand people danced in a Worcestershire field for a week,
+> and the only thing that mattered was being there. Since then, phones, feeds
+> and cheap software that can put a name to a stranger have made the recorded
+> version of life count for more than life itself, and a generation has grown
+> up without ever knowing a night when the moment was all there was.
+
+Anecdotes belong in the body. The standfirst is where the reader is told what
+all of them add up to.
 
 ### How to write one
 
@@ -653,6 +717,54 @@ Reader drafts are Markus Markdown (GFM + colon-fenced directives). Encode
 intent, not CSS. Prefer `pull-quote`, `callout`/`note`/`warning`, `aside`,
 `details`, `two-up`, `card-grid`, `timeline`, `figure`, `metric` when they
 earn their keep. Unknown directives should fail validation.
+
+## Dressing a piece — images, diagrams, embeds, headings (Ryan 2026-09-29)
+
+A wall of text loses the street reader. *The End of the Rave* is the model for
+how a published piece should look: a real cover photograph, section headings a
+reader can scan, a drawn chart that shows the whole argument at a glance,
+diagrams that make one mechanism visible, a figure from the primary research,
+and video where somebody's own voice or footage carries a beat better than
+prose can. No reader post goes to production as text alone.
+
+**Headings.** Break any piece over about 600 words into sections a reader can
+scan. A heading names what happens in the section in plain words ("Your blood
+snitches," "A guessing game"), never a theory label or desk slang
+("hyperreal," "attribute inference").
+
+**The cover.** The first `:::figure` becomes the cover and the homepage card.
+Every piece needs one. A real photograph of the scene, or a real artifact at
+the centre of the story (published code, a front page, a forum thread), beats
+anything decorative.
+
+**Diagrams drawn for the piece.** Draw one when a mechanism is hard to hold in
+prose: the six coupons with one crib, the family tree with one dashed outline,
+the hook turn from above, the falling price per identified person. Plain SVG,
+the site's palette, readable at phone width, one idea per diagram. Credit it
+"Diagram drawn for this piece." If it comes out looking like a consulting
+slide, drop it.
+
+**Figures from the research.** When the primary source is an open-access paper
+(CC BY), its own figure is usually the most honest picture of the finding.
+Credit authors, paper and licence in full.
+
+**Screenshots.** A screenshot of a real public page (a forum thread, a
+published commit, a court listing) is evidence. A recreation of one is a
+fabrication. Never retype code or a post into an image.
+
+**Video.** Embed with `::video` only after confirming the video exists and
+what it is (the YouTube oEmbed endpoint returns the real title and channel).
+Prefer the people in the story, or reputable news footage of the event.
+
+**Rights.** Public domain, CC0, CC BY and CC BY-SA with credit; a real
+screenshot as evidence; or explicit permission recorded in the piece's
+`IMAGES.md`. Never generate or simulate a photograph, front page or screenshot.
+Every asset gets its source, credit and licence written down in
+`web/content/assets/<slug>/IMAGES.md`.
+
+**Captions and alt text follow the prose rules.** Plain words, no riddle
+captions. The caption says what the reader is looking at and why it matters.
+The alt text describes what is visible.
 
 ## Register by surface
 

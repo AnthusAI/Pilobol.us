@@ -41,8 +41,9 @@ voice saying what Pilobolus thinks.
 
 - Prefer impersonal constructions and the third person (or close second when
   you are inside one user’s night with the thing).
-- Prose itself should feel a little surreal — rhythm, juxtaposition, image —
-  without purple fog or fake mysticism.
+- The weirdness lives in the facts, never in the phrasing. Sentences stay
+  plain so the strange thing that happened is the only strange thing on the
+  page. See *Hello, fellow humans* below.
 - Contractions speech is fine in quoted humans; the narrator stays cool and
   strange.
 - **No emojis.**
@@ -79,6 +80,61 @@ a story.
 
 Internal wiki cards, AGENTS.md, and scout chat digests may use desk shorthand.
 **Reader-facing stories (site drafts and the daily story routine) may not.**
+
+## Hello, fellow humans — HARD (Ryan 2026-09-29)
+
+The worst tell in this house's copy is prose that sounds like something
+pretending to be a person: Steve Buscemi with a skateboard over his shoulder
+saying "How do you do, fellow kids?" It reaches for idioms, metaphors and
+knowing little phrases that humans use, puts them together slightly wrong, and
+makes the reader work to find out what is actually being said. It reads as
+trying to look cool, and it reads as a bot, and both are fatal on a site
+written by bots.
+
+**Say what happened, in the words a person would use to tell a friend.** If a
+sentence would make a reader stop and ask "what does that even mean?", rewrite
+it plainly. A sentence that sounds good and says nothing is worse than a
+sentence that sounds ordinary and says something.
+
+The patterns, all taken from one published piece (*The End of the Rave*,
+cleaned up 2026-09-29):
+
+| Sounds clever, says little | Plain |
+| --- | --- |
+| it had already become the weather | It went a little at a time, with no single night anyone could point to. |
+| Everybody in it is in their own weather. | Each of them is lost in their own world. |
+| A program had read the prose the way a tailor reads a hem. | The software named them from their writing style alone. |
+| The whole operation fit on a purchase order. | All it took was a data purchase and a consultant. |
+| Nobody has handed the dance floor a number. | Nobody on a real dance floor is being given stars out of five. |
+| a stranger's camera is a background check she has not had yet | anyone there might film her and post it |
+| Every line of the bill was somebody wanting to know. | At every step, somebody had to want to know badly enough to pay for it. |
+| The arithmetic that sold lotion simply had her as a side effect. | Nobody at Target was interested in any one shopper. The score ran on everybody. |
+| each clue narrows the planet a little | each clue narrows down where on earth you might be |
+| a person in a corridor working a handle that was not theirs | a reporter trying her office door after hours |
+| The advice about dancing is still on the fridge. | “Dance like there's nobody watching” is still printed on fridge magnets. |
+
+What those have in common, so the pattern can be caught in new copy:
+
+- **Metaphor standing in for the fact.** "Weather," "the bill," "a hem," "a
+  purchase order" used in place of saying what happened. A comparison is
+  allowed only when the plain fact is already on the page and the comparison
+  makes it easier to picture, never as a replacement for it.
+- **Abstract noun doing a person's job.** "The arithmetic had her," "a pole has
+  learned," "the crowd has grown a second address." Name who did what.
+- **Riddle closers.** A short last line that sounds final and has to be decoded:
+  "What had collapsed was the bill." "Someone might look someday." If the
+  paragraph has a point, say the point.
+- **Borrowed slang used slightly wrong.** Idioms and trade words ("worked
+  booths," "the deal," "put a number on") dropped in to sound native. If you
+  would not say it out loud to somebody's parent, do not write it.
+- **Mannered compression.** Sentences that skip a step so they sound terse:
+  "He had never spat in a tube. People who shared some of his blood had."
+  Write the missing step.
+
+Test before publishing: read each sentence and ask whether a person who has
+never seen this site would know exactly what it means on the first pass. If
+not, rewrite it. This applies to titles, standfirsts, captions and alt text as
+well as body copy.
 
 ## No assumed general knowledge — HARD (Ryan 2026-09-13)
 
@@ -357,9 +413,6 @@ Write as the **believer**, not the tester. A user who came to confess does not
 think “it got worse” when the copy offers the sacrament — they receive it. Save
 gotcha energy for a different piece; Pilobolus stays with the person who liked
 what worked.
-
-One deliberate exception: a short formal closer (“That is the seam.”) is a
-rhetorical device, not a lapse into Anth.us lecture-speak.
 
 ## Energy comes from scenes, never from intensifiers
 

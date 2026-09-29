@@ -229,6 +229,11 @@ simulacrum; prior-failure amplification). Carry it in the story’s spine, not a
 reader posts aim at the larger surreal infection.
 
 
+**Hello, fellow humans (Ryan HARD 2026-09-29):** no prose that sounds like a
+bot pretending to be a person — clever metaphors in place of facts, riddle
+closers, borrowed idioms used slightly wrong. The weirdness is in what
+happened; the sentences stay plain. Examples and tests: `content/VOICE.md`.
+
 **Street-readable** — full sentences; assume a non-technical Facebook-heavy
 reader who never heard “simulacrum.” No fake desk slang in reader copy. No
 “not A, it’s B” contrast stacks.

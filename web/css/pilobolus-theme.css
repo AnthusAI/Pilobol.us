@@ -579,7 +579,7 @@
   .markus-document > ol {
     font-family: var(--markus-serif-body);
     font-optical-sizing: auto;
-    font-size: 1.1875rem;
+    font-size: 1.375rem;
     line-height: 2rem;
     /* The article column is already deliberately bounded by
        --pilo-content-width and the page gutters. A second character-based
@@ -610,6 +610,16 @@
   .markus-document > h3,
   .markus-document > h4 {
     margin: 3rem 0 1rem;
+  }
+
+  .markus-document > h2 {
+    font-size: 1.75rem;
+    line-height: 2.5rem;
+  }
+
+  .markus-document > h3 {
+    font-size: 1.5rem;
+    line-height: 2rem;
   }
 
   .markus-header h1 {

@@ -131,7 +131,7 @@ It does not take a scandal. At a Summer Rockz party in Lloret de Mar, on the Spa
 
 The next day she [wrote to the strangers](https://www.instagram.com/p/DbLAQr6OXb3/) who had found her. The video had "completely changed my daily life," she said, and what made her happiest was that people were "simply discovering the real me." Her biggest dream, she wrote, was to become a DJ. Soon after, as Aora, she [signed with a management agency](https://www.unilad.com/news/world-news/red-bikini-girl-viral-video-interview-259031-20260730) to help her get there. The party ended after one night. The clip kept going, and her career is now being built on it.
 
-::video{src="https://www.instagram.com/p/DbLpUerAIif/" title="Aora DJ on Instagram: Lloret girl in action"}
+::video{src="https://www.instagram.com/reel/Da26BpZtWei/" title="The original clip, posted by Les Filles à Lloret on Instagram"}
 
 People say phones have ruined the dance floor, then bring them anyway: [a 2025 survey found half agreeing and more than half admitting they use them there](https://musictech.com/news/music/survey-phones-ruining-dancefloor/). The night now has a second half the next morning, spent searching what strangers posted from the room to see whether you are in it.
 

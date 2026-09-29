@@ -632,7 +632,14 @@
 
   .markus-pull-quote blockquote {
     font-optical-sizing: auto;
-    max-width: 58ch;
+    font-size: clamp(2.25rem, 6vw, 3.5rem);
+    line-height: 1.15;
+    max-width: 22ch;
+  }
+
+  .markus-document > .markus-pull-quote {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
   }
 
   /* ---------------------------------------------------------------------

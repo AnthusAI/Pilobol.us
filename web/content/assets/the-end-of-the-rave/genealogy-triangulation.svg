@@ -2,7 +2,7 @@
   <rect width="1200" height="630" fill="#f1ead9"/>
 
   <g font-family="Georgia, 'Times New Roman', serif" fill="#211d17">
-    <text x="60" y="72" font-size="38">Nobody has to upload you</text>
+    <text x="60" y="72" font-size="38">He never uploaded his DNA. Two relatives did.</text>
     <text x="60" y="104" font-size="21" fill="#6b6153">GEDmatch, 2018</text>
   </g>
 
@@ -21,12 +21,12 @@
 
   <g font-family="Georgia, 'Times New Roman', serif" font-size="21" text-anchor="middle" fill="#3f5d43">
     <text x="250" y="404">a distant cousin<tspan x="250" dy="27">who mailed in a kit</tspan></text>
-    <text x="600" y="404">another one,<tspan x="600" dy="27">on a weekend, for fun</tspan></text>
+    <text x="600" y="404">another relative<tspan x="600" dy="27">who uploaded a kit</tspan></text>
   </g>
-  <text x="950" y="404" font-family="Georgia, 'Times New Roman', serif" font-size="21" text-anchor="middle" fill="#a35a2a">Joseph James DeAngelo<tspan x="950" dy="27">never spat in a tube</tspan></text>
+  <text x="950" y="404" font-family="Georgia, 'Times New Roman', serif" font-size="21" text-anchor="middle" fill="#a35a2a">Joseph James DeAngelo<tspan x="950" dy="27">never took a DNA test</tspan></text>
 
   <line x1="60" y1="504" x2="1140" y2="504" stroke="#d7cbb2" stroke-width="2"/>
 
-  <text x="60" y="552" font-family="Georgia, 'Times New Roman', serif" font-size="26" fill="#211d17">Two weekend uploads and one genealogist. The third name fell out.</text>
+  <text x="60" y="552" font-family="Georgia, 'Times New Roman', serif" font-size="26" fill="#211d17">Two relatives' uploads were enough for a genealogist to find him.</text>
   <text x="60" y="592" font-family="Georgia, 'Times New Roman', serif" font-size="17" fill="#8d8065">Investigators uploaded crime-scene DNA to the site as though it were a customer's own kit result.</text>
 </svg>

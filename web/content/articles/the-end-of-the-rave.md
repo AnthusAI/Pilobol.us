@@ -140,6 +140,8 @@ That is the change in a Friday night. The crowd has not disappeared; it has grow
 
 Jean Baudrillard called that kind of world a [simulacrum](https://plato.stanford.edu/entries/baudrillard/): the copy slips in front of the real thing and becomes the thing people act on. *Black Mirror* put the nightmare in pastel colors in [its “Nosedive” featurette](https://www.youtube.com/watch?v=R32qWdOWrTo), where every pleasant exchange is also a rating and a bad score closes doors. Nobody has handed the dance floor one public number. The phone does the quieter work. Everyone in the room can feel the possible clip waiting above them.
 
+::video{src="https://www.youtube.com/watch?v=R32qWdOWrTo" title="Black Mirror — Nosedive featurette | Netflix"}
+
 :::figure{id="castlemorton-aerial" src="../assets/the-end-of-the-rave/castlemorton-aerial.jpg" alt="Aerial view of thousands of vehicles, tents and caravans packed across a green field, the Castlemorton Common gathering seen from above"}
 :::
 

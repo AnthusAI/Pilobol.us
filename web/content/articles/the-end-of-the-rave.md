@@ -135,6 +135,8 @@ Your face, your writing, your relatives' DNA, your license plate: each one alone
 
 On a night out, people feel that. Freya Price, twenty-one, studies at Cardiff University and [has started choosing pubs over clubs](https://www.aol.com/articles/fear-unintentionally-going-viral-changing-220207000.html). She worries that a bad moment on a night out could end up online, where anybody checking up on her later might find it. Nobody has to be looking for her. Somebody only has to film the DJ and post it, and she is in the video.
 
+## Thirteen seconds in a red bikini
+
 It does not take a scandal. At a Summer Rockz party in Lloret de Mar, on the Spanish coast, this summer, a twenty-year-old French woman named Océane, who wanted to be a DJ, was dancing in a red bikini while water and foam hit the crowd. She says she did not know anybody was filming her. An Instagram account called Les Filles à Lloret posted the clip. It lasted thirteen seconds, and it passed [a hundred million views](https://www.ladbible.com/news/world-news/red-viral-instagram-video-spain-travel-732794-20260728).
 
 The next day she [wrote to the strangers](https://www.instagram.com/p/DbLAQr6OXb3/) who had found her. The video had "completely changed my daily life," she said, and what made her happiest was that people were "simply discovering the real me": "a natural, spontaneous girl." Her biggest dream, she wrote, was to become a DJ. Soon after, as Aora, she [signed with a management agency](https://www.unilad.com/news/world-news/red-bikini-girl-viral-video-interview-259031-20260730) to help her get there. Within weeks she was performing the clip on purpose: to mark her hundred-thousandth Instagram follower, she put the red bikini back on and [recreated the moment](https://www.boredpanda.com/red-bikini-girl-breaks-the-internet-again-with-new-videos-in-the-same-swimsuit/) for the camera. The account that posted the original later added her as a co-author, so the video a stranger shot now sits on her own profile too.
@@ -142,6 +144,8 @@ The next day she [wrote to the strangers](https://www.instagram.com/p/DbLAQr6OXb
 Whether she saw that particular phone hardly matters. For someone who has grown up with cameras on every side, dancing the way people dance on camera feels like being yourself. That is how a stranger's thirteen seconds could look to her like the real Océane, more real than the afternoon she actually lived, and something she could step back into whenever a phone was ready. The party was over the same day. The clip kept going, and her career is now being built on it.
 
 ::video{src="https://www.instagram.com/reel/Da26BpZtWei/" title="The original clip, posted by Les Filles à Lloret on Instagram"}
+
+## The work of a night out
 
 People say phones have ruined the dance floor, then bring them anyway: [a 2025 survey found half agreeing and more than half admitting they use them there](https://musictech.com/news/music/survey-phones-ruining-dancefloor/).
 

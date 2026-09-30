@@ -21,10 +21,10 @@ Dance like there's nobody watching.
 
 Between May 22 and May 29, 1992, somewhere between twenty and forty thousand people arrived on Castlemorton Common, under the Malvern Hills in Worcestershire, and stayed for a week. It became [the largest illegal rave in British history](https://www.vice.com/en/article/castlemorton-common-rave-history/). The police who turned up could not move it, could not count it and could not name it. One inspector said afterwards that his force had been outwitted and was in the end powerless to act.
 
-:::figure{id="castlemorton-cover" src="../assets/the-end-of-the-rave/castlemorton-1992.jpg" alt="Seven festivalgoers on a ridge at Castlemorton against a clear blue sky in 1992; four of them stand with their hands raised and turned over, none of them looking at each other, while on the ledge below a young woman in round glasses holds the index finger of the man sitting beside her in her mouth and nobody in the frame reacts" caption="Castlemorton Common, May 1992. Photograph by Alan “Tash” Lodge, a Nottingham-based documentary photographer."}
+:::figure{id="castlemorton-cover" src="../assets/the-end-of-the-rave/castlemorton-1992.jpg" alt="Seven festivalgoers on a ridge at Castlemorton against a clear blue sky in 1992; four of them stand with their hands raised and turned over, none of them looking at each other, while on the ledge below a young woman with dark curly hair holds the index finger of the man sitting beside her in her mouth and nobody in the frame reacts" caption="Castlemorton Common, May 1992. Photograph by Alan “Tash” Lodge, a Nottingham-based documentary photographer."}
 :::
 
-For seven days they danced, mostly to music without words, often until dawn. Look at the photograph. Four of the people in it have their hands up and turned over, elbows out, and not one of them is looking at another. On the ledge below, a young woman in round glasses has the index finger of the man beside her in her mouth, and nobody in the frame has noticed or minds. Each of them is lost in their own world. None of them is performing for anybody.
+For seven days they danced, mostly to music without words, often until dawn. Look at the photograph. Four of the people in it have their hands up and turned over, elbows out, and not one of them is looking at another. On the ledge below, a young woman with dark curly hair has the index finger of the man beside her in her mouth, and nobody in the frame has noticed or minds. Each of them is lost in their own world. None of them is performing for anybody.
 
 ## No guest list
 

@@ -30,6 +30,13 @@ scraps of us it can reach — and what it grows on gets shot back out, smoother
 and more convincing each round, until the output looks less like a fungus and
 more like the thing it grew on.
 
+There is a plainer way to say where that ends, and it is already in the kitchen. A loaf
+goes moldy. The mold eats the bread and turns it into more mold, so the loaf never
+shrinks — it gets replaced from the inside, crumb by crumb. What sits on the counter at
+the end is the size and shape and color of a loaf of bread, and none of it is bread.
+[Somebody said in 2021 that the internet had already gone that way](articles/society-has-a-strangler-fig-creeping-around-it.html),
+and got laughed at for the wrong half of it.
+
 Every piece here is one landing: a place the spore hit and the copy took
 hold, sometimes because someone got fooled, sometimes because they liked what
 grew there better than what was there before.

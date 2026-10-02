@@ -156,6 +156,45 @@ discussion onto electricity, water, and copyright. That asymmetry is itself a
 finding: data-center opponents use AI as a crowbar and say so; anti-AI
 campaigners treat touching it as disqualifying.
 
+## Vein 4 — the industry answer (added 2026-10-02, Ryan tip)
+
+On **2026-10-02**, the day this was scouted, AWS CEO **Matt Garman** published
+["Built Together"](https://www.aboutamazon.com/news/company-news/amazon-data-centers-built-together)
+on Amazon's own newsroom: **$1 billion over five years** to data center host
+communities — free community college, 25 modular training centers aimed at
+100,000 trained workers a year by 2028, efficiency grants for 300+ schools and
+30,000+ homes, and flexible local grants for "roads, parks and athletic
+facilities, fire department equipment, affordable housing, food security."
+Bloomberg filed it plainly as Amazon's "latest response to AI data center
+backlash." **[read]** — primary document.
+
+The memo compares the buildout to the Interstate Highway System and answers the
+movement's grievances as numbered myths: water ("U.S. golf courses alone use
+~200x more water than all of Amazon's data centers"), rates (70% of power lines
+over 25 years old), and diesel generators (~10 hours a year, emissions equal to
+"a single round trip flight from Seattle to London"). Tax and job figures are
+county-specific: $3B versus $1.2M of prior land use in St. Joseph County,
+Indiana; $5,800 a year more per Loudoun County homeowner without data center
+revenue.
+
+**It quotes no resident, no local official and no group.** The 640,000 people in
+Vein 3 appear in it only as a number of moratoriums.
+
+**The part that matters for this story.** The memo carries the astroturf claim
+into industry argument: "there are widespread reports of various countries
+intentionally seeding misinformation in the U.S. about data centers to trick us
+into slowing down. Right now there are over 100 data center moratoriums being
+considered across the country."
+
+Read that against the assignment's constraint, which stands. We still do not
+take the China frame as our spine. What changed is that we no longer have to
+speculate about who benefits from it: the largest builder in the country put it
+in writing, unsourced ("widespread reports"), one paragraph away from the
+moratorium count it is meant to discredit. That is **reportable as their
+position**, cited to their own page. Holloway sweeping synthetic content out of
+her 170,000-person room and Garman attributing that room to foreign seeding are
+the same week.
+
 ## Rubric notes
 
 Already **stay-off-the-shelf** — do not rediscover:

@@ -195,6 +195,43 @@ position**, cited to their own page. Holloway sweeping synthetic content out of
 her 170,000-person room and Garman attributing that room to foreign seeding are
 the same week.
 
+### The Musk side (searched 2026-10-02, Ryan ask)
+
+**No Garman equivalent exists.** Searched for a Musk / xAI / SpaceX document
+telling Americans to fall in line behind the buildout; there is no
+community-facing memo of that kind. What Musk says publicly is the compute race
+— China's electricity generation running at three times the US, electricity
+rather than chips as the bottleneck, chip restrictions losing force. The
+"backlash hands China the lead" argument exists in that register but as op-ed
+(Fox News ran it as the data-center freakout being another fracking backlash to
+ignore), not as an xAI statement. xAI's own community-facing posture is
+transactional: billions invested, millions in local taxes, hundreds of jobs,
+$35M substation, $80M water recycling plant, turbines to be fitted with emissions
+controls. **[snippet]**
+
+**The real artifact is institutional, not personal.** The Greater Memphis
+Chamber of Commerce ran the consent campaign for xAI
+([ProPublica](https://www.propublica.org/article/memphis-xai-colossus-elon-musk-chamber-messaging)):
+a mid-June 2025 postcard to Boxtown and at least one other neighborhood bearing
+nine agency logos and claiming xAI operated "in full compliance with all
+applicable federal, state, and local regulations and oversight." Memphis Light,
+Gas and Water: the claim that it had regulatory oversight "is in error." TDEC
+confirmed it has no oversight of supercomputing facilities. Only EPA and the
+Shelby County Health Department held relevant air authority. Chamber government
+affairs officer **Bobby White** wrote the text, said he used "regulatory"
+loosely, and described a town hall as people "being whipped into a frenzy." The
+Chamber also fielded a five-member special operations team providing xAI
+"round-the-clock concierge service," managed its PR, and held at least **12
+invitation-only meetings and no open public meetings**. State Rep. **Justin J.
+Pearson** called the mailer "the red handkerchief of the magician." Boxtown
+resident **Marilyn Gooch** read it as an attempt to suppress health concerns.
+**[read]**
+
+For the story: this is the mirror of Vein 2. The slop farms manufacture
+opposition for ad money; the Chamber manufactured consent for a client, with
+agency logos instead of generated farmland. Neither side of the Memphis argument
+was entirely staffed by people who live there.
+
 ## Rubric notes
 
 Already **stay-off-the-shelf** — do not rediscover:

@@ -1,0 +1,27 @@
+{
+  "id": "PILO-e9ad8b28-a9ec-4bb9-85bc-aa0666844837",
+  "title": "The beast to beat the beast \u2014 AI inside the anti-data-center fight",
+  "description": "Reporting assignment (Ryan, 2026-10-02): find examples of people organizing anti-data-center and anti-AI protests on social media, especially where they use AI to do it. Two veins: residents turning gen-AI on the permitting process, and AI slop farms monetizing anti-AI anger.",
+  "type": "story",
+  "status": "research",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-10-02T09:15:28.642312Z",
+  "updated_at": "2026-10-02T09:16:19.601775Z",
+  "closed_at": null,
+  "right_now_summary": null,
+  "right_now_updated_at": null,
+  "custom": {},
+  "agent": {
+    "platform": "claude-code",
+    "model": "claude-opus-5[1m]",
+    "name": "claude",
+    "settings": {}
+  },
+  "agent_assignment": null
+}

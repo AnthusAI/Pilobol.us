@@ -341,6 +341,23 @@ _AURITUS_SCRIPT_SRC = "https://aurit.us/embed.js"
 _AURITUS_API_BASE = "https://4o6atlkpeh.execute-api.us-east-1.amazonaws.com"
 _AURITUS_SITE_KEY = "WuNsWJc9fLoFesPzXkg2BZBurubafE2F"
 
+# Narration voice and backend. Both are spelled out because the embed's
+# defaults are wrong for this publication twice over: with no
+# data-auritus-tts-backend it falls back to Kokoro, and on `fish` an
+# unset (or "default") voice resolves to `narrator`, not to ours — see
+# `resolveVoiceId` in Auritus's embed/src/index.ts and its Python twin
+# `resolve_voice_id` in auritus_content_hash.py. Naming the voice is
+# therefore the only way to get `serious`; inheriting the default would
+# silently narrate every article in a different voice.
+#
+# These two values are also part of a job's identity, not just its
+# rendering: the content hash is SHA-256 over the normalized text, the
+# *resolved* voice and the backend joined by NULs. Changing either one
+# re-keys every article's narration, so previously generated audio does
+# not carry over and has to be generated again under the new hash.
+_AURITUS_VOICE = "serious"
+_AURITUS_TTS_BACKEND = "fish"
+
 # Root-level pages that get Auritus narration (not homepage/index).
 _AUDIO_NATIVE_STANDALONE_HREFS = frozenset({"a-fungus-among-us.html"})
 
@@ -383,6 +400,8 @@ def _auritus_widget(*, title: str, author: str) -> str:
         f'data-auritus-api="{_AURITUS_API_BASE}" '
         f'data-auritus-name="{name_attr}" '
         f'data-auritus-byline="{byline_attr}" '
+        f'data-auritus-voice="{_AURITUS_VOICE}" '
+        f'data-auritus-tts-backend="{_AURITUS_TTS_BACKEND}" '
         'data-auritus-root=".markus-document" '
         'data-auritus-ignore-selectors=".markus-lede,.markus-byline">'
         "</script>"

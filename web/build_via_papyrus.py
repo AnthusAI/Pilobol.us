@@ -678,6 +678,39 @@ def _build_standalone_page(result, source: Path, href: str) -> None:
     result.pages.append(page_path)
 
 
+def _build_not_found_page(result) -> None:
+    """Render ``404.html`` through the same shell as every other page.
+
+    Amplify serves it, at the requested URL with status 404, via the catch-all
+    custom rule ``/<*>`` -> ``/404.html`` (status ``404-200``). It is written
+    directly, not added to ``result.pages``, so it stays out of the sitemap.
+    Source lives outside ``content/`` so it is never discovered as a page.
+    """
+    source = POD_ROOT / "standalone" / "404.md"
+    css_version = markus_build._css_version(
+        result.out_dir / "css", result.out_dir / "assets"
+    )
+    html = (
+        markus_build.render_page(
+            title=markus_build._read_title(source, "404.html"),
+            fragment=markus_build.convert_fragment(source, theme=None),
+            active_href="404.html",
+            nav_items=[],
+            depth=0,
+            chrome=PILOBOL_CHROME,
+            css_version=css_version,
+        )
+    )
+    # Served at whatever URL was missing (/a/b/c/), so relative links and
+    # assets must be root-absolute.
+    html = re.sub(
+        r'\b(href|src)="(?!(?:[a-z][a-z0-9+.-]*:|/|#))',
+        r'\1="/',
+        html,
+    )
+    (result.out_dir / "404.html").write_text(html, encoding="utf-8")
+
+
 def _ensure_author_front_matter(source: Path) -> None:
     """Default byline for reader posts when author/authors is omitted."""
     text = source.read_text(encoding="utf-8")
@@ -737,6 +770,7 @@ def main() -> int:
         POD_ROOT / "content" / "a-fungus-among-us.md",
         "a-fungus-among-us.html",
     )
+    _build_not_found_page(result)
     # Crawlers (Twitterbot, Slack, iMessage, Facebook) need an explicit allow.
     (result.out_dir / "robots.txt").write_text(
         "User-agent: *\nAllow: /\n\n"

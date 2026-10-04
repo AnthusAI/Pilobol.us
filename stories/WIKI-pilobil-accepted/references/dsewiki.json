@@ -1,0 +1,9 @@
+{
+  "id": "dsewiki",
+  "title": "DseWiki",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://wikiservice.at/dse/wiki.cgi",
+  "source": "pilobil-wiki",
+  "why": "Primary incident artifact cited in published story"
+}

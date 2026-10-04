@@ -1,0 +1,9 @@
+{
+  "id": "martin-fowler-strangler-fig",
+  "title": "Martin Fowler: Strangler Fig Application",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://martinfowler.com/bliki/StranglerFigApplication.html",
+  "source": "pilobil-wiki",
+  "why": "Canonical conceptual lineage for incremental replacement"
+}

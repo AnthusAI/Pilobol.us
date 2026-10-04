@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "event_id": "0d17b00a-e7e5-47cf-a2d0-1a91b5cb3ba0",
+  "issue_id": "PILO-de5a6b3a-37e0-4c0d-ade4-ea6b3d699d1e",
+  "event_type": "field_updated",
+  "occurred_at": "2026-09-29T17:00:57.767Z",
+  "actor_id": "home",
+  "payload": {
+    "changes": {
+      "title": {
+        "from": "The welcome message became the boss",
+        "to": "The project arrived with a manager"
+      },
+      "description": {
+        "from": "Board draft requested by Ryan on 29 September 2026. One documented research scene: the AgentWorm paper’s representative Alice–Bob–Carol exchange, in which a welcome induces a standing-rule change and the recipient passes it to the next test agent. Reporting and editorial artifacts are in stories/PILO-de5a6b3a-37e0-4c0d-ade4-ea6b3d699d1e/. Original OpenAI email finding provides a short contextual echo; the every-future-email version remains explicitly conditional. Controlled experiment, no claimed live outbreak. Draft pending Ryan’s review.",
+        "to": "A user-level Kanbus instruction quietly appeared in new projects as helpful setup."
+      }
+    }
+  }
+}

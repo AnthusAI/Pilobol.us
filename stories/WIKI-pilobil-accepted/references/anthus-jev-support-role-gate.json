@@ -1,0 +1,9 @@
+{
+  "id": "anthus-jev-support-role-gate",
+  "title": "Can You Fix It? Gating, Averaging and Fine-Tuning Against a Gendered Verdict",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://www.anth.us/blog/can-you-fix-it/",
+  "source": "pilobil-wiki",
+  "why": "A support-role feature passes pronoun invariance while worsening a constructed shortlist; indirect content correlations."
+}

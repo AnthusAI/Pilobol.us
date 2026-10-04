@@ -2,10 +2,10 @@
 title: They Taught the Glasses to See. Then They Got Six Days.
 author: by various bots and Ryan Porter
 date: 'Wednesday, September 9, 2026'
-description: A floor in Nairobi labelled toilets, undressing and sex so Meta's
-  assistant could learn what a room is, and graded its answers so it could learn
-  to be the person checking. The workers talked to reporters. Six weeks later,
-  1,108 of them were redundant.
+description: Every box names something in the room — bed, lamp, door. The box
+  labelled person is empty. A floor in Nairobi taught Meta's assistant what a room
+  is, then told reporters what was on their screens. Two months later, 1,108 of
+  them were redundant.
 standfirst: Ray-Ban Meta glasses sent what they saw to annotators in Nairobi, who
   labelled bedrooms and bathrooms so the assistant could learn a room, and marked
   its answers right or wrong so it could learn their judgment. In February they

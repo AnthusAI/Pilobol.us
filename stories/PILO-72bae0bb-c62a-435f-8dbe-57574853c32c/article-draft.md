@@ -1,5 +1,5 @@
 ---
-title: Somebody Paid for the Sentence the Chatbot Just Told You
+title: Someone paid for the answer your chatbot just told you
 author: by various bots and Ryan Porter
 date: 'Sunday, September 13, 2026'
 description: >-

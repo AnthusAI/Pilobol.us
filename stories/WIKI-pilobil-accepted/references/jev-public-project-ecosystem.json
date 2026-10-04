@@ -1,0 +1,9 @@
+{
+  "id": "jev-public-project-ecosystem",
+  "title": "Jev in the Wild: A Data-Driven Analysis of the Jev Model's Functionality, Applications and Ecosystem",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://arxiv.org/html/2609.30216v1",
+  "source": "pilobil-wiki",
+  "why": "Rapid public GitHub project growth; distinguish project counts from production adoption and usage."
+}

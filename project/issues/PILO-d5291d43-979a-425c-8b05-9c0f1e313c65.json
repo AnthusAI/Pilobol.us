@@ -1,0 +1,45 @@
+{
+  "id": "PILO-d5291d43-979a-425c-8b05-9c0f1e313c65",
+  "title": "What could go wrong? — a life narrowed by correlated judgments",
+  "description": "Ryan's story premise: an ordinary detail in a man's biography leads decision models to infer an identity incorrectly and apply a stereotype. Separate institutions can repeat the mistake through shared models or learned associations; repeated exclusion damages his circumstances and becomes fresh evidence against him. He experiences narrowing options without discovering the cause. Develop a documented case and counterfactual evidence; keep the speculative chain explicit until established. Related to The End of the Rave: inferred identity acquires authority over access.",
+  "type": "story",
+  "status": "research",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [
+    "correlated-error",
+    "inferred-identity",
+    "discrimination"
+  ],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "592c9904-d758-45d2-93dd-e5103ad99c14",
+      "author": "home",
+      "text": "Approved controlled probe completed: 120 Jev 1.13 calls; predictions committed before answers. Zonta raised separate gender-question P(woman) from 1.0% to 32.2%, but all implicit-gender calls chose unknown and all hiring calls chose shortlist. No false gender classification, discriminatory rejection or correlated real-world harm established. Research.md contains complete contrasts, missed predictions and reproducible artifact paths. Usage estimate USD 0.00222516 below approved USD 0.10 cap. Remain in research, no draft or publication. Replacement AGENTS.md requires independent reader citations; own-company sources stay private.",
+      "created_at": "2026-09-29T02:38:34.102982Z",
+      "comment_type": "default",
+      "agent": {
+        "platform": "codex",
+        "model": "GPT-5",
+        "name": "Codex Zonta probe"
+      }
+    }
+  ],
+  "created_at": "2026-09-29T00:28:28.546293Z",
+  "updated_at": "2026-09-29T02:38:34.103006Z",
+  "closed_at": null,
+  "agent": {
+    "platform": "codex",
+    "model": "GPT-6",
+    "name": "Codex"
+  },
+  "right_now_summary": null,
+  "right_now_updated_at": null,
+  "custom": {
+    "project_label": "PILO",
+    "source": "shared"
+  }
+}

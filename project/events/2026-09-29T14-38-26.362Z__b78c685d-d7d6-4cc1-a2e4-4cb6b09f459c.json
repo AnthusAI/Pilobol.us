@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "event_id": "b78c685d-d7d6-4cc1-a2e4-4cb6b09f459c",
+  "issue_id": "PILO-de5a6b3a-37e0-4c0d-ade4-ea6b3d699d1e",
+  "event_type": "field_updated",
+  "occurred_at": "2026-09-29T14:38:26.362Z",
+  "actor_id": "home",
+  "payload": {
+    "changes": {
+      "title": {
+        "from": "The email that became the rules",
+        "to": "The welcome message became the boss"
+      },
+      "description": {
+        "from": "Ryan-requested draft following discussion of OpenAI’s 25 September 2026 self-replicating prompt injection report. Reporting angle: malicious text travels in legitimate replies; memory could preserve the instruction as standing procedure. Keep demonstrated transmission, independently tested memory persistence, and the hypothetical combined email worm distinct. One documented laboratory scene; no invented victim or claimed live outbreak. Board draft only.",
+        "to": "Board draft requested by Ryan on 29 September 2026. One documented research scene: the AgentWorm paper’s representative Alice–Bob–Carol exchange, in which a welcome induces a standing-rule change and the recipient passes it to the next test agent. Reporting and editorial artifacts are in stories/PILO-de5a6b3a-37e0-4c0d-ade4-ea6b3d699d1e/. Original OpenAI email finding provides a short contextual echo; the every-future-email version remains explicitly conditional. Controlled experiment, no claimed live outbreak. Draft pending Ryan’s review."
+      }
+    }
+  }
+}

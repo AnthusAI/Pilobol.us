@@ -1,0 +1,24 @@
+{
+  "id": "PILO-670f795a-b3d5-47dd-9d38-8431c2d74f1e",
+  "title": "The Eternal September of open source",
+  "description": "GitHub says generative AI makes pull requests, issues, and security reports cheap to generate at scale while human review remains expensive. Pitch: the open-source discussion circle grows defensive organs—gates, reputation scoring, invitation-only contribution, and vouching—to decide who gets to speak. Board-only: establish reporting and a story shape before any reader draft; no publication authorization.",
+  "type": "story",
+  "status": "idea",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [
+    "trust",
+    "institutional-lag",
+    "synthetic-contributions"
+  ],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-09-27T20:03:52.779034Z",
+  "updated_at": "2026-09-27T20:03:52.780737Z",
+  "closed_at": null,
+  "right_now_summary": null,
+  "right_now_updated_at": null,
+  "custom": {}
+}

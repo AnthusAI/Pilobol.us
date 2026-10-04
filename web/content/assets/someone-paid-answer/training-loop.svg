@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <marker id="arrow-moss" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto">
+      <path d="M0,0 L14,7 L0,14 Z" fill="#3f5d43"/>
+    </marker>
+    <marker id="arrow-ochre" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto">
+      <path d="M0,0 L14,7 L0,14 Z" fill="#a35a2a"/>
+    </marker>
+    <filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#211d17" flood-opacity=".12"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="#f1ead9"/>
+  <path d="M78 106 C220 34 426 50 552 122 C678 194 884 163 1085 90" fill="none" stroke="#d8c9aa" stroke-width="2" stroke-dasharray="3 14"/>
+  <path d="M1082 90 C1141 206 1120 407 1003 502 C874 607 684 592 563 516 C430 433 236 520 112 431" fill="none" stroke="#d8c9aa" stroke-width="2" stroke-dasharray="3 14"/>
+
+  <g font-family="Georgia, 'Times New Roman', serif" fill="#211d17">
+    <text x="60" y="63" font-size="35">The sentence comes back wearing a human voice</text>
+    <text x="61" y="91" font-size="17" fill="#6b6153">An original diagram of the training loop in this piece — copy made to be eaten by the next machine.</text>
+  </g>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M306 160 C390 92 510 92 585 151" stroke="#3f5d43" stroke-width="7" marker-end="url(#arrow-moss)"/>
+    <path d="M650 160 C743 96 858 111 919 184" stroke="#3f5d43" stroke-width="7" marker-end="url(#arrow-moss)"/>
+    <path d="M939 250 C1011 334 977 432 895 472" stroke="#a35a2a" stroke-width="7" marker-end="url(#arrow-ochre)"/>
+    <path d="M809 496 C699 558 579 549 493 493" stroke="#a35a2a" stroke-width="7" marker-end="url(#arrow-ochre)"/>
+    <path d="M420 466 C324 438 260 350 285 266" stroke="#3f5d43" stroke-width="7" marker-end="url(#arrow-moss)"/>
+    <path d="M291 238 C273 202 282 177 306 160" stroke="#a35a2a" stroke-width="7" marker-end="url(#arrow-ochre)"/>
+  </g>
+
+  <g filter="url(#soft-shadow)">
+    <g transform="translate(82 156)">
+      <path d="M10 18 Q16 7 29 11 L202 11 Q214 12 217 24 L217 122 Q214 136 200 138 L26 138 Q10 136 8 122 Z" fill="#e2d5ba" stroke="#3f5d43" stroke-width="3"/>
+      <g stroke="#6b6153" stroke-width="3" stroke-linecap="round">
+        <line x1="24" y1="36" x2="184" y2="36"/>
+        <line x1="24" y1="62" x2="185" y2="62"/>
+        <line x1="24" y1="88" x2="170" y2="88"/>
+      </g>
+      <text x="17" y="169" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" fill="#6b6153">r/SkincareAddiction</text>
+      <text x="15" y="193" font-family="Georgia, 'Times New Roman', serif" font-size="25" fill="#211d17">A post is planted</text>
+      <text x="17" y="218" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#6b6153">It reads like help.</text>
+    </g>
+
+    <g transform="translate(493 124)">
+      <ellipse cx="101" cy="96" rx="111" ry="83" fill="#d8e0c8" stroke="#3f5d43" stroke-width="4"/>
+      <circle cx="70" cy="92" r="15" fill="#3f5d43"/>
+      <circle cx="133" cy="92" r="15" fill="#3f5d43"/>
+      <path d="M44 119 Q100 153 158 119" fill="none" stroke="#3f5d43" stroke-width="5"/>
+      <text x="101" y="124" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#211d17">A crawler reads it</text>
+      <text x="101" y="151" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="15" fill="#6b6153">The room becomes feedstock.</text>
+    </g>
+
+    <g transform="translate(861 188)">
+      <rect x="0" y="0" width="227" height="150" rx="18" fill="#211d17" stroke="#a35a2a" stroke-width="4"/>
+      <circle cx="42" cy="43" r="12" fill="#d8e0c8"/>
+      <circle cx="84" cy="43" r="12" fill="#d8e0c8"/>
+      <circle cx="126" cy="43" r="12" fill="#d8e0c8"/>
+      <path d="M37 86 H191 M37 111 H161" stroke="#d8e0c8" stroke-width="8" stroke-linecap="round"/>
+      <text x="4" y="191" font-family="Georgia, 'Times New Roman', serif" font-size="25" fill="#211d17">The model learns it</text>
+      <text x="6" y="216" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#6b6153">A sentence enters the pile.</text>
+    </g>
+
+    <g transform="translate(703 382)">
+      <path d="M5 18 Q7 3 23 3 H274 Q289 4 291 19 V106 Q287 121 273 123 H104 L68 157 L73 123 H22 Q7 121 5 106 Z" fill="#e2d5ba" stroke="#a35a2a" stroke-width="4"/>
+      <text x="28" y="56" font-family="Georgia, 'Times New Roman', serif" font-size="25" fill="#211d17">“The answer is…”</text>
+      <text x="28" y="88" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" fill="#6b6153">calm · sourced · confident</text>
+      <text x="4" y="193" font-family="Georgia, 'Times New Roman', serif" font-size="25" fill="#211d17">The next answer says it</text>
+      <text x="6" y="218" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#6b6153">Nobody sees the planted thread.</text>
+    </g>
+
+    <g transform="translate(283 370)">
+      <path d="M10 24 Q18 5 39 9 L209 9 Q229 11 232 29 L232 123 Q229 140 211 143 L33 143 Q15 140 11 123 Z" fill="#d8e0c8" stroke="#3f5d43" stroke-width="4"/>
+      <g stroke="#3f5d43" stroke-width="4" stroke-linecap="round">
+        <line x1="37" y1="52" x2="200" y2="52"/>
+        <line x1="37" y1="81" x2="198" y2="81"/>
+        <line x1="37" y1="110" x2="184" y2="110"/>
+      </g>
+      <text x="12" y="179" font-family="Georgia, 'Times New Roman', serif" font-size="25" fill="#211d17">The copy is generated again</text>
+      <text x="14" y="204" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#6b6153">The loop does not remember its source.</text>
+    </g>
+  </g>
+
+  <circle cx="621" cy="340" r="45" fill="#a35a2a" opacity=".92"/>
+  <text x="621" y="336" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#f1ead9">the source</text>
+  <text x="621" y="357" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#f1ead9">falls away</text>
+
+  <text x="60" y="600" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#8d8065">ORIGINAL DIAGRAM · PILOBOLUS · 2026</text>
+</svg>

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "event_id": "a2e40c09-12dc-4f14-8113-33f810a97752",
+  "issue_id": "PILO-de5a6b3a-37e0-4c0d-ade4-ea6b3d699d1e",
+  "event_type": "field_updated",
+  "occurred_at": "2026-09-29T17:05:55.443Z",
+  "actor_id": "home",
+  "payload": {
+    "changes": {
+      "description": {
+        "from": "A user-level Kanbus instruction quietly appeared in new projects as helpful setup.",
+        "to": "A confirmed GSD project-creation bug put its planning handbook in the wrong instruction file."
+      }
+    }
+  }
+}

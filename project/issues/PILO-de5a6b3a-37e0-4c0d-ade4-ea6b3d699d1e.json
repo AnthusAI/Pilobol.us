@@ -1,0 +1,89 @@
+{
+  "id": "PILO-de5a6b3a-37e0-4c0d-ade4-ea6b3d699d1e",
+  "title": "The project arrived with a manager",
+  "description": "A confirmed GSD project-creation bug put its planning handbook in the wrong instruction file.",
+  "type": "story",
+  "status": "copywriting",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "e19f2676-7167-40d9-93f4-58d2d5af058e",
+      "author": "home",
+      "text": "Draft ready: The welcome message became the boss. Reader draft: stories/PILO-de5a6b3a-37e0-4c0d-ade4-ea6b3d699d1e/article-draft.md. Reporting, stage artifacts, and editorial review are alongside it. One representative research exchange, Alice–Bob–Carol; the exact every-future-email version remains conditional. Deterministic house-style scan and manual editorial review completed; the API-backed judge was unavailable. Board remains in copywriting for Ryan’s review.",
+      "created_at": "2026-09-29T14:40:48.480247Z",
+      "comment_type": "default",
+      "agent": {
+        "platform": "codex",
+        "model": "gpt-6",
+        "name": "newsroom-drafting"
+      }
+    },
+    {
+      "id": "5687aca0-9f16-46fd-8bec-65f97c837402",
+      "author": "home",
+      "text": "Editorial correction: the prior researcher-centered draft has been withdrawn. The board now treats the reported accidental Kanbus installation pathway as the story and holds reader prose pending an attributable developer account, project artifact, and verified installer timeline.",
+      "created_at": "2026-09-29T17:01:05.998807Z",
+      "comment_type": "default",
+      "agent": {
+        "platform": "codex",
+        "model": "gpt-6",
+        "name": "newsroom-drafting"
+      }
+    },
+    {
+      "id": "e43174c6-05d4-4be1-8b67-cbaa07421387",
+      "author": "home",
+      "text": "Draft pivot complete: the reader draft now follows Zhicheng Han’s confirmed May 2026 GSD instruction-file spill in Hannover. Kanbus and laboratory research are offstage; the article stays within the documented GSD 1.40.0 configuration and does not call the bug viral or malicious.",
+      "created_at": "2026-09-29T17:05:55.458811Z",
+      "comment_type": "default",
+      "agent": {
+        "platform": "codex",
+        "model": "gpt-6",
+        "name": "newsroom-drafting"
+      }
+    },
+    {
+      "id": "1914c7fe-e979-4bd0-b404-1263aa23ec4d",
+      "author": "home",
+      "text": "Withdrawal: the GSD draft was editorially wrong. A wrong-file write is not the viral adoption-and-propagation chain this story needs. The reader draft is now withdrawn. Current independent leads are either controlled proofs of concept or skill-malware reports that do not document the full chain in the wild.",
+      "created_at": "2026-09-29T17:25:55.393134Z",
+      "comment_type": "default",
+      "agent": {
+        "platform": "codex",
+        "model": "gpt-6",
+        "name": "newsroom-drafting"
+      }
+    },
+    {
+      "id": "4ddc5dba-7760-4261-a9d5-fd02383dfcf7",
+      "author": "home",
+      "text": "New draft restored at Ryan’s direction. It is centered on the reported accidental Kanbus propagation: a user-level instruction was treated as standing guidance by coding agents and carried into unrelated new projects. This supersedes the withdrawn GSD draft.",
+      "created_at": "2026-09-30T13:12:26.526794Z",
+      "comment_type": "default",
+      "agent": {
+        "platform": "codex",
+        "model": "gpt-6",
+        "name": "newsroom-drafting"
+      }
+    }
+  ],
+  "created_at": "2026-09-29T14:33:05.856673Z",
+  "updated_at": "2026-09-30T13:12:26.526821Z",
+  "closed_at": null,
+  "agent": {
+    "platform": "codex",
+    "model": "gpt-6",
+    "name": "newsroom-drafting"
+  },
+  "right_now_summary": null,
+  "right_now_updated_at": null,
+  "custom": {
+    "project_label": "PILO",
+    "source": "shared"
+  }
+}

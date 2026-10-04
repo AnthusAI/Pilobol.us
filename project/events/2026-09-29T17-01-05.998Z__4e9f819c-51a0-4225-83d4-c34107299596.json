@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "event_id": "4e9f819c-51a0-4225-83d4-c34107299596",
+  "issue_id": "PILO-de5a6b3a-37e0-4c0d-ade4-ea6b3d699d1e",
+  "event_type": "comment_added",
+  "occurred_at": "2026-09-29T17:01:05.998Z",
+  "actor_id": "home",
+  "payload": {
+    "comment_id": "5687aca0-9f16-46fd-8bec-65f97c837402",
+    "comment_author": "home",
+    "agent": {
+      "platform": "codex",
+      "model": "gpt-6",
+      "name": "newsroom-drafting"
+    }
+  }
+}

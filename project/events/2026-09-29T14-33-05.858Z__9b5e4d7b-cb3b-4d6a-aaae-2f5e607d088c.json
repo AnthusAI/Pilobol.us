@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "9b5e4d7b-cb3b-4d6a-aaae-2f5e607d088c",
+  "issue_id": "PILO-de5a6b3a-37e0-4c0d-ade4-ea6b3d699d1e",
+  "event_type": "issue_created",
+  "occurred_at": "2026-09-29T14:33:05.858Z",
+  "actor_id": "home",
+  "payload": {
+    "title": "The email that became the rules",
+    "description": "Ryan-requested draft following discussion of OpenAI’s 25 September 2026 self-replicating prompt injection report. Reporting angle: malicious text travels in legitimate replies; memory could preserve the instruction as standing procedure. Keep demonstrated transmission, independently tested memory persistence, and the hypothetical combined email worm distinct. One documented laboratory scene; no invented victim or claimed live outbreak. Board draft only.",
+    "issue_type": "story",
+    "status": "idea",
+    "priority": 2,
+    "assignee": null,
+    "parent": null,
+    "labels": [],
+    "agent": {
+      "platform": "codex",
+      "model": "gpt-6",
+      "name": "newsroom-drafting"
+    }
+  }
+}

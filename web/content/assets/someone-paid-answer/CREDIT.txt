@@ -1,0 +1,10 @@
+training-loop.svg / training-loop.png = Original diagram for this piece.
+
+model-collapse-figure-1.png = Figure 1 from “AI models collapse when trained on
+recursively generated data,” Ilia Shumailov, Zakhar Shumaylov, Yiren Zhao,
+Nicolas Papernot, Ross Anderson, and Yarin Gal, Nature 631 (2024).
+https://doi.org/10.1038/s41586-024-07566-y
+
+Nature article licence: Creative Commons Attribution 4.0 International (CC BY
+4.0). Publisher image URL:
+https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-024-07566-y/MediaObjects/41586_2024_7566_Fig1_HTML.png

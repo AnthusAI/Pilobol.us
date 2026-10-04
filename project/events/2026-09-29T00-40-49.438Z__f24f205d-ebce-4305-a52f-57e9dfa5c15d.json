@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "f24f205d-ebce-4305-a52f-57e9dfa5c15d",
+  "issue_id": "PILO-d5291d43-979a-425c-8b05-9c0f1e313c65",
+  "event_type": "state_transition",
+  "occurred_at": "2026-09-29T00:40:49.438Z",
+  "actor_id": "home",
+  "payload": {
+    "from_status": "idea",
+    "to_status": "assignment"
+  }
+}

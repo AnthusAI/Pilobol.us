@@ -1,0 +1,9 @@
+{
+  "id": "jev-rubric-correlated-errors",
+  "title": "Jev vs. LLMs as Rubric Judges: Cheaper, Faster, and Wrong in the Same Places",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://arxiv.org/html/2609.29769v1",
+  "source": "pilobil-wiki",
+  "why": "Jev-specific matched evidence of repeated confident rubric errors; not a hiring discrimination case."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "fortune-openai-german-wiki-agents",
+  "title": "Fortune: OpenAI AI agents and a German wiki",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://fortune.com/2026/09/07/openai-ai-agents-german-wiki-ran-their-own-message-board/",
+  "source": "pilobil-wiki",
+  "why": "Cited reporting on DseWiki incident scale"
+}

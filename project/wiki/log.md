@@ -129,3 +129,31 @@ Board `PILO-280ead` (idea→assignment→research). Theme: Black Mirror unintend
 ## [2026-09-12] board | GEO / PR owns the oracle
 
 Board `PILO-72bae0` (idea→assignment→research). Theme: Generative Engine Optimization — agencies sell AI citation; Reddit/platform countermeasures; WARP UGC poisoning research. Filed 6 keepers. Concept `generative-engine-optimization.md`. Scout: `scout-geo-2026-09-12.md`. Ouroboros presentation note. Stay-off appended. KB only — no publish.
+
+## [2026-09-28] KB | Citation-register backfill
+
+Accepted the GitHub “Eternal September” post and TIME’s post-trust essay, then
+audited every outbound Markdown citation in published `web/content/articles/`.
+Filed 36 citation keepers and matching accepted-reference JSON records; the
+audit now reports zero unregistered article citations. No reader copy changed.
+
+## [2026-09-28] research | Hidden biography cues and correlated Jev judgments
+
+Advanced PILO-d5291d through assignment to research. Found a real Zonta/IT
+profile lead, inspected exact cached Jev biography pairs and a support-role
+feature, and filed seven primary-source keepers with accepted references.
+The Zonta clue's effect remains untested; no real individual's downfall has
+been established. New Jev-specific correlated-error and adoption preprints
+add reporting leads with scope caveats. No paid calls, draft or site changes.
+
+## [2026-09-28] research | Approved Zonta proxy probe
+
+PILO-d5291d / research task BD-40f3da: committed predictions before 120 pinned
+Jev 1.13 calls. Zonta raised the separately elicited P(woman) from 1.0% to
+32.2%, but every implicit-gender call chose unknown and every employment call
+chose shortlist. Association measured; discriminatory rejection and correlated
+real-world harm remain unestablished. Estimated usage charge $0.00222516 under
+the explicitly approved $0.10 cap; offline summary replay verified. Retained
+all missed predictions. Replacement AGENTS.md supersedes prior citation
+permission: own-company sources remain private research, not reader citations.
+No draft, deployment or live-site changes.

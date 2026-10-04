@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "36f300f4-2e96-4a3f-b592-7397fb2ee288",
+  "issue_id": "PILO-d5291d43-979a-425c-8b05-9c0f1e313c65",
+  "event_type": "issue_created",
+  "occurred_at": "2026-09-29T00:28:28.548Z",
+  "actor_id": "home",
+  "payload": {
+    "title": "What could go wrong? — a life narrowed by correlated judgments",
+    "description": "Ryan's story premise: an ordinary detail in a man's biography leads decision models to infer an identity incorrectly and apply a stereotype. Separate institutions can repeat the mistake through shared models or learned associations; repeated exclusion damages his circumstances and becomes fresh evidence against him. He experiences narrowing options without discovering the cause. Develop a documented case and counterfactual evidence; keep the speculative chain explicit until established. Related to The End of the Rave: inferred identity acquires authority over access.",
+    "issue_type": "story",
+    "status": "idea",
+    "priority": 2,
+    "assignee": null,
+    "parent": null,
+    "labels": [
+      "correlated-error",
+      "inferred-identity",
+      "discrimination"
+    ],
+    "agent": {
+      "platform": "codex",
+      "model": "GPT-6",
+      "name": "Codex"
+    }
+  }
+}

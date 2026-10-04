@@ -135,6 +135,8 @@ On-topic for the wiki. For **reader posts**, Ryan (2026-09-06): only **really si
 
 *(append when Ryan rejects a theme or style)*
 
+- **Ryan, 2026-09-28 — thesis-first “AI meets a post-truth/post-trust society” pieces:** keep the idea as a reporting lens, not a reader-post premise. A story cannot begin as a direct diagnosis of social readiness, institutional collapse, or AI’s timing. Find the one strange, lived event in which that condition is visible; if no such scene emerges, retain the source as a wiki keeper only. The scene carries the condition. It is not an essay that explains it.
+
 ## Stay-off-the-shelf (do not rediscover)
 
 Shelf is **URL / exact title**, not theme. “Hologram funeral” as a pattern stays

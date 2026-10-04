@@ -13,3 +13,14 @@ frontend:
       - '**/*'
   cache:
     paths: []
+# HTML must not sit on CloudFront for a year — the first deploy shipped
+# s-maxage=31536000 and the homepage was stuck after content landed in git.
+customHeaders:
+  - pattern: '**/*.html'
+    headers:
+      - key: Cache-Control
+        value: 'public, max-age=0, s-maxage=60, must-revalidate'
+  - pattern: '/'
+    headers:
+      - key: Cache-Control
+        value: 'public, max-age=0, s-maxage=60, must-revalidate'

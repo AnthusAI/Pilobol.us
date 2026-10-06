@@ -2,7 +2,12 @@
 
 ## Deployment
 
-This is an **Amplify Gen 2** app (app id `d1od6t7lzbwanr`, "pilobol-us").
+Content lives in the Papyrus CMS, not in Git. Two Amplify apps serve this repo
+(`infra/site.json`): the CMS (`pilobol-us-cms`, app id `dv0pdx67fk80m`, Gen 2
+backend, newsroom at `/newsroom`) and the static reader (`pilobol-us-reader`,
+app id `dssc97s4q5kgk`). The old reader `d1od6t7lzbwanr` serves pilobol.us until
+the domain move and is retired afterwards. Humans publish in `/newsroom`;
+Amplify builds the reader from the published export.
 Production is deployed **through DevOps**, not by an agent session running
 raw AWS CLI commands. Don't `zip` a local build and push it via
 `aws amplify create-deployment` / `start-deployment` as a substitute for
@@ -17,16 +22,23 @@ deploy.
 
 ## Build
 
-The site builds through Papyrus's Markus renderer, not a bespoke pipeline:
+The reader builds only from the CMS export, through Papyrus's Markus renderer.
+There is no content in Git (no `web/content`) and no `amplify.yml`; the reader
+app's build spec is generated from `infra/site.json` by the Papyrus template:
 
 ```bash
-cd web && PAPYRUS_ROOT=/path/to/Papyrus python3 build_via_papyrus.py
+papyrus ops content export-published --auth guest --out content-export --clean
+python3 reader/build.py --content content-export --out dist
 ```
 
-Output goes to `web/dist-papyrus/`. See `web/build_via_papyrus.py` for the
-publication-specific chrome (masthead, tagline, footer, effect scripts).
-The build also regenerates homepage/archive cards from `content/articles/`
-and embeds an Auritus narration player on every article — no build-time
+The export needs `PAPYRUS_GRAPHQL_ENDPOINT`, `PAPYRUS_IDENTITY_POOL_ID` and
+`PAPYRUS_MEDIA_BUCKET` (set in `infra/site.json` `reader.environment`; public
+values, no credentials). A wrong endpoint or an empty export fails the build.
+`reader/build.py` overlays the reader-owned files in `web/reader-assets/` (effect
+scripts, lab pages, unreferenced images) onto the export and renders through
+`web/build_via_papyrus.py` (publication chrome: masthead, tagline, footer,
+effect scripts). The build also regenerates homepage/archive cards from the
+exported articles and embeds an Auritus narration player on every article — no build-time
 sync, no API key (see `README.md`).
 
 ---
@@ -65,7 +77,7 @@ Lenses that stay braided:
 
 Stack: **Papyrus local pod** (desk language) with **Biblicus** as the KB engine
 underneath; site builds through Papyrus's Markus renderer (`web/build_via_papyrus.py`);
-Amplify Gen 2 deploys via DevOps. Build cache (`.amplify-cache/`: pinned Papyrus + pip) is configured in `amplify.yml`; never cache `web/dist-papyrus`.
+Amplify Gen 2 deploys via DevOps. The reader build spec is generated from `infra/site.json` (no `amplify.yml`); never cache the built site.
 
 ### Knowledge base (Papyrus local pod)
 
@@ -166,8 +178,8 @@ weekday 9am fungus scout, and any scheduled Anthus/Pilobolus agent runs) files
 
 **Forbidden without Ryan’s explicit publish ask in chat:**
 
-- Writing or committing under `web/content/articles/` (or other paths that land on
-  pilobol.us via Amplify).
+- Publishing in the Papyrus CMS (`/newsroom`) or importing items into it (published
+  items trigger a reader build that lands on pilobol.us).
 - Pushing to `main`, opening a publish PR, or triggering an Amplify / DevOps ship.
 - Treating a board `article.md`, `article-draft.md`, or Kanbus status **`published`**
   as permission to go live — board workflow and production are separate gates.
@@ -268,7 +280,8 @@ When drafting or reviewing reader-facing articles:
    structure, sourcing and presentation
 2. `project/wiki/style-guide.md` — short index only
 3. `project/wiki/mission.md` + `publication-doctrine.md` — DNA
-4. `web/content/articles/the-end-of-the-rave.md` — the reference piece for how a
+4. The published article `the-end-of-the-rave` (in the CMS, or in Git history before
+   the CMS cutover: `git show pre-cms-cutover:web/content/articles/the-end-of-the-rave.md`) — the reference piece for how a
    finished article reads and looks (spine, bridges, headings, cover, diagrams,
    research figures, video)
 

@@ -3,7 +3,7 @@
 
 The Amplify reader app runs `papyrus content export-published` first (guest
 export into `content-export/`), then this script. It copies that export into a
-work directory, overlays the reader-owned files from `web/content/assets/`
+work directory, overlays the reader-owned files from `web/reader-assets/`
 without overwriting anything the export already provides, and renders the site
 through `web/build_via_papyrus.py`.
 
@@ -21,7 +21,7 @@ import tempfile
 from pathlib import Path
 
 REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
-READER_ASSETS_DIRECTORY = REPOSITORY_ROOT / "web" / "content" / "assets"
+READER_ASSETS_DIRECTORY = REPOSITORY_ROOT / "web" / "reader-assets"
 SITE_BUILD_SCRIPT = REPOSITORY_ROOT / "web" / "build_via_papyrus.py"
 
 
@@ -52,6 +52,9 @@ def main(argv: list[str] | None = None) -> int:
     output_directory = arguments.out.resolve()
     if not export_directory.is_dir():
         print(f"Content export directory not found: {export_directory}", file=sys.stderr)
+        return 1
+    if not any(export_directory.rglob("*.md")):
+        print(f"Content export has no Markdown items: {export_directory}", file=sys.stderr)
         return 1
     with tempfile.TemporaryDirectory(prefix="pilobol-reader-") as work_root:
         work_content_directory = Path(work_root) / "content"

@@ -12,10 +12,18 @@ nothing for `markus_renderer`, `build_markus_site` or `SiteChrome` across the
 org — including `build_markus_site`, which is in this repo, so that index is not
 covering these repos and its silence means nothing.
 
-Set `PAPYRUS_ROOT` to a checkout that has it:
+`papyrus_content.markus_renderer` now ships in the `papyrus-newsroom[markus]`
+package (version pinned in `infra/site.json`); no Papyrus checkout or
+`PAPYRUS_ROOT` is needed. Content is not in Git: export it from the CMS first
+(guest read, public values from `infra/site.json` `reader.environment`):
 
-    PAPYRUS_ROOT=/path/to/Papyrus python3 web/build_via_papyrus.py
+    papyrus ops content export-published --auth guest --out content-export --clean
+    python3 reader/build.py --content content-export --out dist
     python3 bin/dev-server.py --port 3002
+
+Reader-owned files (effect scripts, lab pages, unreferenced images) live in
+`web/reader-assets/`. Rollback is Git history (tag `pre-cms-cutover`) plus a
+re-import.
 
 Needs `markdown-it-py`, `pydantic`, `mdit-py-plugins`, `linkify-it-py`.
 Article narration is an Auritus embed baked into every article page at build

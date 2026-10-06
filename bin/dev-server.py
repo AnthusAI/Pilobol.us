@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Local development server for Pilobol.us.
 
-Serves built files from web/dist-papyrus, with live fallback to web/content/assets
+Serves built files from web/dist-papyrus, with live fallback to web/reader-assets
 so changes to background effect scripts and gallery pages take effect immediately
 without caching or full rebuilds.
 """
@@ -15,7 +15,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DIST_DIR = REPO_ROOT / "web" / "dist-papyrus"
-CONTENT_ASSETS_DIR = REPO_ROOT / "web" / "content" / "assets"
+CONTENT_ASSETS_DIR = REPO_ROOT / "web" / "reader-assets"
 CONTENT_CSS_DIR = REPO_ROOT / "web" / "css"
 
 

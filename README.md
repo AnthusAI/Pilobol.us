@@ -31,16 +31,29 @@ Do not put references on the Kanbus board.
 
 ## Build (Markus site)
 
+Article content lives in the Papyrus CMS, not in Git. Humans publish in
+`/newsroom` on the CMS app; each publish starts a reader build. The reader
+builds from the guest export of published items:
+
 ```bash
-cd web && PAPYRUS_ROOT=/path/to/Papyrus python3 build_via_papyrus.py
+pip install "papyrus-newsroom[markus]==<pin in infra/site.json>"
+export PAPYRUS_GRAPHQL_ENDPOINT=... PAPYRUS_IDENTITY_POOL_ID=... PAPYRUS_MEDIA_BUCKET=...
+papyrus ops content export-published --auth guest --out content-export --clean
+python3 reader/build.py --content content-export --out dist
 ```
 
-Output: `web/dist-papyrus/`. The build also:
+The three variables are public values (see `infra/site.json`
+`reader.environment`); no AWS credentials are needed. `web/reader-assets/` holds the
+reader-owned files (effect scripts, lab pages, unreferenced images) that
+`reader/build.py` overlays onto the export. Rollback of the cutover is Git history
+(tag `pre-cms-cutover` is the last commit with `web/content`) plus a re-import into
+the CMS.
 
-- Regenerates homepage and archive listings from `web/content/articles/*.md`
-  at build time, newest date first. Do not hand-edit or commit
-  `web/content/index.md` or `web/content/articles/index.md`. Homepage honors
-  `feed: false`; the archive lists every published story.
+Output: `dist/`. The build also:
+
+- Regenerates homepage and archive listings from the exported articles at build
+  time, newest date first. Homepage honors `feed: false`; the archive lists every
+  published story.
 - Embeds an [Auritus](https://aurit.us) narration player on every article.
   No build-time sync step: Auritus generates audio just-in-time, client-side,
   in the reader's own browser, keyed off a site key that's baked into the
@@ -54,7 +67,9 @@ Set in **Amplify Console → Environment variables**:
 
 | Variable | Required in CI | Purpose |
 |----------|----------------|---------|
-| `PAPYRUS_ROOT` | No (set in `amplify.yml`) | Papyrus checkout for Markus renderer |
+| `PAPYRUS_GRAPHQL_ENDPOINT` | Yes (reader app, from `infra/site.json`) | CMS AppSync endpoint for the guest export |
+| `PAPYRUS_IDENTITY_POOL_ID` | Yes (reader app, from `infra/site.json`) | Cognito identity pool for guest read |
+| `PAPYRUS_MEDIA_BUCKET` | Yes (reader app, from `infra/site.json`) | CMS media bucket for exported images |
 
 Article frontmatter:
 

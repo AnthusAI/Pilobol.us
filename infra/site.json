@@ -1,0 +1,31 @@
+{
+  "siteId": "pilobol-us",
+  "stackName": "amplify-app-shell-pilobol-us-cms",
+  "repository": "https://github.com/AnthusAI/Pilobol.us",
+  "brand": "pilobol-us",
+  "frontend": "markus-static",
+  "papyrusVersion": "1.0.0-next.8",
+  "cms": {
+    "staging": true,
+    "buildComputeType": "STANDARD_8GB",
+    "environment": {
+      "PAPYRUS_EDITION_SLUG": "current",
+      "PAPYRUS_ENABLE_CONSOLE_RESPONDER": "false",
+      "PAPYRUS_ENABLE_SLACK": "false",
+      "PAPYRUS_ENABLE_INBOUND_EMAIL": "false",
+      "PAPYRUS_ENABLE_STORAGE_BACKUPS": "false",
+      "PAPYRUS_DISABLE_GOOGLE_OAUTH": "1",
+      "PAPYRUS_COGNITO_DOMAIN_PREFIX": "papyrus-pilobol-us-cms",
+      "PAPYRUS_OAUTH_REDIRECT_URLS": "http://localhost:3001/"
+    }
+  },
+  "reader": {
+    "buildCommand": "python3 reader/build.py --content content-export --out dist",
+    "baseDirectory": "dist"
+  },
+  "github": {
+    "owner": "AnthusAI",
+    "repo": "Pilobol.us",
+    "branches": ["main", "staging"]
+  }
+}

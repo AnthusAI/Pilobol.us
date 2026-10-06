@@ -13,30 +13,21 @@ also cannot rebuild its own front page or articles (it only writes
 `effects/*.html`), so its `dist/` output is partly orphaned. See Papyrus
 PPY-a2c716.
 
-Usage:
-    PAPYRUS_ROOT=/path/to/Papyrus python3 web/build_via_papyrus.py
+Usage (normally through reader/build.py):
+    python3 web/build_via_papyrus.py --content CONTENT_DIR --out OUT_DIR
 
-`PAPYRUS_ROOT` defaults to ../Papyrus relative to this pod.
+`papyrus_content` comes from the installed `papyrus-newsroom` package.
 """
 from __future__ import annotations
 
-import os
+import argparse
 import re
 import sys
 from html import escape, unescape
 from pathlib import Path
 
 POD_ROOT = Path(__file__).resolve().parent
-DEFAULT_PAPYRUS = POD_ROOT.parent.parent / "Papyrus"
-
-PAPYRUS_ROOT = Path(os.environ.get("PAPYRUS_ROOT", DEFAULT_PAPYRUS)).resolve()
-if not (PAPYRUS_ROOT / "src" / "papyrus_content").is_dir():
-    sys.exit(
-        f"Papyrus not found at {PAPYRUS_ROOT}. "
-        "Set PAPYRUS_ROOT to your Papyrus checkout."
-    )
-
-sys.path.insert(0, str(PAPYRUS_ROOT / "src"))
+CONTENT_DIR = POD_ROOT / "content"
 
 from papyrus_content.markus_renderer import build as markus_build  # noqa: E402
 from papyrus_content.markus_renderer import shell as markus_shell  # noqa: E402
@@ -216,7 +207,7 @@ def _absolute_asset(src: str) -> str:
 def _source_markdown_for_href(active_href: str) -> Path | None:
     """Map a built page href back to its Markdown source under content/."""
     href = (active_href or "index.html").lstrip("/")
-    content = POD_ROOT / "content"
+    content = CONTENT_DIR
     if href in ("", "index.html"):
         return content / "index.md"
     candidate = content / href.replace(".html", ".md")
@@ -513,7 +504,7 @@ def _wrap_effect_image(img_tag: str, src: str, effect: str) -> str:
 
 
 def _effect_front_matter_for_slug(slug: str) -> dict[str, str]:
-    source = POD_ROOT / "content" / "articles" / f"{slug}.md"
+    source = CONTENT_DIR / "articles" / f"{slug}.md"
     return _parse_front_matter(source) if source.is_file() else {}
 
 
@@ -745,8 +736,18 @@ def _prepare_articles(content_dir: Path) -> list[tuple[str, Path, dict[str, str]
     return prepared
 
 
-def main() -> int:
-    content_dir = POD_ROOT / "content"
+def _parse_arguments(argv: list[str] | None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Build Pilobol.us through Papyrus's Markus renderer.")
+    parser.add_argument("--content", required=True, type=Path, help="Markus content directory to render.")
+    parser.add_argument("--out", required=True, type=Path, help="Output directory for the built site.")
+    return parser.parse_args(argv)
+
+
+def main(argv: list[str] | None = None) -> int:
+    global CONTENT_DIR
+    arguments = _parse_arguments(argv)
+    content_dir = arguments.content.resolve()
+    CONTENT_DIR = content_dir
 
     print("Generating homepage and archive feed from articles…")
     write_generated_feed_pages(content_dir)
@@ -758,8 +759,8 @@ def main() -> int:
     _prepare_articles(content_dir)
 
     result = build_markus_site(
-        content_dir=POD_ROOT / "content",
-        out_dir=POD_ROOT / "dist-papyrus",
+        content_dir=content_dir,
+        out_dir=arguments.out.resolve(),
         theme=None,
         site_css=POD_ROOT / "css" / "pilobolus-theme.css",
         chrome=PILOBOL_CHROME,
@@ -767,7 +768,7 @@ def main() -> int:
     )
     _build_standalone_page(
         result,
-        POD_ROOT / "content" / "a-fungus-among-us.md",
+        content_dir / "a-fungus-among-us.md",
         "a-fungus-among-us.html",
     )
     _build_not_found_page(result)

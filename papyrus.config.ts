@@ -70,8 +70,10 @@ export default defineSite({
     brandId: "pilobol-us",
     auth: {
       cognitoDomainPrefix: "papyrus-pilobol-us-cms",
-      redirectUrls: ["http://localhost:3001/"],
-      disableGoogleOAuth: true,
+      redirectUrls: [
+        "http://localhost:3001/",
+        "https://main.dv0pdx67fk80m.amplifyapp.com/",
+      ],
     },
     stagingBuild: { enabled: true },
     features: {

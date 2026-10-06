@@ -71,6 +71,8 @@ export default defineSite({
     auth: {
       cognitoDomainPrefix: "papyrus-pilobol-us-cms",
       redirectUrls: [
+        "http://localhost:3001/newsroom",
+        "https://main.dv0pdx67fk80m.amplifyapp.com/newsroom",
         "http://localhost:3001/",
         "https://main.dv0pdx67fk80m.amplifyapp.com/",
       ],

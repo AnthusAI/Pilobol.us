@@ -9,6 +9,6 @@ npx papyrus-infra synth --site site.json
 
 Synthesis only prints and writes `cdk.out/`. Deploying is a separate, reviewed step.
 
-## Reader environment (filled in later)
+## Reader environment
 
-The reader app build runs `papyrus content export-published --auth guest`, which needs these environment variables on the reader app: `PAPYRUS_GRAPHQL_ENDPOINT`, `PAPYRUS_IDENTITY_POOL_ID`, `PAPYRUS_MEDIA_BUCKET` and `AWS_REGION`. Their values come from the new CMS backend's outputs, which do not exist until the CMS app has deployed, so `reader.environment` is intentionally absent from `site.json` for now. Ticket PPY-97f03c (P3-04) adds it. The backend's `reader` block in `papyrus.config.ts` (`amplifyAppId`) is added then too.
+The reader app build runs `papyrus ops content export-published --auth guest`, which needs `PAPYRUS_GRAPHQL_ENDPOINT`, `PAPYRUS_IDENTITY_POOL_ID` and `PAPYRUS_MEDIA_BUCKET` on the reader app branch. They are public values from the CMS backend's outputs and live in `reader.environment` in `site.json`; the stack update writes them to the reader `main` branch. `AWS_REGION` is not listed: Amplify reserves the `AWS` prefix for its own variables (it supplies `AWS_REGION` in builds) and the guest export derives the region from the endpoint.

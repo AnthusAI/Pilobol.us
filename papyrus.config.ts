@@ -77,6 +77,7 @@ export default defineSite({
         "https://main.dv0pdx67fk80m.amplifyapp.com/",
       ],
     },
+    reader: { amplifyAppId: "dssc97s4q5kgk", branchName: "main" },
     stagingBuild: { enabled: true },
     features: {
       consoleResponder: false,

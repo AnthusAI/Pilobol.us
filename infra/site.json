@@ -7,7 +7,8 @@
   "hostedZoneId": "Z09961547QX1VHIXOBD7",
   "papyrusVersion": "1.0.0-next.17",
   "cms": {
-    "staging": false,
+    "domainName": "newsroom.pilobol.us",
+    "staging": true,
     "cognitoDomainPrefix": "papyrus-pilobol-us-cms",
     "buildComputeType": "STANDARD_8GB",
     "environment": {
@@ -16,7 +17,7 @@
       "PAPYRUS_ENABLE_SLACK": "false",
       "PAPYRUS_ENABLE_INBOUND_EMAIL": "false",
       "PAPYRUS_ENABLE_STORAGE_BACKUPS": "false",
-      "PAPYRUS_OAUTH_REDIRECT_URLS": "http://localhost:3001/"
+      "PAPYRUS_OAUTH_REDIRECT_URLS": "http://localhost:3001/,https://newsroom.pilobol.us/,https://staging.pilobol.us/"
     }
   },
   "reader": {

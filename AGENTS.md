@@ -4,11 +4,11 @@
 
 Content lives in the Papyrus CMS, not in Git. Two Amplify apps serve this repo
 (`infra/site.json`): the CMS (`pilobol-us-cms`, app id `dv0pdx67fk80m`, Gen 2
-backend, newsroom at `/newsroom`) and the static reader (`pilobol-us-reader`,
+backend, newsroom at `/` on newsroom.pilobol.us; `/newsroom/*` redirects to `/*`) and the static reader (`pilobol-us-reader`,
 app id `dssc97s4q5kgk`). pilobol.us (apex only; there is no www) is attached to the
 new reader (`reader.domainName` in `infra/site.json`).
 The old reader `d1od6t7lzbwanr` no longer has a domain and is kept only for
-rollback until it is retired. Humans publish in `/newsroom`;
+rollback until it is retired. Humans publish in the newsroom at the CMS root (`/`);
 Amplify builds the reader from the published export.
 Production is deployed **through DevOps**, not by an agent session running
 raw AWS CLI commands. Don't `zip` a local build and push it via
@@ -180,7 +180,7 @@ weekday 9am fungus scout, and any scheduled Anthus/Pilobolus agent runs) files
 
 **Forbidden without Ryan’s explicit publish ask in chat:**
 
-- Publishing in the Papyrus CMS (`/newsroom`) or importing items into it (published
+- Publishing in the Papyrus CMS (newsroom at `/`) or importing items into it (published
   items trigger a reader build that lands on pilobol.us).
 - Pushing to `main`, opening a publish PR, or triggering an Amplify / DevOps ship.
 - Treating a board `article.md`, `article-draft.md`, or Kanbus status **`published`**

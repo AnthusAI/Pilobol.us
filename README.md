@@ -32,7 +32,7 @@ Do not put references on the Kanbus board.
 ## Build (Markus site)
 
 Article content lives in the Papyrus CMS, not in Git. Humans publish in
-`/newsroom` on the CMS app; each publish starts a reader build. The reader
+the newsroom at the root (`/`) of the CMS app (`/newsroom` redirects there); each publish starts a reader build. The reader
 builds from the guest export of published items:
 
 ```bash

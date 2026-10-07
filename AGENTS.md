@@ -5,8 +5,10 @@
 Content lives in the Papyrus CMS, not in Git. Two Amplify apps serve this repo
 (`infra/site.json`): the CMS (`pilobol-us-cms`, app id `dv0pdx67fk80m`, Gen 2
 backend, newsroom at `/newsroom`) and the static reader (`pilobol-us-reader`,
-app id `dssc97s4q5kgk`). The old reader `d1od6t7lzbwanr` serves pilobol.us until
-the domain move and is retired afterwards. Humans publish in `/newsroom`;
+app id `dssc97s4q5kgk`). pilobol.us (apex only; there is no www) is attached to the
+new reader (`reader.domainName` in `infra/site.json`).
+The old reader `d1od6t7lzbwanr` no longer has a domain and is kept only for
+rollback until it is retired. Humans publish in `/newsroom`;
 Amplify builds the reader from the published export.
 Production is deployed **through DevOps**, not by an agent session running
 raw AWS CLI commands. Don't `zip` a local build and push it via

@@ -4,7 +4,8 @@
   "repository": "https://github.com/AnthusAI/Pilobol.us",
   "brand": "pilobol-us",
   "frontend": "markus-static",
-  "papyrusVersion": "1.0.0-next.16",
+  "hostedZoneId": "Z09961547QX1VHIXOBD7",
+  "papyrusVersion": "1.0.0-next.17",
   "cms": {
     "staging": false,
     "cognitoDomainPrefix": "papyrus-pilobol-us-cms",
@@ -19,6 +20,7 @@
     }
   },
   "reader": {
+    "domainName": "pilobol.us",
     "buildCommand": "python3 reader/build.py --content content-export --out dist",
     "baseDirectory": "dist",
     "environment": {

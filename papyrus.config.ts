@@ -63,6 +63,9 @@ const pilobolUsBrand: SiteBrand = {
   publicationName: "Pilobolus",
 };
 
+export const applyCognitoDomainPrefixFromEnvironment =
+  process.env.PAPYRUS_APPLY_COGNITO_DOMAIN_PREFIX?.trim() === "true";
+
 export default defineSite({
   brands: [pilobolUsBrand],
   defaultBrand: "pilobol-us",
@@ -70,6 +73,7 @@ export default defineSite({
     brandId: "pilobol-us",
     auth: {
       cognitoDomainPrefix: "papyrus-pilobol-us-cms",
+      applyCognitoDomainPrefix: applyCognitoDomainPrefixFromEnvironment,
       redirectUrls: [
         "http://localhost:3001/newsroom",
         "https://main.dv0pdx67fk80m.amplifyapp.com/newsroom",

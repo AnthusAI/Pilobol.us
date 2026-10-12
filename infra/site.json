@@ -25,9 +25,9 @@
     "buildCommand": "python3 reader/build.py --content content-export --out dist",
     "baseDirectory": "dist",
     "environment": {
-      "PAPYRUS_GRAPHQL_ENDPOINT": "https://a4dxv6gfvreqffkumsn5si54fa.appsync-api.us-east-1.amazonaws.com/graphql",
-      "PAPYRUS_IDENTITY_POOL_ID": "us-east-1:9db6e886-f2ae-4323-ae7d-367150e2583c",
-      "PAPYRUS_MEDIA_BUCKET": "amplify-dv0pdx67fk80m-mai-papyrusmediabucket0dab24-onja3prevkp2"
+      "PAPYRUS_GRAPHQL_ENDPOINT": "https://sivqwif4onbdnoh3fm3nrl437q.appsync-api.us-east-1.amazonaws.com/graphql",
+      "PAPYRUS_IDENTITY_POOL_ID": "us-east-1:bf49b499-4cb3-418b-b8ef-90c0eb972da4",
+      "PAPYRUS_MEDIA_BUCKET": "amplify-d1eiwl0gedkmnj-ma-papyrusmediabucket0dab24-nke2rnsdqes7"
     }
   },
   "github": {

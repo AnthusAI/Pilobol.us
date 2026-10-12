@@ -66,6 +66,12 @@ const pilobolUsBrand: SiteBrand = {
 export const applyCognitoDomainPrefixFromEnvironment =
   process.env.PAPYRUS_APPLY_COGNITO_DOMAIN_PREFIX?.trim() === "true";
 
+const legacyCmsAmplifyAppId = "dv0pdx67fk80m";
+const legacyReaderAmplifyAppId = "dssc97s4q5kgk";
+const productionReaderAmplifyAppId = "dpdg1mg84dlwb";
+const readerAmplifyAppId =
+  process.env.AWS_APP_ID?.trim() === legacyCmsAmplifyAppId ? legacyReaderAmplifyAppId : productionReaderAmplifyAppId;
+
 export default defineSite({
   brands: [pilobolUsBrand],
   defaultBrand: "pilobol-us",
@@ -91,7 +97,7 @@ export default defineSite({
         "https://staging.d1eiwl0gedkmnj.amplifyapp.com/",
       ],
     },
-    reader: { amplifyAppId: "dssc97s4q5kgk", branchName: "main" },
+    reader: { amplifyAppId: readerAmplifyAppId, branchName: "main" },
     stagingBuild: { enabled: true },
     features: {
       consoleResponder: false,

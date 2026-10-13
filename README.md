@@ -32,8 +32,11 @@ Do not put references on the Kanbus board.
 ## Build (Markus site)
 
 Article content lives in the Papyrus CMS, not in Git. Humans publish in
-the newsroom at the root (`/`) of the CMS app (`/newsroom` redirects there); each publish starts a reader build. The reader
-builds from the guest export of published items:
+the newsroom at the root (`/`) of the CMS app (`/newsroom` redirects there). pilobol.us is an
+S3 projection behind CloudFront: saving or publishing runs `web/projector.py` inside the
+publish mutation and the page is live within seconds (no reader build, no Republish
+button). To build the whole site locally, for example to compare with the projection, use the
+guest export:
 
 ```bash
 pip install "papyrus-newsroom[markus]==<pin in infra/site.json>"
@@ -43,7 +46,7 @@ python3 reader/build.py --content content-export --out dist
 ```
 
 The three variables are public values (see `infra/site.json`
-`reader.environment`); no AWS credentials are needed. `web/reader-assets/` holds the
+`reader.environment`); no AWS credentials are needed for the export. `web/reader-assets/` holds the
 reader-owned files (effect scripts, lab pages, unreferenced images) that
 `reader/build.py` overlays onto the export. Rollback of the cutover is Git history
 (tag `pre-cms-cutover` is the last commit with `web/content`) plus a re-import into
@@ -61,15 +64,17 @@ Output: `dist/`. The build also:
   `auritus site create` in the [Auritus README](https://github.com/AnthusAI/Auritus)
   if that key ever needs rotating.
 
-### Amplify / CI environment
+### Environment
 
-Set in **Amplify Console → Environment variables**:
+The guest export (local full build) needs the three public variables below; there is no CI reader build any more.
+After a deploy that changes the projector or theme, run `papyrus ops content project --all` (see
+`Papyrus/docs/site-hosting.md`).
 
-| Variable | Required in CI | Purpose |
-|----------|----------------|---------|
-| `PAPYRUS_GRAPHQL_ENDPOINT` | Yes (reader app, from `infra/site.json`) | CMS AppSync endpoint for the guest export |
-| `PAPYRUS_IDENTITY_POOL_ID` | Yes (reader app, from `infra/site.json`) | Cognito identity pool for guest read |
-| `PAPYRUS_MEDIA_BUCKET` | Yes (reader app, from `infra/site.json`) | CMS media bucket for exported images |
+| Variable | Purpose |
+|----------|---------|
+| `PAPYRUS_GRAPHQL_ENDPOINT` | CMS AppSync endpoint for the guest export |
+| `PAPYRUS_IDENTITY_POOL_ID` | Cognito identity pool for guest read |
+| `PAPYRUS_MEDIA_BUCKET` | CMS media bucket for exported images |
 
 Article frontmatter:
 

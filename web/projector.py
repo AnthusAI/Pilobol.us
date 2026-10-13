@@ -25,6 +25,7 @@ Deploy-time inputs: this repository's ``web/`` directory, bundled next to the mo
 
 from __future__ import annotations
 
+import json
 import os
 import re
 from collections.abc import Collection
@@ -639,8 +640,9 @@ def read_site_static_files(web_directory: Path, media_directory: Path | None) ->
 
 
 class PilobolSiteProjector(MarkusSiteProjector):
-    def __init__(self, web_directory: Path, media_directory: Path | None = None) -> None:
-        settings = MarkusProjectorSettings(theme=None, sections=(EFFECTS_SECTION,), chrome=PILOBOL_CHROME)
+    def __init__(self, web_directory: Path, media_directory: Path | None = None, public_data=None) -> None:
+        extra = {} if public_data is None else {"public_data": public_data}
+        settings = MarkusProjectorSettings(theme=None, sections=(EFFECTS_SECTION,), chrome=PILOBOL_CHROME, **extra)
         super().__init__(settings, read_site_static_files(web_directory, media_directory))
         self._web_directory = web_directory
         self._records_by_version: dict[tuple[str, int | None], dict[str, str]] = {}
@@ -740,19 +742,43 @@ class PilobolSiteProjector(MarkusSiteProjector):
         effects = {slug: record.get("image_effect") for slug, record in articles}
         return generate_homepage_markdown(articles), generate_archive_markdown(articles), effects
 
+    def public_data_entries(self, site: SiteIndex):
+        """The articles a visitor can find: not drafts, not hidden from the feed. Only with ``publicData`` in projection.json."""
+        settings = self._settings.public_data
+        if settings is None:
+            return []
+        from papyrus_content.projection.public_data import PublicEntry, clipped, tags_of
+
+        entries = []
+        for slug, record in self._articles(site):
+            if is_hidden_from_feed(record):
+                continue
+            parsed = parse_article_date(record)
+            entries.append(
+                PublicEntry(
+                    title=clipped(record.get("title") or title_from_slug(slug), 200),
+                    url=f"/{ARTICLES_SECTION}/{slug}.html",
+                    summary=clipped(card_blurb(record), settings.summary_characters),
+                    tags=tags_of(record.get("tags")),
+                    date=parsed.strftime("%Y-%m-%d") if parsed != datetime.min else "",
+                )
+            )
+        return entries
+
     def listing_inputs(self, site: SiteIndex) -> dict[str, str]:
         home, archive, effects = self._listing_sources(site)
         return {
             HOME_HREF: digest_of([home, effects]),
             ARCHIVE_PATH: digest_of([archive, effects]),
             SITEMAP_PATH: digest_of(self._page_keys(site)),
+            **self.public_data_inputs(site),
         }
 
     def shared_inputs(self, site: SiteIndex) -> str:
         return digest_of("no navigation")
 
     def owns_page_key(self, key: str) -> bool:
-        if key in (HOME_HREF, SITEMAP_PATH):
+        if key in (HOME_HREF, SITEMAP_PATH) or (self._settings.public_data is not None and key.startswith("_data/")):
             return True
         if not key.endswith(".html") or key == NOT_FOUND_PATH:
             return False
@@ -761,8 +787,8 @@ class PilobolSiteProjector(MarkusSiteProjector):
         return key.split("/", 1)[0] in (ARTICLES_SECTION, EFFECTS_SECTION)
 
     def listing_pages(self, site: SiteIndex, keys: Collection[str] | None = None) -> dict[str, bytes]:
-        wanted = {HOME_HREF, ARCHIVE_PATH, SITEMAP_PATH} if keys is None else set(keys)
-        pages: dict[str, bytes] = {}
+        wanted = {HOME_HREF, ARCHIVE_PATH, SITEMAP_PATH, *self.public_data_inputs(site)} if keys is None else set(keys)
+        pages: dict[str, bytes] = self.public_data_pages(site, wanted)
         if wanted & {HOME_HREF, ARCHIVE_PATH}:
             home, archive, effects = self._listing_sources(site)
             if HOME_HREF in wanted:
@@ -829,4 +855,15 @@ def create_projector() -> PilobolSiteProjector:
     configured = (os.environ.get(STATIC_DIRECTORY_ENVIRONMENT_VARIABLE) or "").strip()
     web_directory = Path(configured) if configured else Path(__file__).resolve().parent
     media = (os.environ.get(MEDIA_DIRECTORY_ENVIRONMENT_VARIABLE) or "").strip()
-    return PilobolSiteProjector(web_directory, Path(media) if media else None)
+    return PilobolSiteProjector(web_directory, Path(media) if media else None, public_data_of(web_directory))
+
+
+def public_data_of(web_directory: Path):
+    """The ``publicData`` block of projection.json, or None: the search index and latest list are opt-in."""
+    settings_path = web_directory / "projection.json"
+    raw = json.loads(settings_path.read_text(encoding="utf-8")) if settings_path.is_file() else {}
+    if "publicData" not in raw:
+        return None
+    from papyrus_content.projection.public_data import public_data_settings_from_mapping
+
+    return public_data_settings_from_mapping(raw["publicData"])

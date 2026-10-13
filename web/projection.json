@@ -1,3 +1,4 @@
 {
-  "media": { "originals": true }
+  "media": { "originals": true },
+  "publicData": { "searchIndex": true, "latest": true, "latestCount": 20, "summaryCharacters": 240 }
 }

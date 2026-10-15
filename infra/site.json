@@ -9,6 +9,10 @@
   "cms": {
     "domainName": "newsroom.pilobol.us",
     "staging": true,
+    "stagingPreview": {
+      "buildCommand": "python3 reader/build.py --content content-export --out dist",
+      "baseDirectory": "dist"
+    },
     "cognitoDomainPrefix": "papyrus-pilobol-us-cms",
     "buildComputeType": "STANDARD_8GB",
     "environment": {
@@ -18,16 +22,6 @@
       "PAPYRUS_ENABLE_INBOUND_EMAIL": "false",
       "PAPYRUS_ENABLE_STORAGE_BACKUPS": "false",
       "PAPYRUS_OAUTH_REDIRECT_URLS": "http://localhost:3001/,https://newsroom.pilobol.us/,https://staging.pilobol.us/"
-    }
-  },
-  "reader": {
-    "domainName": "pilobol.us",
-    "buildCommand": "python3 reader/build.py --content content-export --out dist",
-    "baseDirectory": "dist",
-    "environment": {
-      "PAPYRUS_GRAPHQL_ENDPOINT": "https://sivqwif4onbdnoh3fm3nrl437q.appsync-api.us-east-1.amazonaws.com/graphql",
-      "PAPYRUS_IDENTITY_POOL_ID": "us-east-1:bf49b499-4cb3-418b-b8ef-90c0eb972da4",
-      "PAPYRUS_MEDIA_BUCKET": "amplify-d1eiwl0gedkmnj-ma-papyrusmediabucket0dab24-nke2rnsdqes7"
     }
   },
   "github": {

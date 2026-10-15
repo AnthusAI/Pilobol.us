@@ -26,3 +26,13 @@ retaining frontend-only mode to avoid reattempting the failed Cognito migration.
 The repaired newsroom.pilobol.us CloudFront/DNS route is independent and stays in
 place. Its existing Google callback is preserved. Reaching Google proves only
 login entry, not completed authentication or live mutation acceptance.
+
+The current package exposes a data factory; the consumer retains only its
+Schema type re-export. Backend construction stays in defineSiteBackend. The
+old unused data singleton re-export was caught by the first hosted staging
+compile and removed before deployment.
+
+Read-only schema compatibility: all 34 explicit CMS client GraphQL documents
+validate against the deployed main API, including the Board reference and
+assignment queries. This checks schema shape, not user-session authorization
+or mutation execution.

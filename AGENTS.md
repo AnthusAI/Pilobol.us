@@ -31,7 +31,11 @@ deploy.
 ## Build
 
 The site renders only from the CMS data, through Papyrus's Markus renderer.
-There is no content in Git (no `web/content`) and no `amplify.yml`. The live pages are
+There is no content in Git (no `web/content`). The CMS `amplify.yml` performs a
+frontend-only build using the existing main backend outputs; it does not deploy
+backend/auth changes. Its app-ID guard excludes the retired legacy CMS. Backend
+changes require a separately reviewed DevOps pipeline change; do not remove this
+mode to resolve a UI build failure. The live pages are
 produced by `web/projector.py` inside the publish mutation. A full local build (for a
 diff against the projection or a quick look) uses the guest export:
 
@@ -86,7 +90,7 @@ Lenses that stay braided:
 
 Stack: **Papyrus local pod** (desk language) with **Biblicus** as the KB engine
 underneath; site builds through Papyrus's Markus renderer (`web/build_via_papyrus.py`);
-Amplify Gen 2 deploys the CMS via DevOps (no `amplify.yml`). Never cache the built site.
+Amplify deploys the CMS frontend via the checked-in DevOps build spec. Never cache the built site.
 
 ### Knowledge base (Papyrus local pod)
 

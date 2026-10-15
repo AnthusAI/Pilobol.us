@@ -56,12 +56,16 @@ const pilobolUsBrand: SiteBrand = {
   rootRoute: { kind: "newsroom" },
   newsroomBasePath: "",
   opsChrome: "app",
+  newsroomLayout: "organizer",
   corpusKey: "pilobol-us",
   steeringConfigPath: "corpora/pilobol-us-steering.yml",
   newsroomSectionsConfigPath: "corpora/pilobol-us-newsroom-sections.yml",
   analysisProfilesPath: "corpora/pilobol-us-analysis-profiles.yml",
   publicationName: "Pilobolus",
 };
+
+export const applyCognitoDomainPrefixFromEnvironment =
+  process.env.PAPYRUS_APPLY_COGNITO_DOMAIN_PREFIX?.trim() === "true";
 
 export default defineSite({
   brands: [pilobolUsBrand],
@@ -70,6 +74,7 @@ export default defineSite({
     brandId: "pilobol-us",
     auth: {
       cognitoDomainPrefix: "papyrus-pilobol-us-cms",
+      applyCognitoDomainPrefix: applyCognitoDomainPrefixFromEnvironment,
       redirectUrls: [
         "http://localhost:3001/newsroom",
         "https://main.dv0pdx67fk80m.amplifyapp.com/newsroom",
@@ -81,9 +86,18 @@ export default defineSite({
         "https://newsroom.pilobol.us/",
         "https://staging.pilobol.us/",
         "https://staging.dv0pdx67fk80m.amplifyapp.com/",
+        "https://main.d1eiwl0gedkmnj.amplifyapp.com/newsroom",
+        "https://staging.d1eiwl0gedkmnj.amplifyapp.com/newsroom",
+        "https://main.d1eiwl0gedkmnj.amplifyapp.com/",
+        "https://staging.d1eiwl0gedkmnj.amplifyapp.com/",
       ],
     },
-    reader: { amplifyAppId: "dssc97s4q5kgk", branchName: "main" },
+    publication: {
+      kind: "s3-projection",
+      projector: "web/projector.py",
+      staticDir: "web",
+      edgeDistributionArn: "arn:aws:cloudfront::712236451410:distribution/E2GKJ877IAH2I8",
+    },
     stagingBuild: { enabled: true },
     features: {
       consoleResponder: false,

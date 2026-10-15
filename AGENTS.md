@@ -2,14 +2,20 @@
 
 ## Deployment
 
-Content lives in the Papyrus CMS, not in Git. Two Amplify apps serve this repo
-(`infra/site.json`): the CMS (`pilobol-us-cms`, app id `dv0pdx67fk80m`, Gen 2
-backend, newsroom at `/` on newsroom.pilobol.us; `/newsroom/*` redirects to `/*`) and the static reader (`pilobol-us-reader`,
-app id `dssc97s4q5kgk`). pilobol.us (apex only; there is no www) is attached to the
-new reader (`reader.domainName` in `infra/site.json`).
-The old reader `d1od6t7lzbwanr` no longer has a domain and is kept only for
-rollback until it is retired. Humans publish in the newsroom at the CMS root (`/`);
-Amplify builds the reader from the published export.
+Content lives in the Papyrus CMS, not in Git. The CMS is one Amplify app
+(`pilobol-us-cms`, Gen 2 backend, newsroom at `/` on newsroom.pilobol.us;
+`/newsroom/*` redirects to `/*`). The public site, **pilobol.us** (apex only; there is
+no www), is an **S3 projection**: static pages in a versioned S3 site bucket behind
+our own CloudFront distribution (edge stack `papyrus-edge-pilobol-us`). Saving or
+publishing in the newsroom runs the `content-actions` Lambda, which renders only the
+affected pages with `web/projector.py` and invalidates exactly those paths; the page is
+live within seconds. There is no reader build and no Amplify reader app in the publish
+path (`web/projection.json` configures media; `papyrus.config.ts`,
+`backend.publication`, configures the projection). The Amplify readers
+(`dssc97s4q5kgk`, `d1od6t7lzbwanr`) no longer serve the domain and are kept only until
+they are retired. Humans publish in the newsroom at the CMS root (`/`).
+Architecture picture and operations (`papyrus ops content project --all`,
+`--reconcile`, `renditions --backfill --originals`): `Papyrus/docs/site-hosting.md`.
 Production is deployed **through DevOps**, not by an agent session running
 raw AWS CLI commands. Don't `zip` a local build and push it via
 `aws amplify create-deployment` / `start-deployment` as a substitute for
@@ -24,9 +30,14 @@ deploy.
 
 ## Build
 
-The reader builds only from the CMS export, through Papyrus's Markus renderer.
-There is no content in Git (no `web/content`) and no `amplify.yml`; the reader
-app's build spec is generated from `infra/site.json` by the Papyrus template:
+The site renders only from the CMS data, through Papyrus's Markus renderer.
+There is no content in Git (no `web/content`). The CMS `amplify.yml` performs a
+frontend-only build using the existing main backend outputs; it does not deploy
+backend/auth changes. Its app-ID guard excludes the retired legacy CMS. Backend
+changes require a separately reviewed DevOps pipeline change; do not remove this
+mode to resolve a UI build failure. The live pages are
+produced by `web/projector.py` inside the publish mutation. A full local build (for a
+diff against the projection or a quick look) uses the guest export:
 
 ```bash
 papyrus ops content export-published --auth guest --out content-export --clean
@@ -34,8 +45,8 @@ python3 reader/build.py --content content-export --out dist
 ```
 
 The export needs `PAPYRUS_GRAPHQL_ENDPOINT`, `PAPYRUS_IDENTITY_POOL_ID` and
-`PAPYRUS_MEDIA_BUCKET` (set in `infra/site.json` `reader.environment`; public
-values, no credentials). A wrong endpoint or an empty export fails the build.
+`PAPYRUS_MEDIA_BUCKET` (public values, listed in `infra/site.json`
+`reader.environment`; no credentials). A wrong endpoint or an empty export fails the build.
 `reader/build.py` overlays the reader-owned files in `web/reader-assets/` (effect
 scripts, lab pages, unreferenced images) onto the export and renders through
 `web/build_via_papyrus.py` (publication chrome: masthead, tagline, footer,
@@ -79,7 +90,7 @@ Lenses that stay braided:
 
 Stack: **Papyrus local pod** (desk language) with **Biblicus** as the KB engine
 underneath; site builds through Papyrus's Markus renderer (`web/build_via_papyrus.py`);
-Amplify Gen 2 deploys via DevOps. The reader build spec is generated from `infra/site.json` (no `amplify.yml`); never cache the built site.
+Amplify deploys the CMS frontend via the checked-in DevOps build spec. Never cache the built site.
 
 ### Knowledge base (Papyrus local pod)
 
@@ -180,9 +191,9 @@ weekday 9am fungus scout, and any scheduled Anthus/Pilobolus agent runs) files
 
 **Forbidden without Ryan’s explicit publish ask in chat:**
 
-- Publishing in the Papyrus CMS (newsroom at `/`) or importing items into it (published
-  items trigger a reader build that lands on pilobol.us).
-- Pushing to `main`, opening a publish PR, or triggering an Amplify / DevOps ship.
+- Publishing in the Papyrus CMS (newsroom at `/`) or importing items into it (saving or
+  publishing an item projects its pages straight onto pilobol.us).
+- Pushing to `main`, opening a publish PR, or triggering a DevOps ship.
 - Treating a board `article.md`, `article-draft.md`, or Kanbus status **`published`**
   as permission to go live — board workflow and production are separate gates.
 

@@ -5,10 +5,14 @@
   "brand": "pilobol-us",
   "frontend": "markus-static",
   "hostedZoneId": "Z09961547QX1VHIXOBD7",
-  "papyrusVersion": "1.0.0-next.39",
+  "papyrusVersion": "1.0.0-next.57",
   "cms": {
     "domainName": "newsroom.pilobol.us",
     "staging": true,
+    "stagingPreview": {
+      "buildCommand": "python3 reader/build.py --content content-export --out dist",
+      "baseDirectory": "dist"
+    },
     "cognitoDomainPrefix": "papyrus-pilobol-us-cms",
     "buildComputeType": "STANDARD_8GB",
     "environment": {
@@ -20,19 +24,12 @@
       "PAPYRUS_OAUTH_REDIRECT_URLS": "http://localhost:3001/,https://newsroom.pilobol.us/,https://staging.pilobol.us/"
     }
   },
-  "reader": {
-    "domainName": "pilobol.us",
-    "buildCommand": "python3 reader/build.py --content content-export --out dist",
-    "baseDirectory": "dist",
-    "environment": {
-      "PAPYRUS_GRAPHQL_ENDPOINT": "https://a4dxv6gfvreqffkumsn5si54fa.appsync-api.us-east-1.amazonaws.com/graphql",
-      "PAPYRUS_IDENTITY_POOL_ID": "us-east-1:9db6e886-f2ae-4323-ae7d-367150e2583c",
-      "PAPYRUS_MEDIA_BUCKET": "amplify-dv0pdx67fk80m-mai-papyrusmediabucket0dab24-onja3prevkp2"
-    }
-  },
   "github": {
     "owner": "AnthusAI",
     "repo": "Pilobol.us",
-    "branches": ["main", "staging"]
+    "branches": [
+      "main",
+      "staging"
+    ]
   }
 }

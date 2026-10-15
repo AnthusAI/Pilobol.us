@@ -56,6 +56,7 @@ const pilobolUsBrand: SiteBrand = {
   rootRoute: { kind: "newsroom" },
   newsroomBasePath: "",
   opsChrome: "app",
+  newsroomLayout: "organizer",
   corpusKey: "pilobol-us",
   steeringConfigPath: "corpora/pilobol-us-steering.yml",
   newsroomSectionsConfigPath: "corpora/pilobol-us-newsroom-sections.yml",

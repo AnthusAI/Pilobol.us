@@ -102,3 +102,7 @@ kbs hooks validate
 kbs wiki list
 python3 bin/list-refs.py
 ```
+
+## License
+
+Everything in this repository, writing and code alike, is licensed under the [MIT License](LICENSE).

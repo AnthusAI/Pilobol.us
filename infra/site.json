@@ -14,6 +14,7 @@
       "baseDirectory": "dist"
     },
     "cognitoDomainPrefix": "papyrus-pilobol-us-cms",
+    "prospectusAccountsApiStageArn": "arn:aws:execute-api:us-east-1:712236451410:bnh9mctvo9/api",
     "buildComputeType": "STANDARD_8GB",
     "environment": {
       "PAPYRUS_EDITION_SLUG": "current",

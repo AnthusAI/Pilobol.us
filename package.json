@@ -6,7 +6,7 @@
     "dev": "papyrus-app sync && next dev --port 3001",
     "build": "papyrus-app sync && next build",
     "start": "next start",
-    "postinstall": "papyrus-infra deploy --site infra/site.json --only-branch main --only-app-id d1eiwl0gedkmnj"
+    "postinstall": "papyrus-infra deploy --site infra/site.json --only-branch main --only-app-id d1eiwl0gedkmnj --account 712236451410"
   },
   "dependencies": {
     "@anthusai/papyrus": "^1.19.1",

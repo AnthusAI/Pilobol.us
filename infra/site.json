@@ -5,7 +5,7 @@
   "brand": "pilobol-us",
   "frontend": "markus-static",
   "hostedZoneId": "Z09961547QX1VHIXOBD7",
-  "papyrusVersion": "1.14.0",
+  "papyrusVersion": "1.15.0",
   "cms": {
     "domainName": "newsroom.pilobol.us",
     "staging": true,

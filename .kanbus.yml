@@ -222,3 +222,4 @@ hooks:
       - ./hooks/story-workspace-scaffold.py
       timeout_ms: 5000
 github_security: null
+project_id: 0cc83ffa-22d0-4a30-8518-8a4c8af384f8

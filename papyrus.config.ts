@@ -44,6 +44,7 @@ const pilobolUsBrand: SiteBrand = {
   mastheadDateFormat: "formatted",
   mastheadSource: "brand",
   sectionLinkStrategy: "route",
+  kanbusTheme: "refined-newsprint",
   themePack: "pilobol-us",
   themeTokens: pilobolUsThemePackTokens,
   renderer: { kind: "markus" },

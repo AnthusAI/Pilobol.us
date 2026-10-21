@@ -57,5 +57,16 @@
     "latest": true,
     "latestCount": 20,
     "summaryCharacters": 240
+  },
+  "sitemap": {
+    "lastmod": true
+  },
+  "agents": {
+    "markdown": true,
+    "llmsTxt": true,
+    "llmsFull": true
+  },
+  "pageActions": {
+    "enabled": true
   }
 }

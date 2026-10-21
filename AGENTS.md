@@ -8,7 +8,7 @@ Content lives in the Papyrus CMS, not in Git. The CMS is one Amplify app
 no www), is an **S3 projection**: static pages in a versioned S3 site bucket behind
 our own CloudFront distribution (edge stack `papyrus-edge-pilobol-us`). Saving or
 publishing in the newsroom runs the `content-actions` Lambda, which renders only the
-affected pages with `web/projector.py` and invalidates exactly those paths; the page is
+affected pages with the standard Papyrus front end (`web/projection.json`, `web/hooks.py`, `web/css/site-theme.css`) and invalidates exactly those paths; the page is
 live within seconds. There is no reader build and no Amplify reader app in the publish
 path (`web/projection.json` configures media; `papyrus.config.ts`,
 `backend.publication`, configures the projection). The Amplify readers
@@ -36,23 +36,21 @@ frontend-only build using the existing main backend outputs; it does not deploy
 backend/auth changes. Its app-ID guard excludes the retired legacy CMS. Backend
 changes require a separately reviewed DevOps pipeline change; do not remove this
 mode to resolve a UI build failure. The live pages are
-produced by `web/projector.py` inside the publish mutation. A full local build (for a
+produced by the standard Papyrus front end inside the publish mutation. A full local build (for a
 diff against the projection or a quick look) uses the guest export:
 
 ```bash
 papyrus ops content export-published --auth guest --out content-export --clean
-python3 reader/build.py --content content-export --out dist
+papyrus ops content project --all --from-dir content-export --static-dir web --out dist
 ```
 
 The export needs `PAPYRUS_GRAPHQL_ENDPOINT`, `PAPYRUS_IDENTITY_POOL_ID` and
-`PAPYRUS_MEDIA_BUCKET` (public values, listed in `infra/site.json`
-`reader.environment`; no credentials). A wrong endpoint or an empty export fails the build.
-`reader/build.py` overlays the reader-owned files in `web/reader-assets/` (effect
-scripts, lab pages, unreferenced images) onto the export and renders through
-`web/build_via_papyrus.py` (publication chrome: masthead, tagline, footer,
-effect scripts). The build also regenerates homepage/archive cards from the
-exported articles and embeds an Auritus narration player on every article — no build-time
-sync, no API key (see `README.md`).
+`PAPYRUS_MEDIA_BUCKET` (public values; see `Papyrus/docs/site-hosting.md`; no credentials). A wrong endpoint or an
+empty export fails the build. Repository-owned files (effect scripts, lab pages, unreferenced images) live in
+`web/assets/` and publish under `/assets/`. The projection settings are `web/projection.json`; what is specific to
+this publication (masthead poem, cards, home, archive and 404 bodies, video embeds, image effects, the Auritus
+narration player) is `web/hooks.py`. Do not add a projector, a sitemap writer or a feed generator here: if the
+standard front end cannot do something, add it to Papyrus core.
 
 ---
 

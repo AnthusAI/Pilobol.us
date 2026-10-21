@@ -91,7 +91,6 @@ export default defineSite({
     },
     publication: {
       kind: "s3-projection",
-      projector: "web/projector.py",
       staticDir: "web",
       edgeDistributionArn: "arn:aws:cloudfront::712236451410:distribution/E2GKJ877IAH2I8",
     },

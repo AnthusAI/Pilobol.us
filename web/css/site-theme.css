@@ -1305,3 +1305,30 @@
   max-width: 100%;
   min-height: 7.5rem;
 }
+
+/* Accessibility baseline. The standard front end's own baseline sheet (markus-components.css) is off for this site
+   (projection.json: site.componentsCss false) because its card-grid rule is unlayered and would override the Markus
+   grid the home page is laid out on. These are the parts of it this site needs; they sit outside the layer on purpose. */
+.markus-skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1000;
+  padding: 0.5rem 1rem;
+  background: var(--markus-paper);
+  color: var(--markus-ink);
+}
+.markus-skip-link:focus {
+  left: 0;
+}
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid var(--markus-accent);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

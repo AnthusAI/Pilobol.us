@@ -76,7 +76,7 @@ a story.
 
 **Still ban “not A, it’s B” / “not C but D” contrast stacks** — see
 "Register: impersonal weird" above for why; `style-profile.yml`'s
-`rules.bannedPatterns` is what Limatus actually enforces.
+`rules.bannedPatterns` is what Humanus actually enforces.
 
 Internal wiki cards, AGENTS.md, and scout chat digests may use desk shorthand.
 **Reader-facing stories (site drafts and the daily story routine) may not.**
@@ -456,7 +456,7 @@ specimen’s nouns, it’s filler. Cut it.
 The enforced intensifier list — including the Pilobol-flavored empty heat
 like "deeply uncanny" or "profoundly surreal" — lives in `style-profile.yml`
 (`rules.bannedIntensifiers` in the Papyrus repo) rather than here, so there's
-one list instead of two that can drift apart. [Limatus](https://github.com/AnthusAI/Limatus)
+one list instead of two that can drift apart. [Humanus](https://github.com/AnthusAI/Humanus)
 checks drafts against it directly.
 
 ## Say the accusation out loud — HARD (Ryan 2026-09-11)

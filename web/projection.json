@@ -1,4 +1,61 @@
 {
-  "media": { "originals": true },
-  "publicData": { "searchIndex": true, "latest": true, "latestCount": 20, "summaryCharacters": 240 }
+  "site": {
+    "name": "Pilobolus",
+    "description": "Glimpses of our moldy future, as our society is gradually infected by a fungus that grows on its own bullshit.",
+    "productionUrl": "https://pilobol.us",
+    "language": "en",
+    "componentsCss": false
+  },
+  "urls": {
+    "style": "html",
+    "sections": {
+      "articles": {
+        "base": "articles",
+        "label": "Spores",
+        "description": "Glimpses of our moldy future."
+      },
+      "effects": {
+        "base": "effects",
+        "listEmpty": true,
+        "feed": false
+      }
+    }
+  },
+  "seo": {
+    "defaultImage": "assets/og-default.jpg",
+    "imageSize": [
+      1200,
+      630
+    ]
+  },
+  "feeds": {
+    "title": "Pilobolus"
+  },
+  "listings": {
+    "pageSize": 1000,
+    "homeCount": 1000,
+    "tags": false
+  },
+  "components": {
+    "breadcrumbs": false
+  },
+  "hooks": "hooks.py",
+  "theme": null,
+  "chrome": {
+    "scripts": [
+      "assets/background-manager.js",
+      "assets/organic-image.js",
+      "assets/cinematic-gallery.js",
+      "assets/image-treatment-lab.js"
+    ]
+  },
+  "media": {
+    "originals": true
+  },
+  "publicData": {
+    "searchIndex": true,
+    "latest": true,
+    "latestCount": 20,
+    "summaryCharacters": 240
+  }
 }

@@ -5,12 +5,12 @@
   "brand": "pilobol-us",
   "frontend": "markus-static",
   "hostedZoneId": "Z09961547QX1VHIXOBD7",
-  "papyrusVersion": "5.0.0",
+  "papyrusVersion": "5.1.0",
   "cms": {
     "domainName": "newsroom.pilobol.us",
     "staging": true,
     "stagingPreview": {
-      "buildCommand": "python3 reader/build.py --content content-export --out dist",
+      "buildCommand": "PAPYRUS_ROOT=\"$PWD\" PAPYRUS_SITE_ENV=staging PAPYRUS_SITE_PUBLIC_URL=https://staging.pilobol.us papyrus ops content project --all --from-dir content-export --static-dir web --out dist && if [ -d content-export/assets ]; then mkdir -p dist/assets && cp -R content-export/assets/. dist/assets/; fi",
       "baseDirectory": "dist"
     },
     "cognitoDomainPrefix": "papyrus-pilobol-us-cms",

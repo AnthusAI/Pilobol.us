@@ -145,6 +145,8 @@ def page_body(page) -> str | None:
         )
     if page.kind == "listing":
         view = page.listing
+        if view.section == "effects":  # the authored effects/index item is the section's introduction: the whole page
+            return _shell(page, page.fragment)
         label = components.esc(view.label)
         lede = page.description
         header = f'<header class="markus-header"><h1>{label}</h1>' + (f'<p class="markus-lede">{components.esc(lede)}</p>' if lede else "") + "</header>"

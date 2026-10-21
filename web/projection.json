@@ -16,7 +16,7 @@
       },
       "effects": {
         "base": "effects",
-        "listing": false,
+        "listEmpty": true,
         "feed": false
       }
     }

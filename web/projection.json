@@ -68,6 +68,7 @@
   },
   "pageActions": {
     "enabled": true,
-    "types": ["page"]
+    "types": ["page"],
+    "ai": ["chatgpt", "claude", "perplexity"]
   }
 }

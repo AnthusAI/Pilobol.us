@@ -67,6 +67,7 @@
     "llmsFull": true
   },
   "pageActions": {
-    "enabled": true
+    "enabled": true,
+    "types": ["page"]
   }
 }

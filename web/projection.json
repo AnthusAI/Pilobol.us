@@ -42,6 +42,10 @@
   "hooks": "hooks.py",
   "theme": null,
   "chrome": {
+    "ga_measurement_id": "G-31SC26SDGX",
+    "consent_mode": {
+      "privacy_policy_url": "https://anth.us/privacy/"
+    },
     "scripts": [
       "assets/background-manager.js",
       "assets/organic-image.js",

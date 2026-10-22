@@ -73,7 +73,10 @@ def masthead(page) -> str:
 
 
 def footer(page) -> str:
-    return "<!-- background credit host -->"
+    return (
+        "<!-- background credit host -->"
+        '<p class="pilo-footer-links"><a href="https://anth.us/privacy/">Privacy</a> <a href="#cookie-settings">Cookie settings</a></p>'
+    )
 
 
 # ---------------------------------------------------------------------------------------------------- listings

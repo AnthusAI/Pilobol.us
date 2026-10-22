@@ -937,6 +937,10 @@
     color: var(--markus-accent);
   }
 
+  .pilo-footer-links a + a {
+    margin-left: 1rem;
+  }
+
   .markus-site-footer-mycelium {
     height: 1px;
     margin: 0 0 2rem;

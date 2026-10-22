@@ -9,7 +9,7 @@
     "postinstall": "papyrus-infra deploy --site infra/site.json --only-branch main --only-app-id d1eiwl0gedkmnj --account 712236451410"
   },
   "dependencies": {
-    "@anthusai/papyrus": "5.15.1",
+    "@anthusai/papyrus": "5.19.1",
     "@aws-amplify/backend": "^1.22.0",
     "@aws-amplify/backend-cli": "^1.8.2",
     "@aws-amplify/seed": "^1.1.2",

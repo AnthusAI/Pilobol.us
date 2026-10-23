@@ -1,107 +1,70 @@
-# Pilobol.us newsroom pod
+# Pilobol.us
 
-Papyrus local pod + Kanbus publication board for **Pilobol.us** (*a fungus among us*).
+*A fungus among us.* The Pilobolus publication: strange, checkable stories about AI and machine-learning systems slowly taking over ordinary life. Live at [pilobol.us](https://pilobol.us). It is pre-production.
 
-- **Papyrus local pod** = desk language for this on-disk KB + newsroom.
-- **Biblicus** = knowledge-base engine underneath.
-- **Markus** = reader-facing Markdown publication (the site is the standard Papyrus front end: `web/projection.json`, `web/css/site-theme.css`, `web/hooks.py`).
-- **Kanbus** project key: `PILO`. Console port: `4260`. Stories only — not the knowledge store.
+## What this repository is
 
-Pod path: `/workspace/pilobil.us` → `/workspace/pilobol.us`.
+This repository is one publication built on Papyrus. It holds the site settings and look (`web/`), the Papyrus site registration and infrastructure description (`papyrus.config.ts`, `infra/site.json`), the pre-publication working board (Kanbus project `PILO`, `project/`, `stories/`), the local knowledge pod (`project/wiki/`, `corpora/`) and the voice guide (`content/VOICE.md`). Published articles live in the Papyrus CMS, not in Git.
 
-## Layout
+| Repository | Role |
+| --- | --- |
+| [Papyrus](https://github.com/AnthusAI/Papyrus) | The engine: `@anthusai/papyrus` (npm) and `papyrus-newsroom` (PyPI), released in lockstep. This site pins an exact version. |
+| This repository | The Pilobolus site, board and local knowledge pod. |
+| [Markus](https://github.com/AnthusAI/Markus) | The Markdown dialect and renderer the articles use. |
+| [Biblicus](https://github.com/AnthusAI/Biblicus) | The corpus and knowledge-base engine under the local pod. |
+| [Tactus](https://github.com/AnthusAI/Tactus) | The procedure language the newsroom procedures use. |
+| [Cyclotron](https://github.com/AnthusAI/Cyclotron) | The relevance engine used for include and exclude decisions; configured in the Papyrus backend, not here. |
+| [Auritus](https://github.com/AnthusAI/Auritus) | The narration player embedded on every article. |
+| [Prospectus](https://github.com/AnthusAI/Prospectus) | A separate product; this site only shares the Amplify and account conventions (its accounts API is referenced in `infra/site.json`). |
 
-```
-.kanbus.yml                          # story type + stage machine + hooks
-.papyrus/operator-cli.config.yaml    # local backend, corpus pilobil-us
-bin/register-ref.py                  # accept a reference (JSON)
-bin/list-refs.py                     # list accepted/pending refs
-project/wiki/                        # Papyrus local-pod wiki (concepts, sources, DNA)
-stories/WIKI-pilobil-accepted/references/  # accepted reference JSON
-stories/<id>/                        # publication story artifacts
-web/                                 # Markus site
-```
+Engine rules for every Papyrus site are in the Papyrus [AGENTS.md](https://github.com/AnthusAI/Papyrus/blob/main/AGENTS.md); its docs index is [docs/README.md](https://github.com/AnthusAI/Papyrus/blob/main/docs/README.md).
 
-Knowledge home: `project/wiki/` + `stories/WIKI-pilobil-accepted/references/`.
-Do not put references on the Kanbus board.
+## Where it runs
 
-## Stage order (publication stories)
+| Thing | Value |
+| --- | --- |
+| AWS account | `papyrus-production`, `712236451410`, `us-east-1` |
+| Public site | `https://pilobol.us` (apex only, no www). Static pages in the versioned S3 site bucket, served by CloudFront distribution `E2GKJ877IAH2I8` (stack `papyrus-edge-pilobol-us`). |
+| Newsroom (CMS) | `https://newsroom.pilobol.us/` (the newsroom is at the root; `/newsroom/*` redirects to `/*`). Served by CloudFront distribution `E205M49121L1RG` (stack `papyrus-edge-pilobol-us-cms`) in front of the Amplify app, because Amplify's own domain association for this host is `FAILED` (cross-account approval needed). |
+| Amplify app | `d1eiwl0gedkmnj` (`pilobol-us-cms`, Gen 2 backend, repository `AnthusAI/Pilobol.us`). Branch `main` is production (auto-build off), branch `staging` is beta (auto-build on, previews drafts). |
+| CDK stack | `amplify-app-shell-pilobol-us-cms`, described by `infra/site.json`. |
+| Retired | The Amplify reader apps and the old CMS app (`d11eu9hbs2mipk`, the id the repo used to list) no longer exist in this account. Do not use their ids. |
+| Analytics | Google Analytics 4 (`G-31SC26SDGX`) with Consent Mode v2 and a cookie banner; privacy link `https://anth.us/privacy/`. |
 
-`idea` → `assignment` → `research` → `report` → `editor_select` → `copywriting` → `published`
+## Quick start
 
-## Build (Markus site)
-
-Article content lives in the Papyrus CMS, not in Git. Humans publish in
-the newsroom at the root (`/`) of the CMS app (`/newsroom` redirects there). pilobol.us is an
-S3 projection behind CloudFront: saving or publishing runs the standard Papyrus front end, configured by
-`web/projection.json` (settings), `web/css/site-theme.css` (theme) and `web/hooks.py` (masthead poem, cards,
-article decoration), inside the publish mutation, and the page is live within seconds (no reader build, no Republish
-button). To build the whole site locally, for example to compare with the projection, use the
-guest export:
+Prerequisites: Node 22 and npm, Python 3.12, and `aws sso login` for anything that touches AWS (`AWS_PROFILE=papyrus-production`).
 
 ```bash
-pip install "papyrus-newsroom[markus]==<pin in infra/site.json>"
+npm ci
+echo '{}' > amplify_outputs.json     # stub; git-ignored; enough for type checking
+npx papyrus-app sync && npx tsc --noEmit
+python3 -m unittest discover -s tests
+```
+
+These are the CI steps. For the Python `papyrus` CLI and a local build of the whole site from published content (no AWS credentials needed, the three variables are public values):
+
+```bash
+pip install "papyrus-newsroom[markus]==5.29.0"      # the pin in infra/site.json
 export PAPYRUS_GRAPHQL_ENDPOINT=... PAPYRUS_IDENTITY_POOL_ID=... PAPYRUS_MEDIA_BUCKET=...
 papyrus ops content export-published --auth guest --out content-export --clean
 papyrus ops content project --all --from-dir content-export --static-dir web --out dist
 ```
 
-The three variables are public values (see `Papyrus/docs/site-hosting.md`); no AWS credentials are needed for the
-export. `web/assets/` holds the repository-owned files (effect scripts, lab pages, unreferenced images) that are
-published under `/assets/`. Rollback of the cutover is Git history
-(tag `pre-cms-cutover` is the last commit with `web/content`) plus a re-import into
-the CMS.
+`npm run dev` (port 3001) runs the CMS app and needs a generated `amplify_outputs.json`. The board uses the pinned Kanbus (`kanbus-version`): `pip install "kanbus==$(cat kanbus-version)"`, then `KANBUS_REALTIME_BROKER=off kbs list`.
 
-Output: `dist/`. The site:
+## How a change reaches production
 
-- Generates the home page and the archive (`/articles/`, "Spores") from the published articles' front matter, newest
-  date first. The home page honors `feed: false`; the archive lists every published story.
-- Embeds an [Auritus](https://aurit.us) narration player on every article.
-  No build-time sync step: Auritus generates audio just-in-time, client-side,
-  in the reader's own browser, keyed off a site key that's baked into
-  `web/hooks.py` (`AURITUS_SITE_KEY`) — see
-  `auritus site create` in the [Auritus README](https://github.com/AnthusAI/Auritus)
-  if that key ever needs rotating.
-- Writes `sitemap.xml`, `robots.txt`, `404.html`, `feed.xml` (RSS) and `atom.xml` from core.
+1. Branch from `main`, open a pull request to `main`. (`develop` exists but is far behind; do not use it.)
+2. The `CI and deploy` workflow (`.github/workflows/deploy.yml`) runs `npm ci`, `papyrus-app sync`, `tsc --noEmit` and the Python unit tests.
+3. On a green push to `main`, the same workflow calls `AnthusAI/Papyrus/.github/workflows/amplify-deploy.yml`, which assumes the GitHub OIDC role `pilobol-us-github-deploy` (no stored keys) and starts an Amplify RELEASE job for the merged commit on app `d1eiwl0gedkmnj`.
+4. The Amplify build (`amplify.yml`) runs `npx ampx pipeline-deploy` (backend), then builds the Next app. `npm ci` also runs `papyrus-infra deploy` for this app and branch only. The backend deploy re-renders the site.
 
-### Environment
+Articles do not go through Git. Saving or publishing in the newsroom renders the affected pages onto pilobol.us within seconds. Engine upgrades go through the pin: edit the exact version in `package.json` and `infra/site.json` together, run `npm install`, merge. Papyrus releases through semantic-release (`feat:` and `fix:` release; `chore:` and `docs:` do not). Details: Papyrus [releasing](https://github.com/AnthusAI/Papyrus/blob/main/docs/releasing.md) and [site hosting](https://github.com/AnthusAI/Papyrus/blob/main/docs/site-hosting.md).
 
-The guest export (local full build) needs the three public variables below; there is no CI reader build any more.
-After a deploy that changes `web/` (settings, hooks or theme), the CMS backend deploy re-renders the site; to do it by hand run `papyrus ops content project --all` (see
-`Papyrus/docs/site-hosting.md`).
+## Where to read next
 
-| Variable | Purpose |
-|----------|---------|
-| `PAPYRUS_GRAPHQL_ENDPOINT` | CMS AppSync endpoint for the guest export |
-| `PAPYRUS_IDENTITY_POOL_ID` | Cognito identity pool for guest read |
-| `PAPYRUS_MEDIA_BUCKET` | CMS media bucket for exported images |
-
-Article frontmatter:
-
-- `feed: false` — omit from homepage cards (still published; still gets audio).
-- `audio: false` — skip the Auritus embed for that slug.
-- `author:` — defaults to `by various bots and Ryan Porter` when omitted.
-
-## Quick check
-
-Kanbus is pinned by `kanbus-version`. On a machine without the
-`/workspace/kbs-172` checkout, install the pinned release from PyPI — it ships
-the `kanbus` entry point, so alias it if you want the `kbs` name the docs use:
-
-```bash
-pip install "kanbus==$(cat kanbus-version)"
-ln -sf "$(command -v kanbus)" /usr/local/bin/kbs
-apt-get install -y mosquitto   # otherwise every kbs command prints a realtime warning
-```
-
-```bash
-cd /workspace/pilobil.us
-PATH=/workspace/kbs-172/bin:$PATH
-kbs validate
-kbs hooks validate
-kbs wiki list
-python3 bin/list-refs.py
-```
+[AGENTS.md](AGENTS.md) is the operating manual (map, tasks, hard rules, editorial rules, current state). The voice guide is [content/VOICE.md](content/VOICE.md).
 
 ## License
 

@@ -1,63 +1,97 @@
-# Agent notes for Pilobol.us
+# AGENTS.md: Pilobol.us
 
-## Deployment
+Operating manual for any agent or person working in this repository, whatever the tool. Read [README.md](README.md) first (what this is, where it runs, how a change ships). Engine-level rules live in the Papyrus [AGENTS.md](https://github.com/AnthusAI/Papyrus/blob/main/AGENTS.md); this file does not repeat them. Papyrus docs index: [docs/README.md](https://github.com/AnthusAI/Papyrus/blob/main/docs/README.md).
 
-Content lives in the Papyrus CMS, not in Git. The CMS is one Amplify app
-(`pilobol-us-cms`, Gen 2 backend, newsroom at `/` on newsroom.pilobol.us;
-`/newsroom/*` redirects to `/*`). The public site, **pilobol.us** (apex only; there is
-no www), is an **S3 projection**: static pages in a versioned S3 site bucket behind
-our own CloudFront distribution (edge stack `papyrus-edge-pilobol-us`). Saving or
-publishing in the newsroom runs the `content-actions` Lambda, which renders only the
-affected pages with the standard Papyrus front end (`web/projection.json`, `web/hooks.py`, `web/css/site-theme.css`) and invalidates exactly those paths; the page is
-live within seconds. There is no reader build and no Amplify reader app in the publish
-path (`web/projection.json` configures media; `papyrus.config.ts`,
-`backend.publication`, configures the projection). The Amplify readers
-(`dssc97s4q5kgk`, `d1od6t7lzbwanr`) no longer serve the domain and are kept only until
-they are retired. Humans publish in the newsroom at the CMS root (`/`).
-Architecture picture and operations (`papyrus ops content project --all`,
-`--reconcile`, `renditions --backfill --originals`): `Papyrus/docs/site-hosting.md`.
-Production is deployed **through DevOps**, not by an agent session running
-raw AWS CLI commands. Don't `zip` a local build and push it via
-`aws amplify create-deployment` / `start-deployment` as a substitute for
-the real deploy path — that was tried in a past session as a one-off
-workaround and should not be treated as the normal way to ship this app.
+Pilobol.us (pilobol.us) is pre-production. Move fast, but use a pull request for every change. Part 1 is operations (read it before touching code or infrastructure). Part 2 is the editorial doctrine for anyone writing or reviewing stories.
 
-If deployment needs to happen and you don't have a working DevOps path
-available in the current session, say so plainly and stop — don't try to
-reauthenticate AWS credentials yourself (`aws login` here needs an
-interactive step only the user can complete) and don't improvise a manual
-deploy.
+# Part 1: Operations
 
-## Build
+## Map of the parts
 
-The site renders only from the CMS data, through Papyrus's Markus renderer.
-There is no content in Git (no `web/content`). The CMS `amplify.yml` performs a
-frontend-only build using the existing main backend outputs; it does not deploy
-backend/auth changes. Its app-ID guard excludes the retired legacy CMS. Backend
-changes require a separately reviewed DevOps pipeline change; do not remove this
-mode to resolve a UI build failure. The live pages are
-produced by the standard Papyrus front end inside the publish mutation. A full local build (for a
-diff against the projection or a quick look) uses the guest export:
+| Part | Where | Docs |
+| --- | --- | --- |
+| Site registration and backend options | `papyrus.config.ts` (`defineSite`: brand `pilobol-us`, `s3-projection` publication with `staticDir: "web"`, edge distribution ARN `E2GKJ877IAH2I8`, `stagingBuild` on; console responder, Slack, inbound email and storage backups off) | [site-hosting](https://github.com/AnthusAI/Papyrus/blob/main/docs/site-hosting.md) |
+| Standard projector (the public static site) | `web/projection.json` (settings: sections `articles` "Spores" and `effects`, feeds, sitemap, public data, GA4 and consent, agent output), `web/css/site-theme.css` (theme), `web/hooks.py` (masthead poem, cards, article decoration, video embeds, image effects, home, archive and 404 bodies, the Auritus narration player), `web/assets/` (effect scripts, lab pages, images, published under `/assets/`) | [building-a-papyrus-static-site](https://github.com/AnthusAI/Papyrus/blob/main/docs/building-a-papyrus-static-site.md) |
+| CMS backend and console | The package's Amplify Gen 2 backend, newsroom at the root of `newsroom.pilobol.us` | [newsroom-operations](https://github.com/AnthusAI/Papyrus/blob/main/docs/newsroom-operations.md) |
+| The edge | Public site: stack `papyrus-edge-pilobol-us` (template `infra/edge/pilobol-us.yaml` in the Papyrus repo). Newsroom host: stack `papyrus-edge-pilobol-us-cms` (design notes in Papyrus `docs/hosting/pilobolus-newsroom-repair.md`). | [edge-under-the-cms-backend](https://github.com/AnthusAI/Papyrus/blob/main/docs/hosting/edge-under-the-cms-backend.md) |
+| CDK app shell | `infra/site.json` (account, hosted zone, domains, staging preview build command, Cognito prefix, GitHub ids, `papyrusVersion`) and `infra/README.md` | [site-hosting](https://github.com/AnthusAI/Papyrus/blob/main/docs/site-hosting.md) |
+| Editorial doctrine and sections | One-time import files `corpora/pilobol-us-newsroom-sections.yml` and the steering file `corpora/pilobol-us-steering.yml`. The live doctrine is data in the CMS (see Part 2). | [editorial-context](https://github.com/AnthusAI/Papyrus/blob/main/docs/editorial-context.md), [steering-and-relevance](https://github.com/AnthusAI/Papyrus/blob/main/docs/steering-and-relevance.md) |
+| Publication board | Kanbus project `PILO` (`.kanbus.yml`, `project/`, `stories/`, stage gates in `hooks/`, skill `skills/advance-story`). Stories only. | [CONTRIBUTING_AGENT.md in Papyrus](https://github.com/AnthusAI/Papyrus/blob/main/CONTRIBUTING_AGENT.md) |
+| Local knowledge pod | `project/wiki/` (concepts, sources), `stories/WIKI-pilobil-accepted/references/`, `corpora/pilobol-us/`, scripts in `bin/` | [knowledge-base](https://github.com/AnthusAI/Papyrus/blob/main/docs/knowledge-base.md) |
+| Agent-readable output | `agents` and `pageActions` in `web/projection.json`: Markdown twins, `llms.txt`, `llms-full.txt`, copy and open-in-AI actions | [agent-readable-sites](https://github.com/AnthusAI/Papyrus/blob/main/docs/agent-readable-sites.md) |
+| GA4 and consent | `chrome.ga_measurement_id` and `chrome.consent_mode` in `web/projection.json` | [site-hosting, Consent Mode v2](https://github.com/AnthusAI/Papyrus/blob/main/docs/site-hosting.md) |
+| Narration | Auritus embed on every article, client-side, keyed by a public site key in `web/hooks.py` | [Auritus](https://github.com/AnthusAI/Auritus) |
+
+Papyrus features that run in the deployed backend rather than in files here: the shared relevance Cyclotron and section-fit classifier (they read the section and doctrine records), review requests and the Notification Center, the procedure runner ([procedure-runner](https://github.com/AnthusAI/Papyrus/blob/main/docs/procedure-runner.md)), [automations](https://github.com/AnthusAI/Papyrus/blob/main/docs/automations.md) and the weekly knowledge run ([knowledge-cloud-run](https://github.com/AnthusAI/Papyrus/blob/main/docs/knowledge-cloud-run.md)). Not used by this site: the newsletter plugin ([newsletter](https://github.com/AnthusAI/Papyrus/blob/main/docs/newsletter.md)) and reader steering ([reader-steering](https://github.com/AnthusAI/Papyrus/blob/main/docs/reader-steering.md)); nothing in `web/` or `papyrus.config.ts` enables them. Whether Cyclotron and the knowledge run are switched on for this site in the live backend was not verified when this file was written. Pilobol.us is not among the sites the Papyrus monitoring docs list for Hacker News routing.
+
+## Common tasks
+
+Use `AWS_PROFILE=papyrus-production` (account `712236451410`) and prefer read-only AWS calls.
+
+**Run the tests**: the CI steps in the README (`npm ci`, stub `amplify_outputs.json`, `npx papyrus-app sync && npx tsc --noEmit`, `python3 -m unittest discover -s tests`). The only unit test covers `bin/diff-trees.py`. Board checks: `KANBUS_REALTIME_BROKER=off kbs validate` and `kbs hooks validate`.
+
+**Preview a change to `web/`**: export the published content and project it locally (README, Quick start). Compare `dist/` with the live site. A draft preview of unpublished content is built by the CMS `staging` branch using `cms.stagingPreview` in `infra/site.json`.
+
+**Bump the Papyrus pin**
+
+1. `npm view @anthusai/papyrus version`, then read the release notes.
+2. In one change set the same exact version in `package.json` and `infra/site.json` (`papyrusVersion`), then `npm install` so `package-lock.json` agrees. Use the same version for `pip install "papyrus-newsroom[markus]==<version>"` in local builds.
+3. Open a pull request to `main` and merge when CI is green. The merge deploys the backend and re-renders the site. Never bump `package.json` alone: the version in `infra/site.json` decides the template that ships.
+
+**Deploy**: merge a pull request to `main`. The `CI and deploy` workflow starts the Amplify job for the merged commit on app `d1eiwl0gedkmnj` through GitHub OIDC (role `pilobol-us-github-deploy`); Amplify's auto-build on `main` is off. Never zip a local build and push it with `aws amplify create-deployment` or `start-deployment`, never run `ampx pipeline-deploy` from a laptop, and never improvise a manual deploy. After a merge check that `https://pilobol.us/` returns 200 and `aws amplify list-jobs --app-id d1eiwl0gedkmnj --branch-name main --max-results 3` shows the merged commit (GitHub webhooks and jobs can be minutes late). If the AWS login is expired, `aws login` needs an interactive step only the user can complete: say so and stop.
+
+**Re-project safely** (after changing `web/` without a backend deploy):
 
 ```bash
-papyrus ops content export-published --auth guest --out content-export --clean
-papyrus ops content project --all --from-dir content-export --static-dir web --out dist
+papyrus ops content project --reconcile --dry-run     # report drift, delete nothing
+papyrus ops content project --all                      # re-render every page
 ```
 
-The export needs `PAPYRUS_GRAPHQL_ENDPOINT`, `PAPYRUS_IDENTITY_POOL_ID` and
-`PAPYRUS_MEDIA_BUCKET` (public values; see `Papyrus/docs/site-hosting.md`; no credentials). A wrong endpoint or an
-empty export fails the build. Repository-owned files (effect scripts, lab pages, unreferenced images) live in
-`web/assets/` and publish under `/assets/`. The projection settings are `web/projection.json`; what is specific to
-this publication (masthead poem, cards, home, archive and 404 bodies, video embeds, image effects, the Auritus
-narration player) is `web/hooks.py`. Do not add a projector, a sitemap writer or a feed generator here: if the
-standard front end cannot do something, add it to Papyrus core.
+A backend deploy re-renders the site by itself. Read the reconcile and deletion-guard sections of [site-hosting](https://github.com/AnthusAI/Papyrus/blob/main/docs/site-hosting.md) before any real reconcile. Image renditions: `papyrus ops content renditions --backfill --dry-run`, then without `--dry-run`.
 
----
+**Edit editorial doctrine**: `papyrus sections doctrine set --kind mission --file <md> --dry-run`, or the newsroom Administration screens (`/administration/policies`, `/administration/sections`). The YAML files in `corpora/` are only a one-time import (`papyrus sections import-doctrine`, `papyrus sections import`); they never overwrite existing records.
 
-# Desk DNA (enduring)
+**Register a site procedure**, **create an automation**, **start a new Papyrus site**: [newsroom-procedures-runbook](https://github.com/AnthusAI/Papyrus/blob/main/docs/newsroom-procedures-runbook.md), [automations](https://github.com/AnthusAI/Papyrus/blob/main/docs/automations.md) (only `monitor` triggers run today), [building-a-papyrus-static-site](https://github.com/AnthusAI/Papyrus/blob/main/docs/building-a-papyrus-static-site.md). Copy the shape of `papyrus.config.ts`, `web/` and `infra/site.json`, not Papyrus code.
 
-Read this every run. Pair with `project/wiki/publication-doctrine.md`, `project/wiki/mission.md`, and `inclusion_rubric.md`.
-These are **repeatable, enduring** desk vibes from Ryan (2026-09-05), not one-off mood.
+**Add a reference to the local pod**: `python3 bin/register-ref.py --title "..." --url "..." --why "..."`; list with `python3 bin/list-refs.py`.
+
+## Hard rules
+
+- Never run `papyrus ops content project --reconcile` for real without the deployed plugin list (the CLI refuses without a readable `amplify_outputs.json` or a matching `PAPYRUS_PLUGINS`). Never use `--allow-deletions`. Always dry-run first.
+- Projections take the projection lease; do not start one by hand while a deploy or a knowledge run is projecting.
+- Secrets go in SSM Parameter Store as SecureString, created by infrastructure code, never in this repository. Never commit `.env*` or `amplify_outputs.json`.
+- No real email addresses anywhere in the repository. Use placeholders; allowlists live in AWS configuration.
+- Shared checkouts: never switch branches and never `git stash`. Use `git worktree add` or a fresh clone.
+- Gherkin specs for every behaviour change, narrative and complete. Unit tests alone are not enough. (This repository has no `features/` runner today; put specs for engine behaviour in the Papyrus repository and for site behaviour under `features/` here.)
+- Do not add a projector, a sitemap writer or a feed generator here. If the standard front end cannot do something, add it to Papyrus core.
+- Do not read or write `project/` Kanbus data directly except the wiki pages under `project/wiki/*.md`; use `kbs`. Board mechanics: `KANBUS_REALTIME_BROKER=off kbs ...`; stories go open, in_progress, blocked or closed. Human review is never a story state; use review requests.
+- Pull requests go to `main`. Conventional commits (`feat:`, `fix:`, `docs:`, `chore:`). Never force-push `main`.
+- Wording: never write "desk"; say "section", "newsroom" or the role. Attribution is "AI". Use "Account", not "Organization", for the shared directory tenant.
+- GA4 follows the anth.us standard: Consent Mode v2 with the banner and a Cookie settings link. Do not turn on `analytics_only` here.
+- Production deploys are by merge to `main` through CI. Reader copy only goes live when Ryan asks in chat (see Part 2, Morning automation).
+
+## Ownership and coordination
+
+- Engine changes belong in the Papyrus repository; this repository follows by bumping the pin.
+- Tell the Papyrus session before changing anything shared: the monitoring router, the procedure runner, the shared Cyclotron, and the reusable workflow `AnthusAI/Papyrus/.github/workflows/amplify-deploy.yml` that this repository's deploy job calls at `@main`.
+- Never touch Anth.us from here. Ryan owns this publication.
+
+## Current state (2026-10-23)
+
+- Live: `https://pilobol.us/` (200), `/feed.xml` and `/llms.txt` (200), `https://newsroom.pilobol.us/` (200). GA4 and the consent banner are in the pages. Last deployed commit on `main` at the time of writing: the Papyrus 5.29.0 and GA4 merge.
+- Pinned to Papyrus `5.29.0`; the latest engine release at the time of writing is `5.32.0`.
+- The mission doctrine was saved in the CMS in the 2026-10-22 handover (record `item-editorial-doctrine-mission-v1`, slug `editorial-doctrine-mission`; recorded from the handover, not re-read from the backend), and the four section descriptions were rewritten in Papyrus PR 640 to match it. The copy of the sections file in this repository carries that rewrite. Whether the live backend already holds `NewsroomSection` records was not verified (PR 640 said it had none).
+- Known stale items, left as they are because they touch authentication or are historical: `papyrus.config.ts` still lists OAuth redirect URLs for a retired Amplify app (`dv0pdx67fk80m`), and `docs/organizer-cms-rollout.md` is a historical note whose claim that `amplify.yml` only generates outputs is out of date (it runs `ampx pipeline-deploy` today). `.papyrus/operator-cli.config.yaml` points at a `/workspace` path that exists only on the original author's machine. `staging.pilobol.us` does not resolve in DNS at the moment; the Amplify domain associations for it and for `newsroom.pilobol.us` report `FAILED`.
+- The `develop` branch is far behind `main`. Work from `main`.
+- Planned: nothing recorded in this repository. Product work is on the Papyrus `PPY` board; this repository's board is the `PILO` publication board.
+
+## Where the docs live
+
+Here: this file, `content/VOICE.md`, `inclusion_rubric.md`, `project/wiki/` and `docs/organizer-cms-rollout.md` (historical). Engine docs: the [Papyrus docs index](https://github.com/AnthusAI/Papyrus/blob/main/docs/README.md).
+
+# Part 2: Editorial doctrine
+
+The authoritative editorial mission and policy are data in the CMS (`editorial-doctrine-mission`, `editorial-doctrine-policy`, and each section's mission, policy, assignment guidance and kill criteria). Read them with `papyrus editorial context --backend cloud --section SECTION_ID --format text`; private doctrine shapes decisions and is never evidence to quote in reader copy. The wiki pages below (`project/wiki/mission.md`, `publication-doctrine.md`) and the rest of this part are the working notes behind that doctrine. If they disagree with the CMS record, the CMS record wins and the note should be updated the same day.
 
 ## What this publication is
 
@@ -86,13 +120,12 @@ Lenses that stay braided:
 - **Fungus / strangler-fig** — distributed infection; creeping AI control of society;
   hard to see at the tips, structural once inside; the host still looks like itself.
 
-Stack: **Papyrus local pod** (desk language) with **Biblicus** as the KB engine
-underneath; site builds through Papyrus's Markus renderer (`web/build_via_papyrus.py`);
-Amplify deploys the CMS frontend via the checked-in DevOps build spec. Never cache the built site.
+Stack: a **Papyrus local pod** with **Biblicus** as the knowledge-base engine underneath. The
+public site is the standard Papyrus front end (Part 1).
 
 ### Knowledge base (Papyrus local pod)
 
-- Pod root: `/workspace/pilobil.us` (symlink to this repo).
+- Pod root: the repository root.
 - Wiki: `project/wiki/` (concepts + `sources/` keepers).
 - Accepted references JSON: `stories/WIKI-pilobil-accepted/references/`.
 - Register: `python3 bin/register-ref.py --title "..." --url "..." --why "..."`.
@@ -102,7 +135,7 @@ Amplify deploys the CMS frontend via the checked-in DevOps build spec. Never cac
   first** and **Morning automation: board only, never publish** below).
 
 **Site is live** at pilobol.us. Reader copy still must never name the house or talk
-about “our take.” Desk DNA lives in this file plus `project/wiki/mission.md`,
+about “our take.” Publication DNA lives in this file plus `project/wiki/mission.md`,
 `project/wiki/publication-doctrine.md`, `content/VOICE.md`, and `inclusion_rubric.md`.
 
 ## The vibes (hard)
@@ -191,7 +224,7 @@ weekday 9am fungus scout, and any scheduled Anthus/Pilobolus agent runs) files
 
 - Publishing in the Papyrus CMS (newsroom at `/`) or importing items into it (saving or
   publishing an item projects its pages straight onto pilobol.us).
-- Pushing to `main`, opening a publish PR, or triggering a DevOps ship.
+- Pushing reader copy to `main`, opening a publish PR, or triggering a deploy to ship reader copy.
 - Treating a board `article.md`, `article-draft.md`, or Kanbus status **`published`**
   as permission to go live — board workflow and production are separate gates.
 
@@ -269,7 +302,7 @@ cover, scannable headings, drawn diagrams, research figures, verified video.
 Rules and rights: `content/VOICE.md`, *Dressing a piece*.
 
 **Street-readable** — full sentences; assume a non-technical Facebook-heavy
-reader who never heard “simulacrum.” No fake desk slang in reader copy. No
+reader who never heard “simulacrum.” No fake newsroom slang in reader copy. No
 “not A, it’s B” contrast stacks.
 
 **Story shapes** (rotate; first-person inside-user is only one): inside the
@@ -295,9 +328,3 @@ When drafting or reviewing reader-facing articles:
    the CMS cutover: `git show pre-cms-cutover:web/content/articles/the-end-of-the-rave.md`) — the reference piece for how a
    finished article reads and looks (spine, bridges, headings, cover, diagrams,
    research figures, video)
-
-The `content/desks/` guides and the `skills/publication-writing` gate script
-named in older notes do not exist in this repo; do not go looking for them.
-
-Sample Markus article for publisher testing:
-`publications/pilobol/content/articles/kuak-skyride-clip.md`

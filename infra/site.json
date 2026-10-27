@@ -6,7 +6,7 @@
   "frontend": "markus-static",
   "aws": { "profile": "papyrus-production", "accountId": "712236451410", "region": "us-east-1" },
   "hostedZoneId": "Z09961547QX1VHIXOBD7",
-  "papyrusVersion": "5.29.0",
+  "papyrusVersion": "5.42.1",
   "cms": {
     "domainName": "newsroom.pilobol.us",
     "staging": true,
@@ -35,5 +35,9 @@
     ],
     "ownerId": 152415604,
     "repoId": 1358579276
+  },
+  "email": {
+    "mode": "managed",
+    "sendingDomain": "mail.pilobol.us"
   }
 }

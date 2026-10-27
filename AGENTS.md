@@ -79,7 +79,7 @@ A backend deploy re-renders the site by itself. Read the reconcile and deletion-
 ## Current state (2026-10-23)
 
 - Live: `https://pilobol.us/` (200), `/feed.xml` and `/llms.txt` (200), `https://newsroom.pilobol.us/` (200). GA4 and the consent banner are in the pages. Last deployed commit on `main` at the time of writing: the Papyrus 5.29.0 and GA4 merge.
-- Pinned to Papyrus `5.43.0`.
+- Pinned to Papyrus `5.46.0`.
 - The mission doctrine was saved in the CMS in the 2026-10-22 handover (record `item-editorial-doctrine-mission-v1`, slug `editorial-doctrine-mission`; recorded from the handover, not re-read from the backend), and the four section descriptions were rewritten in Papyrus PR 640 to match it. The copy of the sections file in this repository carries that rewrite. Whether the live backend already holds `NewsroomSection` records was not verified (PR 640 said it had none).
 - Known stale items, left as they are because they touch authentication or are historical: `papyrus.config.ts` still lists OAuth redirect URLs for a retired Amplify app (`dv0pdx67fk80m`), and `docs/organizer-cms-rollout.md` is a historical note whose claim that `amplify.yml` only generates outputs is out of date (it runs `ampx pipeline-deploy` today). `.papyrus/operator-cli.config.yaml` points at a `/workspace` path that exists only on the original author's machine. `staging.pilobol.us` does not resolve in DNS at the moment; the Amplify domain associations for it and for `newsroom.pilobol.us` report `FAILED`.
 - The `develop` branch is far behind `main`. Work from `main`.

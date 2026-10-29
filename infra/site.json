@@ -6,7 +6,7 @@
   "frontend": "markus-static",
   "aws": { "profile": "papyrus-production", "accountId": "712236451410", "region": "us-east-1" },
   "hostedZoneId": "Z09961547QX1VHIXOBD7",
-  "papyrusVersion": "5.54.0",
+  "papyrusVersion": "5.55.0",
   "cms": {
     "domainName": "newsroom.pilobol.us",
     "staging": true,

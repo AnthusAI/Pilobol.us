@@ -45,7 +45,7 @@ python3 -m unittest discover -s tests
 These are the CI steps. For the Python `papyrus` CLI and a local build of the whole site from published content (no AWS credentials needed, the three variables are public values):
 
 ```bash
-pip install "papyrus-newsroom[markus]==5.59.0"      # the pin in infra/site.json
+pip install "papyrus-newsroom[markus]==5.60.0"      # the pin in infra/site.json
 export PAPYRUS_GRAPHQL_ENDPOINT=... PAPYRUS_IDENTITY_POOL_ID=... PAPYRUS_MEDIA_BUCKET=...
 papyrus ops content export-published --auth guest --out content-export --clean
 papyrus ops content project --all --from-dir content-export --static-dir web --out dist

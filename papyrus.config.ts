@@ -73,7 +73,7 @@ export default defineSite({
       {
         // "Alexa, open Pilobolus". The deploy creates and updates the skill (PPY-704ae1); linking an account is optional.
         name: "alexa",
-        invocationName: "pilobolus",
+        invocationName: "pilobolus newsroom",
         skillName: "Pilobolus",
         siteId: "pilobol-us",
         siteOrigin: "https://pilobol.us",

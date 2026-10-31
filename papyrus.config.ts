@@ -69,6 +69,18 @@ export default defineSite({
   defaultBrand: "pilobol-us",
   backend: {
     brandId: "pilobol-us",
+    plugins: [
+      {
+        // "Alexa, open Pilobolus". The deploy creates and updates the skill (PPY-704ae1); linking an account is optional.
+        name: "alexa",
+        invocationName: "pilobolus",
+        skillName: "Pilobolus",
+        siteId: "pilobol-us",
+        siteOrigin: "https://pilobol.us",
+        accountLinking: true,
+        amazonVendorId: "M3S89C9SRMQZ89",
+      },
+    ],
     auth: {
       cognitoDomainPrefix: "papyrus-pilobol-us-cms",
       applyCognitoDomainPrefix: true,

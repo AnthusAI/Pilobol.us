@@ -10,7 +10,7 @@
     "region": "us-east-1"
   },
   "hostedZoneId": "Z09961547QX1VHIXOBD7",
-  "papyrusVersion": "5.62.1",
+  "papyrusVersion": "5.63.0",
   "cms": {
     "domainName": "newsroom.pilobol.us",
     "staging": true,

@@ -8,12 +8,14 @@
   },
   "urls": {
     "style": "html",
-    "sections": {
-      "articles": {
+    "types": {
+      "article": {
         "base": "articles",
         "label": "Spores",
         "description": "Glimpses of our moldy future."
-      },
+      }
+    },
+    "sections": {
       "effects": {
         "base": "effects",
         "listEmpty": true,

@@ -87,7 +87,7 @@ def _slug_id(title: str) -> str:
 
 def _on_home(entry) -> bool:
     """Articles only, and not those that opt out with ``feed: false`` or ``home: false``."""
-    in_articles = entry.section is not None and entry.section.name == "articles"
+    in_articles = entry.section is not None and entry.section.item_type == "article"
     return in_articles and not (_is_off(entry.data.get("feed")) or _is_off(entry.data.get("home")))
 
 
@@ -285,9 +285,10 @@ def _fix_article_header(html: str, summary, front_matter: dict) -> str:
 
 def item_decorator(html: str, summary) -> str:
     front_matter = summary.front_matter
-    href = f"{summary.section}/{summary.slug}.html" if summary.section else f"{summary.slug}.html"
+    section = "articles" if summary.type == "article" else summary.section  # articles live at /articles/ whatever their topic section
+    href = f"{section}/{summary.slug}.html" if section else f"{summary.slug}.html"
     decorated = _rewrite_instagram(_rewrite_youtube(html))
     decorated = _decorate_media(decorated, _text(front_matter.get("image_effect")))
-    if _href_has_audio(href, summary.section):
+    if _href_has_audio(href, section):
         decorated = _fix_article_header(decorated, summary, front_matter)
     return decorated

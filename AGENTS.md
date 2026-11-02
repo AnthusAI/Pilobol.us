@@ -10,7 +10,7 @@ Pilobol.us (pilobol.us) is pre-production. Move fast, but use a pull request for
 
 | Part | Where | Docs |
 | --- | --- | --- |
-| Site registration and backend options | `papyrus.config.ts` (`defineSite`: brand `pilobol-us`, `s3-projection` publication with `staticDir: "web"`, edge distribution ARN `E2GKJ877IAH2I8`, `stagingBuild` on; console responder, Slack, inbound email and storage backups off) | [site-hosting](https://github.com/AnthusAI/Papyrus/blob/main/docs/site-hosting.md) |
+| Site registration and backend options | `papyrus.config.ts` (`defineSite`: brand `pilobol-us`, `s3-projection` publication with `staticDir: "web"`, edge distribution ARN `<distribution-id>`, `stagingBuild` on; console responder, Slack, inbound email and storage backups off) | [site-hosting](https://github.com/AnthusAI/Papyrus/blob/main/docs/site-hosting.md) |
 | Standard projector (the public static site) | `web/projection.json` (settings: sections `articles` "Spores" and `effects`, feeds, sitemap, public data, GA4 and consent, agent output), `web/css/site-theme.css` (theme), `web/hooks.py` (masthead poem, cards, article decoration, video embeds, image effects, home, archive and 404 bodies, the Auritus narration player), `web/assets/` (effect scripts, lab pages, images, published under `/assets/`) | [building-a-papyrus-static-site](https://github.com/AnthusAI/Papyrus/blob/main/docs/building-a-papyrus-static-site.md) |
 | CMS backend and console | The package's Amplify Gen 2 backend, newsroom at the root of `newsroom.pilobol.us` | [newsroom-operations](https://github.com/AnthusAI/Papyrus/blob/main/docs/newsroom-operations.md) |
 | The edge | Public site: stack `papyrus-edge-pilobol-us` (template `infra/edge/pilobol-us.yaml` in the Papyrus repo). Newsroom host: stack `papyrus-edge-pilobol-us-cms` (design notes in Papyrus `docs/hosting/pilobolus-newsroom-repair.md`). | [edge-under-the-cms-backend](https://github.com/AnthusAI/Papyrus/blob/main/docs/hosting/edge-under-the-cms-backend.md) |
@@ -26,7 +26,7 @@ Papyrus features that run in the deployed backend rather than in files here: the
 
 ## Common tasks
 
-Use `AWS_PROFILE=papyrus-production` (account `712236451410`) and prefer read-only AWS calls.
+Use `AWS_PROFILE=papyrus-production` (account `<account-id>`) and prefer read-only AWS calls.
 
 **Run the tests**: the CI steps in the README (`npm ci`, stub `amplify_outputs.json`, `npx papyrus-app sync && npx tsc --noEmit`, `python3 -m unittest discover -s tests`). The only unit test covers `bin/diff-trees.py`. Board checks: `KANBUS_REALTIME_BROKER=off kbs validate` and `kbs hooks validate`.
 
@@ -38,7 +38,7 @@ Use `AWS_PROFILE=papyrus-production` (account `712236451410`) and prefer read-on
 2. In one change set the same exact version in `package.json` and `infra/site.json` (`papyrusVersion`), then `npm install` so `package-lock.json` agrees. Use the same version for `pip install "papyrus-newsroom[markus]==<version>"` in local builds.
 3. Open a pull request to `main` and merge when CI is green. The merge deploys the backend and re-renders the site. Never bump `package.json` alone: the version in `infra/site.json` decides the template that ships.
 
-**Deploy**: merge a pull request to `main`. The `CI and deploy` workflow starts the Amplify job for the merged commit on app `d1eiwl0gedkmnj` through GitHub OIDC (role `pilobol-us-github-deploy`); Amplify's auto-build on `main` is off. Never zip a local build and push it with `aws amplify create-deployment` or `start-deployment`, never run `ampx pipeline-deploy` from a laptop, and never improvise a manual deploy. After a merge check that `https://pilobol.us/` returns 200 and `aws amplify list-jobs --app-id d1eiwl0gedkmnj --branch-name main --max-results 3` shows the merged commit (GitHub webhooks and jobs can be minutes late). If the AWS login is expired, `aws login` needs an interactive step only the user can complete: say so and stop.
+**Deploy**: merge a pull request to `main`. The `CI and deploy` workflow starts the Amplify job for the merged commit on app `<amplify-app-id>` through GitHub OIDC (role `pilobol-us-github-deploy`); Amplify's auto-build on `main` is off. Never zip a local build and push it with `aws amplify create-deployment` or `start-deployment`, never run `ampx pipeline-deploy` from a laptop, and never improvise a manual deploy. After a merge check that `https://pilobol.us/` returns 200 and `aws amplify list-jobs --app-id <amplify-app-id> --branch-name main --max-results 3` shows the merged commit (GitHub webhooks and jobs can be minutes late). If the AWS login is expired, `aws login` needs an interactive step only the user can complete: say so and stop.
 
 **Re-project safely** (after changing `web/` without a backend deploy):
 
@@ -59,6 +59,7 @@ A backend deploy re-renders the site by itself. Read the reconcile and deletion-
 
 - Never run `papyrus ops content project --reconcile` for real without the deployed plugin list (the CLI refuses without a readable `amplify_outputs.json` or a matching `PAPYRUS_PLUGINS`). Never use `--allow-deletions`. Always dry-run first.
 - Projections take the projection lease; do not start one by hand while a deploy or a knowledge run is projecting.
+- No AWS account id, Amplify app id or CloudFront distribution id in this repository. The deploy workflow reads GitHub repository variables `AWS_ACCOUNT_ID` and `AMPLIFY_APP_ID`; Amplify builds read branch variables `PAPYRUS_AMPLIFY_APP_ID` and `PAPYRUS_EDGE_DISTRIBUTION_ARN` (and `PAPYRUS_OAUTH_REDIRECT_URLS`, `PAPYRUS_SITE_ORIGIN`, which `papyrus.config.ts` merges into the sign-in return URLs). See [AWS identifiers outside Git](https://github.com/AnthusAI/Papyrus/blob/main/docs/site-hosting.md#aws-identifiers-outside-git).
 - Secrets go in SSM Parameter Store as SecureString, created by infrastructure code, never in this repository. Never commit `.env*` or `amplify_outputs.json`.
 - No real email addresses anywhere in the repository. Use placeholders; allowlists live in AWS configuration.
 - Shared checkouts: never switch branches and never `git stash`. Use `git worktree add` or a fresh clone.
@@ -79,9 +80,9 @@ A backend deploy re-renders the site by itself. Read the reconcile and deletion-
 ## Current state (2026-10-23)
 
 - Live: `https://pilobol.us/` (200), `/feed.xml` and `/llms.txt` (200), `https://newsroom.pilobol.us/` (200). GA4 and the consent banner are in the pages. Last deployed commit on `main` at the time of writing: the Papyrus 5.29.0 and GA4 merge.
-- Pinned to Papyrus `5.67.0` (a develop prerelease, for the Alexa skill work; back to a release once it ships).
+- Pinned to Papyrus `5.73.0`.
 - The mission doctrine was saved in the CMS in the 2026-10-22 handover (record `item-editorial-doctrine-mission-v1`, slug `editorial-doctrine-mission`; recorded from the handover, not re-read from the backend), and the four section descriptions were rewritten in Papyrus PR 640 to match it. The copy of the sections file in this repository carries that rewrite. Whether the live backend already holds `NewsroomSection` records was not verified (PR 640 said it had none).
-- Known stale items, left as they are because they touch authentication or are historical: `papyrus.config.ts` still lists OAuth redirect URLs for a retired Amplify app (`dv0pdx67fk80m`), and `docs/organizer-cms-rollout.md` is a historical note whose claim that `amplify.yml` only generates outputs is out of date (it runs `ampx pipeline-deploy` today). `.papyrus/operator-cli.config.yaml` points at a `/workspace` path that exists only on the original author's machine. `staging.pilobol.us` does not resolve in DNS at the moment; the Amplify domain associations for it and for `newsroom.pilobol.us` report `FAILED`.
+- Known stale items, left as they are because they touch authentication or are historical: `papyrus.config.ts` no longer lists OAuth redirect URLs for a retired Amplify app, and `docs/organizer-cms-rollout.md` is a historical note whose claim that `amplify.yml` only generates outputs is out of date (it runs `ampx pipeline-deploy` today). `.papyrus/operator-cli.config.yaml` points at a `/workspace` path that exists only on the original author's machine. `staging.pilobol.us` does not resolve in DNS at the moment; the Amplify domain associations for it and for `newsroom.pilobol.us` report `FAILED`.
 - The `develop` branch is far behind `main`. Work from `main`.
 - Planned: nothing recorded in this repository. Product work is on the Papyrus `PPY` board; this repository's board is the `PILO` publication board.
 

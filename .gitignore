@@ -58,9 +58,13 @@ dist/
 /app/api/newsroom/curation/context/route.ts
 /app/api/newsroom/curation/priming/route.ts
 /app/api/newsroom/curation/publication/route.ts
+/app/api/newsroom/source-frameable/route.ts
+/app/api/newsroom/source-icon/route.ts
 /app/api/reader/comment/delete/route.ts
 /app/api/reader/comment/edit/route.ts
 /app/api/reader/comment/route.ts
+/app/api/reader/extraction/confirm/route.ts
+/app/api/reader/extraction/route.ts
 /app/api/reader/flag/route.ts
 /app/api/reader/handle/route.ts
 /app/api/reader/me/route.ts
@@ -72,6 +76,10 @@ dist/
 /app/api/revalidate/route.ts
 /app/archive/page.tsx
 /app/articles/\[slug\]/page.tsx
+/app/cli/approve/route.ts
+/app/cli/callback/route.ts
+/app/cli/challenge/route.ts
+/app/cli/enroll/route.ts
 /app/cyclotron/page.tsx
 /app/layout.tsx
 /app/newsroom/\[section\]/\[...selection\]/page.tsx

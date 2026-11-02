@@ -23,10 +23,10 @@ Engine rules for every Papyrus site are in the Papyrus [AGENTS.md](https://githu
 
 | Thing | Value |
 | --- | --- |
-| AWS account | `papyrus-production`, `712236451410`, `us-east-1` |
+| AWS account | `papyrus-production`, `<account-id>`, `us-east-1` |
 | Public site | `https://pilobol.us` (apex only, no www). Static pages in the versioned S3 site bucket, served by CloudFront distribution `<distribution-id>` (stack `papyrus-edge-pilobol-us`). |
 | Newsroom (CMS) | `https://newsroom.pilobol.us/` (the newsroom is at the root; `/newsroom/*` redirects to `/*`). Served by CloudFront distribution `<distribution-id>` (stack `papyrus-edge-pilobol-us-cms`) in front of the Amplify app, because Amplify's own domain association for this host is `FAILED` (cross-account approval needed). |
-| Amplify app | `d1eiwl0gedkmnj` (`pilobol-us-cms`, Gen 2 backend, repository `AnthusAI/Pilobol.us`). Branch `main` is production (auto-build off), branch `staging` is beta (auto-build on, previews drafts). |
+| Amplify app | `<amplify-app-id>` (`pilobol-us-cms`, Gen 2 backend, repository `AnthusAI/Pilobol.us`). Branch `main` is production (auto-build off), branch `staging` is beta (auto-build on, previews drafts). |
 | CDK stack | `amplify-app-shell-pilobol-us-cms`, described by `infra/site.json`. |
 | Retired | The Amplify reader apps and the old CMS app (`d11eu9hbs2mipk`, the id the repo used to list) no longer exist in this account. Do not use their ids. |
 | Analytics | Google Analytics 4 (`G-31SC26SDGX`) with Consent Mode v2 and a cookie banner; privacy link `https://anth.us/privacy/`. |
@@ -45,7 +45,7 @@ python3 -m unittest discover -s tests
 These are the CI steps. For the Python `papyrus` CLI and a local build of the whole site from published content (no AWS credentials needed, the three variables are public values):
 
 ```bash
-pip install "papyrus-newsroom[markus]==5.67.0.dev1"      # the pin in infra/site.json
+pip install "papyrus-newsroom[markus]==5.73.0"      # the pin in infra/site.json
 export PAPYRUS_GRAPHQL_ENDPOINT=... PAPYRUS_IDENTITY_POOL_ID=... PAPYRUS_MEDIA_BUCKET=...
 papyrus ops content export-published --auth guest --out content-export --clean
 papyrus ops content project --all --from-dir content-export --static-dir web --out dist
@@ -57,7 +57,7 @@ papyrus ops content project --all --from-dir content-export --static-dir web --o
 
 1. Branch from `main`, open a pull request to `main`. (`develop` exists but is far behind; do not use it.)
 2. The `CI and deploy` workflow (`.github/workflows/deploy.yml`) runs `npm ci`, `papyrus-app sync`, `tsc --noEmit` and the Python unit tests.
-3. On a green push to `main`, the same workflow calls `AnthusAI/Papyrus/.github/workflows/amplify-deploy.yml`, which assumes the GitHub OIDC role `pilobol-us-github-deploy` (no stored keys) and starts an Amplify RELEASE job for the merged commit on app `d1eiwl0gedkmnj`.
+3. On a green push to `main`, the same workflow calls `AnthusAI/Papyrus/.github/workflows/amplify-deploy.yml`, which assumes the GitHub OIDC role `pilobol-us-github-deploy` (no stored keys) and starts an Amplify RELEASE job for the merged commit on app `<amplify-app-id>`.
 4. The Amplify build (`amplify.yml`) runs `npx ampx pipeline-deploy` (backend), then builds the Next app. `npm ci` also runs `papyrus-infra deploy` for this app and branch only. The backend deploy re-renders the site.
 
 Articles do not go through Git. Saving or publishing in the newsroom renders the affected pages onto pilobol.us within seconds. Engine upgrades go through the pin: edit the exact version in `package.json` and `infra/site.json` together, run `npm install`, merge. Papyrus releases through semantic-release (`feat:` and `fix:` release; `chore:` and `docs:` do not). Details: Papyrus [releasing](https://github.com/AnthusAI/Papyrus/blob/main/docs/releasing.md) and [site hosting](https://github.com/AnthusAI/Papyrus/blob/main/docs/site-hosting.md).

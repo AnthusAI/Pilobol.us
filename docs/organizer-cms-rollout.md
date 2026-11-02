@@ -10,7 +10,7 @@ native CMS records with links to those original workflow controls.
 `amplify.yml` derives from the active CMS app's existing build spec. It replaces
 backend deployment with `ampx generate outputs --branch main` so this frontend
 release preserves the deployed backend, OAuth domain, callbacks, roles and data.
-A guard permits only active app `d1eiwl0gedkmnj`; the retired legacy app following
+A guard permits only active app `<amplify-app-id>`; the retired legacy app following
 this repository must not deploy the new release. This is the normal Amplify
 source-build path, not a ZIP/manual deployment. No S3 reader projection is built
 or published by this change. Future backend migrations need their own reviewed

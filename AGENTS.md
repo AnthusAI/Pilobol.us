@@ -26,7 +26,7 @@ Papyrus features that run in the deployed backend rather than in files here: the
 
 ## Common tasks
 
-Use `AWS_PROFILE=papyrus-production` (account `712236451410`) and prefer read-only AWS calls.
+Use `AWS_PROFILE=papyrus-production` (account `<account-id>`) and prefer read-only AWS calls.
 
 **Run the tests**: the CI steps in the README (`npm ci`, stub `amplify_outputs.json`, `npx papyrus-app sync && npx tsc --noEmit`, `python3 -m unittest discover -s tests`). The only unit test covers `bin/diff-trees.py`. Board checks: `KANBUS_REALTIME_BROKER=off kbs validate` and `kbs hooks validate`.
 
@@ -38,7 +38,7 @@ Use `AWS_PROFILE=papyrus-production` (account `712236451410`) and prefer read-on
 2. In one change set the same exact version in `package.json` and `infra/site.json` (`papyrusVersion`), then `npm install` so `package-lock.json` agrees. Use the same version for `pip install "papyrus-newsroom[markus]==<version>"` in local builds.
 3. Open a pull request to `main` and merge when CI is green. The merge deploys the backend and re-renders the site. Never bump `package.json` alone: the version in `infra/site.json` decides the template that ships.
 
-**Deploy**: merge a pull request to `main`. The `CI and deploy` workflow starts the Amplify job for the merged commit on app `d1eiwl0gedkmnj` through GitHub OIDC (role `pilobol-us-github-deploy`); Amplify's auto-build on `main` is off. Never zip a local build and push it with `aws amplify create-deployment` or `start-deployment`, never run `ampx pipeline-deploy` from a laptop, and never improvise a manual deploy. After a merge check that `https://pilobol.us/` returns 200 and `aws amplify list-jobs --app-id d1eiwl0gedkmnj --branch-name main --max-results 3` shows the merged commit (GitHub webhooks and jobs can be minutes late). If the AWS login is expired, `aws login` needs an interactive step only the user can complete: say so and stop.
+**Deploy**: merge a pull request to `main`. The `CI and deploy` workflow starts the Amplify job for the merged commit on app `<amplify-app-id>` through GitHub OIDC (role `pilobol-us-github-deploy`); Amplify's auto-build on `main` is off. Never zip a local build and push it with `aws amplify create-deployment` or `start-deployment`, never run `ampx pipeline-deploy` from a laptop, and never improvise a manual deploy. After a merge check that `https://pilobol.us/` returns 200 and `aws amplify list-jobs --app-id <amplify-app-id> --branch-name main --max-results 3` shows the merged commit (GitHub webhooks and jobs can be minutes late). If the AWS login is expired, `aws login` needs an interactive step only the user can complete: say so and stop.
 
 **Re-project safely** (after changing `web/` without a backend deploy):
 

@@ -24,8 +24,8 @@ Engine rules for every Papyrus site are in the Papyrus [AGENTS.md](https://githu
 | Thing | Value |
 | --- | --- |
 | AWS account | `papyrus-production`, `712236451410`, `us-east-1` |
-| Public site | `https://pilobol.us` (apex only, no www). Static pages in the versioned S3 site bucket, served by CloudFront distribution `E2GKJ877IAH2I8` (stack `papyrus-edge-pilobol-us`). |
-| Newsroom (CMS) | `https://newsroom.pilobol.us/` (the newsroom is at the root; `/newsroom/*` redirects to `/*`). Served by CloudFront distribution `E205M49121L1RG` (stack `papyrus-edge-pilobol-us-cms`) in front of the Amplify app, because Amplify's own domain association for this host is `FAILED` (cross-account approval needed). |
+| Public site | `https://pilobol.us` (apex only, no www). Static pages in the versioned S3 site bucket, served by CloudFront distribution `<distribution-id>` (stack `papyrus-edge-pilobol-us`). |
+| Newsroom (CMS) | `https://newsroom.pilobol.us/` (the newsroom is at the root; `/newsroom/*` redirects to `/*`). Served by CloudFront distribution `<distribution-id>` (stack `papyrus-edge-pilobol-us-cms`) in front of the Amplify app, because Amplify's own domain association for this host is `FAILED` (cross-account approval needed). |
 | Amplify app | `d1eiwl0gedkmnj` (`pilobol-us-cms`, Gen 2 backend, repository `AnthusAI/Pilobol.us`). Branch `main` is production (auto-build off), branch `staging` is beta (auto-build on, previews drafts). |
 | CDK stack | `amplify-app-shell-pilobol-us-cms`, described by `infra/site.json`. |
 | Retired | The Amplify reader apps and the old CMS app (`d11eu9hbs2mipk`, the id the repo used to list) no longer exist in this account. Do not use their ids. |

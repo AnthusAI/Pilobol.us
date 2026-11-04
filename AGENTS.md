@@ -22,7 +22,7 @@ deploy.
 - **Release** means merging `develop` into `main`, which deploys. Aim for once or twice a day, batching what is ready. An extra release needs Ryan's say-so.
 - Papyrus version bumps go to this site's `develop` and ship in this site's release. A Papyrus release can add a GSI and a deploy can add only one per table, so a site cannot skip a release that adds one.
 - Say "merged to develop" or "released" precisely.
-- Pilobolus keeps its existing rules: reader copy goes live only when Ryan asks in chat, and a release is a publish. The `staging` Amplify branch is separate from `develop`.
+- Pilobolus keeps its existing rules: reader copy goes live only when Ryan asks in chat. The `staging` Amplify branch is separate from `develop`.
 
 ## Build
 

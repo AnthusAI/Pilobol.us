@@ -15,6 +15,15 @@ reauthenticate AWS credentials yourself (`aws login` here needs an
 interactive step only the user can complete) and don't improvise a manual
 deploy.
 
+## Development policy (Ryan, 2026-11-04)
+
+- Develop and verify on a local dev server: `npm run dev` (port 3001; it needs a backend's `amplify_outputs.json`; the script is on `main` and reaches `develop` with the main-into-develop sync), or build the static site with `cd web && PAPYRUS_ROOT=/path/to/Papyrus python3 build_via_papyrus.py` and serve it with `python3 bin/dev-server.py`. For the seeded console with no AWS, run `npm run dev:preview` in a Papyrus checkout. Do not deploy to see whether something works.
+- **Merge** means merging a pull request into `develop`; that is where things are reviewed. `develop` builds nothing in Amplify.
+- **Release** means merging `develop` into `main`, which deploys. Aim for once or twice a day, batching what is ready. An extra release needs Ryan's say-so.
+- Papyrus version bumps go to this site's `develop` and ship in this site's release. A Papyrus release can add a GSI and a deploy can add only one per table, so a site cannot skip a release that adds one.
+- Say "merged to develop" or "released" precisely.
+- Pilobolus keeps its existing rules: reader copy goes live only when Ryan asks in chat, and a release is a publish. The `staging` Amplify branch is separate from `develop`.
+
 ## Build
 
 The site builds through Papyrus's Markus renderer, not a bespoke pipeline:
@@ -168,7 +177,7 @@ weekday 9am fungus scout, and any scheduled Anthus/Pilobolus agent runs) files
 
 - Writing or committing under `web/content/articles/` (or other paths that land on
   pilobol.us via Amplify).
-- Pushing to `main`, opening a publish PR, or triggering an Amplify / DevOps ship.
+- Releasing to `main` (merging `develop` into `main`), opening a publish PR, or triggering an Amplify / DevOps ship.
 - Treating a board `article.md`, `article-draft.md`, or Kanbus status **`published`**
   as permission to go live — board workflow and production are separate gates.
 

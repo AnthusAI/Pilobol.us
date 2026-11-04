@@ -1,0 +1,47 @@
+{
+  "siteId": "pilobol-us",
+  "stackName": "amplify-app-shell-pilobol-us-cms",
+  "repository": "https://github.com/AnthusAI/Pilobol.us",
+  "brand": "pilobol-us",
+  "frontend": "markus-static",
+  "aws": {
+    "profile": "papyrus-production",
+    "region": "us-east-1"
+  },
+  "hostedZoneId": "Z09961547QX1VHIXOBD7",
+  "papyrusVersion": "5.84.0",
+  "cms": {
+    "domainName": "newsroom.pilobol.us",
+    "staging": true,
+    "stagingPreview": {
+      "buildCommand": "PAPYRUS_ROOT=\"$PWD\" PAPYRUS_SITE_ENV=staging PAPYRUS_SITE_PUBLIC_URL=https://staging.pilobol.us papyrus ops content project --all --from-dir content-export --static-dir web --out dist && if [ -d content-export/assets ]; then mkdir -p dist/assets && cp -R content-export/assets/. dist/assets/; fi",
+      "baseDirectory": "dist"
+    },
+    "cognitoDomainPrefix": "papyrus-pilobol-us-cms",
+    "prospectusAccountsApiStageArn": "arn:aws:execute-api:us-east-1:712236451410:bnh9mctvo9/api",
+    "buildComputeType": "STANDARD_8GB",
+    "environment": {
+      "PAPYRUS_EDITION_SLUG": "current",
+      "PAPYRUS_ENABLE_CONSOLE_RESPONDER": "false",
+      "PAPYRUS_ENABLE_SLACK": "false",
+      "PAPYRUS_ENABLE_INBOUND_EMAIL": "false",
+      "PAPYRUS_ENABLE_STORAGE_BACKUPS": "false",
+      "PAPYRUS_OAUTH_REDIRECT_URLS": "http://localhost:3001/,https://newsroom.pilobol.us/,https://staging.pilobol.us/"
+    },
+    "cliRemoteLogin": true
+  },
+  "github": {
+    "owner": "AnthusAI",
+    "repo": "Pilobol.us",
+    "branches": [
+      "main",
+      "staging"
+    ],
+    "ownerId": 152415604,
+    "repoId": 1358579276
+  },
+  "email": {
+    "mode": "managed",
+    "sendingDomain": "mail.pilobol.us"
+  }
+}

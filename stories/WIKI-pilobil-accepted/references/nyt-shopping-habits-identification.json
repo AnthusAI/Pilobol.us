@@ -1,0 +1,9 @@
+{
+  "id": "nyt-shopping-habits-identification",
+  "title": "New York Times: Shopping habits and identification",
+  "status": "accepted",
+  "corpus": "pilobil-us",
+  "url": "https://www.nytimes.com/2012/02/19/magazine/shopping-habits.html",
+  "source": "pilobil-wiki",
+  "why": "Cited lineage of data-trace identification"
+}

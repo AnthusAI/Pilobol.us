@@ -1,0 +1,4 @@
+/* Pilobolus newsroom: the refined-newsprint Kanbus theme as shipped (warm paper, press red, Source Serif 4).
+   Colour and type come from the --kb-theme-* tokens (see components/newsroom-theme.css); override a token
+   here, scoped like `:root[data-site-brand="pilobol-us"] [data-kanbus-theme] { --kb-theme-accent: ... }`,
+   to retune the theme. The Pilobolus reader is a separate site and keeps its own stylesheet. */

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#f1ead9"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8d8065"/>
+    </marker>
+    <marker id="arrow-rust" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#a35a2a"/>
+    </marker>
+  </defs>
+  <g font-family="Georgia, 'Times New Roman', serif" fill="#211d17">
+    <text x="60" y="72" font-size="38">How a fake post ends up inside the next chatbot</text>
+    <text x="60" y="104" font-size="21" fill="#6b6153">The same loop turns every year, and each turn feeds the next model</text>
+  </g>
+
+  <g font-family="Georgia, 'Times New Roman', serif" text-anchor="middle">
+    <g fill="#f7f2e6" stroke="#cabd9f" stroke-width="3">
+      <rect x="420" y="140" width="360" height="100" rx="8"/>
+      <rect x="820" y="300" width="330" height="100" rx="8"/>
+      <rect x="420" y="470" width="360" height="100" rx="8"/>
+      <rect x="50" y="300" width="330" height="100" rx="8"/>
+    </g>
+    <rect x="50" y="300" width="330" height="100" rx="8" fill="#f7f2e6" stroke="#a35a2a" stroke-width="4" stroke-dasharray="9 7"/>
+
+    <g font-size="23" fill="#211d17">
+      <text x="600" y="182">People write in public</text>
+      <text x="985" y="342">Companies copy it all</text>
+      <text x="600" y="512">A chatbot is trained on it</text>
+      <text x="215" y="342" fill="#a35a2a">Marketers plant posts</text>
+    </g>
+    <g font-size="18" fill="#6b6153">
+      <text x="600" y="214">questions and answers on Reddit</text>
+      <text x="985" y="374">"scraping" the open internet</text>
+      <text x="600" y="544">and answers millions of questions</text>
+      <text x="215" y="374" fill="#a35a2a">written for the chatbot to read</text>
+    </g>
+  </g>
+
+  <g fill="none" stroke="#8d8065" stroke-width="3">
+    <path d="M 790 200 Q 960 210 975 290" marker-end="url(#arrow)"/>
+    <path d="M 975 410 Q 960 510 790 525" marker-end="url(#arrow)"/>
+    <path d="M 410 525 Q 240 510 225 410" marker-end="url(#arrow)"/>
+  </g>
+  <path d="M 225 290 Q 240 210 410 200" fill="none" stroke="#a35a2a" stroke-width="3" marker-end="url(#arrow-rust)"/>
+
+  <line x1="60" y1="610" x2="1140" y2="610" stroke="#d7cbb2" stroke-width="2"/>
+  <text x="60" y="650" font-family="Georgia, 'Times New Roman', serif" font-size="22" fill="#211d17">Deleting a fake post later does not remove it from data already collected.</text>
+  <text x="60" y="682" font-family="Georgia, 'Times New Roman', serif" font-size="17" fill="#8d8065">Diagram drawn for this piece.</text>
+</svg>

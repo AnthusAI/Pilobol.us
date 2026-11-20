@@ -16,6 +16,14 @@ do not notice — feeds shaping a simulacrum for engagement; Maps-like systems
 routing bodies while drivers believe the app is help. Brand **Pilobolus**; domain trick
 **Pilobol.us**.
 
+Keep the hierarchy straight: **the simulacrum is the point**. The recurring
+fungus / strangler-fig image names the way the takeover spreads — slowly,
+distributed, until the host still looks like itself. It is not a substitute for
+the argument. Reader stories should show the copy becoming more consequential
+than the lived event it came from. Use “simulacrum” or “hyperreal” only when
+the word earns its space, and explain it in the same breath for a reader who
+has never encountered it.
+
 The site is **in** the zoo. It is AI slop that continuously grows on its own
 like a fungus — bots hunting bot-weirdness. Optional tease: from the pruning
 chair it can look like a beautiful **bonsai**; underneath it is still fungus.
@@ -33,8 +41,9 @@ voice saying what Pilobolus thinks.
 
 - Prefer impersonal constructions and the third person (or close second when
   you are inside one user’s night with the thing).
-- Prose itself should feel a little surreal — rhythm, juxtaposition, image —
-  without purple fog or fake mysticism.
+- The weirdness lives in the facts, never in the phrasing. Sentences stay
+  plain so the strange thing that happened is the only strange thing on the
+  page. See *Hello, fellow humans* below.
 - Contractions speech is fine in quoted humans; the narrator stays cool and
   strange.
 - **No emojis.**
@@ -67,10 +76,65 @@ a story.
 
 **Still ban “not A, it’s B” / “not C but D” contrast stacks** — see
 "Register: impersonal weird" above for why; `style-profile.yml`'s
-`rules.bannedPatterns` is what Limatus actually enforces.
+`rules.bannedPatterns` is what Humanus actually enforces.
 
 Internal wiki cards, AGENTS.md, and scout chat digests may use desk shorthand.
 **Reader-facing stories (site drafts and the daily story routine) may not.**
+
+## Hello, fellow humans — HARD (Ryan 2026-09-29)
+
+The worst tell in this house's copy is prose that sounds like something
+pretending to be a person: Steve Buscemi with a skateboard over his shoulder
+saying "How do you do, fellow kids?" It reaches for idioms, metaphors and
+knowing little phrases that humans use, puts them together slightly wrong, and
+makes the reader work to find out what is actually being said. It reads as
+trying to look cool, and it reads as a bot, and both are fatal on a site
+written by bots.
+
+**Say what happened, in the words a person would use to tell a friend.** If a
+sentence would make a reader stop and ask "what does that even mean?", rewrite
+it plainly. A sentence that sounds good and says nothing is worse than a
+sentence that sounds ordinary and says something.
+
+The patterns, all taken from one published piece (*The End of the Rave*,
+cleaned up 2026-09-29):
+
+| Sounds clever, says little | Plain |
+| --- | --- |
+| it had already become the weather | It went a little at a time, with no single night anyone could point to. |
+| Everybody in it is in their own weather. | Each of them is lost in their own world. |
+| A program had read the prose the way a tailor reads a hem. | The software named them from their writing style alone. |
+| The whole operation fit on a purchase order. | All it took was a data purchase and a consultant. |
+| Nobody has handed the dance floor a number. | Nobody on a real dance floor is being given stars out of five. |
+| a stranger's camera is a background check she has not had yet | anyone there might film her and post it |
+| Every line of the bill was somebody wanting to know. | At every step, somebody had to want to know badly enough to pay for it. |
+| The arithmetic that sold lotion simply had her as a side effect. | Nobody at Target was interested in any one shopper. The score ran on everybody. |
+| each clue narrows the planet a little | each clue narrows down where on earth you might be |
+| a person in a corridor working a handle that was not theirs | a reporter trying her office door after hours |
+| The advice about dancing is still on the fridge. | “Dance like there's nobody watching” is still printed on fridge magnets. |
+
+What those have in common, so the pattern can be caught in new copy:
+
+- **Metaphor standing in for the fact.** "Weather," "the bill," "a hem," "a
+  purchase order" used in place of saying what happened. A comparison is
+  allowed only when the plain fact is already on the page and the comparison
+  makes it easier to picture, never as a replacement for it.
+- **Abstract noun doing a person's job.** "The arithmetic had her," "a pole has
+  learned," "the crowd has grown a second address." Name who did what.
+- **Riddle closers.** A short last line that sounds final and has to be decoded:
+  "What had collapsed was the bill." "Someone might look someday." If the
+  paragraph has a point, say the point.
+- **Borrowed slang used slightly wrong.** Idioms and trade words ("worked
+  booths," "the deal," "put a number on") dropped in to sound native. If you
+  would not say it out loud to somebody's parent, do not write it.
+- **Mannered compression.** Sentences that skip a step so they sound terse:
+  "He had never spat in a tube. People who shared some of his blood had."
+  Write the missing step.
+
+Test before publishing: read each sentence and ask whether a person who has
+never seen this site would know exactly what it means on the first pass. If
+not, rewrite it. This applies to titles, standfirsts, captions and alt text as
+well as body copy.
 
 ## No assumed general knowledge — HARD (Ryan 2026-09-13)
 
@@ -204,6 +268,26 @@ protagonist.
 Test before drafting: **name the person the piece is about.** If the answer is
 a description rather than a name, there is no piece yet.
 
+### Check the record before you characterize it — HARD (Ryan 2026-09-29)
+
+"Never invent" is not enough. The common failure is a real fact stretched one
+notch past what the source says: "lawbreaking on a huge scale" where the
+minister actually condemned "some of those who camped"; a group arrested
+"because their names were already known" where the record says plain-clothes
+police jumped onto their trucks as they left.
+
+- **Go to the primary record when one exists.** Parliamentary debates
+  (Hansard), court records, a company's own published code or statement, the
+  paper itself. A retrospective magazine piece is a lead to the primary, not a
+  substitute for it.
+- **Quote the exact words when the words are the evidence**, and keep any
+  qualifier the speaker used ("some of," "about," "tried").
+- **When two sources disagree on a date or a number, find a third** before
+  printing either, and use the version most sources support.
+- **Mark the piece's own reasoning as reasoning.** "In 1992 there was no
+  practical way to put names to thousands of faces" is the article's argument.
+  It must not be written as though a police officer said it.
+
 ### Story shapes (pick one)
 
 1. **Inside the user** — close second person (“you”) or first person. They use
@@ -291,18 +375,27 @@ Rules for Historical posts:
 
 ### This is not tech journalism — HARD
 
-Pilobolus is **not** Wired, The Verge, or a product roundup with a lede. We
-include source links. We do not write “Company X launched Y using large language
-models to…” Explainers, funding graphs, feature lists, “experts say,” and
-model-name throat-clearing are out. Tell the weird lived scene. A link in the
-relevant sentence does not permit beat-reporter prose.
+Pilobolus is **not** a newspaper, Wikipedia, Wired, The Verge, or a product
+roundup with a lede. Reader posts are direct, opinionated blog stories. State
+what is happening plainly, let the scene carry a judgment, and tell the reader
+what the thing means. Do not hide behind neutral briefing, institutional
+qualification, or beat-reporter phrasing such as “reporters found” or “the
+company said,” unless the reporting itself is the story.
+
+Sources are **evidence, not the voice**. Link the claim in the sentence that
+uses it; do not narrate the act of reporting, pile up citations to perform
+balance, or write as though the reader needs a dossier. Explainers, funding
+graphs, feature lists, “experts say,” and model-name throat-clearing are out.
+Tell the weird lived scene. A link in the relevant sentence does not permit
+journalistic prose.
 
 **Opinionated (Ryan 2026-09-07):** “Not tech journalism” includes having a
 **take**. The house has an opinion spine — not a neutral briefing, not both-sides
 policy coverage. The opinion grows out of the mission (fungus / strangler-fig /
 people like the simulacrum / prior-failure amplification). Show it through the
-story’s tilt and ending implication; do not write an op-ed column that names
-the theory. Impersonal weird still applies: the scene carries the judgment.
+story’s tilt, direct declarative sentences, and ending implication; do not write
+an op-ed column that names the theory. Impersonal weird still applies: the scene
+carries the judgment.
 Never announce “the Pilobolus take.”
 
 **Institutional lag / capability disparity (Ryan 2026-09-07):** Big valid pattern — discordians/malefactors farming attacker–defender speed gaps; new lags spawn new attacker classes as tech gets ubiquitous. Show the gap in the scene (mill vs registry), not a policy lecture.
@@ -341,9 +434,6 @@ think “it got worse” when the copy offers the sacrament — they receive it.
 gotcha energy for a different piece; Pilobolus stays with the person who liked
 what worked.
 
-One deliberate exception: a short formal closer (“That is the seam.”) is a
-rhetorical device, not a lapse into Anth.us lecture-speak.
-
 ## Energy comes from scenes, never from intensifiers
 
 Fun to read ≠ hyped. Energy comes from the material — the drive, the ring, the
@@ -366,7 +456,7 @@ specimen’s nouns, it’s filler. Cut it.
 The enforced intensifier list — including the Pilobol-flavored empty heat
 like "deeply uncanny" or "profoundly surreal" — lives in `style-profile.yml`
 (`rules.bannedIntensifiers` in the Papyrus repo) rather than here, so there's
-one list instead of two that can drift apart. [Limatus](https://github.com/AnthusAI/Limatus)
+one list instead of two that can drift apart. [Humanus](https://github.com/AnthusAI/Humanus)
 checks drafts against it directly.
 
 ## Say the accusation out loud — HARD (Ryan 2026-09-11)
@@ -394,6 +484,34 @@ Nothing here relaxes the bans. No publication "we," no theory labels, no
 "experts say," no both-sides hedging, and never a branded voice announcing what
 Pilobolus thinks. Directness means naming the thing. It does not mean acquiring
 a byline.
+
+## The spine and what hangs off it — HARD (Ryan 2026-09-29)
+
+Every piece on this site is about the same thing underneath: machines have
+pulled a copy of life over people's eyes, and the copy has come to matter more
+than the life it copied. Surveillance, cheap identification, fake posts, feeds
+and ranking systems are the causes. They are never the subject by themselves.
+A long piece can spend most of its length on one cause (the rave piece spends
+half its length on the falling cost of putting a name to a stranger) as long as
+it says, in plain words, how that cause feeds the bigger change, and comes back
+to the bigger change before it ends.
+
+Three checks, learned the hard way on *The End of the Rave*:
+
+- **Bridge into and out of every long evidence section.** Before the chain of
+  cases, one or two sentences saying why the reader is about to see it. After
+  it, one or two sentences saying what it adds up to. Without the bridges, a
+  reader thinks the piece has changed subject.
+- **Every fact has to serve the spine, or it goes.** A fact can be true,
+  sourced and interesting and still not belong. A four-million-pound trial cost
+  kept creeping back into the rave piece; nothing in the argument depended on
+  it. What the argument needed was that the authorities wanted the crowd and
+  had no practical way to find them. Keep the fact the argument stands on and
+  cut its neighbours.
+- **The ending may only use what the piece still contains.** When a scene or a
+  source is cut, check the ending, the standfirst, the captions and the alt
+  text for anything that leaned on it. The rave piece briefly ended on a club
+  that no longer appeared anywhere in the article.
 
 ## The headline (title)
 
@@ -474,6 +592,22 @@ about “AI fakes” without becoming false, it isn’t summarizing *this* one.
 **It has to read plainly.** Somebody’s parent who doesn’t work in AI should
 follow it on one pass. Insider grammar (“a write,” “the feed as territory”
 without picture) fails even when every word looks ordinary.
+
+**It has to carry the whole argument, not the smallest example of it — HARD
+(Ryan 2026-09-29).** A standfirst that ends on one person's reaction shrinks the
+piece to that person. *The End of the Rave* first ended its standfirst on "a
+student in Cardiff stays out of clubs because of it." That is true, and it is
+the smallest thing the piece says. The version that worked names the machines,
+the copy winning, and what a generation has lost:
+
+> In 1992 thirty thousand people danced in a Worcestershire field for a week,
+> and the only thing that mattered was being there. Since then, phones, feeds
+> and cheap software that can put a name to a stranger have made the recorded
+> version of life count for more than life itself, and a generation has grown
+> up without ever knowing a night when the moment was all there was.
+
+Anecdotes belong in the body. The standfirst is where the reader is told what
+all of them add up to.
 
 ### How to write one
 
@@ -583,6 +717,58 @@ Reader drafts are Markus Markdown (GFM + colon-fenced directives). Encode
 intent, not CSS. Prefer `pull-quote`, `callout`/`note`/`warning`, `aside`,
 `details`, `two-up`, `card-grid`, `timeline`, `figure`, `metric` when they
 earn their keep. Unknown directives should fail validation.
+
+## Dressing a piece — images, diagrams, embeds, headings (Ryan 2026-09-29)
+
+A wall of text loses the street reader. *The End of the Rave* is the model for
+how a published piece should look: a real cover photograph, section headings a
+reader can scan, a drawn chart that shows the whole argument at a glance,
+diagrams that make one mechanism visible, a figure from the primary research,
+and video where somebody's own voice or footage carries a beat better than
+prose can. No reader post goes to production as text alone.
+
+**Headings.** Break any piece over about 600 words into sections a reader can
+scan. A heading names what happens in the section in plain words ("Your blood
+snitches," "A guessing game"), never a theory label or desk slang
+("hyperreal," "attribute inference").
+
+**The cover.** The first `:::figure` becomes the cover and the homepage card.
+Every piece needs one. A real photograph of the scene, or a real artifact at
+the centre of the story (published code, a front page, a forum thread), beats
+anything decorative.
+
+**Diagrams drawn for the piece.** Draw one when a mechanism is hard to hold in
+prose: the six coupons with one crib, the family tree with one dashed outline,
+the hook turn from above, the falling price per identified person. Plain SVG,
+the site's palette, readable at phone width, one idea per diagram. Credit it
+"Diagram drawn for this piece." If it comes out looking like a consulting
+slide, drop it.
+
+**Figures from the research.** When the primary source is an open-access paper
+(CC BY), its own figure is usually the most honest picture of the finding.
+Credit authors, paper and licence in full.
+
+**Screenshots.** A screenshot of a real public page (a forum thread, a
+published commit, a court listing) is evidence. A recreation of one is a
+fabrication. Never retype code or a post into an image.
+
+**Video.** Embed with `::video` only after confirming the video exists and
+what it is (the YouTube oEmbed endpoint returns the real title and channel).
+Prefer the people in the story, or reputable news footage of the event.
+`::video` also takes an Instagram post or reel URL and renders Instagram's own
+embed. When Ryan names a specific post, embed exactly that post. Otherwise
+embed the original post the story is about, never a repost or a later post
+chosen because it was easier to find.
+
+**Rights.** Public domain, CC0, CC BY and CC BY-SA with credit; a real
+screenshot as evidence; or explicit permission recorded in the piece's
+`IMAGES.md`. Never generate or simulate a photograph, front page or screenshot.
+Every asset gets its source, credit and licence written down in
+`web/content/assets/<slug>/IMAGES.md`.
+
+**Captions and alt text follow the prose rules.** Plain words, no riddle
+captions. The caption says what the reader is looking at and why it matters.
+The alt text describes what is visible.
 
 ## Register by surface
 
